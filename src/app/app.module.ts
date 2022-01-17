@@ -10,6 +10,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppState } from '@shared/store';
 import { configuration } from '@configurations';
+import { ApiModule } from '@ronas-it/angular-common';
+import { AuthModule } from '@shared/auth';
+import { UserModule } from '@shared/user';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,11 @@ import { configuration } from '@configurations';
         useClass: WebpackTranslateLoader
       }
     }),
+    ApiModule.forRoot({
+      apiUrl: configuration.api.url
+    }),
+    AuthModule,
+    UserModule,
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot<AppState>({
