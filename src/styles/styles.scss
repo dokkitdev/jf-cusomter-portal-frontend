@@ -16,3 +16,163 @@ p {margin: 0 0 1rem 0; padding: 0;}
 h1, h2, h3, h4 {margin: 0 0 1rem 0; font-weight: bold; padding: 0;}
 h1 {font-size: $title;}
 h2 {font-size: $large;}
+
+/* links */
+a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer;
+  &:hover {transition: all 0.2s;}
+  &.disabled {pointer-events: none;}
+}
+.link {font-weight: 700;
+  &-title {display: inline-block; vertical-align: middle;}
+  .icon {background-color: $primary; margin-right: 8px; vertical-align: middle; transition: 0.3s all;}
+  &:hover {color: lighten($primary, 10%);
+    .icon {background-color: lighten($primary, 10%);}
+  }
+}
+
+/* logo */
+.logo {width: 258px; height: 62px;
+  background: url(/assets/images/logo.svg) 50% 50% no-repeat; background-size: contain;
+}
+
+/* icons */
+.icon {width: 30px; height: 30px; display: inline-block; vertical-align: text-top; font-size: 0;
+  background-image: url(/assets/images/icons.svg); background-position: var(--bg-position);
+  &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position); background: $dark-gray;
+    &-red {background: $error;}
+  }
+  &-job {--bg-position: 0 0;
+    &-big {--bg-position: 0 -157px; width: 90px; height: 90px;}
+  }
+  &-quote {--bg-position: -30px 0;
+    &-big {--bg-position: -90px -157px; width: 90px; height: 90px;}
+  }
+  &-location {--bg-position: -60px 0;
+    &-big {--bg-position: 0 -337px; width: 90px; height: 90px;}
+  }
+  &-invoice {--bg-position: -90px 0;
+    &-big {--bg-position: 0 -247px; width: 90px; height: 90px;}
+  }
+  &-settings {--bg-position: -120px 0;}
+  &-assets {--bg-position: -150px 0;
+    &-big {--bg-position: -90px -247px; width: 90px; height: 90px;}
+  }
+  &-warning {--bg-position: -180px 0;}
+
+  &-profile {--bg-position: 0 -30px;}
+  &-logout {--bg-position: -30px -30px;}
+  &-tick {--bg-position: -60px -30px;}
+  &-search {--bg-position: -90px -30px;}
+  &-cross {--bg-position: -120px -30px;}
+  &-calendar {--bg-position: -150px -30px;}
+  &-arrow-left {--bg-position: -180px -30px;}
+
+  &-back {--bg-position: 0 -60px;}
+  &-more {--bg-position: -30px -60px;}
+  &-attachment {--bg-position: -60px -60px;
+    &-big {--bg-position: -90px -337px; width: 90px; height: 90px;}
+  }
+  &-employees {--bg-position: -90px -60px;}
+  &-list {--bg-position: -120px -60px;}
+  &-edit {--bg-position: -150px -60px;}
+  &-plus {--bg-position: -180px -60px;}
+
+  &-dashboard {--bg-position: 0 -90px;}
+  &-download {--bg-position: -30px -90px;}
+
+  &-report-big {--bg-position: -180px -157px; width: 90px; height: 90px;}
+  &-kpi-report-big {--bg-position: -180px -247px; width: 90px; height: 90px;}
+}
+
+/* button */
+.button {display: inline-block; padding: 14px 28px; margin: 0; border-radius: 12px;
+  font-size: 1rem; font-weight: 700; outline: none; box-sizing: border-box;
+  line-height: 20px; text-align: center; transition: all 0.2s;
+  cursor: pointer; vertical-align: top;
+  &:disabled {pointer-events: none;}
+  &-primary {background-color: $primary; color: #fff;
+    &:hover {background-color: lighten($primary, 5%);}
+    &:focus {background-color: darken($primary, 10%);}
+    &.button-loading::after {border-color: rgba(#fff, 0.2); border-top-color: #fff;}
+    &:disabled {background-color: $gray; color: #fff; border-color: $gray;}
+  }
+  &-outline {background-color: transparent; color: $primary; border: 1px solid rgba($primary, 0.4);
+    &:hover {border-color: lighten($primary, 5%);}
+    &:focus {border-color: darken($primary, 10%);}
+    &:disabled {border-color: $gray; color: $gray;}
+  }
+  &-block {display: block; width: 100%;}
+  &-loading {pointer-events: none; position: relative; color: transparent;
+    &::after {content: ''; position: absolute; width: 16px; height: 16px;
+      border: 3px solid rgba($primary, 0.4); border-top-color: $primary;
+      animation: spin 1s linear infinite; top: 0; left: 0; bottom: 0;
+      right: 0; margin: auto; border-radius: 50%; pointer-events: none;
+    }
+  }
+}
+
+/* loading spinner */
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+.loading-spinner {margin: 1.5rem auto;
+  circle {stroke: $primary;}
+}
+
+/* forms */
+.form {
+  &-group {position: relative; margin-bottom: 20px;}
+  &-control {width: 100%; padding: 12px 16px; border: 1px solid $lighter-gray;
+    border-radius: 10px; background-color: $lighter-gray; max-width: 100%;
+    color: #000; line-height: 22px; transition: all 0.2s;
+    &:focus {background-color: $lightest-gray; border-color: $primary;}
+    &:disabled {background-color: $light-gray; pointer-events: none;}
+    &::placeholder,
+    &::-webkit-input-placeholder {color: $light-gray;}
+    &-error {
+      &, &:hover, &:focus {border-color: $error;}
+    }
+  }
+  &-control::-ms-input-placeholder {color: $light-gray;}
+  textarea {display: block; min-height: 160px; padding: 8px 12px; background-color: $lighter-gray; resize: vertical;}
+  &-label {display: block; margin-bottom: 2px; font-size: $small; color: $light-gray; line-height: 18px; pointer-events: none;}
+  &-helper {margin: 2px auto 0; font-size: 1rem;
+    &-error {color: $error;}
+    &-info {color: $dark-gray;}
+  }
+  &-errors {text-align: center;}
+  &-error {position: relative; padding: 6px 0; border-radius: 4px; color: $error;
+    line-height: 21px; overflow: hidden;
+    .icon {vertical-align: middle; margin-right: 6px;}
+  }
+}
+
+/* box */
+.box {background: #fff; box-shadow: $box-shadow; border-radius: 8px; padding: 2rem;}
+
+/* pages */
+.page {position: relative; padding: 32px 40px; height: 100%; min-height: 100vh; box-sizing: border-box;
+  &-title {margin-bottom: 2rem; color: $primary-dark; font-size: $title; font-weight: 700;
+    font-family: $font-title; line-height: 44px;
+    .link-back {height: 30px; margin-right: 20px;}
+  }
+  &-header {display: flex; justify-content: space-between; margin-bottom: 28px;
+    .page-title {margin-bottom: 0;}
+  }
+  &-actions {
+    .page-action {margin-right: 8px;
+      &:last-child {margin-right: 0;}
+    }
+  }
+}
+
+/* auth pages */
+.auth {padding: 5rem 0; background: $lighter-gray; background-size: cover;
+  .page-title {text-align: center; position: relative; margin: 0 -4.5rem 3rem;}
+  .form-errors {margin-top: -24px;}
+  &-logo {margin: 58px auto 32px;}
+  &-box {max-width: 412px; margin: 0 auto; position: relative; padding: 3.5rem 4.5rem; box-sizing: border-box;}
+  &-actions {margin-top: 48px; text-align: center;}
+}

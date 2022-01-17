@@ -1,0 +1,11 @@
+<button
+  (click)="onClick($event)"
+  [type]="type"
+  [disabled]="isDisabled"
+  [ngClass]="{
+    'button-block': isBlock,
+    'button-loading': isLoading
+  }"
+  class="button button-{{ variant }}">
+  <ng-content></ng-content>
+</button>
