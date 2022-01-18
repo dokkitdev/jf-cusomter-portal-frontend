@@ -9,11 +9,6 @@ variables:
   CI_PROJECT_NAME: jf-cusomter-portal-frontend
   DOMAIN: dev.js-customer-portal.ronasit.com
 
-include:
-  - project: 'k8s-tools/charts/static'
-    ref: *ref
-    file: '/helpers/.gitlab-ci-template.yml'
-
 cache: &global_cache
   paths:
     - ./node_modules
