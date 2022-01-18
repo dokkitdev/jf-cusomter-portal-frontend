@@ -1,0 +1,44 @@
+<public-layout title="{{ 'PUBLIC.LOGIN.TEXT_PAGE_TITLE' | translate }}" page="login">
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (submit)="formSubmitted()"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    class="login-form">
+    <login-request-error *ngIf="isLoginFailed$ | async"></login-request-error>
+    <form-text
+      [controlState]="formState.controls.email"
+      [validationMessages]="{
+        required: 'PUBLIC.LOGIN.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
+        email: 'PUBLIC.LOGIN.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'PUBLIC.LOGIN.TEXT_EMAIL_PLACEHOLDER' | translate }}"
+      type="email"
+      autocomplete="email">
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.password"
+      [validationMessages]="{
+        required: 'PUBLIC.LOGIN.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'PUBLIC.LOGIN.TEXT_PASSWORD_PLACEHOLDER' | translate }}"
+      type="password"
+      autocomplete="current-password">
+    </form-text>
+    <btn
+      variant="primary"
+      type="submit"
+      [isBlock]="true"
+      [isLoading]="isSubmitting$ | async">
+      {{ 'PUBLIC.LOGIN.BUTTON_SIGN_IN' | translate }}
+    </btn>
+  </form>
+  <div class="auth-actions">
+    <route-link
+      route="/forgot-password"
+      title="{{ 'PUBLIC.LOGIN.LINK_FORGOT_PASSWORD' | translate }}">
+    </route-link>
+  </div>
+</public-layout>
