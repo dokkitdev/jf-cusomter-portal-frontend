@@ -1,0 +1,22 @@
+import { AccountComponent } from './account.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: AccountComponent,
+    children: [
+      {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then((module) => module.AccountAdminPageModule)
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AccountRoutingModule { }
