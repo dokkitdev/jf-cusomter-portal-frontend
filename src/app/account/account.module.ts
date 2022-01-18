@@ -1,3 +1,4 @@
+import { AccountLeftSidebarModule } from './shared/left-sidebar/left-sidebar.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountComponent } from './account.component';
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    AccountLeftSidebarModule
   ]
 })
 export class AccountModule { }

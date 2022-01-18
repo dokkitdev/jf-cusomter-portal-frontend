@@ -6,6 +6,4 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['account.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountComponent {
-
-}
+export class AccountComponent { }
