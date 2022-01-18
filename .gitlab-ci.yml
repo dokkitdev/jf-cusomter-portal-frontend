@@ -1,0 +1,76 @@
+stages:
+  - prepare
+  - lint
+  - build
+  - test
+  - deploy
+
+variables:
+  CI_PROJECT_NAME: jf-cusomter-portal-frontend
+  DOMAIN: dev.js-customer-portal.ronasit.com
+
+include:
+  - project: 'k8s-tools/charts/static'
+    ref: *ref
+    file: '/helpers/.gitlab-ci-template.yml'
+
+cache: &global_cache
+  paths:
+    - ./node_modules
+  policy: pull
+
+.build_template: &build
+  stage: build
+  image: node:16
+  script:
+    - npm run-script build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+  tags:
+    - docker
+    - linux
+    - side
+
+node_dependencies:
+  stage: prepare
+  image: node:16
+  script:
+    - npm i
+  cache:
+    <<: *global_cache
+    policy: pull-push
+  tags:
+    - docker
+    - linux
+    - side
+
+eslint:
+  stage: lint
+  image: node:16
+  script:
+    - npm run-script lint
+  tags:
+    - docker
+    - linux
+    - side
+
+build_development:
+  environment:
+    name: "development"
+  <<: *build
+  except:
+    - production
+    - master
+
+deploy_development:
+  image: projects.ronasit.com:4567/docker/ssh
+  stage: deploy
+  script:
+    - rsync -av ./dist/jf-cusomter-portal-frontend/ ci@209.97.185.115:/var/www/jf-cusomter-portal-frontend/
+  only:
+    - development
+
+
+
