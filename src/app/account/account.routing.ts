@@ -1,3 +1,4 @@
+import { IsAdminGuard } from './../shared/user/guards/is-admin';
 import { AccountComponent } from './account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'admin',
+        canActivate: [IsAdminGuard],
         loadChildren: () => import('./admin/admin.module').then((module) => module.AccountAdminPageModule)
       }
     ]
