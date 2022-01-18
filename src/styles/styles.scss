@@ -175,6 +175,44 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   }
 }
 
+/* modal */
+.dialog {
+  &-panel {overflow: auto; box-shadow: $box-shadow;
+    .mat-dialog-container {position: relative; padding: 16px 20px;
+      border-radius: 8px; box-shadow: none;
+    }
+  }
+  &-title {margin-bottom: $small; text-align: center; line-height: 28px; font-size: $large;}
+  &-message {line-height: 21px; margin-bottom: 16px;}
+  &-buttons {display: flex; padding-top: 8px; border-top: 1px solid $lighter-gray;}
+  &-button {display: inline-block; vertical-align: top; width: 100%; text-align: center;
+    padding: 8px 0; background-color: #fff; font-size: 1rem; outline: none;
+    box-sizing: border-box; line-height: 18px; border: none;
+    transition: all 0.2s; cursor: pointer;
+    &-cancel {color: $primary;
+      &:hover {color: darken($primary, 15%);}
+    }
+    &-confirm {color: $error;
+      &:hover {color: darken($error, 15%);}
+    }
+    &.button-loading {color: transparent;}
+  }
+  &-confirmation {width: 294px; margin: 0 0 -8px;
+    .dialog-message {text-align: center;}
+  }
+  &-edit {position: relative; padding: 26px 32px 32px; width: 420px;
+    background: #fff; box-sizing: border-box; border-radius: 3px;
+    &-title {margin-bottom: 28px; text-align: center; font-size: 2rem; line-height: 36px;}
+    &-buttons {display: flex; justify-content: flex-end; margin: 2.23rem 0 0;
+      .button {margin-right: 8px; width: 100%;
+        &:last-child {margin-right: 0;}
+      }
+    }
+    .row {margin: 0 -10px;}
+    .col {padding: 0 10px}
+  }
+}
+
 /* auth pages */
 .auth {padding: 5rem 0; background: $lighter-gray; background-size: cover;
   .page-title {text-align: center; position: relative; margin: 0 -4.5rem 3rem;}
