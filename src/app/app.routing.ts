@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UnauthenticatedGuard } from '@ronas-it/angular-common';
+import { AuthenticatedGuard, UnauthenticatedGuard } from '@ronas-it/angular-common';
 
 const routes: Routes = [
   {
@@ -12,6 +12,11 @@ const routes: Routes = [
     path: '',
     canActivate: [UnauthenticatedGuard],
     loadChildren: () => import('./public/public.module').then((module) => module.PublicModule)
+  },
+  {
+    path: 'account',
+    canActivate: [AuthenticatedGuard],
+    loadChildren: () => import('./account/account.module').then((module) => module.AccountModule)
   },
   {
     path: '**',
