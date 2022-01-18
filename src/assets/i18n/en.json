@@ -1,3 +1,22 @@
 {
-
+  "PUBLIC": {
+    "LOGIN": {
+      "TEXT_PAGE_TITLE": "Sign In",
+      "TEXT_EMAIL_PLACEHOLDER": "Email address",
+      "TEXT_PASSWORD_PLACEHOLDER": "Password",
+      "LINK_FORGOT_PASSWORD": "Forgot password",
+      "BUTTON_SIGN_IN": "Sign In",
+      "ERRORS": {
+        "TEXT_INCORRECT_EMAIL_OR_PASSWORD": "Incorrect email or password",
+        "TEXT_EMAIL_IS_REQUIRED": "Email is required",
+        "TEXT_EMAIL_IS_INVALID": "Email is invalid",
+        "TEXT_PASSWORD_IS_REQUIRED": "Please enter your password"
+      }
+    },
+    "NOT_FOUND": {
+      "TEXT_TITLE": "Page Not Found",
+      "TEXT_MESSAGE": "Make sure the address is correct and the page hasn't moved.",
+      "LINK_GO_HOME": "Return to home page"
+    }
+  }
 }
