@@ -1,4 +1,4 @@
-import { IsAdminGuard } from './../shared/user/guards/is-admin';
+import { IsAdminGuard } from '@shared/user';
 import { AccountComponent } from './account.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
