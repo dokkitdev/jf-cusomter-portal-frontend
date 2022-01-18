@@ -26,7 +26,6 @@ cache: &global_cache
   tags:
     - docker
     - linux
-    - side
 
 node_dependencies:
   stage: prepare
@@ -39,7 +38,6 @@ node_dependencies:
   tags:
     - docker
     - linux
-    - side
 
 eslint:
   stage: lint
@@ -49,7 +47,6 @@ eslint:
   tags:
     - docker
     - linux
-    - side
 
 build_development:
   environment:
