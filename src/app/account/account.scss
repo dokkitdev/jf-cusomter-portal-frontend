@@ -8,7 +8,7 @@
     background: $brand-dark; transition: all 0.2s;
     &-logo {margin: 38px 25px 79px;}
     &-menu {display: flex; flex-direction: column; justify-content: space-between;
-      height: calc(100% - 151px); padding: 12px 0 30px; box-sizing: border-box;
+      height: calc(100% - 151px); padding: 0 0 30px; box-sizing: border-box;
     }
     &-item {display: block; position: relative; min-height: 50px; overflow: hidden;
       color: $dark-gray; line-height: 22px; transition: all 0.3s;
