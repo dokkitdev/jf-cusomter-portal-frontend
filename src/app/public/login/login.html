@@ -28,10 +28,10 @@
       autocomplete="current-password">
     </form-text>
     <btn
-      variant="primary"
-      type="submit"
       [isBlock]="true"
-      [isLoading]="isSubmitting$ | async">
+      [isLoading]="isSubmitting$ | async"
+      variant="primary"
+      type="submit">
       {{ 'PUBLIC.LOGIN.BUTTON_SIGN_IN' | translate }}
     </btn>
   </form>

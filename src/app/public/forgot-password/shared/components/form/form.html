@@ -1,0 +1,27 @@
+<form
+  *ngrxLet="formState$; let formState"
+  [ngrxFormState]="formState"
+  (submit)="formSubmitted()"
+  (ngrxFormsAction)="formActionTriggered($event)"
+  class="forgot-form"
+  role="form">
+  <forgot-password-request-error *ngIf="isSubmittingFailed$ | async"></forgot-password-request-error>
+  <form-text
+    [controlState]="formState.controls.email"
+    [validationMessages]="{
+      required: 'PUBLIC.FORGOT_PASSWORD.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
+      email: 'PUBLIC.FORGOT_PASSWORD.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+    }"
+    (controlStateActionTriggered)="formActionTriggered($event)"
+    placeholder="{{ 'PUBLIC.FORGOT_PASSWORD.TEXT_EMAIL_PLACEHOLDER' | translate }}"
+    type="email"
+    autocomplete="email">
+  </form-text>
+  <btn
+    [isBlock]="true"
+    [isLoading]="isSubmitting$ | async"
+    variant="primary"
+    type="submit">
+    {{ 'PUBLIC.FORGOT_PASSWORD.BUTTON_RECOVER' | translate }}
+  </btn>
+</form>
