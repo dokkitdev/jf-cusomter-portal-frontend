@@ -13,6 +13,7 @@ import { configuration } from '@configurations';
 import { ApiModule } from '@ronas-it/angular-common';
 import { AuthModule } from '@shared/auth';
 import { UserModule } from '@shared/user';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserModule } from '@shared/user';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
