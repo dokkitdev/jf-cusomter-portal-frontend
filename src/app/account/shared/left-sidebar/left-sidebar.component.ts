@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { AccountLeftSidebarFacade } from './left-sidebar.facade';
 import { User } from '@shared/user/models';
 import { heightCollapseAnimation } from '@shared/animations';
-import { AssetType } from '@shared/asset';
 
 @Component({
   selector: 'account-left-sidebar',
@@ -17,7 +16,6 @@ export class AccountLeftSidebarComponent implements OnDestroy {
   public isAdmin$: Observable<boolean>;
   public isAdminMenuOpened$: Observable<boolean>;
   public isAdminMenuItemActive$: Observable<boolean>;
-  public assetType: typeof AssetType;
 
   constructor(
     private facade: AccountLeftSidebarFacade
@@ -26,7 +24,6 @@ export class AccountLeftSidebarComponent implements OnDestroy {
     this.isAdmin$ = this.facade.isAdmin$;
     this.isAdminMenuOpened$ = this.facade.isAdminMenuOpened$;
     this.isAdminMenuItemActive$ = this.facade.isAdminMenuItemActive$;
-    this.assetType = AssetType;
   }
 
   public ngOnDestroy(): void {
