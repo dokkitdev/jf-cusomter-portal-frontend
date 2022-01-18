@@ -6,7 +6,7 @@ stages:
   - deploy
 
 variables:
-  CI_PROJECT_NAME: jf-cusomter-portal-frontend
+  CI_PROJECT_NAME: jf-customer-portal-frontend
   DOMAIN: dev.js-customer-portal.ronasit.com
 
 cache: &global_cache
@@ -60,9 +60,6 @@ deploy_development:
   image: projects.ronasit.com:4567/docker/ssh
   stage: deploy
   script:
-    - rsync -av ./dist/jf-cusomter-portal-frontend/ ci@209.97.185.115:/var/www/jf-cusomter-portal-frontend/
+    - rsync -av ./dist/jf-customer-portal-frontend/ ci@209.97.185.115:/var/www/jf-customer-portal-frontend/
   only:
     - development
-
-
-
