@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "jf-cusomter-portal-frontend": {
+    "jf-customer-portal-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/jf-cusomter-portal-frontend",
+            "outputPath": "dist/jf-customer-portal-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -135,16 +135,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "jf-cusomter-portal-frontend:build:production"
+              "browserTarget": "jf-customer-portal-frontend:build:production"
             },
             "staging": {
-              "browserTarget": "jf-cusomter-portal-frontend:build:staging"
+              "browserTarget": "jf-customer-portal-frontend:build:staging"
             },
             "development": {
-              "browserTarget": "jf-cusomter-portal-frontend:build:development"
+              "browserTarget": "jf-customer-portal-frontend:build:development"
             },
             "local": {
-              "browserTarget": "jf-cusomter-portal-frontend:build:local"
+              "browserTarget": "jf-customer-portal-frontend:build:local"
             }
           },
           "defaultConfiguration": "development"
@@ -152,7 +152,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "jf-cusomter-portal-frontend:build"
+            "browserTarget": "jf-customer-portal-frontend:build"
           }
         },
         "lint": {
@@ -167,7 +167,7 @@
       }
     }
   },
-  "defaultProject": "jf-cusomter-portal-frontend",
+  "defaultProject": "jf-customer-portal-frontend",
   "cli": {
     "defaultCollection": "@ronas-it/angular-schematics"
   }
