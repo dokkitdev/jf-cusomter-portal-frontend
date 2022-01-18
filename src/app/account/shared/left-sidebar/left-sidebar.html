@@ -48,7 +48,7 @@
           <span class="icon icon-attachment icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_DOCUMENTS' | translate }}</span>
         </a>
-        <ng-container >
+        <ng-container *ngIf="isAdmin$ | async">
           <a
             (click)="toggleAdminMenu()"
             [ngClass]="{ active: isAdminMenuItemActive$ | async }"
