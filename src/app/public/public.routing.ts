@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path: 'login',
         loadChildren: () => import('./login/login.module').then((module) => module.PublicLoginPageModule)
+      },
+      {
+        path: 'forgot-password',
+        loadChildren: () => import('./forgot-password/forgot-password.module').then((module) => module.PublicForgotPasswordPageModule)
       }
     ]
   }

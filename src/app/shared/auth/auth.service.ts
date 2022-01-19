@@ -24,6 +24,10 @@ export class AuthService extends CommonAuthService<User> {
       );
   }
 
+  public sendRecoveryEmail(email: string): Observable<void> {
+    return this.apiService.post(`${this.endpoint}/forgot-password`, { email });
+  }
+
   private refreshProfile(authResponse: AuthResponse<User>): Observable<AuthResponse<User>> {
     return this.userService
       .refreshProfile()

@@ -25,9 +25,11 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 }
 .link {font-weight: 700;
   &-title {display: inline-block; vertical-align: middle;}
-  .icon {background-color: $primary; margin-right: 8px; vertical-align: middle; transition: 0.3s all;}
+  .icon {margin-right: 8px; vertical-align: middle;
+    &:before {background-color: $primary; transition: 0.3s all;}
+  }
   &:hover {color: lighten($primary, 10%);
-    .icon {background-color: lighten($primary, 10%);}
+    .icon:before {background-color: lighten($primary, 10%);}
   }
 }
 
@@ -45,8 +47,9 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* icons */
 .icon {width: 30px; height: 30px; display: inline-block; vertical-align: text-top; font-size: 0;
   background-image: url(/assets/images/icons.svg); background-position: var(--bg-position);
-  &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position); background: $white;
-    &-red {background: $error;}
+  &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position);
+    &:before {content: ''; width: 30px; height: 30px; display: inline-block; background-color: $white;}
+    &-red {background-color: $error;}
   }
   &-job {--bg-position: 0 0;
     &-big {--bg-position: 0 -157px; width: 90px; height: 90px;}
@@ -135,7 +138,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     border-radius: 10px; background-color: $lighter-gray; max-width: 100%;
     color: #000; line-height: 22px; transition: all 0.2s;
     &:focus {background-color: $lightest-gray; border-color: $primary;}
-    &:disabled {background-color: $light-gray; pointer-events: none;}
+    &:disabled {background-color: $bg; pointer-events: none;}
     &::placeholder,
     &::-webkit-input-placeholder {color: $light-gray;}
     &-error {
@@ -216,7 +219,6 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* auth pages */
 .auth {padding: 5rem 0; background: $lighter-gray; background-size: cover;
   .page-title {text-align: center; position: relative; margin: 0 -4.5rem 3rem;}
-  .form-errors {margin-top: -24px;}
   &-logo {margin: 58px auto 32px;}
   &-box {max-width: 412px; margin: 0 auto; position: relative; padding: 3.5rem 4.5rem; box-sizing: border-box;}
   &-actions {margin-top: 48px; text-align: center;}

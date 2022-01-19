@@ -8,9 +8,24 @@
       "BUTTON_SIGN_IN": "Sign In",
       "ERRORS": {
         "TEXT_INCORRECT_EMAIL_OR_PASSWORD": "Incorrect email or password",
-        "TEXT_EMAIL_IS_REQUIRED": "Email is required",
+        "TEXT_EMAIL_IS_REQUIRED": "Please enter your email",
         "TEXT_EMAIL_IS_INVALID": "Email is invalid",
         "TEXT_PASSWORD_IS_REQUIRED": "Please enter your password"
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "TEXT_PAGE_TITLE": "Forgot Password",
+      "TEXT_MESSAGE_1": "To recover your password,",
+      "TEXT_MESSAGE_2": "please enter your account email address",
+      "TEXT_SENT_MESSAGE_1": "We have sent you a recovery email.", 
+      "TEXT_SENT_MESSAGE_2": "There you'll find a password reset link.",
+      "TEXT_EMAIL_PLACEHOLDER": "Email address",
+      "BUTTON_RECOVER": "Recover Password",
+      "LINK_SIGN_IN": "Back to Sign In",
+      "ERRORS": {
+        "TEXT_EMAIL_IS_REQUIRED": "Please enter your email",
+        "TEXT_EMAIL_IS_INVALID": "Email is invalid",
+        "TEXT_INCORRECT_EMAIL": "Incorrect email"
       }
     },
     "NOT_FOUND": {
