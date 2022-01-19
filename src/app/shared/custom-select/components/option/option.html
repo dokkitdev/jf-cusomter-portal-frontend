@@ -1,0 +1,19 @@
+<ng-template
+  #defaultTemplate
+  let-option="option"
+  let-optionClicked="optionClicked">
+  <a
+    (click)="optionClicked(option)"
+    [title]="option.title || ''"
+    data-testid="dropdown-item"
+    class="dropdown-item">
+    {{ option.title }}
+  </a>
+</ng-template>
+<ng-template
+  [ngTemplateOutlet]="customTemplate || defaultTemplate"
+  [ngTemplateOutletContext]="{
+    option: option,
+    optionClicked: optionClicked.bind(this)
+  }">
+</ng-template>

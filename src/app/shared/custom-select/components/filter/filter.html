@@ -1,0 +1,9 @@
+<div class="dropdown-filter">
+  <input
+    [ngrxFormControlState]="filterControlState$ | async"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    #control
+    placeholder="{{ 'SHARED.SELECT.TEXT_SEARCH' | translate }}"
+    type="text"
+    class="form-control">
+</div>

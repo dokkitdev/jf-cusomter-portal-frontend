@@ -1,0 +1,19 @@
+<div class="form-group">
+  <custom-select
+    [controlState]="controlState$ | async"
+    [options]="options$ | async"
+    [isLoading]="isLoading$ | async"
+    [hasScroll]="true"
+    [hasFilter]="true"
+    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+    [hasNextItems]="hasNextItems$ | async"
+    [validationMessages]="validationMessages"
+    [label]="label"
+    [placeholder]="placeholder"
+    (loadNextPage)="loadNextPageClicked()"
+    (filterChanged)="filterChanged($event)"
+    (triggerFirstClick)="triggerFirstClicked()"
+    (selectedOptionChanged)="selectedOptionChanged($event)"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)">
+  </custom-select>
+</div>

@@ -1,0 +1,23 @@
+<ng-template
+  #defaultTemplate
+  let-selectedOption="selectedOption"
+  let-hasTriggerIcon="hasTriggerIcon"
+  let-triggerClicked="triggerClicked">
+  <a
+    [ngClass]="{
+      'dropdown-trigger-placeholder': !selectedOption
+    }"
+    (click)="triggerClicked()"
+    class="dropdown-trigger">
+    {{ triggerText }}
+    <span *ngIf="hasTriggerIcon" class="dropdown-trigger-icon"></span>
+  </a>
+</ng-template>
+<ng-template
+  [ngTemplateOutlet]="customTemplate || defaultTemplate"
+  [ngTemplateOutletContext]="{
+    selectedOption: selectedOption,
+    hasTriggerIcon: hasTriggerIcon,
+    triggerClicked: triggerClicked.bind(this)
+  }">
+</ng-template>
