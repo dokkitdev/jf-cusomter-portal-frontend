@@ -1,3 +1,4 @@
+import { ComponentStore } from '@ngrx/component-store';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountAdminUsersPageComponent } from './users.component';
@@ -27,7 +28,8 @@ import { AccountAdminUsersItemsHeaderComponent } from './shared/components/items
     AccountAdminUsersPageRoutingModule
   ],
   providers: [
-    AccountAdminUsersPageFacade
+    AccountAdminUsersPageFacade,
+    ComponentStore
   ]
 })
 export class AccountAdminUsersPageModule { }
