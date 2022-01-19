@@ -25,9 +25,11 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 }
 .link {font-weight: 700;
   &-title {display: inline-block; vertical-align: middle;}
-  .icon {background-color: $primary; margin-right: 8px; vertical-align: middle; transition: 0.3s all;}
+  .icon {margin-right: 8px; vertical-align: middle;
+    &:before {background-color: $primary; transition: 0.3s all;}
+  }
   &:hover {color: lighten($primary, 10%);
-    .icon {background-color: lighten($primary, 10%);}
+    .icon:before {background-color: lighten($primary, 10%);}
   }
 }
 
@@ -45,7 +47,8 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* icons */
 .icon {width: 30px; height: 30px; display: inline-block; vertical-align: text-top; font-size: 0;
   background-image: url(/assets/images/icons.svg); background-position: var(--bg-position);
-  &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position); background: $white;
+  &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position);
+    &:before {content: ''; width: 30px; height: 30px; display: inline-block; background-color: $white;}
     &-red {background-color: $error;}
   }
   &-job {--bg-position: 0 0;
