@@ -1,7 +1,13 @@
+import { AccountLeftSidebarFacade } from './left-sidebar.facade';
+import { ComponentStore } from '@ngrx/component-store';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountLeftSidebarComponent } from './left-sidebar.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { DialogModule } from '@shared/dialog';
+import { DialogConfirmationModule } from '@shared/dialog-confirmation';
 
 @NgModule({
   declarations: [
@@ -9,9 +15,16 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    RouterModule,
+    ReactiveComponentModule,
+    DialogModule,
+    DialogConfirmationModule
   ],
-  providers: [],
+  providers: [
+    AccountLeftSidebarFacade,
+    ComponentStore
+  ],
   exports: [
     AccountLeftSidebarComponent
   ]

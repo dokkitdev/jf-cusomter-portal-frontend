@@ -33,5 +33,28 @@
       "TEXT_MESSAGE": "Make sure the address is correct and the page hasn't moved.",
       "LINK_GO_HOME": "Return to home page"
     }
+  },
+  "ACCOUNT": {
+    "SIDEBAR": {
+      "LINK_DASHBOARD": "Dashboard",
+      "LINK_JOBS": "Jobs",
+      "LINK_SITES": "Sites",
+      "LINK_ASSETS": "Assets",
+      "LINK_REPORTS": "Reports",
+      "LINK_DOCUMENTS": "Documents",
+      "LINK_ADMIN": "Admin",
+      "LINK_ADMIN_USERS": "Users",
+      "LINK_ADMIN_DOCUMENTS": "Documents",
+      "LINK_LOGOUT": "Logout",
+      "DIALOG_LOGOUT": {
+        "TEXT_TITLE": "Log out?"
+      }
+    }
+  },
+  "SHARED": {
+    "DIALOG_CONFIRMATION": {
+      "BUTTON_CONFIRM": "OK",
+      "BUTTON_CANCEL": "Cancel"
+    }
   }
 }

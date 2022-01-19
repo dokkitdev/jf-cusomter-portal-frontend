@@ -23,5 +23,9 @@ export const initConfiguration = (configuration: any): any =>
     language: {
       available: ['en'],
       default: 'en'
+    },
+    dialog: {
+      panelClass: 'dialog-panel',
+      disableClose: true
     }
   }, configuration);
