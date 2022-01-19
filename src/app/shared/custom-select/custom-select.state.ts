@@ -10,7 +10,7 @@ export class CustomSelectComponentState<T extends FormControlValueTypes> {
   constructor() {
     this.selectedOption = undefined;
     this.options = [];
-    this.controlState = createFormControlState('', <T>undefined);
+    this.controlState = createFormControlState('', undefined as T);
     this.filterControlState = createFormControlState('filter', '');
   }
 }
