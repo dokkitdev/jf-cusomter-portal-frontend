@@ -1,1 +1,29 @@
-:host .account {}
+@import 'vars';
+
+:host ::ng-deep .account {
+  &-layout {background: #fff; min-height: 100vh; width: 100%;
+    box-sizing: border-box; padding-left: $account-sidebar-width;
+  }
+  .sidebar {position: fixed; top: 0; left: 0; bottom: 0; width: $account-sidebar-width;
+    background: $brand-dark; transition: all 0.2s;
+    &-logo {margin: 38px 25px 79px;}
+    &-menu {display: flex; flex-direction: column; justify-content: space-between;
+      height: calc(100% - 151px); padding: 0 0 30px; box-sizing: border-box;
+    }
+    &-item {display: block; position: relative; min-height: 50px; overflow: hidden;
+      color: $dark-gray; line-height: 22px; transition: all 0.3s;
+      &:hover {color: $gray;
+        .icon {background-color: $gray;}
+      }
+      &.active {color: $primary; font-weight: 700;
+        .icon {background-color: $primary;}
+      }
+      .icon {position: absolute; left: 0; margin: 10px 0 10px 29px; transition: 0.3s all;}
+    }
+    &-label {display: inline-block; position: absolute; left: 66px; right: 0;
+      padding: 14px 0; overflow: hidden;
+    }
+    &-content {height: 100%; overflow: hidden; overflow-y: auto; transition: all 0.2s;}
+    &-section-admin {overflow: hidden;}
+  }
+}
