@@ -46,7 +46,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 .icon {width: 30px; height: 30px; display: inline-block; vertical-align: text-top; font-size: 0;
   background-image: url(/assets/images/icons.svg); background-position: var(--bg-position);
   &-mask {mask-image: url(/assets/images/icons.svg); mask-position: var(--bg-position); background: $white;
-    &-red {background: $error;}
+    &-red {background-color: $error;}
   }
   &-job {--bg-position: 0 0;
     &-big {--bg-position: 0 -157px; width: 90px; height: 90px;}
