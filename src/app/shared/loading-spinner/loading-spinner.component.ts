@@ -8,5 +8,9 @@ import { SpinnerDiameter } from './enums';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoadingSpinnerComponent {
-  @Input() diameter: SpinnerDiameter = SpinnerDiameter.HUGE;
+  @Input() diameter: SpinnerDiameter;
+
+  constructor() {
+    this.diameter = SpinnerDiameter.HUGE;
+  }
 }

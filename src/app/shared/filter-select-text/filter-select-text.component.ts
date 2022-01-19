@@ -34,14 +34,17 @@ export class FilterSelectTextComponent<T extends FormControlValueTypes> {
   @ViewChild('trigger') triggerElementRef: ElementRef;
 
   @Input() controlState: FormControlState<T>;
-  @Input() name: string = '';
-  @Input() position: 'left' | 'right' = 'left';
-  @Input() type: string = 'text';
+  @Input() name: string;
+  @Input() position: 'left' | 'right';
+  @Input() type: string;
   @Input() min: number;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
 
   constructor() {
+    this.name = '';
+    this.position = 'left';
+    this.type = 'text';
     this.controlStateActionTriggered = new EventEmitter();
   }
 

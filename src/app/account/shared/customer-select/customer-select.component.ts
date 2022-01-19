@@ -47,8 +47,8 @@ export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   @Input() initialCustomer: Customer;
   @Input() isLoadByOpen: boolean;
   @Input() isPermanentlyShowPlaceholder: boolean;
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
+  @Input() label: string;
+  @Input() placeholder: string;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
   @Output() selectedCustomerChanged: EventEmitter<Customer>;
@@ -61,6 +61,8 @@ export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   constructor(
     private facade: AccountCustomerSelectComponentFacade
   ) {
+    this.label = '';
+    this.placeholder = '';
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.selectedCustomerChanged = new EventEmitter<Customer>();
     this.controlState$ = this.facade.controlState$;

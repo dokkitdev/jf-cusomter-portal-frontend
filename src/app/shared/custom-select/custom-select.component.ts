@@ -49,16 +49,16 @@ export class CustomSelectComponent<T extends FormControlValueTypes> {
     this.facade.setOptions(value || []);
   }
   @Input() validationMessages: Map<string, string>;
-  @Input() placeholder: string = '';
-  @Input() label: string = '';
-  @Input() hasTriggerIcon: boolean = true;
+  @Input() placeholder: string;
+  @Input() label: string;
+  @Input() hasTriggerIcon: boolean;
   @Input() isLoading: boolean;
   @Input() hasScroll: boolean;
   @Input() hasNextItems: boolean;
   @Input() hasFilter: boolean;
   @Input() isManuallyDisabled: boolean;
   @Input() isPermanentlyShowPlaceholder: boolean;
-  @Input() position: 'left' | 'right' = 'left';
+  @Input() position: 'left' | 'right';
   @Input() triggerTemplate: TemplateRef<any>;
   @Input() optionTemplate: TemplateRef<any>;
   @Input() notFoundTemplate: TemplateRef<any>;
@@ -78,6 +78,10 @@ export class CustomSelectComponent<T extends FormControlValueTypes> {
   constructor(
     protected facade: CustomSelectFacade<T>
   ) {
+    this.placeholder = '';
+    this.label = '';
+    this.hasTriggerIcon = true;
+    this.position = 'left';
     this.controlState$ = this.facade.controlState$;
     this.options$ = this.facade.options$;
     this.selectedOption$ = this.facade.selectedOption$;
