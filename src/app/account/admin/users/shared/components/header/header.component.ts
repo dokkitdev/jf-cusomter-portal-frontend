@@ -13,6 +13,6 @@ export class AccountAdminUsersHeaderComponent {
   ) { }
 
   public newUserButtonClicked(): void {
-    console.log('NEW ITEM!');
+    this.facade.createItem();
   }
 }
