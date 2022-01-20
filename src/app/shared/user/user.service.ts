@@ -1,3 +1,11 @@
+import { ClassGroup } from '@shared/class-group';
+import { classToPlain, plainToClassFromExist } from 'class-transformer';
+import { omitBy, isUndefined } from 'lodash';
+import { UserPaginationRequest } from './models/pagination-request';
+import { PaginationResponse } from '@shared/pagination';
+import { UserFilters } from './models/filters';
+import { UserRelationType } from './types/relation';
+import { UserSortField } from '@shared/user';
 import { UserService as CommonUserService } from '@ronas-it/angular-common';
 import { Injectable, Injector } from '@angular/core';
 import { User } from './models';
@@ -35,5 +43,24 @@ export class UserService extends CommonUserService<User> {
     super(injector);
 
     this.endpoint = '/users';
+  }
+
+  public search({ page, perPage, orderBy, desc, relations, filters }: {
+    page?: number,
+    perPage?: number,
+    orderBy?: UserSortField,
+    desc?: boolean,
+    relations?: Array<UserRelationType>,
+    filters?: UserFilters
+  } = {}): Observable<PaginationResponse<User>> {
+    const request = new UserPaginationRequest({ ...filters, page, perPage, orderBy, desc, relations });
+
+    return this.apiService
+      .get<PaginationResponse<User>>(this.endpoint, omitBy(classToPlain<UserPaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) => plainToClassFromExist(
+          new PaginationResponse<User>(User), response, { groups: [ClassGroup.MAIN] })
+        )
+      );
   }
 }
