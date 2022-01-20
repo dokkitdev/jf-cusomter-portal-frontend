@@ -14,6 +14,7 @@ import { ApiModule } from '@ronas-it/angular-common';
 import { AuthModule } from '@shared/auth';
 import { UserModule } from '@shared/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigationEffects } from '@shared/navigation';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     AuthModule,
     UserModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([
+      NavigationEffects
+    ]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot<AppState>({
       router: routerReducer

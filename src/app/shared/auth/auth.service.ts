@@ -3,6 +3,9 @@ import { Injectable, Injector } from '@angular/core';
 import { User } from '@shared/user';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { RestorePasswordRequest } from './models';
+import { classToPlain } from 'class-transformer';
+import { ClassGroup } from '@shared/class-group';
 
 @Injectable()
 export class AuthService extends CommonAuthService<User> {
@@ -26,6 +29,14 @@ export class AuthService extends CommonAuthService<User> {
 
   public sendRecoveryEmail(email: string): Observable<void> {
     return this.apiService.post(`${this.endpoint}/forgot-password`, { email });
+  }
+
+  public restorePasswordRequest(request: RestorePasswordRequest): Observable<void> {
+    return this.apiService.post(`${this.endpoint}/restore-password`, classToPlain(request, { groups: [ClassGroup.MAIN] }));
+  }
+
+  public checkRestoreToken(token: string): Observable<void> {
+    return this.apiService.post(`${this.endpoint}/token/check`, { token });
   }
 
   private refreshProfile(authResponse: AuthResponse<User>): Observable<AuthResponse<User>> {
