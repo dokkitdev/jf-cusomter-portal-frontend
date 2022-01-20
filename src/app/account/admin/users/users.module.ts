@@ -1,3 +1,4 @@
+import { ButtonModule } from '@shared/button';
 import { FilterValuesModule } from './../../../shared/filter-values/filter-values.module';
 import { FilterSelectTextModule } from './../../../shared/filter-select-text/filter-select-text.module';
 import { AccountCustomerSelectModule } from './../../shared/customer-select/customer-select.module';
@@ -35,7 +36,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     FilterSelectTextModule,
     FilterValuesModule,
     AccountCustomerSelectModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    ButtonModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

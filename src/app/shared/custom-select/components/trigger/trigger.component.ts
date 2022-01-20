@@ -24,10 +24,11 @@ export class CustomSelectTriggerComponent<T extends FormControlValueTypes, V> {
       : this.selectedOption?.title || this.placeholder;
   }
 
-  public onceClick: () => void = once(() => this.firstClick.emit());
+  public onceClick: () => void;
 
   constructor() {
     this.firstClick = new EventEmitter();
+    this.onceClick = once(() => this.firstClick.emit());
   }
 
   public triggerClicked(): void {

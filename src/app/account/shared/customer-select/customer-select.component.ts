@@ -1,3 +1,4 @@
+import { ValidationMessages } from '@shared/validation-errors';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -43,7 +44,7 @@ export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   public set idField(value: keyof Customer) {
     this.facade.setIDField(value);
   }
-  @Input() validationMessages: Map<string, string>;
+  @Input() validationMessages: ValidationMessages;
   @Input() initialCustomer: Customer;
   @Input() isLoadByOpen: boolean;
   @Input() isPermanentlyShowPlaceholder: boolean;
