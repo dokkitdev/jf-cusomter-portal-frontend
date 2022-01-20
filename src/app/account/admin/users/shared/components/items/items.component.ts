@@ -19,17 +19,17 @@ export class AccountAdminUsersItemsComponent {
   constructor(
     private facade: AccountAdminUsersPageFacade
   ) {
-    // this.items$ = this.facade.items$;
-    // this.hasMoreItems$ = this.facade.hasMoreItems$;
-    // this.isLoading$ = this.facade.isLoading$;
-    // this.isLoadingToPage$ = this.facade.isLoadingToPage$;
+    this.items$ = this.facade.items$;
+    this.hasMoreItems$ = this.facade.hasMoreItems$;
+    this.isLoading$ = this.facade.isLoading$;
+    this.isLoadingToPage$ = this.facade.isLoadingToPage$;
   }
 
   public loadNextPageClicked(): void {
-    // this.facade.loadNextPage();
+    this.facade.loadNextPage();
   }
 
   public itemDeleted(id: number): void {
-    // this.facade.deleteItem(id);
+    this.facade.deleteItem(id);
   }
 }

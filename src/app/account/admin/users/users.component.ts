@@ -13,7 +13,7 @@ export class AccountAdminUsersPageComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    // this.facade.loadItems();
+    this.facade.loadItems();
   }
 
   public ngOnDestroy(): void {

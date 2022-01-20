@@ -1,5 +1,5 @@
 import { ClassGroup } from '@shared/class-group';
-import { classToPlain, plainToClassFromExist } from 'class-transformer';
+import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { omitBy, isUndefined } from 'lodash';
 import { UserPaginationRequest } from './models/pagination-request';
 import { PaginationResponse } from '@shared/pagination';
@@ -61,6 +61,14 @@ export class UserService extends CommonUserService<User> {
         map((response) => plainToClassFromExist(
           new PaginationResponse<User>(User), response, { groups: [ClassGroup.MAIN] })
         )
+      );
+  }
+
+  public get(id: number, relations?: Array<UserRelationType>): Observable<User> {
+    return this.apiService
+      .get<User>(`${this.endpoint}/${id}`, omitBy({ with: relations }, isUndefined))
+      .pipe(
+        map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] }))
       );
   }
 }
