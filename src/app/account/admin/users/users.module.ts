@@ -1,3 +1,5 @@
+import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
+import { TableContainerModule } from './../../../shared/table-container/table-container.module';
 import { ButtonModule } from '@shared/button';
 import { FilterValuesModule } from './../../../shared/filter-values/filter-values.module';
 import { FilterSelectTextModule } from './../../../shared/filter-select-text/filter-select-text.module';
@@ -37,7 +39,9 @@ import { ReactiveComponentModule } from '@ngrx/component';
     FilterValuesModule,
     AccountCustomerSelectModule,
     ReactiveComponentModule,
-    ButtonModule
+    ButtonModule,
+    TableContainerModule,
+    NgForTrackByPropertyModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

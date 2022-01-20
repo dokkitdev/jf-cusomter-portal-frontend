@@ -17,7 +17,7 @@
       "TEXT_PAGE_TITLE": "Forgot Password",
       "TEXT_MESSAGE_1": "To recover your password,",
       "TEXT_MESSAGE_2": "please enter your account email address",
-      "TEXT_SENT_MESSAGE_1": "We have sent you a recovery email.", 
+      "TEXT_SENT_MESSAGE_1": "We have sent you a recovery email.",
       "TEXT_SENT_MESSAGE_2": "There you'll find a password reset link.",
       "TEXT_EMAIL_PLACEHOLDER": "Email address",
       "BUTTON_RECOVER": "Recover Password",
@@ -70,6 +70,9 @@
     "SELECT": {
       "TEXT_NO_ITEMS": "No items",
       "TEXT_SEARCH": "Search..."
+    },
+    "TABLE_CONTAINER": {
+      "TEXT_NOTHING": "Nothing found"
     }
   }
 }
