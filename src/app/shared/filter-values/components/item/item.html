@@ -1,0 +1,6 @@
+<div class="selectedfilter selectedfilter-{{ item.status }}">
+  <span class="selectedfilter-title">{{ item.title || item.value }}</span>
+  <a (click)="removeFilterClicked()">
+    <span class="icon icon-cross icon-mask"></span>
+  </a>
+</div>

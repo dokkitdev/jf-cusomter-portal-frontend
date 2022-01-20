@@ -1,0 +1,31 @@
+<div class="adminusers-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <filter-select-text
+        [controlState]="filterFormState.controls.name"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.ADMIN.USERS.FILTERS.TEXT_NAME' | translate }}">
+      </filter-select-text>
+      <filter-select-text
+        [controlState]="filterFormState.controls.email"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.ADMIN.USERS.FILTERS.TEXT_EMAIL' | translate }}">
+      </filter-select-text>
+      <account-customer-select
+        [controlState]="filterFormState.controls.simproCustomerID"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedCustomerChanged)="selectedCustomerChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.ADMIN.USERS.FILTERS.TEXT_CUSTOMER' | translate }}">
+      </account-customer-select>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>
