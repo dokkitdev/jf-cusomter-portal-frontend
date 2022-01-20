@@ -1,5 +1,5 @@
 import { SpinnerDiameter } from '@shared/loading-spinner';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'table-container',
@@ -11,8 +11,6 @@ export class TableContainerComponent {
   @Input() isLoadingToPage: boolean;
   @Input() hasMoreItems: boolean;
   @Input() itemsCount: number;
-
-  @Output() loadNextPage: EventEmitter<void>;
 
   public get isInitialLoading(): boolean {
     return this.isLoading && !this.itemsCount;
@@ -29,7 +27,6 @@ export class TableContainerComponent {
   public spinnerDiameter: typeof SpinnerDiameter;
 
   constructor() {
-    this.loadNextPage = new EventEmitter();
     this.spinnerDiameter = SpinnerDiameter;
   }
 }
