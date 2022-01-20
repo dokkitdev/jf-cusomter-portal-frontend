@@ -1,3 +1,4 @@
+import { ValidationMessages } from '@shared/validation-errors';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -48,7 +49,7 @@ export class CustomSelectComponent<T extends FormControlValueTypes> {
   public set options(value: Array<CustomSelectOption<T>>) {
     this.facade.setOptions(value || []);
   }
-  @Input() validationMessages: Map<string, string>;
+  @Input() validationMessages: ValidationMessages;
   @Input() placeholder: string;
   @Input() label: string;
   @Input() hasTriggerIcon: boolean;
