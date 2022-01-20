@@ -1,3 +1,4 @@
+import { IsAdminGuard } from './guards/is-admin';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { User } from './models';
 import { UserModule as CommonUserModule } from '@ronas-it/angular-common';
@@ -11,7 +12,8 @@ import { UserService } from './user.service';
     })
   ],
   providers: [
-    UserService
+    UserService,
+    IsAdminGuard
   ]
 })
 export class UserModule {

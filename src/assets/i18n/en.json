@@ -68,12 +68,27 @@
       "DIALOG_LOGOUT": {
         "TEXT_TITLE": "Log out?"
       }
+    },
+    "ADMIN": {
+      "USERS": {
+        "TEXT_PAGE_TITLE": "Users",
+        "BUTTON_NEW_USER": "New User",
+        "FILTERS": {
+          "TEXT_NAME": "Name",
+          "TEXT_EMAIL": "Email",
+          "TEXT_CUSTOMER": "Customer"
+        }
+      }
     }
   },
   "SHARED": {
     "DIALOG_CONFIRMATION": {
       "BUTTON_CONFIRM": "OK",
       "BUTTON_CANCEL": "Cancel"
+    },
+    "SELECT": {
+      "TEXT_NO_ITEMS": "No items",
+      "TEXT_SEARCH": "Search..."
     }
   }
 }

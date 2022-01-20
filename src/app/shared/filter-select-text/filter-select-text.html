@@ -1,0 +1,22 @@
+<div
+  [class.dropdown-left]="position === 'left'"
+  [class.dropdown-right]="position === 'right'"
+  (opened)="dropdownToggleOpened($event)"
+  class="dropdown filter-select"
+  dropdown>
+  <a #trigger class="dropdown-trigger filter-select-trigger">
+    {{ name }}
+    <span class="dropdown-trigger-icon"></span>
+  </a>
+
+  <div class="dropdown-content">
+    <input
+      [ngrxFormControlState]="controlState"
+      [type]="type"
+      [attr.min]="min"
+      (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+      (keyup.enter)="dropdownClosed()"
+      #control
+      class="filter-select-control">
+  </div>
+</div>
