@@ -28,6 +28,25 @@
         "TEXT_INCORRECT_EMAIL": "Incorrect email"
       }
     },
+    "RESET_PASSWORD": {
+      "TEXT_PAGE_TITLE_RESET": "Reset Password",
+      "TEXT_PAGE_TITLE_ADD": "Add Password",
+      "TEXT_PASSWORD_PLACEHOLDER": "New password",
+      "TEXT_CONFIRM_PASSWORD_PLACEHOLDER": "Re-type new password",
+      "BUTTON_ADD": "Add Password",
+      "BUTTON_RESET": "Reset Password",
+      "LINK_SIGN_IN": "Sign In",
+      "TEXT_RESET_INCORRECT_TOKEN_MESSAGE": "Password reset failed. Please try to request a new reset password link again.",
+      "TEXT_ADD_INCORRECT_TOKEN_MESSAGE": "Password setup failed. Please try to request a reset password link.",
+      "ERRORS": {
+        "TEXT_PASSWORD_IS_REQUIRED": "New password is required",
+        "TEXT_PASSWORD_MIN_LENGTH": "The password must be at least {{ min }} characters",
+        "TEXT_PASSWORD_MUST_CONTAIN_DIGIT": "The password must contain digits",
+        "TEXT_CONFIRM_PASSWORD_IS_REQUIRED": "Confirm password is required",
+        "TEXT_PASSWORDS_MUST_MATCH": "Passwords must match",
+        "TEXT_RESET_FAILED_MESSAGE": "Password reset failed. Please try again or request a new reset password link."
+      }
+    },
     "NOT_FOUND": {
       "TEXT_TITLE": "Page Not Found",
       "TEXT_MESSAGE": "Make sure the address is correct and the page hasn't moved.",

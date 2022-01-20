@@ -1,9 +1,8 @@
 import { AppState } from '@shared/store';
-import { createFeatureSelector } from '@ngrx/store';
 import { Data, Params } from '@angular/router';
-import { getSelectors, RouterReducerState } from '@ngrx/router-store';
+import { createRouterSelector, getSelectors } from '@ngrx/router-store';
 
-const selectRouter = createFeatureSelector<AppState, RouterReducerState<any>>('router');
+const selectRouter = createRouterSelector();
 const {
   selectCurrentRoute,
   selectQueryParams,
