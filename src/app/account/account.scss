@@ -15,7 +15,7 @@
       .icon {position: absolute; left: 0; margin: 10px 0 10px 29px;
         &:before {transition: 0.3s all;}
       }
-      &:hover {color: $primary;
+      &:hover {color: $primary; background-color: rgba(#fff, 0.1);
         .icon:before {background-color: $primary;}
       }
       &.active {color: $primary; font-weight: 700;
