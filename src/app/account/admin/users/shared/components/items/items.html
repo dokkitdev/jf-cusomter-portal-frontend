@@ -3,8 +3,7 @@
   [isLoading]="isLoading$ | async"
   [isLoadingToPage]="isLoadingToPage$ | async"
   [itemsCount]="items?.length"
-  [hasMoreItems]="hasMoreItems$ | async"
-  (loadNextPage)="loadNextPageClicked()">
+  [hasMoreItems]="hasMoreItems$ | async">
   <div class="table">
     <account-admin-users-items-header></account-admin-users-items-header>
     <div class="table-content">

@@ -25,10 +25,6 @@ export class AccountAdminUsersItemsComponent {
     this.isLoadingToPage$ = this.facade.isLoadingToPage$;
   }
 
-  public loadNextPageClicked(): void {
-    this.facade.loadNextPage();
-  }
-
   public itemDeleted(id: number): void {
     this.facade.deleteItem(id);
   }

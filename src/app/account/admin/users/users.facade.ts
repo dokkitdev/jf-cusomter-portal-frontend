@@ -144,10 +144,6 @@ export class AccountAdminUsersPageFacade {
     this.loadItemsToPageEffect$();
   }
 
-  public loadNextPage(): void {
-    this.loadNextPageEffect$();
-  }
-
   public changeSort(parameters: AccountAdminUsersQueryParameters): void {
     this.updateStateSort(parameters);
     this.loadItemsByParameters();
