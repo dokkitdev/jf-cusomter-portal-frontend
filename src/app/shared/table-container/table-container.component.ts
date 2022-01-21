@@ -1,0 +1,32 @@
+import { SpinnerDiameter } from '@shared/loading-spinner';
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'table-container',
+  templateUrl: 'table-container.html',
+  styleUrls: ['table-container.scss']
+})
+export class TableContainerComponent {
+  @Input() isLoading: boolean;
+  @Input() isLoadingToPage: boolean;
+  @Input() hasMoreItems: boolean;
+  @Input() itemsCount: number;
+
+  public get isInitialLoading(): boolean {
+    return this.isLoading && !this.itemsCount;
+  }
+
+  public get hasItems(): boolean {
+    return !this.isLoading && !!this.itemsCount;
+  }
+
+  public get isNotFound(): boolean {
+    return !this.isLoading && !this.itemsCount;
+  }
+
+  public spinnerDiameter: typeof SpinnerDiameter;
+
+  constructor() {
+    this.spinnerDiameter = SpinnerDiameter;
+  }
+}

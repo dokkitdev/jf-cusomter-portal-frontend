@@ -24,7 +24,7 @@ export class AccountAdminUsersFiltersComponent {
   }
 
   public formActionTriggered(action: Actions<any>): void {
-    // this.facade.handleFormStateAction(action);
+    this.facade.handleFormStateAction(action);
   }
 
   public removeFilterClicked(item: FilterValue): void {
