@@ -1,3 +1,4 @@
+import { NotificationModule } from './../../../shared/notification/notification.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { TableContainerModule } from './../../../shared/table-container/table-container.module';
 import { ButtonModule } from '@shared/button';
@@ -41,7 +42,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     ReactiveComponentModule,
     ButtonModule,
     TableContainerModule,
-    NgForTrackByPropertyModule
+    NgForTrackByPropertyModule,
+    NotificationModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

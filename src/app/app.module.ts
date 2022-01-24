@@ -1,3 +1,4 @@
+import { NotificationComponent } from './shared/notification/notification.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing';
@@ -15,6 +16,7 @@ import { AuthModule } from '@shared/auth';
 import { UserModule } from '@shared/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationEffects } from '@shared/navigation';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,11 @@ import { NavigationEffects } from '@shared/navigation';
     StoreModule.forRoot<AppState>({
       router: routerReducer
     }),
-    StoreDevtoolsModule.instrument(configuration.storeDevtools)
+    StoreDevtoolsModule.instrument(configuration.storeDevtools),
+    ToastrModule.forRoot({
+      ...configuration.notifications,
+      toastComponent: NotificationComponent
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

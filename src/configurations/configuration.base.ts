@@ -24,6 +24,18 @@ export const initConfiguration = (configuration: any): any =>
       available: ['en'],
       default: 'en'
     },
+    dateFormats: {
+      jobDate: 'MMM dd, yyyy',
+      jobTime: 'H:mm',
+      scheduleFilter: 'yyyy-MM-dd HH:mm:ss',
+      invoiceDate: 'dd/MM/yyyy',
+      quoteDate: 'dd/MM/yyyy',
+      quoteIssuedDate: 'MMM dd, yyyy',
+      assetDate: 'dd/MM/yyyy',
+      documentDate: 'dd/MM/yyyy',
+      filterDate: 'dd/MM/yyyy',
+      lastLoginDate: 'dd/MM/yyyy HH:mm:ss'
+    },
     dialog: {
       panelClass: 'dialog-panel',
       disableClose: true
