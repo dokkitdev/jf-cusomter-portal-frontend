@@ -18,6 +18,10 @@ const routes: Routes = [
       {
         path: 'reset-password/:token',
         loadChildren: () => import('./reset-password/reset-password.module').then((module) => module.PublicResetPasswordPageModule)
+      },
+      {
+        path: 'add-password/:token',
+        loadChildren: () => import('./reset-password/reset-password.module').then((module) => module.PublicResetPasswordPageModule)
       }
     ]
   }
