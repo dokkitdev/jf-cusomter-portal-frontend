@@ -10,6 +10,9 @@ export class Site {
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
   public name: string;
 
+  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
+  public uprn: string;
+
   @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
   public siteID: number;
 

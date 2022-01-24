@@ -69,6 +69,29 @@
         "TEXT_TITLE": "Log out?"
       }
     },
+    "SITES": {
+      "TEXT_PAGE_TITLE": "Sites",
+      "ITEMS_HEADER": {
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_ADDRESS": "Site Address",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_PRIMARY_CONTACT": "Primary Contact",
+        "TEXT_OPEN_JOBS": "Open Jobs"
+      },
+      "FILTERS": {
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_ADDRESS": "Site Address",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_CONTACT": "Primary Contact",
+        "TEXT_OPEN_JOBS": "Open jobs",
+        "TEXT_OPEN_JOBS_YES": "Open jobs: Yes",
+        "TEXT_OPEN_JOBS_NO": "Open jobs: No"
+      }
+    },
     "ADMIN": {
       "USERS": {
         "TEXT_PAGE_TITLE": "Users",
@@ -89,6 +112,10 @@
     "SELECT": {
       "TEXT_NO_ITEMS": "No items",
       "TEXT_SEARCH": "Search..."
+    },
+    "EXISTENCE_SELECT": {
+      "TEXT_YES": "Yes",
+      "TEXT_NO": "No"
     },
     "TABLE_CONTAINER": {
       "TEXT_NOTHING": "Nothing found"

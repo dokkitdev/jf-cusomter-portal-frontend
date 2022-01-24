@@ -9,6 +9,10 @@ const routes: Routes = [
     component: AccountComponent,
     children: [
       {
+        path: 'sites',
+        loadChildren: () => import('./sites/sites.module').then((module) => module.AccountSitesPageModule)
+      },
+      {
         path: 'admin',
         canActivate: [IsAdminGuard],
         loadChildren: () => import('./admin/admin.module').then((module) => module.AccountAdminPageModule)

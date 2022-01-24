@@ -1,0 +1,23 @@
+<div class="table-row">
+  <div class="table-cell sites-customer">{{ item.simproCustomer?.name }}</div>
+  <div class="table-cell sites-name">
+    <a [routerLink]="['/account/sites', item.id]">{{ item.name }}</a>
+  </div>
+  <div class="table-cell sites-uprn">{{ item.uprn }}</div>
+  <div class="table-cell sites-address">{{ item.address }}</div>
+  <div class="table-cell sites-postcode">{{ item.postalCode }}</div>
+  <div class="table-cell sites-contact">{{ item.primaryContact?.name }}</div>
+  <div class="table-cell sites-jobs">
+    <ng-container *ngIf="item.openJobsCount; else noOpenJobs">
+      <a
+        routerLink="/account/jobs"
+        [queryParams]="{
+          simproSiteID: item.id,
+          stage: [jobStage.PENDING, jobStage.PROGRESS]
+        }">
+        {{ item.openJobsCount }}
+      </a>
+    </ng-container>
+    <ng-template #noOpenJobs>0</ng-template>
+  </div>
+</div>
