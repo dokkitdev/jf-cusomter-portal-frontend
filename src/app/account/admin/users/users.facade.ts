@@ -370,10 +370,9 @@ export class AccountAdminUsersPageFacade {
                 page,
                 orderBy,
                 desc,
-                simproCustomerID: (filters.customerIds?.length) ? filters.customerIds[0] : undefined,
+                simproCustomerID: filters.customerIds || undefined,
                 name: filters.name,
-                email: filters.email,
-                test: [1,2,3]
+                email: filters.email
               }
             }));
           }
