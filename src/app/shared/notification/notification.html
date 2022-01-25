@@ -1,0 +1,7 @@
+<div data-testid="toast" class="toast">
+  <div class="toast-message">{{ message }}</div>
+  <div class="toast-actions">
+    <countdown-progressbar [timerMilliseconds]="originalTimeout" (countdownEnd)="remove()"></countdown-progressbar>
+    <a (click)="remove()" class="link">{{ 'SHARED.NOTIFICATION.TEXT_HIDE' | translate }}</a>
+  </div>
+</div>

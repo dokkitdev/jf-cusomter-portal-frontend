@@ -301,7 +301,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 
 /* table */
 .table {flex: 1;
-  &-row {display: flex; padding: 0 40px; border-bottom: 1px solid $lighter-gray;}
+  &-row {display: flex; padding: 0 10px; border-bottom: 1px solid $lighter-gray;}
   &-head {
     .table-cell {padding: 8px; font-size: $small; font-weight: 700; line-height: 20px;
       a {position: relative; color: #000;
@@ -338,11 +338,53 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       &:hover {color: rgba($yellow, 0.8);}
     }
   }
-  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -40px;
+  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -25px;
     &-empty {overflow: hidden;}
   }
   &-nothing {margin: 160px auto; color: $gray; text-align: center; font-size: $large;}
   &-more {max-width: 226px; margin: 40px auto 20px;}
+}
+
+/* toast notifications */
+.toast-container {width: calc(100% + 200px); transition: all 0.2s; top: 0;
+  .ngx-toastr {box-shadow: none; padding: 12px 18px 12px 48px; margin: 8px auto;
+    font-family: $font; transition: all 0.6s; background-image: none;
+    border-radius: 4px; line-height: 20px; width: unset; min-width: 448px;
+    max-width: fit-content;
+    &:hover {box-shadow: none; transition: all 0.2s; cursor: default;}
+    &::before {width: 30px; height: 30px; position: absolute; top: 50%; left: 0;
+      margin: 0 12px; transform: translateY(-50%); font-size: 0;
+      mask-image: url(/assets/images/icons.svg);
+    }
+    .toast {display: flex; align-items: center; justify-content: space-between;
+      &-message, &-actions {display: inline-block;}
+      &-message {max-width: 600px;}
+      &-actions {position: relative; float: right; margin-left: 52px;}
+    }
+    .countdown-progressbar {position: absolute; top: 0; right: 0; margin: -3px 40px;
+      svg circle {transform: rotateZ(-90deg) scaleY(-1); fill: transparent;}
+    }
+  }
+  .toast-success {background-color: lighten($green, 20%); color: darken($green, 20%);
+    &::before {content: ''; background: darken($green, 10%); mask-position: -60px -30px;}
+    .link {color: darken($green, 20%);
+      &:hover {border-bottom-color: darken($green, 20%);}
+    }
+    .countdown-progressbar {
+      text {fill: darken($green, 20%);}
+      circle {stroke: darken($green, 10%);}
+    }
+  }
+  .toast-error {background-color: lighten($red, 20%); color: darken($red, 20%);
+    &::before {content: ''; background: darken($red, 10%); mask-position: -120px -30px;}
+    .link {color: darken($red, 15%);
+      &:hover {border-bottom-color: darken($red, 20%);}
+    }
+    .countdown-progressbar {
+      text {fill: darken($red, 20%);}
+      circle {stroke: darken($red, 10%);}
+    }
+  }
 }
 
 /* auth pages */

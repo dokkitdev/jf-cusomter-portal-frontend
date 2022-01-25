@@ -73,6 +73,32 @@
       "USERS": {
         "TEXT_PAGE_TITLE": "Users",
         "BUTTON_NEW_USER": "New User",
+        "LINK_EDIT": "Edit",
+        "LINK_RESEND": "Resend",
+        "LINK_DELETE": "Delete",
+        "ITEMS_HEADER": {
+          "TEXT_NAME": "Name",
+          "TEXT_EMAIL": "Email",
+          "TEXT_CUSTOMER": "Customer",
+          "TEXT_PERMISSION": "Permission",
+          "TEXT_ACTIONS": "Actions"
+        },
+        "ROLE": {
+          "TEXT_ADMIN": "Admin",
+          "TEXT_USER": "User",
+          "TEXT_CUSTOMER": "Customer"
+        },
+        "DIALOG_DELETE_ITEM": {
+          "TEXT_TITLE": "Delete user?",
+          "TEXT_MESSAGE": "User will be deleted permanently.",
+          "BUTTON_CANCEL": "Cancel",
+          "BUTTON_CONFIRM": "OK"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_USER_DELETED": "User has been successfully deleted.",
+          "TEXT_INVITATION_RESENT": "Invitation email has been successfully resent.",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        },
         "FILTERS": {
           "TEXT_NAME": "Name",
           "TEXT_EMAIL": "Email",
@@ -92,6 +118,9 @@
     },
     "TABLE_CONTAINER": {
       "TEXT_NOTHING": "Nothing found"
+    },
+    "NOTIFICATION": {
+      "TEXT_HIDE": "Hide"
     }
   }
 }

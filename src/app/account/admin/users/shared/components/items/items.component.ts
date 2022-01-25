@@ -1,14 +1,15 @@
+import { heightCollapseAnimation } from './../../../../../../shared/animations/height-collapse.animation';
 import { AccountAdminUsersPageFacade } from './../../../users.facade';
 import { User } from '@shared/user';
 import { Observable } from 'rxjs';
-import { SpinnerDiameter } from '@shared/loading-spinner';
-import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'admin-users-items',
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation]
 })
 export class AccountAdminUsersItemsComponent {
   public items$: Observable<Array<User>>;
