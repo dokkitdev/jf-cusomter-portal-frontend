@@ -1,0 +1,24 @@
+<div class="countdown-progressbar">
+  <svg
+    [attr.height]="svgSize"
+    [attr.width]="svgSize"
+    [attr.stroke-dasharray]="circleArea">
+    <text x="50%" y="70%" text-anchor="middle">{{ displaySeconds }}</text>
+    <circle
+      [attr.cx]="position"
+      [attr.cy]="position"
+      [attr.r]="radius"
+      [attr.stroke-width]="strokeWidth"
+      fill="transparent">
+      <animate
+        [attr.dur]="duration"
+        [attr.to]="circleArea"
+        from="0"
+        calcMode="spline"
+        keyTimes="0;1"
+        keySplines="0 0 1 1"
+        attributeName="stroke-dashoffset"
+        fill="freeze" />
+    </circle>
+  </svg>
+</div>

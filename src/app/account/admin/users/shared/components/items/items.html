@@ -5,14 +5,14 @@
   [itemsCount]="items?.length"
   [hasMoreItems]="hasMoreItems$ | async">
   <div class="table">
-    <account-admin-users-items-header></account-admin-users-items-header>
+    <admin-users-items-header></admin-users-items-header>
     <div class="table-content">
-      <account-admin-users-item
+      <admin-users-item
         *ngFor="let item of items; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]
         (deletingSuccess)="itemDeleted($event)">
-      </account-admin-users-item>
+      </admin-users-item>
     </div>
   </div>
 </table-container>

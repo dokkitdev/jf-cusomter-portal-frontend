@@ -1,1 +1,17 @@
-:host .users-page {}
+:host ::ng-deep {
+  .adminusers {
+    &-name {flex: 0 0 180px; min-width: 180px;}
+    &-email {flex: 0 0 200px; min-width: 200px;}
+    &-customer {flex: 1 1 240px; min-width: 240px;}
+    &-permission {flex: 1 1 160px; min-width: 160px;}
+    &-customer, &-permission {
+      &, &-title {white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+    }
+    &-actions {flex: 0 0 150px; min-width: 150px;}
+    &-filters {margin-bottom: 28px;
+      .form-group {margin-bottom: 4px;}
+    }
+    .table-cell .loading-spinner {margin: 0 auto;}
+    admin-users-item {display: block;}
+  }
+}

@@ -1,1 +1,29 @@
-Item
+<div class="table-row">
+  <div class="table-cell adminusers-name">{{ item.name }}</div>
+  <div class="table-cell adminusers-email">
+    <a href="mailto:{{ item.email }}" target="_blank">{{ item.email }}</a>
+  </div>
+  <div class="table-cell adminusers-customer">
+    <div
+      *ngFor="let customer of item.customers; trackByProperty: 'id'"
+      [title]="customer.name"
+      class="adminusers-customer-title">
+      {{ customer.name }}
+    </div>
+  </div>
+  <div class="table-cell adminusers-permission">
+    <admin-users-role [item]="item"></admin-users-role>
+  </div>
+  <div class="table-cell adminusers-actions">
+    <ng-container *ngIf="!(isSendingRequest$ | async); else sendingRequest">
+      <a (click)="editButtonClicked()" class="table-action">{{ 'ACCOUNT.ADMIN.USERS.LINK_EDIT' | translate }}</a>
+      <a (click)="resendInvitationEmailButtonClicked()" class="table-action table-action-info">{{ 'ACCOUNT.ADMIN.USERS.LINK_RESEND' | translate }}</a>
+      <a (click)="deleteButtonClicked()" class="table-action table-action-caution">
+        {{ 'ACCOUNT.ADMIN.USERS.LINK_DELETE' | translate }}
+      </a>
+    </ng-container>
+    <ng-template #sendingRequest>
+      <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
+    </ng-template>
+  </div>
+</div>

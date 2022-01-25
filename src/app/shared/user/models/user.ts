@@ -1,3 +1,4 @@
+import { Customer } from './../../customer/models/customer';
 import { AbstractUser } from '@ronas-it/angular-common';
 import { Expose, Type } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
@@ -16,6 +17,10 @@ export class User extends AbstractUser {
 
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
   public email: string;
+
+  @Expose({ groups: [ClassGroup.MAIN] })
+  @Type(() => Customer)
+  public customers?: Array<Customer>;
 
   constructor(model: Partial<User> = {}) {
     super();

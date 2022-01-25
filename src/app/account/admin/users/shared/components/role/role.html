@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="item.roleID">
+  <ng-container *ngSwitchCase="userRole.ADMIN">
+    {{ 'ACCOUNT.ADMIN.USERS.ROLE.TEXT_ADMIN' | translate }}
+  </ng-container>
+  <ng-container *ngSwitchCase="userRole.USER">
+    {{ 'ACCOUNT.ADMIN.USERS.ROLE.TEXT_USER' | translate }}
+  </ng-container>
+  <ng-container *ngSwitchCase="userRole.CUSTOMER">
+    {{ 'ACCOUNT.ADMIN.USERS.ROLE.TEXT_CUSTOMER' | translate }}
+  </ng-container>
+</ng-container>
