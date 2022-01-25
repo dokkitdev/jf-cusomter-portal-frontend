@@ -1,3 +1,4 @@
+import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
 import { NotificationModule } from './../../../shared/notification/notification.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { TableContainerModule } from './../../../shared/table-container/table-container.module';
@@ -20,6 +21,7 @@ import { AccountAdminUsersItemsComponent } from './shared/components/items/items
 import { AccountAdminUsersFiltersComponent } from './shared/components/filters/filters.component';
 import { AccountAdminUsersItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { AccountAdminUsersRoleComponent } from './shared/components/role/role.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     AccountAdminUsersItemComponent,
     AccountAdminUsersItemsComponent,
     AccountAdminUsersFiltersComponent,
-    AccountAdminUsersItemsHeaderComponent
+    AccountAdminUsersItemsHeaderComponent,
+    AccountAdminUsersRoleComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { ReactiveComponentModule } from '@ngrx/component';
     ButtonModule,
     TableContainerModule,
     NgForTrackByPropertyModule,
-    NotificationModule
+    NotificationModule,
+    HeaderSortModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

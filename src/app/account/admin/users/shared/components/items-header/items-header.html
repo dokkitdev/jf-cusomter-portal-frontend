@@ -1,1 +1,23 @@
-ItemsHeader
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell adminusers-name">
+      <header-sort [orderBy]="userSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_NAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminusers-email">
+      <header-sort [orderBy]="userSortField.EMAIL" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_EMAIL' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminusers-customer">
+      {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
+    </div>
+    <div class="table-cell adminusers-permission">
+      {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_PERMISSION' | translate }}
+    </div>
+    <div class="table-cell adminusers-actions">
+      {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_ACTIONS' | translate }}
+    </div>
+  </div>
+</div>

@@ -76,6 +76,18 @@
         "LINK_EDIT": "Edit",
         "LINK_RESEND": "Resend",
         "LINK_DELETE": "Delete",
+        "ITEMS_HEADER": {
+          "TEXT_NAME": "Name",
+          "TEXT_EMAIL": "Email",
+          "TEXT_CUSTOMER": "Customer",
+          "TEXT_PERMISSION": "Permission",
+          "TEXT_ACTIONS": "Actions"
+        },
+        "ROLE": {
+          "TEXT_ADMIN": "Admin",
+          "TEXT_USER": "User",
+          "TEXT_CUSTOMER": "Customer"
+        },
         "FILTERS": {
           "TEXT_NAME": "Name",
           "TEXT_EMAIL": "Email",

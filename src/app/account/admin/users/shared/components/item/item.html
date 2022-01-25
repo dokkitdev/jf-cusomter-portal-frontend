@@ -4,20 +4,15 @@
     <a href="mailto:{{ item.email }}" target="_blank">{{ item.email }}</a>
   </div>
   <div class="table-cell adminusers-customer">
-    <!-- <div
-      *ngFor="let group of item.groups; trackByProperty: 'id'"
-      [title]="group.simproCustomer.name"
+    <div
+      *ngFor="let customer of item.customers; trackByProperty: 'id'"
+      [title]="customer.name"
       class="adminusers-customer-title">
-      {{ group.simproCustomer.name }}
-    </div> -->
+      {{ customer.name }}
+    </div>
   </div>
   <div class="table-cell adminusers-permission">
-    <!-- <div
-      *ngFor="let group of item.groups; trackByProperty: 'id'"
-      [title]="group.title"
-      class="adminusers-group-title">
-      {{ group.title }}
-    </div> -->
+    <admin-users-role [item]="item"></admin-users-role>
   </div>
   <div class="table-cell adminusers-actions">
     <ng-container *ngIf="!(isSendingRequest$ | async); else sendingRequest">
