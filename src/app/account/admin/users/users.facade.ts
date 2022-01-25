@@ -370,7 +370,7 @@ export class AccountAdminUsersPageFacade {
                 page,
                 orderBy,
                 desc,
-                simproCustomerID: filters.customerIds || undefined,
+                simproCustomerID: filters.customerIds,
                 name: filters.name,
                 email: filters.email
               }
