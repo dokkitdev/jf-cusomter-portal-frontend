@@ -24,7 +24,7 @@ export class AccountAdminUsersPageState {
     this.page = 1;
     this.perPage = 15;
     this.orderBy = UserSortField.NAME;
-    // this.relations = ['groups.simpro_customer'];
+    this.relations = ['customers'];
     this.desc = false;
     this.filterFormState = createFormGroupState('AccountAdminUsersFilterForm', new AccountAdminUsersFilterForm());
     this.selectedCustomer = undefined;

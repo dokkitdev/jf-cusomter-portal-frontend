@@ -17,7 +17,7 @@ export class SiteService {
   constructor(
     private apiService: ApiService
   ) {
-    this.endpoint = '/simpro-sites';
+    this.endpoint = '/sites';
   }
 
   public search({ page, perPage, orderBy, desc, relations, countRelations, filters }: {

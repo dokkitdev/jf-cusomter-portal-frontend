@@ -73,6 +73,9 @@
       "USERS": {
         "TEXT_PAGE_TITLE": "Users",
         "BUTTON_NEW_USER": "New User",
+        "LINK_EDIT": "Edit",
+        "LINK_RESEND": "Resend",
+        "LINK_DELETE": "Delete",
         "FILTERS": {
           "TEXT_NAME": "Name",
           "TEXT_EMAIL": "Email",
