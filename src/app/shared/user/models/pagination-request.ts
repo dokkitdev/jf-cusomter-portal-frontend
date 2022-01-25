@@ -16,8 +16,8 @@ export class UserPaginationRequest extends PaginationRequest {
   @Expose({ name: 'email_query' })
   public email?: string;
 
-  @Expose({ name: 'simpro_customer_id' })
-  public simproCustomerID?: number;
+  @Expose({ name: 'customer_ids' })
+  public customerIds?: Array<number>;
 
   constructor(model: Partial<UserPaginationRequest> = {}) {
     super(model);
