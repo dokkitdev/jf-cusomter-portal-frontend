@@ -87,6 +87,10 @@ export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
     this.facade.resetState();
   }
 
+  public loadNextPageClicked(): void {
+    this.facade.loadNextPage();
+  }
+
   public filterChanged(query: string): void {
     this.facade.changeFilterQuery(query);
   }
