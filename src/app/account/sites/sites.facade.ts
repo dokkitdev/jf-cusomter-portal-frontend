@@ -29,14 +29,6 @@ export class AccountSitesPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get isLoadingToPage$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoadingToPage);
-  }
-
-  public get hasMoreItems$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.totalItems > state.items.length);
-  }
-
   public get items$(): Observable<Array<Site>> {
     return this.componentStore.select((state) => state.items);
   }
@@ -127,8 +119,6 @@ export class AccountSitesPageFacade {
 
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
-  private loadItemsToPageEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountSitesPageState>,
@@ -140,8 +130,6 @@ export class AccountSitesPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
-    this.registerLoadItemsToPageEffect();
   }
 
   public resetState(): void {
@@ -155,14 +143,6 @@ export class AccountSitesPageFacade {
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
   }
-
-  public loadItemsToPage(): void {
-    this.loadItemsToPageEffect$();
-  }
-
-  /* public loadNextPage(): void {
-    this.loadNextPageEffect$();
-  } */
 
   public changeSort(parameters: AccountSitesQueryParameters): void {
     this.updateStateSort(parameters);
@@ -208,20 +188,11 @@ export class AccountSitesPageFacade {
     )();
   }
 
-  private updateIsLoadingToPage(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoadingToPage: value
-      })
-    )();
-  }
-
   private updateItems(response: PaginationResponse<Site>): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
@@ -243,15 +214,6 @@ export class AccountSitesPageFacade {
         page: 1,
         items: [],
         totalItems: 0
-      })
-    )();
-  }
-
-  private updateNextPage(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: state.page + 1
       })
     )();
   }
@@ -316,9 +278,7 @@ export class AccountSitesPageFacade {
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsToPage()
-            : this.loadItemsByParameters();
+          return this.loadItemsByParameters();
         })
       )
     );
@@ -329,33 +289,30 @@ export class AccountSitesPageFacade {
       origin$.pipe(
         withLatestFrom(
           this.parameters$,
-          this.isLoadingToPage$,
           this.relations$,
           this.countRelations$,
           this.filters$
         ),
-        switchMap(([targetPage, parameters, isLoadingToPage, relations, countRelations, filters]) => {
+        switchMap(([targetPage, parameters, relations, countRelations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          if (!isLoadingToPage) {
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: {
-                page,
-                orderBy,
-                desc,
-                simproCustomerID: filters.simproCustomerID,
-                name: filters.name,
-                uprn: filters.uprn,
-                query: filters.query,
-                postalCode: filters.postalCode,
-                primaryContactQuery: filters.primaryContactQuery,
-                hasOpenJobs: filters.hasOpenJobs
-              }
-            }));
-          }
+          this.store.dispatch(NavigationActions.mergeQueryParams({
+            queryParams: {
+              page,
+              orderBy,
+              desc,
+              simproCustomerID: filters.simproCustomerID,
+              name: filters.name,
+              uprn: filters.uprn,
+              query: filters.query,
+              postalCode: filters.postalCode,
+              primaryContactQuery: filters.primaryContactQuery,
+              hasOpenJobs: filters.hasOpenJobs
+            }
+          }));
 
           this.updateIsLoading(true);
 
@@ -385,63 +342,13 @@ export class AccountSitesPageFacade {
         filters
       })
       .pipe(
-        withLatestFrom(
-          this.isLoadingToPage$,
-          this.parameters$
-        ),
         tapResponse(
-          ([response, isLoadingToPage, parameters]) => {
+          (response) => {
             this.updateIsLoading(false);
             this.updateItems(response);
-
-            if (!isLoadingToPage) {
-              return;
-            }
-
-            if (response.currentPage >= parameters.page) {
-              this.updateIsLoadingToPage(false);
-
-              return;
-            }
-
-            if (response.currentPage !== response.lastPage) {
-              this.loadItemsByParameters(response.currentPage + 1);
-
-              return;
-            }
-
-            this.updateIsLoadingToPage(false);
-            this.updateQueryParameters(new AccountSitesQueryParameters({ page: response.currentPage }));
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page: response.currentPage }
-            }));
           },
           () => this.updateIsLoading(false)
         )
       );
-  }
-
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
-
-          this.loadItemsByParameters();
-        })
-      )
-    );
-  }
-
-  private registerLoadItemsToPageEffect(): void {
-    this.loadItemsToPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateIsLoadingToPage(true);
-
-          this.loadItemsByParameters(1);
-        })
-      )
-    );
   }
 }

@@ -1,9 +1,7 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [isLoadingToPage]="isLoadingToPage$ | async"
-  [itemsCount]="items.length"
-  [hasMoreItems]="hasMoreItems$ | async">
+  [itemsCount]="items.length">
   <div class="table">
     <account-sites-items-header></account-sites-items-header>
     <div class="table-content">

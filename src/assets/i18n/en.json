@@ -102,6 +102,11 @@
           "TEXT_CUSTOMER": "Customer"
         }
       }
+    },
+    "SHARED": {
+      "CUSTOMER_SELECT": {
+        "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
+      }
     }
   },
   "SHARED": {

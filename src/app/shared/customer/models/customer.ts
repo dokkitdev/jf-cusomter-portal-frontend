@@ -8,7 +8,7 @@ export class Customer {
   @Expose({ groups: [ClassGroup.MAIN] })
   public name: string;
 
-  @Expose({ name: 'customer_id', groups: [ClassGroup.MAIN] })
+  @Expose({ name: 'simpro_customer_id', groups: [ClassGroup.MAIN] })
   public customerID: number;
 
   constructor(model: Partial<Customer> = {}) {

@@ -16,7 +16,7 @@ export class CustomerService {
   constructor(
     private apiService: ApiService
   ) {
-    this.endpoint = '/simpro-customers';
+    this.endpoint = '/customers';
   }
 
   public search({ page, perPage, orderBy, desc, filters }: {

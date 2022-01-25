@@ -5,6 +5,13 @@
       [ngrxFormState]="filterFormState"
       (ngrxFormActions)="formActionTriggered($event)"
       class="form">
+      <account-customer-select
+        [controlState]="filterFormState.controls.simproCustomerID"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedCustomerChanged)="selectedCustomerChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.SITES.FILTERS.TEXT_CUSTOMER' | translate }}">
+      </account-customer-select>
       <filter-select-text
         [controlState]="filterFormState.controls.name"
         (controlStateActionTriggered)="formActionTriggered($event)"
@@ -15,13 +22,6 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.SITES.FILTERS.TEXT_SITE_UPRN' | translate }}">
       </filter-select-text>
-      <account-customer-select
-        [controlState]="filterFormState.controls.simproCustomerID"
-        [isPermanentlyShowPlaceholder]="true"
-        (selectedCustomerChanged)="selectedCustomerChanged($event)"
-        (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.SITES.FILTERS.TEXT_CUSTOMER' | translate }}">
-      </account-customer-select>
       <filter-select-text
         [controlState]="filterFormState.controls.query"
         (controlStateActionTriggered)="formActionTriggered($event)"
@@ -37,12 +37,12 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.SITES.FILTERS.TEXT_CONTACT' | translate }}">
       </filter-select-text>
-      <account-existence-select
+      <existence-select
         [controlState]="filterFormState.controls.hasOpenJobs"
         [isPermanentlyShowPlaceholder]="true"
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.SITES.FILTERS.TEXT_OPEN_JOBS' | translate }}">
-      </account-existence-select>
+      </existence-select>
     </form>
   </div>
   <filter-values
