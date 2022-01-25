@@ -239,7 +239,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   }
   &-right .dropdown-content {left: auto; right: 0;}
   &-left .dropdown-content {right: auto; left: 0;}
-  &-item {display: block; max-width: 100%; padding: 14px 28px; box-sizing: border-box;
+  &-item {display: block; max-width: 100%; padding: 14px 24px; box-sizing: border-box;
     color: #000; white-space: nowrap; overflow: hidden; font-size: 1rem;
     text-overflow: ellipsis; transition: all .3s; cursor: pointer;
     &:hover {background: $lightest-gray;}
@@ -393,4 +393,18 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   &-logo {margin: 58px auto 32px;}
   &-box {max-width: 412px; margin: 0 auto; position: relative; padding: 3.5rem 4.5rem; box-sizing: border-box;}
   &-actions {margin-top: 48px; text-align: center;}
+}
+
+/* page filters */
+.selectedfilter {display: inline-block; padding: 6px 10px;
+  margin-right: 8px; margin-bottom: 4px; border-radius: 8px;
+  background-color: $light-blue; color: $primary-dark;
+  &-title {margin-right: 12px; pointer-events: none;}
+  &-opened {background-color: $light-green;}
+  &-completed {background-color: $light-yellow;}
+  &-canceled {background-color: $light-red;}
+  .icon {margin: -5px -10px; opacity: 0.6; transition: 0.3s all; cursor: pointer;
+    &:before {background-color: $dark-gray;}
+    &:hover {opacity: 1;}
+  }
 }

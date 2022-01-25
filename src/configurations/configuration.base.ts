@@ -44,5 +44,9 @@ export const initConfiguration = (configuration: any): any =>
       positionClass: 'inline',
       disableTimeOut: true,
       tapToDismiss: false
+    },
+    countdownProgressbar: {
+      radius: 12,
+      strokeWidth: 1
     }
   }, configuration);

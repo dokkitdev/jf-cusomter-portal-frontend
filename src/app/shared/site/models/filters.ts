@@ -1,6 +1,7 @@
 export class SiteFilters {
   public query?: string;
   public name?: string;
+  public uprn?: string;
   public siteID?: number;
   public simproCustomerID?: number;
   public postalCode?: string;

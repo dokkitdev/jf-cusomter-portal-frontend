@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { HeaderSortParameters } from './models';
 
 @Component({
   selector: 'header-sort',
@@ -8,13 +9,17 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class HeaderSortComponent {
   @Input() orderBy: string;
-  @Input() parameters: { orderBy: string; desc: boolean };
+  @Input() parameters: HeaderSortParameters;
 
-  @Output() sortChanged: EventEmitter<{ orderBy: string; desc: boolean }> = new EventEmitter();
+  @Output() sortChanged: EventEmitter<HeaderSortParameters>;
 
-  public changeSort(): void {
+  constructor() {
+    this.sortChanged = new EventEmitter();
+  }
+
+  public changeSortClicked(): void {
     const desc = (this.orderBy === this.parameters.orderBy) ? !this.parameters.desc : false;
 
-    this.sortChanged.emit({ orderBy: this.orderBy, desc });
+    this.sortChanged.emit(new HeaderSortParameters({ orderBy: this.orderBy, desc }));
   }
 }

@@ -10,6 +10,9 @@ export class Site {
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
   public name: string;
 
+  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
+  public uprn: string;
+
   @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
   public siteID: number;
 
@@ -32,8 +35,8 @@ export class Site {
   public openJobsCount?: number;
 
   @Type(() => Customer)
-  @Expose({ name: 'simpro_customer', groups: [ClassGroup.MAIN] })
-  public simproCustomer?: Customer;
+  @Expose({ name: 'customers', groups: [ClassGroup.MAIN] })
+  public customers?: Array<Customer>;
 
   @Type(() => Contact)
   @Expose({ name: 'site_contacts', groups: [ClassGroup.MAIN] })

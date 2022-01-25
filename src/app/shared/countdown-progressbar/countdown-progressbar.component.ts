@@ -8,6 +8,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { configuration } from '@configurations';
 
 @Component({
   selector: 'countdown-progressbar',
@@ -17,8 +18,8 @@ import {
 })
 export class CountdownProgressbarComponent implements OnInit, OnDestroy {
   @Input() timerMilliseconds: number;
-  @Input() radius: number = 12;
-  @Input() strokeWidth: number = 1;
+  @Input() radius: number;
+  @Input() strokeWidth: number;
 
   @Output() countdownEnd: EventEmitter<void>;
 
@@ -50,6 +51,8 @@ export class CountdownProgressbarComponent implements OnInit, OnDestroy {
     public changeDetector: ChangeDetectorRef
   ) {
     this.countdownEnd = new EventEmitter();
+    this.radius = configuration.countdownProgressbar.radius;
+    this.strokeWidth = configuration.countdownProgressbar.strokeWidth;
   }
 
   public ngOnInit(): void {

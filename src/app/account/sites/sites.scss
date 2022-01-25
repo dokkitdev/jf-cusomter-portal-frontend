@@ -1,0 +1,13 @@
+:host ::ng-deep .sites {
+  &-customer {flex: 1 1 180px; min-width: 180px;}
+  &-name {flex: 1 1 180px; min-width: 180px;}
+  &-uprn {flex: 1 1 160px; min-width: 160px;}
+  &-address {flex: 1 1 200px; min-width: 200px;}
+  &-postcode {flex: 1 1 110px; min-width: 110px;}
+  &-contact {flex: 1 1 160px; min-width: 160px;}
+  &-jobs {flex: 0 0 80px; min-width: 80px; text-align: center;}
+  &-filters {margin-bottom: 28px;
+    .form-group {margin-bottom: 4px;}
+  }
+  account-sites-item {display: block;}
+}

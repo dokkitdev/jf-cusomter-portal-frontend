@@ -1,0 +1,15 @@
+<table-container
+  *ngrxLet="items$; let items"
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="items.length">
+  <div class="table">
+    <account-sites-items-header></account-sites-items-header>
+    <div class="table-content">
+      <account-sites-item
+        *ngFor="let item of items; trackByProperty: 'id'"
+        [item]="item"
+        [@heightCollapse]>
+      </account-sites-item>
+    </div>
+  </div>
+</table-container>
