@@ -1,6 +1,6 @@
 <div class="table-row">
   <div class="table-cell sites-customer">
-    <span *ngFor="let item of item.customers; trackByProperty: 'id'">{{ item.name }}</span>
+    <div *ngFor="let item of item.customers; trackByProperty: 'id'">{{ item.name }}</div>
   </div>
   <div class="table-cell sites-name">
     <a [routerLink]="['/account/sites', item.id]">{{ item.name }}</a>
