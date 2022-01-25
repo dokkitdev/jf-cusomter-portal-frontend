@@ -39,5 +39,10 @@ export const initConfiguration = (configuration: any): any =>
     dialog: {
       panelClass: 'dialog-panel',
       disableClose: true
+    },
+    notifications: {
+      positionClass: 'inline',
+      disableTimeOut: true,
+      tapToDismiss: false
     }
   }, configuration);

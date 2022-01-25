@@ -88,6 +88,17 @@
           "TEXT_USER": "User",
           "TEXT_CUSTOMER": "Customer"
         },
+        "DIALOG_DELETE_ITEM": {
+          "TEXT_TITLE": "Delete user?",
+          "TEXT_MESSAGE": "User will be deleted permanently.",
+          "BUTTON_CANCEL": "Cancel",
+          "BUTTON_CONFIRM": "OK"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_USER_DELETED": "User has been successfully deleted.",
+          "TEXT_INVITATION_RESENT": "Invitation email has been successfully resent.",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        },
         "FILTERS": {
           "TEXT_NAME": "Name",
           "TEXT_EMAIL": "Email",
@@ -107,6 +118,9 @@
     },
     "TABLE_CONTAINER": {
       "TEXT_NOTHING": "Nothing found"
+    },
+    "NOTIFICATION": {
+      "TEXT_HIDE": "Hide"
     }
   }
 }
