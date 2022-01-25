@@ -22,6 +22,7 @@ import { AccountAdminUsersFiltersComponent } from './shared/components/filters/f
 import { AccountAdminUsersItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { AccountAdminUsersRoleComponent } from './shared/components/role/role.component';
+import { LoadingSpinnerModule } from '@shared/loading-spinner';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AccountAdminUsersRoleComponent } from './shared/components/role/role.co
     TableContainerModule,
     NgForTrackByPropertyModule,
     NotificationModule,
-    HeaderSortModule
+    HeaderSortModule,
+    LoadingSpinnerModule
   ],
   providers: [
     AccountAdminUsersPageFacade,
