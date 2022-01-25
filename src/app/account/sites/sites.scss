@@ -1,5 +1,7 @@
 :host ::ng-deep .sites {
-  &-customer {flex: 1 1 180px; min-width: 180px;}
+  &-customer {flex: 1 1 180px; min-width: 180px;
+    span {display: block;}
+  }
   &-name {flex: 1 1 180px; min-width: 180px;}
   &-uprn {flex: 1 1 160px; min-width: 160px;}
   &-address {flex: 1 1 200px; min-width: 200px;}
