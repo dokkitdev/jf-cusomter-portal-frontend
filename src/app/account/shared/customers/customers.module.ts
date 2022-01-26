@@ -7,7 +7,6 @@ import { AccountCustomersItemAddComponent } from './components/item-add/item-add
 import { ReactiveComponentModule } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { AccountCustomerSelectModule } from '../customer-select';
-import { AccountGroupSelectModule } from '../group-select';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -22,8 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgrxFormsModule,
     ReactiveComponentModule,
     NgForTrackByPropertyModule,
-    AccountCustomerSelectModule,
-    AccountGroupSelectModule
+    AccountCustomerSelectModule
   ],
   exports: [
     AccountCustomersComponent

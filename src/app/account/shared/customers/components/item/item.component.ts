@@ -8,7 +8,6 @@ import {
   forwardRef
 } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Group, GroupFilters } from '@shared/group';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { Observable, Subject } from 'rxjs';
 import { AccountCustomersItemComponentFacade } from './item.facade';
@@ -34,16 +33,14 @@ export class AccountCustomersItemComponent implements OnDestroy {
     this.facade.setControlState(value);
   }
   @Input() groupValidationMessages: Map<string, string>;
-  @Input() initialGroup: Group;
   @Input() excludeCustomerID: Array<number>;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
   @Output() removeItem: EventEmitter<void>;
-  @Output() selectValue: Subject<number>;
+  @Output() selectValue: Subject<number | undefined>;
 
   public controlState$: Observable<FormControlState<number>>;
   public customerControlState$: Observable<FormControlState<number>>;
-  public groupFilters$: Observable<GroupFilters>;
 
   constructor(
     private facade: AccountCustomersItemComponentFacade
@@ -53,11 +50,10 @@ export class AccountCustomersItemComponent implements OnDestroy {
     this.selectValue = this.facade.selectValue;
     this.controlState$ = this.facade.controlState$;
     this.customerControlState$ = this.facade.customerControlState$;
-    this.groupFilters$ = this.facade.groupFilters$;
   }
 
   public ngOnDestroy(): void {
-    this.selectValue.next();
+    this.selectValue.next(void 0);
   }
 
   public removeClicked(): void {
@@ -66,9 +62,5 @@ export class AccountCustomersItemComponent implements OnDestroy {
 
   public customerControlActionTriggered(action: Actions<any>): void {
     this.facade.handleCustomerControlStateAction(action);
-  }
-
-  public groupSelectInitialized(group: Group): void {
-    this.facade.setCustomer(group.simproCustomerID);
   }
 }

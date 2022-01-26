@@ -13,7 +13,7 @@ import {
 import { AccountDialogEditUserForm } from './forms';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountDialogEditUserComponentState } from './dialog-edit-user.state';
-import { email, maxLength, required } from 'ngrx-forms/validation';
+import { email, maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,10 +21,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { DialogService } from '@shared/dialog';
 import { User, UserService } from '@shared/user';
-import { positiveNumber, trimmedRequired } from '@shared/validators';
+import { trimmedRequired } from '@shared/validators';
 import { AccountDialogEditUserActions } from './store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { v4 as uuidv4 } from 'uuid';
 import { omit } from 'lodash';
 
 @Injectable()

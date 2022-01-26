@@ -25,7 +25,7 @@
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_EMAIL' | translate }}">
     </form-text>
-    <account-customers
+    <!-- <account-customers
       *ngrxLet="user$; let user"
       [controlState]="formState.controls.groupIDs"
       [initialGroups]="user.groups"
@@ -33,7 +33,7 @@
         positiveNumber: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_GROUP_IS_REQUIRED' | translate
       }"
       (controlStateActionTriggered)="formActionTriggered($event)">
-    </account-customers>
+    </account-customers> -->
     <form-group
       *ngIf="!isEditMode"
       label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">

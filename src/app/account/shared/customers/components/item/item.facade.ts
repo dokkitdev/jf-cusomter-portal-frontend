@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { GroupFilters } from '@shared/group';
 import { Actions, formControlReducer, FormControlState, setValue } from 'ngrx-forms';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -20,17 +19,7 @@ export class AccountCustomersItemComponentFacade {
     return this.componentStore.select((state) => state.customerControlState.value);
   }
 
-  public get groupFilters$(): Observable<GroupFilters> {
-    return this
-      .simproCustomerID$
-      .pipe(
-        map((simproCustomerID) => new GroupFilters({
-          simproCustomerID: simproCustomerID
-        }))
-      );
-  }
-
-  public selectValue: Subject<number> = new Subject();
+  public selectValue: Subject<number | undefined> = new Subject();
 
   constructor(
     private readonly componentStore: ComponentStore<AccountCustomersItemComponentState>

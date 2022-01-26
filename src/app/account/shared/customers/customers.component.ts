@@ -4,7 +4,6 @@ import { Observable, Subject } from 'rxjs';
 import { AccountCustomersComponentFacade } from './customers.facade';
 import { heightCollapseAnimation } from '@shared/animations';
 import { Actions, FormArrayState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
-import { Group } from '@shared/group';
 
 @Component({
   selector: 'account-customers',
@@ -28,7 +27,6 @@ export class AccountCustomersComponent implements OnDestroy {
     this.facade.setControlState(value);
   }
   @Input() groupValidationMessages: Map<string, string>;
-  @Input() initialGroups: Array<Group>;
 
   @Output() controlStateActionTriggered: Subject<Actions<any>>;
 
@@ -53,10 +51,6 @@ export class AccountCustomersComponent implements OnDestroy {
 
   public removeItemClicked(index: number): void {
     this.facade.removeItem(index);
-  }
-
-  public getInitialGroup(index: number): Group {
-    return this.initialGroups?.[index];
   }
 
   public valueSelected(id: number, index: number): void {

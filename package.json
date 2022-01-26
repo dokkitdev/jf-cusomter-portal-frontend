@@ -49,6 +49,7 @@
     "@ronas-it/angular-schematics": "^12.1.0",
     "@types/lodash": "^4.14.178",
     "@types/node": "^12.11.1",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
     "eslint": "^7.28.0",
