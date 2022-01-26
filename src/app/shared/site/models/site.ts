@@ -1,7 +1,7 @@
 import { ClassGroup } from '@shared/class-group';
 import { Contact } from '@shared/contact';
 import { Customer } from '@shared/customer';
-import { Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 
 export class Site {
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -45,6 +45,11 @@ export class Site {
   @Type(() => Contact)
   @Expose({ name: 'primary_site_contact', groups: [ClassGroup.MAIN] })
   public primaryContact?: Contact;
+
+  @Exclude()
+  public get firstCustomer(): Customer | undefined {
+    return this.customers?.[0];
+  }
 
   constructor(model: Partial<Site> = {}) {
     Object.assign(this, model);
