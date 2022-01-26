@@ -1,7 +1,7 @@
 export class UserFilters {
   public name?: string;
   public email?: string;
-  public simproCustomerID?: number;
+  public customerIds?: Array<number>;
 
   constructor(model: Partial<UserFilters> = {}) {
     Object.assign(this, model);

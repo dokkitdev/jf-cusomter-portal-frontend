@@ -76,7 +76,7 @@ export class AccountAdminUsersPageFacade {
       .filterFormStateValue$
       .pipe(
         map((filterFormStateValue) => new UserFilters({
-          simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
+          customerIds: (filterFormStateValue.simproCustomerID) ? [filterFormStateValue.simproCustomerID] : undefined,
           name: filterFormStateValue.name || undefined,
           email: filterFormStateValue.email || undefined
         }))
@@ -370,7 +370,7 @@ export class AccountAdminUsersPageFacade {
                 page,
                 orderBy,
                 desc,
-                simproCustomerID: filters.simproCustomerID,
+                simproCustomerID: filters.customerIds,
                 name: filters.name,
                 email: filters.email
               }

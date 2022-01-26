@@ -28,10 +28,10 @@ export class AccountAdminUsersFiltersComponent {
   }
 
   public removeFilterClicked(item: FilterValue): void {
-    // this.facade.removeFilter(item);
+    this.facade.removeFilter(item);
   }
 
   public selectedCustomerChanged(customer: Customer): void {
-    // this.facade.setSelectedCustomer(customer);
+    this.facade.setSelectedCustomer(customer);
   }
 }
