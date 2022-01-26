@@ -8,10 +8,7 @@ import {
   FormGroupState,
   setValue,
   updateGroup,
-  validate,
-  compose,
-  setUserDefinedProperty,
-  updateArray
+  validate
 } from 'ngrx-forms';
 import { AccountDialogEditUserForm } from './forms';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -88,7 +85,7 @@ export class AccountDialogEditUserComponentFacade {
   }
 
   private getServerErrorMessage(response: unknown): string {
-    return (<HttpErrorResponse>response).error.error;
+    return (response as HttpErrorResponse).error.error;
   }
 
   private updateIsEditMode(value: boolean): void {
