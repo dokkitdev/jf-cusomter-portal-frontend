@@ -35,8 +35,8 @@ export class Site {
   public openJobsCount?: number;
 
   @Type(() => Customer)
-  @Expose({ name: 'simpro_customer', groups: [ClassGroup.MAIN] })
-  public simproCustomer?: Customer;
+  @Expose({ name: 'customers', groups: [ClassGroup.MAIN] })
+  public customers?: Array<Customer>;
 
   @Type(() => Contact)
   @Expose({ name: 'site_contacts', groups: [ClassGroup.MAIN] })

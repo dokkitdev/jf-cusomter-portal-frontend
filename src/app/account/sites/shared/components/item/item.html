@@ -1,5 +1,7 @@
 <div class="table-row">
-  <div class="table-cell sites-customer">{{ item.simproCustomer?.name }}</div>
+  <div class="table-cell sites-customer">
+    <div *ngFor="let item of item.customers; trackByProperty: 'id'">{{ item.name }}</div>
+  </div>
   <div class="table-cell sites-name">
     <a [routerLink]="['/account/sites', item.id]">{{ item.name }}</a>
   </div>
