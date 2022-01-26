@@ -1,0 +1,10 @@
+<div class="page siteview">
+  <account-sites-view-header></account-sites-view-header>
+  <loading-spinner
+    *ngIf="isLoading$ | async; else details"
+    [diameter]="spinnerDiameter.HUGE">
+  </loading-spinner>
+  <ng-template #details>
+    <account-sites-view-form></account-sites-view-form>
+  </ng-template>
+</div>

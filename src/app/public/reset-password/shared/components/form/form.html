@@ -35,12 +35,12 @@
           type="password"
           autocomplete="new-password">
         </form-text>
-        <button
-          [ngClass]="{ 'button-loading': isSubmitting$ | async }"
-          (click)="formSubmitted()"
-          class="button button-primary button-block">
+        <btn
+          [isLoading]="isSubmitting$ | async"
+          [isBlock]="true"
+          type="submit">
           {{ 'PUBLIC.RESET_PASSWORD.BUTTON_' + ((isNewUser) ? 'ADD' : 'RESET') | translate }}
-        </button>
+        </btn>
       </form>
     </ng-template>
   </ng-container>

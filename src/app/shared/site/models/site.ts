@@ -13,7 +13,7 @@ export class Site {
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
   public uprn: string;
 
-  @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
+  @Expose({ name: 'simpro_site_id', groups: [ClassGroup.MAIN] })
   public siteID: number;
 
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })

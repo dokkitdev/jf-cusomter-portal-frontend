@@ -1,0 +1,8 @@
+<div *ngrxLet="site$; let site" class="page-header">
+  <h2 class="page-title">
+    <a (click)="backClicked()" class="link-back">
+      <span class="icon icon-back icon-mask icon-mask-dark-blue"></span>
+    </a>
+    {{ 'ACCOUNT.SITES.VIEW.TEXT_PAGE_TITLE' | translate }} {{ site.siteID }}
+  </h2>
+</div>

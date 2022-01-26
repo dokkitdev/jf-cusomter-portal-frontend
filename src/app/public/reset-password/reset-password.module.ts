@@ -15,6 +15,7 @@ import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { PublicLayoutModule } from '../shared/layout';
 import { RouteLinkModule } from '@shared/route-link';
 import { FormErrorModule } from '@shared/form-error';
+import { ButtonModule } from '@shared/button';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FormErrorModule } from '@shared/form-error';
     LoadingSpinnerModule,
     PublicLayoutModule,
     RouteLinkModule,
-    FormErrorModule
+    FormErrorModule,
+    ButtonModule
   ],
   providers: [
     PublicResetPasswordPageFacade,
