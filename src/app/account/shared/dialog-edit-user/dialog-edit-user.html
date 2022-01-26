@@ -1,1 +1,64 @@
-DialogEditUser
+<div *ngrxLet="isEditMode$; let isEditMode" class="dialog-edit edituser">
+  <h2 class="dialog-edit-title">
+    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_TITLE_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+  </h2>
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (submit)="formSubmitted()"
+    (ngrxFormsAction)="formActionTriggered($event)">
+    <form-text
+      [controlState]="formState.controls.name"
+      [validationMessages]="{
+        trimmedRequired: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_NAME_IS_REQUIRED' | translate,
+        maxLength: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_NAME_MAX_LENGTH' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_NAME' | translate }}">
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.email"
+      [validationMessages]="{
+        trimmedRequired: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
+        email: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_EMAIL' | translate }}">
+    </form-text>
+    <account-customers
+      *ngrxLet="user$; let user"
+      [controlState]="formState.controls.groupIDs"
+      [initialGroups]="user.groups"
+      [groupValidationMessages]="{
+        positiveNumber: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_GROUP_IS_REQUIRED' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)">
+    </account-customers>
+    <form-group
+      *ngIf="!isEditMode"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
+      <form-checkbox
+        [controlState]="formState.controls.isSendEmail"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_EMAIL' | translate }}">
+      </form-checkbox>
+    </form-group>
+    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+      <button
+        [disabled]="isSendingRequest"
+        type="button"
+        class="button button-outline"
+        mat-dialog-close>
+        {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_CANCEL' | translate }}
+      </button>
+      <button
+        [ngClass]="{ 'button-loading': isSendingRequest }"
+        [disabled]="formState.isPristine"
+        type="submit"
+        class="button button-primary"
+        role="button">
+        {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+      </button>
+    </div>
+  </form>
+</div>

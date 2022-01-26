@@ -72,6 +72,14 @@ export class UserService extends CommonUserService<User> {
       );
   }
 
+  public create(user: User): Observable<User> {
+    return this.apiService
+      .post<User>(this.endpoint, classToPlain(user, { groups: [ClassGroup.CREATING] }))
+      .pipe(
+        map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] }))
+      );
+  }
+
   public update(user: User): Observable<void> {
     return this.apiService.put(`${this.endpoint}/${user.id}`, classToPlain(user, { groups: [ClassGroup.UPDATING] }));
   }

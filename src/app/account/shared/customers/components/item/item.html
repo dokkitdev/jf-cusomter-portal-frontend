@@ -1,0 +1,29 @@
+<div *ngrxLet="customerControlState$; let customerControlState" class="customers-item">
+  <div class="row">
+    <div class="col col-50">
+      <account-customer-select
+        [controlState]="customerControlState"
+        [isLoadByOpen]="true"
+        [initialCustomer]="initialGroup?.simproCustomer"
+        [excludeID]="excludeCustomerID"
+        (controlStateActionTriggered)="customerControlActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.SHARED.CUSTOMERS.TEXT_CUSTOMER' | translate }}">
+      </account-customer-select>
+    </div>
+    <div class="col col-50">
+      <account-group-select
+        [controlState]="controlState$ | async"
+        [filters]="groupFilters$ | async"
+        [validationMessages]="groupValidationMessages"
+        [isLoadByOpen]="true"
+        [initialGroup]="initialGroup"
+        [isManuallyDisabled]="!customerControlState.value"
+        (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+        (itemLoaded)="groupSelectInitialized($event)">
+      </account-group-select>
+    </div>
+  </div>
+  <a (click)="removeClicked()" class="customers-item-action customers-remove">
+    <span class="icon icon-mask icon-cross icon-mask-red"></span>
+  </a>
+</div>
