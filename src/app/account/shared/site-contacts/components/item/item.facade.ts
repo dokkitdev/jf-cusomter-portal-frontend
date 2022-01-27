@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { AccountDialogEditContactComponent } from '@app/account/shared/dialog-edit-contact';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
 import { DialogConfirmationComponent } from '@shared/dialog-confirmation';
-import { ContactService } from '@shared/contact';
+import { Contact, ContactService } from '@shared/contact';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { exhaustMap, map, switchMap } from 'rxjs/operators';
 import { AccountSiteContactsItemComponentState } from './item.state';
@@ -17,6 +18,7 @@ export class AccountSiteContactsItemComponentFacade {
 
   public deletingSuccessSubject: Subject<number> = new Subject();
 
+  private openEditContactDialogEffect$: (item: Contact) => Observable<void>;
   private deleteItemEffect$: (id: number) => Observable<void>;
 
   constructor(
@@ -28,11 +30,16 @@ export class AccountSiteContactsItemComponentFacade {
   ) {
     this.resetState();
 
+    this.registerOpenEditContactDialogEffect();
     this.registerDeleteItemEffect();
   }
 
   public resetState(): void {
     this.componentStore.setState(new AccountSiteContactsItemComponentState());
+  }
+
+  public editItem(item: Contact): void {
+    this.openEditContactDialogEffect$(item);
   }
 
   public deleteItem(id: number): void {
@@ -46,6 +53,17 @@ export class AccountSiteContactsItemComponentFacade {
         isSendingRequest: value
       })
     )();
+  }
+
+  private registerOpenEditContactDialogEffect(): void {
+    this.openEditContactDialogEffect$ = this.componentStore.effect((origin$: Observable<Contact>) =>
+      origin$.pipe(
+        map((contact) => this.dialogService.open(AccountDialogEditContactComponent, {
+          autoFocus: false,
+          data: { isEditMode: true, siteID: contact.simproSiteID, contact }
+        }))
+      )
+    );
   }
 
   private registerDeleteItemEffect(): void {

@@ -11,7 +11,7 @@ import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
 import { DialogModule } from '@shared/dialog';
-import { ButtonModule } from '@shared/button';
+import { AccountDialogEditContactModule } from '../dialog-edit-contact';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { ButtonModule } from '@shared/button';
     HeaderSortModule,
     TableContainerModule,
     DialogModule,
-    ButtonModule
+    AccountDialogEditContactModule
   ],
   exports: [
     AccountSiteContactsComponent

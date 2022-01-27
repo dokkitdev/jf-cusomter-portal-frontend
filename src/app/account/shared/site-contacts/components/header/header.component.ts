@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AccountSiteContactsComponentFacade } from '../../site-contacts.facade';
 
 @Component({
   selector: 'account-site-contacts-header',
@@ -6,4 +7,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountSiteContactsHeaderComponent { }
+export class AccountSiteContactsHeaderComponent {
+  constructor(
+    private facade: AccountSiteContactsComponentFacade
+  ) { }
+
+  public createContactButtonClicked(): void {
+    this.facade.createItem();
+  }
+}

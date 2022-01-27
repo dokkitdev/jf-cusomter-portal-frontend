@@ -31,6 +31,10 @@ export class AccountSiteContactsItemComponent {
     this.spinnerDiameter = SpinnerDiameter;
   }
 
+  public editButtonClicked(): void {
+    this.facade.editItem(this.item);
+  }
+
   public deleteButtonClicked(): void {
     this.facade.deleteItem(this.item.id);
   }

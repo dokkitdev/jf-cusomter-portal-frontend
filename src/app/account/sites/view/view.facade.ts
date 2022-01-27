@@ -76,6 +76,7 @@ export class AccountSitesViewPageFacade {
     private readonly store: Store<AppState>,
     private readonly router: Router,
     private readonly siteService: SiteService,
+    private readonly dialogService: DialogService,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
     private readonly navigationService: NavigationService,
