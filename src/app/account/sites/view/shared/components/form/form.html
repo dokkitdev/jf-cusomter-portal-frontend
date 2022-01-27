@@ -5,14 +5,20 @@
   (submit)="formSubmitted()"
   class="form">
   <div class="row">
-    <div class="col col-33">
+    <div class="col col-25">
       <form-text
         [controlState]="formState.controls.uprn"
         (controlStateActionTriggered)="formActionTriggered($event)"
         label="{{ 'ACCOUNT.SITES.VIEW.TEXT_SITE_UPRN' | translate }}">
       </form-text>
     </div>
-    <div class="col col-33">
+    <div class="col col-25">
+      <form-text
+        [controlState]="formState.controls.customerName"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_CUSTOMER' | translate }}">
+      </form-text>
+    </div>
+    <div class="col col-50">
       <form-text
         [controlState]="formState.controls.name"
         [validationMessages]="{
@@ -22,15 +28,9 @@
         label="{{ 'ACCOUNT.SITES.VIEW.TEXT_SITE_NAME' | translate }}">
       </form-text>
     </div>
-    <div class="col col-33">
-      <form-text
-        [controlState]="formState.controls.customerName"
-        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_CUSTOMER' | translate }}">
-      </form-text>
-    </div>
   </div>
   <h3>{{ 'ACCOUNT.SITES.VIEW.TEXT_TITLE_ADDRESS' | translate }}</h3>
-  <div class="row row-info">
+  <div class="row">
     <div class="col col-50">
       <form-text
         [controlState]="formState.controls.address"
@@ -46,7 +46,7 @@
       </form-text>
     </div>
   </div>
-  <div class="row row-info">
+  <div class="row">
     <div class="col col-50">
       <form-text
         [controlState]="formState.controls.postalCode"
@@ -62,14 +62,16 @@
       </form-text>
     </div>
   </div>
-  <div class="col col-50">
-    <div class="form-group">
-      <custom-select
-        [controlState]="formState.controls.primaryContactID"
-        [options]="contactOptions$ | async"
-        (controlStateActionTriggered)="formActionTriggered($event)"
-        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_PRIMARY_CONTACT' | translate }}">
-      </custom-select>
+  <div class="row">
+    <div class="col col-50">
+      <div class="form-group">
+        <custom-select
+          [controlState]="formState.controls.primaryContactID"
+          [options]="contactOptions$ | async"
+          (controlStateActionTriggered)="formActionTriggered($event)"
+          label="{{ 'ACCOUNT.SITES.VIEW.TEXT_PRIMARY_CONTACT' | translate }}">
+        </custom-select>
+      </div>
     </div>
   </div>
   <btn
