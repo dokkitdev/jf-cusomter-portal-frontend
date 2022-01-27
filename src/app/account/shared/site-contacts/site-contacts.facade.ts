@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Actions, ofType } from '@ngrx/effects';
 import { Contact } from '@shared/contact';
-import { DialogService } from '@shared/dialog';
 import { orderBy } from 'lodash';
 import { Observable, Subject } from 'rxjs';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
-import { AccountDialogEditContactComponent } from '../dialog-edit-contact';
-import { AccountDialogEditContactActions } from '../dialog-edit-contact/store';
 import { AccountSiteContactsQueryParameters } from './models';
 import { AccountSiteContactsComponentState } from './site-contacts.state';
 
@@ -32,18 +27,10 @@ export class AccountSiteContactsComponentFacade {
   public contactUpdatedSubject: Subject<Contact> = new Subject();
   public contactDeletedSubject: Subject<number> = new Subject();
 
-  private openCreateContactDialogEffect$: () => Observable<void>;
-
   constructor(
-    private readonly componentStore: ComponentStore<AccountSiteContactsComponentState>,
-    private readonly actions$: Actions,
-    private readonly dialogService: DialogService
+    private readonly componentStore: ComponentStore<AccountSiteContactsComponentState>
   ) {
     this.resetState();
-
-    this.registerOpenCreateContactDialogEffect();
-    this.registerAddCreatedItemEffect();
-    this.registerChangeUpdatedItemEffect();
   }
 
   public resetState(): void {
@@ -56,10 +43,6 @@ export class AccountSiteContactsComponentFacade {
 
   public setItems(items: Array<Contact>): void {
     this.updateItems(items);
-  }
-
-  public createItem(): void {
-    this.openCreateContactDialogEffect$();
   }
 
   public deleteItem(id: number): void {
@@ -96,37 +79,5 @@ export class AccountSiteContactsComponentFacade {
         desc: parameters.desc
       })
     )();
-  }
-
-  private registerOpenCreateContactDialogEffect(): void {
-    this.openCreateContactDialogEffect$ = this.componentStore.effect((origin$) =>
-      origin$.pipe(
-        withLatestFrom(
-          this.siteID$
-        ),
-        map(([_, siteID]) => this.dialogService.open(AccountDialogEditContactComponent, {
-          autoFocus: false,
-          data: { siteID }
-        }))
-      )
-    );
-  }
-
-  private registerAddCreatedItemEffect(): void {
-    this.componentStore.effect(() =>
-      this.actions$.pipe(
-        ofType(AccountDialogEditContactActions.createContactSuccess),
-        tap(({ contact }) => this.contactCreatedSubject.next(contact))
-      )
-    );
-  }
-
-  private registerChangeUpdatedItemEffect(): void {
-    this.componentStore.effect(() =>
-      this.actions$.pipe(
-        ofType(AccountDialogEditContactActions.updateContactSuccess),
-        tap(({ contact }) => this.contactUpdatedSubject.next(contact))
-      )
-    );
   }
 }
