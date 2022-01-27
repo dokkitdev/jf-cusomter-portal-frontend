@@ -1,3 +1,4 @@
+import { PaginationElementsModule } from './../../../shared/pagination-elements/pagination-elements.module';
 import { DialogModule } from './../../../shared/dialog/dialog.module';
 import { AccountDialogEditUserModule } from './../../shared/dialog-edit-user/dialog-edit-user.module';
 import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
@@ -25,6 +26,7 @@ import { AccountAdminUsersItemsHeaderComponent } from './shared/components/items
 import { ReactiveComponentModule } from '@ngrx/component';
 import { AccountAdminUsersRoleComponent } from './shared/components/role/role.component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { LoadingSpinnerModule } from '@shared/loading-spinner';
     HeaderSortModule,
     LoadingSpinnerModule,
     AccountDialogEditUserModule,
-    DialogModule
+    DialogModule,
+    NgxPaginationModule,
+    PaginationElementsModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

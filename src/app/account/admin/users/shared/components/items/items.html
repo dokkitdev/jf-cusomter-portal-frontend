@@ -1,18 +1,26 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [isLoadingToPage]="isLoadingToPage$ | async"
-  [itemsCount]="items?.length"
-  [hasMoreItems]="hasMoreItems$ | async">
+  [itemsCount]="items?.length">
   <div class="table">
     <admin-users-items-header></admin-users-items-header>
     <div class="table-content">
       <admin-users-item
-        *ngFor="let item of items; trackByProperty: 'id'"
+        *ngFor="let item of items | paginate: {
+          id: paginationId$ | async,
+          itemsPerPage: perPage$ | async,
+          currentPage: currentPage$ | async,
+          totalItems: totalItems$ | async
+        }; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]
         (deletingSuccess)="itemDeleted($event)">
       </admin-users-item>
     </div>
+    <pagination-elements
+      [paginationId]="paginationId$ | async"
+      (pageChanged)="pageChanged($event)"
+    >
+    </pagination-elements>
   </div>
 </table-container>

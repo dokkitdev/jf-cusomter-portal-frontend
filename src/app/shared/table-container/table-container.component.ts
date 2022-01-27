@@ -8,8 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class TableContainerComponent {
   @Input() isLoading: boolean;
-  @Input() isLoadingToPage: boolean;
-  @Input() hasMoreItems: boolean;
   @Input() itemsCount: number;
 
   public get isInitialLoading(): boolean {

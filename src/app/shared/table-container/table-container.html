@@ -4,7 +4,4 @@
 <div *ngIf="isNotFound" class="table-nothing">
   {{ 'SHARED.TABLE_CONTAINER.TEXT_NOTHING' | translate }}
 </div>
-<loading-spinner *ngIf="isInitialLoading || isLoadingToPage" [diameter]="spinnerDiameter.BIG"></loading-spinner>
-<div *ngIf="hasMoreItems && !isLoadingToPage" class="table-more">
-  <!-- pagination elements here -->
-</div>
+<loading-spinner *ngIf="isInitialLoading" [diameter]="spinnerDiameter.BIG"></loading-spinner>
