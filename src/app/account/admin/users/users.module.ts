@@ -1,3 +1,5 @@
+import { DialogModule } from './../../../shared/dialog/dialog.module';
+import { AccountDialogEditUserModule } from './../../shared/dialog-edit-user/dialog-edit-user.module';
 import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
 import { NotificationModule } from './../../../shared/notification/notification.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
@@ -49,7 +51,9 @@ import { LoadingSpinnerModule } from '@shared/loading-spinner';
     NgForTrackByPropertyModule,
     NotificationModule,
     HeaderSortModule,
-    LoadingSpinnerModule
+    LoadingSpinnerModule,
+    AccountDialogEditUserModule,
+    DialogModule
   ],
   providers: [
     AccountAdminUsersPageFacade,

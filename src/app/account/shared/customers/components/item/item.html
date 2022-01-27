@@ -1,0 +1,13 @@
+<div class="customers-item">
+  <account-customer-select
+    [controlState]="controlState"
+    [isLoadByOpen]="true"
+    [excludeID]="excludeCustomerID"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    (selectedCustomerChanged)="customerSelected($event)"
+    placeholder="{{ 'ACCOUNT.SHARED.CUSTOMERS.TEXT_CUSTOMER' | translate }}">
+  </account-customer-select>
+  <a (click)="removeClicked()" class="customers-item-action customers-remove">
+    <span class="icon icon-mask icon-cross icon-mask-red"></span>
+  </a>
+</div>

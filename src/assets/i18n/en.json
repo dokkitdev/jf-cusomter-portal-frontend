@@ -132,6 +132,32 @@
     "SHARED": {
       "CUSTOMER_SELECT": {
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
+      },
+      "DIALOG_EDIT_USER": {
+        "TEXT_TITLE_CREATE": "Create user",
+        "TEXT_TITLE_UPDATE": "Edit user",
+        "TEXT_NAME": "Name",
+        "TEXT_EMAIL": "Email",
+        "TEXT_SEND_INVITE": "Send invite?",
+        "TEXT_SEND_EMAIL": "Send email",
+        "BUTTON_CANCEL": "Cancel",
+        "BUTTON_CREATE": "Create",
+        "BUTTON_UPDATE": "Update",
+        "ERRORS": {
+          "TEXT_NAME_IS_REQUIRED": "Name is required",
+          "TEXT_NAME_MAX_LENGTH": "Name length must be less than or equal to 255",
+          "TEXT_EMAIL_IS_REQUIRED": "Email is required",
+          "TEXT_EMAIL_IS_INVALID": "Email is invalid"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_USER_CREATED": "User has been successfully created",
+          "TEXT_USER_UPDATED": "User has been successfully updated",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
+      "CUSTOMERS": {
+        "TEXT_CUSTOMER": "Customer",
+        "BUTTON_ADD_CUSTOMER": "+ Add Customer"
       }
     }
   },
