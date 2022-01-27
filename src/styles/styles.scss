@@ -316,7 +316,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 
 /* table */
 .table {flex: 1;
-  &-row {display: flex; padding: 0 24px;}
+  &-row {display: flex; padding: 0 60px;}
   &-head {
     .table-cell {padding: 8px; font-size: $small; font-weight: 700; line-height: 20px;
       a {position: relative; color: $text-main;}
@@ -353,7 +353,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       &:hover {color: rgba($yellow, 0.8);}
     }
   }
-  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -25px;
+  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -60px;
     &-empty {overflow: hidden;}
   }
   &-nothing {margin: 160px auto; color: $gray; text-align: center; font-size: $large;}
