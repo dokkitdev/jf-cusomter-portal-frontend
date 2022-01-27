@@ -15,7 +15,6 @@ export class AccountAdminUsersItemsComponent {
   public items$: Observable<Array<User>>;
   public hasMoreItems$: Observable<boolean>;
   public isLoading$: Observable<boolean>;
-  public isLoadingToPage$: Observable<boolean>;
   public perPage$: Observable<number>;
   public currentPage$: Observable<number>;
   public totalItems$: Observable<number>;
@@ -27,7 +26,6 @@ export class AccountAdminUsersItemsComponent {
     this.items$ = this.facade.items$;
     this.hasMoreItems$ = this.facade.hasMoreItems$;
     this.isLoading$ = this.facade.isLoading$;
-    this.isLoadingToPage$ = this.facade.isLoadingToPage$;
     this.perPage$ = this.facade.perPage$;
     this.currentPage$ = this.facade.currentPage$;
     this.totalItems$ = this.facade.totalItems$;
