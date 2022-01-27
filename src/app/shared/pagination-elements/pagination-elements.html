@@ -1,5 +1,6 @@
 <pagination-controls
   [id]="paginationId"
+  (pageChange)="pageChanged.emit($event)"
   directionLinks="false"
 >
 </pagination-controls>

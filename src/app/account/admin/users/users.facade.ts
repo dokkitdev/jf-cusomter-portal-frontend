@@ -122,7 +122,7 @@ export class AccountAdminUsersPageFacade {
 
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsToPageEffect$: () => Observable<void>;
   private openCreateUserDialogEffect$: () => Observable<void>;
 
@@ -137,7 +137,7 @@ export class AccountAdminUsersPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
+    this.registerLoadItemsByPageEffect();
     this.registerLoadItemsToPageEffect();
     this.registerOpenCreateUserDialogEffect();
     this.registerAddCreatedItemEffect();
@@ -150,6 +150,10 @@ export class AccountAdminUsersPageFacade {
 
   public loadItems(): void {
     this.loadItemsEffect$();
+  }
+
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
   }
 
   public loadItemsByParameters(page?: number): void {
@@ -225,7 +229,7 @@ export class AccountAdminUsersPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
@@ -286,11 +290,11 @@ export class AccountAdminUsersPageFacade {
     )();
   }
 
-  private updateNextPage(): void {
+  private updatePage(pageNumber: number): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: state.page + 1
+        page: pageNumber
       })
     )();
   }
@@ -360,6 +364,18 @@ export class AccountAdminUsersPageFacade {
           return (parameters.page > 1)
             ? this.loadItemsToPage()
             : this.loadItemsByParameters();
+        })
+      )
+    );
+  }
+
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
+
+          this.loadItemsByParameters();
         })
       )
     );
@@ -453,18 +469,6 @@ export class AccountAdminUsersPageFacade {
           () => this.updateIsLoading(false)
         )
       );
-  }
-
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
-
-          this.loadItemsByParameters();
-        })
-      )
-    );
   }
 
   private registerLoadItemsToPageEffect(): void {

@@ -19,6 +19,10 @@
         (deletingSuccess)="itemDeleted($event)">
       </admin-users-item>
     </div>
-    <pagination-elements [paginationId]="paginationId$ | async"></pagination-elements>
+    <pagination-elements
+      [paginationId]="paginationId$ | async"
+      (pageChanged)="pageChanged($event)"
+    >
+    </pagination-elements>
   </div>
 </table-container>

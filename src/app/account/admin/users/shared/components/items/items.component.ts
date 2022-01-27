@@ -3,7 +3,6 @@ import { AccountAdminUsersPageFacade } from './../../../users.facade';
 import { User } from '@shared/user';
 import { Observable } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AccountAdminUsersQueryParameters } from '../../models';
 
 @Component({
   selector: 'admin-users-items',
@@ -37,5 +36,9 @@ export class AccountAdminUsersItemsComponent {
 
   public itemDeleted(id: number): void {
     this.facade.deleteItem(id);
+  }
+
+  public pageChanged(page: number): void {
+    this.facade.loadItemsByPage(page);
   }
 }
