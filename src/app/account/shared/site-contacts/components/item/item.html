@@ -1,0 +1,25 @@
+<div class="table-row">
+  <div class="table-cell sitecontacts-title">{{ item.title }}</div>
+  <div class="table-cell sitecontacts-name">{{ item.fullName }}</div>
+  <div class="table-cell sitecontacts-email">
+    <a href="mailto:{{ item.email }}" target="_blank">{{ item.email }}</a>
+  </div>
+  <div class="table-cell sitecontacts-phone">
+    <a href="tel:{{ item.workPhone }}" target="_blank">{{ item.workPhone }}</a>
+  </div>
+  <div class="table-cell sitecontacts-mobile">
+    <a href="tel:{{ item.cellPhone }}" target="_blank">{{ item.cellPhone }}</a>
+  </div>
+  <div class="table-cell sitecontacts-position">{{ item.position }}</div>
+  <div class="table-cell sitecontacts-actions">
+    <ng-container *ngIf="!(isSendingRequest$ | async); else sendingRequest">
+      <a (click)="editButtonClicked()" class="table-action">{{ 'ACCOUNT.SHARED.SITE_CONTACTS.LINK_EDIT' | translate }}</a>
+      <a (click)="deleteButtonClicked()" class="table-action table-action-caution">
+        {{ 'ACCOUNT.SHARED.SITE_CONTACTS.LINK_DELETE' | translate }}
+      </a>
+    </ng-container>
+    <ng-template #sendingRequest>
+      <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
+    </ng-template>
+  </div>
+</div>
