@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { AccountDialogEditUserForm } from './forms';
 import { ComponentStore } from '@ngrx/component-store';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '@shared/user';
 
 @Component({
@@ -25,6 +25,7 @@ export class AccountDialogEditUserComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { isEditMode: boolean, user: User },
+    private readonly dialogRef: MatDialogRef<AccountDialogEditUserComponent>,
     private readonly facade: AccountDialogEditUserComponentFacade
   ) {
     this.isEditMode$ = this.facade.isEditMode$;
@@ -48,5 +49,9 @@ export class AccountDialogEditUserComponent implements OnInit, OnDestroy {
 
   public formActionTriggered(action: Actions<any>): void {
     this.facade.handleFormStateAction(action);
+  }
+
+  public cancelClicked(): void {
+    this.dialogRef.close();
   }
 }

@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../../shared/button/button.module';
 import { NotificationModule } from './../../../shared/notification/notification.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,8 @@ import { AccountCustomersModule } from '../customers';
     FormCheckboxModule,
     FormGroupModule,
     AccountCustomersModule,
-    NotificationModule
+    NotificationModule,
+    ButtonModule
   ],
   exports: [
     AccountDialogEditUserComponent

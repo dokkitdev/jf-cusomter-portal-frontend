@@ -1,3 +1,4 @@
+import { ValidationMessages } from './../../../../../shared/validation-errors/models/messages';
 import { Customer } from '@shared/customer';
 import {
   Component,
@@ -26,7 +27,7 @@ import { Subject } from 'rxjs';
 })
 export class AccountCustomersItemComponent implements OnDestroy {
   @Input() controlState: FormControlState<number>;
-  @Input() groupValidationMessages: Map<string, string>;
+  @Input() groupValidationMessages: ValidationMessages;
   @Input() excludeCustomerID: Array<number>;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;

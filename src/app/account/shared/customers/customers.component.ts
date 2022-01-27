@@ -1,3 +1,4 @@
+import { ValidationMessages } from './../../../shared/validation-errors/models/messages';
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, Subject } from 'rxjs';
@@ -26,7 +27,7 @@ export class AccountCustomersComponent implements OnDestroy {
   public set controlState(value: FormArrayState<number>) {
     this.facade.setControlState(value);
   }
-  @Input() groupValidationMessages: Map<string, string>;
+  @Input() groupValidationMessages: ValidationMessages;
 
   @Output() controlStateActionTriggered: Subject<Actions<any>>;
 

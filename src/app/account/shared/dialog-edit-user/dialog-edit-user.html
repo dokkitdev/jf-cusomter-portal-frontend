@@ -43,21 +43,24 @@
       </form-checkbox>
     </form-group>
     <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
-      <button
-        [disabled]="isSendingRequest"
-        type="button"
-        class="button button-outline"
-        mat-dialog-close>
-        {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_CANCEL' | translate }}
-      </button>
-      <button
-        [ngClass]="{ 'button-loading': isSendingRequest }"
-        [disabled]="formState.isPristine"
-        type="submit"
-        class="button button-primary"
-        role="button">
-        {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
-      </button>
+      <div class="dialog-edit-button">
+        <btn
+          [isDisabled]="isSendingRequest"
+          (clicked)="cancelClicked()"
+          type="button"
+          variant="outline">
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_CANCEL' | translate }}
+        </btn>
+      </div>
+      <div class="dialog-edit-button">
+        <btn
+          [isLoading]="isSendingRequest"
+          [isDisabled]="formState.isPristine"
+          type="submit"
+          variant="outline">
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+        </btn>
+      </div>
     </div>
   </form>
 </div>
