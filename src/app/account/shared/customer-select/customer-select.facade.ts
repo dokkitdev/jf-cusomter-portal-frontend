@@ -59,7 +59,11 @@ export class AccountCustomerSelectComponentFacade {
     .pipe(
       map(([items, excludeID, controlState, idField]) =>
         items
-          .filter((item) => !excludeID.includes(item.id) || controlState.value === item.id)
+          .filter((item) => {
+            console.log(item, excludeID);
+
+            return !excludeID.includes(item.id) || controlState.value === item.id;
+          })
           .map((item) =>
             new CustomSelectOption<number | string>({
               id: item[idField],

@@ -4,6 +4,7 @@
     [isLoadByOpen]="true"
     [excludeID]="excludeCustomerID"
     (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    (selectedCustomerChanged)="customerSelected($event)"
     placeholder="{{ 'ACCOUNT.SHARED.CUSTOMERS.TEXT_CUSTOMER' | translate }}">
   </account-customer-select>
   <a (click)="removeClicked()" class="customers-item-action customers-remove">

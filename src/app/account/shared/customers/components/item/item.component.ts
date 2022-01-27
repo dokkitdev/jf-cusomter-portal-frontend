@@ -1,3 +1,4 @@
+import { Customer } from '@shared/customer';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -44,5 +45,9 @@ export class AccountCustomersItemComponent implements OnDestroy {
 
   public removeClicked(): void {
     this.removeItem.emit();
+  }
+
+  public customerSelected(customer: Customer): void {
+    this.selectValue.next(customer.id);
   }
 }
