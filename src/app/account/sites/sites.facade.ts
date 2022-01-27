@@ -86,16 +86,16 @@ export class AccountSitesPageFacade {
       const formState = state.filterFormState;
       const filterValues = [];
 
+      if (formState.value.simproCustomerID && state.selectedCustomer) {
+        filterValues.push(
+          new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
+        );
+      }
       if (formState.value.name) {
         filterValues.push(this.createFilterValue(formState.controls.name));
       }
       if (formState.value.uprn) {
         filterValues.push(this.createFilterValue(formState.controls.uprn));
-      }
-      if (formState.value.simproCustomerID && state.selectedCustomer) {
-        filterValues.push(
-          new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
-        );
       }
       if (formState.value.query) {
         filterValues.push(this.createFilterValue(formState.controls.query));
