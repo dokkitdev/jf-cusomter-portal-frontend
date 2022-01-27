@@ -179,6 +179,31 @@
       "CUSTOMERS": {
         "TEXT_CUSTOMER": "Customer",
         "BUTTON_ADD_CUSTOMER": "+ Add Customer"
+      },
+      "SITE_CONTACTS": {
+        "TEXT_TITLE": "Contacts",
+        "BUTTON_CREATE_CONTACT": "Add new",
+        "LINK_EDIT": "Edit",
+        "LINK_DELETE": "Delete",
+        "ITEMS_HEADER": {
+          "TEXT_TITLE": "Title",
+          "TEXT_NAME": "Name",
+          "TEXT_EMAIL": "Email",
+          "TEXT_PHONE": "Phone",
+          "TEXT_MOBILE": "Mobile",
+          "TEXT_POSITION": "Position",
+          "TEXT_ACTIONS": "Actions"
+        },
+        "DIALOG_DELETE_ITEM": {
+          "TEXT_TITLE": "Delete site contact?",
+          "TEXT_MESSAGE": "Site contact will be deleted permanently.",
+          "BUTTON_CANCEL": "Cancel",
+          "BUTTON_CONFIRM": "OK"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_CONTACT_DELETED": "Site contact has been successfully deleted.",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
       }
     }
   },

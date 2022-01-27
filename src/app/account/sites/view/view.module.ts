@@ -19,6 +19,7 @@ import { AccountSitesViewHeaderComponent } from './shared/components/header/head
 import { NotificationModule } from '@shared/notification';
 import { NavigationModule } from '@shared/navigation';
 import { ButtonModule } from '@shared/button';
+import { AccountSiteContactsModule } from '@app/account/shared/site-contacts';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ButtonModule } from '@shared/button';
     DialogModule,
     NotificationModule,
     NavigationModule,
-    ButtonModule
+    ButtonModule,
+    AccountSiteContactsModule
   ],
   providers: [
     AccountSitesViewPageFacade,

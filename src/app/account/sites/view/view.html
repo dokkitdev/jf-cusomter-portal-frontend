@@ -6,5 +6,12 @@
   </loading-spinner>
   <ng-template #details>
     <account-sites-view-form></account-sites-view-form>
+    <account-site-contacts
+      [siteID]="site?.id"
+      [items]="contacts$ | async"
+      (contactCreated)="contactCreated($event)"
+      (contactUpdated)="contactUpdated($event)"
+      (contactDeleted)="contactDeleted($event)">
+    </account-site-contacts>
   </ng-template>
 </div>
