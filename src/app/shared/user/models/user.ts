@@ -22,6 +22,9 @@ export class User extends AbstractUser {
   @Type(() => Customer)
   public customers?: Array<Customer>;
 
+  @Expose({ name: 'customer_ids', groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
+  public customerIDs: Array<number>;
+
   constructor(model: Partial<User> = {}) {
     super();
 

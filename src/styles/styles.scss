@@ -206,6 +206,38 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   }
 }
 
+/* checkbox */
+.checkbox {position: relative; line-height: 20px;
+  label {display: inline-block; padding-left: 20px; cursor: pointer; color: #000;
+    a {color: #000;}
+  }
+  &-title {margin-left: 8px;}
+  &-icon {width: 20px; height: 20px; position: absolute; top: 0; left: 0;
+    display: inline-block; background-color: #fff;
+    box-sizing: border-box; border-radius: 6px; transition: all 0.3s;
+    border: 1px solid rgba($primary, 0.5);
+    &::after {content: ''; position: absolute; top: 3px; left: 7px;
+      transform: rotate(45deg); width: 3px; height: 8px; opacity: 0;
+      border-bottom: 3px solid #fff; border-right: 3px solid #fff;
+      border-bottom-right-radius: 2px;
+    }
+  }
+  &:hover .checkbox-icon {border: 1px solid $primary;}
+  input {opacity: 0; width: 0; height: 0; position: absolute;
+    &:checked ~ .checkbox-icon {background: $primary; border: none;
+      box-shadow: 0px 5px 20px rgba($primary, 0.3);
+      &::after {opacity: 1;}
+    }
+  }
+  &.disabled {pointer-events: none;
+    .checkbox {
+      &-title {color: $dark-gray;}
+      &-icon {border-color: rgba($primary, 0.3);}
+    }
+    input:checked ~ .checkbox-icon {background: $gray;}
+  }
+}
+
 /* modal */
 .dialog {
   &-panel {overflow: auto; box-shadow: $box-shadow;
@@ -235,9 +267,10 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     background: #fff; box-sizing: border-box; border-radius: 3px;
     &-title {margin-bottom: 28px; text-align: center; font-size: 2rem; line-height: 36px;}
     &-buttons {display: flex; justify-content: flex-end; margin: 2.23rem 0 0;
-      .button {margin-right: 8px; width: 100%;
-        &:last-child {margin-right: 0;}
-      }
+      .button {width: 100%;}
+    }
+    &-button {margin-right: 8px; width: 100%;
+      &:last-child {margin-right: 0;}
     }
     .row {margin: 0 -10px;}
     .col {padding: 0 10px}
@@ -412,6 +445,18 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       circle {stroke: darken($red, 10%);}
     }
   }
+}
+
+.ngx-pagination {
+  li {
+    &:not(:last-child) {margin-right: 12px;}
+  }
+  a, button, .current {line-height: 20px; padding: 14px 0 !important;
+    width: 48px; height: 48px; box-sizing: border-box; text-align: center;
+    border-radius: 12px !important; font-weight: bold; font-size: $middle;
+    border: 1px solid rgba(31, 167, 218, 0.4); color: $primary !important;
+  }
+  .current {background-color: $primary !important; color: $white !important;}
 }
 
 /* auth pages */

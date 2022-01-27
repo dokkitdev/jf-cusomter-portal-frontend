@@ -35,16 +35,28 @@ export class AccountAdminUsersPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get isLoadingToPage$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoadingToPage);
-  }
-
   public get hasMoreItems$(): Observable<boolean> {
     return this.componentStore.select((state) => state.totalItems > state.items.length);
   }
 
   public get items$(): Observable<Array<User>> {
     return this.componentStore.select((state) => state.items);
+  }
+
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get paginationId$(): Observable<string> {
+    return this.componentStore.select((state) => state.paginationId);
   }
 
   public get parameters$(): Observable<AccountAdminUsersQueryParameters> {
@@ -106,8 +118,7 @@ export class AccountAdminUsersPageFacade {
 
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
-  private loadItemsToPageEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private openCreateUserDialogEffect$: () => Observable<void>;
 
   constructor(
@@ -121,8 +132,7 @@ export class AccountAdminUsersPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
-    this.registerLoadItemsToPageEffect();
+    this.registerLoadItemsByPageEffect();
     this.registerOpenCreateUserDialogEffect();
     this.registerAddCreatedItemEffect();
     this.registerChangeUpdatedItemEffect();
@@ -136,12 +146,12 @@ export class AccountAdminUsersPageFacade {
     this.loadItemsEffect$();
   }
 
-  public loadItemsByParameters(page?: number): void {
-    this.loadItemsByParametersEffect$(page);
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
   }
 
-  public loadItemsToPage(): void {
-    this.loadItemsToPageEffect$();
+  public loadItemsByParameters(page?: number): void {
+    this.loadItemsByParametersEffect$(page);
   }
 
   public changeSort(parameters: AccountAdminUsersQueryParameters): void {
@@ -196,20 +206,11 @@ export class AccountAdminUsersPageFacade {
     )();
   }
 
-  private updateIsLoadingToPage(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoadingToPage: value
-      })
-    )();
-  }
-
   private updateItems(response: PaginationResponse<User>): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
@@ -270,11 +271,11 @@ export class AccountAdminUsersPageFacade {
     )();
   }
 
-  private updateNextPage(): void {
+  private updatePage(pageNumber: number): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: state.page + 1
+        page: pageNumber
       })
     )();
   }
@@ -342,8 +343,20 @@ export class AccountAdminUsersPageFacade {
           this.updateQueryParameters(parameters);
 
           return (parameters.page > 1)
-            ? this.loadItemsToPage()
+            ? this.loadItemsByPage(parameters.page)
             : this.loadItemsByParameters();
+        })
+      )
+    );
+  }
+
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
+
+          this.loadItemsByParameters();
         })
       )
     );
@@ -354,28 +367,25 @@ export class AccountAdminUsersPageFacade {
       origin$.pipe(
         withLatestFrom(
           this.parameters$,
-          this.isLoadingToPage$,
           this.relations$,
           this.filters$
         ),
-        switchMap(([targetPage, parameters, isLoadingToPage, relations, filters]) => {
+        switchMap(([targetPage, parameters, relations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          if (!isLoadingToPage) {
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: {
-                page,
-                orderBy,
-                desc,
-                simproCustomerID: filters.customerIds,
-                name: filters.name,
-                email: filters.email
-              }
-            }));
-          }
+          this.store.dispatch(NavigationActions.mergeQueryParams({
+            queryParams: {
+              page,
+              orderBy,
+              desc,
+              simproCustomerID: filters.customerIds,
+              name: filters.name,
+              email: filters.email
+            }
+          }));
 
           this.updateIsLoading(true);
 
@@ -403,64 +413,14 @@ export class AccountAdminUsersPageFacade {
         filters
       })
       .pipe(
-        withLatestFrom(
-          this.isLoadingToPage$,
-          this.parameters$
-        ),
         tapResponse(
-          ([response, isLoadingToPage, parameters]) => {
+          (response) => {
             this.updateIsLoading(false);
             this.updateItems(response);
-
-            if (!isLoadingToPage) {
-              return;
-            }
-
-            if (response.currentPage >= parameters.page) {
-              this.updateIsLoadingToPage(false);
-
-              return;
-            }
-
-            if (response.currentPage !== response.lastPage) {
-              this.loadItemsByParameters(response.currentPage + 1);
-
-              return;
-            }
-
-            this.updateIsLoadingToPage(false);
-            this.updateQueryParameters(new AccountAdminUsersQueryParameters({ page: response.currentPage }));
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page: response.currentPage }
-            }));
           },
           () => this.updateIsLoading(false)
         )
       );
-  }
-
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
-
-          this.loadItemsByParameters();
-        })
-      )
-    );
-  }
-
-  private registerLoadItemsToPageEffect(): void {
-    this.loadItemsToPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateIsLoadingToPage(true);
-
-          this.loadItemsByParameters(1);
-        })
-      )
-    );
   }
 
   private registerAddCreatedItemEffect(): void {

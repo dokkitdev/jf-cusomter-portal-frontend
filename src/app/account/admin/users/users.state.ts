@@ -15,6 +15,7 @@ export class AccountAdminUsersPageState {
   public desc: boolean;
   public filterFormState: FormGroupState<AccountAdminUsersFilterForm>;
   public selectedCustomer: Customer | undefined;
+  public readonly paginationId: string;
 
   constructor() {
     this.isLoading = false;
@@ -28,5 +29,6 @@ export class AccountAdminUsersPageState {
     this.desc = false;
     this.filterFormState = createFormGroupState('AccountAdminUsersFilterForm', new AccountAdminUsersFilterForm());
     this.selectedCustomer = undefined;
+    this.paginationId = 'account-admin-users-pagination';
   }
 }

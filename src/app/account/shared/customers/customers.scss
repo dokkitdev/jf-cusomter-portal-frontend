@@ -1,0 +1,17 @@
+@import 'vars';
+
+:host ::ng-deep .customers {margin-bottom: 20px;
+  &-item {position: relative;
+    &-action {opacity: 0.6;
+      &:hover {opacity: 1;}
+    }
+  }
+  &-remove {position: absolute; top: 8px; right: -36px;}
+  &-add {display: block; border: 2px rgba($primary, 0.6) dashed; padding: 12px;
+    font-size: $middle; font-weight: 600; text-align: center;
+    transition: 0.3s all; margin-bottom: 20px; border-radius: 12px;
+    &:hover{border-color: $primary;}
+    &.disabled {pointer-events: none; border-color: $gray; color: $gray;}
+  }
+  account-customers-item {display: block;}
+}
