@@ -1,0 +1,83 @@
+<form
+  *ngrxLet="formState$; let formState"
+  [ngrxFormState]="formState"
+  (ngrxFormsAction)="formActionTriggered($event)"
+  (submit)="formSubmitted()"
+  class="form">
+  <div class="row">
+    <div class="col col-25">
+      <form-text
+        [controlState]="formState.controls.uprn"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_SITE_UPRN' | translate }}">
+      </form-text>
+    </div>
+    <div class="col col-25">
+      <form-text
+        [controlState]="formState.controls.customerName"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_CUSTOMER' | translate }}">
+      </form-text>
+    </div>
+    <div class="col col-50">
+      <form-text
+        [controlState]="formState.controls.name"
+        [validationMessages]="{
+          trimmedRequired: 'ACCOUNT.SITES.VIEW.ERRORS.TEXT_NAME_IS_REQUIRED' | translate
+        }"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_SITE_NAME' | translate }}">
+      </form-text>
+    </div>
+  </div>
+  <h3>{{ 'ACCOUNT.SITES.VIEW.TEXT_TITLE_ADDRESS' | translate }}</h3>
+  <div class="row">
+    <div class="col col-50">
+      <form-text
+        [controlState]="formState.controls.address"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_ADDRESS' | translate }}">
+      </form-text>
+    </div>
+    <div class="col col-50">
+      <form-text
+        [controlState]="formState.controls.city"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_CITY' | translate }}">
+      </form-text>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-50">
+      <form-text
+        [controlState]="formState.controls.postalCode"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_POSTCODE' | translate }}">
+      </form-text>
+    </div>
+    <div class="col col-50">
+      <form-text
+        [controlState]="formState.controls.county"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ 'ACCOUNT.SITES.VIEW.TEXT_COUNTY' | translate }}">
+      </form-text>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-50">
+      <div class="form-group">
+        <custom-select
+          [controlState]="formState.controls.primaryContactID"
+          [options]="contactOptions$ | async"
+          (controlStateActionTriggered)="formActionTriggered($event)"
+          label="{{ 'ACCOUNT.SITES.VIEW.TEXT_PRIMARY_CONTACT' | translate }}">
+        </custom-select>
+      </div>
+    </div>
+  </div>
+  <btn
+    [isLoading]="isSubmitting$ | async"
+    [isDisabled]="formState.isPristine"
+    type="submit">
+    {{ 'ACCOUNT.SITES.VIEW.BUTTON_SAVE_CHANGES' | translate }}
+  </btn>
+</form>

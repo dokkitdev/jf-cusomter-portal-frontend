@@ -90,6 +90,27 @@
         "TEXT_OPEN_JOBS": "Open jobs",
         "TEXT_OPEN_JOBS_YES": "Open jobs: Yes",
         "TEXT_OPEN_JOBS_NO": "Open jobs: No"
+      },
+      "VIEW": {
+        "TEXT_PAGE_TITLE": "Site",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_CUSTOMER_NAME": "{{ name }} (ID: {{ id }})",
+        "TEXT_TITLE_ADDRESS": "Address",
+        "TEXT_ADDRESS": "Address",
+        "TEXT_CITY": "City",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COUNTY": "County",
+        "TEXT_PRIMARY_CONTACT": "Primary contact",
+        "BUTTON_SAVE_CHANGES": "Save changes",
+        "ERRORS": {
+          "TEXT_NAME_IS_REQUIRED": "Site name is required"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_ERROR": "Something went wrong. Please try again.",
+          "TEXT_SITE_UPDATED": "Site has been successfully updated"
+        }
       }
     },
     "ADMIN": {
