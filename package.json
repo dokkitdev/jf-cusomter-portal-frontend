@@ -29,6 +29,7 @@
     "lodash": "^4.17.21",
     "ngrx-forms": "^7.0.0",
     "ngx-infinite-scroll": "^10.0.1",
+    "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.2.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.5.2",

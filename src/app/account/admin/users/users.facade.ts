@@ -47,6 +47,22 @@ export class AccountAdminUsersPageFacade {
     return this.componentStore.select((state) => state.items);
   }
 
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get paginationId$(): Observable<string> {
+    return this.componentStore.select((state) => state.paginationId);
+  }
+
   public get parameters$(): Observable<AccountAdminUsersQueryParameters> {
     return this.componentStore.select((state) => ({
       page: state.page,
