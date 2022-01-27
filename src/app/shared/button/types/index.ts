@@ -1,2 +1,3 @@
-export { ButtonVariant } from './variant';
-export { ButtonType } from './type';
+export * from './variant';
+export * from './type';
+export * from './size';

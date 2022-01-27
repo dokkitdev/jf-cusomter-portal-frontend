@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ButtonType, ButtonVariant } from './types';
+import { ButtonSize, ButtonType, ButtonVariant } from './types';
 
 @Component({
   selector: 'btn',
@@ -10,6 +10,7 @@ import { ButtonType, ButtonVariant } from './types';
 export class ButtonComponent {
   @Input() type: ButtonType;
   @Input() variant: ButtonVariant;
+  @Input() size: ButtonSize;
   @Input() isBlock?: boolean | null;
   @Input() isDisabled?: boolean | null;
   @Input() isLoading?: boolean | null;
@@ -18,7 +19,8 @@ export class ButtonComponent {
 
   constructor() {
     this.type = 'button';
-    this.variant = 'default';
+    this.variant = 'primary';
+    this.size = 'medium';
 
     this.clicked = new EventEmitter();
   }
