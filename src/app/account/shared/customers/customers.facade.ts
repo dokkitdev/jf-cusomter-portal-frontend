@@ -12,10 +12,6 @@ export class AccountCustomersComponentFacade {
     return this.componentStore.select((store) => store.controlState);
   }
 
-  public get customersControlState$(): Observable<FormArrayState<number>> {
-    return this.componentStore.select((store) => store.customersControlState);
-  }
-
   public get excludeCustomerID$(): Observable<Array<number>> {
     return this.componentStore.select((store) => store.excludeCustomerID);
   }

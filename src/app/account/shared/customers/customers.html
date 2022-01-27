@@ -4,7 +4,6 @@
     [controlState]="control"
     [groupValidationMessages]="groupValidationMessages"
     [@heightCollapse]
-    [initialGroup]="getInitialGroup(i)"
     [excludeCustomerID]="excludeCustomerID$ | async"
     (controlStateActionTriggered)="controlStateActionTriggered.next($event)"
     (removeItem)="removeItemClicked(i)"

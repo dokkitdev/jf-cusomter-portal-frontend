@@ -154,6 +154,10 @@
           "TEXT_USER_UPDATED": "User has been successfully updated",
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
+      },
+      "CUSTOMERS": {
+        "TEXT_CUSTOMER": "Customer",
+        "BUTTON_ADD_CUSTOMER": "+ Add Customer"
       }
     }
   },

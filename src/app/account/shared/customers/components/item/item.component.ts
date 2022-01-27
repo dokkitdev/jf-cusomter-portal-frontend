@@ -7,10 +7,8 @@ import {
   EventEmitter,
   forwardRef
 } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
-import { Observable, Subject } from 'rxjs';
-import { AccountCustomersItemComponentFacade } from './item.facade';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'account-customers-item',
@@ -18,8 +16,6 @@ import { AccountCustomersItemComponentFacade } from './item.facade';
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    AccountCustomersItemComponentFacade,
-    ComponentStore,
     {
       provide: NGRX_FORM_VIEW_ADAPTER,
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
@@ -28,10 +24,7 @@ import { AccountCustomersItemComponentFacade } from './item.facade';
   ]
 })
 export class AccountCustomersItemComponent implements OnDestroy {
-  @Input()
-  public set controlState(value: FormControlState<number>) {
-    this.facade.setControlState(value);
-  }
+  @Input() controlState: FormControlState<number>;
   @Input() groupValidationMessages: Map<string, string>;
   @Input() excludeCustomerID: Array<number>;
 
@@ -39,17 +32,10 @@ export class AccountCustomersItemComponent implements OnDestroy {
   @Output() removeItem: EventEmitter<void>;
   @Output() selectValue: Subject<number | undefined>;
 
-  public controlState$: Observable<FormControlState<number>>;
-  public customerControlState$: Observable<FormControlState<number>>;
-
-  constructor(
-    private facade: AccountCustomersItemComponentFacade
-  ) {
+  constructor() {
     this.removeItem = new EventEmitter();
     this.controlStateActionTriggered = new EventEmitter();
-    this.selectValue = this.facade.selectValue;
-    this.controlState$ = this.facade.controlState$;
-    this.customerControlState$ = this.facade.customerControlState$;
+    this.selectValue = new Subject();
   }
 
   public ngOnDestroy(): void {
@@ -58,9 +44,5 @@ export class AccountCustomersItemComponent implements OnDestroy {
 
   public removeClicked(): void {
     this.removeItem.emit();
-  }
-
-  public customerControlActionTriggered(action: Actions<any>): void {
-    this.facade.handleCustomerControlStateAction(action);
   }
 }

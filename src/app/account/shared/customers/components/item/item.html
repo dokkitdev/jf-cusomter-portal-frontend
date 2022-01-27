@@ -1,10 +1,9 @@
-<div *ngrxLet="customerControlState$; let customerControlState" class="customers-item">
+<div class="customers-item">
   <account-customer-select
-    [controlState]="customerControlState"
+    [controlState]="controlState"
     [isLoadByOpen]="true"
-    [initialCustomer]="initialGroup?.simproCustomer"
     [excludeID]="excludeCustomerID"
-    (controlStateActionTriggered)="customerControlActionTriggered($event)"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
     placeholder="{{ 'ACCOUNT.SHARED.CUSTOMERS.TEXT_CUSTOMER' | translate }}">
   </account-customer-select>
   <a (click)="removeClicked()" class="customers-item-action customers-remove">

@@ -1,3 +1,4 @@
+import { positiveNumber } from './../../../shared/validators/positive-number';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -6,7 +7,9 @@ import {
   enable,
   formGroupReducer,
   FormGroupState,
+  setUserDefinedProperty,
   setValue,
+  updateArray,
   updateGroup,
   validate
 } from 'ngrx-forms';
@@ -17,7 +20,7 @@ import { email, maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
-import { Store } from '@ngrx/store';
+import { compose, Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { DialogService } from '@shared/dialog';
 import { User, UserService } from '@shared/user';
@@ -25,6 +28,7 @@ import { trimmedRequired } from '@shared/validators';
 import { AccountDialogEditUserActions } from './store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { omit } from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AccountDialogEditUserComponentFacade {
@@ -113,7 +117,8 @@ export class AccountDialogEditUserComponentFacade {
           state.formState,
           {
             name: validate(trimmedRequired, maxLength(255)),
-            email: validate(trimmedRequired, email)
+            email: validate(trimmedRequired, email),
+            customerIDs: updateArray(validate(positiveNumber))
           }
         )
       })
@@ -149,7 +154,11 @@ export class AccountDialogEditUserComponentFacade {
           state.formState,
           {
             name: setValue(user.name),
-            email: setValue(user.email)
+            email: setValue(user.email),
+            customerIDs: compose(
+              setValue(user.customers?.map((item) => item.id) || []),
+              updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
+            )
           }
         )
       })
