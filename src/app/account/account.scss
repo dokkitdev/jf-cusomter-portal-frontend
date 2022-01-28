@@ -5,7 +5,7 @@
     box-sizing: border-box; padding-left: $account-sidebar-width;
   }
   .sidebar {position: fixed; top: 0; left: 0; bottom: 0; width: $account-sidebar-width;
-    background: $brand-dark; transition: all 0.2s;
+    background: $brand-dark; transition: all 0.2s; z-index: 9999;
     &-logo {margin: 38px 25px 79px;}
     &-menu {display: flex; flex-direction: column; justify-content: space-between;
       height: calc(100% - 151px); padding: 0 0 30px; box-sizing: border-box;
