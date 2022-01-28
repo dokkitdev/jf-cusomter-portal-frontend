@@ -1,3 +1,5 @@
+import 'es6-shim';
+
 import { AppModule } from './app/app.module';
 import { configuration } from '@configurations';
 import { enableProdMode } from '@angular/core';
