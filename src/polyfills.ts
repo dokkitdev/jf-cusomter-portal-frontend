@@ -51,4 +51,4 @@ import 'zone.js';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
- import 'core-js/proposals/reflect-metadata';
+ import 'reflect-metadata';
