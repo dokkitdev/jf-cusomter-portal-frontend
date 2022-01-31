@@ -26,8 +26,8 @@ export class Contact {
   @Expose({ name: 'contact_id', groups: [ClassGroup.MAIN] })
   public contactID: number;
 
-  @Expose({ name: 'simpro_site_id', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
-  public simproSiteID: number;
+  @Expose({ name: 'site_id', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
+  public siteID: number;
 
   @Expose({ name: 'is_primary', groups: [ClassGroup.MAIN] })
   public isPrimary: boolean;

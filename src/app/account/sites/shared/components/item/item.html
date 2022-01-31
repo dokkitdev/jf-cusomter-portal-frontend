@@ -14,7 +14,7 @@
       <a
         routerLink="/account/jobs"
         [queryParams]="{
-          simproSiteID: item.id,
+          siteID: item.id,
           stage: [jobStage.PENDING, jobStage.PROGRESS]
         }">
         {{ item.openJobsCount }}

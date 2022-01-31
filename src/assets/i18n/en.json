@@ -176,6 +176,33 @@
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
       },
+      "DIALOG_EDIT_CONTACT": {
+        "TEXT_TITLE_CREATE": "Create contact",
+        "TEXT_TITLE_UPDATE": "Edit contact",
+        "TEXT_TITLE": "Title",
+        "TEXT_GIVEN_NAME": "Given Name",
+        "TEXT_FAMILY_NAME": "Family Name",
+        "TEXT_EMAIL": "Email",
+        "TEXT_PHONE": "Phone",
+        "TEXT_MOBILE": "Mobile",
+        "TEXT_POSITION": "Position",
+        "BUTTON_CANCEL": "Cancel",
+        "BUTTON_CREATE": "Create",
+        "BUTTON_UPDATE": "Update",
+        "ERRORS": {
+          "TEXT_TITLE_MAX_LENGTH": "Title length must be less than or equal to 255",
+          "TEXT_GIVEN_NAME_IS_REQUIRED": "Given Name is required",
+          "TEXT_GIVEN_NAME_MAX_LENGTH": "Given Name length must be less than or equal to 255",
+          "TEXT_FAMILY_NAME_MAX_LENGTH": "Family Name length must be less than or equal to 255",
+          "TEXT_EMAIL_IS_INVALID": "Email is invalid",
+          "TEXT_POSITION_MAX_LENGTH": "Position length must be less than or equal to 255"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_CONTACT_CREATED": "Contact has been successfully created",
+          "TEXT_CONTACT_UPDATED": "Contact has been successfully updated",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
       "CUSTOMERS": {
         "TEXT_CUSTOMER": "Customer",
         "BUTTON_ADD_CUSTOMER": "+ Add Customer"

@@ -1,4 +1,4 @@
-import { heightCollapseAnimation } from './../../../../../../shared/animations/height-collapse.animation';
+import { heightCollapseAnimation } from '@shared/animations';
 import { AccountAdminUsersPageFacade } from './../../../users.facade';
 import { User } from '@shared/user';
 import { Observable } from 'rxjs';

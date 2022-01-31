@@ -60,7 +60,7 @@ export class AccountSiteContactsItemComponentFacade {
       origin$.pipe(
         map((contact) => this.dialogService.open(AccountDialogEditContactComponent, {
           autoFocus: false,
-          data: { isEditMode: true, siteID: contact.simproSiteID, contact }
+          data: { isEditMode: true, siteID: contact.siteID, contact }
         }))
       )
     );

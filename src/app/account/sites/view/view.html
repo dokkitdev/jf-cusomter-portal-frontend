@@ -1,4 +1,4 @@
-<div class="page siteview">
+<div *ngrxLet="site$; let site" class="page siteview">
   <account-sites-view-header></account-sites-view-header>
   <loading-spinner
     *ngIf="isLoading$ | async; else details"
@@ -7,7 +7,7 @@
   <ng-template #details>
     <account-sites-view-form></account-sites-view-form>
     <account-site-contacts
-      [siteID]="site?.id"
+      [siteID]="site.id"
       [items]="contacts$ | async"
       (contactCreated)="contactCreated($event)"
       (contactUpdated)="contactUpdated($event)"

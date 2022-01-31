@@ -5,6 +5,7 @@ import { SpinnerDiameter } from '@shared/loading-spinner';
 import { FormGroupState } from 'ngrx-forms';
 import { AccountSiteViewEditForm } from './shared/forms';
 import { Contact } from '@shared/contact';
+import { Site } from '@shared/site';
 
 @Component({
   selector: 'account-sites-view-page',
@@ -15,6 +16,7 @@ import { Contact } from '@shared/contact';
 export class AccountSitesViewPageComponent implements OnInit, OnDestroy {
   public formState$: Observable<FormGroupState<AccountSiteViewEditForm>>;
   public isLoading$: Observable<boolean>;
+  public site$: Observable<Site>;
   public contacts$: Observable<Array<Contact>>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
@@ -23,6 +25,7 @@ export class AccountSitesViewPageComponent implements OnInit, OnDestroy {
   ) {
     this.formState$ = this.facade.formState$;
     this.isLoading$ = this.facade.isLoading$;
+    this.site$ = this.facade.site$;
     this.contacts$ = this.facade.contacts$;
     this.spinnerDiameter = SpinnerDiameter;
   }

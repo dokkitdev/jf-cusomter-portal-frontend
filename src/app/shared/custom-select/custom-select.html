@@ -32,8 +32,7 @@
           *ngFor="let option of options; trackByProperty: 'id'"
           (optionClick)="optionClicked(option)"
           [option]="option"
-          [customTemplate]="optionTemplate"
-          data-testid="dropdown-item">
+          [customTemplate]="optionTemplate">
         </custom-select-option>
         <custom-select-not-found
           *ngIf="!options?.length && !isLoading"
