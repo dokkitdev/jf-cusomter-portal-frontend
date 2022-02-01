@@ -1,4 +1,4 @@
-import { ValidationMessages } from './../../../../../shared/validation-errors/models/messages';
+import { ValidationMessages } from '@shared/validation-errors';
 import { Customer } from '@shared/customer';
 import {
   Component,

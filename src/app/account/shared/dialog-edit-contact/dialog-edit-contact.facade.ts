@@ -6,31 +6,27 @@ import {
   enable,
   formGroupReducer,
   FormGroupState,
-  setUserDefinedProperty,
   setValue,
-  updateArray,
   updateGroup,
   validate
 } from 'ngrx-forms';
-import { AccountDialogEditUserForm } from './forms';
+import { AccountDialogEditContactForm } from './forms';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { AccountDialogEditUserComponentState } from './dialog-edit-user.state';
+import { AccountDialogEditContactComponentState } from './dialog-edit-contact.state';
 import { email, maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';
-import { NotificationService } from '@shared/notification';
-import { TranslateService } from '@ngx-translate/core';
-import { compose, Store } from '@ngrx/store';
+import { Contact, ContactService } from '@shared/contact';
+import { trimmedRequired } from '@shared/validators';
+import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { DialogService } from '@shared/dialog';
-import { User, UserService } from '@shared/user';
-import { trimmedRequired, positiveNumber } from '@shared/validators';
-import { AccountDialogEditUserActions } from './store';
+import { NotificationService } from '@shared/notification';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { omit } from 'lodash';
-import { v4 as uuidv4 } from 'uuid';
+import { AccountDialogEditContactActions } from './store';
 
 @Injectable()
-export class AccountDialogEditUserComponentFacade {
+export class AccountDialogEditContactComponentFacade {
   public get isSendingRequest$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isSendingRequest);
   }
@@ -39,21 +35,25 @@ export class AccountDialogEditUserComponentFacade {
     return this.componentStore.select((state) => state.isEditMode);
   }
 
-  public get user$(): Observable<User> {
-    return this.componentStore.select((state) => state.user);
+  public get siteID$(): Observable<number | undefined> {
+    return this.componentStore.select((state) => state.siteID);
   }
 
-  public get formState$(): Observable<FormGroupState<AccountDialogEditUserForm>> {
+  public get contact$(): Observable<Contact> {
+    return this.componentStore.select((state) => state.contact);
+  }
+
+  public get formState$(): Observable<FormGroupState<AccountDialogEditContactForm>> {
     return this.componentStore.select((state) => state.formState);
   }
 
-  private initComponentEffect$: (user: User) => Observable<void>;
+  private initComponentEffect$: (contact: Contact) => Observable<void>;
   private saveChangesEffect$: () => Observable<void>;
 
   constructor(
-    private readonly componentStore: ComponentStore<AccountDialogEditUserComponentState>,
+    private readonly componentStore: ComponentStore<AccountDialogEditContactComponentState>,
     private readonly store: Store<AppState>,
-    private readonly userService: UserService,
+    private readonly contactService: ContactService,
     private readonly dialogService: DialogService,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService
@@ -65,15 +65,19 @@ export class AccountDialogEditUserComponentFacade {
   }
 
   public resetState(): void {
-    this.componentStore.setState(new AccountDialogEditUserComponentState());
+    this.componentStore.setState(new AccountDialogEditContactComponentState());
   }
 
   public setIsEditMode(value: boolean): void {
     this.updateIsEditMode(value);
   }
 
-  public initComponent(user: User): void {
-    this.initComponentEffect$(user);
+  public setSiteID(id: number | undefined): void {
+    this.updateSiteID(id);
+  }
+
+  public initComponent(contact: Contact): void {
+    this.initComponentEffect$(contact);
   }
 
   public saveChanges(): void {
@@ -86,15 +90,20 @@ export class AccountDialogEditUserComponentFacade {
     this.validateForm();
   }
 
-  private getServerErrorMessage(response: unknown): string {
-    return (response as HttpErrorResponse).error.error;
-  }
-
   private updateIsEditMode(value: boolean): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
         isEditMode: value
+      })
+    )();
+  }
+
+  private updateSiteID(id: number | undefined): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        siteID: id
       })
     )();
   }
@@ -112,12 +121,35 @@ export class AccountDialogEditUserComponentFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        formState: updateGroup<AccountDialogEditUserForm>(
+        formState: updateGroup<AccountDialogEditContactForm>(
           state.formState,
           {
-            name: validate(trimmedRequired, maxLength(255)),
-            email: validate(trimmedRequired, email),
-            customerIDs: updateArray(validate(positiveNumber))
+            title: validate(maxLength(255)),
+            givenName: validate(trimmedRequired, maxLength(255)),
+            familyName: validate(maxLength(255)),
+            email: validate(email),
+            position: validate(maxLength(255))
+          }
+        )
+      })
+    )();
+  }
+
+  private updateContactFormState(contact: Contact): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        contact,
+        formState: updateGroup<AccountDialogEditContactForm>(
+          state.formState,
+          {
+            title: setValue(contact.title),
+            givenName: setValue(contact.givenName),
+            familyName: setValue(contact.familyName),
+            email: setValue(contact.email),
+            workPhone: setValue(contact.workPhone),
+            cellPhone: setValue(contact.cellPhone),
+            position: setValue(contact.position)
           }
         )
       })
@@ -144,34 +176,14 @@ export class AccountDialogEditUserComponentFacade {
     )();
   }
 
-  private updateUserFormState(user: User): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        user,
-        formState: updateGroup<AccountDialogEditUserForm>(
-          state.formState,
-          {
-            name: setValue(user.name),
-            email: setValue(user.email),
-            customerIDs: compose(
-              setValue(user.customers?.map((item) => item.id) || []),
-              updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
-            )
-          }
-        )
-      })
-    )();
-  }
-
   private registerInitComponentEffect(): void {
-    this.initComponentEffect$ = this.componentStore.effect((origin$: Observable<User>) =>
+    this.initComponentEffect$ = this.componentStore.effect((origin$: Observable<Contact>) =>
       origin$.pipe(
         withLatestFrom(
           this.isEditMode$
         ),
         filter(([_, isEditMode]) => isEditMode),
-        tap(([user]) => this.updateUserFormState(user))
+        tap(([contact]) => this.updateContactFormState(contact))
       )
     );
   }
@@ -182,52 +194,50 @@ export class AccountDialogEditUserComponentFacade {
         withLatestFrom(
           this.formState$,
           this.isEditMode$,
-          this.user$
+          this.contact$,
+          this.siteID$
         ),
         filter(([_, formState]) => formState.isValid),
-        exhaustMap(([_, formState, isEditMode, user]) => {
+        exhaustMap(([_, formState, isEditMode, contact, siteID]) => {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
-          const changedUser = new User({
-            id: user.id,
-            ...(user.email === formState.value.email) ? omit(formState.value, 'email') : formState.value
-          });
+          const changedContact = new Contact({ ...formState.value, siteID, id: contact.id });
 
           return (isEditMode)
-            ? this.tryToUpdateUser(changedUser)
-            : this.tryToCreateUser(changedUser);
+            ? this.tryToUpdateContact(changedContact)
+            : this.tryToCreateContact(changedContact);
         })
       )
     );
   }
 
   private endRequestFailed(errorResponse: unknown): void {
-    const errorMessage = this.getServerErrorMessage(errorResponse);
+    const errorMessage = (errorResponse as HttpErrorResponse).error.error;
 
     this.notificationService.error(
-      this.translateService.instant(errorMessage || 'ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_ERROR')
+      this.translateService.instant(errorMessage || 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_ERROR')
     );
 
     this.updateIsSendingRequest(false);
     this.toggleDisablingForm(false);
   }
 
-  private tryToCreateUser(user: User): Observable<User> {
-    return this.userService
-      .create(user)
+  private tryToCreateContact(contact: Contact): Observable<Contact> {
+    return this.contactService
+      .create(contact)
       .pipe(
         tapResponse(
-          (response: User) => {
+          (response) => {
             this.updateIsSendingRequest(false);
             this.toggleDisablingForm(false);
 
             this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditUserActions.createUserSuccess({ userID: response.id }));
+            this.store.dispatch(AccountDialogEditContactActions.createContactSuccess({ contact: response }));
 
             this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_CREATED')
+              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_CREATED')
             );
           },
           (errorResponse) => this.endRequestFailed(errorResponse)
@@ -235,9 +245,9 @@ export class AccountDialogEditUserComponentFacade {
       );
   }
 
-  private tryToUpdateUser(user: User): Observable<void> {
-    return this.userService
-      .update(user)
+  private tryToUpdateContact(contact: Contact): Observable<void> {
+    return this.contactService
+      .update(contact)
       .pipe(
         tapResponse(
           () => {
@@ -246,10 +256,10 @@ export class AccountDialogEditUserComponentFacade {
 
             this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditUserActions.updateUserSuccess({ userID: user.id }));
+            this.store.dispatch(AccountDialogEditContactActions.updateContactSuccess({ contact }));
 
             this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_UPDATED')
+              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_UPDATED')
             );
           },
           (errorResponse) => this.endRequestFailed(errorResponse)

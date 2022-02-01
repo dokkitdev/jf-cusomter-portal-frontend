@@ -1,0 +1,91 @@
+<div *ngrxLet="isEditMode$; let isEditMode" class="dialog-edit editcontact">
+  <h2 class="dialog-edit-title">
+    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_TITLE_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+  </h2>
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    (submit)="formSubmitted()"
+    class="form">
+    <form-text
+      [controlState]="formState.controls.title"
+      [validationMessages]="{
+        maxLength: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_TITLE_MAX_LENGTH' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_TITLE' | translate }}">
+    </form-text>
+    <div class="row">
+      <div class="col col-50">
+        <form-text
+          [controlState]="formState.controls.givenName"
+          [validationMessages]="{
+            trimmedRequired: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_GIVEN_NAME_IS_REQUIRED' | translate,
+            maxLength: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_GIVEN_NAME_MAX_LENGTH' | translate
+          }"
+          (controlStateActionTriggered)="formActionTriggered($event)"
+          label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_GIVEN_NAME' | translate }}">
+        </form-text>
+      </div>
+      <div class="col col-50">
+        <form-text
+          [controlState]="formState.controls.familyName"
+          [validationMessages]="{
+            maxLength: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_FAMILY_NAME_MAX_LENGTH' | translate
+          }"
+          (controlStateActionTriggered)="formActionTriggered($event)"
+          label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_FAMILY_NAME' | translate }}">
+        </form-text>
+      </div>
+    </div>
+    <form-text
+      [controlState]="formState.controls.email"
+      [validationMessages]="{
+        email: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      type="email"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_EMAIL' | translate }}">
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.workPhone"
+      [mask]="phoneMask"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_PHONE' | translate }}">
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.cellPhone"
+      [mask]="phoneMask"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_MOBILE' | translate }}">
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.position"
+      [validationMessages]="{
+        maxLength: 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.ERRORS.TEXT_POSITION_MAX_LENGTH' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_POSITION' | translate }}">
+    </form-text>
+    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+      <div class="dialog-edit-button">
+        <btn
+          [isDisabled]="isSendingRequest"
+          (clicked)="cancelClicked()"
+          type="button"
+          variant="outline">
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.BUTTON_CANCEL' | translate }}
+        </btn>
+      </div>
+      <div class="dialog-edit-button">
+        <btn
+          [isLoading]="isSendingRequest"
+          [isDisabled]="formState.isPristine"
+          type="submit">
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+        </btn>
+      </div>
+    </div>
+  </form>
+</div>

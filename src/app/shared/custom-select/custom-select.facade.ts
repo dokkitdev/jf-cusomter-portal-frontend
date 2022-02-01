@@ -40,7 +40,7 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
   }
 
   public controlStateActionTriggered: Subject<Actions<any>> = new Subject();
-  public selectedOptionChanged: Subject<CustomSelectOption<T>> = new Subject();
+  public selectedOptionChanged: Subject<CustomSelectOption<T> | undefined> = new Subject();
   public filterChanged: Subject<string> = new Subject();
 
   private changeOptionEffect$: (optionValue: T) => Observable<void>;
@@ -155,7 +155,7 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
         tap(([controlState, options]) => {
           const selectedOption = options.find((option) => option.id === controlState.value);
 
-          if (selectedOption) {
+          if (selectedOption || controlState.value === undefined) {
             this.selectedOptionChanged.next(selectedOption);
             this.updateSelectedOption(selectedOption);
           }

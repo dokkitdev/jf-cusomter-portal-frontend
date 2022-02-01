@@ -48,5 +48,10 @@ export const initConfiguration = (configuration: any): any =>
     countdownProgressbar: {
       radius: 12,
       strokeWidth: 1
+    },
+    masks: {
+      phone: {
+        mask: /^[\w\d()+ ]+$/
+      }
     }
   }, configuration);

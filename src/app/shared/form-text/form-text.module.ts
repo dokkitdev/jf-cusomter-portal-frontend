@@ -3,6 +3,7 @@ import { FormTextComponent } from './form-text.component';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { ValidationErrorsModule } from '@shared/validation-errors';
+import { IMaskModule } from 'angular-imask';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ValidationErrorsModule } from '@shared/validation-errors';
   imports: [
     CommonModule,
     NgrxFormsModule,
-    ValidationErrorsModule
+    ValidationErrorsModule,
+    IMaskModule
   ],
   exports: [
     FormTextComponent

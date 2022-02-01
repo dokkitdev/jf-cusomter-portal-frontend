@@ -65,7 +65,7 @@ export class CustomSelectComponent<T extends FormControlValueTypes> {
   @Input() notFoundTemplate: TemplateRef<any>;
 
   @Output() controlStateActionTriggered: Subject<Actions<any>>;
-  @Output() selectedOptionChanged: Subject<CustomSelectOption<T>>;
+  @Output() selectedOptionChanged: Subject<CustomSelectOption<T> | undefined>;
   @Output() filterChanged: Subject<string>;
   @Output() loadNextPage: EventEmitter<void>;
   @Output() triggerFirstClick: EventEmitter<void>;
