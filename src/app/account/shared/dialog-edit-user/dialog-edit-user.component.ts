@@ -1,4 +1,3 @@
-import { UserRole } from './../../../shared/user/enums/group';
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, Inject } from '@angular/core';
 import { AccountDialogEditUserComponentFacade } from './dialog-edit-user.facade';
 import { Observable } from 'rxjs';
@@ -6,7 +5,7 @@ import { Actions, FormGroupState } from 'ngrx-forms';
 import { AccountDialogEditUserForm } from './forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from '@shared/user';
+import { User, UserRole } from '@shared/user';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
