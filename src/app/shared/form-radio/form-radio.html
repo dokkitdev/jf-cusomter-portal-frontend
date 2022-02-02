@@ -1,0 +1,9 @@
+<label class="radio">
+  <input
+    [ngrxFormControlState]="controlState"
+    [value]="value"
+    (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+    type="radio" />
+  <div class="radio-icon"></div>
+  <ng-content></ng-content>
+</label>

@@ -22,11 +22,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { compose, Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { DialogService } from '@shared/dialog';
-import { User, UserService } from '@shared/user';
+import { User, UserService, UserRole } from '@shared/user';
 import { trimmedRequired, positiveNumber } from '@shared/validators';
 import { AccountDialogEditUserActions } from './store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { omit } from 'lodash';
+import { keys, omit, pickBy } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
@@ -45,6 +45,17 @@ export class AccountDialogEditUserComponentFacade {
 
   public get formState$(): Observable<FormGroupState<AccountDialogEditUserForm>> {
     return this.componentStore.select((state) => state.formState);
+  }
+
+  public get userRole$(): Observable<UserRole> {
+    return this.componentStore.select((state) => state.formState.controls.roleID.value);
+  }
+
+  public get isRoleCustomer$(): Observable<boolean> {
+    return this.componentStore.select(
+      this.userRole$,
+      (role: UserRole) => role === UserRole.CUSTOMER
+    );
   }
 
   private initComponentEffect$: (user: User) => Observable<void>;
@@ -157,7 +168,8 @@ export class AccountDialogEditUserComponentFacade {
             customerIDs: compose(
               setValue(user.customers?.map((item) => item.id) || []),
               updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
-            )
+            ),
+            roleID: setValue(user.roleID)
           }
         )
       })
@@ -189,9 +201,13 @@ export class AccountDialogEditUserComponentFacade {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
+          const omittedFields = keys(pickBy({
+            email: user.email === formState.value.email,
+            customerIDs: formState.value.roleID !== UserRole.CUSTOMER
+          }));
           const changedUser = new User({
             id: user.id,
-            ...(user.email === formState.value.email) ? omit(formState.value, 'email') : formState.value
+            ...omit(formState.value, omittedFields)
           });
 
           return (isEditMode)

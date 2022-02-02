@@ -129,7 +129,7 @@
         },
         "ROLE": {
           "TEXT_ADMIN": "Admin",
-          "TEXT_USER": "User",
+          "TEXT_USER": "Call Centre",
           "TEXT_CUSTOMER": "Customer"
         },
         "DIALOG_DELETE_ITEM": {
@@ -159,6 +159,9 @@
         "TEXT_TITLE_UPDATE": "Edit user",
         "TEXT_NAME": "Name",
         "TEXT_EMAIL": "Email",
+        "TEXT_CALL_CENTRE": "Call Centre",
+        "TEXT_INTERNAL_ADMIN": "Internal Admin",
+        "TEXT_CUSTOMER": "Customer",
         "TEXT_SEND_INVITE": "Send invite?",
         "TEXT_SEND_EMAIL": "Send email",
         "BUTTON_CANCEL": "Cancel",
