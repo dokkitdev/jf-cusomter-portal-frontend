@@ -1,5 +1,5 @@
 import { AccountAdminUsersPageFacade } from './../../../users.facade';
-import { UserSortField } from './../../../../../../shared/user/enums/sort-field';
+import { UserSortField } from '@shared/user';
 import { Observable } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountAdminUsersQueryParameters } from '../../models';

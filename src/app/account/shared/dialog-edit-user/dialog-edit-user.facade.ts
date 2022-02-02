@@ -1,5 +1,3 @@
-import { UserRole } from './../../../shared/user/enums/group';
-import { positiveNumber } from './../../../shared/validators/positive-number';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -24,8 +22,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { compose, Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { DialogService } from '@shared/dialog';
-import { User, UserService } from '@shared/user';
-import { trimmedRequired } from '@shared/validators';
+import { User, UserService, UserRole } from '@shared/user';
+import { trimmedRequired, positiveNumber } from '@shared/validators';
 import { AccountDialogEditUserActions } from './store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { keys, omit, pickBy } from 'lodash';

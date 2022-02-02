@@ -17,6 +17,10 @@ export class SitePaginationRequest extends PaginationRequest {
   @Transform(({ value }) => value || undefined)
   public name?: string;
 
+  @Expose({ name: 'uprn_query' })
+  @Transform(({ value }) => value || undefined)
+  public uprn?: string;
+
   @Expose({ name: 'site_id' })
   public siteID?: number;
 

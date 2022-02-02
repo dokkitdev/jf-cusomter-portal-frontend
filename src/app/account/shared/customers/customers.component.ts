@@ -1,4 +1,4 @@
-import { ValidationMessages } from './../../../shared/validation-errors/models/messages';
+import { ValidationMessages } from '@shared/validation-errors';
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, Subject } from 'rxjs';

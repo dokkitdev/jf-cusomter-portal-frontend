@@ -9,8 +9,7 @@
         *ngrxLet="formState$; let formState"
         [ngrxFormState]="formState"
         (submit)="formSubmitted()"
-        (ngrxFormsAction)="formActionTriggered($event)"
-        role="form">
+        (ngrxFormsAction)="formActionTriggered($event)">
         <reset-password-request-error *ngIf="isSubmittingFailed$ | async"></reset-password-request-error>
         <form-text
           [controlState]="formState.controls.password"

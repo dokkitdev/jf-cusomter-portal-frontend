@@ -1,5 +1,5 @@
 import { ComponentStore } from '@ngrx/component-store';
-import { SpinnerDiameter } from './../../../../../../shared/loading-spinner/enums/diameter';
+import { SpinnerDiameter } from '@shared/loading-spinner';
 import { Subject, Observable } from 'rxjs';
 import { Component, ChangeDetectionStrategy, Input, Output } from '@angular/core';
 import { User } from '@shared/user';

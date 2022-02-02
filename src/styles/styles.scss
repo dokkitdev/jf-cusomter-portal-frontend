@@ -164,7 +164,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     border-radius: 10px; background-color: $lighter-gray; max-width: 100%;
     color: $primary-dark; line-height: 22px; transition: all 0.2s;
     &:focus {background-color: $lightest-gray; border-color: $primary;}
-    &:disabled {background-color: $bg; pointer-events: none;}
+    &:disabled {background-color: $bg;}
     &::placeholder,
     &::-webkit-input-placeholder {color: $light-gray;}
     &-error {
@@ -194,7 +194,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* pages */
 .page {position: relative; padding: 27px 60px; height: 100%; min-height: 100vh;
   box-sizing: border-box;
-  &-list {padding-left: 25px; padding-right: 25px;}
+  &-list {padding-left: 24px; padding-right: 24px;}
   &-title {margin-bottom: 2rem; font-size: $title; font-weight: 700;
     font-family: $font-title; line-height: 44px;
     .link-back {height: 30px; margin-right: 20px;}
@@ -322,7 +322,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     .loading-spinner {margin: 0 auto;}
   }
   &-scroll {max-height: 250px; overflow: hidden; overflow-y: auto;}
-  &.disabled .dropdown-trigger {background-color: $disabled; pointer-events: none;}
+  &.disabled .dropdown-trigger {background-color: $bg; pointer-events: none;}
 }
 
 /* custom select */
@@ -377,7 +377,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 
 /* table */
 .table {flex: 1;
-  &-row {display: flex; padding: 0 60px;}
+  &-row {display: flex; padding: 0 24px;}
   &-head {
     .table-cell {padding: 8px; font-size: $small; font-weight: 700; line-height: 20px;
       a {position: relative; color: $text-main;}
@@ -414,7 +414,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       &:hover {color: rgba($yellow, 0.8);}
     }
   }
-  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -60px;
+  &-container {display: flex; overflow-x: auto; overflow-y: hidden; margin: 0 -24px;
     &-empty {overflow: hidden;}
   }
   &-nothing {margin: 160px auto; color: $gray; text-align: center; font-size: $large;}

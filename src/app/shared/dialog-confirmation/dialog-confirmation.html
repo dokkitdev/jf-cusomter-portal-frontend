@@ -1,12 +1,10 @@
 <div
-  data-testid="dialog-confirmation"
   class="dialog-confirmation">
-  <h1 data-testid="confirm-title" class="dialog-title">
+  <h1 class="dialog-title">
     {{ data.title }}
   </h1>
   <div
     *ngIf="data.text"
-    data-testid="confirm-message"
     class="dialog-message">
     {{ data.text }}
   </div>
@@ -14,14 +12,12 @@
     <button
       (click)="closeButtonClicked()"
       type="button"
-      data-testid="cancel-button"
       class="dialog-button dialog-button-cancel">
       {{ data.cancelButtonText || ('SHARED.DIALOG_CONFIRMATION.BUTTON_CANCEL' | translate) }}
     </button>
     <button
       (click)="confirmButtonClicked()"
       type="button"
-      data-testid="confirm-button"
       class="dialog-button dialog-button-confirm">
       {{ data.confirmButtonText || ('SHARED.DIALOG_CONFIRMATION.BUTTON_CONFIRM' | translate) }}
     </button>
