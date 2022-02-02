@@ -1,6 +1,7 @@
+import { UserRole } from './../../../shared/user/enums/group';
 import { positiveNumber } from './../../../shared/validators/positive-number';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   Actions,
   disable,
@@ -46,6 +47,13 @@ export class AccountDialogEditUserComponentFacade {
 
   public get formState$(): Observable<FormGroupState<AccountDialogEditUserForm>> {
     return this.componentStore.select((state) => state.formState);
+  }
+
+  public get isRoleCustomer$(): Observable<boolean> {
+    return this.formState$.pipe(
+      map((formState: FormGroupState<AccountDialogEditUserForm>) =>
+        formState.controls.roleID.value === UserRole.CUSTOMER)
+    );
   }
 
   private initComponentEffect$: (user: User) => Observable<void>;

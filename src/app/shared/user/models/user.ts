@@ -9,7 +9,7 @@ export class User extends AbstractUser {
   @Expose({ groups: [ClassGroup.MAIN] })
   public id: number;
 
-  @Expose({ name: 'role_id', groups: [ClassGroup.MAIN] })
+  @Expose({ name: 'role_id', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
   public roleID: UserRole;
 
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })

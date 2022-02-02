@@ -1,3 +1,4 @@
+import { FormRadioModule } from './../../../shared/form-radio/form-radio.module';
 import { ButtonModule } from './../../../shared/button/button.module';
 import { NotificationModule } from './../../../shared/notification/notification.module';
 import { CommonModule } from '@angular/common';
@@ -31,7 +32,8 @@ import { AccountCustomersModule } from '../customers';
     FormGroupModule,
     AccountCustomersModule,
     NotificationModule,
-    ButtonModule
+    ButtonModule,
+    FormRadioModule
   ],
   exports: [
     AccountDialogEditUserComponent
