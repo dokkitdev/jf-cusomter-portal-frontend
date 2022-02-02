@@ -1,7 +1,7 @@
 import { UserRole } from './../../../shared/user/enums/group';
 import { positiveNumber } from './../../../shared/validators/positive-number';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   Actions,
   disable,
@@ -28,7 +28,7 @@ import { User, UserService } from '@shared/user';
 import { trimmedRequired } from '@shared/validators';
 import { AccountDialogEditUserActions } from './store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { omit } from 'lodash';
+import { keys, omit, pickBy } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
@@ -49,10 +49,14 @@ export class AccountDialogEditUserComponentFacade {
     return this.componentStore.select((state) => state.formState);
   }
 
+  public get userRole$(): Observable<UserRole> {
+    return this.componentStore.select((state) => state.formState.controls.roleID.value);
+  }
+
   public get isRoleCustomer$(): Observable<boolean> {
-    return this.formState$.pipe(
-      map((formState: FormGroupState<AccountDialogEditUserForm>) =>
-        formState.controls.roleID.value === UserRole.CUSTOMER)
+    return this.componentStore.select(
+      this.userRole$,
+      (role: UserRole) => role === UserRole.CUSTOMER
     );
   }
 
@@ -166,7 +170,8 @@ export class AccountDialogEditUserComponentFacade {
             customerIDs: compose(
               setValue(user.customers?.map((item) => item.id) || []),
               updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
-            )
+            ),
+            roleID: setValue(user.roleID)
           }
         )
       })
@@ -198,9 +203,13 @@ export class AccountDialogEditUserComponentFacade {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
+          const omittedFields = keys(pickBy({
+            email: user.email === formState.value.email,
+            customerIDs: formState.value.roleID !== UserRole.CUSTOMER
+          }));
           const changedUser = new User({
             id: user.id,
-            ...(user.email === formState.value.email) ? omit(formState.value, 'email') : formState.value
+            ...omit(formState.value, omittedFields)
           });
 
           return (isEditMode)
