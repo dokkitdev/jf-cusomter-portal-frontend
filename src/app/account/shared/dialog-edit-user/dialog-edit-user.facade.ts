@@ -1,7 +1,7 @@
 import { UserRole } from './../../../shared/user/enums/group';
 import { positiveNumber } from './../../../shared/validators/positive-number';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   Actions,
   disable,

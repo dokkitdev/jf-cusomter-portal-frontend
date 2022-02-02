@@ -129,7 +129,7 @@
         },
         "ROLE": {
           "TEXT_ADMIN": "Admin",
-          "TEXT_USER": "User",
+          "TEXT_USER": "Call Centre",
           "TEXT_CUSTOMER": "Customer"
         },
         "DIALOG_DELETE_ITEM": {
