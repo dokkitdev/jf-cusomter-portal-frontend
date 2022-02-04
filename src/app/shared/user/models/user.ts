@@ -25,6 +25,9 @@ export class User extends AbstractUser {
   @Expose({ name: 'customer_ids', groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
   public customerIDs: Array<number>;
 
+  @Expose({ name: 'is_send_email', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
+  public isSendEmail: boolean;
+
   constructor(model: Partial<User> = {}) {
     super();
 
