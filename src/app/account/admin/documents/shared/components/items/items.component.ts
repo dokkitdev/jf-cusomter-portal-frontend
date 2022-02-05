@@ -13,21 +13,13 @@ import { heightCollapseAnimation } from '@shared/animations';
 })
 export class AccountAdminDocumentsItemsComponent {
   public items$: Observable<Array<Document>>;
-  public hasMoreItems$: Observable<boolean>;
   public isLoading$: Observable<boolean>;
-  public isLoadingToPage$: Observable<boolean>;
 
   constructor(
     private facade: AccountAdminDocumentsPageFacade
   ) {
     this.items$ = this.facade.items$;
-    this.hasMoreItems$ = this.facade.hasMoreItems$;
     this.isLoading$ = this.facade.isLoading$;
-    this.isLoadingToPage$ = this.facade.isLoadingToPage$;
-  }
-
-  public loadNextPageClicked(): void {
-    this.facade.loadNextPage();
   }
 
   public itemDeleted(id: number): void {

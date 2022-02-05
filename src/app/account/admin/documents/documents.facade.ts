@@ -21,10 +21,6 @@ export class AccountAdminDocumentsPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get isLoadingToPage$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoadingToPage);
-  }
-
   public get hasMoreItems$(): Observable<boolean> {
     return this.componentStore.select((state) => state.totalItems > state.items.length);
   }
@@ -48,8 +44,7 @@ export class AccountAdminDocumentsPageFacade {
 
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
-  private loadItemsToPageEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page: number) => Observable<void>;
   private openAddDocumentDialogEffect$: () => Observable<void>;
 
   constructor(
@@ -63,8 +58,7 @@ export class AccountAdminDocumentsPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
-    this.registerLoadItemsToPageEffect();
+    this.registerLoadItemsByPageEffect();
     this.registerOpenAddDocumentDialogEffect();
     this.registerAddCreatedItemEffect();
   }
@@ -81,12 +75,8 @@ export class AccountAdminDocumentsPageFacade {
     this.loadItemsByParametersEffect$(page);
   }
 
-  public loadItemsToPage(): void {
-    this.loadItemsToPageEffect$();
-  }
-
-  public loadNextPage(): void {
-    this.loadNextPageEffect$();
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
   }
 
   public changeSort(parameters: AccountAdminDocumentsQueryParameters): void {
@@ -107,15 +97,6 @@ export class AccountAdminDocumentsPageFacade {
       (state) => ({
         ...state,
         isLoading: value
-      })
-    )();
-  }
-
-  private updateIsLoadingToPage(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoadingToPage: value
       })
     )();
   }
@@ -150,11 +131,11 @@ export class AccountAdminDocumentsPageFacade {
     )();
   }
 
-  private updateNextPage(): void {
+  private updatePage(pageNumber: number): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: state.page + 1
+        page: pageNumber
       })
     )();
   }
@@ -211,7 +192,7 @@ export class AccountAdminDocumentsPageFacade {
           this.updateQueryParameters(parameters);
 
           return (parameters.page > 1)
-            ? this.loadItemsToPage()
+            ? this.loadItemsByPage(parameters.page)
             : this.loadItemsByParameters();
         })
       )
@@ -223,21 +204,17 @@ export class AccountAdminDocumentsPageFacade {
       origin$.pipe(
         withLatestFrom(
           this.parameters$,
-          this.isLoadingToPage$,
           this.relations$
         ),
-        switchMap(([targetPage, parameters, isLoadingToPage, relations]) => {
+        switchMap(([targetPage, parameters, relations]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          if (!isLoadingToPage) {
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page, orderBy, desc }
-            }));
-          }
-
+          this.store.dispatch(NavigationActions.mergeQueryParams({
+            queryParams: { page, orderBy, desc }
+          }));
           this.updateIsLoading(true);
 
           return this.tryLoadItemsByParameters(page, perPage, orderBy, desc, relations);
@@ -258,61 +235,23 @@ export class AccountAdminDocumentsPageFacade {
         relations
       })
       .pipe(
-        withLatestFrom(
-          this.isLoadingToPage$,
-          this.parameters$
-        ),
         tapResponse(
-          ([response, isLoadingToPage, parameters]) => {
+          (response) => {
             this.updateIsLoading(false);
             this.updateItems(response);
-
-            if (!isLoadingToPage) {
-              return;
-            }
-
-            if (response.currentPage >= parameters.page) {
-              this.updateIsLoadingToPage(false);
-
-              return;
-            }
-
-            if (response.currentPage !== response.lastPage) {
-              this.loadItemsByParameters(response.currentPage + 1);
-
-              return;
-            }
-
-            this.updateIsLoadingToPage(false);
-            this.updateQueryParameters(new AccountAdminDocumentsQueryParameters({ page: response.currentPage }));
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page: response.currentPage }
-            }));
           },
           () => this.updateIsLoading(false)
         )
       );
   }
 
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
+        tap((page) => {
+          this.updatePage(page);
 
           this.loadItemsByParameters();
-        })
-      )
-    );
-  }
-
-  private registerLoadItemsToPageEffect(): void {
-    this.loadItemsToPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateIsLoadingToPage(true);
-
-          this.loadItemsByParameters(1);
         })
       )
     );

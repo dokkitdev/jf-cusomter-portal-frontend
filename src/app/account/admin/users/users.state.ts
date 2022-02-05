@@ -5,7 +5,6 @@ import { AccountAdminUsersFilterForm } from './shared/forms';
 
 export class AccountAdminUsersPageState {
   public isLoading: boolean;
-  public isLoadingToPage: boolean;
   public items: Array<User>;
   public totalItems: number;
   public page: number;
@@ -19,7 +18,6 @@ export class AccountAdminUsersPageState {
 
   constructor() {
     this.isLoading = false;
-    this.isLoadingToPage = false;
     this.items = [];
     this.totalItems = 0;
     this.page = 1;

@@ -1,10 +1,7 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [isLoadingToPage]="isLoadingToPage$ | async"
-  [itemsCount]="items.length"
-  [hasMoreItems]="hasMoreItems$ | async"
-  (loadNextPage)="loadNextPageClicked()">
+  [itemsCount]="items.length">
   <div class="table">
     <admin-documents-items-header></admin-documents-items-header>
     <div class="table-content">
