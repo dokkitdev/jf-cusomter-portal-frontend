@@ -44,7 +44,7 @@ export class MediaService {
         { reportProgress: true, observe: 'events' }
       )
       .pipe(
-        filter((response) => response.type === HttpEventType.UploadProgress || !!(<HttpResponse<Media>>response).body),
+        filter((response) => response.type === HttpEventType.UploadProgress || !!(response as HttpResponse<Media>).body),
         map((response) => {
           if (response.type === HttpEventType.UploadProgress) {
             if (response.total) {
@@ -54,7 +54,7 @@ export class MediaService {
             }
           }
 
-          return plainToClass(Media, (<HttpResponse<Media>>response).body, { groups: [ClassGroup.MAIN] });
+          return plainToClass(Media, (response as HttpResponse<Media>).body, { groups: [ClassGroup.MAIN] });
         })
       );
   }
