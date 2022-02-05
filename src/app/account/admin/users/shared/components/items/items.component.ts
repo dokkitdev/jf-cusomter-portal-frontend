@@ -13,7 +13,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class AccountAdminUsersItemsComponent {
   public items$: Observable<Array<User>>;
-  public hasMoreItems$: Observable<boolean>;
   public isLoading$: Observable<boolean>;
   public perPage$: Observable<number>;
   public currentPage$: Observable<number>;
@@ -24,7 +23,6 @@ export class AccountAdminUsersItemsComponent {
     private facade: AccountAdminUsersPageFacade
   ) {
     this.items$ = this.facade.items$;
-    this.hasMoreItems$ = this.facade.hasMoreItems$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;
     this.currentPage$ = this.facade.currentPage$;

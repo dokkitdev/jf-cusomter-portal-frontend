@@ -1,3 +1,4 @@
+import { PaginationElementsModule } from '@shared/pagination-elements';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountAdminDocumentsPageComponent } from './documents.component';
@@ -21,6 +22,7 @@ import { MediaModule } from '@shared/media';
 import { FileModule } from '@shared/file';
 // import { AccountDialogAddDocumentModule } from '@app/account/shared/dialog-add-document';
 import { DialogModule } from '@shared/dialog';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { DialogModule } from '@shared/dialog';
     MediaModule,
     FileModule,
     DialogModule,
+    PaginationElementsModule,
+    NgxPaginationModule
     // AccountDialogAddDocumentModule
   ],
   providers: [
