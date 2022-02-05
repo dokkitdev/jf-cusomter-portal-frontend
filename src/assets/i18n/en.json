@@ -148,6 +148,29 @@
           "TEXT_EMAIL": "Email",
           "TEXT_CUSTOMER": "Customer"
         }
+      },
+      "DOCUMENTS": {
+        "TEXT_PAGE_TITLE": "Documents",
+        "BUTTON_NEW_DOCUMENT": "New Document",
+        "LINK_VIEW": "View",
+        "LINK_DOWNLOAD": "Download",
+        "LINK_DELETE": "Delete",
+        "ITEMS_HEADER": {
+          "TEXT_TITLE": "Filename",
+          "TEXT_DESCRIPTION": "Description",
+          "TEXT_CREATED_AT": "Uploaded",
+          "TEXT_ACTIONS": "Actions"
+        },
+        "DIALOG_DELETE_ITEM": {
+          "TEXT_TITLE": "Delete document?",
+          "TEXT_MESSAGE": "Document will be deleted permanently.",
+          "BUTTON_CANCEL": "Cancel",
+          "BUTTON_CONFIRM": "OK"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_DOCUMENT_DELETED": "Document has been successfully deleted.",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
       }
     },
     "SHARED": {

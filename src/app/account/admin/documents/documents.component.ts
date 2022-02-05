@@ -1,6 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { AccountAdminDocumentsPageFacade } from './documents.facade';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'account-admin-documents-page',
@@ -8,8 +7,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['documents.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountAdminDocumentsPageComponent {
+export class AccountAdminDocumentsPageComponent implements OnInit, OnDestroy {
   constructor(
     private facade: AccountAdminDocumentsPageFacade
-  ) {}
+  ) { }
+
+  public ngOnInit(): void {
+    this.facade.loadItems();
+  }
+
+  public ngOnDestroy(): void {
+    this.facade.resetState();
+  }
 }

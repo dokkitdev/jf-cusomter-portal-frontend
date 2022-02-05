@@ -19,12 +19,12 @@ export class MediaService {
 
   public getBlob(id: number): Observable<Blob> {
     return this.apiService
-      .get<HttpResponse<Blob>>(`${this.endpoint}/${id}/view`, {}, {
+      .get<HttpResponse<Blob>>(`${this.endpoint}/${id}/download`, {}, {
         responseType: 'blob',
         observe: 'response'
       })
       .pipe(
-        map((response) => <Blob>response.body)
+        map((response) => (response.body as Blob))
       );
   }
 
