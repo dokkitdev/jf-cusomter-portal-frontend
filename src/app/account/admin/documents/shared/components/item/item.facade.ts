@@ -17,7 +17,7 @@ export class AccountAdminDocumentsItemComponentFacade {
     return this.componentStore.select((store) => store.isSendingRequest);
   }
 
-  public deletingSuccessSubject: Subject<number> = new Subject();
+  public deletingSuccessSubject: Subject<number>;
 
   private viewMediaEffect$: (media: Media) => Observable<void>;
   private downloadMediaEffect$: (media: Media) => Observable<void>;
@@ -32,8 +32,9 @@ export class AccountAdminDocumentsItemComponentFacade {
     private readonly mediaService: MediaService,
     private readonly fileService: FileService
   ) {
-    this.resetState();
+    this.deletingSuccessSubject = new Subject();
 
+    this.resetState();
     this.registerDeleteItemEffect();
     this.registerViewMediaEffect();
     this.registerDownloadMediaEffect();
