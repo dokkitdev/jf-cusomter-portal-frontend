@@ -1,0 +1,16 @@
+<table-container
+  *ngrxLet="items$; let items"
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="items.length">
+  <div class="table">
+    <admin-documents-items-header></admin-documents-items-header>
+    <div class="table-content">
+      <admin-documents-item
+        *ngFor="let item of items; trackByProperty: 'id'"
+        [item]="item"
+        [@heightCollapse]
+        (deletingSuccess)="itemDeleted($event)">
+      </admin-documents-item>
+    </div>
+  </div>
+</table-container>
