@@ -6,11 +6,21 @@
     <admin-documents-items-header></admin-documents-items-header>
     <div class="table-content">
       <admin-documents-item
-        *ngFor="let item of items; trackByProperty: 'id'"
+        *ngFor="let item of items | paginate: {
+          id: paginationId$ | async,
+          itemsPerPage: perPage$ | async,
+          currentPage: currentPage$ | async,
+          totalItems: totalItems$ | async
+        }; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]
         (deletingSuccess)="itemDeleted($event)">
       </admin-documents-item>
     </div>
+    <pagination-elements
+      [paginationId]="paginationId$ | async"
+      (pageChanged)="pageChanged($event)"
+    >
+    </pagination-elements>
   </div>
 </table-container>

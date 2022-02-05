@@ -35,10 +35,6 @@ export class AccountAdminUsersPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get hasMoreItems$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.totalItems > state.items.length);
-  }
-
   public get items$(): Observable<Array<User>> {
     return this.componentStore.select((state) => state.items);
   }

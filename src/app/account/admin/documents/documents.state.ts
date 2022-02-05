@@ -9,6 +9,7 @@ export class AccountAdminDocumentsPageState {
   public orderBy: DocumentSortField;
   public relations: Array<DocumentRelationType>;
   public desc: boolean;
+  public readonly paginationId: string;
 
   constructor() {
     this.isLoading = false;
@@ -19,5 +20,6 @@ export class AccountAdminDocumentsPageState {
     this.orderBy = DocumentSortField.TITLE;
     this.relations = ['media'];
     this.desc = false;
+    this.paginationId = 'account-admin-documents-pagination';
   }
 }
