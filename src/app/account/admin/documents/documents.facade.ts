@@ -105,7 +105,7 @@ export class AccountAdminDocumentsPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
