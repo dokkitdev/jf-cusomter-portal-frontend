@@ -6,13 +6,13 @@
   [hasMoreItems]="hasMoreItems$ | async"
   (loadNextPage)="loadNextPageClicked()">
   <div class="table">
-    <account-documents-items-header></account-documents-items-header>
+    <documents-items-header></documents-items-header>
     <div class="table-content">
-      <account-documents-item
+      <documents-item
         *ngFor="let item of items; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]>
-      </account-documents-item>
+      </documents-item>
     </div>
   </div>
 </table-container>

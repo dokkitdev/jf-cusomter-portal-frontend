@@ -173,6 +173,23 @@
         }
       }
     },
+    "DOCUMENTS": {
+      "TEXT_PAGE_TITLE": "Documents",
+      "LINK_VIEW": "View",
+      "LINK_DOWNLOAD": "Download",
+      "ITEMS_HEADER": {
+        "TEXT_FILENAME": "Filename",
+        "TEXT_DESCRIPTION": "Description",
+        "TEXT_UPLOADED": "Uploaded",
+        "TEXT_ACTIONS": "Actions"
+      },
+      "FILTERS": {
+        "TEXT_TITLE": "Filename",
+        "TEXT_DESCRIPTION": "Description",
+        "TEXT_CREATED_AT_FROM": "Uploaded At From",
+        "TEXT_CREATED_AT_TO": "Uploaded At To"
+      }
+    },
     "SHARED": {
       "CUSTOMER_SELECT": {
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
