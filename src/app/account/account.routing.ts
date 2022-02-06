@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'admin',
         canActivate: [IsAdminGuard],
         loadChildren: () => import('./admin/admin.module').then((module) => module.AccountAdminPageModule)
+      },
+      {
+        path: 'documents',
+        loadChildren: () => import('./documents/documents.module').then((module) => module.AccountDocumentsPageModule)
       }
     ]
   }

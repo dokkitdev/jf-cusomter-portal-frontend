@@ -1,0 +1,36 @@
+<div class="documents-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <filter-select-text
+        [controlState]="filterFormState.controls.title"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.DOCUMENTS.FILTERS.TEXT_TITLE' | translate }}">
+      </filter-select-text>
+      <filter-select-text
+        [controlState]="filterFormState.controls.query"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.DOCUMENTS.FILTERS.TEXT_DESCRIPTION' | translate }}">
+      </filter-select-text>
+      <form-datepicker
+        [controlState]="filterFormState.controls.createdAtFrom"
+        [dateFilter]="getStartCreatedAtFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.DOCUMENTS.FILTERS.TEXT_CREATED_AT_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.createdAtTo"
+        [dateFilter]="getEndCreatedAtFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.DOCUMENTS.FILTERS.TEXT_CREATED_AT_TO' | translate }}">
+      </form-datepicker>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>
