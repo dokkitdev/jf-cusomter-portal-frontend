@@ -51,6 +51,9 @@ export const initConfiguration = (configuration: any): any =>
     maxFileSize: {
       default: 10485760
     },
+    fileSize: {
+      base: 2
+    },
     countdownProgressbar: {
       radius: 12,
       strokeWidth: 1

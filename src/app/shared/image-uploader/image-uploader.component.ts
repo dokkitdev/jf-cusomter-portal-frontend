@@ -37,7 +37,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   @Input() validationMessages: Map<string, string>;
   @Input() placeholder: string;
   @Input() maxFileSize: boolean;
-  @Input() allowedFileExtensions: Array<string> = configuration.allowedFileExtensions.default;
+  @Input() allowedFileExtensions: Array<string>;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
   @Output() startUploading: EventEmitter<void>;
@@ -47,6 +47,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   public isUploading$: Observable<boolean>;
   public image$: Observable<Media>;
   public spinnerDiameter: typeof SpinnerDiameter;
+  public fileSizeBase: number;
 
   public get acceptingFiles(): string {
     return this.allowedFileExtensions.join(',');
@@ -70,6 +71,8 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
     this.progress$ = this.facade.progress$;
     this.isUploading$ = this.facade.isUploading$;
     this.image$ = this.facade.image$;
+    this.allowedFileExtensions = configuration.allowedFileExtensions.default;
+    this.fileSizeBase = configuration.fileSize.base;
   }
 
   public ngOnInit(): void {

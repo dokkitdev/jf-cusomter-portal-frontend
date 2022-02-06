@@ -32,7 +32,7 @@
     <div class="imageuploader-info">
       <span>{{ extensionRequirements }}</span>
       <span *ngIf="maxFileSize">
-        {{ 'SHARED.IMAGE_UPLOADER.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize } }}
+        {{ 'SHARED.IMAGE_UPLOADER.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: { base: fileSizeBase } } }}
       </span>
     </div>
   </div>
