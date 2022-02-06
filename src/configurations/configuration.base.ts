@@ -45,6 +45,12 @@ export const initConfiguration = (configuration: any): any =>
       disableTimeOut: true,
       tapToDismiss: false
     },
+    allowedFileExtensions: {
+      default: ['image/jpeg', 'image/png', 'image/bmp', 'image/heic', 'image/heif', 'application/pdf']
+    },
+    maxFileSize: {
+      default: 10485760
+    },
     countdownProgressbar: {
       radius: 12,
       strokeWidth: 1

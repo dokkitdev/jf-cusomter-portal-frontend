@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label *ngIf="label" class="form-label">
+    {{ label }}
+  </label>
+  <textarea
+    [ngrxFormControlState]="controlState"
+    [placeholder]="placeholder"
+    [ngClass]="{
+      'form-control-error': controlState.isSubmitted && controlState.isInvalid
+    }"
+    (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+    class="form-control">
+  </textarea>
+  <validation-errors
+    *ngIf="controlState.isSubmitted && controlState.isInvalid"
+    [controlErrors]="controlState.errors"
+    [messages]="validationMessages">
+  </validation-errors>
+</div>

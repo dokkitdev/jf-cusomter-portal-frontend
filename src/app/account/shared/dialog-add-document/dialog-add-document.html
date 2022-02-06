@@ -1,0 +1,57 @@
+<div class="dialog-edit">
+  <h2 class="dialog-edit-title">
+    {{ 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.TEXT_TITLE_CREATE' | translate }}
+  </h2>
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (submit)="formSubmitted()"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    class="form">
+    <form-text
+      [controlState]="formState.controls.title"
+      [validationMessages]="{
+        trimmedRequired: 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.ERRORS.TEXT_FILENAME_IS_REQUIRED' | translate,
+        maxLength: 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.ERRORS.TEXT_FILENAME_MAX_LENGTH' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.TEXT_FILENAME' | translate }}">
+    </form-text>
+    <form-textarea
+      [controlState]="formState.controls.description"
+      [validationMessages]="{
+        trimmedRequired: 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.ERRORS.TEXT_DESCRIPTION_IS_REQUIRED' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.TEXT_DESCRIPTION' | translate }}">
+    </form-textarea>
+    <image-uploader
+      [controlState]="formState.controls.mediaID"
+      [maxFileSize]="maxFileSize"
+      [validationMessages]="{
+        positiveNumber: 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.ERRORS.TEXT_FILE_IS_REQUIRED' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)">
+    </image-uploader>
+    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+      <div class="dialog-edit-button">
+        <btn
+          [disabled]="isSendingRequest"
+          (clicked)="cancelClicked()"
+          type="button"
+          variant="outline">
+          {{ 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.BUTTON_CANCEL' | translate }}
+        </btn>
+      </div>
+      <div class="dialog-edit-button">
+        <btn
+          [isLoading]="isSendingRequest"
+          [disabled]="formState.isPristine"
+          type="submit"
+          variant="primary">
+          {{ 'ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.BUTTON_CREATE' | translate }}
+        </btn>
+      </div>
+    </div>
+  </form>
+</div>
