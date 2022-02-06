@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter } from 'ngrx-forms';
 import { ExistenceSelectComponentFacade } from './existence-select.facade';
-import { CustomSelectOption } from '@shared/custom-select/models';
+import { CustomSelectOption } from '@shared/custom-select';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
 

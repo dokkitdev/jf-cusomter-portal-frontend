@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { SpinnerDiameter } from '@shared/loading-spinner';
+import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
   selector: 'image-uploader',
@@ -34,7 +35,7 @@ import { SpinnerDiameter } from '@shared/loading-spinner';
 })
 export class ImageUploaderComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<number>;
-  @Input() validationMessages: Map<string, string>;
+  @Input() validationMessages: ValidationMessages;
   @Input() placeholder: string;
   @Input() maxFileSize: boolean;
   @Input() allowedFileExtensions: Array<string>;

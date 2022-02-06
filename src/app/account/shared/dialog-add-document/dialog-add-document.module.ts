@@ -1,4 +1,4 @@
-import { ButtonModule } from './../../../shared/button/button.module';
+import { ButtonModule } from '@shared/button';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';

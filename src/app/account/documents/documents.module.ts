@@ -1,4 +1,4 @@
-import { PaginationElementsModule } from './../../shared/pagination-elements/pagination-elements.module';
+import { PaginationElementsModule } from '@shared/pagination-elements';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountDocumentsPageComponent } from './documents.component';

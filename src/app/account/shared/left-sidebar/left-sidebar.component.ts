@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountLeftSidebarFacade } from './left-sidebar.facade';
-import { User } from '@shared/user/models';
+import { User } from '@shared/user';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({

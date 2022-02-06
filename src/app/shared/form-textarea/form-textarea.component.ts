@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
+import { ValidationMessages } from '@shared/validation-errors';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 
 @Component({
@@ -18,7 +19,7 @@ export class FormTextareaComponent {
   @Input() controlState: FormControlState<string>;
   @Input() placeholder: string = '';
   @Input() label: string = '';
-  @Input() validationMessages: Map<string, string>;
+  @Input() validationMessages: ValidationMessages;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
 

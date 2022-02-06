@@ -4,6 +4,7 @@ import { dateValueConverter } from '@shared/date-converter';
 import { Observable } from 'rxjs';
 import { FormDatepickerFacade } from './form-datepicker.facade';
 import { ComponentStore } from '@ngrx/component-store';
+import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
   selector: 'form-datepicker',
@@ -24,7 +25,7 @@ export class FormDatepickerComponent {
   @Input() controlState: FormControlState<string>;
   @Input() placeholder: string;
   @Input() isDisabled: boolean;
-  @Input() validationMessages: Map<string, string>;
+  @Input() validationMessages: ValidationMessages;
   @Input() dataTestID: string;
   @Input() dateFilter: (date: Date) => boolean;
   @Input() dateValueConverter: NgrxValueConverter<Date | null, string | null> = dateValueConverter;

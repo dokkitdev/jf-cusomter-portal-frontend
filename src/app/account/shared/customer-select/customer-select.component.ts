@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter } from 'ngrx-forms';
 import { AccountCustomerSelectComponentFacade } from './customer-select.facade';
-import { CustomSelectOption } from '@shared/custom-select/models';
+import { CustomSelectOption } from '@shared/custom-select';
 import { Customer } from '@shared/customer';
 import { Observable } from 'rxjs';
 import { ComponentStore } from '@ngrx/component-store';
