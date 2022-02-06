@@ -1,3 +1,4 @@
+import { ButtonModule } from './../../../shared/button/button.module';
 import { PaginationElementsModule } from '@shared/pagination-elements';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -20,7 +21,7 @@ import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { NotificationModule } from '@shared/notification';
 import { MediaModule } from '@shared/media';
 import { FileModule } from '@shared/file';
-// import { AccountDialogAddDocumentModule } from '@app/account/shared/dialog-add-document';
+import { AccountDialogAddDocumentModule } from '@app/account/shared/dialog-add-document';
 import { DialogModule } from '@shared/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 
@@ -48,8 +49,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FileModule,
     DialogModule,
     PaginationElementsModule,
-    NgxPaginationModule
-    // AccountDialogAddDocumentModule
+    NgxPaginationModule,
+    AccountDialogAddDocumentModule,
+    ButtonModule
   ],
   providers: [
     AccountAdminDocumentsPageFacade,

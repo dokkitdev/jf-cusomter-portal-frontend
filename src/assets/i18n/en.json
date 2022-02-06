@@ -202,6 +202,23 @@
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
       },
+      "DIALOG_ADD_DOCUMENT": {
+        "TEXT_TITLE_CREATE": "New Document",
+        "TEXT_FILENAME": "Filename",
+        "TEXT_DESCRIPTION": "Description",
+        "BUTTON_CANCEL": "Cancel",
+        "BUTTON_CREATE": "Create",
+        "ERRORS": {
+          "TEXT_FILENAME_IS_REQUIRED": "Filename is required",
+          "TEXT_FILENAME_MAX_LENGTH": "Filename length must be less than or equal to 255",
+          "TEXT_DESCRIPTION_IS_REQUIRED": "Description is required",
+          "TEXT_FILE_IS_REQUIRED": "File is required"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_DOCUMENT_CREATED": "Document has been successfully created",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
       "DIALOG_EDIT_CONTACT": {
         "TEXT_TITLE_CREATE": "Create contact",
         "TEXT_TITLE_UPDATE": "Edit contact",
@@ -275,6 +292,14 @@
     },
     "TABLE_CONTAINER": {
       "TEXT_NOTHING": "Nothing found"
+    },
+    "IMAGE_UPLOADER": {
+      "TEXT_UPLOADING": "Uploading...",
+      "TEXT_PLACEHOLDER": "Drag & drop file here",
+      "TEXT_MAX_SIZE": "Max size: {{ size }}",
+      "NOTIFICATIONS": {
+        "TEXT_UPLOADING_ERROR": "File uploading error"
+      }
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"

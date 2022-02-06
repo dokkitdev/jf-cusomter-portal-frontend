@@ -32,6 +32,8 @@
     "lodash": "^4.17.21",
     "luxon": "^2.3.0",
     "ngrx-forms": "^7.0.0",
+    "ngx-dropzone": "^3.0.0",
+    "ngx-filesize": "^2.0.16",
     "ngx-infinite-scroll": "^10.0.1",
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.2.1",

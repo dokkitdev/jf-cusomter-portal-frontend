@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-// import { AccountDialogAddDocumentComponent } from '@app/account/shared/dialog-add-document';
-// import { AccountDialogAddDocumentActions } from '@app/account/shared/dialog-add-document/store';
+import { AccountDialogAddDocumentComponent } from '@app/account/shared/dialog-add-document';
+import { AccountDialogAddDocumentActions } from '@app/account/shared/dialog-add-document/store';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -181,13 +181,13 @@ export class AccountAdminDocumentsPageFacade {
   }
 
   private registerOpenAddDocumentDialogEffect(): void {
-    // this.openAddDocumentDialogEffect$ = this.componentStore.effect((origin$) =>
-    //   origin$.pipe(
-    //     map(() => this.dialogService.open(AccountDialogAddDocumentComponent, {
-    //       autoFocus: false
-    //     }))
-    //   )
-    // );
+    this.openAddDocumentDialogEffect$ = this.componentStore.effect((origin$) =>
+      origin$.pipe(
+        map(() => this.dialogService.open(AccountDialogAddDocumentComponent, {
+          autoFocus: false
+        }))
+      )
+    );
   }
 
   private registerLoadItemsEffect(): void {
@@ -274,19 +274,19 @@ export class AccountAdminDocumentsPageFacade {
   }
 
   private registerAddCreatedItemEffect(): void {
-    // this.componentStore.effect(() =>
-    //   this.actions$.pipe(
-    //     ofType(AccountDialogAddDocumentActions.createDocumentSuccess),
-    //     withLatestFrom(
-    //       this.relations$
-    //     ),
-    //     mergeMap(([{ documentID }, relations]) => this.documentService
-    //       .get(documentID, relations)
-    //       .pipe(
-    //         tap((document) => this.addItemToList(document))
-    //       )
-    //     )
-    //   )
-    // );
+    this.componentStore.effect(() =>
+      this.actions$.pipe(
+        ofType(AccountDialogAddDocumentActions.createDocumentSuccess),
+        withLatestFrom(
+          this.relations$
+        ),
+        mergeMap(([{ documentID }, relations]) => this.documentService
+          .get(documentID, relations)
+          .pipe(
+            tap((document) => this.addItemToList(document))
+          )
+        )
+      )
+    );
   }
 }
