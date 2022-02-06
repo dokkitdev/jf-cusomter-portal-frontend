@@ -4,7 +4,6 @@ import { AccountDocumentsFilterForm } from './shared/forms';
 
 export class AccountDocumentsPageState {
   public isLoading: boolean;
-  public isLoadingToPage: boolean;
   public items: Array<Document>;
   public totalItems: number;
   public page: number;
@@ -13,10 +12,10 @@ export class AccountDocumentsPageState {
   public relations: Array<DocumentRelationType>;
   public desc: boolean;
   public filterFormState: FormGroupState<AccountDocumentsFilterForm>;
+  public readonly paginationId: string;
 
   constructor() {
     this.isLoading = false;
-    this.isLoadingToPage = false;
     this.items = [];
     this.totalItems = 0;
     this.page = 1;
@@ -25,5 +24,6 @@ export class AccountDocumentsPageState {
     this.relations = ['media'];
     this.desc = false;
     this.filterFormState = createFormGroupState('AccountDocumentsFilterForm', new AccountDocumentsFilterForm());
+    this.paginationId = 'account-documents-pagination';
   }
 }

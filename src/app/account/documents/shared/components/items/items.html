@@ -1,10 +1,7 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [isLoadingToPage]="isLoadingToPage$ | async"
-  [itemsCount]="items.length"
-  [hasMoreItems]="hasMoreItems$ | async"
-  (loadNextPage)="loadNextPageClicked()">
+  [itemsCount]="items.length">
   <div class="table">
     <documents-items-header></documents-items-header>
     <div class="table-content">
@@ -14,5 +11,10 @@
         [@heightCollapse]>
       </documents-item>
     </div>
+    <pagination-elements
+      [paginationId]="paginationId$ | async"
+      (pageChanged)="pageChanged($event)"
+    >
+    </pagination-elements>
   </div>
 </table-container>

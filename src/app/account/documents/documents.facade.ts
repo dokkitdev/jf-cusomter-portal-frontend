@@ -24,16 +24,24 @@ export class AccountDocumentsPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get isLoadingToPage$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoadingToPage);
-  }
-
-  public get hasMoreItems$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.totalItems > state.items.length);
-  }
-
   public get items$(): Observable<Array<Document>> {
     return this.componentStore.select((state) => state.items);
+  }
+
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get paginationId$(): Observable<string> {
+    return this.componentStore.select((state) => state.paginationId);
   }
 
   public get parameters$(): Observable<AccountDocumentsQueryParameters> {
@@ -104,8 +112,7 @@ export class AccountDocumentsPageFacade {
 
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
-  private loadItemsToPageEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page: number) => Observable<void>;
   private viewMediaEffect$: (media: Media) => Observable<void>;
   private downloadMediaEffect$: (media: Media) => Observable<void>;
 
@@ -120,8 +127,7 @@ export class AccountDocumentsPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
-    this.registerLoadItemsToPageEffect();
+    this.registerLoadItemsByPageEffect();
     this.registerViewMediaEffect();
     this.registerDownloadMediaEffect();
   }
@@ -138,12 +144,9 @@ export class AccountDocumentsPageFacade {
     this.loadItemsByParametersEffect$(page);
   }
 
-  public loadItemsToPage(): void {
-    this.loadItemsToPageEffect$();
-  }
 
-  public loadNextPage(): void {
-    this.loadNextPageEffect$();
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
   }
 
   public changeSort(parameters: AccountDocumentsQueryParameters): void {
@@ -210,20 +213,11 @@ export class AccountDocumentsPageFacade {
     )();
   }
 
-  private updateIsLoadingToPage(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoadingToPage: value
-      })
-    )();
-  }
-
   private updateItems(response: PaginationResponse<Document>): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
@@ -240,11 +234,11 @@ export class AccountDocumentsPageFacade {
     )();
   }
 
-  private updateNextPage(): void {
+  private updatePage(pageNumber: number): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: state.page + 1
+        page: pageNumber
       })
     )();
   }
@@ -304,7 +298,7 @@ export class AccountDocumentsPageFacade {
           this.updateQueryParameters(parameters);
 
           return (parameters.page > 1)
-            ? this.loadItemsToPage()
+            ? this.loadItemsByPage(parameters.page)
             : this.loadItemsByParameters();
         })
       )
@@ -316,29 +310,26 @@ export class AccountDocumentsPageFacade {
       origin$.pipe(
         withLatestFrom(
           this.parameters$,
-          this.isLoadingToPage$,
           this.relations$,
           this.filters$
         ),
-        switchMap(([targetPage, parameters, isLoadingToPage, relations, filters]) => {
+        switchMap(([targetPage, parameters, relations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          if (!isLoadingToPage) {
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: {
-                page,
-                orderBy,
-                desc,
-                title: filters.title,
-                query: filters.query,
-                createdAtFrom: filters.createdAtFrom,
-                createdAtTo: filters.createdAtTo
-              }
-            }));
-          }
+          this.store.dispatch(NavigationActions.mergeQueryParams({
+            queryParams: {
+              page,
+              orderBy,
+              desc,
+              title: filters.title,
+              query: filters.query,
+              createdAtFrom: filters.createdAtFrom,
+              createdAtTo: filters.createdAtTo
+            }
+          }));
 
           this.updateIsLoading(true);
 
@@ -366,61 +357,23 @@ export class AccountDocumentsPageFacade {
         filters
       })
       .pipe(
-        withLatestFrom(
-          this.isLoadingToPage$,
-          this.parameters$
-        ),
         tapResponse(
-          ([response, isLoadingToPage, parameters]) => {
+          (response) => {
             this.updateIsLoading(false);
             this.updateItems(response);
-
-            if (!isLoadingToPage) {
-              return;
-            }
-
-            if (response.currentPage >= parameters.page) {
-              this.updateIsLoadingToPage(false);
-
-              return;
-            }
-
-            if (response.currentPage !== response.lastPage) {
-              this.loadItemsByParameters(response.currentPage + 1);
-
-              return;
-            }
-
-            this.updateIsLoadingToPage(false);
-            this.updateQueryParameters(new AccountDocumentsQueryParameters({ page: response.currentPage }));
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page: response.currentPage }
-            }));
           },
           () => this.updateIsLoading(true)
         )
       );
   }
 
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
+        tap((page) => {
+          this.updatePage(page);
 
           this.loadItemsByParameters();
-        })
-      )
-    );
-  }
-
-  private registerLoadItemsToPageEffect(): void {
-    this.loadItemsToPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateIsLoadingToPage(true);
-
-          this.loadItemsByParameters(1);
         })
       )
     );

@@ -1,3 +1,4 @@
+import { PaginationElementsModule } from './../../shared/pagination-elements/pagination-elements.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountDocumentsPageComponent } from './documents.component';
@@ -20,6 +21,7 @@ import { TableContainerModule } from '@shared/table-container';
 import { FilterSelectTextModule } from '@shared/filter-select-text';
 import { FilterValuesModule } from '@shared/filter-values';
 import { FormDatepickerModule } from '@shared/form-datepicker';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { FormDatepickerModule } from '@shared/form-datepicker';
     TableContainerModule,
     FilterSelectTextModule,
     FilterValuesModule,
-    FormDatepickerModule
+    FormDatepickerModule,
+    NgxPaginationModule,
+    PaginationElementsModule
   ],
   providers: [
     AccountDocumentsPageFacade,
