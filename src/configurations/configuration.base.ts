@@ -49,7 +49,7 @@ export const initConfiguration = (configuration: any): any =>
       default: ['image/jpeg', 'image/png', 'image/bmp', 'image/heic', 'image/heif', 'application/pdf']
     },
     maxFileSize: {
-      default: 10485760
+      default: 5242880
     },
     fileSize: {
       base: 2
