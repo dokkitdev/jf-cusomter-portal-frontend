@@ -3,7 +3,7 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountCustomerSelectComponentState } from './customer-select.state';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
 import { Customer, CustomerFilters, CustomerService } from '@shared/customer';
-import { CustomSelectOption } from '@shared/custom-select/models';
+import { CustomSelectOption } from '@shared/custom-select';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { CustomerQueryParameters } from './models';
 import { unionBy } from 'lodash';

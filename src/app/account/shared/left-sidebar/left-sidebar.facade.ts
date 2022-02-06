@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { User } from '@shared/user/models';
-import { UserService } from '@shared/user';
+import { User, UserService } from '@shared/user';
 import { exhaustMap, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountLeftSidebarPageState } from './left-sidebar.state';

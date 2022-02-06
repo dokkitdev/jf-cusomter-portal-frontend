@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CustomSelectOption } from '@shared/custom-select/models';
+import { CustomSelectOption } from '@shared/custom-select';
 import { TranslateService } from '@ngx-translate/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { ExistenceSelectComponentState } from './existence-select.state';

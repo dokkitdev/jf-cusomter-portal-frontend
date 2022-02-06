@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { CustomSelectFacade } from '@shared/custom-select/custom-select.facade';
+import { CustomSelectFacade } from '@shared/custom-select';
 import { Actions, FormControlState, FormControlValueTypes } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 

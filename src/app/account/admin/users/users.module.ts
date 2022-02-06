@@ -1,6 +1,6 @@
 import { PaginationElementsModule } from '@shared/pagination-elements';
 import { DialogModule } from '@shared/dialog';
-import { AccountDialogEditUserModule } from './../../shared/dialog-edit-user/dialog-edit-user.module';
+import { AccountDialogEditUserModule } from './../../shared/dialog-edit-user';
 import { HeaderSortModule } from '@shared/header-sort';
 import { NotificationModule } from '@shared/notification';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
@@ -8,7 +8,7 @@ import { TableContainerModule } from '@shared/table-container';
 import { ButtonModule } from '@shared/button';
 import { FilterValuesModule } from '@shared/filter-values';
 import { FilterSelectTextModule } from '@shared/filter-select-text';
-import { AccountCustomerSelectModule } from './../../shared/customer-select/customer-select.module';
+import { AccountCustomerSelectModule } from './../../shared/customer-select';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { CommonModule } from '@angular/common';
