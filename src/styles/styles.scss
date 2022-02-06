@@ -464,7 +464,10 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 }
 
 /* material datepicker */
-.form-group-datepicker {
+.form-group-datepicker {position: relative;
+  &-toggler {position: absolute; right: 0; left: 0; top: 0; bottom: 0;
+    z-index: 999;
+  }
   .mat-form-field {max-width: 100%;
     &.mat-form-field-should-float .mat-form-field-label {opacity: 0;}
     &-label {top: 0; padding: 12px 34px 12px 14px; box-sizing: border-box; color: $gray;

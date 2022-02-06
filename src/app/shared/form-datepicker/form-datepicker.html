@@ -1,7 +1,8 @@
 <div
   [ngClass]="{ opened: isOpened$ | async }"
   class="form-group form-group-datepicker">
-  <mat-form-field (click)="picker.open()">
+  <div (click)="picker.open()" class="form-group-datepicker-toggler"></div>
+  <mat-form-field>
     <mat-label>{{ placeholder }}</mat-label>
     <input
       [ngrxFormControlState]="controlState"
