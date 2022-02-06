@@ -36,6 +36,14 @@ export const initConfiguration = (configuration: any): any =>
       filterDate: 'dd/MM/yyyy',
       lastLoginDate: 'dd/MM/yyyy HH:mm:ss'
     },
+    datepicker: {
+      dateFormats: {
+        display: {
+          dateInput: 'dd/MM/yyyy',
+          monthYearLabel: 'MMMM, yyyy'
+        }
+      }
+    },
     dialog: {
       panelClass: 'dialog-panel',
       disableClose: true

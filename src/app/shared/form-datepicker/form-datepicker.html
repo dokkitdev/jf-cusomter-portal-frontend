@@ -1,0 +1,32 @@
+<div
+  [ngClass]="{ opened: isOpened$ | async }"
+  class="form-group form-group-datepicker">
+  <div (click)="picker.open()" class="form-group-datepicker-toggler"></div>
+  <mat-form-field>
+    <mat-label>{{ placeholder }}</mat-label>
+    <input
+      [ngrxFormControlState]="controlState"
+      [ngrxValueConverter]="dateValueConverter"
+      [matDatepicker]="picker"
+      [matDatepickerFilter]="dateFilter"
+      [disabled]="isDisabled"
+      [ngClass]="{
+        'form-control-error': controlState.isSubmitted && controlState.isInvalid
+      }"
+      (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+      class="form-control"
+      readonly
+      matInput>
+    <span class="form-group-datepicker-icon"></span>
+    <mat-datepicker
+      (closed)="datePickerClosed()"
+      (opened)="datePickerOpened()"
+      #picker>
+    </mat-datepicker>
+  </mat-form-field>
+  <validation-errors
+    *ngIf="controlState.isSubmitted && controlState.isInvalid"
+    [controlErrors]="controlState.errors"
+    [messages]="validationMessages">
+  </validation-errors>
+</div>

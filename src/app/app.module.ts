@@ -17,6 +17,8 @@ import { UserModule } from '@shared/user';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationEffects } from '@shared/navigation';
 import { ToastrModule } from 'ngx-toastr';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { CustomDateAdapter } from '@shared/date-adapter';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,10 @@ import { ToastrModule } from 'ngx-toastr';
       toastComponent: NotificationComponent
     })
   ],
-  providers: [],
+  providers: [
+    { provide: DateAdapter, useClass: CustomDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: configuration.datepicker.dateFormats }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

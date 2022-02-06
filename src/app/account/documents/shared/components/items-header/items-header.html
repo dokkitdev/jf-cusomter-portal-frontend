@@ -1,0 +1,22 @@
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell documents-filename">
+      <header-sort [orderBy]="documentSortField.TITLE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.DOCUMENTS.ITEMS_HEADER.TEXT_FILENAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell documents-description">
+      <header-sort [orderBy]="documentSortField.DESCRIPTION" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.DOCUMENTS.ITEMS_HEADER.TEXT_DESCRIPTION' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell documents-uploaded">
+      <header-sort [orderBy]="documentSortField.CREATED_AT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.DOCUMENTS.ITEMS_HEADER.TEXT_UPLOADED' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell documents-actions">
+      {{ 'ACCOUNT.DOCUMENTS.ITEMS_HEADER.TEXT_ACTIONS' | translate }}
+    </div>
+  </div>
+</div>

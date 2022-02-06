@@ -119,7 +119,8 @@
           }
         ],
         "@typescript-eslint/member-delimiter-style": "off",
-        "@angular-eslint/no-negated-async": "off"
+        "@angular-eslint/no-negated-async": "off",
+        "prefer-arrow/prefer-arrow-functions": "off"
       }
     },
     {
