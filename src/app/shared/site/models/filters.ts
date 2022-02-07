@@ -3,7 +3,7 @@ export class SiteFilters {
   public name?: string;
   public uprn?: string;
   public siteID?: number;
-  public simproCustomerID?: number;
+  public customerIds?: Array<number>;
   public postalCode?: string;
   public primaryContactQuery?: string;
   public hasOpenJobs?: boolean;

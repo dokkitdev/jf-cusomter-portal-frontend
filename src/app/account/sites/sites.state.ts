@@ -15,6 +15,7 @@ export class AccountSitesPageState {
   public desc: boolean;
   public filterFormState: FormGroupState<AccountSitesFilterForm>;
   public selectedCustomer: Customer | undefined;
+  public paginationID: string;
 
   constructor() {
     this.isLoading = false;
@@ -28,5 +29,6 @@ export class AccountSitesPageState {
     this.desc = false;
     this.filterFormState = createFormGroupState('AccountSitesFilterForm', new AccountSitesFilterForm());
     this.selectedCustomer = undefined;
+    this.paginationID = 'account-sites-pagination';
   }
 }

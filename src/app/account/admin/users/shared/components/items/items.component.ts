@@ -17,6 +17,7 @@ export class AccountAdminUsersItemsComponent {
   public perPage$: Observable<number>;
   public currentPage$: Observable<number>;
   public totalItems$: Observable<number>;
+  public hasPagination$: Observable<boolean>;
   public paginationId$: Observable<string>;
 
   constructor(
@@ -27,6 +28,7 @@ export class AccountAdminUsersItemsComponent {
     this.perPage$ = this.facade.perPage$;
     this.currentPage$ = this.facade.currentPage$;
     this.totalItems$ = this.facade.totalItems$;
+    this.hasPagination$ = this.facade.hasPagination$;
     this.paginationId$ = this.facade.paginationId$;
   }
 

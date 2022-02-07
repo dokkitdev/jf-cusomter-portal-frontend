@@ -5,7 +5,7 @@ export class AccountSitesQueryParameters {
   public perPage: number;
   public orderBy: SiteSortField;
   public desc: boolean;
-  public simproCustomerID: number | undefined;
+  public customerID: number | undefined;
   public name: string;
   public uprn: string;
   public query: string;

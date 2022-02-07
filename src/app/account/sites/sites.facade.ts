@@ -33,13 +33,33 @@ export class AccountSitesPageFacade {
     return this.componentStore.select((state) => state.items);
   }
 
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get hasPagination$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.totalItems > 0);
+  }
+
+  public get paginationID$(): Observable<string> {
+    return this.componentStore.select((state) => state.paginationID);
+  }
+
   public get parameters$(): Observable<AccountSitesQueryParameters> {
     return this.componentStore.select((state) => ({
       page: state.page,
       perPage: state.perPage,
       orderBy: state.orderBy,
       desc: state.desc,
-      simproCustomerID: state.filterFormState.value.simproCustomerID,
+      customerID: state.filterFormState.value.customerID,
       name: state.filterFormState.value.name,
       uprn: state.filterFormState.value.uprn,
       query: state.filterFormState.value.query,
@@ -70,7 +90,7 @@ export class AccountSitesPageFacade {
       .filterFormStateValue$
       .pipe(
         map((filterFormStateValue) => new SiteFilters({
-          simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
+          customerIds: (filterFormStateValue.customerID) ? [filterFormStateValue.customerID] : undefined,
           name: filterFormStateValue.name || undefined,
           uprn: filterFormStateValue.uprn || undefined,
           query: filterFormStateValue.query || undefined,
@@ -86,9 +106,9 @@ export class AccountSitesPageFacade {
       const formState = state.filterFormState;
       const filterValues = [];
 
-      if (formState.value.simproCustomerID && state.selectedCustomer) {
+      if (formState.value.customerID && state.selectedCustomer) {
         filterValues.push(
-          new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
+          new FilterValue({ id: formState.controls.customerID.id, value: state.selectedCustomer.name })
         );
       }
       if (formState.value.name) {
@@ -118,6 +138,7 @@ export class AccountSitesPageFacade {
   }
 
   private loadItemsEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
 
   constructor(
@@ -130,6 +151,7 @@ export class AccountSitesPageFacade {
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
+    this.registerLoadItemsByPageEffect();
   }
 
   public resetState(): void {
@@ -138,6 +160,10 @@ export class AccountSitesPageFacade {
 
   public loadItems(): void {
     this.loadItemsEffect$();
+  }
+
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
   }
 
   public loadItemsByParameters(page?: number): void {
@@ -218,6 +244,15 @@ export class AccountSitesPageFacade {
     )();
   }
 
+  private updatePage(pageNumber: number): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        page: pageNumber
+      })
+    )();
+  }
+
   private updateStateSort(parameters: AccountSitesQueryParameters): void {
     this.componentStore.updater(
       (state) => ({
@@ -241,7 +276,7 @@ export class AccountSitesPageFacade {
         filterFormState: updateGroup<AccountSitesFilterForm>(
           state.filterFormState,
           {
-            simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
+            customerID: setValue(parameters.customerID || state.filterFormState.value.customerID),
             name: setValue(parameters.name || state.filterFormState.value.name),
             uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
             query: setValue(parameters.query || state.filterFormState.value.query),
@@ -267,7 +302,7 @@ export class AccountSitesPageFacade {
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
-            simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
+            customerID: (queryParams.customerID) ? parseInt(queryParams.customerID, 10) : undefined,
             name: queryParams.name || undefined,
             uprn: queryParams.uprn || undefined,
             query: queryParams.query || undefined,
@@ -278,7 +313,21 @@ export class AccountSitesPageFacade {
 
           this.updateQueryParameters(parameters);
 
-          return this.loadItemsByParameters();
+          return (parameters.page > 1)
+            ? this.loadItemsByPage(parameters.page)
+            : this.loadItemsByParameters();
+        })
+      )
+    );
+  }
+
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
+
+          this.loadItemsByParameters();
         })
       )
     );
@@ -304,7 +353,7 @@ export class AccountSitesPageFacade {
               page,
               orderBy,
               desc,
-              simproCustomerID: filters.simproCustomerID,
+              customerID: filters.customerIds,
               name: filters.name,
               uprn: filters.uprn,
               query: filters.query,

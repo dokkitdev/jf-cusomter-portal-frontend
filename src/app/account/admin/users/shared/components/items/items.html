@@ -17,10 +17,10 @@
         (deletingSuccess)="itemDeleted($event)">
       </admin-users-item>
     </div>
-    <pagination-elements
-      [paginationId]="paginationId$ | async"
-      (pageChanged)="pageChanged($event)"
-    >
-    </pagination-elements>
   </div>
 </table-container>
+<pagination-elements
+  *ngIf="hasPagination$ | async"
+  [paginationId]="paginationId$ | async"
+  (pageChanged)="pageChanged($event)">
+</pagination-elements>
