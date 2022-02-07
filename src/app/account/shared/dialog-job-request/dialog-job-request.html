@@ -1,0 +1,44 @@
+<div class="dialog-edit jobrequest">
+  <h2 class="dialog-edit-title">
+    {{ 'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.TEXT_TITLE' | translate }}
+  </h2>
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    (submit)="formSubmitted()"
+    class="form">
+    <form-textarea
+      [controlState]="formState.controls.description"
+      [validationMessages]="{
+        trimmedRequired: 'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.ERRORS.TEXT_DESCRIPTION_IS_REQUIRED' | translate
+      }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      label="{{ 'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.TEXT_DESCRIPTION' | translate }}">
+    </form-textarea>
+    <media-multiselect
+      [maxFileSize]="maxFileSize"
+      [isDisabled]="formState.isDisabled"
+      (itemsChanged)="attachmentsChanged($event)">
+    </media-multiselect>
+    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+      <div class="dialog-edit-button">
+        <btn
+          [isDisabled]="isSendingRequest"
+          (clicked)="cancelClicked()"
+          type="button"
+          variant="outline">
+          {{ 'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.BUTTON_CANCEL' | translate }}
+        </btn>
+      </div>
+      <div class="dialog-edit-button">
+        <btn
+          [isLoading]="isSendingRequest"
+          [isDisabled]="formState.isPristine"
+          type="submit">
+          {{ 'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.BUTTON_SEND' | translate }}
+        </btn>
+      </div>
+    </div>
+  </form>
+</div>

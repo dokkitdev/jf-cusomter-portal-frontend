@@ -6,7 +6,7 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountSitesViewPageState } from './view.state';
 import { Router } from '@angular/router';
 import { Site, SiteRelationType, SiteService } from '@shared/site';
-import { exhaustMap, filter, switchMap, withLatestFrom } from 'rxjs/operators';
+import { exhaustMap, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { NavigationSelectors, NavigationService } from '@shared/navigation';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { DialogService } from '@shared/dialog';
@@ -28,6 +28,7 @@ import { CustomSelectOption } from '@shared/custom-select';
 import { Contact } from '@shared/contact';
 import { findIndex } from 'lodash';
 import { User, UserService } from '@shared/user';
+import { AccountDialogJobRequestComponent } from '@app/account/shared/dialog-job-request';
 
 @Injectable()
 export class AccountSitesViewPageFacade {
@@ -70,6 +71,7 @@ export class AccountSitesViewPageFacade {
 
   private initPageEffect$: () => Observable<void>;
   private saveChangesEffect$: () => Observable<void>;
+  private openJobRequestDialogEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountSitesViewPageState>,
@@ -86,14 +88,11 @@ export class AccountSitesViewPageFacade {
 
     this.registerInitPageEffect();
     this.registerSaveChangesEffect();
+    this.registerOpenJobRequestDialogEffect();
   }
 
   public resetState(): void {
     this.componentStore.setState(new AccountSitesViewPageState());
-  }
-
-  public initPage(): void {
-    this.initPageEffect$();
   }
 
   public back(): void {
@@ -110,8 +109,16 @@ export class AccountSitesViewPageFacade {
     this.validateForm();
   }
 
+  public initPage(): void {
+    this.initPageEffect$();
+  }
+
   public saveChanges(): void {
     this.saveChangesEffect$();
+  }
+
+  public openJobRequestDialog(): void {
+    this.openJobRequestDialogEffect$();
   }
 
   public addContact(contact: Contact): void {
@@ -275,6 +282,20 @@ export class AccountSitesViewPageFacade {
     this.updateIsSubmitting(false);
     this.toggleDisablingForm(false);
     this.disableNotEditableControls();
+  }
+
+  private registerOpenJobRequestDialogEffect(): void {
+    this.openJobRequestDialogEffect$ = this.componentStore.effect((origin$) =>
+      origin$.pipe(
+        withLatestFrom(
+          this.site$
+        ),
+        map(([_, site]) => this.dialogService.open(AccountDialogJobRequestComponent, {
+          autoFocus: false,
+          data: { siteID: site.id }
+        }))
+      )
+    );
   }
 
   private registerInitPageEffect(): void {

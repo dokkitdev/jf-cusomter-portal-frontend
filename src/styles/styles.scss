@@ -575,6 +575,28 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     color: #000; opacity: 0.7; transition: 0.3s all; pointer-events: none; position: relative;
   }
 }
+.multiuploader {position: relative; margin-bottom: 4px;
+  &-area {padding: 8px; margin: 0; position: absolute; top: 0; bottom: 0; left: 0; right: 0;
+    &:hover, &.ngx-dz-hovered {
+      & + .multiuploader-content .imageuploader-placeholder {opacity: 1;}
+    }
+  }
+  &-content {pointer-events: none; z-index: 1;}
+  &-items {width: 100%; padding: 8px; box-sizing: border-box;}
+  &-item {display: flex; align-items: center; position: relative; padding: 2px 0 2px 8px; border-radius: 3px;
+    margin-bottom: 2px; background-color: #fff; color: $primary; transition: 0.3s all;
+    .icon {opacity: 0.6; transition: 0.3s all;
+      &:hover {opacity: 1;}
+    }
+    &-name {flex: 1 1 auto; padding: 5px 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+    &-actions {position: absolute; right: 0; pointer-events: all; z-index: 1;}
+  }
+  &-progress {position: absolute; top: 0; left: 0; height: 100%; background-color: $primary;
+    border-radius: 3px; overflow: hidden;
+    &-name {position: absolute; padding: 7px 8px; color: #fff; white-space: nowrap;}
+  }
+  media-multiselect-item:last-child .multiuploader-item {margin-bottom: 0;}
+}
 
 /* auth pages */
 .auth {padding: 5rem 0; background: $lighter-gray; background-size: cover;

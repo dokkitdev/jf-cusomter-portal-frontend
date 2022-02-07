@@ -103,6 +103,9 @@
         "TEXT_POSTCODE": "Postcode",
         "TEXT_COUNTY": "County",
         "TEXT_PRIMARY_CONTACT": "Primary contact",
+        "BUTTON_VIEW_JOBS": "View jobs",
+        "BUTTON_VIEW_ASSETS": "View assets",
+        "BUTTON_REQUEST_JOB": "Request job",
         "BUTTON_SAVE_CHANGES": "Save changes",
         "ERRORS": {
           "TEXT_NAME_IS_REQUIRED": "Site name is required"
@@ -263,6 +266,20 @@
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
       },
+      "DIALOG_JOB_REQUEST": {
+        "TEXT_TITLE": "Job request",
+        "TEXT_DESCRIPTION": "Description",
+        "BUTTON_CANCEL": "Cancel",
+        "BUTTON_SEND": "Send",
+        "ERRORS": {
+          "TEXT_DESCRIPTION_IS_REQUIRED": "Description is required",
+          "TEXT_ATTACHMENTS_IS_REQUIRED": "Required at least 1 attachment file"
+        },
+        "NOTIFICATIONS": {
+          "TEXT_REQUEST_CREATED": "Job request has been successfully sent",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
       "CUSTOMERS": {
         "TEXT_CUSTOMER": "Customer",
         "BUTTON_ADD_CUSTOMER": "+ Add Customer"
@@ -317,6 +334,10 @@
       "NOTIFICATIONS": {
         "TEXT_UPLOADING_ERROR": "File uploading error"
       }
+    },
+    "MEDIA_MULTISELECT": {
+      "TEXT_PLACEHOLDER": "Drag & drop files here",
+      "TEXT_MAX_SIZE": "Max size: {{ size }}"
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
