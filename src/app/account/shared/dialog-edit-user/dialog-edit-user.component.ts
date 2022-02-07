@@ -7,6 +7,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User, UserRole } from '@shared/user';
 import { heightCollapseAnimation } from '@shared/animations';
+import { AccountDialogEditUserData } from './models';
 
 @Component({
   selector: 'account-dialog-edit-user',
@@ -31,7 +32,7 @@ export class AccountDialogEditUserComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { isEditMode: boolean, user: User },
+    @Inject(MAT_DIALOG_DATA) public data: AccountDialogEditUserData,
     private readonly dialogRef: MatDialogRef<AccountDialogEditUserComponent>,
     private readonly facade: AccountDialogEditUserComponentFacade
   ) {

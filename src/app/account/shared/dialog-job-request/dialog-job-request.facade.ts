@@ -13,12 +13,13 @@ import { AccountDialogJobRequestForm } from './forms';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountDialogJobRequestComponentState } from './dialog-job-request.state';
 import { trimmedRequired } from '@shared/validators';
-import { filter, switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { JobRequest, JobService } from '@shared/job';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
 import { Media } from '@shared/media';
+import { concatLatestFrom } from '@ngrx/effects';
 
 @Injectable()
 export class AccountDialogJobRequestComponentFacade {
@@ -138,11 +139,11 @@ export class AccountDialogJobRequestComponentFacade {
   private registerCreateRequestEffect(): void {
     this.createRequestEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
+        concatLatestFrom(() => [
           this.formState$,
           this.attachments$,
           this.siteID$
-        ),
+        ]),
         filter(([_, formState]) => formState.isValid),
         switchMap(([_, formState, attachments, siteID]) => {
           this.updateIsSendingRequest(true);

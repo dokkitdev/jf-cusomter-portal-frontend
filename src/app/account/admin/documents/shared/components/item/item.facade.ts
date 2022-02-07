@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
-import { DialogConfirmationComponent } from '@shared/dialog-confirmation';
+import { DialogConfirmationComponent, DialogConfirmationConfig } from '@shared/dialog-confirmation';
 import { DocumentService } from '@shared/document';
 import { FileService } from '@shared/file';
 import { Media, MediaService } from '@shared/media';
@@ -69,13 +69,13 @@ export class AccountAdminDocumentsItemComponentFacade {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
         map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: {
+          data: new DialogConfirmationConfig({
             title: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
             text: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
             cancelButtonText: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
             confirmButtonText: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
             resultData: id
-          }
+          })
         })),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {

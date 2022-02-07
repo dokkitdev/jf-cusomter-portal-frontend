@@ -6,7 +6,7 @@ import { DialogService } from '@shared/dialog';
 import { orderBy } from 'lodash';
 import { Observable, Subject } from 'rxjs';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
-import { AccountDialogEditContactComponent } from '../dialog-edit-contact';
+import { AccountDialogEditContactComponent, AccountDialogEditContactData } from '../dialog-edit-contact';
 import { AccountDialogEditContactActions } from '../dialog-edit-contact/store';
 import { AccountSiteContactsQueryParameters } from './models';
 import { AccountSiteContactsComponentState } from './site-contacts.state';
@@ -106,7 +106,7 @@ export class AccountSiteContactsComponentFacade {
         ),
         map(([_, siteID]) => this.dialogService.open(AccountDialogEditContactComponent, {
           autoFocus: false,
-          data: { siteID }
+          data: new AccountDialogEditContactData({ siteID })
         }))
       )
     );

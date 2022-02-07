@@ -7,7 +7,7 @@ import { AccountLeftSidebarPageState } from './left-sidebar.state';
 import { NavigationEnd, Router, Event } from '@angular/router';
 import { AuthService } from '@shared/auth';
 import { DialogService } from '@shared/dialog';
-import { DialogConfirmationComponent } from '@shared/dialog-confirmation';
+import { DialogConfirmationComponent, DialogConfirmationConfig } from '@shared/dialog-confirmation';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
@@ -88,9 +88,9 @@ export class AccountLeftSidebarFacade {
     this.logoutEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
       origin$.pipe(
         map(() => this.dialogService.open(DialogConfirmationComponent, {
-          data: {
+          data: new DialogConfirmationConfig({
             title: this.translateService.instant('ACCOUNT.SIDEBAR.DIALOG_LOGOUT.TEXT_TITLE')
-          }
+          })
         })),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {

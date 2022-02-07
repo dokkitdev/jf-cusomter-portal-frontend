@@ -7,6 +7,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Media } from '@shared/media';
 import { configuration } from '@configurations';
+import { AccountDialogJobRequestData } from './models';
 
 @Component({
   selector: 'account-dialog-job-request',
@@ -24,7 +25,7 @@ export class AccountDialogJobRequestComponent implements OnInit, OnDestroy {
   public maxFileSize: number;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { siteID: number },
+    @Inject(MAT_DIALOG_DATA) public data: AccountDialogJobRequestData,
     private readonly dialogRef: MatDialogRef<AccountDialogJobRequestComponent>,
     private readonly facade: AccountDialogJobRequestComponentFacade
   ) {

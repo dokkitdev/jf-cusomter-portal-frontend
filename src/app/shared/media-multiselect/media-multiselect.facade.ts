@@ -4,7 +4,8 @@ import { Media } from '@shared/media';
 import { ComponentStore } from '@ngrx/component-store';
 import { MediaMultiselectComponentState } from './media-multiselect.state';
 import { cloneDeep } from 'lodash';
-import { tap, withLatestFrom } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { concatLatestFrom } from '@ngrx/effects';
 
 @Injectable()
 export class MediaMultiselectFacade {
@@ -66,9 +67,7 @@ export class MediaMultiselectFacade {
   private registerItemsChangedEffect(): void {
     this.itemsChangedEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.items$
-        ),
+        concatLatestFrom(() => this.items$),
         tap(([_, items]) => this.itemsChanged.next(items))
       )
     );
