@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TableContainerComponent } from './table-container.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoadingSpinnerModule } from '@shared/loading-spinner';
 
 @NgModule({
   declarations: [
@@ -9,7 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    LoadingSpinnerModule
   ],
   exports: [
     TableContainerComponent

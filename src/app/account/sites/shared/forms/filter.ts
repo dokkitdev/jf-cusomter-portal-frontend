@@ -1,5 +1,5 @@
 export class AccountSitesFilterForm {
-  public simproCustomerID: number | undefined;
+  public customerID: number | undefined;
   public name: string;
   public uprn: string;
   public query: string;
@@ -8,7 +8,7 @@ export class AccountSitesFilterForm {
   public hasOpenJobs: boolean | undefined;
 
   constructor() {
-    this.simproCustomerID = undefined;
+    this.customerID = undefined;
     this.name = '';
     this.uprn = '';
     this.query = '';

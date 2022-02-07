@@ -19,6 +19,8 @@ import { AccountSitesItemsComponent } from './shared/components/items/items.comp
 import { AccountSitesItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { AccountSitesFiltersComponent } from './shared/components/filters/filters.component';
 import { AccountCustomerSelectModule } from '../shared/customer-select';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationElementsModule } from '@shared/pagination-elements';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AccountCustomerSelectModule } from '../shared/customer-select';
     FilterSelectTextModule,
     ExistenceSelectModule,
     FilterValuesModule,
-    AccountCustomerSelectModule
+    AccountCustomerSelectModule,
+    NgxPaginationModule,
+    PaginationElementsModule
   ],
   providers: [
     AccountSitesPageFacade,

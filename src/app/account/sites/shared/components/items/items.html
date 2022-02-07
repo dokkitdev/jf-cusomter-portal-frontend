@@ -6,10 +6,20 @@
     <account-sites-items-header></account-sites-items-header>
     <div class="table-content">
       <account-sites-item
-        *ngFor="let item of items; trackByProperty: 'id'"
+        *ngFor="let item of items | paginate: {
+          id: paginationID$ | async,
+          itemsPerPage: perPage$ | async,
+          currentPage: currentPage$ | async,
+          totalItems: totalItems$ | async
+        }; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]>
       </account-sites-item>
     </div>
   </div>
 </table-container>
+<pagination-elements
+  *ngIf="hasPagination$ | async"
+  [paginationId]="paginationID$ | async"
+  (pageChanged)="pageChanged($event)">
+</pagination-elements>

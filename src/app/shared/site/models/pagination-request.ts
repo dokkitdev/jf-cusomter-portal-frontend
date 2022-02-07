@@ -24,8 +24,8 @@ export class SitePaginationRequest extends PaginationRequest {
   @Expose({ name: 'site_id' })
   public siteID?: number;
 
-  @Expose({ name: 'simpro_customer_id' })
-  public simproCustomerID?: number;
+  @Expose({ name: 'customer_ids' })
+  public customerIds?: Array<number>;
 
   @Expose({ name: 'postal_code' })
   public postalCode?: string;
