@@ -268,6 +268,7 @@
       },
       "DIALOG_JOB_REQUEST": {
         "TEXT_TITLE": "Job request",
+        "TEXT_NOTE": "Please contact the call centre directly for all emergency jobs",
         "TEXT_DESCRIPTION": "Description",
         "BUTTON_CANCEL": "Cancel",
         "BUTTON_SEND": "Send",
