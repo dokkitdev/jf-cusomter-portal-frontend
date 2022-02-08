@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AccountDialogEditContactComponent } from '@app/account/shared/dialog-edit-contact';
+import {
+  AccountDialogEditContactComponent,
+  AccountDialogEditContactData
+} from '@app/account/shared/dialog-edit-contact';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
-import { DialogConfirmationComponent } from '@shared/dialog-confirmation';
+import { DialogConfirmationComponent, DialogConfirmationConfig } from '@shared/dialog-confirmation';
 import { Contact, ContactService } from '@shared/contact';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { exhaustMap, map, switchMap } from 'rxjs/operators';
@@ -60,7 +63,7 @@ export class AccountSiteContactsItemComponentFacade {
       origin$.pipe(
         map((contact) => this.dialogService.open(AccountDialogEditContactComponent, {
           autoFocus: false,
-          data: { isEditMode: true, siteID: contact.siteID, contact }
+          data: new AccountDialogEditContactData({ isEditMode: true, siteID: contact.siteID, contact })
         }))
       )
     );
@@ -70,13 +73,13 @@ export class AccountSiteContactsItemComponentFacade {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
         map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: {
+          data: new DialogConfirmationConfig({
             title: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
             text: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
             cancelButtonText: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
             confirmButtonText: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
             resultData: id
-          }
+          })
         })),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {

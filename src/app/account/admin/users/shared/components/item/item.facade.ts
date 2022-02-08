@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
-import { DialogConfirmationComponent } from '@shared/dialog-confirmation';
+import { DialogConfirmationComponent, DialogConfirmationConfig } from '@shared/dialog-confirmation';
 import { User, UserService } from '@shared/user';
 import { NotificationService } from '@shared/notification';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { exhaustMap, map, switchMap } from 'rxjs/operators';
 import { AccountAdminUsersItemComponentState } from './item.state';
-import { AccountDialogEditUserComponent } from '@app/account/shared/dialog-edit-user';
+import {
+  AccountDialogEditUserComponent,
+  AccountDialogEditUserData
+} from '@app/account/shared/dialog-edit-user';
 
 @Injectable()
 export class AccountAdminUsersItemComponentFacade {
@@ -66,7 +69,7 @@ export class AccountAdminUsersItemComponentFacade {
       origin$.pipe(
         map((user) => this.dialogService.open(AccountDialogEditUserComponent, {
           autoFocus: false,
-          data: { isEditMode: true, user }
+          data: new AccountDialogEditUserData({ isEditMode: true, user })
         }))
       )
     );
@@ -107,13 +110,13 @@ export class AccountAdminUsersItemComponentFacade {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
         map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: {
+          data: new DialogConfirmationConfig({
             title: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
             text: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
             cancelButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
             confirmButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
             resultData: id
-          }
+          })
         })),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {

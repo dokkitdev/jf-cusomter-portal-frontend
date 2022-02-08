@@ -20,6 +20,7 @@ import { NotificationModule } from '@shared/notification';
 import { NavigationModule } from '@shared/navigation';
 import { ButtonModule } from '@shared/button';
 import { AccountSiteContactsModule } from '@app/account/shared/site-contacts';
+import { AccountDialogJobRequestModule } from '@app/account/shared/dialog-job-request';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AccountSiteContactsModule } from '@app/account/shared/site-contacts';
     NotificationModule,
     NavigationModule,
     ButtonModule,
-    AccountSiteContactsModule
+    AccountSiteContactsModule,
+    AccountDialogJobRequestModule
   ],
   providers: [
     AccountSitesViewPageFacade,

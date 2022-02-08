@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { NgrxRadioViewAdapter, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter, FormControlState, FormControlValueTypes, Actions } from 'ngrx-forms';
+import { Component, forwardRef, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter, FormControlState, FormControlValueTypes, Actions } from 'ngrx-forms';
 
 @Component({
   selector: 'form-radio',
   templateUrl: 'form-radio.html',
   styleUrls: ['form-radio.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{
     provide: NGRX_FORM_VIEW_ADAPTER,
     useExisting: forwardRef(() => NgrxDefaultViewAdapter),

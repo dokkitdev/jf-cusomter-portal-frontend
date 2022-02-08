@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'pagination-elements',
   templateUrl: 'pagination-elements.html',
-  styleUrls: ['pagination-elements.scss']
+  styleUrls: ['pagination-elements.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationElementsComponent {
   @Input() paginationId: number;

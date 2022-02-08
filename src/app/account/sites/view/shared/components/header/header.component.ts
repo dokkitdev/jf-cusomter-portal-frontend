@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Site } from '@shared/site';
+import { User } from '@shared/user';
 import { Observable } from 'rxjs';
 import { AccountSitesViewPageFacade } from '../../../view.facade';
 
@@ -11,11 +12,17 @@ import { AccountSitesViewPageFacade } from '../../../view.facade';
 })
 export class AccountSitesViewHeaderComponent {
   public site$: Observable<Site>;
+  public profile$: Observable<User>;
 
   constructor(
     private facade: AccountSitesViewPageFacade
   ) {
     this.site$ = this.facade.site$;
+    this.profile$ = this.facade.profile$;
+  }
+
+  public sendJobRequestClicked(): void {
+    this.facade.openJobRequestDialog();
   }
 
   public backClicked(): void {

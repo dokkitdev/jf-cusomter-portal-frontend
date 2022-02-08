@@ -1,0 +1,35 @@
+<div class="form-group">
+  <label *ngIf="label" class="form-label">{{ label }}</label>
+  <ng-container *ngrxLet="items$; let items">
+    <div class="imageuploader multiuploader">
+      <div
+        [multiple]="true"
+        [accept]="acceptingFiles"
+        [disabled]="isDisabled"
+        [maxFileSize]="maxFileSize"
+        (change)="filesSelected($event)"
+        class="imageuploader-area multiuploader-area"
+        ngx-dropzone>
+      </div>
+      <div class="multiuploader-content">
+        <div *ngIf="!items.length" class="imageuploader-placeholder">
+          <span class="imageuploader-icon"></span>
+          <span>{{ placeholder || ('SHARED.MEDIA_MULTISELECT.TEXT_PLACEHOLDER' | translate) }}</span>
+        </div>
+        <div *ngIf="items.length" class="multiuploader-items">
+          <media-multiselect-item
+            *ngFor="let item of items; let i = index; trackByProperty"
+            [item]="item"
+            (removeFile)="removeFileClicked(i)">
+          </media-multiselect-item>
+        </div>
+      </div>
+    </div>
+    <div class="imageuploader-info">
+      <span>{{ extensionRequirements }}</span>
+      <span *ngIf="maxFileSize">
+        {{ 'SHARED.MEDIA_MULTISELECT.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: { base: fileSizeBase } } }}
+      </span>
+    </div>
+  </ng-container>
+</div>

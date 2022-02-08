@@ -1,10 +1,11 @@
 import { SpinnerDiameter } from '@shared/loading-spinner';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'table-container',
   templateUrl: 'table-container.html',
-  styleUrls: ['table-container.scss']
+  styleUrls: ['table-container.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableContainerComponent {
   @Input() isLoading: boolean;
