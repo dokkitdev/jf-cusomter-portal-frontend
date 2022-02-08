@@ -28,7 +28,7 @@
     <div class="imageuploader-info">
       <span>{{ extensionRequirements }}</span>
       <span *ngIf="maxFileSize">
-        {{ 'SHARED.MEDIA_MULTISELECT.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: { base: fileSizeBase } } }}
+        {{ 'SHARED.MEDIA_MULTISELECT.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: fileSizeConfigs } }}
       </span>
     </div>
   </ng-container>

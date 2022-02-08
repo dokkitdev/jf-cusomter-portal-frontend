@@ -13,6 +13,7 @@ import { Media } from '@shared/media';
 import { Observable, Subject } from 'rxjs';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+import { FileSizeConfigs } from '@shared/file-size';
 
 @Component({
   selector: 'media-multiselect',
@@ -51,7 +52,7 @@ export class MediaMultiselectComponent implements OnDestroy {
   }
 
   public items$: Observable<Array<Media>>;
-  public fileSizeBase: number;
+  public fileSizeConfigs: FileSizeConfigs;
 
   constructor(
     private facade: MediaMultiselectFacade
@@ -59,7 +60,7 @@ export class MediaMultiselectComponent implements OnDestroy {
     this.itemsChanged = this.facade.itemsChanged;
     this.items$ = this.facade.items$;
     this.allowedFileExtensions = configuration.allowedFileExtensions.default;
-    this.fileSizeBase = configuration.fileSize.base;
+    this.fileSizeConfigs = configuration.fileSize;
   }
 
   public ngOnDestroy(): void {
