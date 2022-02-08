@@ -45,23 +45,19 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   @Output() startUploading: EventEmitter<void>;
   @Output() endUploading: EventEmitter<void>;
 
-  public progress$: Observable<number>;
-  public isUploading$: Observable<boolean>;
-  public image$: Observable<Media>;
-  public spinnerDiameter: typeof SpinnerDiameter;
-  public fileSizeConfigs: FileSizeConfigs;
-
   public get acceptingFiles(): string {
     return this.allowedFileExtensions.join(',');
   }
 
   public get extensionRequirements(): string {
-    return this.allowedFileExtensions.map((item) => {
-      const [, extension] = item.split('/');
-
-      return `.${extension.toUpperCase()}`;
-    }).join(', ');
+    return this.allowedFileExtensions.join(', ').toUpperCase();
   }
+
+  public progress$: Observable<number>;
+  public isUploading$: Observable<boolean>;
+  public image$: Observable<Media>;
+  public spinnerDiameter: typeof SpinnerDiameter;
+  public fileSizeConfigs: FileSizeConfigs;
 
   constructor(
     private facade: ImageUploaderFacade
