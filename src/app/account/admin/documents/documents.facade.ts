@@ -41,6 +41,10 @@ export class AccountAdminDocumentsPageFacade {
     return this.componentStore.select((state) => state.totalItems);
   }
 
+  public get hasPagination$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.totalItems > 0);
+  }
+
   public get paginationId$(): Observable<string> {
     return this.componentStore.select((state) => state.paginationId);
   }
