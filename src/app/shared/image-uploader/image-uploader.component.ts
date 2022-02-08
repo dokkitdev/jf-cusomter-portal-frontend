@@ -17,6 +17,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 import { ValidationMessages } from '@shared/validation-errors';
+import { FileSizeConfigs } from '@shared/file-size';
 
 @Component({
   selector: 'image-uploader',
@@ -48,7 +49,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   public isUploading$: Observable<boolean>;
   public image$: Observable<Media>;
   public spinnerDiameter: typeof SpinnerDiameter;
-  public fileSizeBase: number;
+  public fileSizeConfigs: FileSizeConfigs;
 
   public get acceptingFiles(): string {
     return this.allowedFileExtensions.join(',');
@@ -73,7 +74,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
     this.isUploading$ = this.facade.isUploading$;
     this.image$ = this.facade.image$;
     this.allowedFileExtensions = configuration.allowedFileExtensions.default;
-    this.fileSizeBase = configuration.fileSize.base;
+    this.fileSizeConfigs = configuration.fileSize;
   }
 
   public ngOnInit(): void {

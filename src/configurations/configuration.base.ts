@@ -66,7 +66,11 @@ export const initConfiguration = (configuration: any): any =>
       jobAttachment: 10485760
     },
     fileSize: {
-      base: 2
+      base: 2,
+      symbols: {
+        KiB: 'KB',
+        MiB: 'MB'
+      }
     },
     countdownProgressbar: {
       radius: 12,
