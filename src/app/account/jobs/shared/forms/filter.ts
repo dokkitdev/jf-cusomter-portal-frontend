@@ -1,4 +1,4 @@
-import { JobStage, JobStatus } from '@shared/job';
+import { JobStage } from '@shared/job';
 import { box, Boxed } from 'ngrx-forms';
 
 export class AccountJobsFilterForm {
@@ -8,7 +8,7 @@ export class AccountJobsFilterForm {
   public postalCode: string;
   public costCenterName: Boxed<Array<string>>;
   public stage: Boxed<Array<JobStage>>;
-  public jobStatus: Boxed<Array<JobStatus>>;
+  public jobStatus: Boxed<Array<string>>;
   public appointmentFrom: string;
   public appointmentTo: string;
   public startTimeFrom: string;

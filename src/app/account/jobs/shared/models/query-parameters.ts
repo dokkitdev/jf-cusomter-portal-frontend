@@ -1,4 +1,4 @@
-import { JobSortField, JobStage, JobStatus } from '@shared/job';
+import { JobSortField, JobStage } from '@shared/job';
 
 export class AccountJobsQueryParameters {
   public page: number;
@@ -11,7 +11,7 @@ export class AccountJobsQueryParameters {
   public postalCode: string;
   public costCenterName: Array<string>;
   public stage: Array<JobStage>;
-  public jobStatus: Array<JobStatus>;
+  public jobStatus: Array<string>;
   public appointmentFrom: string;
   public appointmentTo: string;
   public startTimeFrom: string;

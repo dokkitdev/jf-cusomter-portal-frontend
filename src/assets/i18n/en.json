@@ -349,6 +349,9 @@
       "TEXT_NO_ITEMS": "No items",
       "TEXT_SEARCH": "Search..."
     },
+    "MULTISELECT": {
+      "TEXT_NO_ITEMS": "No items"
+    },
     "EXISTENCE_SELECT": {
       "TEXT_YES": "Yes",
       "TEXT_NO": "No"

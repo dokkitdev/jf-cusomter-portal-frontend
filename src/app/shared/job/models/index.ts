@@ -4,5 +4,6 @@ export * from './filters';
 export * from './job';
 export * from './pagination-request';
 export * from './priority';
-export * from './schedule';
 export * from './request';
+export * from './schedule';
+export * from './status';

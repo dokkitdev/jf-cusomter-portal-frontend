@@ -1,0 +1,25 @@
+<ng-template
+  #defaultTemplate
+  let-option="option"
+  let-isSelected="isSelected"
+  let-optionClicked="optionClicked">
+  <a
+    (click)="optionClicked(option)"
+    [title]="option.title || ''"
+    data-testid="dropdown-item"
+    class="dropdown-item">
+    <span class="checkbox">
+      <input [checked]="isSelected" type="checkbox">
+      <span class="checkbox-icon"></span>
+      <span class="checkbox-title">{{ option.title }}</span>
+    </span>
+  </a>
+</ng-template>
+<ng-template
+  [ngTemplateOutlet]="customTemplate || defaultTemplate"
+  [ngTemplateOutletContext]="{
+    option: option,
+    isSelected: isSelected,
+    optionClicked: optionClicked.bind(this)
+  }">
+</ng-template>

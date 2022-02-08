@@ -5,7 +5,7 @@ import { Site } from '@shared/site';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { DateTime } from 'luxon';
 import { JobAttachment } from './attachment';
-import { JobStage, JobStatus } from '../enums';
+import { JobStage } from '../enums';
 
 export class Job {
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -27,7 +27,7 @@ export class Job {
   public jobID: number;
 
   @Expose({ name: 'job_status', groups: [ClassGroup.MAIN] })
-  public jobStatus: JobStatus;
+  public jobStatus: string;
 
   @Expose({ groups: [ClassGroup.MAIN] })
   public priority: string;

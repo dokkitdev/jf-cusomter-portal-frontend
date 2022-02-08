@@ -2,9 +2,9 @@ import { ApiService } from '@ronas-it/angular-common';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { classToPlain, plainToClassFromExist } from 'class-transformer';
+import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { Job, JobFilters, JobPaginationRequest, JobRequest } from './models';
+import { Job, JobCostCenter, JobFilters, JobPaginationRequest, JobRequest, JobStatus } from './models';
 import { HttpResponse } from '@angular/common/http';
 import { JobSortField } from './enums';
 import { JobCountRelationType, JobRelationType } from './types';
@@ -38,6 +38,22 @@ export class JobService {
         map((response) => plainToClassFromExist(
           new PaginationResponse<Job>(Job), response, { groups: [ClassGroup.MAIN] })
         )
+      );
+  }
+
+  public getCostCenters(): Observable<Array<JobCostCenter>> {
+    return this.apiService
+      .get(`${this.endpoint}/cost-centers`)
+      .pipe(
+        map((response) => plainToClass(JobCostCenter, response, { groups: [ClassGroup.MAIN] }))
+      );
+  }
+
+  public getStatuses(): Observable<Array<JobStatus>> {
+    return this.apiService
+      .get(`${this.endpoint}/statuses`)
+      .pipe(
+        map((response) => plainToClass(JobStatus, response, { groups: [ClassGroup.MAIN] }))
       );
   }
 
