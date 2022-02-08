@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { concatLatestFrom } from '@ngrx/effects';
 import {
   SetValueAction,
   MarkAsDirtyAction,
@@ -9,7 +10,7 @@ import {
   formStateReducer
 } from 'ngrx-forms';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, skip, tap, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, skip, tap } from 'rxjs/operators';
 import { CustomSelectComponentState } from './custom-select.state';
 import { CustomSelectOption } from './models';
 
@@ -114,9 +115,7 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
   private registerChangeOptionEffect(): void {
     this.changeOptionEffect$ = this.componentStore.effect((origin$: Observable<T>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.controlState$
-        ),
+        concatLatestFrom(() => this.controlState$),
         tap(([optionValue, controlState]) => {
           this.controlStateActionTriggered.next(
             new SetValueAction(controlState.id, optionValue)

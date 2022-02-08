@@ -1,2 +1,2 @@
-export * from './relation';
 export * from './count-relation';
+export * from './relation';

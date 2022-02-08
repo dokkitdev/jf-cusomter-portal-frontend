@@ -17,11 +17,11 @@ import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
 import { FilterSelectTextModule } from '@shared/filter-select-text';
 import { AccountCustomerSelectModule } from '../shared/customer-select';
-// import { AccountSiteSelectModule } from '../shared/site-select';
-// import { AccountJobStageMultiselectModule } from '../shared/job-stage-multiselect';
-// import { AccountJobStatusMultiselectModule } from '../shared/job-status-multiselect';
+import { AccountSiteSelectModule } from '../shared/site-select';
+import { AccountJobStageMultiselectModule } from '../shared/job-stage-multiselect';
+import { AccountJobStatusMultiselectModule } from '../shared/job-status-multiselect';
 import { FormDatepickerModule } from '@shared/form-datepicker';
-// import { FormTimepickerModule } from '@shared/form-timepicker';
+import { FormTimepickerModule } from '@shared/form-timepicker';
 import { SnakeModule } from '@shared/snake';
 import { AccountCostCenterMultiselectModule } from '../shared/cost-center-multiselect';
 import { FilterValuesModule } from '@shared/filter-values';
@@ -46,11 +46,11 @@ import { FilterValuesModule } from '@shared/filter-values';
     TableContainerModule,
     FilterSelectTextModule,
     AccountCustomerSelectModule,
-    // AccountSiteSelectModule,
-    // AccountJobStageMultiselectModule,
-    // AccountJobStatusMultiselectModule,
+    AccountSiteSelectModule,
+    AccountJobStageMultiselectModule,
+    AccountJobStatusMultiselectModule,
     FormDatepickerModule,
-    // FormTimepickerModule,
+    FormTimepickerModule,
     SnakeModule,
     AccountCostCenterMultiselectModule,
     FilterValuesModule
