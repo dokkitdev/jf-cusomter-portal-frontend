@@ -1,0 +1,17 @@
+<div class="form-group form-group-timepicker">
+  <input
+    [ngrxFormControlState]="controlState"
+    [ngxTimepicker]="timepicker"
+    [placeholder]="placeholder"
+    [format]="24"
+    (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+    class="form-control"
+    readonly>
+  <span class="form-group-timepicker-icon"></span>
+  <ngx-material-timepicker [theme]="theme" #timepicker></ngx-material-timepicker>
+  <validation-errors
+    *ngIf="controlState.isSubmitted && controlState.isInvalid"
+    [controlErrors]="controlState.errors"
+    [messages]="validationMessages">
+  </validation-errors>
+</div>

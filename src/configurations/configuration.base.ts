@@ -44,6 +44,11 @@ export const initConfiguration = (configuration: any): any =>
         }
       }
     },
+    timepickerTheme: {
+      container: { buttonColor: '#35a9e1' },
+      dial: { dialBackgroundColor: '#35a9e1' },
+      clockFace: { clockHandColor: '#35a9e1' }
+    },
     dialog: {
       panelClass: 'dialog-panel',
       disableClose: true
