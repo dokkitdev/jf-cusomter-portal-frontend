@@ -1,0 +1,17 @@
+<div class="form-group">
+  <custom-select
+    [controlState]="controlState$ | async"
+    [options]="options$ | async"
+    [isLoading]="isLoading$ | async"
+    [hasScroll]="true"
+    [hasFilter]="true"
+    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+    [hasNextItems]="hasNextItems$ | async"
+    [validationMessages]="validationMessages"
+    (loadNextPage)="loadNextPageClicked()"
+    (filterChanged)="filterChanged($event)"
+    (selectedOptionChanged)="selectedOptionChanged($event)"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    placeholder="{{ placeholder || 'ACCOUNT.SHARED.SITE_SELECT.TEXT_PLACEHOLDER' | translate }}">
+  </custom-select>
+</div>
