@@ -203,12 +203,16 @@ export class AccountDialogEditUserComponentFacade {
 
           const omittedFields = keys(pickBy({
             email: user.email === formState.value.email,
-            customerIDs: formState.value.roleID !== UserRole.CUSTOMER
+            customerIDs: formState.value.roleID !== UserRole.CUSTOMER,
+            isNotSendEmail: true
           }));
           const changedUser = new User({
             id: user.id,
-            ...omit(formState.value, omittedFields)
+            ...omit(formState.value, omittedFields),
+            isSendEmail: !formState.value.isNotSendEmail
           });
+
+          console.log(changedUser);
 
           return (isEditMode)
             ? this.tryToUpdateUser(changedUser)
