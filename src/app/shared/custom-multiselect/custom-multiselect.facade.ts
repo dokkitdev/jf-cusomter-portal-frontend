@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { concatLatestFrom } from '@ngrx/effects';
 import { CustomSelectOption } from '@shared/custom-select';
 import { xor } from 'lodash';
 import {
@@ -12,7 +13,7 @@ import {
   box
 } from 'ngrx-forms';
 import { Observable, Subject } from 'rxjs';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CustomMultiselectComponentState } from './custom-multiselect.state';
 
 @Injectable()
@@ -87,9 +88,7 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
   private registerChangeOptionEffect(): void {
     this.changeOptionEffect$ = this.componentStore.effect((origin$: Observable<T>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.controlState$
-        ),
+        concatLatestFrom(() => this.controlState$),
         tap(([optionValue, controlState]) => {
           const value = unbox(controlState.value);
           const options = xor(value, [optionValue]);
