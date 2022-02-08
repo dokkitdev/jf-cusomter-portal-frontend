@@ -1,0 +1,6 @@
+<ng-template #defaultTemplate>
+  <div class="dropdown-item not-found">
+    {{ 'SHARED.MULTISELECT.TEXT_NO_ITEMS' | translate }}
+  </div>
+</ng-template>
+<ng-template [ngTemplateOutlet]="customTemplate || defaultTemplate"></ng-template>

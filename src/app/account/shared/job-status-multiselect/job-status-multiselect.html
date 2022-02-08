@@ -1,0 +1,11 @@
+<div class="form-group">
+  <custom-multiselect
+    [controlState]="controlState"
+    [options]="options$ | async"
+    [isLoading]="isLoading$ | async"
+    [placeholder]="placeholder"
+    [hasScroll]="true"
+    [validationMessages]="validationMessages"
+    (controlStateActionTriggered)="controlStateActionTriggered.next($event)">
+  </custom-multiselect>
+</div>
