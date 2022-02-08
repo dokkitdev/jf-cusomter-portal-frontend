@@ -321,6 +321,9 @@
       "TEXT_NO_ITEMS": "No items",
       "TEXT_SEARCH": "Search..."
     },
+    "MULTISELECT": {
+      "TEXT_NO_ITEMS": "No items"
+    },
     "EXISTENCE_SELECT": {
       "TEXT_YES": "Yes",
       "TEXT_NO": "No"
@@ -342,6 +345,13 @@
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
+    },
+    "JOB_STAGE": {
+      "TEXT_PENDING": "Pending",
+      "TEXT_PROGRESS": "Progress",
+      "TEXT_COMPLETE": "Complete",
+      "TEXT_ARCHIVED": "Archived",
+      "TEXT_INVOICED": "Invoiced"
     }
   }
 }
