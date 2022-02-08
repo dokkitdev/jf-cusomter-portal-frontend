@@ -212,8 +212,6 @@ export class AccountDialogEditUserComponentFacade {
             isSendEmail: !formState.value.isNotSendEmail
           });
 
-          console.log(changedUser);
-
           return (isEditMode)
             ? this.tryToUpdateUser(changedUser)
             : this.tryToCreateUser(changedUser);
