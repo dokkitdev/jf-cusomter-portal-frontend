@@ -18,6 +18,7 @@ export class AccountDocumentsItemsComponent {
   public currentPage$: Observable<number>;
   public totalItems$: Observable<number>;
   public paginationId$: Observable<string>;
+  public hasPagination$: Observable<boolean>;
 
   constructor(
     private facade: AccountDocumentsPageFacade
@@ -28,6 +29,7 @@ export class AccountDocumentsItemsComponent {
     this.currentPage$ = this.facade.currentPage$;
     this.totalItems$ = this.facade.totalItems$;
     this.paginationId$ = this.facade.paginationId$;
+    this.hasPagination$ = this.facade.hasPagination$;
   }
 
   public pageChanged(page: number): void {
