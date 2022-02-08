@@ -1,4 +1,3 @@
-
 import { Expose } from 'class-transformer';
 import { PaginationRequest } from '@shared/pagination';
 import { JobSortField, JobStage } from '../enums';
