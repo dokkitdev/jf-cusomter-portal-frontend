@@ -220,10 +220,10 @@ export class AccountSitesViewPageFacade {
             county: setValue(site.county || ''),
             primaryContactID: setValue(site.primaryContact?.id),
             customerName: (control) => setValue(control,
-              (site.firstCustomer)
+              (site.customer)
                 ? this.translateService.instant('ACCOUNT.SITES.VIEW.TEXT_CUSTOMER_NAME', {
-                  name: site.firstCustomer.name,
-                  id: site.firstCustomer.customerID
+                  name: site.customer.name,
+                  id: site.customer.customerID
                 }) as string
                 : ''
             )
