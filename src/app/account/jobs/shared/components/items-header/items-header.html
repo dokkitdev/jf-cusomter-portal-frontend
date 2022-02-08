@@ -1,0 +1,45 @@
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell jobs-icon"></div>
+    <div class="table-cell jobs-title">
+      <header-sort [orderBy]="jobSortField.JOB_ID" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_JOB' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-name">
+      <header-sort [orderBy]="jobSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_NAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-customer">
+      <header-sort [orderBy]="jobSortField.CUSTOMER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-site">
+      <header-sort [orderBy]="jobSortField.SITE_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-cost">
+      <header-sort [orderBy]="jobSortField.COST_CENTER" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COST_CENTER' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-stage">
+      <header-sort [orderBy]="jobSortField.STAGE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_STAGE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-status">
+      <header-sort [orderBy]="jobSortField.STATUS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_STATUS' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-appointment">
+      <header-sort [orderBy]="jobSortField.APPOINTMENT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_APPOINTMENT' | translate }}
+      </header-sort>
+    </div>
+  </div>
+</div>

@@ -69,6 +69,34 @@
         "TEXT_TITLE": "Log out?"
       }
     },
+    "JOBS": {
+      "TEXT_PAGE_TITLE": "Jobs",
+      "TEXT_CREATED": "Created",
+      "ITEMS_HEADER": {
+        "TEXT_JOB": "Job ID",
+        "TEXT_NAME": "Job Name",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_COST_CENTER": "Cost Center",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_REQUEST": "Request",
+        "TEXT_APPOINTMENT": "Appointment"
+      },
+      "FILTERS": {
+        "TEXT_ID": "ID",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COST_CENTER": "Cost Center",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_APPOINTMENT_FROM": "Appointment From",
+        "TEXT_APPOINTMENT_TO": "Appointment To",
+        "TEXT_SCHEDULED_AFTER": "Scheduled After",
+        "TEXT_SCHEDULED_BEFORE": "Scheduled Before"
+      }
+    },
     "SITES": {
       "TEXT_PAGE_TITLE": "Sites",
       "ITEMS_HEADER": {
@@ -342,6 +370,13 @@
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
+    },
+    "JOB_STAGE": {
+      "TEXT_PENDING": "Pending",
+      "TEXT_PROGRESS": "Progress",
+      "TEXT_COMPLETE": "Complete",
+      "TEXT_ARCHIVED": "Archived",
+      "TEXT_INVOICED": "Invoiced"
     }
   }
 }

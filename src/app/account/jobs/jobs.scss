@@ -1,0 +1,33 @@
+@import 'vars';
+
+:host ::ng-deep .jobs {
+  &-icon {flex: 0 0 35px; min-width: 35px;
+    &-action {position: relative; top: -6px; opacity: 0.6;
+      &:hover {opacity: 1;}
+    }
+  }
+  &-description {flex: 0 0 135px; min-width: 135px; font-size: $small; font-weight: 600;}
+  &-title {flex: 0 0 135px; min-width: 135px;
+    &-created {color: $gray; font-size: $small;}
+  }
+  &-name {flex: 1 1 160px; min-width: 160px;}
+  &-customer {flex: 1 1 160px; min-width: 160px;}
+  &-site {flex: 1 1 160px; min-width: 160px;}
+  &-cost {flex: 1 1 135px; min-width: 135px;}
+  // &-business {flex: 1 1 100px; min-width: 100px;}
+  &-stage {flex: 1 1 90px; min-width: 90px;}
+  &-status {flex: 1 1 160px; min-width: 160px;}
+  &-appointment {flex: 1 1 95px; min-width: 95px;
+    &-date {margin-bottom: 4px;}
+  }
+  &-filters {margin-bottom: 28px;
+    .form-group {margin-bottom: 4px;}
+  }
+  .table-cell .loading-spinner {margin: 0 auto;}
+  .form-group-timepicker {max-width: 130px;}
+  .badge {
+    &-progress {background-color: $light-green;}
+    &-complete {background-color: $light-yellow;}
+    &-archived {background-color: $light-red;}
+  }
+}

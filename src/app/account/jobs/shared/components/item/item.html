@@ -1,0 +1,64 @@
+<ng-container *ngrxLet="isDescriptionOpened$; let isDescriptionOpened">
+  <div class="table-row">
+    <div class="table-cell jobs-icon">
+      <a (click)="toggleDescriptionClicked()" class="jobs-icon-action">
+        <span [ngClass]="{ 'accordionplus-opened': isDescriptionOpened }" class="accordionplus"></span>
+      </a>
+    </div>
+    <div class="table-cell jobs-title">
+      <a [routerLink]="['/account/jobs', item.id]">{{ item.jobID }}</a>
+      <div class="jobs-title-created">
+        {{ 'ACCOUNT.JOBS.TEXT_CREATED' | translate }} {{ item.dateCreated | date: dateFormat }}
+      </div>
+    </div>
+    <div class="table-cell jobs-name">{{ item.name }}</div>
+    <div class="table-cell jobs-customer">{{ item.simproCustomer?.name }}</div>
+    <div class="table-cell jobs-site">
+      <div>{{ item.simproSite?.name }}</div>
+      <div>{{ item.simproSite?.postalCode }}</div>
+    </div>
+    <div class="table-cell jobs-cost">{{ item.costCenterName }}</div>
+    <div class="table-cell jobs-stage">
+      <span
+        *ngIf="item.jobStatus"
+        [ngClass]="{
+          'badge-archived': item.isArchived,
+          'badge-complete': item.isCompleted,
+          'badge-progress': item.isInProgress
+        }"
+        class="badge">
+        {{ 'SHARED.JOB_STAGE.TEXT_' + item.stage | uppercase | translate }}
+      </span>
+    </div>
+    <div class="table-cell jobs-status">
+      <span
+        *ngIf="item.jobStatus"
+        [ngClass]="{
+          'badge-archived': item.isArchived,
+          'badge-complete': item.isCompleted,
+          'badge-progress': item.isInProgress
+        }"
+        class="badge">
+        {{ item.jobStatus }}
+      </span>
+    </div>
+    <div class="table-cell jobs-appointment">
+      <ng-container *ngIf="item.recentSchedule">
+        <div class="jobs-appointment-date">{{ item.recentSchedule.date | date: dateFormat }}</div>
+        <div>
+          {{ item.recentSchedule.startTime | date: timeFormat }}-{{ item.recentSchedule.endTime | date: timeFormat }}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div
+    *ngIf="isDescriptionOpened"
+    [@heightCollapse]
+    class="table-row table-row-small">
+    <div class="table-cell jobs-icon"></div>
+    <div class="table-cell jobs-description">{{ 'ACCOUNT.QUOTES.TEXT_DESCRIPTION' | translate }}</div>
+    <div class="table-cell">
+      <span [innerHTML]="description"></span>
+    </div>
+  </div>
+</ng-container>
