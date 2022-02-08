@@ -18,6 +18,7 @@
       </admin-documents-item>
     </div>
     <pagination-elements
+      *ngIf="hasPagination$ | async"
       [paginationId]="paginationId$ | async"
       (pageChanged)="pageChanged($event)"
     >
