@@ -19,7 +19,7 @@ export class AccountSiteContactsItemComponentFacade {
     return this.componentStore.select((store) => store.isSendingRequest);
   }
 
-  public deletingSuccessSubject: Subject<number> = new Subject();
+  public deletingSuccessSubject: Subject<number>;
 
   private openEditContactDialogEffect$: (item: Contact) => Observable<void>;
   private deleteItemEffect$: (id: number) => Observable<void>;
@@ -31,8 +31,9 @@ export class AccountSiteContactsItemComponentFacade {
     private readonly translateService: TranslateService,
     private readonly notificationService: NotificationService
   ) {
-    this.resetState();
+    this.deletingSuccessSubject = new Subject();
 
+    this.resetState();
     this.registerOpenEditContactDialogEffect();
     this.registerDeleteItemEffect();
   }

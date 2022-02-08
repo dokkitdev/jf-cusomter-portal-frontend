@@ -40,17 +40,20 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
     return this.componentStore.select((state) => state.selectedOption);
   }
 
-  public controlStateActionTriggered: Subject<Actions<any>> = new Subject();
-  public selectedOptionChanged: Subject<CustomSelectOption<T> | undefined> = new Subject();
-  public filterChanged: Subject<string> = new Subject();
+  public controlStateActionTriggered: Subject<Actions<any>>;
+  public selectedOptionChanged: Subject<CustomSelectOption<T> | undefined>;
+  public filterChanged: Subject<string>;
 
   private changeOptionEffect$: (optionValue: T) => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<CustomSelectComponentState<T>>
   ) {
-    this.resetState();
+    this.controlStateActionTriggered = new Subject();
+    this.selectedOptionChanged = new Subject();
+    this.filterChanged = new Subject();
 
+    this.resetState();
     this.registerHandleFilterChangesEffect();
     this.registerSetSelectedOptionEffect();
     this.registerChangeOptionEffect();

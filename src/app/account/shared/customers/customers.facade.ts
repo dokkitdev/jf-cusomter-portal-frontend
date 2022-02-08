@@ -16,7 +16,7 @@ export class AccountCustomersComponentFacade {
     return this.componentStore.select((store) => store.excludeCustomerID);
   }
 
-  public controlStateActionTriggered: Subject<Actions<any>> = new Subject();
+  public controlStateActionTriggered: Subject<Actions<any>>;
 
   private addNewItemEffect$: () => Observable<void>;
   private removeItemEffect$: (index: number) => Observable<void>;
@@ -24,8 +24,9 @@ export class AccountCustomersComponentFacade {
   constructor(
     private readonly componentStore: ComponentStore<AccountCustomersComponentState>
   ) {
-    this.resetState();
+    this.controlStateActionTriggered = new Subject();
 
+    this.resetState();
     this.registerAddNewItemEffect();
     this.registerRemoveItemEffect();
   }

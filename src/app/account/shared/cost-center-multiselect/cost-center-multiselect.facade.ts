@@ -28,7 +28,7 @@ export class AccountCostCenterMultiselectComponentFacade {
     );
   }
 
-  public controlStateActionTriggered: Subject<Actions<any>> = new Subject();
+  public controlStateActionTriggered: Subject<Actions<any>>;
 
   private loadItemsEffect$: () => Observable<void>;
 
@@ -36,6 +36,8 @@ export class AccountCostCenterMultiselectComponentFacade {
     private readonly componentStore: ComponentStore<AccountCostCenterMultiselectComponentState>,
     private readonly jobService: JobService
   ) {
+    this.controlStateActionTriggered = new Subject();
+
     this.resetState();
     this.registerLoadItemsEffect();
   }

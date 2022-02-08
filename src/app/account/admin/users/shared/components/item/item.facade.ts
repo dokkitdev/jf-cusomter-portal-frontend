@@ -19,7 +19,7 @@ export class AccountAdminUsersItemComponentFacade {
     return this.componentStore.select((store) => store.isSendingRequest);
   }
 
-  public deletingSuccessSubject: Subject<number> = new Subject();
+  public deletingSuccessSubject: Subject<number>;
 
   private openEditUserDialogEffect$: (item: User) => Observable<void>;
   private resendInvitationEmailEffect$: (item: User) => Observable<void>;
@@ -32,8 +32,9 @@ export class AccountAdminUsersItemComponentFacade {
     private readonly translateService: TranslateService,
     private readonly notificationService: NotificationService
   ) {
-    this.resetState();
+    this.deletingSuccessSubject = new Subject();
 
+    this.resetState();
     this.registerOpenEditUserDialogEffect();
     this.registerResendInvitationEmailEffect();
     this.registerDeleteItemEffect();
