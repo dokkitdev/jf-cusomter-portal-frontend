@@ -24,7 +24,7 @@ export class AccountSitesPageState {
     this.page = 1;
     this.perPage = 15;
     this.orderBy = SiteSortField.NAME;
-    this.relations = ['customers', 'primary_site_contact'];
+    this.relations = ['customer', 'primary_site_contact'];
     this.countRelations = ['open_jobs'];
     this.desc = false;
     this.filterFormState = createFormGroupState('AccountSitesFilterForm', new AccountSitesFilterForm());

@@ -3,7 +3,7 @@ export enum SiteSortField {
   NAME = 'name',
   SITE_ID = 'site_id',
   UPRN = 'uprn',
-  CUSTOMER_NAME = 'simpro_customer.name',
+  CUSTOMER_NAME = 'customer.name',
   ADDRESS = 'address',
   POSTAL_CODE = 'postal_code',
   PRIMARY_CONTACT_NAME = 'primary_site_contact.name',

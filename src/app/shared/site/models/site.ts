@@ -35,7 +35,11 @@ export class Site {
   public openJobsCount?: number;
 
   @Type(() => Customer)
-  @Expose({ name: 'customers', groups: [ClassGroup.MAIN] })
+  @Expose({ groups: [ClassGroup.MAIN] })
+  public customer?: Customer;
+
+  @Type(() => Customer)
+  @Expose({ groups: [ClassGroup.MAIN] })
   public customers?: Array<Customer>;
 
   @Type(() => Contact)
@@ -45,11 +49,6 @@ export class Site {
   @Type(() => Contact)
   @Expose({ name: 'primary_site_contact', groups: [ClassGroup.MAIN] })
   public primaryContact?: Contact;
-
-  @Exclude()
-  public get firstCustomer(): Customer | undefined {
-    return this.customers?.[0];
-  }
 
   constructor(model: Partial<Site> = {}) {
     Object.assign(this, model);
