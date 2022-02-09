@@ -62,7 +62,7 @@ export const initConfiguration = (configuration: any): any =>
       default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.doc', '.docx']
     },
     maxFileSize: {
-      default: 5242880,
+      default: 15728640,
       jobAttachment: 10485760
     },
     fileSize: {
