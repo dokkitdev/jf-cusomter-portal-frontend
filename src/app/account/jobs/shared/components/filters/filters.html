@@ -12,20 +12,27 @@
         type="number"
         name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ID' | translate }}">
       </filter-select-text>
-      <account-customer-select
-        [controlState]="filterFormState.controls.simproCustomerID"
-        [isPermanentlyShowPlaceholder]="true"
-        (selectedCustomerChanged)="selectedCustomerChanged($event)"
+      <filter-select-text
+        [controlState]="filterFormState.controls.orderNo"
+        [min]="1"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_CUSTOMER' | translate }}">
-      </account-customer-select>
-      <account-site-select
-        [controlState]="filterFormState.controls.simproSiteID"
-        [isPermanentlyShowPlaceholder]="true"
-        (selectedSiteChanged)="selectedSiteChanged($event)"
+        type="number"
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ORDER_NO' | translate }}">
+      </filter-select-text>
+      <filter-select-text
+        [controlState]="filterFormState.controls.siteUprn"
+        [min]="1"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE' | translate }}">
-      </account-site-select>
+        type="number"
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_UPRN' | translate }}">
+      </filter-select-text>
+      <filter-select-text
+        [controlState]="filterFormState.controls.siteName"
+        [min]="1"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        type="number"
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_NAME' | translate }}">
+      </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.postalCode"
         (controlStateActionTriggered)="formActionTriggered($event)"
@@ -34,7 +41,7 @@
       <account-cost-center-multiselect
         [controlState]="filterFormState.controls.costCenterName"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_COST_CENTER' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_COST_CENTRE' | translate }}">
       </account-cost-center-multiselect>
       <account-job-stage-multiselect
         [controlState]="filterFormState.controls.stage"
@@ -42,12 +49,6 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_STAGE' | translate }}">
       </account-job-stage-multiselect>
-      <account-job-status-multiselect
-        [controlState]="filterFormState.controls.jobStatus"
-        [isPermanentlyShowPlaceholder]="true"
-        (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_STATUS' | translate }}">
-      </account-job-status-multiselect>
       <form-datepicker
         [controlState]="filterFormState.controls.appointmentFrom"
         [dateFilter]="getStartAppointmentDateFilter$ | async"

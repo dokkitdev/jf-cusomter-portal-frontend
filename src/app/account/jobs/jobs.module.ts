@@ -25,6 +25,8 @@ import { FormTimepickerModule } from '@shared/form-timepicker';
 import { SnakeModule } from '@shared/snake';
 import { AccountCostCenterMultiselectModule } from '../shared/cost-center-multiselect';
 import { FilterValuesModule } from '@shared/filter-values';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PaginationElementsModule } from '@shared/pagination-elements';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { FilterValuesModule } from '@shared/filter-values';
     FormTimepickerModule,
     SnakeModule,
     AccountCostCenterMultiselectModule,
-    FilterValuesModule
+    FilterValuesModule,
+    NgxPaginationModule,
+    PaginationElementsModule
   ],
   providers: [
     AccountJobsPageFacade,

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Customer } from '@shared/customer';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
-import { Job, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
+import { Job, JobCountRelationType, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { PaginationResponse } from '@shared/pagination';
 import { Site } from '@shared/site';
@@ -36,16 +36,28 @@ export class AccountJobsPageFacade {
     return this.componentStore.select((state) => state.isLoading);
   }
 
-  public get isLoadingToPage$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoadingToPage);
-  }
-
-  public get hasMoreItems$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.totalItems > state.items.length);
-  }
-
   public get items$(): Observable<Array<Job>> {
     return this.componentStore.select((state) => state.items);
+  }
+
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get hasPagination$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.totalItems > 0);
+  }
+
+  public get paginationID$(): Observable<string> {
+    return this.componentStore.select((state) => state.paginationID);
   }
 
   public get parameters$(): Observable<AccountJobsQueryParameters> {
@@ -55,13 +67,12 @@ export class AccountJobsPageFacade {
       orderBy: state.orderBy,
       desc: state.desc,
       jobID: state.filterFormState.value.jobID,
-      simproCustomerID: state.filterFormState.value.simproCustomerID,
-      simproSiteID: state.filterFormState.value.simproSiteID,
+      orderNo: state.filterFormState.value.orderNo,
+      siteUprn: state.filterFormState.value.siteUprn,
+      siteName: state.filterFormState.value.siteName,
       postalCode: state.filterFormState.value.postalCode,
       costCenterName: unbox(state.filterFormState.value.costCenterName),
-      // businessGroup: unbox(state.filterFormState.value.businessGroup),
       stage: unbox(state.filterFormState.value.stage),
-      jobStatus: unbox(state.filterFormState.value.jobStatus),
       appointmentFrom: state.filterFormState.value.appointmentFrom,
       appointmentTo: state.filterFormState.value.appointmentTo,
       startTimeFrom: state.filterFormState.value.startTimeFrom,
@@ -71,6 +82,10 @@ export class AccountJobsPageFacade {
 
   public get relations$(): Observable<Array<JobRelationType>> {
     return this.componentStore.select((state) => state.relations);
+  }
+
+  public get countRelations$(): Observable<Array<JobCountRelationType>> {
+    return this.componentStore.select((state) => state.countRelations);
   }
 
   public get filterFormState$(): Observable<FormGroupState<AccountJobsFilterForm>> {
@@ -87,17 +102,16 @@ export class AccountJobsPageFacade {
       .pipe(
         map((filterFormStateValue) => new JobFilters({
           jobID: filterFormStateValue.jobID || undefined,
-          simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
-          simproSiteID: filterFormStateValue.simproSiteID || undefined,
+          orderNo: filterFormStateValue.orderNo || undefined,
+          siteUprn: filterFormStateValue.siteUprn || undefined,
+          siteName: filterFormStateValue.siteName || undefined,
           postalCode: filterFormStateValue.postalCode || undefined,
           costCenterName: (unbox(filterFormStateValue.costCenterName).length) ? unbox(filterFormStateValue.costCenterName) : undefined,
-          // businessGroup: (unbox(filterFormStateValue.businessGroup).length) ? unbox(filterFormStateValue.businessGroup) : undefined,
+          stage: (unbox(filterFormStateValue.stage).length) ? unbox(filterFormStateValue.stage) : undefined,
           appointmentFrom: filterFormStateValue.appointmentFrom || undefined,
           appointmentTo: filterFormStateValue.appointmentTo || undefined,
           startTimeFrom: (filterFormStateValue.startTimeFrom) ? DateTime.fromISO(filterFormStateValue.startTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
-          startTimeTo: (filterFormStateValue.startTimeTo) ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
-          stage: (unbox(filterFormStateValue.stage).length) ? unbox(filterFormStateValue.stage) : undefined,
-          jobStatus: (unbox(filterFormStateValue.jobStatus).length) ? unbox(filterFormStateValue.jobStatus) : undefined
+          startTimeTo: (filterFormStateValue.startTimeTo) ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
         }))
       );
   }
@@ -110,15 +124,14 @@ export class AccountJobsPageFacade {
       if (formState.value.jobID) {
         filterValues.push(this.createFilterValue(formState.controls.jobID));
       }
-      if (formState.value.simproCustomerID && state.selectedCustomer) {
-        filterValues.push(
-          new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
-        );
+      if (formState.value.orderNo) {
+        filterValues.push(this.createFilterValue(formState.controls.postalCode));
       }
-      if (formState.value.simproSiteID && state.selectedSite) {
-        filterValues.push(
-          new FilterValue({ id: formState.controls.simproSiteID.id, value: state.selectedSite.name })
-        );
+      if (formState.value.siteUprn) {
+        filterValues.push(this.createFilterValue(formState.controls.postalCode));
+      }
+      if (formState.value.siteName) {
+        filterValues.push(this.createFilterValue(formState.controls.postalCode));
       }
       if (formState.value.postalCode) {
         filterValues.push(this.createFilterValue(formState.controls.postalCode));
@@ -126,14 +139,8 @@ export class AccountJobsPageFacade {
       unbox(formState.value.costCenterName).forEach((value) =>
         filterValues.push(new FilterValue({ id: formState.controls.costCenterName.id, value }))
       );
-      /* unbox(formState.value.businessGroup).forEach((value) =>
-        filterValues.push(new FilterValue({ id: formState.controls.businessGroup.id, value }))
-      ); */
       unbox(formState.value.stage).forEach((value) =>
         filterValues.push(new FilterValue({ id: formState.controls.stage.id, value, status: this.getJobStageFilterStatus(value) }))
-      );
-      unbox(formState.value.jobStatus).forEach((value) =>
-        filterValues.push(new FilterValue({ id: formState.controls.jobStatus.id, value }))
       );
       if (formState.value.appointmentFrom) {
         filterValues.push(new FilterValue({
@@ -159,9 +166,8 @@ export class AccountJobsPageFacade {
   }
 
   private loadItemsEffect$: () => Observable<void>;
+  private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
-  private loadNextPageEffect$: () => Observable<void>;
-  private loadItemsToPageEffect$: () => Observable<void>;
   private removeFilterEffect$: (filter: FilterValue) => Observable<void>;
 
   constructor(
@@ -172,9 +178,8 @@ export class AccountJobsPageFacade {
     this.resetState();
 
     this.registerLoadItemsEffect();
+    this.registerLoadItemsByPageEffect();
     this.registerLoadItemsByParametersEffect();
-    this.registerLoadNextPageEffect();
-    this.registerLoadItemsToPageEffect();
     this.registerRemoveFilterEffect();
   }
 
@@ -186,16 +191,12 @@ export class AccountJobsPageFacade {
     this.loadItemsEffect$();
   }
 
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
+  }
+
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
-  }
-
-  public loadItemsToPage(): void {
-    this.loadItemsToPageEffect$();
-  }
-
-  public loadNextPage(): void {
-    this.loadNextPageEffect$();
   }
 
   public changeSort(parameters: AccountJobsQueryParameters): void {
@@ -275,20 +276,11 @@ export class AccountJobsPageFacade {
     )();
   }
 
-  private updateIsLoadingToPage(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoadingToPage: value
-      })
-    )();
-  }
-
   private updateItems(response: PaginationResponse<Job>): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items: [...state.items, ...response.items],
+        items: response.items,
         totalItems: response.totalItems
       })
     )();
@@ -323,11 +315,11 @@ export class AccountJobsPageFacade {
     )();
   }
 
-  private updateNextPage(): void {
+  private updatePage(pageNumber: number): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: state.page + 1
+        page: pageNumber
       })
     )();
   }
@@ -356,13 +348,12 @@ export class AccountJobsPageFacade {
           state.filterFormState,
           {
             jobID: setValue(parameters.jobID || state.filterFormState.value.jobID),
-            simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
-            simproSiteID: setValue(parameters.simproSiteID || state.filterFormState.value.simproSiteID),
+            orderNo: setValue(parameters.orderNo || state.filterFormState.value.orderNo),
+            siteUprn: setValue(parameters.siteUprn || state.filterFormState.value.siteUprn),
+            siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
             postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
             costCenterName: setValue((parameters.costCenterName) ? box(parameters.costCenterName) : state.filterFormState.value.costCenterName),
-            // businessGroup: setValue((parameters.businessGroup) ? box(parameters.businessGroup) : state.filterFormState.value.businessGroup),
             stage: setValue((parameters.stage) ? box(parameters.stage) : state.filterFormState.value.stage),
-            jobStatus: setValue((parameters.jobStatus) ? box(parameters.jobStatus) : state.filterFormState.value.jobStatus),
             appointmentFrom: setValue(parameters.appointmentFrom || state.filterFormState.value.appointmentFrom),
             appointmentTo: setValue(parameters.appointmentTo || state.filterFormState.value.appointmentTo),
             startTimeFrom: setValue(parameters.startTimeFrom || state.filterFormState.value.startTimeFrom),
@@ -387,13 +378,12 @@ export class AccountJobsPageFacade {
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
             jobID: (queryParams.jobID) ? parseInt(queryParams.jobID, 10) : undefined,
-            simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
-            simproSiteID: (queryParams.simproSiteID) ? parseInt(queryParams.simproSiteID, 10) : undefined,
+            orderNo: queryParams.orderNo || undefined,
+            siteUprn: queryParams.siteUprn || undefined,
+            siteName: queryParams.siteName || undefined,
             postalCode: queryParams.postalCode || undefined,
             costCenterName: (queryParams.costCenterName) ? castArray(queryParams.costCenterName) : undefined,
-            // businessGroup: (queryParams.businessGroup) ? castArray(queryParams.businessGroup) : undefined,
             stage: (queryParams.stage) ? castArray(queryParams.stage) : undefined,
-            jobStatus: (queryParams.jobStatus) ? castArray(queryParams.jobStatus) : undefined,
             appointmentFrom: queryParams.appointmentFrom || undefined,
             appointmentTo: queryParams.appointmentTo || undefined,
             startTimeFrom: queryParams.startTimeFrom || undefined,
@@ -403,8 +393,20 @@ export class AccountJobsPageFacade {
           this.updateQueryParameters(parameters);
 
           return (parameters.page > 1)
-            ? this.loadItemsToPage()
+            ? this.loadItemsByPage(parameters.page)
             : this.loadItemsByParameters();
+        })
+      )
+    );
+  }
+
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
+
+          this.loadItemsByParameters();
         })
       )
     );
@@ -415,50 +417,52 @@ export class AccountJobsPageFacade {
       origin$.pipe(
         withLatestFrom(
           this.parameters$,
-          this.isLoadingToPage$,
           this.relations$,
+          this.countRelations$,
           this.filters$
         ),
-        switchMap(([targetPage, parameters, isLoadingToPage, relations, filters]) => {
+        switchMap(([targetPage, parameters, relations, countRelations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          if (!isLoadingToPage) {
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: {
-                page,
-                orderBy,
-                desc,
-                jobID: filters.jobID,
-                simproCustomerID: filters.simproCustomerID,
-                simproSiteID: filters.simproSiteID,
-                postalCode: filters.postalCode,
-                costCenterName: filters.costCenterName,
-                // businessGroup: filters.businessGroup,
-                stage: filters.stage,
-                jobStatus: filters.jobStatus,
-                appointmentFrom: filters.appointmentFrom,
-                appointmentTo: filters.appointmentTo,
-                startTimeFrom: parameters.startTimeFrom || undefined,
-                startTimeTo: parameters.startTimeTo || undefined
-              }
-            }));
-          }
+          this.store.dispatch(NavigationActions.mergeQueryParams({
+            queryParams: {
+              page,
+              orderBy,
+              desc,
+              jobID: filters.jobID,
+              orderNo: filters.orderNo,
+              siteUprn: filters.siteUprn,
+              siteName: filters.siteName,
+              postalCode: filters.postalCode,
+              costCenterName: filters.costCenterName,
+              stage: filters.stage,
+              appointmentFrom: filters.appointmentFrom,
+              appointmentTo: filters.appointmentTo,
+              startTimeFrom: parameters.startTimeFrom || undefined,
+              startTimeTo: parameters.startTimeTo || undefined
+            }
+          }));
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters(page, perPage, orderBy, desc, relations, filters);
+          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters(
-    page: number, perPage: number, orderBy: JobSortField, desc: boolean,
-    relations: Array<JobRelationType>, filters: JobFilters
-  ): Observable<any> {
+  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters }: {
+    page: number,
+    perPage: number,
+    orderBy: JobSortField,
+    desc: boolean,
+    relations: Array<JobRelationType>,
+    countRelations: Array<JobCountRelationType>,
+    filters: JobFilters
+  }): Observable<any> {
     return this.jobService
       .search({
         page,
@@ -466,67 +470,18 @@ export class AccountJobsPageFacade {
         orderBy,
         desc,
         relations,
+        countRelations,
         filters
       })
       .pipe(
-        withLatestFrom(
-          this.isLoadingToPage$,
-          this.parameters$
-        ),
         tapResponse(
-          ([response, isLoadingToPage, parameters]) => {
+          (response) => {
             this.updateIsLoading(false);
             this.updateItems(response);
-
-            if (!isLoadingToPage) {
-              return;
-            }
-
-            if (response.currentPage >= parameters.page) {
-              this.updateIsLoadingToPage(false);
-
-              return;
-            }
-
-            if (response.currentPage !== response.lastPage) {
-              this.loadItemsByParameters(response.currentPage + 1);
-
-              return;
-            }
-
-            this.updateIsLoadingToPage(false);
-            this.updateQueryParameters(new AccountJobsQueryParameters({ page: response.currentPage }));
-            this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page: response.currentPage }
-            }));
           },
           () => this.updateIsLoading(false)
         )
       );
-  }
-
-  private registerLoadNextPageEffect(): void {
-    this.loadNextPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateNextPage();
-
-          this.loadItemsByParameters();
-        })
-      )
-    );
-  }
-
-  private registerLoadItemsToPageEffect(): void {
-    this.loadItemsToPageEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$.pipe(
-        tap(() => {
-          this.updateIsLoadingToPage(true);
-
-          this.loadItemsByParameters(1);
-        })
-      )
-    );
   }
 
   private registerRemoveFilterEffect(): void {

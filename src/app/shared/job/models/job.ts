@@ -27,22 +27,28 @@ export class Job {
   public jobID: number;
 
   @Expose({ name: 'job_status', groups: [ClassGroup.MAIN] })
-  public jobStatus: string;
+  public status: string;
 
   @Expose({ groups: [ClassGroup.MAIN] })
   public priority: string;
 
-  @Expose({ name: 'simpro_site_id', groups: [ClassGroup.MAIN] })
-  public simproSiteID: number;
+  @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
+  public siteID: number;
 
   @Expose({ groups: [ClassGroup.MAIN] })
   public stage: JobStage;
 
-  @Expose({ name: 'simpro_customer_id', groups: [ClassGroup.MAIN] })
-  public simproCustomerID: number;
+  @Expose({ name: 'customer_id', groups: [ClassGroup.MAIN] })
+  public customerID: number;
 
   @Expose({ name: 'recent_schedule_id', groups: [ClassGroup.MAIN] })
   public recentScheduleID: number;
+
+  @Expose({ name: 'job_attachments_count', groups: [ClassGroup.MAIN] })
+  public attachmentsCount: number;
+
+  @Expose({ name: 'order_no', groups: [ClassGroup.MAIN] })
+  public orderNo: number;
 
   @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -53,16 +59,28 @@ export class Job {
   public dateCreated: DateTime;
 
   @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Expose({ name: 'completion_date', groups: [ClassGroup.MAIN] })
+  public completionDate: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Expose({ name: 'due_date', groups: [ClassGroup.MAIN] })
+  public dueDate: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Expose({ name: 'made_safe_date', groups: [ClassGroup.MAIN] })
+  public madeSafeDate: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
   @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })
   public createdAt: DateTime;
 
   @Type(() => Customer)
-  @Expose({ name: 'simpro_customer', groups: [ClassGroup.MAIN] })
-  public simproCustomer?: Customer;
+  @Expose({ groups: [ClassGroup.MAIN] })
+  public customer?: Customer;
 
   @Type(() => Site)
-  @Expose({ name: 'simpro_site', groups: [ClassGroup.MAIN] })
-  public simproSite?: Site;
+  @Expose({ groups: [ClassGroup.MAIN] })
+  public site?: Site;
 
   @Type(() => JobSchedule)
   @Expose({ name: 'recent_schedule', groups: [ClassGroup.MAIN] })

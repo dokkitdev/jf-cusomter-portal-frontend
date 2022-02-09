@@ -1,7 +1,7 @@
 <ng-container *ngrxLet="isDescriptionOpened$; let isDescriptionOpened">
   <div class="table-row">
     <div class="table-cell jobs-icon">
-      <a (click)="toggleDescriptionClicked()" class="jobs-icon-action">
+      <a *ngIf="item.description" (click)="toggleDescriptionClicked()" class="jobs-icon-action">
         <span [ngClass]="{ 'accordionplus-opened': isDescriptionOpened }" class="accordionplus"></span>
       </a>
     </div>
@@ -11,16 +11,16 @@
         {{ 'ACCOUNT.JOBS.TEXT_CREATED' | translate }} {{ item.dateCreated | date: dateFormat }}
       </div>
     </div>
-    <div class="table-cell jobs-name">{{ item.name }}</div>
-    <div class="table-cell jobs-customer">{{ item.simproCustomer?.name }}</div>
-    <div class="table-cell jobs-site">
-      <div>{{ item.simproSite?.name }}</div>
-      <div>{{ item.simproSite?.postalCode }}</div>
-    </div>
+    <div class="table-cell jobs-order">{{ item.orderNo }}</div>
+    <div class="table-cell jobs-customer">{{ item.customer?.name }}</div>
+    <div class="table-cell jobs-uprn">{{ item.site?.uprn }}</div>
+    <div class="table-cell jobs-sitename">{{ item.site?.name }}</div>
+    <div class="table-cell jobs-postalcode">{{ item.site?.postalCode }}</div>
     <div class="table-cell jobs-cost">{{ item.costCenterName }}</div>
+    <div class="table-cell jobs-priority">{{ item.priority }}</div>
     <div class="table-cell jobs-stage">
       <span
-        *ngIf="item.jobStatus"
+        *ngIf="item.stage"
         [ngClass]="{
           'badge-archived': item.isArchived,
           'badge-complete': item.isCompleted,
@@ -42,6 +42,9 @@
         {{ item.jobStatus }}
       </span>
     </div>
+    <div class="table-cell jobs-madesafe">{{ item.madeSafe | date: dateFormat }}</div>
+    <div class="table-cell jobs-completion">{{ item.completionDate | date: dateFormat }}</div>
+    <div class="table-cell jobs-due">{{ item.dueDate | date: dateFormat }}</div>
     <div class="table-cell jobs-appointment">
       <ng-container *ngIf="item.recentSchedule">
         <div class="jobs-appointment-date">{{ item.recentSchedule.date | date: dateFormat }}</div>
@@ -56,7 +59,7 @@
     [@heightCollapse]
     class="table-row table-row-small">
     <div class="table-cell jobs-icon"></div>
-    <div class="table-cell jobs-description">{{ 'ACCOUNT.QUOTES.TEXT_DESCRIPTION' | translate }}</div>
+    <div class="table-cell jobs-description">{{ 'ACCOUNT.JOBS.TEXT_DESCRIPTION' | translate }}</div>
     <div class="table-cell">
       <span [innerHTML]="description"></span>
     </div>

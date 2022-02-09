@@ -14,7 +14,6 @@
   &-customer {flex: 1 1 160px; min-width: 160px;}
   &-site {flex: 1 1 160px; min-width: 160px;}
   &-cost {flex: 1 1 135px; min-width: 135px;}
-  // &-business {flex: 1 1 100px; min-width: 100px;}
   &-stage {flex: 1 1 90px; min-width: 90px;}
   &-status {flex: 1 1 160px; min-width: 160px;}
   &-appointment {flex: 1 1 95px; min-width: 95px;
@@ -26,8 +25,8 @@
   .table-cell .loading-spinner {margin: 0 auto;}
   .form-group-timepicker {max-width: 130px;}
   .badge {
-    &-progress {background-color: $light-green;}
-    &-complete {background-color: $light-yellow;}
-    &-archived {background-color: $light-red;}
+    &-progress {background-color: $light-green; color: $dark-green;}
+    &-complete {background-color: $light-yellow; color: $dark-yellow;}
+    &-archived {background-color: $light-red; color: $dark-red;}
   }
 }

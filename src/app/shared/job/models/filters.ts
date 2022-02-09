@@ -2,16 +2,13 @@ import { JobStage } from '../enums';
 
 export class JobFilters {
   public jobID?: number;
-  public customerName?: string;
+  public orderNo?: string;
+  public siteUprn?: string;
   public siteName?: string;
-  public simproCustomerID?: number;
-  public simproSiteID?: number;
   public postalCode?: string;
   public priority?: Array<string>;
   public costCenterName?: Array<string>;
   public stage?: Array<JobStage>;
-  public jobStatus?: Array<string>;
-  public requested?: boolean;
   public appointmentFrom?: string;
   public appointmentTo?: string;
   public startTimeFrom?: string;

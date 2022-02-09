@@ -13,20 +13,26 @@ import { heightCollapseAnimation } from '@shared/animations';
 })
 export class AccountJobsItemsComponent {
   public items$: Observable<Array<Job>>;
-  public hasMoreItems$: Observable<boolean>;
   public isLoading$: Observable<boolean>;
-  public isLoadingToPage$: Observable<boolean>;
+  public perPage$: Observable<number>;
+  public currentPage$: Observable<number>;
+  public totalItems$: Observable<number>;
+  public hasPagination$: Observable<boolean>;
+  public paginationID$: Observable<string>;
 
   constructor(
     private facade: AccountJobsPageFacade
   ) {
     this.items$ = this.facade.items$;
-    this.hasMoreItems$ = this.facade.hasMoreItems$;
     this.isLoading$ = this.facade.isLoading$;
-    this.isLoadingToPage$ = this.facade.isLoadingToPage$;
+    this.perPage$ = this.facade.perPage$;
+    this.currentPage$ = this.facade.currentPage$;
+    this.totalItems$ = this.facade.totalItems$;
+    this.hasPagination$ = this.facade.hasPagination$;
+    this.paginationID$ = this.facade.paginationID$;
   }
 
-  public loadNextPageClicked(): void {
-    this.facade.loadNextPage();
+  public pageChanged(page: number): void {
+    this.facade.loadItemsByPage(page);
   }
 }

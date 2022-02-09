@@ -6,12 +6,12 @@ export class AccountJobsQueryParameters {
   public orderBy: JobSortField;
   public desc: boolean;
   public jobID: number | undefined;
-  public simproCustomerID: number;
-  public simproSiteID: number;
+  public orderNo: string;
+  public siteUprn: string;
+  public siteName: string;
   public postalCode: string;
   public costCenterName: Array<string>;
   public stage: Array<JobStage>;
-  public jobStatus: Array<string>;
   public appointmentFrom: string;
   public appointmentTo: string;
   public startTimeFrom: string;

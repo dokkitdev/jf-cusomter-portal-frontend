@@ -6,9 +6,9 @@
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_JOB' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell jobs-name">
-      <header-sort [orderBy]="jobSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_NAME' | translate }}
+    <div class="table-cell jobs-order">
+      <header-sort [orderBy]="jobSortField.ORDER" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_ORDER_NO' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-customer">
@@ -16,14 +16,29 @@
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell jobs-site">
+    <div class="table-cell jobs-uprn">
+      <header-sort [orderBy]="jobSortField.SITE_UPRN" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-sitename">
       <header-sort [orderBy]="jobSortField.SITE_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE' | translate }}
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE_NAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-postalcode">
+      <header-sort [orderBy]="jobSortField.POSTCODE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_POSTCODE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-cost">
       <header-sort [orderBy]="jobSortField.COST_CENTER" [parameters]="parameters" (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COST_CENTER' | translate }}
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COST_CENTRE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-priority">
+      <header-sort [orderBy]="jobSortField.PRIORITY" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_PRIORITY' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-stage">
@@ -36,9 +51,19 @@
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_STATUS' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell jobs-appointment">
-      <header-sort [orderBy]="jobSortField.APPOINTMENT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_APPOINTMENT' | translate }}
+    <div class="table-cell jobs-madesafe">
+      <header-sort [orderBy]="jobSortField.MADE_SAFE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_MADE_SAFE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-completion">
+      <header-sort [orderBy]="jobSortField.COMPLETION_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COMPLETION_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell jobs-due">
+      <header-sort [orderBy]="jobSortField.DUE_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_DUE_DATE' | translate }}
       </header-sort>
     </div>
   </div>
