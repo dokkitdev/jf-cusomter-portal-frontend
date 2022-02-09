@@ -44,11 +44,7 @@ export class MediaMultiselectComponent implements OnDestroy {
   }
 
   public get extensionRequirements(): string {
-    return this.allowedFileExtensions.map((item) => {
-      const [, extension] = item.split('/');
-
-      return `.${extension.toUpperCase()}`;
-    }).join(', ');
+    return this.allowedFileExtensions.join(', ').toUpperCase();
   }
 
   public items$: Observable<Array<Media>>;
