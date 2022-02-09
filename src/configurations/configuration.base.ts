@@ -59,7 +59,7 @@ export const initConfiguration = (configuration: any): any =>
       tapToDismiss: false
     },
     allowedFileExtensions: {
-      default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.docx']
+      default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.doc', '.docx']
     },
     maxFileSize: {
       default: 5242880,
