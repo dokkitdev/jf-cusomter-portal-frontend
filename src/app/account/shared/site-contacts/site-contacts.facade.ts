@@ -28,9 +28,9 @@ export class AccountSiteContactsComponentFacade {
     }));
   }
 
-  public contactCreatedSubject: Subject<Contact> = new Subject();
-  public contactUpdatedSubject: Subject<Contact> = new Subject();
-  public contactDeletedSubject: Subject<number> = new Subject();
+  public contactCreatedSubject: Subject<Contact>;
+  public contactUpdatedSubject: Subject<Contact>;
+  public contactDeletedSubject: Subject<number>;
 
   private openCreateContactDialogEffect$: () => Observable<void>;
 
@@ -39,8 +39,11 @@ export class AccountSiteContactsComponentFacade {
     private readonly actions$: Actions,
     private readonly dialogService: DialogService
   ) {
-    this.resetState();
+    this.contactCreatedSubject = new Subject();
+    this.contactUpdatedSubject = new Subject();
+    this.contactDeletedSubject = new Subject();
 
+    this.resetState();
     this.registerOpenCreateContactDialogEffect();
     this.registerAddCreatedItemEffect();
     this.registerChangeUpdatedItemEffect();

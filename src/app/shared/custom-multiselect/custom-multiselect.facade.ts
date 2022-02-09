@@ -30,16 +30,18 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
     return this.componentStore.select((state) => state.options);
   }
 
-  public controlStateActionTriggered: Subject<Actions<any>> = new Subject();
-  public filterChanged: Subject<string> = new Subject();
+  public controlStateActionTriggered: Subject<Actions<any>>;
+  public filterChanged: Subject<string>;
 
   private changeOptionEffect$: (optionValue: T) => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<CustomMultiselectComponentState<T>>
   ) {
-    this.resetState();
+    this.controlStateActionTriggered = new Subject();
+    this.filterChanged = new Subject();
 
+    this.resetState();
     this.registerChangeOptionEffect();
   }
 

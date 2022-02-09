@@ -13,15 +13,16 @@ export class MediaMultiselectFacade {
     return this.componentStore.select((state) => state.items);
   }
 
-  public itemsChanged: Subject<Array<Media>> = new Subject();
+  public itemsChanged: Subject<Array<Media>>;
 
   private itemsChangedEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<MediaMultiselectComponentState>
   ) {
-    this.resetState();
+    this.itemsChanged = new Subject();
 
+    this.resetState();
     this.registerItemsChangedEffect();
   }
 

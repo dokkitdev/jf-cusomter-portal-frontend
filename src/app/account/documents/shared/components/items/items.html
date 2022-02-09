@@ -6,12 +6,18 @@
     <documents-items-header></documents-items-header>
     <div class="table-content">
       <documents-item
-        *ngFor="let item of items; trackByProperty: 'id'"
+        *ngFor="let item of items | paginate: {
+          id: paginationId$ | async,
+          itemsPerPage: perPage$ | async,
+          currentPage: currentPage$ | async,
+          totalItems: totalItems$ | async
+        }; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]>
       </documents-item>
     </div>
     <pagination-elements
+      *ngIf="hasPagination$ | async"
       [paginationId]="paginationId$ | async"
       (pageChanged)="pageChanged($event)"
     >
