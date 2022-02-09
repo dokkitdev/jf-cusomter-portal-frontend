@@ -11,7 +11,7 @@ export class AccountDialogEditUserForm {
     this.name = '';
     this.email = '';
     this.roleID = UserRole.CUSTOMER;
-    this.isSendEmail = false;
+    this.isSendEmail = true;
     this.customerIDs = [];
   }
 }
