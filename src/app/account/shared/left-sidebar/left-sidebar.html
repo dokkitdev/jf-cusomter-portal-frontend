@@ -40,16 +40,16 @@
         </a>
         <div *ngIf="isReportsMenuOpened$ | async" [@heightCollapse] class="sidebar-section-admin">
           <a
-            routerLink="/account/admin/users"
+            routerLink="/account/reports/service-control"
             routerLinkActive="active"
             class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_USERS' | translate }}</span>
+            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_SERVICE_CONTROL' | translate }}</span>
           </a>
           <a
-            routerLink="/account/admin/documents"
+            routerLink="/account/reports/repair-response"
             routerLinkActive="active"
             class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_DOCUMENTS' | translate }}</span>
+            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_REPAIR_RESPONSE' | translate }}</span>
           </a>
         </div>
         <a
