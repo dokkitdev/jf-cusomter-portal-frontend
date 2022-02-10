@@ -14,23 +14,17 @@
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.orderNo"
-        [min]="1"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        type="number"
         name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ORDER_NO' | translate }}">
       </filter-select-text>
       <filter-select-text
-        [controlState]="filterFormState.controls.siteUprn"
-        [min]="1"
+        [controlState]="filterFormState.controls.uprn"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        type="number"
         name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_UPRN' | translate }}">
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.siteName"
-        [min]="1"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        type="number"
         name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_NAME' | translate }}">
       </filter-select-text>
       <filter-select-text

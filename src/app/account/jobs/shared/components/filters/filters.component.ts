@@ -1,8 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountJobsPageFacade } from '@app/account/jobs/jobs.facade';
-import { Customer } from '@shared/customer';
 import { FilterValue } from '@shared/filter-values';
-import { Site } from '@shared/site';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { AccountJobsFilterForm } from '../../forms';
@@ -34,13 +32,5 @@ export class AccountJobsFiltersComponent {
 
   public removeFilterClicked(item: FilterValue): void {
     this.facade.removeFilter(item);
-  }
-
-  public selectedCustomerChanged(customer: Customer): void {
-    this.facade.setSelectedCustomer(customer);
-  }
-
-  public selectedSiteChanged(site: Site): void {
-    this.facade.setSelectedSite(site);
   }
 }

@@ -27,10 +27,9 @@ export const initConfiguration = (configuration: any): any =>
     dateFormats: {
       jobDate: 'MMM dd, yyyy',
       jobTime: 'H:mm',
+      madeSafeDate: 'dd-MM-yyyy',
+      madeSafeTime: 'HH:mm',
       scheduleFilter: 'yyyy-MM-dd HH:mm:ss',
-      invoiceDate: 'dd/MM/yyyy',
-      quoteDate: 'dd/MM/yyyy',
-      quoteIssuedDate: 'MMM dd, yyyy',
       assetDate: 'dd/MM/yyyy',
       documentDate: 'dd/MM/yyyy',
       filterDate: 'dd/MM/yyyy',

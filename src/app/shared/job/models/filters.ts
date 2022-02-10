@@ -2,8 +2,9 @@ import { JobStage } from '../enums';
 
 export class JobFilters {
   public jobID?: number;
+  public siteID?: number;
   public orderNo?: string;
-  public siteUprn?: string;
+  public uprn?: string;
   public siteName?: string;
   public postalCode?: string;
   public priority?: Array<string>;

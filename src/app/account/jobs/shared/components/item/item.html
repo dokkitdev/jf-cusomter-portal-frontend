@@ -13,7 +13,13 @@
     </div>
     <div class="table-cell jobs-order">{{ item.orderNo }}</div>
     <div class="table-cell jobs-customer">{{ item.customer?.name }}</div>
-    <div class="table-cell jobs-uprn">{{ item.site?.uprn }}</div>
+    <div class="table-cell jobs-uprn">
+      <a
+        routerLink="/account/sites"
+        [queryParams]="{ uprn: item.site?.uprn }">
+        {{ item.site?.uprn }}
+      </a>
+    </div>
     <div class="table-cell jobs-sitename">{{ item.site?.name }}</div>
     <div class="table-cell jobs-postalcode">{{ item.site?.postalCode }}</div>
     <div class="table-cell jobs-cost">{{ item.costCenterName }}</div>
@@ -24,7 +30,7 @@
         [ngClass]="{
           'badge-archived': item.isArchived,
           'badge-complete': item.isCompleted,
-          'badge-progress': item.isInProgress
+          'badge-pending': item.isPending
         }"
         class="badge">
         {{ 'SHARED.JOB_STAGE.TEXT_' + item.stage | uppercase | translate }}
@@ -32,27 +38,33 @@
     </div>
     <div class="table-cell jobs-status">
       <span
-        *ngIf="item.jobStatus"
+        *ngIf="item.status"
         [ngClass]="{
           'badge-archived': item.isArchived,
           'badge-complete': item.isCompleted,
-          'badge-progress': item.isInProgress
+          'badge-pending': item.isPending
         }"
         class="badge">
-        {{ item.jobStatus }}
+        {{ item.status }}
       </span>
     </div>
-    <div class="table-cell jobs-madesafe">{{ item.madeSafe | date: dateFormat }}</div>
+    <div
+      [ngClass]="{ 'jobs-madesafe-completed': item.isCompleted }"
+      class="table-cell jobs-madesafe">
+      <div>{{ item.madeSafeDate | date: dateFormat }}</div>
+      <div>{{ item.madeSafeDate | date: timeFormat }}</div>
+    </div>
     <div class="table-cell jobs-completion">{{ item.completionDate | date: dateFormat }}</div>
     <div class="table-cell jobs-due">{{ item.dueDate | date: dateFormat }}</div>
     <div class="table-cell jobs-appointment">
       <ng-container *ngIf="item.recentSchedule">
-        <div class="jobs-appointment-date">{{ item.recentSchedule.date | date: dateFormat }}</div>
+        <div>{{ item.recentSchedule.date | date: dateFormat }}</div>
         <div>
-          {{ item.recentSchedule.startTime | date: timeFormat }}-{{ item.recentSchedule.endTime | date: timeFormat }}
+          {{ item.recentSchedule.startTime | date: timeFormat }} - {{ item.recentSchedule.endTime | date: timeFormat }}
         </div>
       </ng-container>
     </div>
+    <div class="table-cell jobs-attachments">{{ item.attachmentsCount }}</div>
   </div>
   <div
     *ngIf="isDescriptionOpened"

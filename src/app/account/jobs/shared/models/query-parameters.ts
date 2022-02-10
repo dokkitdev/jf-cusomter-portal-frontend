@@ -6,8 +6,9 @@ export class AccountJobsQueryParameters {
   public orderBy: JobSortField;
   public desc: boolean;
   public jobID: number | undefined;
+  public siteID: number | undefined;
   public orderNo: string;
-  public siteUprn: string;
+  public uprn: string;
   public siteName: string;
   public postalCode: string;
   public costCenterName: Array<string>;

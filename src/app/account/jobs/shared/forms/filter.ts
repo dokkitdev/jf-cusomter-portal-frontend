@@ -3,8 +3,9 @@ import { box, Boxed } from 'ngrx-forms';
 
 export class AccountJobsFilterForm {
   public jobID: number | undefined;
+  public siteID: number | undefined;
   public orderNo: string;
-  public siteUprn: string;
+  public uprn: string;
   public siteName: string;
   public postalCode: string;
   public costCenterName: Boxed<Array<string>>;
@@ -16,8 +17,9 @@ export class AccountJobsFilterForm {
 
   constructor() {
     this.jobID = undefined;
+    this.siteID = undefined;
     this.orderNo = '';
-    this.siteUprn = '';
+    this.uprn = '';
     this.siteName = '';
     this.postalCode = '';
     this.costCenterName = box([]);

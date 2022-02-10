@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { configuration } from '@configurations';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Customer } from '@shared/customer';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import { Job, JobCountRelationType, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { PaginationResponse } from '@shared/pagination';
-import { Site } from '@shared/site';
 import { AppState } from '@shared/store';
 import { castArray, without } from 'lodash';
 import { DateTime } from 'luxon';
@@ -25,7 +24,7 @@ import {
   updateGroup
 } from 'ngrx-forms';
 import { Observable } from 'rxjs';
-import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { AccountJobsPageState } from './jobs.state';
 import { AccountJobsFilterForm } from './shared/forms';
 import { AccountJobsQueryParameters } from './shared/models';
@@ -67,8 +66,9 @@ export class AccountJobsPageFacade {
       orderBy: state.orderBy,
       desc: state.desc,
       jobID: state.filterFormState.value.jobID,
+      siteID: state.filterFormState.value.siteID,
       orderNo: state.filterFormState.value.orderNo,
-      siteUprn: state.filterFormState.value.siteUprn,
+      uprn: state.filterFormState.value.uprn,
       siteName: state.filterFormState.value.siteName,
       postalCode: state.filterFormState.value.postalCode,
       costCenterName: unbox(state.filterFormState.value.costCenterName),
@@ -102,8 +102,9 @@ export class AccountJobsPageFacade {
       .pipe(
         map((filterFormStateValue) => new JobFilters({
           jobID: filterFormStateValue.jobID || undefined,
+          siteID: filterFormStateValue.siteID || undefined,
           orderNo: filterFormStateValue.orderNo || undefined,
-          siteUprn: filterFormStateValue.siteUprn || undefined,
+          uprn: filterFormStateValue.uprn || undefined,
           siteName: filterFormStateValue.siteName || undefined,
           postalCode: filterFormStateValue.postalCode || undefined,
           costCenterName: (unbox(filterFormStateValue.costCenterName).length) ? unbox(filterFormStateValue.costCenterName) : undefined,
@@ -121,17 +122,20 @@ export class AccountJobsPageFacade {
       const formState = state.filterFormState;
       const filterValues = [];
 
+      if (formState.value.siteID) {
+        filterValues.push(this.createFilterValue(formState.controls.siteID));
+      }
       if (formState.value.jobID) {
         filterValues.push(this.createFilterValue(formState.controls.jobID));
       }
       if (formState.value.orderNo) {
-        filterValues.push(this.createFilterValue(formState.controls.postalCode));
+        filterValues.push(this.createFilterValue(formState.controls.orderNo));
       }
-      if (formState.value.siteUprn) {
-        filterValues.push(this.createFilterValue(formState.controls.postalCode));
+      if (formState.value.uprn) {
+        filterValues.push(this.createFilterValue(formState.controls.uprn));
       }
       if (formState.value.siteName) {
-        filterValues.push(this.createFilterValue(formState.controls.postalCode));
+        filterValues.push(this.createFilterValue(formState.controls.siteName));
       }
       if (formState.value.postalCode) {
         filterValues.push(this.createFilterValue(formState.controls.postalCode));
@@ -217,14 +221,6 @@ export class AccountJobsPageFacade {
     this.removeFilterEffect$(filter);
   }
 
-  public setSelectedCustomer(customer: Customer): void {
-    this.updateSelectedCustomer(customer);
-  }
-
-  public setSelectedSite(site: Site): void {
-    this.updateSelectedSite(site);
-  }
-
   public getStartAppointmentDateFilter$(): Observable<(date: Date) => boolean> {
     return this
       .filterFormState$
@@ -247,8 +243,8 @@ export class AccountJobsPageFacade {
 
   private getJobStageFilterStatus(stage: JobStage): FilterValueStatus {
     switch (stage) {
-      case JobStage.PROGRESS:
-        return FilterValueStatus.OPENED;
+      case JobStage.PENDING:
+        return FilterValueStatus.PENDING;
       case JobStage.COMPLETE:
         return FilterValueStatus.COMPLETED;
       case JobStage.ARCHIVED:
@@ -282,24 +278,6 @@ export class AccountJobsPageFacade {
         ...state,
         items: response.items,
         totalItems: response.totalItems
-      })
-    )();
-  }
-
-  private updateSelectedCustomer(customer: Customer): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedCustomer: customer
-      })
-    )();
-  }
-
-  private updateSelectedSite(site: Site): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedSite: site
       })
     )();
   }
@@ -347,9 +325,10 @@ export class AccountJobsPageFacade {
         filterFormState: updateGroup<AccountJobsFilterForm>(
           state.filterFormState,
           {
+            siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
             jobID: setValue(parameters.jobID || state.filterFormState.value.jobID),
             orderNo: setValue(parameters.orderNo || state.filterFormState.value.orderNo),
-            siteUprn: setValue(parameters.siteUprn || state.filterFormState.value.siteUprn),
+            uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
             siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
             postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
             costCenterName: setValue((parameters.costCenterName) ? box(parameters.costCenterName) : state.filterFormState.value.costCenterName),
@@ -367,9 +346,7 @@ export class AccountJobsPageFacade {
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectQueryParams)
-        ),
+        concatLatestFrom(() => this.store.select(NavigationSelectors.selectQueryParams)),
         tap(([_, queryParams]) => {
           this.updateIsLoading(true);
 
@@ -377,9 +354,10 @@ export class AccountJobsPageFacade {
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
+            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
             jobID: (queryParams.jobID) ? parseInt(queryParams.jobID, 10) : undefined,
             orderNo: queryParams.orderNo || undefined,
-            siteUprn: queryParams.siteUprn || undefined,
+            uprn: queryParams.uprn || undefined,
             siteName: queryParams.siteName || undefined,
             postalCode: queryParams.postalCode || undefined,
             costCenterName: (queryParams.costCenterName) ? castArray(queryParams.costCenterName) : undefined,
@@ -415,12 +393,12 @@ export class AccountJobsPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
+        concatLatestFrom(() => [
           this.parameters$,
           this.relations$,
           this.countRelations$,
           this.filters$
-        ),
+        ]),
         switchMap(([targetPage, parameters, relations, countRelations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
@@ -433,8 +411,9 @@ export class AccountJobsPageFacade {
               orderBy,
               desc,
               jobID: filters.jobID,
+              siteID: filters.siteID,
               orderNo: filters.orderNo,
-              siteUprn: filters.siteUprn,
+              uprn: filters.uprn,
               siteName: filters.siteName,
               postalCode: filters.postalCode,
               costCenterName: filters.costCenterName,
@@ -487,9 +466,7 @@ export class AccountJobsPageFacade {
   private registerRemoveFilterEffect(): void {
     this.removeFilterEffect$ = this.componentStore.effect((origin$: Observable<FilterValue>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.filterFormState$
-        ),
+        concatLatestFrom(() => this.filterFormState$),
         tap(([filter, formState]) => {
           const controlName = filter.id.split('.')[1] as keyof AccountJobsFilterForm;
 

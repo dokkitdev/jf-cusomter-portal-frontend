@@ -48,11 +48,7 @@ export class Job {
   public attachmentsCount: number;
 
   @Expose({ name: 'order_no', groups: [ClassGroup.MAIN] })
-  public orderNo: number;
-
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
-  @Expose({ groups: [ClassGroup.MAIN] })
-  public requested: DateTime;
+  public orderNo: string;
 
   @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
   @Expose({ name: 'date_created', groups: [ClassGroup.MAIN] })
@@ -62,11 +58,11 @@ export class Job {
   @Expose({ name: 'completion_date', groups: [ClassGroup.MAIN] })
   public completionDate: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
   @Expose({ name: 'due_date', groups: [ClassGroup.MAIN] })
   public dueDate: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
   @Expose({ name: 'made_safe_date', groups: [ClassGroup.MAIN] })
   public madeSafeDate: DateTime;
 
@@ -111,5 +107,10 @@ export class Job {
   @Exclude()
   public get isInProgress(): boolean {
     return this.stage === JobStage.PROGRESS;
+  }
+
+  @Exclude()
+  public get isPending(): boolean {
+    return this.stage === JobStage.PENDING;
   }
 }

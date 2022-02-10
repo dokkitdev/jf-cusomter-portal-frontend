@@ -87,7 +87,7 @@
         "TEXT_MADE_SAFE": "Made Safe",
         "TEXT_COMPLETION_DATE": "Completion Date",
         "TEXT_DUE_DATE": "Due Date",
-        "TEXT_SCHEDULE_DATE": "Schedule Date",
+        "TEXT_SCHEDULED_DATE": "Scheduled Date",
         "TEXT_ATTACHMENTS": "Attachments"
       },
       "FILTERS": {

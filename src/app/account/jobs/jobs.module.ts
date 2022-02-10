@@ -16,8 +16,6 @@ import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
 import { FilterSelectTextModule } from '@shared/filter-select-text';
-import { AccountCustomerSelectModule } from '../shared/customer-select';
-import { AccountSiteSelectModule } from '../shared/site-select';
 import { AccountJobStageMultiselectModule } from '../shared/job-stage-multiselect';
 import { AccountJobStatusMultiselectModule } from '../shared/job-status-multiselect';
 import { FormDatepickerModule } from '@shared/form-datepicker';
@@ -47,8 +45,6 @@ import { PaginationElementsModule } from '@shared/pagination-elements';
     HeaderSortModule,
     TableContainerModule,
     FilterSelectTextModule,
-    AccountCustomerSelectModule,
-    AccountSiteSelectModule,
     AccountJobStageMultiselectModule,
     AccountJobStatusMultiselectModule,
     FormDatepickerModule,

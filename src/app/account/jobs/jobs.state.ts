@@ -1,6 +1,4 @@
-import { Customer } from '@shared/customer';
 import { Job, JobCountRelationType, JobRelationType, JobSortField } from '@shared/job';
-import { Site } from '@shared/site';
 import { createFormGroupState, FormGroupState } from 'ngrx-forms';
 import { AccountJobsFilterForm } from './shared/forms';
 
@@ -15,8 +13,6 @@ export class AccountJobsPageState {
   public countRelations: Array<JobCountRelationType>;
   public desc: boolean;
   public filterFormState: FormGroupState<AccountJobsFilterForm>;
-  public selectedCustomer: Customer | undefined;
-  public selectedSite: Site | undefined;
   public readonly paginationID: string;
 
   constructor() {
@@ -30,8 +26,6 @@ export class AccountJobsPageState {
     this.countRelations = ['job_attachments'];
     this.desc = true;
     this.filterFormState = createFormGroupState('AccountJobsFilterForm', new AccountJobsFilterForm());
-    this.selectedCustomer = undefined;
-    this.selectedSite = undefined;
     this.paginationID = 'account-jobs-pagination';
   }
 }

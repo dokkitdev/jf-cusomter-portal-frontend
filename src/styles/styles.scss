@@ -648,9 +648,8 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   margin-right: 8px; margin-bottom: 4px; border-radius: 8px;
   background-color: $light-blue; color: $dark-blue;
   &-title {margin-right: 12px; pointer-events: none;}
-  &-pending {color: $dark-blue;}
-  &-opened {background-color: $light-green; color: $dark-green;}
-  &-completed {background-color: $light-yellow; color: $dark-yellow;}
+  &-pending {background-color: $light-yellow; color: $dark-yellow;}
+  &-completed {background-color: $light-green; color: $dark-green;}
   &-canceled {background-color: $light-red; color: $dark-red;}
   .icon {margin: -5px -10px; opacity: 0.6; transition: 0.3s all; cursor: pointer;
     &:before {background-color: $dark-gray;}
