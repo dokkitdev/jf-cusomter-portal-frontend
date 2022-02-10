@@ -14,6 +14,8 @@ import { heightCollapseAnimation } from '@shared/animations';
 export class AccountLeftSidebarComponent implements OnDestroy {
   public profile$: Observable<User>;
   public isAdmin$: Observable<boolean>;
+  public isReportsMenuOpened$: Observable<boolean>;
+  public isReportsMenuItemActive$: Observable<boolean>;
   public isAdminMenuOpened$: Observable<boolean>;
   public isAdminMenuItemActive$: Observable<boolean>;
 
@@ -22,12 +24,18 @@ export class AccountLeftSidebarComponent implements OnDestroy {
   ) {
     this.profile$ = this.facade.profile$;
     this.isAdmin$ = this.facade.isAdmin$;
+    this.isReportsMenuOpened$ = this.facade.isReportsMenuOpened$;
+    this.isReportsMenuItemActive$ = this.facade.isReportsMenuItemActive$;
     this.isAdminMenuOpened$ = this.facade.isAdminMenuOpened$;
     this.isAdminMenuItemActive$ = this.facade.isAdminMenuItemActive$;
   }
 
   public ngOnDestroy(): void {
     this.facade.resetState();
+  }
+
+  public toggleReportsMenu(): void {
+    this.facade.toggleReportsMenu();
   }
 
   public toggleAdminMenu(): void {

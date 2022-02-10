@@ -32,12 +32,26 @@
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ASSETS' | translate }}</span>
         </a>
         <a
-        routerLink="/account/reports"
-        routerLinkActive="active"
-        class="sidebar-item">
-        <span class="icon icon-quote icon-mask"></span>
-        <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS' | translate }}</span>
-      </a>
+          (click)="toggleReportsMenu()"
+          [ngClass]="{ active: isReportsMenuItemActive$ | async }"
+          class="sidebar-item">
+          <span class="icon icon-quote icon-mask"></span>
+          <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS' | translate }}</span>
+        </a>
+        <div *ngIf="isReportsMenuOpened$ | async" [@heightCollapse] class="sidebar-section-admin">
+          <a
+            routerLink="/account/admin/users"
+            routerLinkActive="active"
+            class="sidebar-item">
+            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_USERS' | translate }}</span>
+          </a>
+          <a
+            routerLink="/account/admin/documents"
+            routerLinkActive="active"
+            class="sidebar-item">
+            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_DOCUMENTS' | translate }}</span>
+          </a>
+        </div>
         <a
           routerLink="/account/documents"
           routerLinkActive="active"

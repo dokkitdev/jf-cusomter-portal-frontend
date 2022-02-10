@@ -20,6 +20,15 @@ export class AccountLeftSidebarFacade {
     return this.userService.isAdmin$;
   }
 
+
+  public get isReportsMenuOpened$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isReportsMenuOpened);
+  }
+
+  public get isReportsMenuItemActive$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isReportsMenuItemActive);
+  }
+
   public get isAdminMenuOpened$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isAdminMenuOpened);
   }
@@ -47,12 +56,34 @@ export class AccountLeftSidebarFacade {
     this.componentStore.setState(new AccountLeftSidebarPageState());
   }
 
+  public toggleReportsMenu(): void {
+    this.toggleStateIsReportsMenuOpened();
+  }
+
   public toggleAdminMenu(): void {
     this.toggleStateIsAdminMenuOpened();
   }
 
   public logout(): void {
     this.logoutEffect$();
+  }
+
+  private toggleStateIsReportsMenuOpened(): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isReportsMenuOpened: !state.isReportsMenuOpened
+      })
+    )();
+  }
+
+  private updateStateIsReportsMenuItemActive(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isReportsMenuItemActive: value
+      })
+    )();
   }
 
   private toggleStateIsAdminMenuOpened(): void {
@@ -79,6 +110,9 @@ export class AccountLeftSidebarFacade {
         filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd),
         tap((event: NavigationEnd) =>
           this.updateStateIsAdminMenuItemActive(event.url.includes('admin'))
+        ),
+        tap((event: NavigationEnd) =>
+          this.updateStateIsReportsMenuItemActive(event.url.includes('reports'))
         )
       )
     );
