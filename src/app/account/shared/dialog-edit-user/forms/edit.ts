@@ -4,14 +4,14 @@ export class AccountDialogEditUserForm {
   public name: string;
   public email: string;
   public roleID: UserRole;
-  public isNotSendEmail: boolean;
+  public isSendEmail: boolean;
   public customerIDs: Array<number>;
 
   constructor() {
     this.name = '';
     this.email = '';
     this.roleID = UserRole.CUSTOMER;
-    this.isNotSendEmail = false;
+    this.isSendEmail = true;
     this.customerIDs = [];
   }
 }

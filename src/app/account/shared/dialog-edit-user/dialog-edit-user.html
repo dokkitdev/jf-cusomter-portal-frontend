@@ -59,7 +59,7 @@
       *ngIf="!isEditMode"
       label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
       <form-checkbox
-        [controlState]="formState.controls.isNotSendEmail"
+        [controlState]="formState.controls.isSendEmail"
         (controlStateActionTriggered)="formActionTriggered($event)"
         label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_EMAIL' | translate }}">
       </form-checkbox>

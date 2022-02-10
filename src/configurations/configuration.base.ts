@@ -59,10 +59,10 @@ export const initConfiguration = (configuration: any): any =>
       tapToDismiss: false
     },
     allowedFileExtensions: {
-      default: ['image/jpeg', 'image/png', 'image/bmp', 'image/heic', 'image/heif', 'application/pdf']
+      default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.doc', '.docx']
     },
     maxFileSize: {
-      default: 5242880,
+      default: 15728640,
       jobAttachment: 10485760
     },
     fileSize: {

@@ -241,7 +241,7 @@
         "TEXT_INTERNAL_ADMIN": "Internal Admin",
         "TEXT_CUSTOMER": "Customer",
         "TEXT_SEND_INVITE": "Send invite?",
-        "TEXT_SEND_EMAIL": "Don't send email",
+        "TEXT_SEND_EMAIL": "Send email",
         "BUTTON_CANCEL": "Cancel",
         "BUTTON_CREATE": "Create",
         "BUTTON_UPDATE": "Update",
