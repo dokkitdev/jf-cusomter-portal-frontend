@@ -3,7 +3,7 @@ import { JobStage } from '@shared/job';
 import { Site } from '@shared/site';
 
 @Component({
-  selector: 'account-sites-item',
+  selector: 'sites-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

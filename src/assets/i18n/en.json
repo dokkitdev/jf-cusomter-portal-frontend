@@ -69,6 +69,41 @@
         "TEXT_TITLE": "Log out?"
       }
     },
+    "JOBS": {
+      "TEXT_PAGE_TITLE": "Jobs",
+      "TEXT_CREATED": "Created",
+      "TEXT_DESCRIPTION": "Description:",
+      "ITEMS_HEADER": {
+        "TEXT_JOB": "Job ID",
+        "TEXT_ORDER_NO": "Order No",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COST_CENTRE": "Cost Centre",
+        "TEXT_PRIORITY": "Priority",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_MADE_SAFE": "Made Safe",
+        "TEXT_COMPLETION_DATE": "Completion Date",
+        "TEXT_DUE_DATE": "Due Date",
+        "TEXT_SCHEDULED_DATE": "Scheduled Date",
+        "TEXT_ATTACHMENTS": "Attachments"
+      },
+      "FILTERS": {
+        "TEXT_ID": "Job ID",
+        "TEXT_ORDER_NO": "Order No",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COST_CENTRE": "Cost Centre",
+        "TEXT_STAGE": "Stage",
+        "TEXT_APPOINTMENT_FROM": "Appointment From",
+        "TEXT_APPOINTMENT_TO": "Appointment To",
+        "TEXT_SCHEDULED_AFTER": "Scheduled After",
+        "TEXT_SCHEDULED_BEFORE": "Scheduled Before"
+      }
+    },
     "SITES": {
       "TEXT_PAGE_TITLE": "Sites",
       "ITEMS_HEADER": {

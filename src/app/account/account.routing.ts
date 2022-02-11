@@ -9,6 +9,10 @@ const routes: Routes = [
     component: AccountComponent,
     children: [
       {
+        path: 'jobs',
+        loadChildren: () => import('./jobs/jobs.module').then((module) => module.AccountJobsPageModule)
+      },
+      {
         path: 'sites',
         loadChildren: () => import('./sites/sites.module').then((module) => module.AccountSitesPageModule)
       },

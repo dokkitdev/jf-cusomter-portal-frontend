@@ -1,26 +1,29 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AccountSitesPageFacade } from '@app/account/sites/sites.facade';
-import { Customer } from '@shared/customer';
+import { AccountJobsPageFacade } from '@app/account/jobs/jobs.facade';
 import { FilterValue } from '@shared/filter-values';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs';
-import { AccountSitesFilterForm } from '../../forms';
+import { AccountJobsFilterForm } from '../../forms';
 
 @Component({
-  selector: 'sites-filters',
+  selector: 'jobs-filters',
   templateUrl: 'filters.html',
   styleUrls: ['filters.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountSitesFiltersComponent {
-  public filterFormState$: Observable<FormGroupState<AccountSitesFilterForm>>;
+export class AccountJobsFiltersComponent {
+  public filterFormState$: Observable<FormGroupState<AccountJobsFilterForm>>;
   public filterValues$: Observable<Array<FilterValue>>;
+  public getStartAppointmentDateFilter$: Observable<(date: Date) => boolean>;
+  public getEndAppointmentDateFilter$: Observable<(date: Date) => boolean>;
 
   constructor(
-    private facade: AccountSitesPageFacade
+    private facade: AccountJobsPageFacade
   ) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
+    this.getStartAppointmentDateFilter$ = this.facade.getStartAppointmentDateFilter$();
+    this.getEndAppointmentDateFilter$ = this.facade.getEndAppointmentDateFilter$();
   }
 
   public formActionTriggered(action: Actions<any>): void {
@@ -29,9 +32,5 @@ export class AccountSitesFiltersComponent {
 
   public removeFilterClicked(item: FilterValue): void {
     this.facade.removeFilter(item);
-  }
-
-  public selectedCustomerChanged(customer: Customer): void {
-    this.facade.setSelectedCustomer(customer);
   }
 }

@@ -1,18 +1,18 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AccountSitesPageFacade } from '../../../sites.facade';
-import { Site } from '@shared/site';
+import { AccountJobsPageFacade } from '@app/account/jobs/jobs.facade';
+import { Job } from '@shared/job';
 import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'sites-items',
+  selector: 'jobs-items',
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [heightCollapseAnimation]
 })
-export class AccountSitesItemsComponent {
-  public items$: Observable<Array<Site>>;
+export class AccountJobsItemsComponent {
+  public items$: Observable<Array<Job>>;
   public isLoading$: Observable<boolean>;
   public perPage$: Observable<number>;
   public currentPage$: Observable<number>;
@@ -21,7 +21,7 @@ export class AccountSitesItemsComponent {
   public paginationID$: Observable<string>;
 
   constructor(
-    private facade: AccountSitesPageFacade
+    private facade: AccountJobsPageFacade
   ) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;

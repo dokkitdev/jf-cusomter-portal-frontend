@@ -1,0 +1,79 @@
+<ng-container *ngrxLet="isDescriptionOpened$; let isDescriptionOpened">
+  <div class="table-row">
+    <div class="table-cell jobs-icon">
+      <a *ngIf="item.description" (click)="toggleDescriptionClicked()" class="jobs-icon-action">
+        <span [ngClass]="{ 'accordionplus-opened': isDescriptionOpened }" class="accordionplus"></span>
+      </a>
+    </div>
+    <div class="table-cell jobs-title">
+      <a [routerLink]="['/account/jobs', item.id]">{{ item.jobID }}</a>
+      <div class="jobs-title-created">
+        {{ 'ACCOUNT.JOBS.TEXT_CREATED' | translate }} {{ item.dateCreated | date: dateFormat }}
+      </div>
+    </div>
+    <div class="table-cell jobs-order">{{ item.orderNo }}</div>
+    <div class="table-cell jobs-customer">{{ item.customer?.name }}</div>
+    <div class="table-cell jobs-uprn">
+      <a
+        routerLink="/account/sites"
+        [queryParams]="{ uprn: item.site?.uprn }">
+        {{ item.site?.uprn }}
+      </a>
+    </div>
+    <div class="table-cell jobs-sitename">{{ item.site?.name }}</div>
+    <div class="table-cell jobs-postalcode">{{ item.site?.postalCode }}</div>
+    <div class="table-cell jobs-cost">{{ item.costCenterName }}</div>
+    <div class="table-cell jobs-priority">{{ item.priority }}</div>
+    <div class="table-cell jobs-stage">
+      <span
+        *ngIf="item.stage"
+        [ngClass]="{
+          'badge-archived': item.isArchived,
+          'badge-complete': item.isCompleted,
+          'badge-pending': item.isPending
+        }"
+        class="badge">
+        {{ 'SHARED.JOB_STAGE.TEXT_' + item.stage | uppercase | translate }}
+      </span>
+    </div>
+    <div class="table-cell jobs-status">
+      <span
+        *ngIf="item.status"
+        [ngClass]="{
+          'badge-archived': item.isArchived,
+          'badge-complete': item.isCompleted,
+          'badge-pending': item.isPending
+        }"
+        class="badge">
+        {{ item.status }}
+      </span>
+    </div>
+    <div
+      [ngClass]="{ 'jobs-madesafe-completed': item.isCompleted }"
+      class="table-cell jobs-madesafe">
+      <div>{{ item.madeSafeDate | date: dateFormat }}</div>
+      <div>{{ item.madeSafeDate | date: timeFormat }}</div>
+    </div>
+    <div class="table-cell jobs-completion">{{ item.completionDate | date: dateFormat }}</div>
+    <div class="table-cell jobs-due">{{ item.dueDate | date: dateFormat }}</div>
+    <div class="table-cell jobs-appointment">
+      <ng-container *ngIf="item.recentSchedule">
+        <div>{{ item.recentSchedule.date | date: dateFormat }}</div>
+        <div>
+          {{ item.recentSchedule.startTime | date: timeFormat }} - {{ item.recentSchedule.endTime | date: timeFormat }}
+        </div>
+      </ng-container>
+    </div>
+    <div class="table-cell jobs-attachments">{{ item.attachmentsCount }}</div>
+  </div>
+  <div
+    *ngIf="isDescriptionOpened"
+    [@heightCollapse]
+    class="table-row table-row-small">
+    <div class="table-cell jobs-icon"></div>
+    <div class="table-cell jobs-description">{{ 'ACCOUNT.JOBS.TEXT_DESCRIPTION' | translate }}</div>
+    <div class="table-cell">
+      <span [innerHTML]="description"></span>
+    </div>
+  </div>
+</ng-container>

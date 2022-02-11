@@ -3,9 +3,9 @@
   [isLoading]="isLoading$ | async"
   [itemsCount]="items.length">
   <div class="table">
-    <sites-items-header></sites-items-header>
+    <jobs-items-header></jobs-items-header>
     <div class="table-content">
-      <sites-item
+      <jobs-item
         *ngFor="let item of items | paginate: {
           id: paginationID$ | async,
           itemsPerPage: perPage$ | async,
@@ -14,7 +14,7 @@
         }; trackByProperty: 'id'"
         [item]="item"
         [@heightCollapse]>
-      </sites-item>
+      </jobs-item>
     </div>
   </div>
 </table-container>
