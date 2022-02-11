@@ -118,6 +118,11 @@
         }
       }
     },
+    "REPORTS": {
+      "SERVICE_CONTROL": {
+        "TEXT_PAGE_TITLE": "Service Control Report"
+      }
+    },
     "ADMIN": {
       "USERS": {
         "TEXT_PAGE_TITLE": "Users",

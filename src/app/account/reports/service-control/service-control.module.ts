@@ -9,6 +9,7 @@ import { AccountReportsServiceControlItemsComponent } from './shared/components/
 import { AccountReportsServiceControlItemComponent } from './shared/components/item/item.component';
 import { AccountReportsServiceControlItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { AccountReportsServiceControlHeaderComponent } from './shared/components/header/header.component';
+import { AccountReportsServiceControlFiltersComponent } from './shared/components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AccountReportsServiceControlHeaderComponent } from './shared/components
     AccountReportsServiceControlItemsComponent,
     AccountReportsServiceControlItemComponent,
     AccountReportsServiceControlItemsHeaderComponent,
-    AccountReportsServiceControlHeaderComponent
+    AccountReportsServiceControlHeaderComponent,
+    AccountReportsServiceControlFiltersComponent
   ],
   imports: [
     CommonModule,
