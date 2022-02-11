@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { AccountJobsFilterForm } from '../../forms';
 
 @Component({
-  selector: 'account-jobs-filters',
+  selector: 'jobs-filters',
   templateUrl: 'filters.html',
   styleUrls: ['filters.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

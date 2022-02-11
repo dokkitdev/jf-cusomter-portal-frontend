@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { AccountJobsItemComponentFacade } from './item.facade';
 
 @Component({
-  selector: 'account-jobs-item',
+  selector: 'jobs-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

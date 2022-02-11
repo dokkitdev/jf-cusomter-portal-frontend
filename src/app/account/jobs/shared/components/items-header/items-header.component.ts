@@ -5,7 +5,7 @@ import { AccountJobsPageFacade } from '../../../jobs.facade';
 import { AccountJobsQueryParameters } from '../../models';
 
 @Component({
-  selector: 'account-jobs-items-header',
+  selector: 'jobs-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

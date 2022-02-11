@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AccountSitesViewPageFacade } from '../../../view.facade';
 
 @Component({
-  selector: 'account-sites-view-header',
+  selector: 'sites-view-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

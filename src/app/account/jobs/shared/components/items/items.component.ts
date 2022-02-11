@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'account-jobs-items',
+  selector: 'jobs-items',
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
