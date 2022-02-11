@@ -20,7 +20,6 @@ export class AccountLeftSidebarFacade {
     return this.userService.isAdmin$;
   }
 
-
   public get isReportsMenuOpened$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isReportsMenuOpened);
   }
