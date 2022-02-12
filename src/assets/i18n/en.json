@@ -60,6 +60,8 @@
       "LINK_SITES": "Sites",
       "LINK_ASSETS": "Assets",
       "LINK_REPORTS": "Reports",
+      "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
+      "LINK_REPORTS_REPAIR_RESPONSE": "Repair Response",
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
@@ -149,6 +151,11 @@
           "TEXT_ERROR": "Something went wrong. Please try again.",
           "TEXT_SITE_UPDATED": "Site has been successfully updated"
         }
+      }
+    },
+    "REPORTS": {
+      "SERVICE_CONTROL": {
+        "TEXT_PAGE_TITLE": "Service Control Report"
       }
     },
     "ADMIN": {
