@@ -2,7 +2,7 @@ export enum JobSortField {
   JOB_ID = 'simpro_job_id',
   ORDER_NO = 'order_no',
   CUSTOMER_NAME = 'customer.name',
-  UPRN = 'uprn',
+  SITE_UPRN = 'site.uprn',
   SITE_NAME = 'site.name',
   POSTCODE = 'site.postal_code',
   COST_CENTER = 'cost_center_name',
