@@ -1,0 +1,5 @@
+<div class="jobview-notes-item">
+  <div class="jobview-notes-date">{{ item.date | date: dateFormat }}</div>
+  <div class="jobview-notes-author">{{ item.name }}</div>
+  <div [innerHTML]="description" class="jobview-notes-description"></div>
+</div>

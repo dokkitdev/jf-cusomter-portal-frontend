@@ -1,0 +1,41 @@
+@import 'vars';
+
+:host ::ng-deep .jobview {
+  .page-title {display: flex; align-items: center;}
+  .loading-spinner {margin-top: 100px;}
+  .table-cell:first-child {padding-left: 8px;}
+  .table-cell:last-child {padding-right: 8px;}
+  .row {margin: 0 -40px;}
+  .col {padding: 0 40px;}
+  .badge {
+    &-pending {background-color: $light-yellow; color: $dark-yellow;}
+    &-complete {background-color: $light-green; color: $dark-green;}
+    &-archived {background-color: $light-red; color: $dark-red;}
+  }
+  &-schedules {
+    &-engineer {flex: 1 1 140px; min-width: 140px;}
+    &-date {flex: 1 1 120px; min-width: 120px;}
+    &-time {flex: 0 0 120px; min-width: 120px;}
+    .table-row {padding: 0;}
+  }
+  &-catalogs {
+    &-quantity {flex: 0 0 46px; min-width: 46px;}
+    &-name {flex: 1 1 120px; min-width: 120px;}
+    .table-row {padding: 0;}
+    &-more {display: block; position: relative; padding: 10px 0;
+      &:after {content: ''; position: absolute; top: 6px; left: 0; right: 0; margin: 0 auto;
+        width: 0; height: 0; border-style: solid; border-width: 6px 6px 0 6px;
+        border-color: transparent; border-top-color: #000;
+      }
+      &-opened:after {transform: rotateX(180deg);}
+    }
+  }
+  &-attachment {margin-bottom: 4px; font-size: $middle; word-break: break-all;
+    &:last-child {margin-bottom: 0;}
+  }
+  &-notes {
+    &-item {margin-bottom: 32px;}
+    &-date {color: $gray; margin-bottom: 2px; font-size: $small;}
+    &-author {margin-bottom: 12px; font-size: $middle; font-weight: 700;}
+  }
+}

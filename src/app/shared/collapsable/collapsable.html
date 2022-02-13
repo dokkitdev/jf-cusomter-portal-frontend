@@ -1,0 +1,13 @@
+<div
+  *ngrxLet="isCollapsed$; let isCollapsed"
+  [ngClass]="{ expand: !isCollapsed }"
+  class="collapsable"
+  collapsable>
+  <div class="collapsable-content">
+    <ng-content></ng-content>
+  </div>
+  <a
+    (click)="toggleCollapseClicked()"
+    class="collapsable-toggle">
+  </a>
+</div>

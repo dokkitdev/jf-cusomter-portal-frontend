@@ -1,4 +1,5 @@
 export * from './attachment';
+export * from './catalog';
 export * from './cost-center';
 export * from './filters';
 export * from './job';
@@ -7,3 +8,4 @@ export * from './priority';
 export * from './request';
 export * from './schedule';
 export * from './status';
+export * from './work-order';

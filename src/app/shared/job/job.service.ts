@@ -41,6 +41,14 @@ export class JobService {
       );
   }
 
+  public get(id: number, relations?: Array<JobRelationType>): Observable<Job> {
+    return this.apiService
+      .get<Job>(`${this.endpoint}/${id}`, omitBy({ with: relations }, isUndefined))
+      .pipe(
+        map((response) => plainToClass(Job, response, { groups: [ClassGroup.MAIN] }))
+      );
+  }
+
   public getCostCenters(): Observable<Array<JobCostCenter>> {
     return this.apiService
       .get(`${this.endpoint}/cost-centers`)
