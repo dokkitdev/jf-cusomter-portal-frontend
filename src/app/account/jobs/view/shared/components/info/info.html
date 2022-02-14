@@ -34,6 +34,10 @@
   </div>
   <div class="col col-50">
     <section>
+      <property *ngIf="job.orderNo">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_WORK_ORDER' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.orderNo }}</ng-container>
+      </property>
       <property *ngIf="job.dateCreated">
         <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_DATE_OPENED' | translate }}</ng-container>
         <ng-container ngProjectAs="value">{{ job.dateCreated | date: dateFormat }}</ng-container>
