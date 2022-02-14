@@ -132,7 +132,7 @@ export class AccountJobsViewPageFacade {
           this.jobService
             .downloadAttachment(attachment.id)
             .pipe(
-              tap((response) => this.fileService.saveFile(response, attachment.name))
+              tap((response) => this.fileService.openInNewTab(response))
             )
         )
       )
