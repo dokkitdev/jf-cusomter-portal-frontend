@@ -635,6 +635,42 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   &:last-child {margin-right: 0; margin-bottom: 0;}
 }
 
+/* property */
+.property {display: flex; margin-bottom: 20px;
+  &-name {flex: 1 1 auto; position: relative; overflow: hidden; margin-right: 2px;
+    &:after {content: ''; position: absolute; width: 100%; top: 15px;
+      margin-left: 2px; border-bottom: 1px $light-gray dotted;
+    }
+  }
+  &-value {width: 300px;}
+}
+
+/* page section */
+.section {margin-bottom: 60px;
+  &-title {display: flex; align-items: center; margin-bottom: 24px;
+    &-icon {width: 30px; height: 30px; padding: 13px;
+      border-radius: 16px; background-color: $lighter-gray;
+    }
+    &-name {margin-left: 16px; font-size: $large; font-weight: 700;}
+  }
+  &-nocontent {font-size: $big; color: $dark-gray;}
+}
+
+/* collapsable */
+.collapsable {
+  &-content {max-height: 200px; overflow: hidden;}
+  &-toggle {display: block; position: relative; padding: 10px 0;
+    &:after {content: ''; position: absolute; top: 6px; left: 0; right: 0; margin: 0 auto;
+      width: 0; height: 0; border-style: solid; border-width: 6px 6px 0 6px;
+      border-color: transparent; border-top-color: #000;
+    }
+  }
+  &.expand {
+    .collapsable-content {max-height: unset;}
+    .collapsable-toggle:after {transform: rotateX(180deg);}
+  }
+}
+
 /* auth pages */
 .auth {padding: 5rem 0; background: $lighter-gray; background-size: cover;
   .page-title {text-align: center; position: relative; margin: 0 -4.5rem 3rem;}

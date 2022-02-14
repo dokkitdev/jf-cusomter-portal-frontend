@@ -5,6 +5,8 @@ import { Site } from '@shared/site';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { DateTime } from 'luxon';
 import { JobAttachment } from './attachment';
+import { JobCatalog } from './catalog';
+import { JobWorkOrder } from './work-order';
 import { JobStage } from '../enums';
 
 export class Job {
@@ -66,6 +68,10 @@ export class Job {
   @Expose({ name: 'made_safe_date', groups: [ClassGroup.MAIN] })
   public madeSafeDate: DateTime;
 
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'requested', groups: [ClassGroup.MAIN] })
+  public requestedDate: DateTime;
+
   @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
   @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })
   public createdAt: DateTime;
@@ -88,7 +94,15 @@ export class Job {
 
   @Type(() => JobAttachment)
   @Expose({ name: 'job_attachments', groups: [ClassGroup.MAIN] })
-  public attachments?: Array<JobAttachment>;
+  public attachments: Array<JobAttachment>;
+
+  @Type(() => JobCatalog)
+  @Expose({ name: 'job_catalogs', groups: [ClassGroup.MAIN] })
+  public catalogs: Array<JobCatalog>;
+
+  @Type(() => JobWorkOrder)
+  @Expose({ name: 'job_work_orders', groups: [ClassGroup.MAIN] })
+  public workOrders: Array<JobWorkOrder>;
 
   constructor(model: Partial<Job> = {}) {
     Object.assign(this, model);

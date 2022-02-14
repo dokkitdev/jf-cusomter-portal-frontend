@@ -60,7 +60,7 @@
       <ng-container *ngIf="item.recentSchedule">
         <div>{{ item.recentSchedule.date | date: dateFormat }}</div>
         <div>
-          {{ item.recentSchedule.startTime | date: timeFormat }} - {{ item.recentSchedule.endTime | date: timeFormat }}
+          {{ item.recentSchedule.startTime | date: timeFormat }}–{{ item.recentSchedule.endTime | date: timeFormat }}
         </div>
       </ng-container>
     </div>

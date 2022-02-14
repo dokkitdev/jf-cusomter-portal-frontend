@@ -79,5 +79,8 @@ export const initConfiguration = (configuration: any): any =>
       phone: {
         mask: /^[\w\d()+ ]+$/
       }
+    },
+    collapsable: {
+      height: 200
     }
   }, configuration);

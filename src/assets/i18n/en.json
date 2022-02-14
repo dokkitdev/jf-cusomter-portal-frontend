@@ -104,6 +104,36 @@
         "TEXT_APPOINTMENT_TO": "Appointment To",
         "TEXT_SCHEDULED_AFTER": "Scheduled After",
         "TEXT_SCHEDULED_BEFORE": "Scheduled Before"
+      },
+      "VIEW": {
+        "TEXT_PAGE_TITLE": "Job",
+        "TEXT_WORK_ORDER": "Work Order",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_ADDRESS": "Address",
+        "TEXT_DESCRIPTION": "Description",
+        "TEXT_DATE_OPENED": "Date Opened",
+        "TEXT_REQUESTED": "Requested",
+        "TEXT_PRIORITY": "Priority",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_DUE_DATE": "Due Date",
+        "TEXT_MADE_SAFE": "Made Safe",
+        "TEXT_ATTACHMENTS": "Attachments",
+        "TEXT_ENGINEERS": "Engineers",
+        "TEXT_NOTES": "Work Notes",
+        "TEXT_SORS": "Parts Used",
+        "ENGINEERS": {
+          "ITEMS_HEADER": {
+            "TEXT_ENGINEER": "Engineer",
+            "TEXT_DATE": "Appointment Date",
+            "TEXT_TIME": "Scheduled Time"
+          }
+        },
+        "SORS": {
+          "TEXT_QUANTITY": "x{{ quantity }}"
+        }
       }
     },
     "SITES": {
@@ -387,6 +417,9 @@
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
+    },
+    "SECTION": {
+      "TEXT_NO_CONTENT": "No content"
     },
     "JOB_STAGE": {
       "TEXT_PENDING": "Pending",

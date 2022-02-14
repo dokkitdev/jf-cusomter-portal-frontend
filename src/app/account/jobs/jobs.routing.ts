@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: AccountJobsPageComponent
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./view/view.module').then((module) => module.AccountJobsViewPageModule)
   }
 ];
 
