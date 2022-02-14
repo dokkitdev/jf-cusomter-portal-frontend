@@ -16,7 +16,7 @@ export class AccountSitesViewPageState {
     this.isSubmitting = false;
     this.site = new Site();
     this.contacts = [];
-    this.relations = ['customers', 'site_contacts', 'primary_site_contact'];
+    this.relations = ['customer', 'site_contacts', 'primary_site_contact'];
     this.formState = createFormGroupState('AccountSiteViewEditForm', new AccountSiteViewEditForm());
   }
 }
