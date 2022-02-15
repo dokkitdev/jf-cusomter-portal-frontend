@@ -6,4 +6,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['admin.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountAdminPageComponent {}
+export class AccountAdminPageComponent {
+  ngOnInit(): void {
+    console.log('fff');
+  }
+}
