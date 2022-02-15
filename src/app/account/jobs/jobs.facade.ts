@@ -3,9 +3,18 @@ import { configuration } from '@configurations';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
-import { Job, JobCountRelationType, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
+import {
+  Job,
+  JobCountRelationType,
+  JobFilters,
+  JobRelationType,
+  JobService,
+  JobSortField,
+  JobStage
+} from '@shared/job';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
@@ -76,7 +85,9 @@ export class AccountJobsPageFacade {
       appointmentFrom: state.filterFormState.value.appointmentFrom,
       appointmentTo: state.filterFormState.value.appointmentTo,
       startTimeFrom: state.filterFormState.value.startTimeFrom,
-      startTimeTo: state.filterFormState.value.startTimeTo
+      startTimeTo: state.filterFormState.value.startTimeTo,
+      dateCreated: state.filterFormState.value.dateCreated,
+      outOfHours: state.filterFormState.value.outOfHours
     }));
   }
 
@@ -111,6 +122,8 @@ export class AccountJobsPageFacade {
           stage: (unbox(filterFormStateValue.stage).length) ? unbox(filterFormStateValue.stage) : undefined,
           appointmentFrom: filterFormStateValue.appointmentFrom || undefined,
           appointmentTo: filterFormStateValue.appointmentTo || undefined,
+          dateCreated: filterFormStateValue.dateCreated || undefined,
+          outOfHours: filterFormStateValue.outOfHours,
           startTimeFrom: (filterFormStateValue.startTimeFrom) ? DateTime.fromISO(filterFormStateValue.startTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
           startTimeTo: (filterFormStateValue.startTimeTo) ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
         }))
@@ -124,6 +137,18 @@ export class AccountJobsPageFacade {
 
       if (formState.value.siteID) {
         filterValues.push(this.createFilterValue(formState.controls.siteID));
+      }
+      if (formState.value.dateCreated) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.dateCreated.id,
+          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_CREATED_TODAY')
+        }));
+      }
+      if (formState.value.outOfHours) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.outOfHours.id,
+          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_OUT_OF_HOURS')
+        }));
       }
       if (formState.value.jobID) {
         filterValues.push(this.createFilterValue(formState.controls.jobID));
@@ -177,7 +202,8 @@ export class AccountJobsPageFacade {
   constructor(
     private readonly componentStore: ComponentStore<AccountJobsPageState>,
     private readonly store: Store<AppState>,
-    private readonly jobService: JobService
+    private readonly jobService: JobService,
+    private readonly translateService: TranslateService
   ) {
     this.resetState();
 
@@ -335,6 +361,8 @@ export class AccountJobsPageFacade {
             stage: setValue((parameters.stage) ? box(parameters.stage) : state.filterFormState.value.stage),
             appointmentFrom: setValue(parameters.appointmentFrom || state.filterFormState.value.appointmentFrom),
             appointmentTo: setValue(parameters.appointmentTo || state.filterFormState.value.appointmentTo),
+            dateCreated: setValue(parameters.dateCreated || state.filterFormState.value.dateCreated),
+            outOfHours: setValue((parameters.outOfHours !== undefined) ? parameters.outOfHours : state.filterFormState.value.outOfHours),
             startTimeFrom: setValue(parameters.startTimeFrom || state.filterFormState.value.startTimeFrom),
             startTimeTo: setValue(parameters.startTimeTo || state.filterFormState.value.startTimeTo)
           }
@@ -364,6 +392,8 @@ export class AccountJobsPageFacade {
             stage: (queryParams.stage) ? castArray(queryParams.stage) : undefined,
             appointmentFrom: queryParams.appointmentFrom || undefined,
             appointmentTo: queryParams.appointmentTo || undefined,
+            dateCreated: queryParams.dateCreated || undefined,
+            outOfHours: (queryParams.outOfHours !== undefined) ? queryParams.outOfHours === 'true' : undefined,
             startTimeFrom: queryParams.startTimeFrom || undefined,
             startTimeTo: queryParams.startTimeTo || undefined
           });
@@ -420,6 +450,8 @@ export class AccountJobsPageFacade {
               stage: filters.stage,
               appointmentFrom: filters.appointmentFrom,
               appointmentTo: filters.appointmentTo,
+              dateCreated: filters.dateCreated,
+              outOfHours: filters.outOfHours,
               startTimeFrom: parameters.startTimeFrom || undefined,
               startTimeTo: parameters.startTimeTo || undefined
             }

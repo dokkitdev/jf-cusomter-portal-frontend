@@ -17,6 +17,8 @@ export class AccountJobsQueryParameters {
   public appointmentTo: string;
   public startTimeFrom: string;
   public startTimeTo: string;
+  public dateCreated: string;
+  public outOfHours: boolean;
 
   constructor(model: Partial<AccountJobsQueryParameters> = {}) {
     Object.assign(this, model);
