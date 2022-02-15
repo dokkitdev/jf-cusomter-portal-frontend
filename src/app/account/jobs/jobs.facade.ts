@@ -6,7 +6,15 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
-import { Job, JobCountRelationType, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
+import {
+  Job,
+  JobCountRelationType,
+  JobFilters,
+  JobRelationType,
+  JobService,
+  JobSortField,
+  JobStage
+} from '@shared/job';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
@@ -130,6 +138,18 @@ export class AccountJobsPageFacade {
       if (formState.value.siteID) {
         filterValues.push(this.createFilterValue(formState.controls.siteID));
       }
+      if (formState.value.dateCreated) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.dateCreated.id,
+          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_CREATED_TODAY')
+        }));
+      }
+      if (formState.value.outOfHours) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.outOfHours.id,
+          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_OUT_OF_HOURS')
+        }));
+      }
       if (formState.value.jobID) {
         filterValues.push(this.createFilterValue(formState.controls.jobID));
       }
@@ -163,23 +183,11 @@ export class AccountJobsPageFacade {
           value: DateTime.fromISO(formState.value.appointmentTo).toFormat(configuration.dateFormats.filterDate)
         }));
       }
-      if (formState.value.dateCreated) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.dateCreated.id,
-          value: DateTime.fromISO(formState.value.dateCreated).toFormat(configuration.dateFormats.filterDate)
-        }));
-      }
       if (formState.value.startTimeFrom) {
         filterValues.push(this.createFilterValue(formState.controls.startTimeFrom));
       }
       if (formState.value.startTimeTo) {
         filterValues.push(this.createFilterValue(formState.controls.startTimeTo));
-      }
-      if (formState.value.outOfHours) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.outOfHours.id,
-          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_OUT_OF_HOURS')
-        }));
       }
 
       return filterValues;
