@@ -14,8 +14,7 @@ export class AccountJobsFilterForm {
   public appointmentTo: string;
   public startTimeFrom: string;
   public startTimeTo: string;
-  public dateCreatedFrom: string;
-  public dateCreatedTo: string;
+  public dateCreated: string;
 
   constructor() {
     this.jobID = undefined;
@@ -30,7 +29,6 @@ export class AccountJobsFilterForm {
     this.appointmentTo = '';
     this.startTimeFrom = '';
     this.startTimeTo = '';
-    this.dateCreatedFrom = '';
-    this.dateCreatedTo = '';
+    this.dateCreated = '';
   }
 }
