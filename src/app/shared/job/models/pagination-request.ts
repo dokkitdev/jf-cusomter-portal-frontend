@@ -10,7 +10,7 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'with' })
   public relations?: Array<JobRelationType>;
 
-  @Expose({ name: 'job_id' })
+  @Expose({ name: 'simpro_job_id' })
   public jobID?: number;
 
   @Expose({ name: 'customer_name' })
@@ -19,11 +19,8 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'site_name' })
   public siteName?: string;
 
-  @Expose({ name: 'simpro_customer_id' })
-  public simproCustomerID?: number;
-
-  @Expose({ name: 'simpro_site_id' })
-  public simproSiteID?: number;
+  @Expose({ name: 'site_id' })
+  public siteID?: number;
 
   @Expose({ name: 'postal_code' })
   public postalCode?: string;
@@ -38,10 +35,13 @@ export class JobPaginationRequest extends PaginationRequest {
   public stage?: Array<JobStage>;
 
   @Expose({ name: 'job_status' })
-  public jobStatus?: Array<string>;
+  public status?: Array<string>;
+
+  @Expose({ name: 'order_no' })
+  public orderNo?: string;
 
   @Expose()
-  public requested?: boolean;
+  public uprn?: string;
 
   @Expose({ name: 'appointment_from' })
   public appointmentFrom?: string;
@@ -60,6 +60,12 @@ export class JobPaginationRequest extends PaginationRequest {
 
   @Expose({ name: 'end_time_to' })
   public endTimeTo?: string;
+
+  @Expose({ name: 'date_created' })
+  public dateCreated?: string;
+
+  @Expose({ name: 'out_of_hours' })
+  public outOfHours?: boolean;
 
   constructor(model: Partial<JobPaginationRequest> = {}) {
     super(model);

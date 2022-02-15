@@ -1,0 +1,11 @@
+<section
+  [isNoContent]="!notes?.length"
+  name="{{ 'ACCOUNT.JOBS.VIEW.TEXT_NOTES' | translate }}">
+  <span ngProjectAs="section-icon" class="icon icon-edit icon-mask icon-mask-dark-blue"></span>
+  <div class="jobview-notes">
+    <jobs-view-notes-item
+      *ngFor="let item of notes; trackByProperty: 'id'"
+      [item]="item">
+    </jobs-view-notes-item>
+  </div>
+</section>

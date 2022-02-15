@@ -27,10 +27,9 @@ export const initConfiguration = (configuration: any): any =>
     dateFormats: {
       jobDate: 'MMM dd, yyyy',
       jobTime: 'H:mm',
+      madeSafeDate: 'dd-MM-yyyy',
+      madeSafeTime: 'HH:mm',
       scheduleFilter: 'yyyy-MM-dd HH:mm:ss',
-      invoiceDate: 'dd/MM/yyyy',
-      quoteDate: 'dd/MM/yyyy',
-      quoteIssuedDate: 'MMM dd, yyyy',
       assetDate: 'dd/MM/yyyy',
       documentDate: 'dd/MM/yyyy',
       filterDate: 'dd/MM/yyyy',
@@ -59,10 +58,10 @@ export const initConfiguration = (configuration: any): any =>
       tapToDismiss: false
     },
     allowedFileExtensions: {
-      default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.docx']
+      default: ['.jpeg', '.jpg', '.png', '.bmp', '.pdf', '.doc', '.docx']
     },
     maxFileSize: {
-      default: 5242880,
+      default: 15728640,
       jobAttachment: 10485760
     },
     fileSize: {
@@ -80,5 +79,8 @@ export const initConfiguration = (configuration: any): any =>
       phone: {
         mask: /^[\w\d()+ ]+$/
       }
+    },
+    collapsable: {
+      height: 200
     }
   }, configuration);

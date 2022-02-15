@@ -71,6 +71,88 @@
         "TEXT_TITLE": "Log out?"
       }
     },
+    "DASHBOARD": {
+      "TEXT_PAGE_TITLE": "Dashboard",
+      "TEXT_JOBS": "Jobs",
+      "LINK_TODAYS": "Todays",
+      "LINK_OUT_OF_HOURS": "Out of hours",
+      "LINK_PENDING_JOBS": "Pending",
+      "LINK_IN_PROGRESS_JOBS": "In Progress",
+      "LINK_COMPLETED_JOBS": "Completed",
+      "LINK_INVOICED_JOBS": "Invoiced",
+      "LINK_ARCHIVED_JOBS": "Archived",
+      "LINK_SITES": "Sites",
+      "LINK_ASSETS": "Assets",
+      "LINK_DOCUMENTS": "Documents",
+      "LINK_SERVICE_CONTROL_REPORT": "Service Control Report",
+      "LINK_KPI_REPORT": "KPI Report",
+      "NOTIFICATIONS": {
+        "TEXT_ERROR": "Something went wrong. Please try again."
+      }
+    },
+    "JOBS": {
+      "TEXT_PAGE_TITLE": "Jobs",
+      "TEXT_CREATED": "Created",
+      "TEXT_DESCRIPTION": "Description:",
+      "ITEMS_HEADER": {
+        "TEXT_JOB": "Job ID",
+        "TEXT_ORDER_NO": "Order No",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COST_CENTRE": "Cost Centre",
+        "TEXT_PRIORITY": "Priority",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_MADE_SAFE": "Made Safe",
+        "TEXT_COMPLETION_DATE": "Completion Date",
+        "TEXT_DUE_DATE": "Due Date",
+        "TEXT_SCHEDULED_DATE": "Scheduled Date",
+        "TEXT_ATTACHMENTS": "Attachments"
+      },
+      "FILTERS": {
+        "TEXT_ID": "Job ID",
+        "TEXT_ORDER_NO": "Order No",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_POSTCODE": "Postcode",
+        "TEXT_COST_CENTRE": "Cost Centre",
+        "TEXT_STAGE": "Stage",
+        "TEXT_APPOINTMENT_FROM": "Appointment From",
+        "TEXT_APPOINTMENT_TO": "Appointment To",
+        "TEXT_SCHEDULED_AFTER": "Scheduled After",
+        "TEXT_SCHEDULED_BEFORE": "Scheduled Before",
+        "TEXT_OUT_OF_HOURS": "Out of hours",
+        "TEXT_CREATED_TODAY": "Created today"
+      },
+      "VIEW": {
+        "TEXT_PAGE_TITLE": "Job",
+        "TEXT_WORK_ORDER": "Work Order",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_ADDRESS": "Address",
+        "TEXT_DESCRIPTION": "Description",
+        "TEXT_DATE_OPENED": "Date Opened",
+        "TEXT_REQUESTED": "Requested",
+        "TEXT_PRIORITY": "Priority",
+        "TEXT_STAGE": "Stage",
+        "TEXT_STATUS": "Status",
+        "TEXT_DUE_DATE": "Due Date",
+        "TEXT_MADE_SAFE": "Made Safe",
+        "TEXT_ATTACHMENTS": "Attachments",
+        "TEXT_ENGINEERS": "Engineers",
+        "TEXT_NOTES": "Work Notes",
+        "ENGINEERS": {
+          "ITEMS_HEADER": {
+            "TEXT_ENGINEER": "Engineer",
+            "TEXT_DATE": "Appointment Date",
+            "TEXT_TIME": "Scheduled Time"
+          }
+        }
+      }
+    },
     "SITES": {
       "TEXT_PAGE_TITLE": "Sites",
       "ITEMS_HEADER": {
@@ -213,7 +295,7 @@
         "TEXT_INTERNAL_ADMIN": "Internal Admin",
         "TEXT_CUSTOMER": "Customer",
         "TEXT_SEND_INVITE": "Send invite?",
-        "TEXT_SEND_EMAIL": "Don't send email",
+        "TEXT_SEND_EMAIL": "Send email",
         "BUTTON_CANCEL": "Cancel",
         "BUTTON_CREATE": "Create",
         "BUTTON_UPDATE": "Update",
@@ -352,6 +434,9 @@
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
+    },
+    "SECTION": {
+      "TEXT_NO_CONTENT": "No content"
     },
     "JOB_STAGE": {
       "TEXT_PENDING": "Pending",

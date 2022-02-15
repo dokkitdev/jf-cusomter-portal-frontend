@@ -5,7 +5,7 @@ import { AccountSitesPageFacade } from '../../../sites.facade';
 import { AccountSitesQueryParameters } from '../../models';
 
 @Component({
-  selector: 'account-sites-items-header',
+  selector: 'sites-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

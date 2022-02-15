@@ -1,0 +1,30 @@
+@import 'vars';
+
+:host ::ng-deep .dashboard {
+  .statistic {display: flex; align-items: center; padding: 20px; padding-right: 52px;
+    margin-bottom: 32px; border-radius: 12px; box-shadow: 0px 10px 70px 0px rgba(0, 0, 0, 0.05);
+    &-icon {padding: 23px 31px 13px; margin-right: 32px; border-radius: 12px;
+      pointer-events: none;
+      &-name {margin-top: 4px; text-align: center;}
+      &-blue {background-color: rgba($primary, 0.1);
+        .icon:before {background-color: $primary;}
+        .statistic-icon-name {color: $primary;}
+      }
+    }
+    &-items {display: flex; justify-content: space-between; width: 100%;}
+    &-item {display: block; color: $primary-dark; transition: 0.3s all;
+      &:hover {color: $primary;}
+      &-value, &-name {display: block;}
+      &-value {margin-bottom: 10px; font-size: $largest; font-weight: 700; line-height: 3.33rem;}
+    }
+    &-link {width: 100%; margin-bottom: 32px; padding: 32px 0; border-radius: 24px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background-color: rgba($light-gray, 0.1); color: $primary-dark;
+      &:hover {background-color: $primary-light;}
+      &-name {margin-top: 14px;}
+    }
+  }
+  .loading-spinner {margin: 150px auto;}
+  .row {margin: 0 -16px;}
+  .col {padding: 0 16px;}
+}

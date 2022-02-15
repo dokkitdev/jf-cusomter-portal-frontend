@@ -51,6 +51,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     &:before {content: ''; width: 30px; height: 30px; display: inline-block; background-color: $white;}
     &-red:before {background-color: $error;}
     &-dark-blue:before {background-color: $text-main;}
+    &-big:before {width: 90px; height: 90px;}
   }
   &-job {--bg-position: 0 0;
     &-big {--bg-position: 0 -157px; width: 90px; height: 90px;}
@@ -466,7 +467,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* material datepicker */
 .form-group-datepicker {position: relative;
   &-toggler {position: absolute; right: 0; left: 0; top: 0; bottom: 0;
-    z-index: 999;
+    z-index: 999; cursor: pointer;
   }
   .mat-form-field {max-width: 100%;
     &.mat-form-field-should-float .mat-form-field-label {opacity: 0;}
@@ -485,7 +486,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     &:disabled {background-color: $lightest-gray; pointer-events: none;}
   }
   &-icon {position: absolute; top: 0; right: 0;
-    display: inline-block; width: 9px; height: 6px; margin: 20px;
+    display: inline-block; width: 8px; height: 6px; margin: 20px;
     margin: 20px; background-color: $primary-dark; transition: 0.3s all;
     mask-image: url(/assets/images/arrow-down.svg); mask-position: 0 0;
   }
@@ -534,6 +535,34 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       &-selected {border-color: transparent !important; background-color: #000 !important; color: #fff;}
       &-today {box-shadow: none;}
     }
+  }
+}
+
+/* accordion plus */
+.accordionplus {display: block; width: 30px; height: 30px; border: 0; position: relative;
+  opacity: 0.6; transition: 0.3s all;
+  &:hover {opacity: 1;}
+  &:after, &:before {content: ''; position: absolute; transition: 0.3s all; background: #000; border-radius: 2px;}
+  &:before {top: 25%; bottom: 25%; width: 10%; left: 45%;}
+  &:after {left: 25%; right: 25%; height: 10%; top: 45%;}
+  &-opened {
+    &:after, &:before {transform: rotate(90deg);}
+    &:after {left: 50%; right: 50%;}
+  }
+}
+
+/* timepicker */
+.form-group-timepicker {position: relative; width: 150px;
+  margin-right: 8px; vertical-align: text-bottom;
+  &-icon {position: absolute; top: 0; right: 0;
+    display: inline-block; width: 8px; height: 6px; margin: 9px 7px;
+    mask-image: url(/assets/images/arrow-down.svg); mask-position: 0 0;
+    background-color: $primary-dark; transition: 0.3s all;
+  }
+  .form-control {padding: 1px 22px 1px 10px; font-size: $small; color: $primary-dark; cursor: pointer;
+    border-radius: 8px; border: none;
+    &:focus {border-color: transparent;}
+    &::placeholder {color: $primary-dark;}
   }
 }
 
@@ -596,7 +625,54 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     border-radius: 3px; overflow: hidden;
     &-name {position: absolute; padding: 7px 8px; color: #fff; white-space: nowrap;}
   }
+  &.disabled {
+    &, .multiuploader-item-actions {pointer-events: none;}
+  }
   media-multiselect-item:last-child .multiuploader-item {margin-bottom: 0;}
+}
+
+/* badge */
+.badge {display: inline-block; border-radius: 6px; padding: 1px 8px;
+  line-height: 20px; font-size: $small; pointer-events: none;
+  margin-right: 8px; margin-bottom: 6px; color: $dark-blue;
+  background-color: $light-blue;
+  &:last-child {margin-right: 0; margin-bottom: 0;}
+}
+
+/* property */
+.property {display: flex; margin-bottom: 20px;
+  &-name {flex: 1 1 auto; position: relative; overflow: hidden; margin-right: 2px;
+    &:after {content: ''; position: absolute; width: 100%; top: 15px;
+      margin-left: 2px; border-bottom: 1px $light-gray dotted;
+    }
+  }
+  &-value {width: 300px;}
+}
+
+/* page section */
+.section {margin-bottom: 60px;
+  &-title {display: flex; align-items: center; margin-bottom: 24px;
+    &-icon {width: 30px; height: 30px; padding: 13px;
+      border-radius: 16px; background-color: $lighter-gray;
+    }
+    &-name {margin-left: 16px; font-size: $large; font-weight: 700;}
+  }
+  &-nocontent {font-size: $big; color: $dark-gray;}
+}
+
+/* collapsable */
+.collapsable {
+  &-content {max-height: 200px; overflow: hidden;}
+  &-toggle {display: block; position: relative; padding: 10px 0;
+    &:after {content: ''; position: absolute; top: 6px; left: 0; right: 0; margin: 0 auto;
+      width: 0; height: 0; border-style: solid; border-width: 6px 6px 0 6px;
+      border-color: transparent; border-top-color: #000;
+    }
+  }
+  &.expand {
+    .collapsable-content {max-height: unset;}
+    .collapsable-toggle:after {transform: rotateX(180deg);}
+  }
 }
 
 /* auth pages */
@@ -610,11 +686,10 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* page filters */
 .selectedfilter {display: inline-block; padding: 4px 10px;
   margin-right: 8px; margin-bottom: 4px; border-radius: 8px;
-  background-color: $light-blue; color: $primary-dark;
+  background-color: $light-blue; color: $dark-blue;
   &-title {margin-right: 12px; pointer-events: none;}
-  &-pending {color: $dark-blue;}
-  &-opened {background-color: $light-green; color: $dark-green;}
-  &-completed {background-color: $light-yellow; color: $dark-yellow;}
+  &-pending {background-color: $light-yellow; color: $dark-yellow;}
+  &-completed {background-color: $light-green; color: $dark-green;}
   &-canceled {background-color: $light-red; color: $dark-red;}
   .icon {margin: -5px -10px; opacity: 0.6; transition: 0.3s all; cursor: pointer;
     &:before {background-color: $dark-gray;}

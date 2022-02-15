@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AccountSitesFilterForm } from '../../forms';
 
 @Component({
-  selector: 'account-sites-filters',
+  selector: 'sites-filters',
   templateUrl: 'filters.html',
   styleUrls: ['filters.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

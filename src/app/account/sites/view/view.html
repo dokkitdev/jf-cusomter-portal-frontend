@@ -1,11 +1,11 @@
 <div *ngrxLet="site$; let site" class="page siteview">
-  <account-sites-view-header></account-sites-view-header>
+  <sites-view-header></sites-view-header>
   <loading-spinner
     *ngIf="isLoading$ | async; else details"
     [diameter]="spinnerDiameter.HUGE">
   </loading-spinner>
   <ng-template #details>
-    <account-sites-view-form></account-sites-view-form>
+    <sites-view-form></sites-view-form>
     <account-site-contacts
       [siteID]="site.id"
       [items]="contacts$ | async"

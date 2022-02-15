@@ -6,7 +6,7 @@ import { AccountSitesViewPageFacade } from '../../../view.facade';
 import { AccountSiteViewEditForm } from '../../forms';
 
 @Component({
-  selector: 'account-sites-view-form',
+  selector: 'sites-view-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

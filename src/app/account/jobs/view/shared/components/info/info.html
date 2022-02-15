@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col col-50">
+    <section>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_CUSTOMER' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.customer?.name }}</ng-container>
+      </property>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_SITE' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          <a [routerLink]="['/account/sites', job.site?.id]">{{ job.site?.name }}</a>
+        </ng-container>
+      </property>
+      <property *ngIf="job.site?.uprn">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_SITE_UPRN' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.site.uprn }}</ng-container>
+      </property>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_ADDRESS' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          <div>{{ job.site?.address }}</div>
+          <div>{{ job.site?.postalCode }}</div>
+        </ng-container>
+      </property>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_DESCRIPTION' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          <collapsable>
+            <span [innerHTML]="description"></span>
+          </collapsable>
+        </ng-container>
+      </property>
+    </section>
+  </div>
+  <div class="col col-50">
+    <section>
+      <property *ngIf="job.orderNo">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_WORK_ORDER' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.orderNo }}</ng-container>
+      </property>
+      <property *ngIf="job.dateCreated">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_DATE_OPENED' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.dateCreated | date: dateFormat }}</ng-container>
+      </property>
+      <property *ngIf="job.priority">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_PRIORITY' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.priority }}</ng-container>
+      </property>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_STAGE' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          <span
+            [ngClass]="{
+              'badge-archived': job.isArchived,
+              'badge-complete': job.isCompleted,
+              'badge-pending': job.isPending
+            }"
+            class="badge">
+            {{ 'SHARED.JOB_STAGE.TEXT_' + job.stage | uppercase | translate }}
+          </span>
+        </ng-container>
+      </property>
+      <property>
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_STATUS' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          <span
+            [ngClass]="{
+              'badge-archived': job.isArchived,
+              'badge-complete': job.isCompleted,
+              'badge-pending': job.isPending
+            }"
+            class="badge">
+            {{ job.status }}
+          </span>
+        </ng-container>
+      </property>
+      <property *ngIf="job.dueDate">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_DUE_DATE' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          {{ job.dueDate | date: dateFormat }},
+          {{ job.dueDate | date: timeFormat }}
+        </ng-container>
+      </property>
+      <property *ngIf="job.madeSafeDate">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_MADE_SAFE' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">
+          {{ job.madeSafeDate | date: dateFormat }},
+          {{ job.madeSafeDate | date: timeFormat }}
+        </ng-container>
+      </property>
+    </section>
+  </div>
+</div>

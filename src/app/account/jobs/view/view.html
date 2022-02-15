@@ -1,0 +1,25 @@
+<div *ngrxLet="job$; let job" class="page jobview">
+  <div class="page-header">
+    <h2 class="page-title">
+      <a (click)="backClicked()" class="link-back">
+        <span class="icon icon-back icon-mask icon-mask-dark-blue"></span>
+      </a>
+      {{ 'ACCOUNT.JOBS.VIEW.TEXT_PAGE_TITLE' | translate }} {{ job?.jobID }}
+    </h2>
+  </div>
+  <ng-container *ngIf="!(isLoading$ | async); else loading">
+    <jobs-view-info [job]="job"></jobs-view-info>
+    <div class="row">
+      <div class="col col-50">
+        <jobs-view-engineers [schedules]="job.schedules"></jobs-view-engineers>
+      </div>
+      <div class="col col-50">
+        <jobs-view-attachments [attachments]="job.attachments"></jobs-view-attachments>
+      </div>
+    </div>
+    <jobs-view-notes [notes]="job.workOrders"></jobs-view-notes>
+  </ng-container>
+  <ng-template #loading>
+    <loading-spinner [diameter]="spinnerDiameter.HUGE"></loading-spinner>
+  </ng-template>
+</div>
