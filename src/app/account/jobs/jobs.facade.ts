@@ -76,7 +76,9 @@ export class AccountJobsPageFacade {
       appointmentFrom: state.filterFormState.value.appointmentFrom,
       appointmentTo: state.filterFormState.value.appointmentTo,
       startTimeFrom: state.filterFormState.value.startTimeFrom,
-      startTimeTo: state.filterFormState.value.startTimeTo
+      startTimeTo: state.filterFormState.value.startTimeTo,
+      dateCreatedFrom: state.filterFormState.value.dateCreatedFrom,
+      dateCreatedTo: state.filterFormState.value.dateCreatedTo
     }));
   }
 
@@ -111,6 +113,8 @@ export class AccountJobsPageFacade {
           stage: (unbox(filterFormStateValue.stage).length) ? unbox(filterFormStateValue.stage) : undefined,
           appointmentFrom: filterFormStateValue.appointmentFrom || undefined,
           appointmentTo: filterFormStateValue.appointmentTo || undefined,
+          dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
+          dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined,
           startTimeFrom: (filterFormStateValue.startTimeFrom) ? DateTime.fromISO(filterFormStateValue.startTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
           startTimeTo: (filterFormStateValue.startTimeTo) ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
         }))
@@ -156,6 +160,18 @@ export class AccountJobsPageFacade {
         filterValues.push(new FilterValue({
           id: formState.controls.appointmentTo.id,
           value: DateTime.fromISO(formState.value.appointmentTo).toFormat(configuration.dateFormats.filterDate)
+        }));
+      }
+      if (formState.value.dateCreatedFrom) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.dateCreatedFrom.id,
+          value: DateTime.fromISO(formState.value.dateCreatedFrom).toFormat(configuration.dateFormats.filterDate)
+        }));
+      }
+      if (formState.value.dateCreatedTo) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.dateCreatedTo.id,
+          value: DateTime.fromISO(formState.value.dateCreatedTo).toFormat(configuration.dateFormats.filterDate)
         }));
       }
       if (formState.value.startTimeFrom) {
@@ -335,6 +351,8 @@ export class AccountJobsPageFacade {
             stage: setValue((parameters.stage) ? box(parameters.stage) : state.filterFormState.value.stage),
             appointmentFrom: setValue(parameters.appointmentFrom || state.filterFormState.value.appointmentFrom),
             appointmentTo: setValue(parameters.appointmentTo || state.filterFormState.value.appointmentTo),
+            dateCreatedFrom: setValue(parameters.dateCreatedFrom || state.filterFormState.value.dateCreatedFrom),
+            dateCreatedTo: setValue(parameters.dateCreatedTo || state.filterFormState.value.dateCreatedTo),
             startTimeFrom: setValue(parameters.startTimeFrom || state.filterFormState.value.startTimeFrom),
             startTimeTo: setValue(parameters.startTimeTo || state.filterFormState.value.startTimeTo)
           }
@@ -364,6 +382,8 @@ export class AccountJobsPageFacade {
             stage: (queryParams.stage) ? castArray(queryParams.stage) : undefined,
             appointmentFrom: queryParams.appointmentFrom || undefined,
             appointmentTo: queryParams.appointmentTo || undefined,
+            dateCreatedFrom: queryParams.dateCreatedFrom || undefined,
+            dateCreatedTo: queryParams.dateCreatedTo || undefined,
             startTimeFrom: queryParams.startTimeFrom || undefined,
             startTimeTo: queryParams.startTimeTo || undefined
           });
@@ -420,6 +440,8 @@ export class AccountJobsPageFacade {
               stage: filters.stage,
               appointmentFrom: filters.appointmentFrom,
               appointmentTo: filters.appointmentTo,
+              dateCreatedFrom: filters.dateCreatedFrom,
+              dateCreatedTo: filters.dateCreatedTo,
               startTimeFrom: parameters.startTimeFrom || undefined,
               startTimeTo: parameters.startTimeTo || undefined
             }

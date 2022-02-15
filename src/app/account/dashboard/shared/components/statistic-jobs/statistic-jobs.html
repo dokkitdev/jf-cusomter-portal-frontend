@@ -6,11 +6,19 @@
   <ng-container ngProjectAs="items">
     <dashboard-statistic-item
       [value]="statistic.todaysJobsTotal"
+      [queryParams]="{
+        stage: jobStage.PENDING,
+        dateCreatedFrom: '2022-02-15T00:00:00Z',
+        dateCreatedTo: '2022-02-15T23:59:59Z'
+      }"
       route="/account/jobs"
       name="{{ translations + 'LINK_TODAYS' | translate }}">
     </dashboard-statistic-item>
     <dashboard-statistic-item
       [value]="statistic.outOfHoursJobsTotal"
+      [queryParams]="{
+        stage: jobStage.PENDING
+      }"
       route="/account/jobs"
       name="{{ translations + 'LINK_OUT_OF_HOURS' | translate }}">
     </dashboard-statistic-item>
