@@ -15,6 +15,7 @@ export class AccountJobsFilterForm {
   public startTimeFrom: string;
   public startTimeTo: string;
   public dateCreated: string;
+  public outOfHours: boolean;
 
   constructor() {
     this.jobID = undefined;
@@ -30,5 +31,6 @@ export class AccountJobsFilterForm {
     this.startTimeFrom = '';
     this.startTimeTo = '';
     this.dateCreated = '';
+    this.outOfHours = false;
   }
 }

@@ -16,7 +16,7 @@
     <dashboard-statistic-item
       [value]="statistic.outOfHoursJobsTotal"
       [queryParams]="{
-        stage: jobStage.PENDING
+        outOfHours: true
       }"
       route="/account/jobs"
       name="{{ translations + 'LINK_OUT_OF_HOURS' | translate }}">
