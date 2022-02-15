@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import('./sites/sites.module').then((module) => module.AccountSitesPageModule)
       },
       {
+        path: 'assets',
+        loadChildren: () => import('./assets/assets.module').then((module) => module.AccountAssetsPageModule)
+      },
+      {
         path: 'admin',
         canActivate: [IsAdminGuard],
         loadChildren: () => import('./admin/admin.module').then((module) => module.AccountAdminPageModule)
