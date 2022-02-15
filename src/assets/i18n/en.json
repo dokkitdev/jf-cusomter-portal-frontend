@@ -71,6 +71,25 @@
         "TEXT_TITLE": "Log out?"
       }
     },
+    "DASHBOARD": {
+      "TEXT_PAGE_TITLE": "Dashboard",
+      "TEXT_JOBS": "Jobs",
+      "LINK_TODAYS": "Todays",
+      "LINK_OUT_OF_HOURS": "Out of hours",
+      "LINK_PENDING_JOBS": "Pending",
+      "LINK_IN_PROGRESS_JOBS": "In Progress",
+      "LINK_COMPLETED_JOBS": "Completed",
+      "LINK_INVOICED_JOBS": "Invoiced",
+      "LINK_ARCHIVED_JOBS": "Archived",
+      "LINK_SITES": "Sites",
+      "LINK_ASSETS": "Assets",
+      "LINK_DOCUMENTS": "Documents",
+      "LINK_SERVICE_CONTROL_REPORT": "Service Control Report",
+      "LINK_KPI_REPORT": "KPI Report",
+      "NOTIFICATIONS": {
+        "TEXT_ERROR": "Something went wrong. Please try again."
+      }
+    },
     "JOBS": {
       "TEXT_PAGE_TITLE": "Jobs",
       "TEXT_CREATED": "Created",

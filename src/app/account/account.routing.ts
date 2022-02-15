@@ -9,6 +9,15 @@ const routes: Routes = [
     component: AccountComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then((module) => module.AccountDashboardPageModule)
+      },
+      {
         path: 'jobs',
         loadChildren: () => import('./jobs/jobs.module').then((module) => module.AccountJobsPageModule)
       },
