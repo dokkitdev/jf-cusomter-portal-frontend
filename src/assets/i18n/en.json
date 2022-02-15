@@ -142,16 +142,12 @@
         "TEXT_ATTACHMENTS": "Attachments",
         "TEXT_ENGINEERS": "Engineers",
         "TEXT_NOTES": "Work Notes",
-        "TEXT_SORS": "Parts Used",
         "ENGINEERS": {
           "ITEMS_HEADER": {
             "TEXT_ENGINEER": "Engineer",
             "TEXT_DATE": "Appointment Date",
             "TEXT_TIME": "Scheduled Time"
           }
-        },
-        "SORS": {
-          "TEXT_QUANTITY": "x{{ quantity }}"
         }
       }
     },
