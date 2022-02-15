@@ -8,6 +8,6 @@ export class AccountJobsViewPageState {
   constructor() {
     this.isLoading = false;
     this.job = new Job();
-    this.relations = ['site', 'customer', 'job_attachments', 'job_catalogs', 'job_work_orders', 'schedules'];
+    this.relations = ['site', 'customer', 'job_attachments', 'job_work_orders', 'schedules'];
   }
 }

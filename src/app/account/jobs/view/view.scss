@@ -18,18 +18,6 @@
     &-time {flex: 0 0 120px; min-width: 120px;}
     .table-row {padding: 0;}
   }
-  &-catalogs {
-    &-quantity {flex: 0 0 46px; min-width: 46px;}
-    &-name {flex: 1 1 120px; min-width: 120px;}
-    .table-row {padding: 0;}
-    &-more {display: block; position: relative; padding: 10px 0;
-      &:after {content: ''; position: absolute; top: 6px; left: 0; right: 0; margin: 0 auto;
-        width: 0; height: 0; border-style: solid; border-width: 6px 6px 0 6px;
-        border-color: transparent; border-top-color: #000;
-      }
-      &-opened:after {transform: rotateX(180deg);}
-    }
-  }
   &-attachment {margin-bottom: 4px; font-size: $middle; word-break: break-all;
     &:last-child {margin-bottom: 0;}
   }
