@@ -1,0 +1,20 @@
+@import 'vars';
+
+:host ::ng-deep .assets {
+  &-id {flex: 0 0 70px; min-width: 70px;}
+  &-customer {flex: 1 1 180px; min-width: 180px;}
+  &-uprn {flex: 1 1 160px; min-width: 160px;}
+  &-site {flex: 1 1 180px; min-width: 180px;}
+  &-name {flex: 1 1 180px; min-width: 180px;}
+  &-location {flex: 1 1 200px; min-width: 200px;}
+  &-make {flex: 1 1 100px; min-width: 100px;}
+  &-model {flex: 1 1 100px; min-width: 100px;}
+  &-testresult {flex: 1 1 120px; min-width: 120px;}
+  &-testdate {flex: 1 1 110px; min-width: 110px;}
+  &-servicelevel {flex: 1 1 120px; min-width: 120px;}
+  &-servicedate {flex: 1 1 120px; min-width: 120px;}
+  &-filters {margin-bottom: 28px;
+    .form-group {margin-bottom: 4px;}
+    .form-group-datepicker .mat-form-field-infix {width: 160px;}
+  }
+}

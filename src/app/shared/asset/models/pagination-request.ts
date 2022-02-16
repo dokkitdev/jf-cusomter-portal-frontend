@@ -13,7 +13,7 @@ export class AssetPaginationRequest extends PaginationRequest {
   @Expose({ name: 'simpro_asset_id' })
   public assetID?: number;
 
-  @Expose({ name: 'simpro_customer_id' })
+  @Expose({ name: 'customer_id' })
   public simproCustomerID?: number;
 
   @Expose({ name: 'uprn_query' })

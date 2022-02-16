@@ -1,0 +1,18 @@
+<div class="table-row">
+  <div class="table-cell assets-id">
+    <a [routerLink]="['/account/assets', item.id]">{{ item.assetID }}</a>
+  </div>
+  <div class="table-cell assets-customer">{{ item.site?.customer?.name }}</div>
+  <div class="table-cell assets-uprn">{{ item.site?.uprn }}</div>
+  <div class="table-cell assets-site">{{ item.site?.name }}</div>
+  <div class="table-cell assets-name">{{ item.name }}</div>
+  <div class="table-cell assets-location">{{ item.location }}</div>
+  <div class="table-cell assets-make">{{ item.make }}</div>
+  <div class="table-cell assets-model">{{ item.model }}</div>
+  <div class="table-cell assets-testresult">
+    <span *ngIf="item.lastTestResult">{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.lastTestResult | snake | uppercase | translate }}</span>
+  </div>
+  <div class="table-cell assets-testdate">{{ item.lastTestDate | date: dateFormat }}</div>
+  <div class="table-cell assets-servicelevel">{{ item.serviceLevelName }}</div>
+  <div class="table-cell assets-servicedate">{{ item.nextServiceDate| date: dateFormat }}</div>
+</div>

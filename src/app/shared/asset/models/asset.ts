@@ -24,9 +24,6 @@ export class Asset {
   @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
   public siteID: number;
 
-  @Expose({ name: 'customer_name', groups: [ClassGroup.MAIN] })
-  public customerName: string;
-
   @Expose({ groups: [ClassGroup.MAIN] })
   public make: string;
 

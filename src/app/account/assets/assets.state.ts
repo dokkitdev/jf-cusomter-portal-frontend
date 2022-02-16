@@ -21,7 +21,7 @@ export class AccountAssetsPageState {
     this.items = [];
     this.totalItems = 0;
     this.page = 1;
-    this.perPage = 10;
+    this.perPage = 15;
     this.orderBy = AssetSortField.ASSET_ID;
     this.relations = ['site', 'site.customer'];
     this.desc = true;

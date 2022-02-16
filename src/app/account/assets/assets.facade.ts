@@ -134,11 +134,23 @@ export class AccountAssetsPageFacade {
           new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
         );
       }
+      if (formState.value.uprn) {
+        filterValues.push(this.createFilterValue(formState.controls.uprn));
+      }
+      if (formState.value.siteName) {
+        filterValues.push(this.createFilterValue(formState.controls.siteName));
+      }
       if (formState.value.query) {
         filterValues.push(this.createFilterValue(formState.controls.query));
       }
       if (formState.value.location) {
         filterValues.push(this.createFilterValue(formState.controls.location));
+      }
+      if (formState.value.make) {
+        filterValues.push(this.createFilterValue(formState.controls.make));
+      }
+      if (formState.value.model) {
+        filterValues.push(this.createFilterValue(formState.controls.model));
       }
       if (formState.value.archived !== undefined) {
         filterValues.push(new FilterValue({
