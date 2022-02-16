@@ -4,7 +4,6 @@ import { AccountReportsPageComponent } from './reports.component';
 import { AccountReportsPageRoutingModule } from './reports.routing';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { AccountReportsPageFacade } from './reports.facade';
 
 @NgModule({
   declarations: [
@@ -15,9 +14,6 @@ import { AccountReportsPageFacade } from './reports.facade';
     RouterModule,
     TranslateModule,
     AccountReportsPageRoutingModule
-  ],
-  providers: [
-    AccountReportsPageFacade
   ]
 })
 export class AccountReportsPageModule { }
