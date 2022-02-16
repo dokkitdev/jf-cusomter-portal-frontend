@@ -487,6 +487,11 @@
       "TEXT_COMPLETE": "Complete",
       "TEXT_ARCHIVED": "Archived",
       "TEXT_INVOICED": "Invoiced"
+    },
+    "ASSET_TEST_RESULT": {
+      "TEXT_PASS": "Pass",
+      "TEXT_FAIL": "Fail",
+      "TEXT_NO_TEST": "No Test"
     }
   }
 }
