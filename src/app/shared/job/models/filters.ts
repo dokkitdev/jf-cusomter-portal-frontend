@@ -16,6 +16,8 @@ export class JobFilters {
   public startTimeTo?: string;
   public endTimeFrom?: string;
   public endTimeTo?: string;
+  public dateCreated?: string;
+  public outOfHours?: boolean;
 
   constructor(model: Partial<JobFilters> = {}) {
     Object.assign(this, model);

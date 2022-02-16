@@ -1,1 +1,17 @@
-Items
+<table-container
+  *ngrxLet="items$; let items"
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="items?.length">
+  <div class="table">
+    <reports-service-control-items-header></reports-service-control-items-header>
+    <div class="table-content">
+      <reports-service-control-item
+        *ngFor="let item of items; trackByProperty: 'id'"
+        [item]="item"
+        [@heightCollapse]>
+      </reports-service-control-item>
+    </div>
+  </div>
+</table-container>
+<pagination-elements [paginationId]="paginationId$ | async">
+</pagination-elements>

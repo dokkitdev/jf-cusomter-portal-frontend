@@ -11,8 +11,6 @@ import { AccountJobsViewInfoComponent } from './shared/components/info/info.comp
 import { AccountJobsViewEngineersComponent } from './shared/components/engineers/engineers.component';
 import { AccountJobsViewEngineersItemComponent } from './shared/components/engineers-item/engineers-item.component';
 import { AccountJobsViewEngineersItemsHeaderComponent } from './shared/components/engineers-items-header/engineers-items-header.component';
-import { AccountJobsViewSorsComponent } from './shared/components/sors/sors.component';
-import { AccountJobsViewSorsItemComponent } from './shared/components/sors-item/sors-item.component';
 import { AccountJobsViewNotesComponent } from './shared/components/notes/notes.component';
 import { AccountJobsViewNotesItemComponent } from './shared/components/notes-item/notes-item.component';
 import { AccountJobsViewAttachmentsComponent } from './shared/components/attachments/attachments.component';
@@ -33,8 +31,6 @@ import { SectionModule } from '@shared/section';
     AccountJobsViewEngineersComponent,
     AccountJobsViewEngineersItemComponent,
     AccountJobsViewEngineersItemsHeaderComponent,
-    AccountJobsViewSorsComponent,
-    AccountJobsViewSorsItemComponent,
     AccountJobsViewNotesComponent,
     AccountJobsViewNotesItemComponent,
     AccountJobsViewAttachmentsComponent

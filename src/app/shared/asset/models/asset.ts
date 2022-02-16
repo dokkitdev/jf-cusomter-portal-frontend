@@ -31,7 +31,7 @@ export class Asset {
   public model: string;
 
   @Expose({ name: 'last_cp12_date', groups: [ClassGroup.MAIN] })
-  public lastCp12Date: AssetCp12Status;
+  public lastCp12Status: AssetCp12Status;
 
   @Expose({ name: 'asset_type', groups: [ClassGroup.MAIN] })
   public type: string;

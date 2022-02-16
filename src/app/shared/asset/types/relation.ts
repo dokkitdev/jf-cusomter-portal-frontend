@@ -1,5 +1,5 @@
 export type AssetRelationType =
-  'site'
+  | 'site'
   | 'site.primary_site_contact'
   | 'site.customers'
   | 'site.customer'

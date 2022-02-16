@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { DashboardService, DashboardStatistic } from '@shared/dashboard';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
+import { DateTime } from 'luxon';
 
 @Injectable()
 export class AccountDashboardPageFacade {
@@ -15,6 +16,10 @@ export class AccountDashboardPageFacade {
 
   public get dashboardStatistic$(): Observable<DashboardStatistic> {
     return this.componentStore.select((state) => state.dashboardStatistic);
+  }
+
+  public get todayDate(): string {
+    return DateTime.now().toFormat('yyyy-MM-dd');
   }
 
   private loadDashboardStatistic$: () => Observable<void>;

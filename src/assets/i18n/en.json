@@ -122,7 +122,9 @@
         "TEXT_APPOINTMENT_FROM": "Appointment From",
         "TEXT_APPOINTMENT_TO": "Appointment To",
         "TEXT_SCHEDULED_AFTER": "Scheduled After",
-        "TEXT_SCHEDULED_BEFORE": "Scheduled Before"
+        "TEXT_SCHEDULED_BEFORE": "Scheduled Before",
+        "TEXT_OUT_OF_HOURS": "Out of hours",
+        "TEXT_CREATED_TODAY": "Created today"
       },
       "VIEW": {
         "TEXT_PAGE_TITLE": "Job",
@@ -142,16 +144,12 @@
         "TEXT_ATTACHMENTS": "Attachments",
         "TEXT_ENGINEERS": "Engineers",
         "TEXT_NOTES": "Work Notes",
-        "TEXT_SORS": "Parts Used",
         "ENGINEERS": {
           "ITEMS_HEADER": {
             "TEXT_ENGINEER": "Engineer",
             "TEXT_DATE": "Appointment Date",
             "TEXT_TIME": "Scheduled Time"
           }
-        },
-        "SORS": {
-          "TEXT_QUANTITY": "x{{ quantity }}"
         }
       }
     },
