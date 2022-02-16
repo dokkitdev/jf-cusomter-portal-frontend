@@ -14,6 +14,7 @@ import { AccountReportsServiceControlItemsHeaderComponent } from './shared/compo
 import { AccountReportsServiceControlHeaderComponent } from './shared/components/header/header.component';
 import { AccountReportsServiceControlFiltersComponent } from './shared/components/filters/filters.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AccountReportsServiceControlPageRoutingModule,
     TableContainerModule,
     NgxPaginationModule,
-    PaginationElementsModule
+    PaginationElementsModule,
+    ReactiveComponentModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

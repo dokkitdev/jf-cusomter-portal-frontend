@@ -1,4 +1,7 @@
-<table-container>
+<table-container
+  *ngrxLet="items$; let items"
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="items?.length">
   <div class="table">
     <reports-service-control-items-header></reports-service-control-items-header>
     <div class="table-content">
