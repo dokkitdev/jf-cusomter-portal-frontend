@@ -7,7 +7,7 @@ export class AccountAssetsQueryParameters {
   public desc: boolean;
   public assetID: number | undefined;
   public simproCustomerID: number | undefined;
-  public uprn: string;
+  public siteUprn: string;
   public siteName: string;
   public query: string;
   public location: string;
