@@ -4,7 +4,7 @@ import { box, Boxed } from 'ngrx-forms';
 export class AccountAssetsFilterForm {
   public assetID: number | undefined;
   public simproCustomerID: number | undefined;
-  public uprn: string;
+  public siteUprn: string;
   public siteName: string;
   public query: string;
   public location: string;
@@ -21,7 +21,7 @@ export class AccountAssetsFilterForm {
   constructor() {
     this.assetID = undefined;
     this.simproCustomerID = undefined;
-    this.uprn = '';
+    this.siteUprn = '';
     this.siteName = '';
     this.query = '';
     this.location = '';
