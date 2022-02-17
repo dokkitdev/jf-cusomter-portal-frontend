@@ -1,0 +1,32 @@
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell assettests-engineer">
+      <header-sort [orderBy]="assetTestSortField.ENGINEER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_ENGINEER' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assettests-date">
+      <header-sort [orderBy]="assetTestSortField.DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_TEST_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assettests-jobid">
+      <header-sort [orderBy]="assetTestSortField.JOB_ID" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_JOB_ID' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assettests-notes">
+      <header-sort [orderBy]="assetTestSortField.NOTES" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_NOTES' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assettests-result">
+      <header-sort [orderBy]="assetTestSortField.RESULT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_RESULT' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assettests-readings">
+      {{ 'ACCOUNT.SHARED.ASSET_TESTS.ITEMS_HEADER.TEXT_TEST_READINGS' | translate }}
+    </div>
+  </div>
+</div>

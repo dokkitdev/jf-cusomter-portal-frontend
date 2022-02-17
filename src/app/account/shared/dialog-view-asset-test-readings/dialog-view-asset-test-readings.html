@@ -1,0 +1,13 @@
+<div class="dialog-edit viewreadings">
+  <h2 class="dialog-edit-title">
+    {{ 'ACCOUNT.SHARED.DIALOG_VIEW_ASSET_TEST_READINGS.TEXT_TITLE' | translate }}
+  </h2>
+  <dialog-view-asset-test-readings-items [items]="data.readings"></dialog-view-asset-test-readings-items>
+  <div class="dialog-edit-buttons">
+    <div class="dialog-edit-button">
+      <btn (clicked)="cancelClicked()" variant="outline">
+        {{ 'ACCOUNT.SHARED.DIALOG_VIEW_ASSET_TEST_READINGS.BUTTON_CANCEL' | translate }}
+      </btn>
+    </div>
+  </div>
+</div>

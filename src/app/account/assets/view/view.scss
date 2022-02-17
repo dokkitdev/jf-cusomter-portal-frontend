@@ -1,0 +1,9 @@
+@import 'vars';
+
+:host ::ng-deep .assetview {
+  .page-title {display: flex; align-items: center;}
+  .loading-spinner {margin-top: 100px;}
+  &-attachment {margin-bottom: 4px; font-size: $middle; word-break: break-all;
+    &:last-child {margin-bottom: 0;}
+  }
+}

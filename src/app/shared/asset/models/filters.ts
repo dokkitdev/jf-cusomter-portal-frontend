@@ -3,6 +3,7 @@ import { AssetTestResult } from '../enums';
 export class AssetFilters {
   public assetID?: number;
   public simproCustomerID?: number;
+  public siteID?: number;
   public siteUprn?: string;
   public siteName?: string;
   public query?: string;

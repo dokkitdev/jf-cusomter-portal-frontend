@@ -234,6 +234,21 @@
         "TEXT_LAST_TEST_DATE_TO": "Last Test Date To",
         "TEXT_NEXT_SERVICE_DATE_FROM": "Next Service Date From",
         "TEXT_NEXT_SERVICE_DATE_TO": "Next Service Date To"
+      },
+      "VIEW": {
+        "TEXT_PAGE_TITLE": "Asset",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE": "Site",
+        "TEXT_LAST_TEST_DATE": "Last Test Date",
+        "TEXT_NEXT_SERVICE_DATE": "Next Service Date",
+        "TEXT_ASSET_NAME": "Asset Name",
+        "TEXT_LAST_TEST_RESULT": "Last Test Result",
+        "TEXT_SERVICE_LEVEL": "Service Level",
+        "TEXT_ARCHIVED": "Archived",
+        "TEXT_ARCHIVED_TRUE": "True",
+        "TEXT_ARCHIVED_FALSE": "False",
+        "TEXT_ATTACHMENTS": "Attachments",
+        "TEXT_CUSTOM_FIELDS": "Technical Information"
       }
     },
     "REPORTS": {
@@ -410,6 +425,14 @@
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
       },
+      "DIALOG_VIEW_ASSET_TEST_READINGS": {
+        "TEXT_TITLE": "Asset Test Readings",
+        "BUTTON_CANCEL": "Cancel",
+        "ITEMS_HEADER": {
+          "TEXT_NAME": "Name",
+          "TEXT_VALUE": "Value"
+        }
+      },
       "CUSTOMERS": {
         "TEXT_CUSTOMER": "Customer",
         "BUTTON_ADD_CUSTOMER": "+ Add Customer"
@@ -437,6 +460,18 @@
         "NOTIFICATIONS": {
           "TEXT_CONTACT_DELETED": "Site contact has been successfully deleted.",
           "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
+      "ASSET_TESTS": {
+        "TEXT_TITLE": "Testing History",
+        "LINK_VIEW": "View",
+        "ITEMS_HEADER": {
+          "TEXT_ENGINEER": "Engineer",
+          "TEXT_TEST_DATE": "Test Date",
+          "TEXT_JOB_ID": "Job ID",
+          "TEXT_NOTES": "Notes",
+          "TEXT_RESULT": "Pass/Fail",
+          "TEXT_TEST_READINGS": "Test Readings"
         }
       }
     }

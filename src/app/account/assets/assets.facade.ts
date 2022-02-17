@@ -69,6 +69,7 @@ export class AccountAssetsPageFacade {
       desc: state.desc,
       assetID: state.filterFormState.value.assetID,
       simproCustomerID: state.filterFormState.value.simproCustomerID,
+      siteID: state.filterFormState.value.siteID,
       siteUprn: state.filterFormState.value.siteUprn,
       siteName: state.filterFormState.value.siteName,
       query: state.filterFormState.value.query,
@@ -104,6 +105,7 @@ export class AccountAssetsPageFacade {
         map((filterFormStateValue) => new AssetFilters({
           assetID: filterFormStateValue.assetID || undefined,
           simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
+          siteID: filterFormStateValue.siteID || undefined,
           query: filterFormStateValue.query || undefined,
           siteUprn: filterFormStateValue.siteUprn || undefined,
           siteName: filterFormStateValue.siteName || undefined,
@@ -126,6 +128,9 @@ export class AccountAssetsPageFacade {
       const formState = state.filterFormState;
       const filterValues = [];
 
+      if (formState.value.siteID) {
+        filterValues.push(this.createFilterValue(formState.controls.siteID));
+      }
       if (formState.value.assetID) {
         filterValues.push(this.createFilterValue(formState.controls.assetID));
       }
@@ -368,6 +373,7 @@ export class AccountAssetsPageFacade {
           {
             assetID: setValue(parameters.assetID || state.filterFormState.value.assetID),
             simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
+            siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
             siteUprn: setValue(parameters.siteUprn || state.filterFormState.value.siteUprn),
             siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
             query: setValue(parameters.query || state.filterFormState.value.query),
@@ -400,6 +406,7 @@ export class AccountAssetsPageFacade {
             desc: queryParams.desc === 'true',
             assetID: (queryParams.assetID) ? parseInt(queryParams.assetID, 10) : undefined,
             simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
+            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
             siteUprn: queryParams.siteUprn || undefined,
             siteName: queryParams.siteName || undefined,
             query: queryParams.query || undefined,
@@ -458,6 +465,7 @@ export class AccountAssetsPageFacade {
               desc,
               assetID: filters.assetID,
               simproCustomerID: filters.simproCustomerID,
+              siteID: filters.siteID,
               siteUprn: filters.siteUprn,
               siteName: filters.siteName,
               query: filters.query,
