@@ -200,6 +200,42 @@
         }
       }
     },
+    "ASSETS": {
+      "TEXT_PAGE_TITLE": "Assets",
+      "ITEMS_HEADER": {
+        "TEXT_ASSET_ID": "AssetID",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE": "Site",
+        "TEXT_ASSET_NAME": "Asset Name",
+        "TEXT_LOCATION": "Location",
+        "TEXT_MAKE": "Make",
+        "TEXT_MODEL": "Model",
+        "TEXT_LAST_TEST_RESULT": "Last Test Result",
+        "TEXT_LAST_TEST_DATE": "Last Test Date",
+        "TEXT_SERVICE_LEVEL": "Service Level",
+        "TEXT_NEXT_SERVICE_DATE": "Next Service Date"
+      },
+      "FILTERS": {
+        "TEXT_ASSET_ID": "AssetID",
+        "TEXT_CUSTOMER": "Customer",
+        "TEXT_SITE_UPRN": "Site UPRN",
+        "TEXT_SITE_NAME": "Site Name",
+        "TEXT_ASSET_NAME": "Asset Name",
+        "TEXT_LOCATION": "Location",
+        "TEXT_MAKE": "Make",
+        "TEXT_MODEL": "Model",
+        "TEXT_ARCHIVED": "Archived",
+        "TEXT_ARCHIVED_YES": "Archived: Yes",
+        "TEXT_ARCHIVED_NO": "Archived: No",
+        "TEXT_LAST_TEST_RESULT": "Last Test Result",
+        "TEXT_SERVICE_LEVEL": "Service Level",
+        "TEXT_LAST_TEST_DATE_FROM": "Last Test Date From",
+        "TEXT_LAST_TEST_DATE_TO": "Last Test Date To",
+        "TEXT_NEXT_SERVICE_DATE_FROM": "Next Service Date From",
+        "TEXT_NEXT_SERVICE_DATE_TO": "Next Service Date To"
+      }
+    },
     "REPORTS": {
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report"
@@ -284,6 +320,10 @@
     },
     "SHARED": {
       "CUSTOMER_SELECT": {
+        "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
+      },
+      "SITE_SELECT": {
+        "TEXT_PLACEHOLDER": "Site",
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
       },
       "DIALOG_EDIT_USER": {
@@ -444,6 +484,11 @@
       "TEXT_COMPLETE": "Complete",
       "TEXT_ARCHIVED": "Archived",
       "TEXT_INVOICED": "Invoiced"
+    },
+    "ASSET_TEST_RESULT": {
+      "TEXT_PASS": "Pass",
+      "TEXT_FAIL": "Fail",
+      "TEXT_NO_TEST": "No Test"
     }
   }
 }

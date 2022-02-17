@@ -1,0 +1,64 @@
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell assets-id">
+      <header-sort [orderBy]="assetSortField.ASSET_ID" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_ASSET_ID' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-customer">
+      <header-sort [orderBy]="assetSortField.CUSTOMER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-uprn">
+      <header-sort [orderBy]="assetSortField.SITE_UPRN" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-site">
+      <header-sort [orderBy]="assetSortField.SITE_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_SITE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-name">
+      <header-sort [orderBy]="assetSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_ASSET_NAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-location">
+      <header-sort [orderBy]="assetSortField.LOCATION" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_LOCATION' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-make">
+      <header-sort [orderBy]="assetSortField.MAKE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_MAKE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-model">
+      <header-sort [orderBy]="assetSortField.MODEL" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_MODEL' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-testresult">
+      <header-sort [orderBy]="assetSortField.LAST_TEST_RESULT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_LAST_TEST_RESULT' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-testdate">
+      <header-sort [orderBy]="assetSortField.LAST_TEST_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_LAST_TEST_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-servicelevel">
+      <header-sort [orderBy]="assetSortField.SERVICE_LEVEL" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_SERVICE_LEVEL' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell assets-servicedate">
+      <header-sort [orderBy]="assetSortField.NEXT_SERVICE_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_NEXT_SERVICE_DATE' | translate }}
+      </header-sort>
+    </div>
+  </div>
+</div>

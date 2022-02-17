@@ -1,14 +1,15 @@
-import { ClassGroup } from '@shared/class-group/enums/class-group';
-import { classToPlain, plainToClassFromExist } from 'class-transformer';
-import omitBy from 'lodash/omitBy';
-import isUndefined from 'lodash/isUndefined';
-import { PaginationResponse } from '@shared/pagination/models/response';
-import { map, Observable } from 'rxjs';
-import { Asset, AssetFilters, AssetPaginationRequest } from './models';
-import { AssetSortField } from './enums';
-import { AssetRelationType } from './types';
 import { ApiService } from '@ronas-it/angular-common';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { PaginationResponse } from '@shared/pagination';
+import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
+import { ClassGroup } from '@shared/class-group';
+import { Asset, AssetFilters, AssetPaginationRequest, AssetServiceLevel } from './models';
+import { AssetRelationType } from './types';
+import { isUndefined, omitBy } from 'lodash';
+import { AssetSortField } from './enums';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class AssetService {
@@ -36,6 +37,33 @@ export class AssetService {
         map((response) => plainToClassFromExist(
           new PaginationResponse<Asset>(Asset), response, { groups: [ClassGroup.MAIN] })
         )
+      );
+  }
+
+  public get(id: number, relations?: Array<AssetRelationType>): Observable<Asset> {
+    return this.apiService
+      .get<Asset>(`${this.endpoint}/${id}`, omitBy({ with: relations }, isUndefined))
+      .pipe(
+        map((response) => plainToClass(Asset, response, { groups: [ClassGroup.MAIN] }))
+      );
+  }
+
+  public getServiceLevels(): Observable<Array<AssetServiceLevel>> {
+    return this.apiService
+      .get(`${this.endpoint}/service-levels`)
+      .pipe(
+        map((response) => plainToClass(AssetServiceLevel, response, { groups: [ClassGroup.MAIN] }))
+      );
+  }
+
+  public downloadAttachment(id: number): Observable<Blob> {
+    return this.apiService
+      .get<HttpResponse<Blob>>(`/asset-attachments/${id}/download`, {}, {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
       );
   }
 }
