@@ -82,5 +82,8 @@ export const initConfiguration = (configuration: any): any =>
     },
     collapsable: {
       height: 200
+    },
+    assetDetails: {
+      countOfDisplayedCustomFields: 4
     }
   }, configuration);

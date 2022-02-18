@@ -1,0 +1,15 @@
+<table-container
+  *ngrxLet="items$; let items"
+  [itemsCount]="items.length">
+  <div class="table">
+    <asset-tests-items-header></asset-tests-items-header>
+    <div class="table-content">
+      <asset-tests-item
+        *ngFor="let item of items; trackByProperty: 'id'"
+        [item]="item"
+        [@heightCollapse]
+        (deletingSuccess)="itemDeleted($event)">
+      </asset-tests-item>
+    </div>
+  </div>
+</table-container>

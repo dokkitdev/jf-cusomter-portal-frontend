@@ -1,0 +1,9 @@
+:host ::ng-deep .assettests {
+  &-engineer {flex: 1 1 180px; min-width: 180px;}
+  &-date {flex: 0 0 105px; min-width: 105px;}
+  &-jobid {flex: 0 0 90px; min-width: 90px;}
+  &-notes {flex: 1 1 180px; min-width: 180px;}
+  &-result {flex: 0 0 100px; min-width: 100px;}
+  &-readings {flex: 0 0 100px; min-width: 100px; text-align: center;}
+  .table-nothing {margin: 80px auto 50px;}
+}

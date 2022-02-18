@@ -1,0 +1,23 @@
+<div class="table-row">
+  <div class="table-cell assettests-engineer">{{ item.engineerName }}</div>
+  <div class="table-cell assettests-date">{{ item.testDate | date: dateFormat }}</div>
+  <div class="table-cell assettests-jobid">
+    <a [routerLink]="['/account/jobs', item.job?.id]">
+      {{ item.job?.jobID }}
+    </a>
+  </div>
+  <div class="table-cell assettests-notes">
+    <span [innerHTML]="notes"></span>
+  </div>
+  <div class="table-cell assettests-result">
+    {{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.result | snake | uppercase | translate }}
+  </div>
+  <div class="table-cell assettests-readings">
+    <a
+      *ngIf="item.readings?.length"
+      (click)="viewReadingsClicked()"
+      class="table-action">
+      {{ 'ACCOUNT.SHARED.ASSET_TESTS.LINK_VIEW' | translate }}
+    </a>
+  </div>
+</div>
