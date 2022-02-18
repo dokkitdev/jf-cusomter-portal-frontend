@@ -1,3 +1,4 @@
+import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsServiceControlFacade } from './service-control.facade';
 import { PaginationElementsModule } from '@shared/pagination-elements';
@@ -15,6 +16,7 @@ import { AccountReportsServiceControlHeaderComponent } from './shared/components
 import { AccountReportsServiceControlFiltersComponent } from './shared/components/filters/filters.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { AssetModule } from '@shared/asset';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ReactiveComponentModule } from '@ngrx/component';
     TableContainerModule,
     NgxPaginationModule,
     PaginationElementsModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    AssetModule,
+    NgForTrackByPropertyModule
   ],
   providers: [
     AccountReportsServiceControlFacade,
