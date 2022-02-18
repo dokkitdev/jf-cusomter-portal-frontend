@@ -127,4 +127,14 @@ export class Job {
   public get isPending(): boolean {
     return this.stage === JobStage.PENDING;
   }
+
+  @Exclude()
+  public get isOnTime(): boolean {
+    return this.madeSafeDate && this.dueDate && this.madeSafeDate <= this.dueDate;
+  }
+
+  @Exclude()
+  public get isLate(): boolean {
+    return this.madeSafeDate && this.dueDate && this.madeSafeDate > this.dueDate;
+  }
 }

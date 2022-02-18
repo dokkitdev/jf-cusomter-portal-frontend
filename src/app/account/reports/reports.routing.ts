@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: 'service-control',
     loadChildren: () => import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
+  },
+  {
+    path: 'kpi',
+    loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
   }
 ];
 
