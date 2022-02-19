@@ -37,10 +37,10 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'job_status' })
   public status?: Array<string>;
 
-  @Expose({ name: 'order_no' })
+  @Expose({ name: 'order_no_query' })
   public orderNo?: string;
 
-  @Expose()
+  @Expose({ name: 'uprn_query' })
   public uprn?: string;
 
   @Expose({ name: 'appointment_from' })
