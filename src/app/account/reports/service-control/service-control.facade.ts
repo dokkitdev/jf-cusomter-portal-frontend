@@ -1,8 +1,9 @@
+import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { tap, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Asset, AssetService } from '@shared/asset';
+import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
-import { ComponentStore } from '@ngrx/component-store';
+import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
 import { PaginationResponse } from '@shared/pagination';
 
@@ -19,6 +20,15 @@ export class AccountReportsServiceControlFacade {
   public get paginationId$(): Observable<string> {
     return this.componentStore.select((state) => state.paginationId);
   };
+
+  public get parameters$(): Observable<AccountReportsServiceControlQueryParameters> {
+    return this.componentStore.select((state) => ({
+      page: state.page,
+      perPage: state.perPage,
+      orderBy: state.orderBy,
+      desc: state.desc
+    }));
+  }
 
   private loadItemsEffect$: () => Observable<void>;
 
@@ -39,20 +49,58 @@ export class AccountReportsServiceControlFacade {
     this.loadItemsEffect$();
   }
 
+  private updateIsLoading(isLoading: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isLoading
+      })
+    )();
+  }
+
+  private updateItems(items: Array<Asset>): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        items
+      })
+    )();
+  }
+
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$
         .pipe(
-          switchMap(() => this.tryToLoadItems())
+          tap(() => this.updateIsLoading(true)),
+          switchMap(() => this.tryLoadItemsByParameters())
         )
     );
   }
 
-  private tryToLoadItems(): Observable<PaginationResponse<Asset>> {
+  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters }: {
+    page: number,
+    perPage: number,
+    orderBy: AssetSortField,
+    desc: boolean,
+    relations: AssetRelationType,
+    filters: AssetFilters
+  }): Observable<PaginationResponse<Asset>> {
     return this.assetService
       .search()
       .pipe(
-        tap((response) => console.log(response))
+        tapResponse(
+          (response) => this.onLoadItemsSuccess(response),
+          (error: Error) => this.onLoadItemsError(error)
+        )
       );
+  }
+
+  private onLoadItemsSuccess(response: PaginationResponse<Asset>): void {
+    this.updateIsLoading(false);
+    this.updateItems(response.items);
+  }
+
+  private onLoadItemsError(error: Error): void {
+    this.updateIsLoading(false);
   }
 }
