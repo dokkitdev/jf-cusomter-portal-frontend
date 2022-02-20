@@ -1,3 +1,4 @@
+import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { tap, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -28,6 +29,14 @@ export class AccountReportsServiceControlFacade {
       orderBy: state.orderBy,
       desc: state.desc
     }));
+  }
+
+  public get filters$(): Observable<AssetFilters> {
+    return this.componentStore.select((state) => state.filters);
+  }
+
+  public get relations$(): Observable<Array<AssetRelationType>> {
+    return this.componentStore.select((state) => state.relations);
   }
 
   private loadItemsEffect$: () => Observable<void>;
@@ -71,8 +80,25 @@ export class AccountReportsServiceControlFacade {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$
         .pipe(
-          tap(() => this.updateIsLoading(true)),
-          switchMap(() => this.tryLoadItemsByParameters())
+          concatLatestFrom(() => [
+            this.parameters$,
+            this.relations$,
+            this.filters$
+          ]),
+          switchMap(([_, parameters, relations, filters]) => {
+            const { page, perPage, orderBy, desc } = parameters;
+
+            this.updateIsLoading(true);
+
+            return this.tryLoadItemsByParameters({
+              page,
+              perPage,
+              orderBy,
+              desc,
+              relations,
+              filters
+            });
+          })
         )
     );
   }
@@ -82,11 +108,11 @@ export class AccountReportsServiceControlFacade {
     perPage: number,
     orderBy: AssetSortField,
     desc: boolean,
-    relations: AssetRelationType,
+    relations: Array<AssetRelationType>,
     filters: AssetFilters
   }): Observable<PaginationResponse<Asset>> {
     return this.assetService
-      .search()
+      .search({ page, perPage, orderBy, desc, relations, filters })
       .pipe(
         tapResponse(
           (response) => this.onLoadItemsSuccess(response),
@@ -97,7 +123,7 @@ export class AccountReportsServiceControlFacade {
 
   private onLoadItemsSuccess(response: PaginationResponse<Asset>): void {
     this.updateIsLoading(false);
-    this.updateItems(response.items);
+    this.updateItems(response.items);``
   }
 
   private onLoadItemsError(error: Error): void {
