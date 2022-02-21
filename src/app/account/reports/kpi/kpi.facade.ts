@@ -428,10 +428,7 @@ export class AccountReportsKPIPageFacade {
                   this.updateIsExporting(false);
                   this.fileService.saveFile(response, configuration.exportCSV.jobsReport);
                 },
-                () => {
-                  // error
-                  this.updateIsExporting(false);
-                }
+                () => this.updateIsExporting(false)
               )
             );
         })

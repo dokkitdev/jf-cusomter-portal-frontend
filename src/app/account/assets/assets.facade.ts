@@ -558,10 +558,7 @@ export class AccountAssetsPageFacade {
                   this.updateIsExporting(false);
                   this.fileService.saveFile(response, configuration.exportCSV.assets);
                 },
-                () => {
-                  // error
-                  this.updateIsExporting(false);
-                }
+                () => this.updateIsExporting(false)
               )
             );
         })

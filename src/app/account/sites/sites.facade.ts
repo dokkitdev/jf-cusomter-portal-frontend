@@ -444,10 +444,7 @@ export class AccountSitesPageFacade {
                   this.updateIsExporting(false);
                   this.fileService.saveFile(response, configuration.exportCSV.sites);
                 },
-                () => {
-                  // error
-                  this.updateIsExporting(false);
-                }
+                () => this.updateIsExporting(false)
               )
             );
         })

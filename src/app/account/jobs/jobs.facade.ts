@@ -536,10 +536,7 @@ export class AccountJobsPageFacade {
                   this.updateIsExporting(false);
                   this.fileService.saveFile(response, configuration.exportCSV.jobs);
                 },
-                () => {
-                  // error
-                  this.updateIsExporting(false);
-                }
+                () => this.updateIsExporting(false)
               )
             );
         })
