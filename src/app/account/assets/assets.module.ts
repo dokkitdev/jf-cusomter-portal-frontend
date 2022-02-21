@@ -25,6 +25,8 @@ import { ExistenceSelectModule } from '@shared/existence-select';
 import { SnakeModule } from '@shared/snake';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationElementsModule } from '@shared/pagination-elements';
+import { FileModule } from '@shared/file';
+import { ButtonModule } from '@shared/button';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PaginationElementsModule } from '@shared/pagination-elements';
     ExistenceSelectModule,
     SnakeModule,
     NgxPaginationModule,
-    PaginationElementsModule
+    PaginationElementsModule,
+    FileModule,
+    ButtonModule
   ],
   providers: [
     AccountAssetsPageFacade,

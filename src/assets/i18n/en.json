@@ -94,6 +94,7 @@
       "TEXT_PAGE_TITLE": "Jobs",
       "TEXT_CREATED": "Created",
       "TEXT_DESCRIPTION": "Description:",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_JOB": "Job ID",
         "TEXT_ORDER_NO": "Order No",
@@ -155,6 +156,7 @@
     },
     "SITES": {
       "TEXT_PAGE_TITLE": "Sites",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_CUSTOMER": "Customer",
         "TEXT_SITE": "Site",
@@ -202,6 +204,7 @@
     },
     "ASSETS": {
       "TEXT_PAGE_TITLE": "Assets",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_ASSET_ID": "AssetID",
         "TEXT_CUSTOMER": "Customer",
@@ -259,6 +262,7 @@
         "TEXT_PAGE_TITLE": "KPI Report",
         "TEXT_ON_TIME": "On Time",
         "TEXT_LATE": "Late",
+        "LINK_CSV": "CSV",
         "ITEMS_HEADER": {
           "TEXT_STATUS": "Status",
           "TEXT_SITE_UPRN": "Site UPRN",

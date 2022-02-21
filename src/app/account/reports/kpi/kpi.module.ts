@@ -21,6 +21,8 @@ import { FilterValuesModule } from '@shared/filter-values';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationElementsModule } from '@shared/pagination-elements';
 import { ExistenceSelectModule } from '@shared/existence-select';
+import { FileModule } from '@shared/file';
+import { ButtonModule } from '@shared/button';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { ExistenceSelectModule } from '@shared/existence-select';
     FilterValuesModule,
     NgxPaginationModule,
     PaginationElementsModule,
-    ExistenceSelectModule
+    ExistenceSelectModule,
+    FileModule,
+    ButtonModule
   ],
   providers: [
     AccountReportsKPIPageFacade,

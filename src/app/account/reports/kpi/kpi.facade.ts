@@ -4,6 +4,7 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { FileService } from '@shared/file';
 import { FilterValue } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import { Job, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
@@ -31,6 +32,10 @@ import { AccountReportsKPIQueryParameters } from './shared/models';
 export class AccountReportsKPIPageFacade {
   public get isLoading$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isLoading);
+  }
+
+  public get isExporting$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isExporting);
   }
 
   public get items$(): Observable<Array<Job>> {
@@ -130,18 +135,21 @@ export class AccountReportsKPIPageFacade {
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
+  private exportCSVEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsKPIPageState>,
     private readonly store: Store<AppState>,
     private readonly jobService: JobService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly fileService: FileService
   ) {
     this.resetState();
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByPageEffect();
     this.registerLoadItemsByParametersEffect();
+    this.registerExportCSVEffect();
   }
 
   public resetState(): void {
@@ -158,6 +166,10 @@ export class AccountReportsKPIPageFacade {
 
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
+  }
+
+  public exportCSV(): void {
+    this.exportCSVEffect$();
   }
 
   public changeSort(parameters: AccountReportsKPIQueryParameters): void {
@@ -220,6 +232,15 @@ export class AccountReportsKPIPageFacade {
       (state) => ({
         ...state,
         isLoading: value
+      })
+    )();
+  }
+
+  private updateIsExporting(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isExporting: value
       })
     )();
   }
@@ -386,5 +407,35 @@ export class AccountReportsKPIPageFacade {
           () => this.updateIsLoading(false)
         )
       );
+  }
+
+  private registerExportCSVEffect(): void {
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [
+          this.parameters$,
+          this.filters$,
+          this.relations$
+        ]),
+        switchMap(([_, parameters, filters, relations]) => {
+          this.updateIsExporting(true);
+
+          return this.jobService
+            .exportCSV({ ...parameters, filters, relations })
+            .pipe(
+              tapResponse(
+                (response) => {
+                  this.updateIsExporting(false);
+                  this.fileService.saveFile(response, configuration.exportCSV.jobsReport);
+                },
+                () => {
+                  // error
+                  this.updateIsExporting(false);
+                }
+              )
+            );
+        })
+      )
+    );
   }
 }

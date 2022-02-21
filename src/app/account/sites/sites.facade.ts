@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { configuration } from '@configurations';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Customer } from '@shared/customer';
+import { FileService } from '@shared/file';
 import { FilterValue } from '@shared/filter-values';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { PaginationResponse } from '@shared/pagination';
@@ -27,6 +30,10 @@ import { AccountSitesPageState } from './sites.state';
 export class AccountSitesPageFacade {
   public get isLoading$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isLoading);
+  }
+
+  public get isExporting$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isExporting);
   }
 
   public get items$(): Observable<Array<Site>> {
@@ -140,18 +147,21 @@ export class AccountSitesPageFacade {
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
+  private exportCSVEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountSitesPageState>,
     private readonly store: Store<AppState>,
     private readonly siteService: SiteService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly fileService: FileService
   ) {
     this.resetState();
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
     this.registerLoadItemsByPageEffect();
+    this.registerExportCSVEffect();
   }
 
   public resetState(): void {
@@ -168,6 +178,10 @@ export class AccountSitesPageFacade {
 
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
+  }
+
+  public exportCSV(): void {
+    this.exportCSVEffect$();
   }
 
   public changeSort(parameters: AccountSitesQueryParameters): void {
@@ -210,6 +224,15 @@ export class AccountSitesPageFacade {
       (state) => ({
         ...state,
         isLoading: value
+      })
+    )();
+  }
+
+  private updateIsExporting(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isExporting: value
       })
     )();
   }
@@ -399,5 +422,36 @@ export class AccountSitesPageFacade {
           () => this.updateIsLoading(false)
         )
       );
+  }
+
+  private registerExportCSVEffect(): void {
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [
+          this.parameters$,
+          this.filters$,
+          this.relations$,
+          this.countRelations$
+        ]),
+        switchMap(([_, parameters, filters, relations, countRelations]) => {
+          this.updateIsExporting(true);
+
+          return this.siteService
+            .exportCSV({ ...parameters, filters, relations, countRelations })
+            .pipe(
+              tapResponse(
+                (response) => {
+                  this.updateIsExporting(false);
+                  this.fileService.saveFile(response, configuration.exportCSV.sites);
+                },
+                () => {
+                  // error
+                  this.updateIsExporting(false);
+                }
+              )
+            );
+        })
+      )
+    );
   }
 }

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AccountReportsKPIPageFacade } from './kpi.facade';
 
 @Component({
@@ -8,9 +9,13 @@ import { AccountReportsKPIPageFacade } from './kpi.facade';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountReportsKPIComponent implements OnInit, OnDestroy {
+  public isExporting$: Observable<boolean>;
+
   constructor(
     private facade: AccountReportsKPIPageFacade
-  ) { }
+  ) {
+    this.isExporting$ = this.facade.isExporting$;
+  }
 
   public ngOnInit(): void {
     this.facade.loadItems();
@@ -18,5 +23,9 @@ export class AccountReportsKPIComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.facade.resetState();
+  }
+
+  public exportClicked(): void {
+    this.facade.exportCSV();
   }
 }

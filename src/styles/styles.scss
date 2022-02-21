@@ -51,23 +51,28 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     &:before {content: ''; width: 30px; height: 30px; display: inline-block; background-color: $white;}
     &-red:before {background-color: $error;}
     &-dark-blue:before {background-color: $text-main;}
-    &-big:before {width: 90px; height: 90px;}
+  }
+  &-big {
+    &, &:before {width: 90px; height: 90px;}
+  }
+  &-small {
+    &, &:before {width: 24px; height: 24px;}
   }
   &-job {--bg-position: 0 0;
-    &-big {--bg-position: 0 -157px; width: 90px; height: 90px;}
+    &-big {--bg-position: 0 -157px;}
   }
   &-quote {--bg-position: -30px 0;
-    &-big {--bg-position: -90px -157px; width: 90px; height: 90px;}
+    &-big {--bg-position: -90px -157px;}
   }
   &-location {--bg-position: -60px 0;
-    &-big {--bg-position: 0 -337px; width: 90px; height: 90px;}
+    &-big {--bg-position: 0 -337px;}
   }
   &-invoice {--bg-position: -90px 0;
-    &-big {--bg-position: 0 -247px; width: 90px; height: 90px;}
+    &-big {--bg-position: 0 -247px;}
   }
   &-settings {--bg-position: -120px 0;}
   &-assets {--bg-position: -150px 0;
-    &-big {--bg-position: -90px -247px; width: 90px; height: 90px;}
+    &-big {--bg-position: -90px -247px;}
   }
   &-warning {--bg-position: -180px 0;}
 
@@ -82,7 +87,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   &-back {--bg-position: 0 -60px;}
   &-more {--bg-position: -30px -60px;}
   &-attachment {--bg-position: -60px -60px;
-    &-big {--bg-position: -90px -337px; width: 90px; height: 90px;}
+    &-big {--bg-position: -90px -337px;}
   }
   &-employees {--bg-position: -90px -60px;}
   &-list {--bg-position: -120px -60px;}
@@ -90,10 +95,10 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   &-plus {--bg-position: -180px -60px;}
 
   &-dashboard {--bg-position: 0 -90px;}
-  &-download {--bg-position: -30px -90px;}
+  &-download {--bg-position: -34px -90px;}
 
-  &-report-big {--bg-position: -180px -157px; width: 90px; height: 90px;}
-  &-kpi-report-big {--bg-position: -180px -247px; width: 90px; height: 90px;}
+  &-report-big {--bg-position: -180px -157px;}
+  &-kpi-report-big {--bg-position: -180px -247px;}
 }
 
 /* grid */
@@ -136,8 +141,11 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     &:disabled {border-color: $disabled; color: $gray;}
   }
   &-block {display: block; width: 100%;}
-  &-small {padding: 6px 16px; font-size: $small;
+  &-small {padding: 4px 16px; font-size: $small;
     &.button-loading::after {width: 12px; height: 12px;}
+  }
+  &-iconed {display: flex; align-items: center;
+    .icon {margin-right: 4px;}
   }
   &-loading {pointer-events: none; position: relative; color: transparent;
     &::after {content: ''; position: absolute; width: 16px; height: 16px;
@@ -145,6 +153,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       animation: spin 1s linear infinite; top: 0; left: 0; bottom: 0;
       right: 0; margin: auto; border-radius: 50%; pointer-events: none;
     }
+    .icon {opacity: 0;}
   }
 }
 
@@ -200,7 +209,8 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     font-family: $font-title; line-height: 44px;
     .link-back {height: 30px; margin-right: 20px;}
   }
-  &-header {display: flex; justify-content: space-between; margin-bottom: 34px;
+  &-header {display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 34px;
     .page-title {margin-bottom: 0;}
   }
   &-actions {
@@ -646,7 +656,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
       margin-left: 2px; border-bottom: 1px $light-gray dotted;
     }
   }
-  &-value {width: 300px;}
+  &-value {width: 300px; white-space: pre-line;}
 }
 
 /* page section */

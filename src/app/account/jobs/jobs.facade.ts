@@ -4,6 +4,7 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { concatLatestFrom } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { FileService } from '@shared/file';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import {
@@ -42,6 +43,10 @@ import { AccountJobsQueryParameters } from './shared/models';
 export class AccountJobsPageFacade {
   public get isLoading$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isLoading);
+  }
+
+  public get isExporting$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isExporting);
   }
 
   public get items$(): Observable<Array<Job>> {
@@ -198,12 +203,14 @@ export class AccountJobsPageFacade {
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
   private removeFilterEffect$: (filter: FilterValue) => Observable<void>;
+  private exportCSVEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountJobsPageState>,
     private readonly store: Store<AppState>,
     private readonly jobService: JobService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly fileService: FileService
   ) {
     this.resetState();
 
@@ -211,6 +218,7 @@ export class AccountJobsPageFacade {
     this.registerLoadItemsByPageEffect();
     this.registerLoadItemsByParametersEffect();
     this.registerRemoveFilterEffect();
+    this.registerExportCSVEffect();
   }
 
   public resetState(): void {
@@ -227,6 +235,10 @@ export class AccountJobsPageFacade {
 
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
+  }
+
+  public exportCSV(): void {
+    this.exportCSVEffect$();
   }
 
   public changeSort(parameters: AccountJobsQueryParameters): void {
@@ -294,6 +306,15 @@ export class AccountJobsPageFacade {
       (state) => ({
         ...state,
         isLoading: value
+      })
+    )();
+  }
+
+  private updateIsExporting(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isExporting: value
       })
     )();
   }
@@ -493,6 +514,37 @@ export class AccountJobsPageFacade {
           () => this.updateIsLoading(false)
         )
       );
+  }
+
+  private registerExportCSVEffect(): void {
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [
+          this.parameters$,
+          this.filters$,
+          this.relations$,
+          this.countRelations$
+        ]),
+        switchMap(([_, parameters, filters, relations, countRelations]) => {
+          this.updateIsExporting(true);
+
+          return this.jobService
+            .exportCSV({ ...parameters, filters, relations, countRelations })
+            .pipe(
+              tapResponse(
+                (response) => {
+                  this.updateIsExporting(false);
+                  this.fileService.saveFile(response, configuration.exportCSV.jobs);
+                },
+                () => {
+                  // error
+                  this.updateIsExporting(false);
+                }
+              )
+            );
+        })
+      )
+    );
   }
 
   private registerRemoveFilterEffect(): void {

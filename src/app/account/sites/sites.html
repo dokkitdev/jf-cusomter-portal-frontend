@@ -1,6 +1,14 @@
 <div class="page page-list sites">
   <div class="page-header">
     <h2 class="page-title">{{ 'ACCOUNT.SITES.TEXT_PAGE_TITLE' | translate }}</h2>
+    <btn
+      [hasIcon]="true"
+      [isLoading]="isExporting$ | async"
+      (clicked)="exportClicked()"
+      size="small">
+      <span class="icon icon-download icon-mask icon-small"></span>
+      {{ 'ACCOUNT.SITES.LINK_CSV' | translate }}
+    </btn>
   </div>
   <sites-filters></sites-filters>
   <sites-items></sites-items>

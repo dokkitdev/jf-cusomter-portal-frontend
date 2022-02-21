@@ -85,5 +85,11 @@ export const initConfiguration = (configuration: any): any =>
     },
     assetDetails: {
       countOfDisplayedCustomFields: 4
+    },
+    exportCSV: {
+      jobs: 'jobs.csv',
+      jobsReport: 'jobs_report.csv',
+      sites: 'sites.csv',
+      assets: 'assets.csv'
     }
   }, configuration);
