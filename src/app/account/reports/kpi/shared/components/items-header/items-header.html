@@ -1,9 +1,7 @@
 <div class="table-head">
   <div *ngrxLet="parameters$; let parameters" class="table-row">
     <div class="table-cell kpi-status">
-      <header-sort [orderBy]="jobSortField.REPORT_STATUS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_STATUS' | translate }}
-      </header-sort>
+      {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_STATUS' | translate }}
     </div>
     <div class="table-cell kpi-uprn">
       <header-sort [orderBy]="jobSortField.SITE_UPRN" [parameters]="parameters" (sortChanged)="sortChanged($event)">
