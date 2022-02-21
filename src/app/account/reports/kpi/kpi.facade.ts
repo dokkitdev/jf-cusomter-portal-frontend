@@ -293,7 +293,7 @@ export class AccountReportsKPIPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountReportsKPIFilterForm>(
           state.filterFormState,
@@ -318,7 +318,7 @@ export class AccountReportsKPIPageFacade {
           const parameters = new AccountReportsKPIQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             uprn: queryParams.uprn || undefined,
             archived: (queryParams.archived !== undefined) ? queryParams.archived === 'true' : undefined,
             dateCreatedFrom: queryParams.dateCreatedFrom || undefined,
