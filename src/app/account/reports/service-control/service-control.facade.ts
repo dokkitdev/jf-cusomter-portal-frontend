@@ -123,7 +123,7 @@ export class AccountReportsServiceControlFacade {
 
   private onLoadItemsSuccess(response: PaginationResponse<Asset>): void {
     this.updateIsLoading(false);
-    this.updateItems(response.items);``
+    this.updateItems(response.items);
   }
 
   private onLoadItemsError(error: Error): void {
