@@ -1,0 +1,37 @@
+<div class="kpi-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <filter-select-text
+        [controlState]="filterFormState.controls.uprn"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_SITE_UPRN' | translate }}">
+      </filter-select-text>
+      <existence-select
+        [controlState]="filterFormState.controls.archived"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_ARCHIVED' | translate }}">
+      </existence-select>
+      <form-datepicker
+        [controlState]="filterFormState.controls.dateCreatedFrom"
+        [dateFilter]="getStartCreatedDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_DATE_CREATED_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.dateCreatedTo"
+        [dateFilter]="getEndCreatedDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_DATE_CREATED_TO' | translate }}">
+      </form-datepicker>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>

@@ -61,7 +61,7 @@
       "LINK_ASSETS": "Assets",
       "LINK_REPORTS": "Reports",
       "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
-      "LINK_REPORTS_REPAIR_RESPONSE": "Repair Response",
+      "LINK_REPORTS_KPI": "KPI",
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
@@ -254,6 +254,33 @@
     "REPORTS": {
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report"
+      },
+      "KPI": {
+        "TEXT_PAGE_TITLE": "KPI Report",
+        "TEXT_ON_TIME": "On Time",
+        "TEXT_LATE": "Late",
+        "ITEMS_HEADER": {
+          "TEXT_STATUS": "Status",
+          "TEXT_SITE_UPRN": "Site UPRN",
+          "TEXT_JOB_ID": "Job ID",
+          "TEXT_ORDER_REF": "Order Ref",
+          "TEXT_DESCRIPTION": "Description",
+          "TEXT_RESPONSE_TYPE": "Response Type",
+          "TEXT_SITE_ADDRESS": "Site Address",
+          "TEXT_CALL_DATE": "Call Date",
+          "TEXT_TARGET_DATE": "Target Date",
+          "TEXT_MADE_SAFE": "Made Safe",
+          "TEXT_COMPLETED_DATE": "Completed Date"
+        },
+        "FILTERS": {
+          "TEXT_SITE_UPRN": "Site UPRN",
+          "TEXT_SITE_NAME": "Site Name",
+          "TEXT_ARCHIVED": "Archived",
+          "TEXT_ARCHIVED_YES": "Archived: Yes",
+          "TEXT_ARCHIVED_NO": "Archived: No",
+          "TEXT_DATE_CREATED_FROM": "Date Created From",
+          "TEXT_DATE_CREATED_TO": "Date Created To"
+        }
       }
     },
     "ADMIN": {

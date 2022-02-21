@@ -64,8 +64,17 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'date_created' })
   public dateCreated?: string;
 
+  @Expose({ name: 'date_created_from' })
+  public dateCreatedFrom?: string;
+
+  @Expose({ name: 'date_created_to' })
+  public dateCreatedTo?: string;
+
   @Expose({ name: 'out_of_hours' })
   public outOfHours?: boolean;
+
+  @Expose()
+  public archived?: boolean;
 
   constructor(model: Partial<JobPaginationRequest> = {}) {
     super(model);
