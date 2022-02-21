@@ -366,7 +366,7 @@ export class AccountAssetsPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountAssetsFilterForm>(
           state.filterFormState,
@@ -403,7 +403,7 @@ export class AccountAssetsPageFacade {
           const parameters = new AccountAssetsQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             assetID: (queryParams.assetID) ? parseInt(queryParams.assetID, 10) : undefined,
             simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
             siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,

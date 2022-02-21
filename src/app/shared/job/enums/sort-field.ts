@@ -16,6 +16,5 @@ export enum JobSortField {
   DUE_DATE = 'due_date',
   APPOINTMENT = 'recent_schedule.date',
   ATTACHMENTS = 'job_attachments_count',
-  REPORT_STATUS = 'report_status',
   DESCRIPTION = 'description'
 }

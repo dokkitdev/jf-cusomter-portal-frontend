@@ -271,7 +271,7 @@ export class AccountSitesPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountSitesFilterForm>(
           state.filterFormState,
@@ -301,7 +301,7 @@ export class AccountSitesPageFacade {
           const parameters = new AccountSitesQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             customerID: (queryParams.customerID) ? parseInt(queryParams.customerID, 10) : undefined,
             name: queryParams.name || undefined,
             uprn: queryParams.uprn || undefined,

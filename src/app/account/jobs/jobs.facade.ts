@@ -346,7 +346,7 @@ export class AccountJobsPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountJobsFilterForm>(
           state.filterFormState,
@@ -381,7 +381,7 @@ export class AccountJobsPageFacade {
           const parameters = new AccountJobsQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
             jobID: (queryParams.jobID) ? parseInt(queryParams.jobID, 10) : undefined,
             orderNo: queryParams.orderNo || undefined,
