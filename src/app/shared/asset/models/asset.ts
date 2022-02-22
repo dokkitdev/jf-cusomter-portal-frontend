@@ -5,7 +5,7 @@ import { Expose, Transform, Type } from 'class-transformer';
 import { DateTime } from 'luxon';
 import { AssetAttachment } from './attachment';
 import { AssetCustomField } from './custom-field';
-import { AssetCp12Status, AssetTestResult } from '../enums';
+import { AssetTestResult } from '../enums';
 import { AssetTest } from './test';
 
 export class Asset {
@@ -30,8 +30,9 @@ export class Asset {
   @Expose({ groups: [ClassGroup.MAIN] })
   public model: string;
 
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
   @Expose({ name: 'last_cp12_date', groups: [ClassGroup.MAIN] })
-  public lastCp12Status: AssetCp12Status;
+  public lastCp12Date: DateTime;
 
   @Expose({ name: 'asset_type', groups: [ClassGroup.MAIN] })
   public type: string;

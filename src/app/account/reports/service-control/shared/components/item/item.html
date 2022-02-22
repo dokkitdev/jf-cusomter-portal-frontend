@@ -1,18 +1,49 @@
 <div class="table-row">
-  <div class="table-cell servicecontrol-uprn"></div>
-  <div class="table-cell servicecontrol-orderno"></div>
-  <div class="table-cell servicecontrol-customer"></div>
-  <div class="table-cell servicecontrol-sitename"></div>
-  <div class="table-cell servicecontrol-siteaddress"></div>
-  <div class="table-cell servicecontrol-sitecontact"></div>
-  <div class="table-cell servicecontrol-completiondate"></div>
-  <div class="table-cell servicecontrol-cp2date"></div>
-  <div class="table-cell servicecontrol-noaccess"></div>
-  <div class="table-cell servicecontrol-noaccess"></div>
-  <div class="table-cell servicecontrol-noaccess"></div>
-  <div class="table-cell servicecontrol-noaccess"></div>
-  <div class="table-cell servicecontrol-noaccess"></div>
-  <div class="table-cell servicecontrol-nextscheduled"></div>
-  <div class="table-cell servicecontrol-status"></div>
-  <div class="table-cell servicecontrol-jobnumber"></div>
+  <div class="table-cell servicecontrol-uprn">
+    {{ item.site?.uprn }}
+  </div>
+  <div class="table-cell servicecontrol-orderno">
+    {{ item.testRecord?.job?.orderNo }}
+  </div>
+  <div class="table-cell servicecontrol-customer">
+    {{ item.testRecord?.job?.customer?.name }}
+  </div>
+  <div class="table-cell servicecontrol-sitename">
+    {{ item.site?.name }}
+  </div>
+  <div class="table-cell servicecontrol-siteaddress">
+    <div>{{ item.site?.fullAddress }}</div>
+    <div>{{ item.site?.postalCode }}</div>
+  </div>
+  <div class="table-cell servicecontrol-sitecontact">
+    {{ item.site?.primaryContact?.fullName }}
+  </div>
+  <div class="table-cell servicecontrol-completiondate">
+    {{ item.testRecord?.job?.completionDate | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-cp2date">
+    {{ item?.lastCp12Date | date: dateFormat }}
+  </div>
+  <div *ngFor="let i of [0, 1, 2, 3, 4]" class="table-cell servicecontrol-noaccess">
+    <ng-container *ngIf="i < item.testRecord?.job?.noAccessDates.length">
+      {{ item.testRecord?.job?.noAccessDates[i].date | date: dateFormat }}
+    </ng-container>
+  </div>
+  <div class="table-cell servicecontrol-nextscheduled">
+    {{ item.testRecord?.job?.nextSchedule?.date | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-status">
+    <span
+      [ngClass]="{
+        'badge-archived': item.testRecord?.job.isArchived,
+        'badge-complete': item.testRecord?.job.isCompleted,
+        'badge-pending': item.testRecord?.job.isPending
+      }"
+      class="badge">
+      {{ 'SHARED.JOB_STAGE.TEXT_' + item.testRecord?.job.stage | uppercase | translate }}
+    </span>
+  </div>
+  <div class="table-cell servicecontrol-jobnumber">
+    {{ item.testRecord?.job.id }}
+  </div>
 </div>

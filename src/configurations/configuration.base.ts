@@ -33,7 +33,10 @@ export const initConfiguration = (configuration: any): any =>
       assetDate: 'dd/MM/yyyy',
       documentDate: 'dd/MM/yyyy',
       filterDate: 'dd/MM/yyyy',
-      lastLoginDate: 'dd/MM/yyyy HH:mm:ss'
+      lastLoginDate: 'dd/MM/yyyy HH:mm:ss',
+      reports: {
+        serviceControlDate: 'dd/MM/yyyy'
+      }
     },
     datepicker: {
       dateFormats: {

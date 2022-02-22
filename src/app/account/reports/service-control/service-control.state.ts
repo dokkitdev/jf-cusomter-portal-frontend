@@ -24,6 +24,7 @@ export class AccountReportsServiceControlState {
       'site.primary_site_contact',
       'asset_test_record',
       'asset_test_record.job',
+      'asset_test_record.job.customer',
       'asset_test_record.job.job_no_access_dates',
       'asset_test_record.job.next_schedule'
     ];

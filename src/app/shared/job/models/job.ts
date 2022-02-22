@@ -8,7 +8,7 @@ import { JobAttachment } from './attachment';
 import { JobCatalog } from './catalog';
 import { JobWorkOrder } from './work-order';
 import { JobStage } from '../enums';
-import { NoAccessDate } from '@shared/no-access-date';
+import { NoAccessDate } from './no-access-date';
 
 export class Job {
   @Expose({ groups: [ClassGroup.MAIN] })
