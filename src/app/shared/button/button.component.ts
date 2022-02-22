@@ -14,6 +14,7 @@ export class ButtonComponent {
   @Input() isBlock?: boolean | null;
   @Input() isDisabled?: boolean | null;
   @Input() isLoading?: boolean | null;
+  @Input() hasIcon?: boolean | null;
 
   @Output() clicked: EventEmitter<MouseEvent>;
 

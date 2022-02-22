@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Asset, AssetFilters, AssetRelationType, AssetService, AssetSortField } from '@shared/asset';
 import { Customer } from '@shared/customer';
+import { FileService } from '@shared/file';
 import { FilterValue } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
@@ -35,6 +36,10 @@ import { AccountAssetsQueryParameters } from './shared/models';
 export class AccountAssetsPageFacade {
   public get isLoading$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isLoading);
+  }
+
+  public get isExporting$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isExporting);
   }
 
   public get items$(): Observable<Array<Asset>> {
@@ -202,12 +207,14 @@ export class AccountAssetsPageFacade {
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
   private removeFilterEffect$: (filter: FilterValue) => Observable<void>;
+  private exportCSVEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountAssetsPageState>,
     private readonly store: Store<AppState>,
     private readonly assetService: AssetService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly fileService: FileService
   ) {
     this.resetState();
 
@@ -215,6 +222,7 @@ export class AccountAssetsPageFacade {
     this.registerLoadItemsByPageEffect();
     this.registerLoadItemsByParametersEffect();
     this.registerRemoveFilterEffect();
+    this.registerExportCSVEffect();
   }
 
   public resetState(): void {
@@ -231,6 +239,10 @@ export class AccountAssetsPageFacade {
 
   public loadItemsByParameters(page?: number): void {
     this.loadItemsByParametersEffect$(page);
+  }
+
+  public exportCSV(): void {
+    this.exportCSVEffect$();
   }
 
   public changeSort(parameters: AccountAssetsQueryParameters): void {
@@ -309,6 +321,15 @@ export class AccountAssetsPageFacade {
     )();
   }
 
+  private updateIsExporting(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isExporting: value
+      })
+    )();
+  }
+
   private updateItems(response: PaginationResponse<Asset>): void {
     this.componentStore.updater(
       (state) => ({
@@ -366,7 +387,7 @@ export class AccountAssetsPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountAssetsFilterForm>(
           state.filterFormState,
@@ -403,7 +424,7 @@ export class AccountAssetsPageFacade {
           const parameters = new AccountAssetsQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             assetID: (queryParams.assetID) ? parseInt(queryParams.assetID, 10) : undefined,
             simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
             siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
@@ -516,6 +537,33 @@ export class AccountAssetsPageFacade {
           () => this.updateIsLoading(true)
         )
       );
+  }
+
+  private registerExportCSVEffect(): void {
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [
+          this.parameters$,
+          this.filters$,
+          this.relations$
+        ]),
+        switchMap(([_, parameters, filters, relations]) => {
+          this.updateIsExporting(true);
+
+          return this.assetService
+            .exportCSV({ ...parameters, filters, relations })
+            .pipe(
+              tapResponse(
+                (response) => {
+                  this.updateIsExporting(false);
+                  this.fileService.saveFile(response, configuration.exportCSV.assets);
+                },
+                () => this.updateIsExporting(false)
+              )
+            );
+        })
+      )
+    );
   }
 
   private registerRemoveFilterEffect(): void {

@@ -66,4 +66,40 @@ export class AssetService {
         map((response) => response.body as Blob)
       );
   }
+
+  public exportCSV({ orderBy, desc, relations, filters }: {
+    orderBy?: AssetSortField,
+    desc?: boolean,
+    relations?: Array<AssetRelationType>,
+    filters?: AssetFilters
+  } = {}): Observable<Blob> {
+    const request = new AssetPaginationRequest({ ...filters, orderBy, desc, relations, all: true });
+
+    return this.apiService
+      .get<HttpResponse<Blob>>(`${this.endpoint}/export`, omitBy(classToPlain<AssetPaginationRequest>(request), isUndefined), {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
+      );
+  }
+
+  public exportReportCSV({ orderBy, desc, relations, filters }: {
+    orderBy?: AssetSortField,
+    desc?: boolean,
+    relations?: Array<AssetRelationType>,
+    filters?: AssetFilters
+  } = {}): Observable<Blob> {
+    const request = new AssetPaginationRequest({ ...filters, orderBy, desc, relations, all: true });
+
+    return this.apiService
+      .get<HttpResponse<Blob>>(`${this.endpoint}/report/export`, omitBy(classToPlain<AssetPaginationRequest>(request), isUndefined), {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
+      );
+  }
 }

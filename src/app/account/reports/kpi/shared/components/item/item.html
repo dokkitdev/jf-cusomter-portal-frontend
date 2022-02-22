@@ -1,0 +1,39 @@
+<ng-container>
+  <div class="table-row">
+    <div class="table-cell kpi-status">
+      <span *ngIf="item.isOnTime" class="kpi-status-ontime">{{ 'ACCOUNT.REPORTS.KPI.TEXT_ON_TIME' | translate }}</span>
+      <span *ngIf="item.isLate" class="kpi-status-late">{{ 'ACCOUNT.REPORTS.KPI.TEXT_LATE' | translate }}</span>
+    </div>
+    <div class="table-cell kpi-uprn">
+      <a
+        routerLink="/account/sites"
+        [queryParams]="{ uprn: item.site?.uprn }">
+        {{ item.site?.uprn }}
+      </a>
+    </div>
+    <div class="table-cell kpi-id">
+      <a [routerLink]="['/account/jobs', item.id]">{{ item.jobID }}</a>
+    </div>
+    <div class="table-cell kpi-order">{{ item.orderNo }}</div>
+    <div class="table-cell kpi-description">
+      <span [innerHTML]="description"></span>
+    </div>
+    <div class="table-cell kpi-response">{{ item.priority }}</div>
+    <div class="table-cell kpi-address">
+      <div>{{ item.site?.address }}</div>
+      <div>{{ item.site?.postalCode }}</div>
+    </div>
+    <div class="table-cell kpi-calldate">
+      {{ item.dateCreated | date: dateFormat }} {{ item.dateCreated | date: timeFormat }}
+    </div>
+    <div class="table-cell kpi-targetdate">
+      {{ item.dueDate | date: dateFormat }} {{ item.dueDate | date: timeFormat }}
+    </div>
+    <div class="table-cell kpi-madesafe">
+      {{ item.madeSafeDate | date: dateFormat }} {{ item.madeSafeDate | date: timeFormat }}
+    </div>
+    <div class="table-cell kpi-completed">
+      {{ item.completionDate | date: dateFormat }} {{ item.completionDate | date: timeFormat }}
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,15 @@
+<div class="page page-list kpi">
+  <div class="page-header">
+    <h2 class="page-title">{{ 'ACCOUNT.REPORTS.KPI.TEXT_PAGE_TITLE' | translate }}</h2>
+    <btn
+      [hasIcon]="true"
+      [isLoading]="isExporting$ | async"
+      (clicked)="exportClicked()"
+      size="small">
+      <span class="icon icon-download icon-mask icon-small"></span>
+      {{ 'ACCOUNT.REPORTS.KPI.LINK_CSV' | translate }}
+    </btn>
+  </div>
+  <reports-kpi-filters></reports-kpi-filters>
+  <reports-kpi-items></reports-kpi-items>
+</div>

@@ -25,6 +25,8 @@ import { AccountCostCenterMultiselectModule } from '../shared/cost-center-multis
 import { FilterValuesModule } from '@shared/filter-values';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationElementsModule } from '@shared/pagination-elements';
+import { FileModule } from '@shared/file';
+import { ButtonModule } from '@shared/button';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PaginationElementsModule } from '@shared/pagination-elements';
     AccountCostCenterMultiselectModule,
     FilterValuesModule,
     NgxPaginationModule,
-    PaginationElementsModule
+    PaginationElementsModule,
+    FileModule,
+    ButtonModule
   ],
   providers: [
     AccountJobsPageFacade,

@@ -61,7 +61,7 @@
       "LINK_ASSETS": "Assets",
       "LINK_REPORTS": "Reports",
       "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
-      "LINK_REPORTS_REPAIR_RESPONSE": "Repair Response",
+      "LINK_REPORTS_KPI": "KPI",
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
@@ -94,6 +94,7 @@
       "TEXT_PAGE_TITLE": "Jobs",
       "TEXT_CREATED": "Created",
       "TEXT_DESCRIPTION": "Description:",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_JOB": "Job ID",
         "TEXT_ORDER_NO": "Order No",
@@ -155,6 +156,7 @@
     },
     "SITES": {
       "TEXT_PAGE_TITLE": "Sites",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_CUSTOMER": "Customer",
         "TEXT_SITE": "Site",
@@ -202,6 +204,7 @@
     },
     "ASSETS": {
       "TEXT_PAGE_TITLE": "Assets",
+      "LINK_CSV": "CSV",
       "ITEMS_HEADER": {
         "TEXT_ASSET_ID": "AssetID",
         "TEXT_CUSTOMER": "Customer",
@@ -271,6 +274,33 @@
           "TEXT_NEXT_SCHEDULE_DATE": "Next Scheduled Date",
           "TEXT_STATUS": "Status",
           "TEXT_JOB_NUMBER": "Job Number"
+      },
+      "KPI": {
+        "TEXT_PAGE_TITLE": "KPI Report",
+        "TEXT_ON_TIME": "On Time",
+        "TEXT_LATE": "Late",
+        "LINK_CSV": "CSV",
+        "ITEMS_HEADER": {
+          "TEXT_STATUS": "Status",
+          "TEXT_SITE_UPRN": "Site UPRN",
+          "TEXT_JOB_ID": "Job ID",
+          "TEXT_ORDER_REF": "Order Ref",
+          "TEXT_DESCRIPTION": "Description",
+          "TEXT_RESPONSE_TYPE": "Response Type",
+          "TEXT_SITE_ADDRESS": "Site Address",
+          "TEXT_CALL_DATE": "Call Date",
+          "TEXT_TARGET_DATE": "Target Date",
+          "TEXT_MADE_SAFE": "Made Safe",
+          "TEXT_COMPLETED_DATE": "Completed Date"
+        },
+        "FILTERS": {
+          "TEXT_SITE_UPRN": "Site UPRN",
+          "TEXT_SITE_NAME": "Site Name",
+          "TEXT_ARCHIVED": "Archived",
+          "TEXT_ARCHIVED_YES": "Archived: Yes",
+          "TEXT_ARCHIVED_NO": "Archived: No",
+          "TEXT_DATE_CREATED_FROM": "Date Created From",
+          "TEXT_DATE_CREATED_TO": "Date Created To"
         }
       }
     },

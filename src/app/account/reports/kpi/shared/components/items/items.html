@@ -1,0 +1,25 @@
+<table-container
+  *ngrxLet="items$; let items"
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="items.length">
+  <div class="table">
+    <reports-kpi-items-header></reports-kpi-items-header>
+    <div class="table-content">
+      <reports-kpi-item
+        *ngFor="let item of items | paginate: {
+          id: paginationID$ | async,
+          itemsPerPage: perPage$ | async,
+          currentPage: currentPage$ | async,
+          totalItems: totalItems$ | async
+        }; trackByProperty: 'id'"
+        [item]="item"
+        [@heightCollapse]>
+      </reports-kpi-item>
+    </div>
+  </div>
+</table-container>
+<pagination-elements
+  *ngIf="hasPagination$ | async"
+  [paginationId]="paginationID$ | async"
+  (pageChanged)="pageChanged($event)">
+</pagination-elements>

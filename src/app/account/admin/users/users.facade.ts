@@ -298,7 +298,7 @@ export class AccountAdminUsersPageFacade {
       (state) => ({
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
+        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
         page: parameters.page || state.page,
         filterFormState: updateGroup<AccountAdminUsersFilterForm>(
           state.filterFormState,
@@ -334,7 +334,7 @@ export class AccountAdminUsersPageFacade {
           const parameters = new AccountAdminUsersQueryParameters({
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: queryParams.desc === 'true',
+            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
             simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
             name: queryParams.name || undefined,
             email: queryParams.email || undefined

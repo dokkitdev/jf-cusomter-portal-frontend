@@ -4,7 +4,8 @@
   [disabled]="isDisabled"
   [ngClass]="{
     'button-block': isBlock,
-    'button-loading': isLoading
+    'button-loading': isLoading,
+    'button-iconed': hasIcon
   }"
   class="button button-{{ variant }} button-{{ size }}">
   <ng-content></ng-content>

@@ -37,10 +37,10 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'job_status' })
   public status?: Array<string>;
 
-  @Expose({ name: 'order_no' })
+  @Expose({ name: 'order_no_query' })
   public orderNo?: string;
 
-  @Expose()
+  @Expose({ name: 'uprn_query' })
   public uprn?: string;
 
   @Expose({ name: 'appointment_from' })
@@ -64,8 +64,17 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'date_created' })
   public dateCreated?: string;
 
+  @Expose({ name: 'date_created_from' })
+  public dateCreatedFrom?: string;
+
+  @Expose({ name: 'date_created_to' })
+  public dateCreatedTo?: string;
+
   @Expose({ name: 'out_of_hours' })
   public outOfHours?: boolean;
+
+  @Expose()
+  public archived?: boolean;
 
   constructor(model: Partial<JobPaginationRequest> = {}) {
     super(model);
