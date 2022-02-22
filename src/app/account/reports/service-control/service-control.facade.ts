@@ -1,7 +1,8 @@
+import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
 import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { switchMap } from 'rxjs/operators';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, map } from 'rxjs';
 import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -10,6 +11,8 @@ import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
+import { Actions as FormActions, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
+import { FilterValue } from '@shared/filter-values';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -50,12 +53,24 @@ export class AccountReportsServiceControlFacade {
     }));
   }
 
-  public get filters$(): Observable<AssetFilters> {
-    return this.componentStore.select((state) => state.filters);
-  }
-
   public get relations$(): Observable<Array<AssetRelationType>> {
     return this.componentStore.select((state) => state.relations);
+  }
+
+  public get filterFormState$(): Observable<FormGroupState<AccountReportsServiceControlFilterForm>> {
+    return this.componentStore.select((state) => state.filterFormState);
+  }
+
+  public get filterFormStateValue$(): Observable<AccountReportsServiceControlFilterForm> {
+    return this.componentStore.select((state) => state.filterFormState.value);
+  }
+
+  public get filters$(): Observable<AssetFilters> {
+    return this
+      .filterFormStateValue$
+      .pipe(
+        map((filterFormStateValue) => new AssetFilters({}))
+      );
   }
 
   private loadItemsEffect$: () => Observable<void>;
@@ -93,6 +108,28 @@ export class AccountReportsServiceControlFacade {
   public changeSort(parameters: AccountReportsServiceControlQueryParameters): void {
     this.updateStateSort(parameters);
     this.loadItemsByParameters();
+  }
+
+  public handleFormStateAction(action: FormActions<any>): void {
+    this.updateFormState(action);
+
+    if (action instanceof SetValueAction) {
+      this.resetPagination();
+      this.loadItemsByParameters();
+    }
+  }
+
+  public removeFilter(filter: FilterValue): void {
+    this.handleFormStateAction(new SetValueAction(filter.id, undefined));
+  }
+
+  private updateFormState(action: FormActions<any>): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        filterFormState: formGroupReducer(state.filterFormState, action)
+      })
+    )();
   }
 
   private updateIsLoading(isLoading: boolean): void {
@@ -140,6 +177,17 @@ export class AccountReportsServiceControlFacade {
         ...state,
         orderBy: parameters.orderBy,
         desc: parameters.desc,
+        page: 1,
+        items: [],
+        totalItems: 0
+      })
+    )();
+  }
+
+  private resetPagination(): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
         page: 1,
         items: [],
         totalItems: 0

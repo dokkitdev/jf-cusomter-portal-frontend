@@ -1,3 +1,5 @@
+import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
+import { FormGroupState, createFormGroupState } from 'ngrx-forms';
 import { Asset, AssetFilters, AssetSortField, AssetRelationType } from '@shared/asset';
 
 export class AccountReportsServiceControlState {
@@ -8,9 +10,9 @@ export class AccountReportsServiceControlState {
   public desc: boolean;
   public perPage: number;
   public totalItems: number;
-  public filters: AssetFilters;
   public relations: Array<AssetRelationType>;
   public paginationId: string;
+  public filterFormState: FormGroupState<AccountReportsServiceControlFilterForm>;
 
   constructor() {
     this.items = [];
@@ -20,7 +22,6 @@ export class AccountReportsServiceControlState {
     this.desc = true;
     this.perPage = 10;
     this.totalItems = 0;
-    this.filters = new AssetFilters({ assetType: 4 });
     this.relations = [
       'site',
       'site.primary_site_contact',
@@ -31,5 +32,6 @@ export class AccountReportsServiceControlState {
       'asset_test_record.job.next_schedule'
     ];
     this.paginationId = 'account-reports-service-control-pagination';
+    this.filterFormState = createFormGroupState('AccountReportsServiceControlFilterForm', new AccountReportsServiceControlFilterForm())
   }
 }

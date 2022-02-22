@@ -1,3 +1,4 @@
+import { FilterValuesModule } from '@shared/filter-values';
 import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { ComponentStore } from '@ngrx/component-store';
@@ -39,7 +40,8 @@ import { AssetModule } from '@shared/asset';
     ReactiveComponentModule,
     AssetModule,
     NgForTrackByPropertyModule,
-    HeaderSortModule
+    HeaderSortModule,
+    FilterValuesModule
   ],
   providers: [
     AccountReportsServiceControlFacade,
