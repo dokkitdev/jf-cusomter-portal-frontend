@@ -50,6 +50,10 @@ export class Site {
   @Expose({ name: 'primary_site_contact', groups: [ClassGroup.MAIN] })
   public primaryContact?: Contact;
 
+  public get fullAddress(): string {
+    return [this.address, this.city].join(', ');
+  }
+
   constructor(model: Partial<Site> = {}) {
     Object.assign(this, model);
   }

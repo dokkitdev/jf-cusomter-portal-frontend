@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AccountReportsServiceControlFacade } from './service-control.facade';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'account-reports-service-control-page',
@@ -6,4 +7,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['service-control.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountReportsServiceControlPageComponent {}
+export class AccountReportsServiceControlPageComponent implements OnInit {
+  constructor(
+    public facade: AccountReportsServiceControlFacade
+  ) {}
+
+  public ngOnInit(): void {
+    this.facade.loadItems();
+  }
+}

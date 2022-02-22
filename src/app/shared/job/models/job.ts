@@ -8,6 +8,7 @@ import { JobAttachment } from './attachment';
 import { JobCatalog } from './catalog';
 import { JobWorkOrder } from './work-order';
 import { JobStage } from '../enums';
+import { NoAccessDate } from './no-access-date';
 
 export class Job {
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -89,6 +90,10 @@ export class Job {
   public recentSchedule?: JobSchedule;
 
   @Type(() => JobSchedule)
+  @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
+  public nextSchedule?: JobSchedule;
+
+  @Type(() => JobSchedule)
   @Expose({ groups: [ClassGroup.MAIN] })
   public schedules?: Array<JobSchedule>;
 
@@ -103,6 +108,10 @@ export class Job {
   @Type(() => JobWorkOrder)
   @Expose({ name: 'job_work_orders', groups: [ClassGroup.MAIN] })
   public workOrders: Array<JobWorkOrder>;
+
+  @Type(() => NoAccessDate)
+  @Expose({ name: 'job_no_access_dates', groups: [ClassGroup.MAIN] })
+  public noAccessDates?: Array<NoAccessDate>;
 
   constructor(model: Partial<Job> = {}) {
     Object.assign(this, model);
