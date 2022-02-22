@@ -5,6 +5,7 @@ import { AccountAssetsFilterForm } from './shared/forms';
 
 export class AccountAssetsPageState {
   public isLoading: boolean;
+  public isExporting: boolean;
   public items: Array<Asset>;
   public totalItems: number;
   public page: number;
@@ -18,6 +19,7 @@ export class AccountAssetsPageState {
 
   constructor() {
     this.isLoading = false;
+    this.isExporting = false;
     this.items = [];
     this.totalItems = 0;
     this.page = 1;

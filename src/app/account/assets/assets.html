@@ -1,6 +1,14 @@
 <div class="page page-list assets">
   <div class="page-header">
     <h2 class="page-title">{{ 'ACCOUNT.ASSETS.TEXT_PAGE_TITLE' | translate }}</h2>
+    <btn
+      [hasIcon]="true"
+      [isLoading]="isExporting$ | async"
+      (clicked)="exportClicked()"
+      size="small">
+      <span class="icon icon-small icon-download icon-mask"></span>
+      {{ 'ACCOUNT.ASSETS.LINK_CSV' | translate }}
+    </btn>
   </div>
   <assets-filters></assets-filters>
   <assets-items></assets-items>

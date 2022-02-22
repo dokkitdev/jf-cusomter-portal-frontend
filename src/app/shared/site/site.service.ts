@@ -9,6 +9,7 @@ import { Site, SiteFilters, SitePaginationRequest } from './models';
 import { SiteCountRelationType, SiteRelationType } from './types';
 import { isUndefined, omitBy } from 'lodash';
 import { SiteSortField } from './enums';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class SiteService {
@@ -50,5 +51,24 @@ export class SiteService {
 
   public update(site: Site): Observable<void> {
     return this.apiService.put(`${this.endpoint}/${site.id}`, classToPlain(site, { groups: [ClassGroup.UPDATING], excludeExtraneousValues: true }));
+  }
+
+  public exportCSV({ orderBy, desc, relations, countRelations, filters }: {
+    orderBy?: SiteSortField,
+    desc?: boolean,
+    relations?: Array<SiteRelationType>,
+    countRelations?: Array<SiteCountRelationType>,
+    filters?: SiteFilters
+  } = {}): Observable<Blob> {
+    const request = new SitePaginationRequest({ ...filters, orderBy, desc, relations, countRelations, all: true });
+
+    return this.apiService
+      .get<HttpResponse<Blob>>(`${this.endpoint}/export`, omitBy(classToPlain<SitePaginationRequest>(request), isUndefined), {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
+      );
   }
 }

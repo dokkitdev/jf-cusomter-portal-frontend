@@ -4,6 +4,7 @@ import { AccountReportsKPIFilterForm } from './shared/forms';
 
 export class AccountReportsKPIPageState {
   public isLoading: boolean;
+  public isExporting: boolean;
   public items: Array<Job>;
   public totalItems: number;
   public page: number;
@@ -16,6 +17,7 @@ export class AccountReportsKPIPageState {
 
   constructor() {
     this.isLoading = false;
+    this.isExporting = false;
     this.items = [];
     this.totalItems = 0;
     this.page = 1;

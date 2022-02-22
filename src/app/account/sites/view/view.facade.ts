@@ -222,9 +222,9 @@ export class AccountSitesViewPageFacade {
             customerName: (control) => setValue(control,
               (site.customer)
                 ? this.translateService.instant('ACCOUNT.SITES.VIEW.TEXT_CUSTOMER_NAME', {
-                  name: site.customer.name,
-                  id: site.customer.customerID
-                }) as string
+                    name: site.customer.name,
+                    id: site.customer.customerID
+                  }) as string
                 : ''
             )
           }
@@ -332,10 +332,10 @@ export class AccountSitesViewPageFacade {
             this.disableNotEditableControls();
             this.updateIsLoading(false);
           },
-          (response) => {
+          (response: HttpErrorResponse) => {
             this.updateIsLoading(false);
 
-            if ((response as HttpErrorResponse).status === HttpStatusCode.NotFound) {
+            if (response.status === HttpStatusCode.NotFound) {
               this.redirectToSitesPage();
             }
           }

@@ -82,4 +82,42 @@ export class JobService {
 
     return this.apiService.post(`${this.endpoint}/create-in-simpro`, requestObject);
   }
+
+  public exportCSV({ orderBy, desc, relations, countRelations, filters }: {
+    orderBy?: JobSortField,
+    desc?: boolean,
+    relations?: Array<JobRelationType>,
+    countRelations?: Array<JobCountRelationType>,
+    filters?: JobFilters
+  } = {}): Observable<Blob> {
+    const request = new JobPaginationRequest({ ...filters, orderBy, desc, relations, countRelations, all: true });
+
+    return this.apiService
+      .get<HttpResponse<Blob>>(`${this.endpoint}/export`, omitBy(classToPlain<JobPaginationRequest>(request), isUndefined), {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
+      );
+  }
+
+  public exportReportCSV({ orderBy, desc, relations, countRelations, filters }: {
+    orderBy?: JobSortField,
+    desc?: boolean,
+    relations?: Array<JobRelationType>,
+    countRelations?: Array<JobCountRelationType>,
+    filters?: JobFilters
+  } = {}): Observable<Blob> {
+    const request = new JobPaginationRequest({ ...filters, orderBy, desc, relations, countRelations, all: true });
+
+    return this.apiService
+      .get<HttpResponse<Blob>>(`${this.endpoint}/report/export`, omitBy(classToPlain<JobPaginationRequest>(request), isUndefined), {
+        responseType: 'blob',
+        observe: 'response'
+      })
+      .pipe(
+        map((response) => response.body as Blob)
+      );
+  }
 }

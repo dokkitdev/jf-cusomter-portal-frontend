@@ -4,6 +4,7 @@ import { AccountJobsFilterForm } from './shared/forms';
 
 export class AccountJobsPageState {
   public isLoading: boolean;
+  public isExporting: boolean;
   public items: Array<Job>;
   public totalItems: number;
   public page: number;
@@ -17,6 +18,7 @@ export class AccountJobsPageState {
 
   constructor() {
     this.isLoading = false;
+    this.isExporting = false;
     this.items = [];
     this.totalItems = 0;
     this.page = 1;
