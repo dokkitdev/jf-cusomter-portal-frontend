@@ -76,6 +76,10 @@ export class Asset {
   @Expose({ name: 'asset_test_records', groups: [ClassGroup.MAIN] })
   public testRecords?: Array<AssetTest>;
 
+  @Type(() => AssetTest)
+  @Expose({ name: 'asset_test_record', groups: [ClassGroup.MAIN] })
+  public testRecord?: AssetTest;
+
   constructor(model: Partial<Asset> = {}) {
     Object.assign(this, model);
   }

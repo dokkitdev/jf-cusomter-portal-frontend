@@ -3,6 +3,8 @@ export enum AssetSortField {
   CUSTOMER_NAME = 'site.customer.name',
   SITE_UPRN = 'site.uprn',
   SITE_NAME = 'site.name',
+  SITE_ADDRESS = 'site.address',
+  SITE_CONTACT = 'site.primary_site_contact.family_name',
   NAME = 'name',
   LOCATION = 'location',
   MAKE = 'make',
@@ -10,5 +12,11 @@ export enum AssetSortField {
   LAST_TEST_RESULT = 'last_test_result',
   LAST_TEST_DATE = 'last_test_date',
   SERVICE_LEVEL = 'service_level_name',
-  NEXT_SERVICE_DATE = 'next_service_date'
+  NEXT_SERVICE_DATE = 'next_service_date',
+  ASSET_TEST_RECORD_JOB_ORDER_NO = 'asset_test_record.job.order_no',
+  ASSET_TEST_RECORD_JOB_COMPLETION_DATE = 'asset_test_record.job.completion_date',
+  ASSET_TEST_RECORD_JOB_NEXT_SCHEDULE_DATE = 'asset_test_record.job.next_schedule.date',
+  ASSET_TEST_RECORD_JOB_STAGE = 'asset_test_record.job.stage',
+  ASSET_TEST_RECORD_JOB_ID = 'asset_test_record.job.id',
+  LAST_CP2_DATE = 'last_cp12_date'
 }

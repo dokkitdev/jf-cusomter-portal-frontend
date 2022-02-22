@@ -18,8 +18,15 @@ export class AccountReportsServiceControlState {
     this.orderBy = AssetSortField.NAME;
     this.desc = true;
     this.perPage = 10;
-    this.filters = new AssetFilters();
-    this.relations = [];
+    this.filters = new AssetFilters({ assetType: 4 });
+    this.relations = [
+      'site',
+      'site.primary_site_contact',
+      'asset_test_record',
+      'asset_test_record.job',
+      'asset_test_record.job.job_no_access_dates',
+      'asset_test_record.job.next_schedule'
+    ];
     this.paginationId = 'account-reports-service-control-pagination';
   }
 }
