@@ -274,6 +274,7 @@
           "TEXT_NEXT_SCHEDULE_DATE": "Next Scheduled Date",
           "TEXT_STATUS": "Status",
           "TEXT_JOB_NUMBER": "Job Number"
+        }
       },
       "KPI": {
         "TEXT_PAGE_TITLE": "KPI Report",
