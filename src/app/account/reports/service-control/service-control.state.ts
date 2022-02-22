@@ -7,6 +7,7 @@ export class AccountReportsServiceControlState {
   public orderBy: AssetSortField;
   public desc: boolean;
   public perPage: number;
+  public totalItems: number;
   public filters: AssetFilters;
   public relations: Array<AssetRelationType>;
   public paginationId: string;
@@ -18,6 +19,7 @@ export class AccountReportsServiceControlState {
     this.orderBy = AssetSortField.NAME;
     this.desc = true;
     this.perPage = 10;
+    this.totalItems = 0;
     this.filters = new AssetFilters({ assetType: 4 });
     this.relations = [
       'site',

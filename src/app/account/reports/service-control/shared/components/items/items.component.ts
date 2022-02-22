@@ -12,15 +12,27 @@ import { heightCollapseAnimation } from '@shared/animations';
   animations: [heightCollapseAnimation]
 })
 export class AccountReportsServiceControlItemsComponent {
-  public isLoading$: Observable<boolean>;
   public items$: Observable<Array<Asset>>;
-  public paginationId$: Observable<string>;
+  public isLoading$: Observable<boolean>;
+  public perPage$: Observable<number>;
+  public currentPage$: Observable<number>;
+  public totalItems$: Observable<number>;
+  public hasPagination$: Observable<boolean>;
+  public paginationID$: Observable<string>;
 
   constructor(
     private facade: AccountReportsServiceControlFacade
   ) {
-    this.isLoading$ = this.facade.isLoading$;
     this.items$ = this.facade.items$;
-    this.paginationId$ = this.facade.paginationId$;
+    this.isLoading$ = this.facade.isLoading$;
+    this.perPage$ = this.facade.perPage$;
+    this.currentPage$ = this.facade.currentPage$;
+    this.totalItems$ = this.facade.totalItems$;
+    this.hasPagination$ = this.facade.hasPagination$;
+    this.paginationID$ = this.facade.paginationID$;
+  }
+
+  public pageChanged(page: number): void {
+    this.facade.loadItemsByPage(page);
   }
 }

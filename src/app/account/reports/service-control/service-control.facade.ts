@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
-import { NavigationSelectors } from '@shared/navigation';
+import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -21,7 +21,23 @@ export class AccountReportsServiceControlFacade {
     return this.componentStore.select((state) => state.items);
   };
 
-  public get paginationId$(): Observable<string> {
+  public get hasPagination$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.totalItems > 0);
+  }
+
+  public get perPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.perPage);
+  }
+
+  public get currentPage$(): Observable<number> {
+    return this.componentStore.select((state) => state.page);
+  }
+
+  public get totalItems$(): Observable<number> {
+    return this.componentStore.select((state) => state.totalItems);
+  }
+
+  public get paginationID$(): Observable<string> {
     return this.componentStore.select((state) => state.paginationId);
   };
 
@@ -83,11 +99,12 @@ export class AccountReportsServiceControlFacade {
     )();
   }
 
-  private updateItems(items: Array<Asset>): void {
+  private updateItems(response: PaginationResponse<Asset>): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        items
+        items: response.items,
+        totalItems: response.totalItems
       })
     )();
   }
@@ -147,6 +164,9 @@ export class AccountReportsServiceControlFacade {
           switchMap(([_, parameters, relations, filters]) => {
             const { page, perPage, orderBy, desc } = parameters;
 
+            this.store.dispatch(NavigationActions.mergeQueryParams({
+              queryParams: { page, orderBy, desc }
+            }));
             this.updateIsLoading(true);
 
             return this.tryLoadItemsByParameters({
@@ -194,7 +214,7 @@ export class AccountReportsServiceControlFacade {
 
   private onLoadItemsSuccess(response: PaginationResponse<Asset>): void {
     this.updateIsLoading(false);
-    this.updateItems(response.items);
+    this.updateItems(response);
   }
 
   private onLoadItemsError(error: Error): void {
