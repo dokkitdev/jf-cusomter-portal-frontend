@@ -1,3 +1,4 @@
+import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsServiceControlFacade } from './service-control.facade';
@@ -37,7 +38,8 @@ import { AssetModule } from '@shared/asset';
     PaginationElementsModule,
     ReactiveComponentModule,
     AssetModule,
-    NgForTrackByPropertyModule
+    NgForTrackByPropertyModule,
+    HeaderSortModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

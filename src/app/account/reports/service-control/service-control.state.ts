@@ -14,7 +14,7 @@ export class AccountReportsServiceControlState {
   constructor() {
     this.items = [];
     this.isLoading = false;
-    this.page = 0;
+    this.page = 1;
     this.orderBy = AssetSortField.NAME;
     this.desc = true;
     this.perPage = 10;
