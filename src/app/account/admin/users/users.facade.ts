@@ -370,11 +370,8 @@ export class AccountAdminUsersPageFacade {
           this.relations$,
           this.filters$
         ),
-        switchMap(([targetPage, parameters, relations, filters]) => {
-          const page = targetPage || parameters.page;
-          const perPage = parameters.perPage;
-          const orderBy = parameters.orderBy;
-          const desc = parameters.desc;
+        switchMap(([_, parameters, relations, filters]) => {
+          const { page, perPage, orderBy, desc } = parameters;
 
           this.store.dispatch(NavigationActions.mergeQueryParams({
             queryParams: {

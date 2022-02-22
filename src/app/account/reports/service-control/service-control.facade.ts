@@ -1,12 +1,15 @@
 import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
-import { tap, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Observable, tap } from 'rxjs';
 import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
 import { PaginationResponse } from '@shared/pagination';
+import { AppState } from '@shared/store';
+import { Store } from '@ngrx/store';
+import { NavigationSelectors } from '@shared/navigation';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -40,14 +43,19 @@ export class AccountReportsServiceControlFacade {
   }
 
   private loadItemsEffect$: () => Observable<void>;
+  private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
+  private loadItemsByPageEffect$: (page?: number) => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsServiceControlState>,
+    private readonly store: Store<AppState>,
     private readonly assetService: AssetService
   ) {
     this.resetState();
 
     this.registerLoadItemsEffect();
+    this.registerLoadItemsByParametersEffect();
+    this.registerLoadItemsByPageEffect();
   }
 
   public resetState(): void {
@@ -56,6 +64,14 @@ export class AccountReportsServiceControlFacade {
 
   public loadItems(): void {
     this.loadItemsEffect$();
+  }
+
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(page);
+  }
+
+  public loadItemsByParameters(page?: number): void {
+    this.loadItemsByParametersEffect$(page);
   }
 
   private updateIsLoading(isLoading: boolean): void {
@@ -76,8 +92,51 @@ export class AccountReportsServiceControlFacade {
     )();
   }
 
+  private updatePage(pageNumber: number): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        page: pageNumber
+      })
+    )();
+  }
+
+  private updateQueryParameters(parameters: AccountReportsServiceControlQueryParameters): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        orderBy: parameters.orderBy || state.orderBy,
+        desc: parameters.desc || state.desc,
+        page: parameters.page || state.page
+      })
+    )();
+  }
+
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => this.store.select(NavigationSelectors.selectQueryParams)),
+        tap(([_, queryParams]) => {
+          this.updateIsLoading(true);
+
+          const parameters = new AccountReportsServiceControlQueryParameters({
+            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            orderBy: queryParams.orderBy || undefined,
+            desc: queryParams.desc === 'true',
+          });
+
+          this.updateQueryParameters(parameters);
+
+          return (parameters.page > 1)
+            ? this.loadItemsByPage(parameters.page)
+            : this.loadItemsByParameters();
+        })
+      )
+    );
+  }
+
+  private registerLoadItemsByParametersEffect(): void {
+    this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$
         .pipe(
           concatLatestFrom(() => [
@@ -100,6 +159,18 @@ export class AccountReportsServiceControlFacade {
             });
           })
         )
+    );
+  }
+
+  private registerLoadItemsByPageEffect(): void {
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
+
+          this.loadItemsByParameters();
+        })
+      )
     );
   }
 
