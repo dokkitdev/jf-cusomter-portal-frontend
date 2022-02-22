@@ -90,6 +90,11 @@ export class AccountReportsServiceControlFacade {
     this.loadItemsByParametersEffect$(page);
   }
 
+  public changeSort(parameters: AccountReportsServiceControlQueryParameters): void {
+    this.updateStateSort(parameters);
+    this.loadItemsByParameters();
+  }
+
   private updateIsLoading(isLoading: boolean): void {
     this.componentStore.updater(
       (state) => ({
@@ -125,6 +130,19 @@ export class AccountReportsServiceControlFacade {
         orderBy: parameters.orderBy || state.orderBy,
         desc: parameters.desc || state.desc,
         page: parameters.page || state.page
+      })
+    )();
+  }
+
+  private updateStateSort(parameters: AccountReportsServiceControlQueryParameters): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        orderBy: parameters.orderBy,
+        desc: parameters.desc,
+        page: 1,
+        items: [],
+        totalItems: 0
       })
     )();
   }

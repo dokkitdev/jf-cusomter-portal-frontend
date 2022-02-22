@@ -22,6 +22,6 @@ export class AccountReportsServiceControlItemsHeaderComponent {
   }
 
   public sortChanged(parameters: AccountReportsServiceControlQueryParameters): void {
-    // this.facade.changeSort(parameters);
+    this.facade.changeSort(parameters);
   }
 }
