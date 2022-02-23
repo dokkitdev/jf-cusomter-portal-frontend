@@ -15,11 +15,20 @@ import { Actions as FormActions, FormControlState, formGroupReducer, FormGroupSt
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { Site } from '@shared/site';
 import { JobStage } from '@shared/job';
+import { configuration } from '@configurations';
+import { FileService } from '@shared/file';
+import { NotificationService } from '@shared/notification';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
   public get isLoading$(): Observable<boolean> {
     return this.componentStore.select((state) => state.isLoading);
+  }
+
+  public get isExporting$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isExporting);
   }
 
   public get items$(): Observable<Array<Asset>> {
@@ -109,17 +118,22 @@ export class AccountReportsServiceControlFacade {
   private loadItemsEffect$: () => Observable<void>;
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
+  private exportCSVEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsServiceControlState>,
     private readonly store: Store<AppState>,
-    private readonly assetService: AssetService
+    private readonly assetService: AssetService,
+    private readonly fileService: FileService,
+    private readonly translateService: TranslateService,
+    private readonly notificationService: NotificationService
   ) {
     this.resetState();
 
     this.registerLoadItemsEffect();
     this.registerLoadItemsByParametersEffect();
     this.registerLoadItemsByPageEffect();
+    this.registerExportCSVEffect();
   }
 
   public resetState(): void {
@@ -160,8 +174,8 @@ export class AccountReportsServiceControlFacade {
     this.updateSelectedSite(site);
   }
 
-  private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
-    return new FilterValue({ id: control.id, value: control.value });
+  public exportCSV(): void {
+    this.exportCSVEffect$();
   }
 
   private getJobStageFilterStatus(stage: JobStage): FilterValueStatus {
@@ -191,6 +205,15 @@ export class AccountReportsServiceControlFacade {
       (state) => ({
         ...state,
         isLoading
+      })
+    )();
+  }
+
+  private updateIsExporting(value: boolean): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        isExporting: value
       })
     )();
   }
@@ -348,5 +371,43 @@ export class AccountReportsServiceControlFacade {
 
   private onLoadItemsError(error: Error): void {
     this.updateIsLoading(false);
+  }
+
+  private registerExportCSVEffect(): void {
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [
+          this.parameters$,
+          this.filters$,
+          this.relations$
+        ]),
+        switchMap(([_, parameters, filters, relations]) => {
+          this.updateIsExporting(true);
+
+          return this.assetService
+            .exportReportCSV({ ...parameters, filters, relations })
+            .pipe(
+              tapResponse(
+                (response) => {
+                  this.updateIsExporting(false);
+                  this.fileService.saveFile(response, configuration.exportCSV.assetsReport);
+                },
+                (response: HttpErrorResponse) => {
+                  this.updateIsExporting(false);
+
+                  const errorTranslationKey =
+                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
+                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+
+                  this.notificationService.error(
+                    this.translateService.instant(errorTranslationKey)
+                  );
+                }
+              )
+            );
+        })
+      )
+    );
   }
 }

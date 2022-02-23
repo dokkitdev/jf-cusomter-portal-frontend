@@ -93,6 +93,7 @@ export const initConfiguration = (configuration: any): any =>
       jobs: 'jobs.csv',
       jobsReport: 'jobs_report.csv',
       sites: 'sites.csv',
-      assets: 'assets.csv'
+      assets: 'assets.csv',
+      assetsReport: 'assets_report.csv'
     }
   }, configuration);

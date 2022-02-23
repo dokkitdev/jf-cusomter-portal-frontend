@@ -27,6 +27,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PaginationElementsModule } from '@shared/pagination-elements';
 import { FileModule } from '@shared/file';
 import { ButtonModule } from '@shared/button';
+import { NotificationModule } from '@shared/notification';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ButtonModule } from '@shared/button';
     NgxPaginationModule,
     PaginationElementsModule,
     FileModule,
-    ButtonModule
+    ButtonModule,
+    NotificationModule
   ],
   providers: [
     AccountJobsPageFacade,

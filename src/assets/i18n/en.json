@@ -257,6 +257,7 @@
     "REPORTS": {
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
+        "LINK_CSV": "CSV",
         "FILTERS": {
           "TEXT_SITE": "Site",
           "TEXT_STAGE": "Stage"
@@ -565,6 +566,10 @@
     },
     "NOTIFICATION": {
       "TEXT_HIDE": "Hide"
+    },
+    "NOTIFICATIONS": {
+      "TEXT_ERROR": "Something went wrong. Please try again.",
+      "TEXT_CSV_EXPORT_ERROR": "Too many records to export"
     },
     "SECTION": {
       "TEXT_NO_CONTENT": "No content"

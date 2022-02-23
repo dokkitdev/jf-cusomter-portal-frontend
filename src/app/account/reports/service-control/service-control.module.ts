@@ -21,6 +21,9 @@ import { AccountReportsServiceControlFiltersComponent } from './shared/component
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { AssetModule } from '@shared/asset';
+import { ButtonModule } from '@shared/button';
+import { FileModule } from '@shared/file';
+import { NotificationModule } from '@shared/notification';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { AssetModule } from '@shared/asset';
     HeaderSortModule,
     FilterValuesModule,
     AccountSiteSelectModule,
-    AccountJobStageSelectModule
+    AccountJobStageSelectModule,
+    ButtonModule,
+    FileModule,
+    NotificationModule
   ],
   providers: [
     AccountReportsServiceControlFacade,
