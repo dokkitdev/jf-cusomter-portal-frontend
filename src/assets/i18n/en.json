@@ -258,6 +258,10 @@
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
         "LINK_CSV": "CSV",
+        "FILTERS": {
+          "TEXT_SITE": "Site",
+          "TEXT_STAGE": "Stage"
+        },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
           "TEXT_ORDER_NO": "Order No",
@@ -390,6 +394,9 @@
       "SITE_SELECT": {
         "TEXT_PLACEHOLDER": "Site",
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
+      },
+      "JOB_STAGE_SELECT": {
+        "TEXT_PLACEHOLDER": "Stage"
       },
       "DIALOG_EDIT_USER": {
         "TEXT_TITLE_CREATE": "Create user",

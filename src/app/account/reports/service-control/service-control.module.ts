@@ -1,4 +1,7 @@
-import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
+import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
+import { AccountSiteSelectModule } from './../../shared/site-select';
+import { FilterValuesModule } from '@shared/filter-values';
+import { HeaderSortModule } from '@shared/header-sort';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsServiceControlFacade } from './service-control.facade';
@@ -43,6 +46,9 @@ import { NotificationModule } from '@shared/notification';
     AssetModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,
+    FilterValuesModule,
+    AccountSiteSelectModule,
+    AccountJobStageSelectModule,
     ButtonModule,
     FileModule,
     NotificationModule

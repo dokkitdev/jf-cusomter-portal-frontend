@@ -1,1 +1,27 @@
-Filters
+<div class="servicecontrol-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <account-site-select
+        [controlState]="filterFormState.controls.siteID"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedSiteChanged)="selectedSiteChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_SITE' | translate }}">
+      </account-site-select>
+      <account-job-stage-select
+        [controlState]="filterFormState.controls.jobStage"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}">
+      </account-job-stage-select>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>

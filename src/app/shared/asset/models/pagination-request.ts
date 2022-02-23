@@ -2,6 +2,7 @@ import { Expose } from 'class-transformer';
 import { PaginationRequest } from '@shared/pagination';
 import { AssetSortField, AssetTestResult } from '../enums';
 import { AssetRelationType } from '../types';
+import { JobStage } from '@shared/job';
 
 export class AssetPaginationRequest extends PaginationRequest {
   @Expose({ name: 'order_by' })
@@ -60,6 +61,9 @@ export class AssetPaginationRequest extends PaginationRequest {
 
   @Expose({ name: 'next_service_date_to' })
   public nextServiceDateTo?: string;
+
+  @Expose({ name: 'job_stage' })
+  public jobStage: JobStage;
 
   constructor(model: Partial<AssetPaginationRequest> = {}) {
     super(model);

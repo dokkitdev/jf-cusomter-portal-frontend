@@ -1,7 +1,8 @@
+import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
 import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { switchMap } from 'rxjs/operators';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, map } from 'rxjs';
 import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -10,6 +11,10 @@ import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
+import { Actions as FormActions, FormControlState, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
+import { FilterValue, FilterValueStatus } from '@shared/filter-values';
+import { Site } from '@shared/site';
+import { JobStage } from '@shared/job';
 import { configuration } from '@configurations';
 import { FileService } from '@shared/file';
 import { NotificationService } from '@shared/notification';
@@ -59,12 +64,55 @@ export class AccountReportsServiceControlFacade {
     }));
   }
 
-  public get filters$(): Observable<AssetFilters> {
-    return this.componentStore.select((state) => state.filters);
-  }
-
   public get relations$(): Observable<Array<AssetRelationType>> {
     return this.componentStore.select((state) => state.relations);
+  }
+
+  public get filterFormState$(): Observable<FormGroupState<AccountReportsServiceControlFilterForm>> {
+    return this.componentStore.select((state) => state.filterFormState);
+  }
+
+  public get filterFormStateValue$(): Observable<AccountReportsServiceControlFilterForm> {
+    return this.componentStore.select((state) => state.filterFormState.value);
+  }
+
+  public get filterValues$(): Observable<Array<FilterValue>> {
+    return this.componentStore.select((state) => {
+      const formState = state.filterFormState;
+      const filterValues = [];
+
+      if (formState.value.siteID && state.selectedSite) {
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.siteID.id,
+            value: state.selectedSite.name
+          })
+        );
+      }
+
+      if (formState.value.jobStage) {
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobStage.id,
+            value: formState.value.jobStage,
+            status: this.getJobStageFilterStatus(formState.value.jobStage)
+          })
+        );
+      }
+
+      return filterValues;
+    });
+  }
+
+  public get filters$(): Observable<AssetFilters> {
+    return this
+      .filterFormStateValue$
+      .pipe(
+        map((filterFormStateValue) => new AssetFilters({
+          siteID: filterFormStateValue.siteID || undefined,
+          jobStage: filterFormStateValue.jobStage || undefined
+        }))
+      );
   }
 
   private loadItemsEffect$: () => Observable<void>;
@@ -104,8 +152,52 @@ export class AccountReportsServiceControlFacade {
     this.loadItemsByParametersEffect$(page);
   }
 
+  public changeSort(parameters: AccountReportsServiceControlQueryParameters): void {
+    this.updateStateSort(parameters);
+    this.loadItemsByParameters();
+  }
+
+  public handleFormStateAction(action: FormActions<any>): void {
+    this.updateFormState(action);
+
+    if (action instanceof SetValueAction) {
+      this.resetPagination();
+      this.loadItemsByParameters();
+    }
+  }
+
+  public removeFilter(filter: FilterValue): void {
+    this.handleFormStateAction(new SetValueAction(filter.id, undefined));
+  }
+
+  public setSelectedSite(site: Site): void {
+    this.updateSelectedSite(site);
+  }
+
   public exportCSV(): void {
     this.exportCSVEffect$();
+  }
+
+  private getJobStageFilterStatus(stage: JobStage): FilterValueStatus {
+    switch (stage) {
+      case JobStage.PENDING:
+        return FilterValueStatus.PENDING;
+      case JobStage.COMPLETE:
+        return FilterValueStatus.COMPLETED;
+      case JobStage.ARCHIVED:
+        return FilterValueStatus.CANCELED;
+      default:
+        return FilterValueStatus.DEFAULT;
+    }
+  }
+
+  private updateFormState(action: FormActions<any>): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        filterFormState: formGroupReducer(state.filterFormState, action)
+      })
+    )();
   }
 
   private updateIsLoading(isLoading: boolean): void {
@@ -152,6 +244,39 @@ export class AccountReportsServiceControlFacade {
         orderBy: parameters.orderBy || state.orderBy,
         desc: parameters.desc || state.desc,
         page: parameters.page || state.page
+      })
+    )();
+  }
+
+  private updateStateSort(parameters: AccountReportsServiceControlQueryParameters): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        orderBy: parameters.orderBy,
+        desc: parameters.desc,
+        page: 1,
+        items: [],
+        totalItems: 0
+      })
+    )();
+  }
+
+  private resetPagination(): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        page: 1,
+        items: [],
+        totalItems: 0
+      })
+    )();
+  }
+
+  private updateSelectedSite(site: Site): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        selectedSite: site
       })
     )();
   }
