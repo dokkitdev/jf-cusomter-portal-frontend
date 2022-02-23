@@ -22,6 +22,8 @@ export class AssetFilters {
   public jobStage?: JobStage;
   public jobDueDateFrom?: string;
   public jobDueDateTo?: string;
+  public jobLoggedCompletionDateFrom?: string;
+  public jobLoggedCompletionDateTo?: string;
 
   constructor(model: Partial<AssetFilters> = {}) {
     Object.assign(this, model);

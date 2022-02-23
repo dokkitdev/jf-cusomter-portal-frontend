@@ -10,6 +10,8 @@ export class AccountReportsServiceControlQueryParameters {
   public jobStage: JobStage | undefined;
   public jobDueDateFrom: string;
   public jobDueDateTo: string;
+  public jobLoggedCompletionDateFrom: string;
+  public jobLoggedCompletionDateTo: string;
 
   constructor(model: Partial<AccountReportsServiceControlQueryParameters> = {}) {
     Object.assign(this, model);

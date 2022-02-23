@@ -30,6 +30,18 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_TO' | translate }}">
       </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateFrom"
+        [dateFilter]="getStartJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateTo"
+        [dateFilter]="getEndJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_TO' | translate }}">
+      </form-datepicker>
     </form>
   </div>
   <filter-values

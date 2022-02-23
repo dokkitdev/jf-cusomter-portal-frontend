@@ -17,6 +17,8 @@ export class AccountReportsServiceControlFiltersComponent {
   public filterValues$: Observable<Array<FilterValue>>;
   public getStartJobDueDateFilter$: Observable<(date: Date) => boolean>;
   public getEndJobDueDateFilter$: Observable<(date: Date) => boolean>;
+  public getStartJobLoggedCompletionDateFilter$: Observable<(date: Date) => boolean>;
+  public getEndJobLoggedCompletionDateFilter$: Observable<(date: Date) => boolean>;
 
   constructor(
     private facade: AccountReportsServiceControlFacade
@@ -25,6 +27,8 @@ export class AccountReportsServiceControlFiltersComponent {
     this.filterValues$ = this.facade.filterValues$;
     this.getStartJobDueDateFilter$ = this.facade.getStartJobDueDateFilter$();
     this.getEndJobDueDateFilter$ = this.facade.getEndJobDueDateFilter$();
+    this.getStartJobLoggedCompletionDateFilter$ = this.facade.getStartJobLoggedCompletionDateFilter$();
+    this.getEndJobLoggedCompletionDateFilter$ = this.facade.getEndJobLoggedCompletionDateFilter$();
   }
 
   public formActionTriggered(action: Actions<any>): void {

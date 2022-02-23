@@ -6,11 +6,16 @@ export class AccountReportsServiceControlFilterForm {
   public jobStage: Boxed<JobStage | undefined>;
   public jobDueDateFrom: string;
   public jobDueDateTo: string;
+  public jobFrom: string;
+  public jobLoggedCompletionDateFrom: string;
+  public jobLoggedCompletionDateTo: string;
 
   constructor() {
     this.siteID = 0;
     this.jobStage = box(undefined);
     this.jobDueDateFrom = '';
     this.jobDueDateTo = '';
+    this.jobLoggedCompletionDateFrom = '';
+    this.jobLoggedCompletionDateTo = '';
   }
 }

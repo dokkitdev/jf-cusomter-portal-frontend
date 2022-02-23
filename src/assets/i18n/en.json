@@ -262,7 +262,9 @@
           "TEXT_SITE": "Site",
           "TEXT_STAGE": "Stage",
           "TEXT_DUE_DATE_FROM": "Due Date From",
-          "TEXT_DUE_DATE_TO": "Due Date To"
+          "TEXT_DUE_DATE_TO": "Due Date To",
+          "TEXT_COMPLETION_FROM": "Completion From",
+          "TEXT_COMPLETION_TO": "Completion To"
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
