@@ -1,3 +1,4 @@
+import { FormDatepickerModule } from './../../../shared/form-datepicker/form-datepicker.module';
 import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
 import { AccountSiteSelectModule } from './../../shared/site-select';
 import { FilterValuesModule } from '@shared/filter-values';
@@ -51,7 +52,8 @@ import { NotificationModule } from '@shared/notification';
     AccountJobStageSelectModule,
     ButtonModule,
     FileModule,
-    NotificationModule
+    NotificationModule,
+    FormDatepickerModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

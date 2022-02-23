@@ -260,7 +260,9 @@
         "LINK_CSV": "CSV",
         "FILTERS": {
           "TEXT_SITE": "Site",
-          "TEXT_STAGE": "Stage"
+          "TEXT_STAGE": "Stage",
+          "TEXT_DUE_DATE_FROM": "Due Date From",
+          "TEXT_DUE_DATE_TO": "Due Date To"
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",

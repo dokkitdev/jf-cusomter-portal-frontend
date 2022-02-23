@@ -20,6 +20,8 @@ export class AssetFilters {
   public nextServiceDateFrom?: string;
   public nextServiceDateTo?: string;
   public jobStage?: JobStage;
+  public jobDueDateFrom?: string;
+  public jobDueDateTo?: string;
 
   constructor(model: Partial<AssetFilters> = {}) {
     Object.assign(this, model);

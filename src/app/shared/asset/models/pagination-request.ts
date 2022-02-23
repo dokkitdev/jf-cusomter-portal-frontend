@@ -65,6 +65,12 @@ export class AssetPaginationRequest extends PaginationRequest {
   @Expose({ name: 'job_stage' })
   public jobStage: JobStage;
 
+  @Expose({ name: 'job_due_date_from' })
+  public jobDueDateFrom?: string;
+
+  @Expose({ name: 'job_due_date_to' })
+  public jobDueDateTo?: string;
+
   constructor(model: Partial<AssetPaginationRequest> = {}) {
     super(model);
 

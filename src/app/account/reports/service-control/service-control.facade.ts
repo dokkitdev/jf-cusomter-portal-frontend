@@ -11,7 +11,16 @@ import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
-import { Actions as FormActions, FormControlState, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
+import {
+  Actions as FormActions,
+  formGroupReducer,
+  FormGroupState,
+  SetValueAction,
+  updateGroup,
+  setValue,
+  box,
+  unbox
+} from 'ngrx-forms';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { Site } from '@shared/site';
 import { JobStage } from '@shared/job';
@@ -20,6 +29,9 @@ import { FileService } from '@shared/file';
 import { NotificationService } from '@shared/notification';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { getStartDateFilter, getEndDateFilter } from '@shared/form-datepicker';
+import { DateTime } from 'luxon';
+import parseInt from 'lodash/parseInt';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -60,7 +72,11 @@ export class AccountReportsServiceControlFacade {
       page: state.page,
       perPage: state.perPage,
       orderBy: state.orderBy,
-      desc: state.desc
+      desc: state.desc,
+      siteID: state.filterFormState.value.siteID,
+      jobStage: unbox(state.filterFormState.value.jobStage),
+      jobDueDateFrom: state.filterFormState.value.jobDueDateFrom,
+      jobDueDateTo: state.filterFormState.value.jobDueDateTo
     }));
   }
 
@@ -90,14 +106,28 @@ export class AccountReportsServiceControlFacade {
         );
       }
 
-      if (formState.value.jobStage) {
+      if (unbox(formState.value.jobStage)) {
         filterValues.push(
           new FilterValue({
             id: formState.controls.jobStage.id,
-            value: formState.value.jobStage,
-            status: this.getJobStageFilterStatus(formState.value.jobStage)
+            value: unbox(formState.value.jobStage),
+            status: this.getJobStageFilterStatus(unbox(formState.value.jobStage))
           })
         );
+      }
+
+      if (formState.value.jobDueDateFrom) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.jobDueDateFrom.id,
+          value: DateTime.fromISO(formState.value.jobDueDateFrom).toFormat(configuration.dateFormats.filterDate)
+        }));
+      }
+
+      if (formState.value.jobDueDateTo) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.jobDueDateTo.id,
+          value: DateTime.fromISO(formState.value.jobDueDateTo).toFormat(configuration.dateFormats.filterDate)
+        }));
       }
 
       return filterValues;
@@ -110,7 +140,9 @@ export class AccountReportsServiceControlFacade {
       .pipe(
         map((filterFormStateValue) => new AssetFilters({
           siteID: filterFormStateValue.siteID || undefined,
-          jobStage: filterFormStateValue.jobStage || undefined
+          jobStage: unbox(filterFormStateValue.jobStage) ? unbox(filterFormStateValue.jobStage) : undefined,
+          jobDueDateFrom: filterFormStateValue.jobDueDateFrom || undefined,
+          jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined
         }))
       );
   }
@@ -178,7 +210,23 @@ export class AccountReportsServiceControlFacade {
     this.exportCSVEffect$();
   }
 
-  private getJobStageFilterStatus(stage: JobStage): FilterValueStatus {
+  public getStartJobDueDateFilter$(): Observable<(date: Date) => boolean> {
+    return this
+      .filterFormState$
+      .pipe(
+        map((formState) => getStartDateFilter(formState.value.jobDueDateTo))
+      );
+  }
+
+  public getEndJobDueDateFilter$(): Observable<(date: Date) => boolean> {
+    return this
+      .filterFormState$
+      .pipe(
+        map((formState) => getEndDateFilter(formState.value.jobDueDateFrom))
+      );
+  }
+
+  private getJobStageFilterStatus(stage: JobStage | undefined): FilterValueStatus {
     switch (stage) {
       case JobStage.PENDING:
         return FilterValueStatus.PENDING;
@@ -243,7 +291,16 @@ export class AccountReportsServiceControlFacade {
         ...state,
         orderBy: parameters.orderBy || state.orderBy,
         desc: parameters.desc || state.desc,
-        page: parameters.page || state.page
+        page: parameters.page || state.page,
+        filterFormState: updateGroup<AccountReportsServiceControlFilterForm>(
+          state.filterFormState,
+          {
+            siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
+            jobStage: setValue((parameters.jobStage) ? box(parameters.jobStage) : state.filterFormState.value.jobStage),
+            jobDueDateFrom: setValue(parameters.jobDueDateFrom || state.filterFormState.value.jobDueDateFrom),
+            jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo)
+          }
+        )
       })
     )();
   }
@@ -292,6 +349,10 @@ export class AccountReportsServiceControlFacade {
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
+            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID) : undefined,
+            jobStage: queryParams.jobStage || undefined,
+            jobDueDateFrom: queryParams.jobDueDateFrom || undefined,
+            jobDueDateTo: queryParams.jobDueDateTo || undefined
           });
 
           this.updateQueryParameters(parameters);
@@ -317,7 +378,15 @@ export class AccountReportsServiceControlFacade {
             const { page, perPage, orderBy, desc } = parameters;
 
             this.store.dispatch(NavigationActions.mergeQueryParams({
-              queryParams: { page, orderBy, desc }
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                siteID: filters.siteID,
+                jobStage: filters.jobStage,
+                jobDueDateFrom: filters.jobDueDateFrom || undefined,
+                jobDueDateTo: filters.jobDueDateTo || undefined
+              }
             }));
             this.updateIsLoading(true);
 

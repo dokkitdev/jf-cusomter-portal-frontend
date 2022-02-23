@@ -18,6 +18,18 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}">
       </account-job-stage-select>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateFrom"
+        [dateFilter]="getStartJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateTo"
+        [dateFilter]="getEndJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_TO' | translate }}">
+      </form-datepicker>
     </form>
   </div>
   <filter-values
