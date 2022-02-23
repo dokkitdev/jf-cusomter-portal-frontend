@@ -3,6 +3,7 @@ import { Asset, AssetFilters, AssetSortField, AssetRelationType } from '@shared/
 export class AccountReportsServiceControlState {
   public items: Array<Asset>;
   public isLoading: boolean;
+  public isExporting: boolean;
   public page: number;
   public orderBy: AssetSortField;
   public desc: boolean;
@@ -15,6 +16,7 @@ export class AccountReportsServiceControlState {
   constructor() {
     this.items = [];
     this.isLoading = false;
+    this.isExporting = false;
     this.page = 1;
     this.orderBy = AssetSortField.NAME;
     this.desc = true;

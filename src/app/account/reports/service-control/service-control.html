@@ -1,6 +1,14 @@
 <div class="page page-list servicecontrol">
   <div class="page-header">
     <h2 class="page-title">{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.TEXT_PAGE_TITLE' | translate }}</h2>
+    <btn
+      [hasIcon]="true"
+      [isLoading]="isExporting$ | async"
+      (clicked)="exportClicked()"
+      size="small">
+      <span class="icon icon-download icon-mask icon-small"></span>
+      {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.LINK_CSV' | translate }}
+    </btn>
   </div>
   <reports-service-control-filters></reports-service-control-filters>
   <reports-service-control-items></reports-service-control-items>
