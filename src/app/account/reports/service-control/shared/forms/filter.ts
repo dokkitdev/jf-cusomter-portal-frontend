@@ -1,3 +1,4 @@
+import { AssetCp12Status } from '@shared/asset';
 import { JobStage } from '@shared/job';
 import { box, Boxed } from 'ngrx-forms';
 
@@ -9,6 +10,7 @@ export class AccountReportsServiceControlFilterForm {
   public jobFrom: string;
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
+  public CP12Status: Boxed<AssetCp12Status | undefined>;
 
   constructor() {
     this.siteID = 0;

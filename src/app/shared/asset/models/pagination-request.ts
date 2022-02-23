@@ -1,3 +1,4 @@
+import { AssetCp12Status } from './../enums/cp12-status';
 import { Expose } from 'class-transformer';
 import { PaginationRequest } from '@shared/pagination';
 import { AssetSortField, AssetTestResult } from '../enums';
@@ -76,6 +77,9 @@ export class AssetPaginationRequest extends PaginationRequest {
 
   @Expose({ name: 'job_logged_completion_date_to' })
   public jobLoggedCompletionDateTo?: string;
+
+  @Expose({ name: 'cp12_status' })
+  public CP12Status?: AssetCp12Status;
 
   constructor(model: Partial<AssetPaginationRequest> = {}) {
     super(model);

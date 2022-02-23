@@ -1,3 +1,4 @@
+import { AssetCp12Status } from './../enums/cp12-status';
 import { JobStage } from '@shared/job';
 import { AssetTestResult } from '../enums';
 
@@ -24,6 +25,7 @@ export class AssetFilters {
   public jobDueDateTo?: string;
   public jobLoggedCompletionDateFrom?: string;
   public jobLoggedCompletionDateTo?: string;
+  public CP12Status?: AssetCp12Status;
 
   constructor(model: Partial<AssetFilters> = {}) {
     Object.assign(this, model);

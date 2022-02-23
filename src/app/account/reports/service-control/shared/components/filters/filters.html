@@ -42,6 +42,12 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_TO' | translate }}">
       </form-datepicker>
+      <account-cp12-status-select
+        [controlState]="filterFormState.controls.jobStage"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_CP12_STATUS' | translate }}">
+      </account-cp12-status-select>
     </form>
   </div>
   <filter-values

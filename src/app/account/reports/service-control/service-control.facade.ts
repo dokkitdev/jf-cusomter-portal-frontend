@@ -78,7 +78,8 @@ export class AccountReportsServiceControlFacade {
       jobDueDateFrom: state.filterFormState.value.jobDueDateFrom,
       jobDueDateTo: state.filterFormState.value.jobDueDateTo,
       jobLoggedCompletionDateFrom: state.filterFormState.value.jobLoggedCompletionDateFrom,
-      jobLoggedCompletionDateTo: state.filterFormState.value.jobLoggedCompletionDateTo
+      jobLoggedCompletionDateTo: state.filterFormState.value.jobLoggedCompletionDateTo,
+      CP12Status: unbox(state.filterFormState.value.CP12Status)
     }));
   }
 
@@ -146,6 +147,15 @@ export class AccountReportsServiceControlFacade {
         }));
       }
 
+      if (unbox(formState.value.CP12Status)) {
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.CP12Status.id,
+            value: unbox(formState.value.CP12Status)
+          })
+        );
+      }
+
       return filterValues;
     });
   }
@@ -156,11 +166,12 @@ export class AccountReportsServiceControlFacade {
       .pipe(
         map((filterFormStateValue) => new AssetFilters({
           siteID: filterFormStateValue.siteID || undefined,
-          jobStage: unbox(filterFormStateValue.jobStage) ? unbox(filterFormStateValue.jobStage) : undefined,
+          jobStage: unbox(filterFormStateValue.jobStage) || undefined,
           jobDueDateFrom: filterFormStateValue.jobDueDateFrom || undefined,
           jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined,
           jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
+          CP12Status: unbox(filterFormStateValue.CP12Status) || undefined
         }))
       );
   }
@@ -334,7 +345,8 @@ export class AccountReportsServiceControlFacade {
             jobDueDateFrom: setValue(parameters.jobDueDateFrom || state.filterFormState.value.jobDueDateFrom),
             jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo),
             jobLoggedCompletionDateFrom: setValue(parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom),
-            jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo)
+            jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo),
+            CP12Status: setValue((parameters.CP12Status) ? box(parameters.CP12Status) : state.filterFormState.value.CP12Status)
           }
         )
       })
@@ -390,7 +402,8 @@ export class AccountReportsServiceControlFacade {
             jobDueDateFrom: queryParams.jobDueDateFrom || undefined,
             jobDueDateTo: queryParams.jobDueDateTo || undefined,
             jobLoggedCompletionDateFrom: queryParams.jobLoggedCompletionDateFrom || undefined,
-            jobLoggedCompletionDateTo: queryParams.jobLoggedCompletionDateTo || undefined
+            jobLoggedCompletionDateTo: queryParams.jobLoggedCompletionDateTo || undefined,
+            CP12Status: queryParams.CP12Status || undefined
           });
 
           this.updateQueryParameters(parameters);
@@ -425,7 +438,8 @@ export class AccountReportsServiceControlFacade {
                 jobDueDateFrom: filters.jobDueDateFrom || undefined,
                 jobDueDateTo: filters.jobDueDateTo || undefined,
                 jobLoggedCompletionDateFrom: filters.jobLoggedCompletionDateFrom || undefined,
-                jobLoggedCompletionDateTo: filters.jobLoggedCompletionDateTo || undefined
+                jobLoggedCompletionDateTo: filters.jobLoggedCompletionDateTo || undefined,
+                CP12Status: filters.CP12Status
               }
             }));
             this.updateIsLoading(true);

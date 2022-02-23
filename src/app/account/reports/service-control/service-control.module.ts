@@ -1,3 +1,4 @@
+import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select/cp12-status-select.module';
 import { FormDatepickerModule } from './../../../shared/form-datepicker/form-datepicker.module';
 import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
 import { AccountSiteSelectModule } from './../../shared/site-select';
@@ -53,7 +54,8 @@ import { NotificationModule } from '@shared/notification';
     ButtonModule,
     FileModule,
     NotificationModule,
-    FormDatepickerModule
+    FormDatepickerModule,
+    AccountCp12StatusSelectModule
   ],
   providers: [
     AccountReportsServiceControlFacade,
