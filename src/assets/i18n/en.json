@@ -394,6 +394,9 @@
         "TEXT_PLACEHOLDER": "Site",
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
       },
+      "JOB_STAGE_SELECT": {
+        "TEXT_PLACEHOLDER": "Stage"
+      },
       "DIALOG_EDIT_USER": {
         "TEXT_TITLE_CREATE": "Create user",
         "TEXT_TITLE_UPDATE": "Edit user",
