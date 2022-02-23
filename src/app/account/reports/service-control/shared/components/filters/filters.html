@@ -5,6 +5,13 @@
       [ngrxFormState]="filterFormState"
       (ngrxFormActions)="formActionTriggered($event)"
       class="form">
+      <account-site-select
+        [controlState]="filterFormState.controls.siteID"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedSiteChanged)="selectedSiteChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_SITE' | translate }}"
+      ></account-site-select>
       <!-- <filter-select-text
         [controlState]="filterFormState.controls.name"
         (controlStateActionTriggered)="formActionTriggered($event)"

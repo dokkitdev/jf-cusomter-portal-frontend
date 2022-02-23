@@ -1,3 +1,4 @@
+import { AccountSiteSelectModule } from './../../shared/site-select/site-select.module';
 import { FilterValuesModule } from '@shared/filter-values';
 import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
@@ -41,7 +42,8 @@ import { AssetModule } from '@shared/asset';
     AssetModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,
-    FilterValuesModule
+    FilterValuesModule,
+    AccountSiteSelectModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

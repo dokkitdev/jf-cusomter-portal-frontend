@@ -11,8 +11,9 @@ import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
-import { Actions as FormActions, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
+import { Actions as FormActions, FormControlState, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
 import { FilterValue } from '@shared/filter-values';
+import { Site } from '@shared/site';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -65,11 +66,29 @@ export class AccountReportsServiceControlFacade {
     return this.componentStore.select((state) => state.filterFormState.value);
   }
 
+  public get filterValues$(): Observable<Array<FilterValue>> {
+    return this.componentStore.select((state) => {
+      const formState = state.filterFormState;
+      const filterValues = [];
+
+      if (formState.value.siteID && state.selectedSite) {
+        filterValues.push(new FilterValue({
+          id: formState.controls.siteID.id,
+          value: state.selectedSite.name
+        }));
+      }
+
+      return filterValues;
+    });
+  }
+
   public get filters$(): Observable<AssetFilters> {
     return this
       .filterFormStateValue$
       .pipe(
-        map((filterFormStateValue) => new AssetFilters({}))
+        map((filterFormStateValue) => new AssetFilters({
+          siteID: filterFormStateValue.siteID || undefined,
+        }))
       );
   }
 
@@ -121,6 +140,14 @@ export class AccountReportsServiceControlFacade {
 
   public removeFilter(filter: FilterValue): void {
     this.handleFormStateAction(new SetValueAction(filter.id, undefined));
+  }
+
+  public setSelectedSite(site: Site): void {
+    this.updateSelectedSite(site);
+  }
+
+  private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
+    return new FilterValue({ id: control.id, value: control.value });
   }
 
   private updateFormState(action: FormActions<any>): void {
@@ -191,6 +218,15 @@ export class AccountReportsServiceControlFacade {
         page: 1,
         items: [],
         totalItems: 0
+      })
+    )();
+  }
+
+  private updateSelectedSite(site: Site): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        selectedSite: site
       })
     )();
   }

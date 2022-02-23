@@ -257,6 +257,9 @@
     "REPORTS": {
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
+        "FILTERS": {
+          "TEXT_SITE": "Site"
+        },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
           "TEXT_ORDER_NO": "Order No",

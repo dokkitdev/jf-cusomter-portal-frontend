@@ -4,6 +4,7 @@ import { FilterValue } from '@shared/filter-values';
 import { Observable } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountReportsServiceControlFilterForm } from '../../forms';
+import { Site } from '@shared/site';
 
 @Component({
   selector: 'reports-service-control-filters',
@@ -24,6 +25,10 @@ export class AccountReportsServiceControlFiltersComponent {
 
   public formActionTriggered(action: Actions<any>): void {
     this.facade.handleFormStateAction(action);
+  }
+
+  public selectedSiteChanged(site: Site): void {
+    this.facade.setSelectedSite(site);
   }
 
   public removeFilterClicked(item: FilterValue): void {
