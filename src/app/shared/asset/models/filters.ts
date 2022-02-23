@@ -1,3 +1,4 @@
+import { JobStage } from '@shared/job';
 import { AssetTestResult } from '../enums';
 
 export class AssetFilters {
@@ -18,6 +19,7 @@ export class AssetFilters {
   public lastTestDateTo?: string;
   public nextServiceDateFrom?: string;
   public nextServiceDateTo?: string;
+  public jobStage?: JobStage;
 
   constructor(model: Partial<AssetFilters> = {}) {
     Object.assign(this, model);

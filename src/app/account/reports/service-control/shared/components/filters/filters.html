@@ -11,7 +11,16 @@
         (selectedSiteChanged)="selectedSiteChanged($event)"
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_SITE' | translate }}"
-      ></account-site-select>
+      >
+      </account-site-select>
+      <account-job-stage-select
+        [controlState]="filterFormState.controls.jobStage"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedSiteChanged)="selectedSiteChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}"
+      >
+      </account-job-stage-select>
       <!-- <filter-select-text
         [controlState]="filterFormState.controls.name"
         (controlStateActionTriggered)="formActionTriggered($event)"

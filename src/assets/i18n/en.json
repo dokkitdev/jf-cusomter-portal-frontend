@@ -258,7 +258,8 @@
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
         "FILTERS": {
-          "TEXT_SITE": "Site"
+          "TEXT_SITE": "Site",
+          "TEXT_STAGE": "Stage"
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",

@@ -12,8 +12,9 @@ import { AppState } from '@shared/store';
 import { Store } from '@ngrx/store';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { Actions as FormActions, FormControlState, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
-import { FilterValue } from '@shared/filter-values';
+import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { Site } from '@shared/site';
+import { JobStage } from '@shared/job';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -72,10 +73,22 @@ export class AccountReportsServiceControlFacade {
       const filterValues = [];
 
       if (formState.value.siteID && state.selectedSite) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.siteID.id,
-          value: state.selectedSite.name
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.siteID.id,
+            value: state.selectedSite.name
+          })
+        );
+      }
+
+      if (formState.value.jobStage) {
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobStage.id,
+            value: formState.value.jobStage,
+            status: this.getJobStageFilterStatus(formState.value.jobStage)
+          })
+        );
       }
 
       return filterValues;
@@ -88,6 +101,7 @@ export class AccountReportsServiceControlFacade {
       .pipe(
         map((filterFormStateValue) => new AssetFilters({
           siteID: filterFormStateValue.siteID || undefined,
+          jobStage: filterFormStateValue.jobStage || undefined
         }))
       );
   }
@@ -148,6 +162,19 @@ export class AccountReportsServiceControlFacade {
 
   private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
     return new FilterValue({ id: control.id, value: control.value });
+  }
+
+  private getJobStageFilterStatus(stage: JobStage): FilterValueStatus {
+    switch (stage) {
+      case JobStage.PENDING:
+        return FilterValueStatus.PENDING;
+      case JobStage.COMPLETE:
+        return FilterValueStatus.COMPLETED;
+      case JobStage.ARCHIVED:
+        return FilterValueStatus.CANCELED;
+      default:
+        return FilterValueStatus.DEFAULT;
+    }
   }
 
   private updateFormState(action: FormActions<any>): void {

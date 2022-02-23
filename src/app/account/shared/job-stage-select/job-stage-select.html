@@ -1,0 +1,11 @@
+<div class="form-group">
+  <custom-select
+    [controlState]="controlState"
+    [options]="options"
+    [hasScroll]="true"
+    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+    [validationMessages]="validationMessages"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    placeholder="{{ placeholder || 'ACCOUNT.SHARED.JOB_STAGE_SELECT.TEXT_PLACEHOLDER' | translate }}">
+  </custom-select>
+</div>
