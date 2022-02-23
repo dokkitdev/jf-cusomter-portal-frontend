@@ -1,5 +1,6 @@
-import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select/cp12-status-select.module';
-import { FormDatepickerModule } from './../../../shared/form-datepicker/form-datepicker.module';
+import { FilterSelectTextModule } from '@shared/filter-select-text/';
+import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select';
+import { FormDatepickerModule } from '@shared/form-datepicker';
 import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
 import { AccountSiteSelectModule } from './../../shared/site-select';
 import { FilterValuesModule } from '@shared/filter-values';
@@ -55,7 +56,8 @@ import { NotificationModule } from '@shared/notification';
     FileModule,
     NotificationModule,
     FormDatepickerModule,
-    AccountCp12StatusSelectModule
+    AccountCp12StatusSelectModule,
+    FilterSelectTextModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

@@ -48,6 +48,11 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_CP12_STATUS' | translate }}">
       </account-cp12-status-select>
+      <filter-select-text
+        [controlState]="filterFormState.controls.customAssetTypeValue"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_ASSET_TYPE' | translate }}">
+      </filter-select-text>
     </form>
   </div>
   <filter-values

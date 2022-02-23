@@ -11,6 +11,7 @@ export class AccountReportsServiceControlFilterForm {
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
   public CP12Status: Boxed<AssetCp12Status | undefined>;
+  public customAssetTypeValue: string;
 
   constructor() {
     this.siteID = 0;
@@ -19,5 +20,6 @@ export class AccountReportsServiceControlFilterForm {
     this.jobDueDateTo = '';
     this.jobLoggedCompletionDateFrom = '';
     this.jobLoggedCompletionDateTo = '';
+    this.customAssetTypeValue = '';
   }
 }

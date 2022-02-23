@@ -79,7 +79,8 @@ export class AccountReportsServiceControlFacade {
       jobDueDateTo: state.filterFormState.value.jobDueDateTo,
       jobLoggedCompletionDateFrom: state.filterFormState.value.jobLoggedCompletionDateFrom,
       jobLoggedCompletionDateTo: state.filterFormState.value.jobLoggedCompletionDateTo,
-      CP12Status: unbox(state.filterFormState.value.CP12Status)
+      CP12Status: unbox(state.filterFormState.value.CP12Status),
+      customAssetTypeValue: state.filterFormState.value.customAssetTypeValue
     }));
   }
 
@@ -156,6 +157,15 @@ export class AccountReportsServiceControlFacade {
         );
       }
 
+      if (formState.value.customAssetTypeValue) {
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.customAssetTypeValue.id,
+            value: formState.value.customAssetTypeValue
+          })
+        );
+      }
+
       return filterValues;
     });
   }
@@ -171,7 +181,8 @@ export class AccountReportsServiceControlFacade {
           jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined,
           jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
-          CP12Status: unbox(filterFormStateValue.CP12Status) || undefined
+          CP12Status: unbox(filterFormStateValue.CP12Status) || undefined,
+          customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined
         }))
       );
   }
@@ -346,7 +357,8 @@ export class AccountReportsServiceControlFacade {
             jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo),
             jobLoggedCompletionDateFrom: setValue(parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom),
             jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo),
-            CP12Status: setValue((parameters.CP12Status) ? box(parameters.CP12Status) : state.filterFormState.value.CP12Status)
+            CP12Status: setValue((parameters.CP12Status) ? box(parameters.CP12Status) : state.filterFormState.value.CP12Status),
+            customAssetTypeValue: setValue(parameters.customAssetTypeValue || state.filterFormState.value.customAssetTypeValue)
           }
         )
       })
@@ -403,7 +415,8 @@ export class AccountReportsServiceControlFacade {
             jobDueDateTo: queryParams.jobDueDateTo || undefined,
             jobLoggedCompletionDateFrom: queryParams.jobLoggedCompletionDateFrom || undefined,
             jobLoggedCompletionDateTo: queryParams.jobLoggedCompletionDateTo || undefined,
-            CP12Status: queryParams.CP12Status || undefined
+            CP12Status: queryParams.CP12Status || undefined,
+            customAssetTypeValue: queryParams.customAssetTypeValue || undefined
           });
 
           this.updateQueryParameters(parameters);
@@ -439,7 +452,8 @@ export class AccountReportsServiceControlFacade {
                 jobDueDateTo: filters.jobDueDateTo || undefined,
                 jobLoggedCompletionDateFrom: filters.jobLoggedCompletionDateFrom || undefined,
                 jobLoggedCompletionDateTo: filters.jobLoggedCompletionDateTo || undefined,
-                CP12Status: filters.CP12Status
+                CP12Status: filters.CP12Status,
+                customAssetTypeValue: filters.customAssetTypeValue
               }
             }));
             this.updateIsLoading(true);

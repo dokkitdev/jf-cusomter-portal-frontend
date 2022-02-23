@@ -81,6 +81,9 @@ export class AssetPaginationRequest extends PaginationRequest {
   @Expose({ name: 'cp12_status' })
   public CP12Status?: AssetCp12Status;
 
+  @Expose({ name: 'custom_asset_type_value' })
+  public customAssetTypeValue: string;
+
   constructor(model: Partial<AssetPaginationRequest> = {}) {
     super(model);
 

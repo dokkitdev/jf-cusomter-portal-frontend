@@ -265,7 +265,8 @@
           "TEXT_DUE_DATE_TO": "Due Date To",
           "TEXT_COMPLETION_FROM": "Completion From",
           "TEXT_COMPLETION_TO": "Completion To",
-          "TEXT_CP12_STATUS": "CP12 Status"
+          "TEXT_CP12_STATUS": "CP12 Status",
+          "TEXT_ASSET_TYPE": "Asset Type"
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
