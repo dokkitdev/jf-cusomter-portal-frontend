@@ -57,9 +57,17 @@ export class Job {
   @Expose({ name: 'date_created', groups: [ClassGroup.MAIN] })
   public dateCreated: DateTime;
 
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'logged_create_date', groups: [ClassGroup.MAIN] })
+  public loggedCreateDate: DateTime;
+
   @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
   @Expose({ name: 'completion_date', groups: [ClassGroup.MAIN] })
   public completionDate: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'logged_completion_date', groups: [ClassGroup.MAIN] })
+  public loggedCompletionDate: DateTime;
 
   @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
   @Expose({ name: 'due_date', groups: [ClassGroup.MAIN] })

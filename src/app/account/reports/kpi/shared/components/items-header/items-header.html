@@ -34,7 +34,7 @@
       </header-sort>
     </div>
     <div class="table-cell kpi-calldate">
-      <header-sort [orderBy]="jobSortField.CREATED_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort [orderBy]="jobSortField.LOGGED_CREATE_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_CALL_DATE' | translate }}
       </header-sort>
     </div>
@@ -49,7 +49,7 @@
       </header-sort>
     </div>
     <div class="table-cell kpi-completed">
-      <header-sort [orderBy]="jobSortField.COMPLETION_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort [orderBy]="jobSortField.LOGGED_COMPLETION_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_COMPLETED_DATE' | translate }}
       </header-sort>
     </div>

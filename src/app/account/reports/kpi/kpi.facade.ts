@@ -421,7 +421,7 @@ export class AccountReportsKPIPageFacade {
           this.updateIsExporting(true);
 
           return this.jobService
-            .exportCSV({ ...parameters, filters, relations })
+            .exportReportCSV({ ...parameters, filters, relations })
             .pipe(
               tapResponse(
                 (response) => {
