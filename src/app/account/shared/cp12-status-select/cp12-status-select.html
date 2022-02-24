@@ -1,0 +1,9 @@
+<div class="form-group">
+  <custom-select
+    [controlState]="controlState"
+    [options]="options"
+    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    placeholder="{{ placeholder || 'ACCOUNT.SHARED.CP12_STATUS_SELECT.TEXT_PLACEHOLDER' | translate }}">
+  </custom-select>
+</div>

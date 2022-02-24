@@ -11,4 +11,7 @@
   &-nextscheduled {flex: 0 0 160px; min-width: 160px;}
   &-status {flex: 0 0 120px; min-width: 120px;}
   &-jobnumber {flex: 0 0 120px; min-width: 120px;}
+  &-filters {margin-bottom: 28px;
+    .form-group {margin-bottom: 4px;}
+  }
 }

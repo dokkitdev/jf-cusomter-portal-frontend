@@ -1,7 +1,9 @@
+import { AssetCp12Status } from './../enums/cp12-status';
 import { Expose } from 'class-transformer';
 import { PaginationRequest } from '@shared/pagination';
 import { AssetSortField, AssetTestResult } from '../enums';
 import { AssetRelationType } from '../types';
+import { JobStage } from '@shared/job';
 
 export class AssetPaginationRequest extends PaginationRequest {
   @Expose({ name: 'order_by' })
@@ -60,6 +62,27 @@ export class AssetPaginationRequest extends PaginationRequest {
 
   @Expose({ name: 'next_service_date_to' })
   public nextServiceDateTo?: string;
+
+  @Expose({ name: 'job_stage' })
+  public jobStage: JobStage;
+
+  @Expose({ name: 'job_due_date_from' })
+  public jobDueDateFrom?: string;
+
+  @Expose({ name: 'job_due_date_to' })
+  public jobDueDateTo?: string;
+
+  @Expose({ name: 'job_logged_completion_date_from' })
+  public jobLoggedCompletionDateFrom?: string;
+
+  @Expose({ name: 'job_logged_completion_date_to' })
+  public jobLoggedCompletionDateTo?: string;
+
+  @Expose({ name: 'cp12_status' })
+  public CP12Status?: AssetCp12Status;
+
+  @Expose({ name: 'custom_asset_type_value' })
+  public customAssetTypeValue: string;
 
   constructor(model: Partial<AssetPaginationRequest> = {}) {
     super(model);

@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { configuration } from '@configurations';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
@@ -9,6 +10,7 @@ import { FilterValue } from '@shared/filter-values';
 import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import { Job, JobFilters, JobRelationType, JobService, JobSortField, JobStage } from '@shared/job';
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
+import { NotificationService } from '@shared/notification';
 import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
 import { without } from 'lodash';
@@ -142,7 +144,8 @@ export class AccountReportsKPIPageFacade {
     private readonly store: Store<AppState>,
     private readonly jobService: JobService,
     private readonly translateService: TranslateService,
-    private readonly fileService: FileService
+    private readonly fileService: FileService,
+    private readonly notificationService: NotificationService
   ) {
     this.resetState();
 
@@ -428,7 +431,18 @@ export class AccountReportsKPIPageFacade {
                   this.updateIsExporting(false);
                   this.fileService.saveFile(response, configuration.exportCSV.jobsReport);
                 },
-                () => this.updateIsExporting(false)
+                (response: HttpErrorResponse) => {
+                  this.updateIsExporting(false);
+
+                  const errorTranslationKey =
+                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
+                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+
+                  this.notificationService.error(
+                    this.translateService.instant(errorTranslationKey)
+                  );
+                }
               )
             );
         })

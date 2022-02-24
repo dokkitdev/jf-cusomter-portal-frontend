@@ -1,4 +1,10 @@
-import { HeaderSortModule } from './../../../shared/header-sort/header-sort.module';
+import { FilterSelectTextModule } from '@shared/filter-select-text/';
+import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select';
+import { FormDatepickerModule } from '@shared/form-datepicker';
+import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
+import { AccountSiteSelectModule } from './../../shared/site-select';
+import { FilterValuesModule } from '@shared/filter-values';
+import { HeaderSortModule } from '@shared/header-sort';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsServiceControlFacade } from './service-control.facade';
@@ -18,6 +24,9 @@ import { AccountReportsServiceControlFiltersComponent } from './shared/component
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { AssetModule } from '@shared/asset';
+import { ButtonModule } from '@shared/button';
+import { FileModule } from '@shared/file';
+import { NotificationModule } from '@shared/notification';
 
 @NgModule({
   declarations: [
@@ -39,7 +48,16 @@ import { AssetModule } from '@shared/asset';
     ReactiveComponentModule,
     AssetModule,
     NgForTrackByPropertyModule,
-    HeaderSortModule
+    HeaderSortModule,
+    FilterValuesModule,
+    AccountSiteSelectModule,
+    AccountJobStageSelectModule,
+    ButtonModule,
+    FileModule,
+    NotificationModule,
+    FormDatepickerModule,
+    AccountCp12StatusSelectModule,
+    FilterSelectTextModule
   ],
   providers: [
     AccountReportsServiceControlFacade,
