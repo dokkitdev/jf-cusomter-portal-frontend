@@ -18,6 +18,41 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}">
       </account-job-stage-select>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateFrom"
+        [dateFilter]="getStartJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateTo"
+        [dateFilter]="getEndJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_TO' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateFrom"
+        [dateFilter]="getStartJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateTo"
+        [dateFilter]="getEndJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_TO' | translate }}">
+      </form-datepicker>
+      <account-cp12-status-select
+        [controlState]="filterFormState.controls.jobStage"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_CP12_STATUS' | translate }}">
+      </account-cp12-status-select>
+      <filter-select-text
+        [controlState]="filterFormState.controls.customAssetTypeValue"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_ASSET_TYPE' | translate }}">
+      </filter-select-text>
     </form>
   </div>
   <filter-values

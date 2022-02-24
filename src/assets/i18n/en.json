@@ -260,7 +260,13 @@
         "LINK_CSV": "CSV",
         "FILTERS": {
           "TEXT_SITE": "Site",
-          "TEXT_STAGE": "Stage"
+          "TEXT_STAGE": "Stage",
+          "TEXT_DUE_DATE_FROM": "Due Date From",
+          "TEXT_DUE_DATE_TO": "Due Date To",
+          "TEXT_COMPLETION_FROM": "Completion From",
+          "TEXT_COMPLETION_TO": "Completion To",
+          "TEXT_CP12_STATUS": "CP12 Status",
+          "TEXT_ASSET_TYPE": "Asset Type"
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
@@ -397,6 +403,9 @@
       },
       "JOB_STAGE_SELECT": {
         "TEXT_PLACEHOLDER": "Stage"
+      },
+      "CP12_STATUS_SELECT": {
+        "TEXT_PLACEHOLDER": "CP12 Status"
       },
       "DIALOG_EDIT_USER": {
         "TEXT_TITLE_CREATE": "Create user",
@@ -580,6 +589,11 @@
       "TEXT_COMPLETE": "Complete",
       "TEXT_ARCHIVED": "Archived",
       "TEXT_INVOICED": "Invoiced"
+    },
+    "CP12_STATUS": {
+      "TEXT_ON_TIME": "On Time",
+      "TEXT_DUE": "Due",
+      "TEXT_OVERDUE": "Overdue"
     },
     "ASSET_TEST_RESULT": {
       "TEXT_PASS": "Pass",

@@ -1,6 +1,5 @@
 import { AccountJobStageSelectComponentFacade } from './job-stage-select.facade';
 import { CustomSelectOption } from '@shared/custom-select';
-import { ValidationMessages } from '@shared/validation-errors';
 import { Component, ChangeDetectionStrategy, Input, EventEmitter, Output, forwardRef } from '@angular/core';
 import { Actions, Boxed, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { ComponentStore } from '@ngrx/component-store';
@@ -22,7 +21,6 @@ import { ComponentStore } from '@ngrx/component-store';
 })
 export class AccountJobStageSelectComponent {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;
-  @Input() validationMessages: ValidationMessages;
   @Input() isPermanentlyShowPlaceholder: boolean;
   @Input() placeholder: string;
 
