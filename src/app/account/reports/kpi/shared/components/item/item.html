@@ -24,7 +24,7 @@
       <div>{{ item.site?.postalCode }}</div>
     </div>
     <div class="table-cell kpi-calldate">
-      {{ item.dateCreated | date: dateFormat }} {{ item.dateCreated | date: timeFormat }}
+      {{ item.loggedCreateDate | date: dateFormat }} {{ item.loggedCreateDate | date: timeFormat }}
     </div>
     <div class="table-cell kpi-targetdate">
       {{ item.dueDate | date: dateFormat }} {{ item.dueDate | date: timeFormat }}
@@ -33,7 +33,7 @@
       {{ item.madeSafeDate | date: dateFormat }} {{ item.madeSafeDate | date: timeFormat }}
     </div>
     <div class="table-cell kpi-completed">
-      {{ item.completionDate | date: dateFormat }} {{ item.completionDate | date: timeFormat }}
+      {{ item.loggedCompletionDate | date: dateFormat }} {{ item.loggedCompletionDate | date: timeFormat }}
     </div>
   </div>
 </ng-container>
