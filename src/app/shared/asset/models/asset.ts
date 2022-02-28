@@ -7,6 +7,7 @@ import { AssetAttachment } from './attachment';
 import { AssetCustomField } from './custom-field';
 import { AssetTestResult } from '../enums';
 import { AssetTest } from './test';
+import { Job, JobSchedule } from '@shared/job';
 
 export class Asset {
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -23,6 +24,9 @@ export class Asset {
 
   @Expose({ name: 'site_id', groups: [ClassGroup.MAIN] })
   public siteID: number;
+
+  @Expose({ name: 'job_id', groups: [ClassGroup.MAIN] })
+  public jobID: number;
 
   @Expose({ groups: [ClassGroup.MAIN] })
   public make: string;
@@ -80,6 +84,18 @@ export class Asset {
   @Type(() => AssetTest)
   @Expose({ name: 'asset_test_record', groups: [ClassGroup.MAIN] })
   public testRecord?: AssetTest;
+
+  @Type(() => Job)
+  @Expose({ name: 'job', groups: [ClassGroup.MAIN] })
+  public job?: Job;
+
+  @Type(() => Customer)
+  @Expose({ name: 'job_customer', groups: [ClassGroup.MAIN] })
+  public jobCustomer?: Customer;
+
+  @Type(() => JobSchedule)
+  @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
+  public nextSchedule?: JobSchedule;
 
   constructor(model: Partial<Asset> = {}) {
     Object.assign(this, model);

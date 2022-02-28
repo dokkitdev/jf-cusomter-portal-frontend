@@ -30,10 +30,10 @@ export class AccountReportsServiceControlState {
       'site',
       'site.primary_site_contact',
       'asset_test_record',
-      'asset_test_record.job',
-      'asset_test_record.job.customer',
-      'asset_test_record.job.job_no_access_dates',
-      'asset_test_record.job.next_schedule'
+      'job',
+      'job_customer',
+      'job.job_no_access_dates',
+      'next_schedule'
     ];
     this.paginationId = 'account-reports-service-control-pagination';
     this.filterFormState = createFormGroupState('AccountReportsServiceControlFilterForm', new AccountReportsServiceControlFilterForm());

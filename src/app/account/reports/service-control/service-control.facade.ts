@@ -181,7 +181,9 @@ export class AccountReportsServiceControlFacade {
           jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
           CP12Status: unbox(filterFormStateValue.CP12Status) || undefined,
-          customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined
+          customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined,
+          assetType: 4,
+          report: true
         }))
       );
   }
