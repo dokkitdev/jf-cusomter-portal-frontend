@@ -31,7 +31,6 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { getStartDateFilter, getEndDateFilter } from '@shared/form-datepicker';
 import { DateTime } from 'luxon';
-import parseInt from 'lodash/parseInt';
 
 @Injectable()
 export class AccountReportsServiceControlFacade {
@@ -409,7 +408,7 @@ export class AccountReportsServiceControlFacade {
             page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
-            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID) : undefined,
+            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
             jobStage: queryParams.jobStage || undefined,
             jobDueDateFrom: queryParams.jobDueDateFrom || undefined,
             jobDueDateTo: queryParams.jobDueDateTo || undefined,
