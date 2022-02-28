@@ -25,7 +25,7 @@
     {{ item?.lastCp12Date | date: dateFormat }}
   </div>
   <div *ngFor="let i of [0, 1, 2, 3, 4]" class="table-cell servicecontrol-noaccess">
-    <ng-container *ngIf="i < item.testRecord?.job?.noAccessDates.length">
+    <ng-container *ngIf="i < item.job?.noAccessDates.length">
       {{ item.job?.noAccessDates[i].date | date: dateFormat }}
     </ng-container>
   </div>
