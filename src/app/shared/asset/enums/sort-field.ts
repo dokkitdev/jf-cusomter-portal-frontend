@@ -13,11 +13,11 @@ export enum AssetSortField {
   LAST_TEST_DATE = 'last_test_date',
   SERVICE_LEVEL = 'service_level_name',
   NEXT_SERVICE_DATE = 'next_service_date',
-  ASSET_TEST_RECORD_JOB_ORDER_NO = 'asset_test_record.job.order_no',
-  ASSET_TEST_RECORD_JOB_CUSTOMER_NAME = 'asset_test_record.job.customer.name',
-  ASSET_TEST_RECORD_JOB_COMPLETION_DATE = 'asset_test_record.job.completion_date',
-  ASSET_TEST_RECORD_JOB_NEXT_SCHEDULE_DATE = 'asset_test_record.job.next_schedule.date',
-  ASSET_TEST_RECORD_JOB_STAGE = 'asset_test_record.job.stage',
-  ASSET_TEST_RECORD_JOB_ID = 'asset_test_record.job.id',
+  JOB_ORDER_NO = 'job.order_no',
+  JOB_CUSTOMER_NAME = 'job_customer.name',
+  JOB_COMPLETION_DATE = 'job.completion_date',
+  NEXT_SCHEDULE_DATE = 'next_schedule.date',
+  JOB_STAGE = 'job.stage',
+  JOB_ID = 'job_id',
   LAST_CP2_DATE = 'last_cp12_date'
 }
