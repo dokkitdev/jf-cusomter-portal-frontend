@@ -5,9 +5,9 @@
     &-ontime {color: $complete;}
     &-late {color: $error;}
   }
-  &-uprn {flex: 0 0 120px; min-width: 120px;}
-  &-id {flex: 0 0 100px; min-width: 100px;}
-  &-order {flex: 0 0 140px; min-width: 140px;}
+  &-uprn {flex: 0 0 100px; min-width: 100px;}
+  &-id {flex: 0 0 70px; min-width: 70px;}
+  &-order {flex: 0 0 100px; min-width: 100px;}
   &-description {flex: 1 1 200px; min-width: 200px;}
   &-response {flex: 0 0 180px; min-width: 180px;}
   &-address {flex: 0 0 200px; min-width: 200px; white-space: pre-line;}
