@@ -173,7 +173,11 @@ export class AccountReportsServiceControlFacade {
     return this
       .filterFormStateValue$
       .pipe(
-        map((filterFormStateValue) => new AssetFilters({
+        concatLatestFrom(() => [
+          this.assetType$,
+          this.report$
+        ]),
+        map(([filterFormStateValue, assetType, report]) => new AssetFilters({
           siteID: filterFormStateValue.siteID || undefined,
           jobStage: unbox(filterFormStateValue.jobStage) || undefined,
           jobDueDateFrom: filterFormStateValue.jobDueDateFrom || undefined,
@@ -182,8 +186,8 @@ export class AccountReportsServiceControlFacade {
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
           CP12Status: unbox(filterFormStateValue.CP12Status) || undefined,
           customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined,
-          assetType: 4,
-          report: true
+          assetType,
+          report
         }))
       );
   }
@@ -192,6 +196,14 @@ export class AccountReportsServiceControlFacade {
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private exportCSVEffect$: () => Observable<void>;
+
+  private get assetType$(): Observable<number> {
+    return this.componentStore.select((state) => state.assetType);
+  }
+
+  private get report$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.report);
+  }
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsServiceControlState>,

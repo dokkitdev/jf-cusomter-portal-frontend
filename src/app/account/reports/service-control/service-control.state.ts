@@ -16,6 +16,8 @@ export class AccountReportsServiceControlState {
   public paginationId: string;
   public filterFormState: FormGroupState<AccountReportsServiceControlFilterForm>;
   public selectedSite?: Site;
+  public report: boolean;
+  public assetType: number;
 
   constructor() {
     this.items = [];
@@ -38,5 +40,7 @@ export class AccountReportsServiceControlState {
     this.paginationId = 'account-reports-service-control-pagination';
     this.filterFormState = createFormGroupState('AccountReportsServiceControlFilterForm', new AccountReportsServiceControlFilterForm());
     this.selectedSite = undefined;
+    this.report = true;
+    this.assetType = 4;
   }
 }

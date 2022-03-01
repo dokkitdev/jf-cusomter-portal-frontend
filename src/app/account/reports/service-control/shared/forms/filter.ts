@@ -20,6 +20,7 @@ export class AccountReportsServiceControlFilterForm {
     this.jobDueDateTo = '';
     this.jobLoggedCompletionDateFrom = '';
     this.jobLoggedCompletionDateTo = '';
+    this.CP12Status = box(undefined);
     this.customAssetTypeValue = '';
   }
 }
