@@ -10,7 +10,7 @@
     </div>
     <div class="table-cell servicecontrol-orderno">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_ORDER_NO"
+        [orderBy]="assetSortField.JOB_ORDER_NO"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_ORDER_NO' | translate }}
@@ -18,7 +18,7 @@
     </div>
     <div class="table-cell servicecontrol-customer">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_CUSTOMER_NAME"
+        [orderBy]="assetSortField.JOB_CUSTOMER_NAME"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
@@ -50,7 +50,7 @@
     </div>
     <div class="table-cell servicecontrol-completiondate">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_COMPLETION_DATE"
+        [orderBy]="assetSortField.JOB_COMPLETION_DATE"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_COMPLETION_DATE' | translate }}
@@ -81,7 +81,7 @@
     </div>
     <div class="table-cell servicecontrol-nextscheduled">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_NEXT_SCHEDULE_DATE"
+        [orderBy]="assetSortField.NEXT_SCHEDULE_DATE"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NEXT_SCHEDULE_DATE' | translate }}
@@ -89,7 +89,7 @@
     </div>
     <div class="table-cell servicecontrol-status">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_STAGE"
+        [orderBy]="assetSortField.JOB_STAGE"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_STATUS' | translate }}
@@ -97,7 +97,7 @@
     </div>
     <div class="table-cell servicecontrol-jobnumber">
       <header-sort
-        [orderBy]="assetSortField.ASSET_TEST_RECORD_JOB_ID"
+        [orderBy]="assetSortField.JOB_ID"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_JOB_NUMBER' | translate }}

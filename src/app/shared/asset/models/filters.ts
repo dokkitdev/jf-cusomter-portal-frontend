@@ -27,6 +27,7 @@ export class AssetFilters {
   public jobLoggedCompletionDateTo?: string;
   public CP12Status?: AssetCp12Status;
   public customAssetTypeValue?: string;
+  public report?: boolean;
 
   constructor(model: Partial<AssetFilters> = {}) {
     Object.assign(this, model);

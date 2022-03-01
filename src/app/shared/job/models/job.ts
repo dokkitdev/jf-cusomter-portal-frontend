@@ -98,10 +98,6 @@ export class Job {
   public recentSchedule?: JobSchedule;
 
   @Type(() => JobSchedule)
-  @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
-  public nextSchedule?: JobSchedule;
-
-  @Type(() => JobSchedule)
   @Expose({ groups: [ClassGroup.MAIN] })
   public schedules?: Array<JobSchedule>;
 
