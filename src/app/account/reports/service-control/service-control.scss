@@ -1,3 +1,5 @@
+@import 'vars';
+
 :host ::ng-deep .servicecontrol {
   &-uprn {flex: 0 0 120px; min-width: 120px;}
   &-orderno {flex: 0 0 120px; min-width: 120px;}
@@ -13,5 +15,10 @@
   &-jobnumber {flex: 0 0 120px; min-width: 120px;}
   &-filters {margin-bottom: 28px;
     .form-group {margin-bottom: 4px;}
+  }
+  &-row {
+    &-overdue {color: $red;}
+    &-due {color: $yellow;}
+    &-ontime {color: $green;}
   }
 }

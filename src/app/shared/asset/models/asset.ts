@@ -1,3 +1,4 @@
+import { AssetCp12Status } from '@shared/asset';
 import { ClassGroup } from '@shared/class-group';
 import { Customer } from '@shared/customer';
 import { Site } from '@shared/site';
@@ -61,6 +62,9 @@ export class Asset {
   @Expose({ name: 'next_service_date', groups: [ClassGroup.MAIN] })
   public nextServiceDate: DateTime;
 
+  @Expose({ name: 'cp12_status' })
+  public CP12Status: AssetCp12Status;
+
   @Type(() => Customer)
   @Expose({ name: 'simpro_customer', groups: [ClassGroup.MAIN] })
   public simproCustomer?: Customer;
@@ -96,6 +100,18 @@ export class Asset {
   @Type(() => JobSchedule)
   @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
   public nextSchedule?: JobSchedule;
+
+  public get isDue(): boolean {
+    return this.CP12Status === AssetCp12Status.DUE;
+  }
+
+  public get isOverdue(): boolean {
+    return this.CP12Status === AssetCp12Status.OVERDUE;
+  }
+
+  public get isOnTime(): boolean {
+    return this.CP12Status === AssetCp12Status.ON_TIME;
+  }
 
   constructor(model: Partial<Asset> = {}) {
     Object.assign(this, model);
