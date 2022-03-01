@@ -3,7 +3,7 @@ import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { switchMap } from 'rxjs/operators';
 import { Observable, tap, map } from 'rxjs';
-import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters } from '@shared/asset';
+import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters, AssetCp12Status } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
@@ -151,7 +151,8 @@ export class AccountReportsServiceControlFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.CP12Status.id,
-            value: unbox(formState.value.CP12Status)
+            value: unbox(formState.value.CP12Status),
+            status: this.getCP12FilterStatus(unbox(formState.value.CP12Status))
           })
         );
       }
@@ -302,6 +303,19 @@ export class AccountReportsServiceControlFacade {
       case JobStage.COMPLETE:
         return FilterValueStatus.COMPLETED;
       case JobStage.ARCHIVED:
+        return FilterValueStatus.CANCELED;
+      default:
+        return FilterValueStatus.DEFAULT;
+    }
+  }
+
+  private getCP12FilterStatus(status: AssetCp12Status | undefined): FilterValueStatus {
+    switch (status) {
+      case AssetCp12Status.DUE:
+        return FilterValueStatus.PENDING;
+      case AssetCp12Status.ON_TIME:
+        return FilterValueStatus.COMPLETED;
+      case AssetCp12Status.OVERDUE:
         return FilterValueStatus.CANCELED;
       default:
         return FilterValueStatus.DEFAULT;
@@ -540,8 +554,12 @@ export class AccountReportsServiceControlFacade {
             .pipe(
               tapResponse(
                 (response) => {
+                  const date = DateTime
+                    .now()
+                    .toFormat(configuration.dateFormats.reports.serviceControlDateCSV);
+
                   this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.assetsReport);
+                  this.fileService.saveFile(response, configuration.exportCSV.assetsReport(date));
                 },
                 (response: HttpErrorResponse) => {
                   this.updateIsExporting(false);

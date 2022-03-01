@@ -36,6 +36,7 @@ export const initConfiguration = (configuration: any): any =>
       lastLoginDate: 'dd/MM/yyyy HH:mm:ss',
       reports: {
         serviceControlDate: 'dd/MM/yyyy',
+        serviceControlDateCSV: 'yyyy-MM-dd',
         kpiDate: 'yyyy_MM_dd'
       }
     },
@@ -95,6 +96,6 @@ export const initConfiguration = (configuration: any): any =>
       jobsReport: (date: string) => `JF_KPI_Report_${date}.csv`,
       sites: 'sites.csv',
       assets: 'assets.csv',
-      assetsReport: 'assets_report.csv'
+      assetsReport: (date: string) => `JF_Service_Control_${date}.csv`
     }
   }, configuration);
