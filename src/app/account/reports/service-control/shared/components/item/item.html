@@ -1,4 +1,10 @@
-<div class="table-row servicecontrol-row">
+<div
+  [ngClass]="{
+    'servicecontrol-row-overdue': item.isOverdue,
+    'servicecontrol-row-due': item.isDue,
+    'servicecontrol-row-ontime': item.isOnTime
+  }"
+  class="table-row servicecontrol-row">
   <div class="table-cell servicecontrol-uprn">
     {{ item.site?.uprn }}
   </div>
