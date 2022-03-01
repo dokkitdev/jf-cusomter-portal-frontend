@@ -367,7 +367,8 @@ export class AccountAssetsPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: pageNumber
+        page: pageNumber,
+        items: []
       })
     )();
   }

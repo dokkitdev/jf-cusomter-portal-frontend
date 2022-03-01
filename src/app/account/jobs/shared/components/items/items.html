@@ -5,16 +5,17 @@
   <div class="table">
     <jobs-items-header></jobs-items-header>
     <div class="table-content">
-      <jobs-item
+      <div
         *ngFor="let item of items | paginate: {
           id: paginationID$ | async,
           itemsPerPage: perPage$ | async,
           currentPage: currentPage$ | async,
           totalItems: totalItems$ | async
         }; trackByProperty: 'id'"
-        [item]="item"
-        [@heightCollapse]>
-      </jobs-item>
+        [@heightCollapse]
+        class="table-content-row">
+        <jobs-item [item]="item"></jobs-item>
+      </div>
     </div>
   </div>
 </table-container>

@@ -4,12 +4,15 @@
   <div class="table">
     <account-site-contacts-items-header></account-site-contacts-items-header>
     <div class="table-content">
-      <account-site-contacts-item
+      <div
         *ngFor="let item of items; trackByProperty: 'id'"
-        [item]="item"
         [@heightCollapse]
-        (deletingSuccess)="itemDeleted($event)">
-      </account-site-contacts-item>
+        class="table-content-row">
+        <account-site-contacts-item
+          [item]="item"
+          (deletingSuccess)="itemDeleted($event)">
+        </account-site-contacts-item>
+      </div>
     </div>
   </div>
 </table-container>

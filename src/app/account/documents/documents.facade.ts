@@ -242,7 +242,8 @@ export class AccountDocumentsPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: pageNumber
+        page: pageNumber,
+        items: []
       })
     )();
   }
