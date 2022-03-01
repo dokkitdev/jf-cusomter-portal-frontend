@@ -5,22 +5,22 @@
   <div class="table">
     <documents-items-header></documents-items-header>
     <div class="table-content">
-      <documents-item
+      <div
         *ngFor="let item of items | paginate: {
           id: paginationId$ | async,
           itemsPerPage: perPage$ | async,
           currentPage: currentPage$ | async,
           totalItems: totalItems$ | async
         }; trackByProperty: 'id'"
-        [item]="item"
-        [@heightCollapse]>
-      </documents-item>
+        [@heightCollapse]
+        class="table-content-row">
+        <documents-item [item]="item"></documents-item>
+      </div>
     </div>
-    <pagination-elements
-      *ngIf="hasPagination$ | async"
-      [paginationId]="paginationId$ | async"
-      (pageChanged)="pageChanged($event)"
-    >
-    </pagination-elements>
   </div>
 </table-container>
+<pagination-elements
+  *ngIf="hasPagination$ | async"
+  [paginationId]="paginationId$ | async"
+  (pageChanged)="pageChanged($event)">
+</pagination-elements>

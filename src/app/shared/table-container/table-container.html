@@ -1,7 +1,7 @@
-<div [ngClass]="{ 'table-container-empty': isNotFound || isInitialLoading }" class="table-container">
+<div [ngClass]="{ 'table-container-empty': isNotFound || isLoading }" class="table-container">
   <ng-content></ng-content>
 </div>
 <div *ngIf="isNotFound" class="table-nothing">
   {{ 'SHARED.TABLE_CONTAINER.TEXT_NOTHING' | translate }}
 </div>
-<loading-spinner *ngIf="isInitialLoading" [diameter]="spinnerDiameter.BIG"></loading-spinner>
+<loading-spinner *ngIf="isLoading" [diameter]="spinnerDiameter.BIG"></loading-spinner>

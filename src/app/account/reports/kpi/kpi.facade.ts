@@ -273,7 +273,8 @@ export class AccountReportsKPIPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: pageNumber
+        page: pageNumber,
+        items: []
       })
     )();
   }

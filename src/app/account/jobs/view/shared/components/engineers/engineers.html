@@ -6,10 +6,9 @@
     <div class="table">
       <jobs-view-engineers-items-header></jobs-view-engineers-items-header>
       <div class="table-content">
-        <jobs-view-engineers-item
-          *ngFor="let item of schedules; trackByProperty: 'id'"
-          [item]="item">
-        </jobs-view-engineers-item>
+        <div *ngFor="let item of schedules; trackByProperty: 'id'" class="table-content-row">
+          <jobs-view-engineers-item [item]="item"></jobs-view-engineers-item>
+        </div>
       </div>
     </div>
   </div>

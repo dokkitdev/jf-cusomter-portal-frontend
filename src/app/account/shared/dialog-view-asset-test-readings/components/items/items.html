@@ -2,11 +2,12 @@
   <div class="table">
     <dialog-view-asset-test-readings-items-header></dialog-view-asset-test-readings-items-header>
     <div class="table-content">
-      <dialog-view-asset-test-readings-item
+      <div
         *ngFor="let item of items; trackByProperty: 'id'"
-        [item]="item"
-        [@heightCollapse]>
-      </dialog-view-asset-test-readings-item>
+        [@heightCollapse]
+        class="table-content-row">
+        <dialog-view-asset-test-readings-item [item]="item"></dialog-view-asset-test-readings-item>
+      </div>
     </div>
   </div>
 </table-container>

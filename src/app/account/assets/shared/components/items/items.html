@@ -5,16 +5,17 @@
   <div class="table">
     <assets-items-header></assets-items-header>
     <div class="table-content">
-      <assets-item
+      <div
         *ngFor="let item of items | paginate: {
           id: paginationID$ | async,
           itemsPerPage: perPage$ | async,
           currentPage: currentPage$ | async,
           totalItems: totalItems$ | async
         }; trackByProperty: 'id'"
-        [item]="item"
-        [@heightCollapse]>
-      </assets-item>
+        [@heightCollapse]
+        class="table-content-row">
+        <assets-item [item]="item"></assets-item>
+      </div>
     </div>
   </div>
 </table-container>

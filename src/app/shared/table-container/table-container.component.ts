@@ -11,10 +11,6 @@ export class TableContainerComponent {
   @Input() isLoading: boolean;
   @Input() itemsCount: number;
 
-  public get isInitialLoading(): boolean {
-    return this.isLoading && !this.itemsCount;
-  }
-
   public get hasItems(): boolean {
     return !this.isLoading && !!this.itemsCount;
   }

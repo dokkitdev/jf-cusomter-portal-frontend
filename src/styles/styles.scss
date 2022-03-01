@@ -403,7 +403,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
   &-content {
     .table-cell {padding: 16px 8px;}
     .table-row-small .table-cell {padding: 8px;}
-    > *:nth-child(odd) > .table-row {background-color: $lightest-blue-gray;}
+    &-row:nth-child(odd) .table-row {background-color: $lightest-blue-gray;}
   }
   &-cell {box-sizing: border-box; word-break: break-word;
     &:first-child {padding-left: 0;}

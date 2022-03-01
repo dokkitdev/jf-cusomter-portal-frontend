@@ -155,7 +155,8 @@ export class AccountAdminDocumentsPageFacade {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        page: pageNumber
+        page: pageNumber,
+        items: []
       })
     )();
   }
