@@ -35,7 +35,8 @@ export const initConfiguration = (configuration: any): any =>
       filterDate: 'dd/MM/yyyy',
       lastLoginDate: 'dd/MM/yyyy HH:mm:ss',
       reports: {
-        serviceControlDate: 'dd/MM/yyyy'
+        serviceControlDate: 'dd/MM/yyyy',
+        kpiDate: 'yyyy_MM_dd'
       }
     },
     datepicker: {
@@ -91,7 +92,7 @@ export const initConfiguration = (configuration: any): any =>
     },
     exportCSV: {
       jobs: 'jobs.csv',
-      jobsReport: 'jobs_report.csv',
+      jobsReport: (date: string) => `JF_KPI_Report_${date}.csv`,
       sites: 'sites.csv',
       assets: 'assets.csv',
       assetsReport: 'assets_report.csv'

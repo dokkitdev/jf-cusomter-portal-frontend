@@ -429,8 +429,10 @@ export class AccountReportsKPIPageFacade {
             .pipe(
               tapResponse(
                 (response) => {
+                  const date = DateTime.now().toFormat(configuration.dateFormats.reports.kpiDate);
+
                   this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.jobsReport);
+                  this.fileService.saveFile(response, configuration.exportCSV.jobsReport(date));
                 },
                 (response: HttpErrorResponse) => {
                   this.updateIsExporting(false);
