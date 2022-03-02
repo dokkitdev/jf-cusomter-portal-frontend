@@ -401,9 +401,6 @@
         "TEXT_PLACEHOLDER": "Site",
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
       },
-      "CUSTOM_ASSET_TYPE_SELECT": {
-        "TEXT_PLACEHOLDER": "Asset Type"
-      },
       "JOB_STAGE_SELECT": {
         "TEXT_PLACEHOLDER": "Stage"
       },
