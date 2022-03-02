@@ -1,4 +1,3 @@
-import { CustomAssetType } from '@shared/asset';
 import { AccountReportsServiceControlFacade } from './../../../service-control.facade';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { FilterValue } from '@shared/filter-values';
@@ -38,10 +37,6 @@ export class AccountReportsServiceControlFiltersComponent {
 
   public selectedSiteChanged(site: Site): void {
     this.facade.setSelectedSite(site);
-  }
-
-  public selectedAssetTypeChanged(assetType: CustomAssetType): void {
-    this.facade.setSelectedAssetType(assetType);
   }
 
   public removeFilterClicked(item: FilterValue): void {

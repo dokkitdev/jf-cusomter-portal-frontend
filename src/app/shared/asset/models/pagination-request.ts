@@ -82,7 +82,7 @@ export class AssetPaginationRequest extends PaginationRequest {
   public CP12Status?: AssetCp12Status;
 
   @Expose({ name: 'custom_asset_type_value' })
-  public customAssetTypeValue: string;
+  public customAssetTypeValue: Array<string>;
 
   @Expose()
   public report?: boolean;

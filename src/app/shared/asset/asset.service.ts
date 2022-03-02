@@ -1,4 +1,3 @@
-import { CustomAssetType } from './models/custom-asset-type';
 import { ApiService } from '@ronas-it/angular-common';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -104,10 +103,7 @@ export class AssetService {
       );
   }
 
-  public searchCustomAssetTypes(): Observable<Array<CustomAssetType>> {
-    return this.apiService.get(`${this.endpoint}/types`)
-      .pipe(
-        map((items) => items.map((item: any) => plainToClass(CustomAssetType, item)))
-      );
+  public getCustomAssetTypes(): Observable<Array<string>> {
+    return this.apiService.get(`${this.endpoint}/types`);
   }
 }

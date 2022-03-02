@@ -1,6 +1,6 @@
 import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
 import { FormGroupState, createFormGroupState } from 'ngrx-forms';
-import { Asset, AssetSortField, AssetRelationType, CustomAssetType } from '@shared/asset';
+import { Asset, AssetSortField, AssetRelationType } from '@shared/asset';
 import { Site } from '@shared/site';
 
 export class AccountReportsServiceControlState {
@@ -18,7 +18,6 @@ export class AccountReportsServiceControlState {
   public selectedSite?: Site;
   public report: boolean;
   public assetType: number;
-  public selectedAssetType?: CustomAssetType;
 
   constructor() {
     this.items = [];
@@ -43,6 +42,5 @@ export class AccountReportsServiceControlState {
     this.selectedSite = undefined;
     this.report = true;
     this.assetType = 4;
-    this.selectedAssetType = undefined;
   }
 }

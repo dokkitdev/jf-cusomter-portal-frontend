@@ -1,6 +1,5 @@
-import { AccountCustomAssetTypeSelectModule } from './../../shared/custom-asset-type-select/custom-asset-type-select.module';
+import { AccountCustomAssetTypeMultiselectModule } from './../../shared/custom-asset-type-multiselect';
 import { AccountJobStageMultiselectModule } from './../../shared/job-stage-multiselect';
-import { FilterSelectTextModule } from '@shared/filter-select-text/';
 import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select';
 import { FormDatepickerModule } from '@shared/form-datepicker';
 import { AccountSiteSelectModule } from './../../shared/site-select';
@@ -58,8 +57,7 @@ import { NotificationModule } from '@shared/notification';
     NotificationModule,
     FormDatepickerModule,
     AccountCp12StatusSelectModule,
-    FilterSelectTextModule,
-    AccountCustomAssetTypeSelectModule
+    AccountCustomAssetTypeMultiselectModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

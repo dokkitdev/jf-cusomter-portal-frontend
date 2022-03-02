@@ -1,4 +1,4 @@
-import { AssetCp12Status, AssetSortField } from '@shared/asset';
+import { AssetSortField } from '@shared/asset';
 import { JobStage } from '@shared/job';
 
 export class AccountReportsServiceControlQueryParameters {
@@ -13,7 +13,7 @@ export class AccountReportsServiceControlQueryParameters {
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
   public CP12Status: string | undefined;
-  public customAssetTypeValue: string;
+  public customAssetTypeValue: Array<string>;
 
   constructor(model: Partial<AccountReportsServiceControlQueryParameters> = {}) {
     Object.assign(this, model);
