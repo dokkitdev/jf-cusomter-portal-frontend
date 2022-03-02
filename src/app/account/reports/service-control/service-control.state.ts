@@ -1,6 +1,6 @@
 import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
 import { FormGroupState, createFormGroupState } from 'ngrx-forms';
-import { Asset, AssetFilters, AssetSortField, AssetRelationType } from '@shared/asset';
+import { Asset, AssetSortField, AssetRelationType } from '@shared/asset';
 import { Site } from '@shared/site';
 
 export class AccountReportsServiceControlState {

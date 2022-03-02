@@ -11,7 +11,7 @@ export class AccountReportsServiceControlFilterForm {
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
   public CP12Status: AssetCp12Status | undefined;
-  public customAssetTypeValue: string;
+  public customAssetTypeValue: Boxed<Array<string>>;
 
   constructor() {
     this.siteID = 0;
@@ -21,6 +21,6 @@ export class AccountReportsServiceControlFilterForm {
     this.jobLoggedCompletionDateFrom = '';
     this.jobLoggedCompletionDateTo = '';
     this.CP12Status = undefined;
-    this.customAssetTypeValue = '';
+    this.customAssetTypeValue = box([]);
   }
 }

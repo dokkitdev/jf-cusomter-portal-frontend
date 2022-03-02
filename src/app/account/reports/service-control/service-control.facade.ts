@@ -82,7 +82,7 @@ export class AccountReportsServiceControlFacade {
       jobLoggedCompletionDateFrom: state.filterFormState.value.jobLoggedCompletionDateFrom,
       jobLoggedCompletionDateTo: state.filterFormState.value.jobLoggedCompletionDateTo,
       CP12Status: state.filterFormState.value.CP12Status,
-      customAssetTypeValue: state.filterFormState.value.customAssetTypeValue
+      customAssetTypeValue: unbox(state.filterFormState.value.customAssetTypeValue)
     }));
   }
 
@@ -158,14 +158,12 @@ export class AccountReportsServiceControlFacade {
         );
       }
 
-      if (formState.value.customAssetTypeValue) {
-        filterValues.push(
-          new FilterValue({
-            id: formState.controls.customAssetTypeValue.id,
-            value: formState.value.customAssetTypeValue
-          })
-        );
-      }
+      unbox(formState.value.customAssetTypeValue).forEach((assetType: string) =>
+        filterValues.push(new FilterValue({
+          id: formState.controls.customAssetTypeValue.id,
+          value: assetType
+        }))
+      );
 
       return filterValues;
     });
@@ -187,7 +185,7 @@ export class AccountReportsServiceControlFacade {
           jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
           CP12Status: filterFormStateValue.CP12Status || undefined,
-          customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined,
+          customAssetTypeValue: unbox(filterFormStateValue.customAssetTypeValue) || undefined,
           assetType,
           report
         }))
@@ -247,7 +245,6 @@ export class AccountReportsServiceControlFacade {
   }
 
   public handleFormStateAction(action: FormActions<any>): void {
-    console.log(action);
     this.updateFormState(action);
 
     if (action instanceof SetValueAction) {
@@ -390,7 +387,7 @@ export class AccountReportsServiceControlFacade {
             jobLoggedCompletionDateFrom: setValue(parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom),
             jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo),
             CP12Status: setValue(parameters.CP12Status || state.filterFormState.value.CP12Status),
-            customAssetTypeValue: setValue(parameters.customAssetTypeValue || state.filterFormState.value.customAssetTypeValue)
+            customAssetTypeValue: setValue((parameters.customAssetTypeValue) ? box(parameters.customAssetTypeValue) : state.filterFormState.value.customAssetTypeValue)
           }
         )
       })
@@ -421,11 +418,11 @@ export class AccountReportsServiceControlFacade {
     )();
   }
 
-  private updateSelectedSite(site: Site): void {
+  private updateSelectedSite(selectedSite: Site): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        selectedSite: site
+        selectedSite
       })
     )();
   }
@@ -448,7 +445,7 @@ export class AccountReportsServiceControlFacade {
             jobLoggedCompletionDateFrom: queryParams.jobLoggedCompletionDateFrom || undefined,
             jobLoggedCompletionDateTo: queryParams.jobLoggedCompletionDateTo || undefined,
             CP12Status: queryParams.CP12Status || undefined,
-            customAssetTypeValue: queryParams.customAssetTypeValue || undefined
+            customAssetTypeValue: (queryParams.customAssetTypeValue) ? castArray(queryParams.customAssetTypeValue) : undefined
           });
 
           this.updateQueryParameters(parameters);

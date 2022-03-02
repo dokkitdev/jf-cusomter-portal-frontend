@@ -102,4 +102,8 @@ export class AssetService {
         map((response) => response.body as Blob)
       );
   }
+
+  public getCustomAssetTypes(): Observable<Array<string>> {
+    return this.apiService.get(`${this.endpoint}/types`);
+  }
 }
