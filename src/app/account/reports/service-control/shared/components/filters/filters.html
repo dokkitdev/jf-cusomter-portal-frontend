@@ -12,12 +12,12 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_SITE' | translate }}">
       </account-site-select>
-      <account-job-stage-select
+      <account-job-stage-multiselect
         [controlState]="filterFormState.controls.jobStage"
         [isPermanentlyShowPlaceholder]="true"
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}">
-      </account-job-stage-select>
+      </account-job-stage-multiselect>
       <form-datepicker
         [controlState]="filterFormState.controls.jobDueDateFrom"
         [dateFilter]="getStartJobDueDateFilter$ | async"

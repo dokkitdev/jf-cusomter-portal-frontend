@@ -20,7 +20,7 @@ export class AssetFilters {
   public lastTestDateTo?: string;
   public nextServiceDateFrom?: string;
   public nextServiceDateTo?: string;
-  public jobStage?: JobStage;
+  public jobStage?: Array<JobStage>;
   public jobDueDateFrom?: string;
   public jobDueDateTo?: string;
   public jobLoggedCompletionDateFrom?: string;

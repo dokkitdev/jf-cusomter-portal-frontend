@@ -1,3 +1,5 @@
+import without from 'lodash/without';
+import castArray from 'lodash/castArray';
 import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
 import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
@@ -19,7 +21,8 @@ import {
   updateGroup,
   setValue,
   box,
-  unbox
+  unbox,
+  isBoxed
 } from 'ngrx-forms';
 import { FilterValue, FilterValueStatus } from '@shared/filter-values';
 import { Site } from '@shared/site';
@@ -78,7 +81,7 @@ export class AccountReportsServiceControlFacade {
       jobDueDateTo: state.filterFormState.value.jobDueDateTo,
       jobLoggedCompletionDateFrom: state.filterFormState.value.jobLoggedCompletionDateFrom,
       jobLoggedCompletionDateTo: state.filterFormState.value.jobLoggedCompletionDateTo,
-      CP12Status: unbox(state.filterFormState.value.CP12Status),
+      CP12Status: state.filterFormState.value.CP12Status,
       customAssetTypeValue: state.filterFormState.value.customAssetTypeValue
     }));
   }
@@ -109,15 +112,13 @@ export class AccountReportsServiceControlFacade {
         );
       }
 
-      if (unbox(formState.value.jobStage)) {
-        filterValues.push(
-          new FilterValue({
-            id: formState.controls.jobStage.id,
-            value: unbox(formState.value.jobStage),
-            status: this.getJobStageFilterStatus(unbox(formState.value.jobStage))
-          })
-        );
-      }
+      unbox(formState.value.jobStage).forEach((jobStage: JobStage) =>
+        filterValues.push(new FilterValue({
+          id: formState.controls.jobStage.id,
+          value: jobStage,
+          status: this.getJobStageFilterStatus(jobStage)
+        }))
+      );
 
       if (formState.value.jobDueDateFrom) {
         filterValues.push(new FilterValue({
@@ -147,12 +148,12 @@ export class AccountReportsServiceControlFacade {
         }));
       }
 
-      if (unbox(formState.value.CP12Status)) {
+      if (formState.value.CP12Status) {
         filterValues.push(
           new FilterValue({
             id: formState.controls.CP12Status.id,
-            value: unbox(formState.value.CP12Status),
-            status: this.getCP12FilterStatus(unbox(formState.value.CP12Status))
+            value: formState.value.CP12Status,
+            status: this.getCP12FilterStatus(formState.value.CP12Status)
           })
         );
       }
@@ -185,7 +186,7 @@ export class AccountReportsServiceControlFacade {
           jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined,
           jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
           jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
-          CP12Status: unbox(filterFormStateValue.CP12Status) || undefined,
+          CP12Status: filterFormStateValue.CP12Status || undefined,
           customAssetTypeValue: filterFormStateValue.customAssetTypeValue || undefined,
           assetType,
           report
@@ -197,6 +198,7 @@ export class AccountReportsServiceControlFacade {
   private loadItemsByParametersEffect$: (page?: number) => Observable<void>;
   private loadItemsByPageEffect$: (page?: number) => Observable<void>;
   private exportCSVEffect$: () => Observable<void>;
+  private removeFilterEffect$: (filter: FilterValue) => Observable<void>;
 
   private get assetType$(): Observable<number> {
     return this.componentStore.select((state) => state.assetType);
@@ -220,6 +222,7 @@ export class AccountReportsServiceControlFacade {
     this.registerLoadItemsByParametersEffect();
     this.registerLoadItemsByPageEffect();
     this.registerExportCSVEffect();
+    this.registerRemoveFilterEffect();
   }
 
   public resetState(): void {
@@ -244,6 +247,7 @@ export class AccountReportsServiceControlFacade {
   }
 
   public handleFormStateAction(action: FormActions<any>): void {
+    console.log(action);
     this.updateFormState(action);
 
     if (action instanceof SetValueAction) {
@@ -253,7 +257,7 @@ export class AccountReportsServiceControlFacade {
   }
 
   public removeFilter(filter: FilterValue): void {
-    this.handleFormStateAction(new SetValueAction(filter.id, undefined));
+    this.removeFilterEffect$(filter);
   }
 
   public setSelectedSite(site: Site): void {
@@ -385,7 +389,7 @@ export class AccountReportsServiceControlFacade {
             jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo),
             jobLoggedCompletionDateFrom: setValue(parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom),
             jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo),
-            CP12Status: setValue((parameters.CP12Status) ? box(parameters.CP12Status) : state.filterFormState.value.CP12Status),
+            CP12Status: setValue(parameters.CP12Status || state.filterFormState.value.CP12Status),
             customAssetTypeValue: setValue(parameters.customAssetTypeValue || state.filterFormState.value.customAssetTypeValue)
           }
         )
@@ -438,7 +442,7 @@ export class AccountReportsServiceControlFacade {
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
             siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
-            jobStage: queryParams.jobStage || undefined,
+            jobStage: (queryParams.jobStage) ? castArray(queryParams.jobStage) : undefined,
             jobDueDateFrom: queryParams.jobDueDateFrom || undefined,
             jobDueDateTo: queryParams.jobDueDateTo || undefined,
             jobLoggedCompletionDateFrom: queryParams.jobLoggedCompletionDateFrom || undefined,
@@ -575,6 +579,26 @@ export class AccountReportsServiceControlFacade {
                 }
               )
             );
+        })
+      )
+    );
+  }
+
+  private registerRemoveFilterEffect(): void {
+    this.removeFilterEffect$ = this.componentStore.effect((origin$: Observable<FilterValue>) =>
+      origin$.pipe(
+        concatLatestFrom(() => this.filterFormState$),
+        tap(([filter, formState]) => {
+          const controlName = filter.id.split('.')[1] as keyof AccountReportsServiceControlFilterForm;
+
+          let filterValue;
+          if (isBoxed(formState.controls[controlName].value)) {
+            const value = unbox(formState.controls[controlName].value) as Array<string>;
+
+            filterValue = box(without(value, filter.value?.toString()));
+          }
+
+          this.handleFormStateAction(new SetValueAction(filter.id, filterValue));
         })
       )
     );
