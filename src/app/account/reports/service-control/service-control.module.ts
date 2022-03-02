@@ -1,7 +1,7 @@
+import { AccountJobStageMultiselectModule } from './../../shared/job-stage-multiselect';
 import { FilterSelectTextModule } from '@shared/filter-select-text/';
 import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select';
 import { FormDatepickerModule } from '@shared/form-datepicker';
-import { AccountJobStageSelectModule } from './../../shared/job-stage-select';
 import { AccountSiteSelectModule } from './../../shared/site-select';
 import { FilterValuesModule } from '@shared/filter-values';
 import { HeaderSortModule } from '@shared/header-sort';
@@ -51,7 +51,7 @@ import { NotificationModule } from '@shared/notification';
     HeaderSortModule,
     FilterValuesModule,
     AccountSiteSelectModule,
-    AccountJobStageSelectModule,
+    AccountJobStageMultiselectModule,
     ButtonModule,
     FileModule,
     NotificationModule,

@@ -7,12 +7,12 @@ export class AccountReportsServiceControlQueryParameters {
   public orderBy: AssetSortField;
   public desc: boolean;
   public siteID: number;
-  public jobStage: JobStage | undefined;
+  public jobStage: Array<JobStage>;
   public jobDueDateFrom: string;
   public jobDueDateTo: string;
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
-  public CP12Status: AssetCp12Status | undefined;
+  public CP12Status: string | undefined;
   public customAssetTypeValue: string;
 
   constructor(model: Partial<AccountReportsServiceControlQueryParameters> = {}) {

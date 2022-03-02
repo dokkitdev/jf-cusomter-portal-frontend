@@ -4,23 +4,23 @@ import { box, Boxed } from 'ngrx-forms';
 
 export class AccountReportsServiceControlFilterForm {
   public siteID: number;
-  public jobStage: Boxed<JobStage | undefined>;
+  public jobStage: Boxed<Array<JobStage>>;
   public jobDueDateFrom: string;
   public jobDueDateTo: string;
   public jobFrom: string;
   public jobLoggedCompletionDateFrom: string;
   public jobLoggedCompletionDateTo: string;
-  public CP12Status: Boxed<AssetCp12Status | undefined>;
+  public CP12Status: AssetCp12Status | undefined;
   public customAssetTypeValue: string;
 
   constructor() {
     this.siteID = 0;
-    this.jobStage = box(undefined);
+    this.jobStage = box([]);
     this.jobDueDateFrom = '';
     this.jobDueDateTo = '';
     this.jobLoggedCompletionDateFrom = '';
     this.jobLoggedCompletionDateTo = '';
-    this.CP12Status = box(undefined);
+    this.CP12Status = undefined;
     this.customAssetTypeValue = '';
   }
 }

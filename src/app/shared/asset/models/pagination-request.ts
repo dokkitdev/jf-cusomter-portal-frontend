@@ -64,7 +64,7 @@ export class AssetPaginationRequest extends PaginationRequest {
   public nextServiceDateTo?: string;
 
   @Expose({ name: 'job_stage' })
-  public jobStage: JobStage;
+  public jobStage: Array<JobStage>;
 
   @Expose({ name: 'job_due_date_from' })
   public jobDueDateFrom?: string;
