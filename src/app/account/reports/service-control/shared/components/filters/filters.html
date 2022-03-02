@@ -53,6 +53,13 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_ASSET_TYPE' | translate }}">
       </filter-select-text>
+      <account-custom-asset-type-select
+        [controlState]="filterFormState.controls.customAssetTypeValue"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedAssetTypeChanged)="selectedAssetTypeChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_ASSET_TYPE' | translate }}">
+      </account-custom-asset-type-select>
     </form>
   </div>
   <filter-values

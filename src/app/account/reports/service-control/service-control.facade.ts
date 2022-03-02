@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/effects';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { switchMap } from 'rxjs/operators';
 import { Observable, tap, map } from 'rxjs';
-import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters, AssetCp12Status } from '@shared/asset';
+import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters, AssetCp12Status, CustomAssetType } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
@@ -158,11 +158,11 @@ export class AccountReportsServiceControlFacade {
         );
       }
 
-      if (formState.value.customAssetTypeValue) {
+      if (formState.value.customAssetTypeValue && state.selectedAssetType) {
         filterValues.push(
           new FilterValue({
             id: formState.controls.customAssetTypeValue.id,
-            value: formState.value.customAssetTypeValue
+            value: state.selectedAssetType.name
           })
         );
       }
@@ -247,7 +247,6 @@ export class AccountReportsServiceControlFacade {
   }
 
   public handleFormStateAction(action: FormActions<any>): void {
-    console.log(action);
     this.updateFormState(action);
 
     if (action instanceof SetValueAction) {
@@ -262,6 +261,10 @@ export class AccountReportsServiceControlFacade {
 
   public setSelectedSite(site: Site): void {
     this.updateSelectedSite(site);
+  }
+
+  public setSelectedAssetType(assetType: CustomAssetType): void {
+    this.updateSelectedAssetType(assetType);
   }
 
   public exportCSV(): void {
@@ -421,11 +424,20 @@ export class AccountReportsServiceControlFacade {
     )();
   }
 
-  private updateSelectedSite(site: Site): void {
+  private updateSelectedSite(selectedSite: Site): void {
     this.componentStore.updater(
       (state) => ({
         ...state,
-        selectedSite: site
+        selectedSite
+      })
+    )();
+  }
+
+  private updateSelectedAssetType(selectedAssetType: CustomAssetType): void {
+    this.componentStore.updater(
+      (state) => ({
+        ...state,
+        selectedAssetType
       })
     )();
   }

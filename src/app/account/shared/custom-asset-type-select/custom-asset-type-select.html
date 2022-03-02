@@ -1,0 +1,14 @@
+<div class="form-group">
+  <custom-select
+    [controlState]="controlState$ | async"
+    [options]="options$ | async"
+    [isLoading]="isLoading$ | async"
+    [hasScroll]="false"
+    [hasFilter]="false"
+    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+    [validationMessages]="validationMessages"
+    (selectedOptionChanged)="selectedOptionChanged($event)"
+    (controlStateActionTriggered)="controlStateActionTriggered.emit($event)"
+    placeholder="{{ placeholder || 'ACCOUNT.SHARED.CUSTOM_ASSET_TYPE_SELECT.TEXT_PLACEHOLDER' | translate }}">
+  </custom-select>
+</div>

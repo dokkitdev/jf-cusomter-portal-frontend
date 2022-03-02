@@ -1,3 +1,4 @@
+import { AccountCustomAssetTypeSelectModule } from './../../shared/custom-asset-type-select/custom-asset-type-select.module';
 import { AccountJobStageMultiselectModule } from './../../shared/job-stage-multiselect';
 import { FilterSelectTextModule } from '@shared/filter-select-text/';
 import { AccountCp12StatusSelectModule } from './../../shared/cp12-status-select';
@@ -57,7 +58,8 @@ import { NotificationModule } from '@shared/notification';
     NotificationModule,
     FormDatepickerModule,
     AccountCp12StatusSelectModule,
-    FilterSelectTextModule
+    FilterSelectTextModule,
+    AccountCustomAssetTypeSelectModule
   ],
   providers: [
     AccountReportsServiceControlFacade,

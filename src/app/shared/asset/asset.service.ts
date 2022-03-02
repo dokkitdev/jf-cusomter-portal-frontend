@@ -1,3 +1,4 @@
+import { CustomAssetType } from './models/custom-asset-type';
 import { ApiService } from '@ronas-it/angular-common';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -100,6 +101,13 @@ export class AssetService {
       })
       .pipe(
         map((response) => response.body as Blob)
+      );
+  }
+
+  public searchCustomAssetTypes(): Observable<Array<CustomAssetType>> {
+    return this.apiService.get(`${this.endpoint}/types`)
+      .pipe(
+        map((items) => items.map((item: any) => plainToClass(CustomAssetType, item)))
       );
   }
 }
