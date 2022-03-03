@@ -61,7 +61,7 @@ build_production:
     name: "production"
   <<: *build
   script:
-    - npm run-script build -c=production
+    - npx run-script build -c=production
   only:
     - production
 
