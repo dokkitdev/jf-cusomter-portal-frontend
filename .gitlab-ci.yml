@@ -56,6 +56,15 @@ build_development:
     - production
     - master
 
+build_production:
+  environment:
+    name: "production"
+  <<: *build
+  script:
+    - npm run-script build -c=production
+  only:
+    - production
+
 deploy_development:
   image: projects.ronasit.com:4567/docker/ssh
   stage: deploy
@@ -63,3 +72,11 @@ deploy_development:
     - rsync -av ./dist/jf-customer-portal-frontend/ ci@209.97.185.115:/var/www/jf-customer-portal-frontend/
   only:
     - development
+
+deploy_production:
+  image: projects.ronasit.com:4567/docker/ssh
+  stage: deploy
+  script:
+    - rsync -av ./dist/jf-customer-portal-frontend/ ci@167.99.192.109:/var/www/jf-customer-portal-frontend/
+  only:
+    - production
