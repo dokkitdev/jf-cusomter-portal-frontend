@@ -28,6 +28,15 @@ export class User extends AbstractUser {
   @Expose({ name: 'is_send_email', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
   public isSendEmail: boolean;
 
+  @Expose({ groups: [ClassGroup.UPDATING] })
+  public password: string;
+
+  @Expose({ name: 'old_password', groups: [ClassGroup.UPDATING] })
+  public oldPassword: string;
+
+  @Expose({ name: 'password_confirmation', groups: [ClassGroup.UPDATING] })
+  public passwordConfirmation: string;
+
   constructor(model: Partial<User> = {}) {
     super();
 

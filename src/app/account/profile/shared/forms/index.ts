@@ -1,0 +1,1 @@
+export { AccountProfilePageForm } from './profile';

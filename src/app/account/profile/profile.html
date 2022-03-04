@@ -1,0 +1,9 @@
+<div *ngrxLet="isLoading$; let isLoading" class="page profile">
+  <div class="page-header">
+    <h2 class="page-title">{{ 'ACCOUNT.PROFILE.TEXT_PAGE_TITLE' | translate }}</h2>
+  </div>
+  <account-profile-form *ngIf="!isLoading; else loading"></account-profile-form>
+  <ng-template #loading>
+    <loading-spinner></loading-spinner>
+  </ng-template>
+</div>

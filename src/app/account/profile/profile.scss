@@ -1,0 +1,7 @@
+:host ::ng-deep .profile {
+  .form {max-width: 400px;}
+  .password {
+    &-actions {margin-bottom: 20px;}
+    &-action {font-weight: 700;}
+  }
+}

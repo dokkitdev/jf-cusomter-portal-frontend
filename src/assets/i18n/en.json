@@ -393,6 +393,30 @@
         "TEXT_CREATED_AT_TO": "Uploaded At To"
       }
     },
+    "PROFILE": {
+      "TEXT_PAGE_TITLE": "Profile",
+      "TEXT_CHANGE_PASSWORD": "Change Password",
+      "TEXT_NAME": "Name",
+      "TEXT_EMAIL": "Email",
+      "TEXT_CURRENT_PASSWORD": "Current Password",
+      "TEXT_NEW_PASSWORD": "New Password",
+      "TEXT_PASSWORD_CONFIRMATION": "Password Confirmation",
+      "BUTTON_SAVE": "Save",
+      "ERRORS": {
+        "TEXT_NAME_IS_REQUIRED": "Name is required",
+        "TEXT_EMAIL_IS_REQUIRED": "Email is required",
+        "TEXT_CURRENT_PASSWORD_IS_REQUIRED": "Current password is required",
+        "TEXT_PASSWORD_IS_REQUIRED": "New password is required",
+        "TEXT_PASSWORD_MIN_LENGTH": "The password must be at least {{ min }} characters",
+        "TEXT_PASSWORD_MUST_CONTAIN_DIGIT": "The password must contain digits",
+        "TEXT_PASSWORD_CONFIRMATION_IS_REQUIRED": "Password confirmation is required",
+        "TEXT_PASSWORD_CONFIRMATION_SHOULD_MATCH": "Password confirmation should match the new password"
+      },
+      "NOTIFICATIONS": {
+        "TEXT_PROFILE_UPDATED": "Profile has been successfully updated",
+        "TEXT_ERROR": "Something went wrong. Please try again."
+      }
+    },
     "SHARED": {
       "CUSTOMER_SELECT": {
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
