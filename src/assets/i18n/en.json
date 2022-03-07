@@ -61,7 +61,7 @@
       "LINK_ASSETS": "Assets",
       "LINK_REPORTS": "Reports",
       "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
-      "LINK_REPORTS_KPI": "KPI",
+      "LINK_REPORTS_KPI": "Repair Response",
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
@@ -85,7 +85,7 @@
       "LINK_ASSETS": "Assets",
       "LINK_DOCUMENTS": "Documents",
       "LINK_SERVICE_CONTROL_REPORT": "Service Control Report",
-      "LINK_KPI_REPORT": "KPI Report",
+      "LINK_KPI_REPORT": "Repair Response Report",
       "NOTIFICATIONS": {
         "TEXT_ERROR": "Something went wrong. Please try again."
       }
@@ -288,7 +288,7 @@
         }
       },
       "KPI": {
-        "TEXT_PAGE_TITLE": "KPI Report",
+        "TEXT_PAGE_TITLE": "Repair Response Report",
         "TEXT_ON_TIME": "On Time",
         "TEXT_LATE": "Late",
         "LINK_CSV": "CSV",

@@ -93,7 +93,7 @@ export const initConfiguration = (configuration: any): any =>
     },
     exportCSV: {
       jobs: 'jobs.csv',
-      jobsReport: (date: string) => `JF_KPI_Report_${date}.csv`,
+      jobsReport: (date: string) => `JF_Repair_Response_Report_${date}.csv`,
       sites: 'sites.csv',
       assets: 'assets.csv',
       assetsReport: (date: string) => `JF_Service_Control_${date}.csv`
