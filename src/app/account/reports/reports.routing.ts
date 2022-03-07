@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
   },
   {
-    path: 'kpi',
+    path: 'repair-response',
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
   }
 ];
