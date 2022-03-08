@@ -29,11 +29,16 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_SITE_NAME' | translate }}">
       </filter-select-text>
-      <filter-select-text
-        [controlState]="filterFormState.controls.query"
+      <!-- <account-custom-asset-type-multiselect
+        [controlState]="filterFormState.controls.customAssetTypeValue"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        name="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_ASSET_NAME' | translate }}">
-      </filter-select-text>
+        placeholder="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_ASSET_NAME' | translate }}">
+      </account-custom-asset-type-multiselect> -->
+      <account-asset-name-multiselect
+        [controlState]="filterFormState.controls.names"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_ASSET_NAME' | translate }}">
+      </account-asset-name-multiselect>
       <filter-select-text
         [controlState]="filterFormState.controls.location"
         (controlStateActionTriggered)="formActionTriggered($event)"

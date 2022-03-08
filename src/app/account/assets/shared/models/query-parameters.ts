@@ -10,7 +10,7 @@ export class AccountAssetsQueryParameters {
   public siteID: number | undefined;
   public siteUprn: string;
   public siteName: string;
-  public query: string;
+  public names: Array<string>;
   public location: string;
   public make: string;
   public model: string;

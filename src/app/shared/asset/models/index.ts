@@ -6,3 +6,4 @@ export * from './test';
 export * from './reading';
 export * from './custom-field';
 export * from './service-level';
+export * from './name';

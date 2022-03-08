@@ -7,7 +7,7 @@ export class AccountAssetsFilterForm {
   public siteID: number | undefined;
   public siteUprn: string;
   public siteName: string;
-  public query: string;
+  public names: Boxed<Array<string>>;
   public location: string;
   public make: string;
   public model: string;
@@ -25,7 +25,7 @@ export class AccountAssetsFilterForm {
     this.siteID = undefined;
     this.siteUprn = '';
     this.siteName = '';
-    this.query = '';
+    this.names = box([]);
     this.location = '';
     this.make = '';
     this.model = '';
