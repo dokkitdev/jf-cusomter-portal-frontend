@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { PaginationResponse } from '@shared/pagination';
 import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { Asset, AssetFilters, AssetPaginationRequest, AssetServiceLevel } from './models';
+import { Asset, AssetFilters, AssetName, AssetPaginationRequest, AssetServiceLevel } from './models';
 import { AssetRelationType } from './types';
 import { isUndefined, omitBy } from 'lodash';
 import { AssetSortField } from './enums';
@@ -105,5 +105,13 @@ export class AssetService {
 
   public getCustomAssetTypes(): Observable<Array<string>> {
     return this.apiService.get(`${this.endpoint}/types`);
+  }
+
+  public getAssetNames(): Observable<Array<AssetName>> {
+    return this.apiService
+      .get(`${this.endpoint}/names`)
+      .pipe(
+        map((response) => plainToClass(AssetName, response, { groups: [ClassGroup.MAIN] }))
+      );
   }
 }

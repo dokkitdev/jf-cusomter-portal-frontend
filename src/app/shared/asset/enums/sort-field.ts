@@ -19,5 +19,6 @@ export enum AssetSortField {
   NEXT_SCHEDULE_DATE = 'next_schedule.date',
   JOB_STAGE = 'job.stage',
   JOB_ID = 'job.simpro_job_id',
-  LAST_CP2_DATE = 'last_cp12_date'
+  LAST_CP2_DATE = 'last_cp12_date',
+  EXPIRY_DATE = 'expiry_date'
 }
