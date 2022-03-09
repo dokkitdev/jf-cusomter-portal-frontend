@@ -29,11 +29,6 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_SITE_NAME' | translate }}">
       </filter-select-text>
-      <!-- <account-custom-asset-type-multiselect
-        [controlState]="filterFormState.controls.customAssetTypeValue"
-        (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.ASSETS.FILTERS.TEXT_ASSET_NAME' | translate }}">
-      </account-custom-asset-type-multiselect> -->
       <account-asset-name-multiselect
         [controlState]="filterFormState.controls.names"
         (controlStateActionTriggered)="formActionTriggered($event)"

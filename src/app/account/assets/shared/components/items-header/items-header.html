@@ -60,5 +60,10 @@
         {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_NEXT_SERVICE_DATE' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell assets-expirydate">
+      <header-sort [orderBy]="assetSortField.EXPIRY_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ASSETS.ITEMS_HEADER.TEXT_EXPIRY_DATE' | translate }}
+      </header-sort>
+    </div>
   </div>
 </div>

@@ -62,6 +62,10 @@ export class Asset {
   @Expose({ name: 'next_service_date', groups: [ClassGroup.MAIN] })
   public nextServiceDate: DateTime;
 
+  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Expose({ name: 'expiry_date', groups: [ClassGroup.MAIN] })
+  public expiryDate: DateTime;
+
   @Expose({ name: 'cp12_status' })
   public CP12Status: AssetCp12Status;
 
