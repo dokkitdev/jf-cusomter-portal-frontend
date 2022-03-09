@@ -21,6 +21,7 @@ export class JobFilters {
   public dateCreatedTo?: string;
   public outOfHours?: boolean;
   public archived?: boolean;
+  public isRepair?: boolean;
 
   constructor(model: Partial<JobFilters> = {}) {
     Object.assign(this, model);

@@ -76,6 +76,9 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose()
   public archived?: boolean;
 
+  @Expose({ name: 'is_repair' })
+  public isRepair?: boolean;
+
   constructor(model: Partial<JobPaginationRequest> = {}) {
     super(model);
 
