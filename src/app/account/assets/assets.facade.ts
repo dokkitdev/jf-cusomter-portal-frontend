@@ -79,7 +79,7 @@ export class AccountAssetsPageFacade {
       siteID: state.filterFormState.value.siteID,
       siteUprn: state.filterFormState.value.siteUprn,
       siteName: state.filterFormState.value.siteName,
-      query: state.filterFormState.value.query,
+      names: unbox(state.filterFormState.value.names),
       location: state.filterFormState.value.location,
       make: state.filterFormState.value.make,
       model: state.filterFormState.value.model,
@@ -113,7 +113,7 @@ export class AccountAssetsPageFacade {
           assetID: filterFormStateValue.assetID || undefined,
           simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
           siteID: filterFormStateValue.siteID || undefined,
-          query: filterFormStateValue.query || undefined,
+          names: (unbox(filterFormStateValue.names).length) ? unbox(filterFormStateValue.names) : undefined,
           siteUprn: filterFormStateValue.siteUprn || undefined,
           siteName: filterFormStateValue.siteName || undefined,
           location: filterFormStateValue.location || undefined,
@@ -152,9 +152,9 @@ export class AccountAssetsPageFacade {
       if (formState.value.siteName) {
         filterValues.push(this.createFilterValue(formState.controls.siteName));
       }
-      if (formState.value.query) {
-        filterValues.push(this.createFilterValue(formState.controls.query));
-      }
+      unbox(formState.value.names).forEach((value) =>
+        filterValues.push(new FilterValue({ id: formState.controls.names.id, value }))
+      );
       if (formState.value.location) {
         filterValues.push(this.createFilterValue(formState.controls.location));
       }
@@ -401,7 +401,7 @@ export class AccountAssetsPageFacade {
             siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
             siteUprn: setValue(parameters.siteUprn || state.filterFormState.value.siteUprn),
             siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
-            query: setValue(parameters.query || state.filterFormState.value.query),
+            names: setValue((parameters.names) ? box(parameters.names) : state.filterFormState.value.names),
             location: setValue(parameters.location || state.filterFormState.value.location),
             make: setValue(parameters.make || state.filterFormState.value.make),
             model: setValue(parameters.model || state.filterFormState.value.model),
@@ -434,7 +434,7 @@ export class AccountAssetsPageFacade {
             siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
             siteUprn: queryParams.siteUprn || undefined,
             siteName: queryParams.siteName || undefined,
-            query: queryParams.query || undefined,
+            names: (queryParams.names) ? castArray(queryParams.names) : undefined,
             location: queryParams.location || undefined,
             make: queryParams.make || undefined,
             model: queryParams.model || undefined,
@@ -493,7 +493,7 @@ export class AccountAssetsPageFacade {
               siteID: filters.siteID,
               siteUprn: filters.siteUprn,
               siteName: filters.siteName,
-              query: filters.query,
+              names: filters.names,
               location: filters.location,
               make: filters.make,
               model: filters.model,

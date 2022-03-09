@@ -28,6 +28,7 @@ import { PaginationElementsModule } from '@shared/pagination-elements';
 import { FileModule } from '@shared/file';
 import { ButtonModule } from '@shared/button';
 import { NotificationModule } from '@shared/notification';
+import { AccountAssetNameMultiselectModule } from '../shared/asset-name-multiselect';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { NotificationModule } from '@shared/notification';
     PaginationElementsModule,
     FileModule,
     ButtonModule,
-    NotificationModule
+    NotificationModule,
+    AccountAssetNameMultiselectModule
   ],
   providers: [
     AccountAssetsPageFacade,
