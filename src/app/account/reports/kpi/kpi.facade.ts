@@ -98,7 +98,8 @@ export class AccountReportsKPIPageFacade {
           archived: filterFormStateValue.archived,
           stage: (filterFormStateValue.archived === undefined) ? [] : this.getArchivedFilterStages(filterFormStateValue.archived),
           dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
-          dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined
+          dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined,
+          isRepair: filterFormStateValue.isRepair
         }))
       );
   }
