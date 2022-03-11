@@ -8,7 +8,7 @@ import { AssetAttachment } from './attachment';
 import { AssetCustomField } from './custom-field';
 import { AssetTestResult } from '../enums';
 import { AssetTest } from './test';
-import { Job, JobSchedule } from '@shared/job';
+import { Job, JobSchedule, NoAccessDate } from '@shared/job';
 
 export class Asset {
   @Expose({ groups: [ClassGroup.MAIN] })
@@ -104,6 +104,26 @@ export class Asset {
   @Type(() => JobSchedule)
   @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
   public nextSchedule?: JobSchedule;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'no_access_date_1', groups: [ClassGroup.MAIN] })
+  public noAccessDate1?: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'no_access_date_2', groups: [ClassGroup.MAIN] })
+  public noAccessDate2?: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'no_access_date_3', groups: [ClassGroup.MAIN] })
+  public noAccessDate3?: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'no_access_date_4', groups: [ClassGroup.MAIN] })
+  public noAccessDate4?: DateTime;
+
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'no_access_date_5', groups: [ClassGroup.MAIN] })
+  public noAccessDate5?: DateTime;
 
   public get isDue(): boolean {
     return this.CP12Status === AssetCp12Status.DUE;

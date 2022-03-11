@@ -33,10 +33,20 @@
   <div class="table-cell servicecontrol-cp2date">
     {{ item?.displayedLastCP12Date | date: dateFormat }}
   </div>
-  <div *ngFor="let i of [0, 1, 2, 3, 4]" class="table-cell servicecontrol-noaccess">
-    <ng-container *ngIf="i < item.job?.noAccessDates.length">
-      {{ item.job?.noAccessDates[i].date | date: dateFormat }}
-    </ng-container>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate1 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate2 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate3 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate4 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate5 | date: dateFormat }}
   </div>
   <div class="table-cell servicecontrol-nextscheduled">
     {{ item.nextSchedule?.date | date: dateFormat }}
