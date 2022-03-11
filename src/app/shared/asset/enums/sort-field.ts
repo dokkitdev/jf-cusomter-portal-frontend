@@ -18,6 +18,7 @@ export enum AssetSortField {
   JOB_COMPLETION_DATE = 'job.completion_date',
   NEXT_SCHEDULE_DATE = 'next_schedule.date',
   JOB_STAGE = 'job.stage',
+  JOB_STATUS = 'job.job_status',
   JOB_ID = 'job.simpro_job_id',
   LAST_CP2_DATE = 'last_cp12_date',
   EXPIRY_DATE = 'expiry_date'
