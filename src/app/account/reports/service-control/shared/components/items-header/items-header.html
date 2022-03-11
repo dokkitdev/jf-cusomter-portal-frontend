@@ -8,6 +8,14 @@
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell servicecontrol-assetid">
+      <header-sort
+        [orderBy]="assetSortField.ASSET_ID"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_ASSET_ID' | translate }}
+      </header-sort>
+    </div>
     <div class="table-cell servicecontrol-orderno">
       <header-sort
         [orderBy]="assetSortField.JOB_ORDER_NO"
