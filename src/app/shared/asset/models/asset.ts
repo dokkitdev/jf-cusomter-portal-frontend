@@ -117,6 +117,10 @@ export class Asset {
     return this.CP12Status === AssetCp12Status.ON_TIME;
   }
 
+  public get displayedLastCP12Date(): DateTime {
+    return this.lastTestDate || this.lastCp12Date;
+  }
+
   constructor(model: Partial<Asset> = {}) {
     Object.assign(this, model);
   }
