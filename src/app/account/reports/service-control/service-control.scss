@@ -2,6 +2,7 @@
 
 :host ::ng-deep .servicecontrol {
   &-uprn {flex: 0 0 120px; min-width: 120px;}
+  &-assetid {flex: 0 0 120px; min-width: 120px;}
   &-orderno {flex: 0 0 120px; min-width: 120px;}
   &-customer {flex: 1 1 160px; min-width: 160px;}
   &-sitename {flex: 1 1 160px; min-width: 160px;}
@@ -11,7 +12,7 @@
   &-cp2date {flex: 0 0 130px; min-width: 130px;}
   &-noaccess {flex: 0 0 140px; min-width: 140px;}
   &-nextscheduled {flex: 0 0 160px; min-width: 160px;}
-  &-status {flex: 0 0 120px; min-width: 120px;}
+  &-status {flex: 1 1 180px; min-width: 180px;}
   &-jobnumber {flex: 0 0 120px; min-width: 120px;}
   &-filters {margin-bottom: 28px;
     .form-group {margin-bottom: 4px;}

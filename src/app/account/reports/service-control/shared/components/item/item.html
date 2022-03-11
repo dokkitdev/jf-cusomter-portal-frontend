@@ -8,6 +8,9 @@
   <div class="table-cell servicecontrol-uprn">
     {{ item.site?.uprn }}
   </div>
+  <div class="table-cell servicecontrol-assetid">
+    {{ item.assetID }}
+  </div>
   <div class="table-cell servicecontrol-orderno">
     {{ item.job?.orderNo }}
   </div>
@@ -28,12 +31,22 @@
     {{ item.job?.completionDate | date: dateFormat }}
   </div>
   <div class="table-cell servicecontrol-cp2date">
-    {{ item?.lastCp12Date | date: dateFormat }}
+    {{ item?.displayedLastCP12Date | date: dateFormat }}
   </div>
-  <div *ngFor="let i of [0, 1, 2, 3, 4]" class="table-cell servicecontrol-noaccess">
-    <ng-container *ngIf="i < item.job?.noAccessDates.length">
-      {{ item.job?.noAccessDates[i].date | date: dateFormat }}
-    </ng-container>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate1 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate2 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate3 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate4 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate5 | date: dateFormat }}
   </div>
   <div class="table-cell servicecontrol-nextscheduled">
     {{ item.nextSchedule?.date | date: dateFormat }}
@@ -46,7 +59,7 @@
         'badge-pending': item.job?.isPending
       }"
       class="badge">
-      {{ 'SHARED.JOB_STAGE.TEXT_' + item.job?.stage | uppercase | translate }}
+      {{ item.job?.status }}
     </span>
   </div>
   <div class="table-cell servicecontrol-jobnumber">
