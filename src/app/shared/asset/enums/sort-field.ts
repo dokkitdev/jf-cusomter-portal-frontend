@@ -18,7 +18,13 @@ export enum AssetSortField {
   JOB_COMPLETION_DATE = 'job.completion_date',
   NEXT_SCHEDULE_DATE = 'next_schedule.date',
   JOB_STAGE = 'job.stage',
+  JOB_STATUS = 'job.job_status',
   JOB_ID = 'job.simpro_job_id',
   LAST_CP2_DATE = 'last_cp12_date',
-  EXPIRY_DATE = 'expiry_date'
+  EXPIRY_DATE = 'expiry_date',
+  NO_ACCESS_DATE_1 = 'no_access_date_1',
+  NO_ACCESS_DATE_2 = 'no_access_date_2',
+  NO_ACCESS_DATE_3 = 'no_access_date_3',
+  NO_ACCESS_DATE_4 = 'no_access_date_4',
+  NO_ACCESS_DATE_5 = 'no_access_date_5'
 }

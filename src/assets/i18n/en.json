@@ -271,6 +271,7 @@
         },
         "ITEMS_HEADER": {
           "TEXT_SITE_UPRN": "Site UPRN",
+          "TEXT_ASSET_ID": "AssetID",
           "TEXT_ORDER_NO": "Order No",
           "TEXT_CUSTOMER": "Customer",
           "TEXT_SITE_NAME": "Site Name",
