@@ -11,6 +11,11 @@
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_ORDER_NO' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell jobs-name">
+      <header-sort [orderBy]="jobSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_JOB_NAME' | translate }}
+      </header-sort>
+    </div>
     <div class="table-cell jobs-customer">
       <header-sort [orderBy]="jobSortField.CUSTOMER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}

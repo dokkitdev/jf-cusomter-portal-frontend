@@ -98,6 +98,7 @@
       "ITEMS_HEADER": {
         "TEXT_JOB": "Job ID",
         "TEXT_ORDER_NO": "Order No",
+        "TEXT_JOB_NAME": "Job Name",
         "TEXT_CUSTOMER": "Customer",
         "TEXT_SITE_UPRN": "Site UPRN",
         "TEXT_SITE_NAME": "Site Name",
@@ -135,6 +136,7 @@
         "TEXT_SITE_UPRN": "Site UPRN",
         "TEXT_ADDRESS": "Address",
         "TEXT_DESCRIPTION": "Description",
+        "TEXT_JOB_NAME": "Job Name",
         "TEXT_DATE_OPENED": "Date Opened",
         "TEXT_REQUESTED": "Requested",
         "TEXT_PRIORITY": "Priority",
