@@ -1,5 +1,6 @@
 export enum JobSortField {
   JOB_ID = 'simpro_job_id',
+  NAME = 'name',
   ORDER_NO = 'order_no',
   CUSTOMER_NAME = 'customer.name',
   SITE_UPRN = 'site.uprn',

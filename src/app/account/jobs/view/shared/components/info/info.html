@@ -22,6 +22,10 @@
           <div>{{ job.site?.postalCode }}</div>
         </ng-container>
       </property>
+      <property *ngIf="job.name">
+        <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_JOB_NAME' | translate }}</ng-container>
+        <ng-container ngProjectAs="value">{{ job.name }}</ng-container>
+      </property>
       <property>
         <ng-container ngProjectAs="name">{{ 'ACCOUNT.JOBS.VIEW.TEXT_DESCRIPTION' | translate }}</ng-container>
         <ng-container ngProjectAs="value">
