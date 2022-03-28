@@ -5,6 +5,7 @@ export class FilterValue {
   public value: string | number | undefined;
   public title?: string | number;
   public status?: FilterValueStatus;
+  public variant?: string;
 
   constructor(model: Partial<FilterValue> = {}) {
     Object.assign(this, model);
