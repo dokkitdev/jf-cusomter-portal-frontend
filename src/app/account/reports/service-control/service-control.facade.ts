@@ -24,7 +24,7 @@ import {
   unbox,
   isBoxed
 } from 'ngrx-forms';
-import { FilterValue, FilterValueStatus } from '@shared/filter-values';
+import { FilterValue, FilterValueStatus, FilterValueVariant } from '@shared/filter-values';
 import { Site } from '@shared/site';
 import { JobStage } from '@shared/job';
 import { configuration } from '@configurations';
@@ -153,7 +153,8 @@ export class AccountReportsServiceControlFacade {
           new FilterValue({
             id: formState.controls.CP12Status.id,
             value: formState.value.CP12Status,
-            status: this.getCP12FilterStatus(formState.value.CP12Status)
+            status: this.getCP12FilterStatus(formState.value.CP12Status),
+            variant: FilterValueVariant.CP_12_STATUS
           })
         );
       }
