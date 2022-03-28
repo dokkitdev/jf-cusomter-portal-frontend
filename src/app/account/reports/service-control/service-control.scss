@@ -18,8 +18,8 @@
     .form-group {margin-bottom: 4px;}
   }
   &-row {
-    &-overdue {color: $red;}
-    &-due {color: $yellow;}
-    &-ontime {color: $green;}
+    &-overdue {color: $bright-red;}
+    &-due {color: $bright-yellow;}
+    &-ontime {color: $bright-green;}
   }
 }
