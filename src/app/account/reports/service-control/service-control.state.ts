@@ -24,7 +24,7 @@ export class AccountReportsServiceControlState {
     this.isLoading = false;
     this.isExporting = false;
     this.page = 1;
-    this.orderBy = AssetSortField.LAST_CP2_DATE;
+    this.orderBy = AssetSortField.SORTABLE_DATE;
     this.desc = true;
     this.perPage = 10;
     this.totalItems = 0;
