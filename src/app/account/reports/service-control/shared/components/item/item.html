@@ -31,7 +31,7 @@
     {{ item.job?.completionDate | date: dateFormat }}
   </div>
   <div class="table-cell servicecontrol-cp2date">
-    {{ item?.displayedLastCP12Date | date: dateFormat }}
+    {{ item?.sortableDate | date: dateFormat }}
   </div>
   <div class="table-cell servicecontrol-noaccess">
     {{ item.noAccessDate1 | date: dateFormat }}

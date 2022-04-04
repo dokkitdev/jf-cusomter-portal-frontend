@@ -66,6 +66,10 @@ export class Asset {
   @Expose({ name: 'expiry_date', groups: [ClassGroup.MAIN] })
   public expiryDate: DateTime;
 
+  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Expose({ name: 'sortable_date', groups: [ClassGroup.MAIN] })
+  public sortableDate: DateTime;
+
   @Expose({ name: 'cp12_status' })
   public CP12Status: AssetCp12Status;
 
