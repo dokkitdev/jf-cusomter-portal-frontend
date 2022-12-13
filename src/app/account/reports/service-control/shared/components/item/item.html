@@ -33,6 +33,9 @@
   <div class="table-cell servicecontrol-cp2date">
     {{ item?.sortableDate | date: dateFormat }}
   </div>
+  <div class="table-cell servicecontrol-nextservicedate">
+    {{ item?.nextServiceDate | date: dateFormat }}
+  </div>
   <div class="table-cell servicecontrol-noaccess">
     {{ item.noAccessDate1 | date: dateFormat }}
   </div>

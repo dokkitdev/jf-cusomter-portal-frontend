@@ -72,6 +72,14 @@
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_LAST_CP12_DATE' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell servicecontrol-nextservicedate">
+      <header-sort
+        [orderBy]="assetSortField.NEXT_SERVICE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NEXT_SERVICE_DATE' | translate }}
+      </header-sort>
+    </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
       [orderBy]="assetSortField.NO_ACCESS_DATE_1"
