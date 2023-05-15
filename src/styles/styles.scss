@@ -36,7 +36,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
 /* logo */
 .logo {width: 320px; height: 180px;
   background: url(/assets/images/logo.png) 50% 50% no-repeat; background-size: contain;
-  &-light {width: 320px; height: 180px;
+  &-light {width: 200px; height: 112.5px;
     background: url(/assets/images/logo-light.png) 50% 50% no-repeat; background-size: contain;
   }
 }
