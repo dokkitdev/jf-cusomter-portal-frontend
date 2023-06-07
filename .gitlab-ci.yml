@@ -7,7 +7,7 @@ stages:
 
 variables:
   CI_PROJECT_NAME: jf-customer-portal-frontend
-  DOMAIN: dev.js-customer-portal.ronasit.com
+  DOMAIN: dev.jamesfrewportal.co.uk
 
 cache: &global_cache
   paths:
