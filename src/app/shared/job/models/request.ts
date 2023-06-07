@@ -6,6 +6,9 @@ export class JobRequest {
   public simproSiteID: number;
 
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
+  public name: string;
+
+  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
   public description: string;
 
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
