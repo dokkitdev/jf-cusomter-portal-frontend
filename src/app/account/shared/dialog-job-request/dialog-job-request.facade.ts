@@ -20,6 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
 import { Media } from '@shared/media';
 import { concatLatestFrom } from '@ngrx/effects';
+import { maxLength } from 'ngrx-forms/validation';
 
 @Injectable()
 export class AccountDialogJobRequestComponentFacade {
@@ -129,6 +130,7 @@ export class AccountDialogJobRequestComponentFacade {
         formState: updateGroup<AccountDialogJobRequestForm>(
           state.formState,
           {
+            name: validate(trimmedRequired, maxLength(50)),
             description: validate(trimmedRequired)
           }
         )
@@ -151,6 +153,7 @@ export class AccountDialogJobRequestComponentFacade {
 
           const request = new JobRequest({
             simproSiteID: siteID,
+            name: formState.value.name,
             description: formState.value.description,
             files: attachments.map((item) => item.file)
           });
