@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MediaMultiselectModule } from '@shared/media-multiselect';
 import { JobModule } from '@shared/job';
 import { ButtonModule } from '@shared/button';
+import { FormTextModule } from '@shared/form-text';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ButtonModule } from '@shared/button';
     TranslateModule,
     MatDialogModule,
     ReactiveComponentModule,
+    FormTextModule,
     FormTextareaModule,
     MediaMultiselectModule,
     JobModule,
