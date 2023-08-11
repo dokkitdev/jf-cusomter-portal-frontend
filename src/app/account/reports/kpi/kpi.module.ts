@@ -24,6 +24,7 @@ import { ExistenceSelectModule } from '@shared/existence-select';
 import { FileModule } from '@shared/file';
 import { ButtonModule } from '@shared/button';
 import { NotificationModule } from '@shared/notification';
+import { AccountCostCenterMultiselectModule } from '@app/account/shared/cost-center-multiselect';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NotificationModule } from '@shared/notification';
     ExistenceSelectModule,
     FileModule,
     ButtonModule,
-    NotificationModule
+    NotificationModule,
+    AccountCostCenterMultiselectModule
   ],
   providers: [
     AccountReportsKPIPageFacade,

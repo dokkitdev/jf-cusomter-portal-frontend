@@ -28,6 +28,11 @@
         {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_RESPONSE_TYPE' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell kpi-cost">
+      <header-sort [orderBy]="jobSortField.COST_CENTER" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_COST_CENTRE' | translate }}
+      </header-sort>
+    </div>
     <div class="table-cell kpi-address">
       <header-sort [orderBy]="jobSortField.SITE_ADDRESS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.KPI.ITEMS_HEADER.TEXT_SITE_ADDRESS' | translate }}

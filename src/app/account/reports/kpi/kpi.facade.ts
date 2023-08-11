@@ -22,6 +22,7 @@ import {
   FormGroupState,
   setValue,
   SetValueAction,
+  unbox,
   updateGroup
 } from 'ngrx-forms';
 import { Observable } from 'rxjs';
@@ -71,6 +72,7 @@ export class AccountReportsKPIPageFacade {
       orderBy: state.orderBy,
       desc: state.desc,
       uprn: state.filterFormState.value.uprn,
+      costCenterName: unbox(state.filterFormState.value.costCenterName),
       archived: state.filterFormState.value.archived,
       dateCreatedFrom: state.filterFormState.value.dateCreatedFrom,
       dateCreatedTo: state.filterFormState.value.dateCreatedTo
@@ -95,6 +97,7 @@ export class AccountReportsKPIPageFacade {
       .pipe(
         map((filterFormStateValue) => new JobFilters({
           uprn: filterFormStateValue.uprn || undefined,
+          costCenterName: (unbox(filterFormStateValue.costCenterName).length) ? unbox(filterFormStateValue.costCenterName) : undefined,
           archived: filterFormStateValue.archived,
           stage: (filterFormStateValue.archived === undefined) ? [] : this.getArchivedFilterStages(filterFormStateValue.archived),
           dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
@@ -372,6 +375,7 @@ export class AccountReportsKPIPageFacade {
               orderBy,
               desc,
               uprn: filters.uprn,
+              costCenterName: filters.costCenterName,
               archived: filters.archived,
               dateCreatedFrom: filters.dateCreatedFrom || undefined,
               dateCreatedTo: filters.dateCreatedTo || undefined
