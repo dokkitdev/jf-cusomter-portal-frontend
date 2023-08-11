@@ -10,6 +10,11 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         name="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_SITE_UPRN' | translate }}">
       </filter-select-text>
+      <account-cost-center-multiselect
+        [controlState]="filterFormState.controls.costCenterName"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_COST_CENTRE' | translate }}">
+      </account-cost-center-multiselect>
       <existence-select
         [controlState]="filterFormState.controls.archived"
         [isPermanentlyShowPlaceholder]="true"
