@@ -6,6 +6,7 @@ export class AccountReportsKPIQueryParameters {
   public orderBy: JobSortField;
   public desc: boolean;
   public uprn: string;
+  public costCenterName: Array<string>;
   public archived: boolean | undefined;
   public dateCreatedFrom: string;
   public dateCreatedTo: string;

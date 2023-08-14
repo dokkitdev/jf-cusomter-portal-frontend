@@ -304,6 +304,7 @@
           "TEXT_ORDER_REF": "Order Ref",
           "TEXT_DESCRIPTION": "Description",
           "TEXT_RESPONSE_TYPE": "Response Type",
+          "TEXT_COST_CENTRE": "Cost Centre",
           "TEXT_SITE_ADDRESS": "Site Address",
           "TEXT_CALL_DATE": "Call Date",
           "TEXT_TARGET_DATE": "Target Date",
@@ -313,6 +314,7 @@
         "FILTERS": {
           "TEXT_SITE_UPRN": "Site UPRN",
           "TEXT_SITE_NAME": "Site Name",
+          "TEXT_COST_CENTRE": "Cost Centre",
           "TEXT_ARCHIVED": "Archived",
           "TEXT_ARCHIVED_YES": "Archived: Yes",
           "TEXT_ARCHIVED_NO": "Archived: No",
