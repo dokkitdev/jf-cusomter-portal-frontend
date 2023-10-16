@@ -19,6 +19,8 @@ export class JobFilters {
   public dateCreated?: string;
   public dateCreatedFrom?: string;
   public dateCreatedTo?: string;
+  public safeTimeFrom: string;
+  public safeTimeTo: string;
   public outOfHours?: boolean;
   public archived?: boolean;
   public isRepair?: boolean;

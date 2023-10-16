@@ -25,6 +25,7 @@ import { FileModule } from '@shared/file';
 import { ButtonModule } from '@shared/button';
 import { NotificationModule } from '@shared/notification';
 import { AccountCostCenterMultiselectModule } from '@app/account/shared/cost-center-multiselect';
+import { FormTimepickerModule } from '@shared/form-timepicker';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AccountCostCenterMultiselectModule } from '@app/account/shared/cost-cen
     TableContainerModule,
     FilterSelectTextModule,
     FormDatepickerModule,
+    FormTimepickerModule,
     FilterValuesModule,
     NgxPaginationModule,
     PaginationElementsModule,

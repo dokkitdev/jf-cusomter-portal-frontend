@@ -75,7 +75,9 @@ export class AccountReportsKPIPageFacade {
       costCenterName: unbox(state.filterFormState.value.costCenterName),
       archived: state.filterFormState.value.archived,
       dateCreatedFrom: state.filterFormState.value.dateCreatedFrom,
-      dateCreatedTo: state.filterFormState.value.dateCreatedTo
+      dateCreatedTo: state.filterFormState.value.dateCreatedTo,
+      safeTimeFrom: state.filterFormState.value.safeTimeFrom,
+      safeTimeTo: state.filterFormState.value.safeTimeTo
     }));
   }
 
@@ -102,7 +104,9 @@ export class AccountReportsKPIPageFacade {
           stage: (filterFormStateValue.archived === undefined) ? [] : this.getArchivedFilterStages(filterFormStateValue.archived),
           dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
           dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined,
-          isRepair: filterFormStateValue.isRepair
+          isRepair: filterFormStateValue.isRepair,
+          safeTimeFrom: (filterFormStateValue.safeTimeFrom) ? DateTime.fromISO(filterFormStateValue.safeTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
+          safeTimeTo: (filterFormStateValue.safeTimeTo) ? DateTime.fromISO(filterFormStateValue.safeTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
         }))
       );
   }
@@ -132,6 +136,12 @@ export class AccountReportsKPIPageFacade {
           id: formState.controls.dateCreatedTo.id,
           value: DateTime.fromISO(formState.value.dateCreatedTo).toFormat(configuration.dateFormats.filterDate)
         }));
+      }
+      if (formState.value.safeTimeFrom) {
+        filterValues.push(this.createFilterValue(formState.controls.safeTimeFrom));
+      }
+      if (formState.value.safeTimeTo) {
+        filterValues.push(this.createFilterValue(formState.controls.safeTimeTo));
       }
 
       return filterValues;
@@ -309,7 +319,9 @@ export class AccountReportsKPIPageFacade {
             uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
             archived: setValue((parameters.archived !== undefined) ? parameters.archived : state.filterFormState.value.archived),
             dateCreatedFrom: setValue(parameters.dateCreatedFrom || state.filterFormState.value.dateCreatedFrom),
-            dateCreatedTo: setValue(parameters.dateCreatedTo || state.filterFormState.value.dateCreatedTo)
+            dateCreatedTo: setValue(parameters.dateCreatedTo || state.filterFormState.value.dateCreatedTo),
+            safeTimeFrom: setValue(parameters.safeTimeFrom || state.filterFormState.value.safeTimeFrom),
+            safeTimeTo: setValue(parameters.safeTimeTo || state.filterFormState.value.safeTimeTo)
           }
         )
       })
@@ -378,7 +390,9 @@ export class AccountReportsKPIPageFacade {
               costCenterName: filters.costCenterName,
               archived: filters.archived,
               dateCreatedFrom: filters.dateCreatedFrom || undefined,
-              dateCreatedTo: filters.dateCreatedTo || undefined
+              dateCreatedTo: filters.dateCreatedTo || undefined,
+              safeTimeFrom: filters.safeTimeFrom || undefined,
+              safeTimeTo: filters.safeTimeTo || undefined
             }
           }));
 

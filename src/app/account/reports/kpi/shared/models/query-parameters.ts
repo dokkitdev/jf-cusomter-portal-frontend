@@ -10,6 +10,8 @@ export class AccountReportsKPIQueryParameters {
   public archived: boolean | undefined;
   public dateCreatedFrom: string;
   public dateCreatedTo: string;
+  public safeTimeFrom: string;
+  public safeTimeTo: string;
 
   constructor(model: Partial<AccountReportsKPIQueryParameters> = {}) {
     Object.assign(this, model);

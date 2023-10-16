@@ -319,7 +319,9 @@
           "TEXT_ARCHIVED_YES": "Archived: Yes",
           "TEXT_ARCHIVED_NO": "Archived: No",
           "TEXT_DATE_CREATED_FROM": "Date Created From",
-          "TEXT_DATE_CREATED_TO": "Date Created To"
+          "TEXT_DATE_CREATED_TO": "Date Created To",
+          "TEXT_SAFE_TIME_FROM": "Safe time from",
+          "TEXT_SAFE_TIME_TO": "Safe time to"
         }
       }
     },
