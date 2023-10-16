@@ -33,6 +33,16 @@
         (controlStateActionTriggered)="formActionTriggered($event)"
         placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_DATE_CREATED_TO' | translate }}">
       </form-datepicker>
+      <form-timepicker
+        [controlState]="filterFormState.controls.safeTimeFrom"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_SAFE_TIME_FROM' | translate }}">
+      </form-timepicker>
+      <form-timepicker
+      [controlState]="filterFormState.controls.safeTimeTo"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_SAFE_TIME_TO' | translate }}">
+    </form-timepicker>
     </form>
   </div>
   <filter-values
