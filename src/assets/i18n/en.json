@@ -13,6 +13,10 @@
         "TEXT_PASSWORD_IS_REQUIRED": "Please enter your password"
       }
     },
+    "LOGIN_CONFIRMATION": {
+      "TEXT_PAGE_TITLE": "Confirm your email",
+      "TEXT_MESSAGE": "Please enter the verification code that was sent to <b>{{ email }}</b>"
+    },
     "FORGOT_PASSWORD": {
       "TEXT_PAGE_TITLE": "Forgot Password",
       "TEXT_MESSAGE_1": "To recover your password,",

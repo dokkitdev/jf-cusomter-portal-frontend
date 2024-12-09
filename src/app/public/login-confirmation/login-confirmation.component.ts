@@ -1,0 +1,39 @@
+import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Actions, FormGroupState } from 'ngrx-forms';
+import { Observable } from 'rxjs';
+import { PublicLoginConfirmationPageForm } from './shared/forms';
+import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
+// import { PublicLoginPageForm } from './shared/forms';
+// import { PublicLoginPageFacade } from './login.facade';
+
+@Component({
+  selector: 'public-login-confirmation',
+  templateUrl: 'login-confirmation.html',
+  styleUrls: ['login-confirmation.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PublicLoginConfirmationPageComponent implements OnDestroy {
+  public formState$: Observable<
+    FormGroupState<PublicLoginConfirmationPageForm>
+  >;
+  public isSubmitting$: Observable<boolean>;
+  public isConfirmLoginFailed$: Observable<boolean>;
+
+  constructor(private facade: PublicLoginConfirmationPageFacade) {
+    this.formState$ = this.facade.formState$;
+    this.isSubmitting$ = this.facade.isSubmitting$;
+    this.isConfirmLoginFailed$ = this.facade.isConfirmLoginFailed$;
+  }
+
+  public ngOnDestroy(): void {
+    this.facade.resetState();
+  }
+
+  public formSubmitted(): void {
+    // this.facade.tryLogin();
+  }
+
+  public formActionTriggered(action: Actions<any>): void {
+    this.facade.handleFormStateAction(action);
+  }
+}
