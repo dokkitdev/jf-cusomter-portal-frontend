@@ -10,8 +10,6 @@ import { PublicLoginConfirmationPageForm } from './shared/forms';
 import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
 import IMask from 'imask';
 import { configuration } from '@configurations';
-// import { PublicLoginPageForm } from './shared/forms';
-// import { PublicLoginPageFacade } from './login.facade';
 
 @Component({
   selector: 'public-login-confirmation',
