@@ -14,11 +14,13 @@ import { PublicLoginConfirmationPageRoutingModule } from './login-confirmation.r
 import { PublicLoginConfirmationPageComponent } from './login-confirmation.component';
 import { PublicLoginConfirmationMessageComponent } from './shared/components/message/message.component';
 import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
+import { PublicLoginConfirmationRequestErrorComponent } from './shared/components/request-error/request-error.component';
 
 @NgModule({
   declarations: [
     PublicLoginConfirmationPageComponent,
     PublicLoginConfirmationMessageComponent,
+    PublicLoginConfirmationRequestErrorComponent,
   ],
   imports: [
     CommonModule,

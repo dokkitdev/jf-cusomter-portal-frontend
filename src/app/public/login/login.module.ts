@@ -12,14 +12,10 @@ import { ReactiveComponentModule } from '@ngrx/component';
 import { PublicLayoutModule } from '../shared/layout';
 import { RouteLinkModule } from '@shared/route-link';
 import { FormErrorModule } from '@shared/form-error';
-import { PublicLoginRequestErrorComponent } from './shared/components/request-error/request-error.component';
 import { ButtonModule } from '@shared/button';
 
 @NgModule({
-  declarations: [
-    PublicLoginPageComponent,
-    PublicLoginRequestErrorComponent
-  ],
+  declarations: [PublicLoginPageComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -31,11 +27,8 @@ import { ButtonModule } from '@shared/button';
     PublicLayoutModule,
     RouteLinkModule,
     FormErrorModule,
-    ButtonModule
+    ButtonModule,
   ],
-  providers: [
-    PublicLoginPageFacade,
-    ComponentStore
-  ]
+  providers: [PublicLoginPageFacade, ComponentStore],
 })
-export class PublicLoginPageModule { }
+export class PublicLoginPageModule {}

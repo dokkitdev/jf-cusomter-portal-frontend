@@ -9,9 +9,11 @@
     [ngrxFormState]="formState"
     (submit)="formSubmitted()"
     (ngrxFormsAction)="formActionTriggered($event)"
-    class="login-form"
+    class="login-confirmation-form"
   >
-    <login-request-error *ngIf="isLoginFailed$ | async"></login-request-error>
+    <login-confirmation-request-error
+      *ngIf="isConfirmLoginFailed$ | async"
+    ></login-confirmation-request-error>
     <form-text
       [controlState]="formState.controls.email"
       [validationMessages]="{
@@ -27,12 +29,13 @@
     </form-text>
     <form-text
       [controlState]="formState.controls.code"
+      [mask]="codeMask"
       [validationMessages]="{
-    required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_REQUIRED' | translate
+    required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_REQUIRED' | translate,
+    minLength: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_INVALID' | translate
   }"
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_CODE_PLACEHOLDER' | translate }}"
-      type="number"
     >
     </form-text>
     <form-text

@@ -8,6 +8,8 @@ import { Actions, FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { PublicLoginConfirmationPageForm } from './shared/forms';
 import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
+import IMask from 'imask';
+import { configuration } from '@configurations';
 // import { PublicLoginPageForm } from './shared/forms';
 // import { PublicLoginPageFacade } from './login.facade';
 
@@ -23,11 +25,13 @@ export class PublicLoginConfirmationPageComponent implements OnInit, OnDestroy {
   >;
   public isSubmitting$: Observable<boolean>;
   public isConfirmLoginFailed$: Observable<boolean>;
+  public codeMask: IMask.AnyMasked;
 
   constructor(private facade: PublicLoginConfirmationPageFacade) {
     this.formState$ = this.facade.formState$;
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isConfirmLoginFailed$ = this.facade.isConfirmLoginFailed$;
+    this.codeMask = configuration.masks.code;
   }
 
   public ngOnInit(): void {
@@ -39,7 +43,7 @@ export class PublicLoginConfirmationPageComponent implements OnInit, OnDestroy {
   }
 
   public formSubmitted(): void {
-    // this.facade.tryLogin();
+    this.facade.confirmLogin();
   }
 
   public formActionTriggered(action: Actions<any>): void {

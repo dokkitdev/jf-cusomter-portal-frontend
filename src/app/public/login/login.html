@@ -9,7 +9,6 @@
     (ngrxFormsAction)="formActionTriggered($event)"
     class="login-form"
   >
-    <login-request-error *ngIf="isLoginFailed$ | async"></login-request-error>
     <form-text
       [controlState]="formState.controls.email"
       [validationMessages]="{

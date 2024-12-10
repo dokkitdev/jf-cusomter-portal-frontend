@@ -17,7 +17,7 @@ import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';
 import { AuthResponse } from '@ronas-it/angular-common';
 import { AuthCredentials, AuthService } from '@shared/auth';
 import { Router } from '@angular/router';
-import { email, required } from 'ngrx-forms/validation';
+import { email, minLength, required } from 'ngrx-forms/validation';
 import { User } from '@shared/user';
 import { PublicLoginConfirmationPageForm } from './shared/forms';
 import { PublicLoginConfirmationPageState } from './login-confirmation.state';
@@ -63,7 +63,7 @@ export class PublicLoginConfirmationPageFacade {
     this.componentStore.setState(new PublicLoginConfirmationPageState());
   }
 
-  public tryConfirmLogin(): void {
+  public confirmLogin(): void {
     this.tryConfirmLogin$();
   }
 
@@ -86,7 +86,7 @@ export class PublicLoginConfirmationPageFacade {
       ...state,
       formState: updateGroup<PublicLoginConfirmationPageForm>(state.formState, {
         email: validate(required, email),
-        code: validate(required),
+        code: validate(required, minLength(6)),
         password: validate(required),
       }),
     }))();
@@ -104,7 +104,7 @@ export class PublicLoginConfirmationPageFacade {
       ...state,
       formState: disable(state.formState),
       isSubmitting: true,
-      isLoginFailed: false,
+      isConfirmLoginFailed: false,
     }))();
   }
 
@@ -113,7 +113,7 @@ export class PublicLoginConfirmationPageFacade {
       ...state,
       formState: enable(state.formState),
       isSubmitting: false,
-      isLoginFailed: true,
+      isConfirmLoginFailed: true,
     }))();
   }
 
@@ -134,7 +134,7 @@ export class PublicLoginConfirmationPageFacade {
             this.updateStateDueToStartLogin();
             const credentials = new AuthCredentials(formState.value);
 
-            return this.tryAuthorize(credentials);
+            return this.tryConfirmLogin(credentials);
           })
         )
     );
@@ -179,7 +179,7 @@ export class PublicLoginConfirmationPageFacade {
     );
   }
 
-  private tryAuthorize(
+  private tryConfirmLogin(
     credentials: AuthCredentials
   ): Observable<AuthResponse<User>> {
     return this.authService.signIn(credentials, true).pipe(
