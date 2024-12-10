@@ -79,6 +79,12 @@ export class JobPaginationRequest extends PaginationRequest {
   @Expose({ name: 'is_repair' })
   public isRepair?: boolean;
 
+  @Expose({ name: 'made_safe_time_from' })
+  public safeTimeFrom: string;
+
+  @Expose({ name: 'made_safe_time_to' })
+  public safeTimeTo: string;
+
   constructor(model: Partial<JobPaginationRequest> = {}) {
     super(model);
 

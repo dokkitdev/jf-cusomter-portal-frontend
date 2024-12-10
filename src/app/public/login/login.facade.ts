@@ -7,7 +7,7 @@ import {
   markAsSubmitted,
   MarkAsSubmittedAction,
   updateGroup,
-  validate
+  validate,
 } from 'ngrx-forms';
 import { PublicLoginPageForm } from './shared/forms';
 import { Injectable } from '@angular/core';
@@ -17,7 +17,7 @@ import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
 import { AuthCredentials, AuthResponse } from '@ronas-it/angular-common';
 import { AuthService } from '@shared/auth';
 import { Router } from '@angular/router';
-import { email, required } from 'ngrx-forms/validation';
+import { email as emailValidation, required } from 'ngrx-forms/validation';
 import { PublicLoginPageState } from './login.state';
 import { User } from '@shared/user';
 
@@ -66,86 +66,70 @@ export class PublicLoginPageFacade {
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<PublicLoginPageForm>(
-          state.formState,
-          {
-            email: validate(required, email),
-            password: validate(required)
-          }
-        )
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<PublicLoginPageForm>(state.formState, {
+        email: validate(required, emailValidation),
+      }),
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action),
+    }))();
   }
 
   private updateStateDueToStartLogin(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: disable(state.formState),
-        isSubmitting: true,
-        isLoginFailed: false
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: disable(state.formState),
+      isSubmitting: true,
+      isLoginFailed: false,
+    }))();
   }
 
   private updateStateDueToFailedLogin(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: enable(state.formState),
-        isSubmitting: false,
-        isLoginFailed: true
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: enable(state.formState),
+      isSubmitting: false,
+      isLoginFailed: true,
+    }))();
   }
 
   private markFormStateAsSubmitted(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: markAsSubmitted(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: markAsSubmitted(state.formState),
+    }))();
   }
 
   private registerTryLoginEffect(): void {
-    this.tryLoginEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
-      origin$.pipe(
-        withLatestFrom(
-          this.formState$
-        ),
-        filter(([_, formState]) => formState.isValid),
-        exhaustMap(([_, formState]) => {
-          this.updateStateDueToStartLogin();
+    this.tryLoginEffect$ = this.componentStore.effect(
+      (origin$: Observable<string>) =>
+        origin$.pipe(
+          withLatestFrom(this.formState$),
+          filter(([_, formState]) => formState.isValid),
+          exhaustMap(([_, formState]) => {
+            this.updateStateDueToStartLogin();
 
-          const credentials = new AuthCredentials(formState.value);
-
-          return this.tryAuthorize(credentials);
-        })
-      )
+            return this.tryAuthorize(formState.value.email);
+          })
+        )
     );
   }
 
-  private tryAuthorize(credentials: AuthCredentials): Observable<AuthResponse<User>> {
-    return this.authService
-      .authorize(credentials, true)
-      .pipe(
-        tapResponse(
-          () => this.router.navigate(['/account']),
-          () => this.updateStateDueToFailedLogin()
-        )
-      );
+  private tryAuthorize(email: string): Observable<void> {
+    return this.authService.sendAuthCode(email).pipe(
+      tapResponse(
+        () =>
+          this.router.navigate(['/login-confirmation'], {
+            queryParams: { email },
+          }),
+        () => this.updateStateDueToFailedLogin()
+      )
+    );
   }
 }

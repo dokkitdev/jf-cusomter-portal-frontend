@@ -7,17 +7,17 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
   imports: [
     CommonAuthModule.forRoot({
       ...configuration.api,
-      authService: AuthService
-    })
+      authService: AuthService,
+    }),
   ],
-  providers: [
-    AuthService
-  ]
+  providers: [AuthService],
 })
 export class AuthModule {
   constructor(@Optional() @SkipSelf() parentModule: AuthModule) {
     if (parentModule) {
-      throw new Error('AuthModule is already loaded. Import it in the AppModule only');
+      throw new Error(
+        'AuthModule is already loaded. Import it in the AppModule only'
+      );
     }
   }
 }

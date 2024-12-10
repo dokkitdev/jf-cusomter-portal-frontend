@@ -4,71 +4,84 @@
       *ngrxLet="filterFormState$; let filterFormState"
       [ngrxFormState]="filterFormState"
       (ngrxFormActions)="formActionTriggered($event)"
-      class="form">
+      class="form"
+    >
       <filter-select-text
         [controlState]="filterFormState.controls.jobID"
         [min]="1"
         (controlStateActionTriggered)="formActionTriggered($event)"
         type="number"
-        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ID' | translate }}">
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ID' | translate }}"
+      >
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.orderNo"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ORDER_NO' | translate }}">
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_ORDER_NO' | translate }}"
+      >
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.uprn"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_UPRN' | translate }}">
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_UPRN' | translate }}"
+      >
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.siteName"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_NAME' | translate }}">
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SITE_NAME' | translate }}"
+      >
       </filter-select-text>
       <filter-select-text
         [controlState]="filterFormState.controls.postalCode"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_POSTCODE' | translate }}">
+        name="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_POSTCODE' | translate }}"
+      >
       </filter-select-text>
       <account-cost-center-multiselect
         [controlState]="filterFormState.controls.costCenterName"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_COST_CENTRE' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_COST_CENTRE' | translate }}"
+      >
       </account-cost-center-multiselect>
       <account-job-stage-multiselect
         [controlState]="filterFormState.controls.stage"
         [isPermanentlyShowPlaceholder]="true"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_STAGE' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_STAGE' | translate }}"
+      >
       </account-job-stage-multiselect>
       <form-datepicker
         [controlState]="filterFormState.controls.appointmentFrom"
         [dateFilter]="getStartAppointmentDateFilter$ | async"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_APPOINTMENT_FROM' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_APPOINTMENT_FROM' | translate }}"
+      >
       </form-datepicker>
       <form-datepicker
         [controlState]="filterFormState.controls.appointmentTo"
         [dateFilter]="getEndAppointmentDateFilter$ | async"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_APPOINTMENT_TO' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_APPOINTMENT_TO' | translate }}"
+      >
       </form-datepicker>
       <form-timepicker
         [controlState]="filterFormState.controls.startTimeFrom"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SCHEDULED_AFTER' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SCHEDULED_AFTER' | translate }}"
+      >
       </form-timepicker>
       <form-timepicker
         [controlState]="filterFormState.controls.startTimeTo"
         (controlStateActionTriggered)="formActionTriggered($event)"
-        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SCHEDULED_BEFORE' | translate }}">
+        placeholder="{{ 'ACCOUNT.JOBS.FILTERS.TEXT_SCHEDULED_BEFORE' | translate }}"
+      >
       </form-timepicker>
     </form>
   </div>
   <filter-values
     [items]="filterValues$ | async"
-    (filterRemoved)="removeFilterClicked($event)">
+    (filterRemoved)="removeFilterClicked($event)"
+  >
   </filter-values>
 </div>

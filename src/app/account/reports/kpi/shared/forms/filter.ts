@@ -7,6 +7,8 @@ export class AccountReportsKPIFilterForm {
   public dateCreatedFrom: string;
   public dateCreatedTo: string;
   public isRepair: boolean;
+  public safeTimeFrom: string;
+  public safeTimeTo: string;
 
   constructor() {
     this.uprn = '';
@@ -15,5 +17,7 @@ export class AccountReportsKPIFilterForm {
     this.dateCreatedFrom = '';
     this.dateCreatedTo = '';
     this.isRepair = true;
+    this.safeTimeFrom = '';
+    this.safeTimeTo = '';
   }
 }
