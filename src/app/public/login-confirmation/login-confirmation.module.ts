@@ -1,11 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PublicLoginPageComponent } from './login.component';
-import { PublicLoginPageRoutingModule } from './login.routing';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormTextModule } from '@shared/form-text';
-import { PublicLoginPageFacade } from './login.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { ReactiveComponentModule } from '@ngrx/component';
@@ -13,14 +10,23 @@ import { PublicLayoutModule } from '../shared/layout';
 import { RouteLinkModule } from '@shared/route-link';
 import { FormErrorModule } from '@shared/form-error';
 import { ButtonModule } from '@shared/button';
+import { PublicLoginConfirmationPageRoutingModule } from './login-confirmation.routing';
+import { PublicLoginConfirmationPageComponent } from './login-confirmation.component';
+import { PublicLoginConfirmationMessageComponent } from './shared/components/message/message.component';
+import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
+import { PublicLoginConfirmationRequestErrorComponent } from './shared/components/request-error/request-error.component';
 
 @NgModule({
-  declarations: [PublicLoginPageComponent],
+  declarations: [
+    PublicLoginConfirmationPageComponent,
+    PublicLoginConfirmationMessageComponent,
+    PublicLoginConfirmationRequestErrorComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
     TranslateModule,
-    PublicLoginPageRoutingModule,
+    PublicLoginConfirmationPageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
     ReactiveComponentModule,
@@ -29,6 +35,6 @@ import { ButtonModule } from '@shared/button';
     FormErrorModule,
     ButtonModule,
   ],
-  providers: [PublicLoginPageFacade, ComponentStore],
+  providers: [PublicLoginConfirmationPageFacade, ComponentStore],
 })
-export class PublicLoginPageModule {}
+export class PublicLoginConfirmationPageModule {}

@@ -6,14 +6,12 @@ import { PublicForgotPasswordPageFacade } from './forgot-password.facade';
   selector: 'public-forgot-password-page',
   templateUrl: 'forgot-password.html',
   styleUrls: ['forgot-password.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PublicForgotPasswordPageComponent implements OnDestroy {
   public isRecoveryEmailSent$: Observable<boolean>;
 
-  constructor(
-    private facade: PublicForgotPasswordPageFacade
-  ) {
+  constructor(private facade: PublicForgotPasswordPageFacade) {
     this.isRecoveryEmailSent$ = this.facade.isRecoveryEmailSent$;
   }
 
