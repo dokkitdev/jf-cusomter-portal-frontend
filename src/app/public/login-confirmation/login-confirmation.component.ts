@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { PublicLoginConfirmationPageForm } from './shared/forms';
@@ -12,7 +17,7 @@ import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
   styleUrls: ['login-confirmation.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PublicLoginConfirmationPageComponent implements OnDestroy {
+export class PublicLoginConfirmationPageComponent implements OnInit, OnDestroy {
   public formState$: Observable<
     FormGroupState<PublicLoginConfirmationPageForm>
   >;
@@ -23,6 +28,10 @@ export class PublicLoginConfirmationPageComponent implements OnDestroy {
     this.formState$ = this.facade.formState$;
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isConfirmLoginFailed$ = this.facade.isConfirmLoginFailed$;
+  }
+
+  public ngOnInit(): void {
+    this.facade.fillFormByQueryParams();
   }
 
   public ngOnDestroy(): void {

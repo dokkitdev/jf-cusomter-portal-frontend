@@ -1,5 +1,5 @@
-<div class="confirmation-message">
+<div *ngrxLet="email$; let email" class="confirmation-message">
   <div
-    [innerHTML]="'PUBLIC.LOGIN_CONFIRMATION.TEXT_MESSAGE' | translate: { email: 'second@example.com' }"
+    [innerHTML]="'PUBLIC.LOGIN_CONFIRMATION.TEXT_MESSAGE' | translate: { email: email || '' }"
   ></div>
 </div>

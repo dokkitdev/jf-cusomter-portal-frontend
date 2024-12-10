@@ -1,7 +1,5 @@
 <div class="form-group">
-  <label *ngIf="label" class="form-label">
-    {{ label }}
-  </label>
+  <label *ngIf="label" class="form-label"> {{ label }} </label>
   <input
     [ngrxFormControlState]="controlState"
     [type]="type"
@@ -12,11 +10,15 @@
       'form-control-error': controlState.isSubmitted && controlState.isInvalid
     }"
     (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
-    class="form-control">
-  <div *ngIf="description" class="form-helper form-helper-info">{{ description }}</div>
+    class="form-control"
+  />
+  <div *ngIf="description" class="form-helper form-helper-info">
+    {{ description }}
+  </div>
   <validation-errors
     *ngIf="controlState.isSubmitted && controlState.isInvalid"
     [controlErrors]="controlState.errors"
-    [messages]="validationMessages">
+    [messages]="validationMessages"
+  >
   </validation-errors>
 </div>

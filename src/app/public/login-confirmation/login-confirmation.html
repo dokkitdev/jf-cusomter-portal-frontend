@@ -3,4 +3,58 @@
   page="login-confirmation"
 >
   <login-confirmation-message></login-confirmation-message>
+
+  <form
+    *ngrxLet="formState$; let formState"
+    [ngrxFormState]="formState"
+    (submit)="formSubmitted()"
+    (ngrxFormsAction)="formActionTriggered($event)"
+    class="login-form"
+  >
+    <login-request-error *ngIf="isLoginFailed$ | async"></login-request-error>
+    <form-text
+      [controlState]="formState.controls.email"
+      [validationMessages]="{
+      required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
+      email: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+    }"
+      [disabled]="true"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_EMAIL_PLACEHOLDER' | translate }}"
+      type="email"
+      autocomplete="email"
+    >
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.code"
+      [validationMessages]="{
+    required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_REQUIRED' | translate
+  }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_CODE_PLACEHOLDER' | translate }}"
+      type="number"
+    >
+    </form-text>
+    <form-text
+      [controlState]="formState.controls.password"
+      [validationMessages]="{
+      required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate
+    }"
+      (controlStateActionTriggered)="formActionTriggered($event)"
+      placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_PASSWORD_PLACEHOLDER' | translate }}"
+      type="password"
+      autocomplete="current-password"
+    >
+    </form-text>
+    <btn [isBlock]="true" [isLoading]="isSubmitting$ | async" type="submit">
+      {{ 'PUBLIC.LOGIN_CONFIRMATION.BUTTON_SIGN_IN' | translate }}
+    </btn>
+  </form>
+  <div class="auth-actions">
+    <route-link
+      route="/forgot-password"
+      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_FORGOT_PASSWORD' | translate }}"
+    >
+    </route-link>
+  </div>
 </public-layout>

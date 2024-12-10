@@ -13,12 +13,12 @@ import { ButtonModule } from '@shared/button';
 import { PublicLoginConfirmationPageRoutingModule } from './login-confirmation.routing';
 import { PublicLoginConfirmationPageComponent } from './login-confirmation.component';
 import { PublicLoginConfirmationMessageComponent } from './shared/components/message/message.component';
+import { PublicLoginConfirmationPageFacade } from './login-confirmation.facade';
 
 @NgModule({
   declarations: [
     PublicLoginConfirmationPageComponent,
     PublicLoginConfirmationMessageComponent,
-    // PublicLoginRequestErrorComponent
   ],
   imports: [
     CommonModule,
@@ -33,9 +33,6 @@ import { PublicLoginConfirmationMessageComponent } from './shared/components/mes
     FormErrorModule,
     ButtonModule,
   ],
-  providers: [
-    // PublicLoginPageFacade,
-    ComponentStore,
-  ],
+  providers: [PublicLoginConfirmationPageFacade, ComponentStore],
 })
 export class PublicLoginConfirmationPageModule {}
