@@ -21,25 +21,8 @@
       autocomplete="email"
     >
     </form-text>
-    <!-- <form-text
-      [controlState]="formState.controls.password"
-      [validationMessages]="{
-        required: 'PUBLIC.LOGIN.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate
-      }"
-      (controlStateActionTriggered)="formActionTriggered($event)"
-      placeholder="{{ 'PUBLIC.LOGIN.TEXT_PASSWORD_PLACEHOLDER' | translate }}"
-      type="password"
-      autocomplete="current-password">
-    </form-text> -->
     <btn [isBlock]="true" [isLoading]="isSubmitting$ | async" type="submit">
       {{ 'PUBLIC.LOGIN.BUTTON_SEND_CODE' | translate }}
     </btn>
   </form>
-  <!-- <div class="auth-actions">
-    <route-link
-      route="/forgot-password"
-      title="{{ 'PUBLIC.LOGIN.LINK_FORGOT_PASSWORD' | translate }}"
-    >
-    </route-link>
-  </div> -->
 </public-layout>

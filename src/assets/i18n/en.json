@@ -4,7 +4,6 @@
       "TEXT_PAGE_TITLE": "Sign In",
       "TEXT_EMAIL_PLACEHOLDER": "Email address",
       "TEXT_PASSWORD_PLACEHOLDER": "Password",
-      "LINK_FORGOT_PASSWORD": "Forgot password",
       "BUTTON_SEND_CODE": "Send verification code",
       "ERRORS": {
         "TEXT_EMAIL_IS_REQUIRED": "Please enter your email",
@@ -18,9 +17,10 @@
       "TEXT_CODE_PLACEHOLDER": "Code",
       "TEXT_PASSWORD_PLACEHOLDER": "Password",
       "LINK_FORGOT_PASSWORD": "Forgot password",
+      "LINK_BACK": "Back",
       "BUTTON_SIGN_IN": "Sign in",
       "ERRORS": {
-        "TEXT_INCORRECT_CREDENTIALS": "Authorization failed. Please check your email, password and code are correct.",
+        "TEXT_INCORRECT_CREDENTIALS": "Authorization failed. Please check your email, password and code and try again.",
         "TEXT_EMAIL_IS_REQUIRED": "Please enter your email",
         "TEXT_EMAIL_IS_INVALID": "Email is invalid",
         "TEXT_CODE_IS_REQUIRED": "Please enter the verification code",

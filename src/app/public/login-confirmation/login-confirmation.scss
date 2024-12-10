@@ -1,12 +1,6 @@
 @import "vars";
 
 :host ::ng-deep .confirmation {
-  &-message {
-    margin-bottom: 24px;
-    line-height: 22px;
-    text-align: center;
-  }
-  .form-errors {
-    margin-top: -24px;
-  }
+  &-message {margin-bottom: 24px; line-height: 22px; text-align: center;}
+  .form-errors {margin-top: -24px;}
 }

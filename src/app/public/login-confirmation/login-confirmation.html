@@ -60,4 +60,16 @@
     >
     </route-link>
   </div>
+  <div class="auth-actions">
+    <route-link
+      [hasIcon]="true"
+      route="/login"
+      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_BACK' | translate }}"
+    >
+      <span
+        ngProjectAs="route-icon"
+        class="icon icon-arrow-left icon-mask"
+      ></span>
+    </route-link>
+  </div>
 </public-layout>
