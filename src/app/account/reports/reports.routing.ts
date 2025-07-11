@@ -5,9 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: AccountReportsPageComponent,
     pathMatch: 'full',
-    redirectTo: 'service-control'
+    redirectTo: 'logs'
+  },
+  {
+    path: 'logs',
+    component: AccountReportsPageComponent
   },
   {
     path: 'service-control',

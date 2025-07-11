@@ -80,6 +80,7 @@
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
+      "LINK_REPORTS_LOGS": "Logs",
       "LINK_ADMIN_DOCUMENTS": "Documents",
       "LINK_LOGOUT": "Logout",
       "DIALOG_LOGOUT": {
@@ -273,6 +274,19 @@
       }
     },
     "REPORTS": {
+      "TEXT_PAGE_TITLE": "Report logs",
+      "LINK_DOWNLOAD": "Download",
+      "ITEMS_HEADER": {
+        "TEXT_DATE": "Date",
+        "TEXT_TYPE": "Report Type",
+        "TEXT_FILENAME": "Filename",
+        "TEXT_ACTIONS": "Actions"
+      },
+      "FILTERS": {
+        "TEXT_DATE": "Date",
+        "TEXT_TYPE": "Type",
+        "TEXT_FILENAME": "Filename"
+      },
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
         "LINK_CSV": "CSV",
@@ -640,6 +654,11 @@
       "TEXT_COMPLETE": "Complete",
       "TEXT_ARCHIVED": "Archived",
       "TEXT_INVOICED": "Invoiced"
+    },
+    "REPORT_TYPE": {
+      "TEXT_ASSET": "Asset",
+      "TEXT_WIREHOUSE": "Wirehouse",
+      "TEXT_ZERO": "Zero"
     },
     "CP12_STATUS": {
       "TEXT_ON_TIME": "On Time",

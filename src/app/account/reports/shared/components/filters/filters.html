@@ -1,0 +1,30 @@
+<div class="reports-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <form-datepicker
+        [controlState]="filterFormState.controls.createdAt"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.FILTERS.TEXT_DATE' | translate }}">
+      </form-datepicker>
+      <account-report-type-multiselect
+        [controlState]="filterFormState.controls.type"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.FILTERS.TEXT_TYPE' | translate }}">
+      </account-report-type-multiselect>
+      <filter-select-text
+        [controlState]="filterFormState.controls.title"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        name="{{ 'ACCOUNT.REPORTS.FILTERS.TEXT_FILENAME' | translate }}">
+      </filter-select-text>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>

@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
+import { AccountReportsPageFacade } from './reports.facade';
 
 @Component({
   selector: 'account-reports-page',
@@ -6,4 +7,16 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['reports.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountReportsPageComponent {}
+export class AccountReportsPageComponent implements OnInit, OnDestroy {
+  constructor(
+    private facade: AccountReportsPageFacade
+  ) { }
+
+  public ngOnInit(): void {
+    this.facade.loadItems();
+  }
+
+  public ngOnDestroy(): void {
+    this.facade.resetState();
+  }
+}

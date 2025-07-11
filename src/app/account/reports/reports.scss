@@ -1,1 +1,9 @@
-:host .reports-page {}
+:host ::ng-deep .reports {
+  &-date {flex: 1 1 160px; min-width: 160px;}
+  &-type {flex: 5 1 200px; min-width: 200px;}
+  &-filename {flex: 0 0 140px; min-width: 140px;}
+  &-actions {flex: 0 0 120px; min-width: 120px;}
+  &-filters {margin-bottom: 28px;
+    .form-group {margin-bottom: 4px;}
+  }
+}
