@@ -1,0 +1,36 @@
+<form
+  *ngrxLet="formState$; let formState"
+  [ngrxFormState]="formState"
+  (submit)="formSubmitted()"
+  (ngrxFormsAction)="formActionTriggered($event)"
+  class="form">
+  <h5>{{ 'ACCOUNT.REPORTS.WAREHOUSE.TEXT_LABEL' | translate }}</h5>
+  <div class="form-group form-radio-group warehouse-group">
+    <form-radio
+      [controlState]="formState.controls.period"
+      [value]="1"
+      (controlStateActionTriggered)="formActionTriggered($event)">
+      {{ 'ACCOUNT.REPORTS.WAREHOUSE.TEXT_ONE_DAY' | translate }}
+    </form-radio>
+    <form-radio
+      [controlState]="formState.controls.period"
+      [value]="3"
+      (controlStateActionTriggered)="formActionTriggered($event)">
+      {{ 'ACCOUNT.REPORTS.WAREHOUSE.TEXT_THREE_DAYS' | translate }}
+    </form-radio>
+    <form-radio
+      [controlState]="formState.controls.period"
+      [value]="5"
+      (controlStateActionTriggered)="formActionTriggered($event)">
+      {{ 'ACCOUNT.REPORTS.WAREHOUSE.TEXT_FOUR_DAYS' | translate }}
+    </form-radio>
+  </div>
+  <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="page-buttons">
+    <btn
+      [isLoading]="isSendingRequest"
+      [isDisabled]="formState.isDisabled"
+      type="submit">
+      {{ 'ACCOUNT.REPORTS.WAREHOUSE.BUTTON_SUBMIT' | translate }}
+    </btn>
+  </div>
+</form>

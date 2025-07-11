@@ -77,6 +77,7 @@
       "LINK_REPORTS": "Reports",
       "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
       "LINK_REPORTS_KPI": "Repair Response",
+      "LINK_REPORTS_WAREHOUSE": "Warehouse",
       "LINK_DOCUMENTS": "Documents",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
@@ -337,6 +338,17 @@
           "TEXT_DATE_CREATED_TO": "Date Created To",
           "TEXT_SAFE_TIME_FROM": "Safe time from",
           "TEXT_SAFE_TIME_TO": "Safe time to"
+        }
+      },
+      "WAREHOUSE": {
+        "TEXT_PAGE_TITLE": "Warehouse Report",
+        "TEXT_LABEL": "Select time period:",
+        "TEXT_ONE_DAY": "One day",
+        "TEXT_THREE_DAYS": "Three days",
+        "TEXT_FOUR_DAYS": "Four days",
+        "BUTTON_SUBMIT": "Generate warehouse report",
+        "NOTIFICATIONS": {
+          "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!"
         }
       }
     },
