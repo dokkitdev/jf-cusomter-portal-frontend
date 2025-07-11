@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
-import { Report, ReportFilters, ReportRelationType, ReportSortField } from '@shared/report';
+import { Report, ReportFilters, ReportRelationType, ReportSortField, ReportService } from '@shared/report';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountReportsQueryParameters } from './shared/models';
 import { PaginationResponse } from '@shared/pagination';
@@ -15,7 +15,6 @@ import { AccountReportsFilterForm } from './shared/forms';
 import { FilterValue } from '@shared/filter-values';
 import { DateTime } from 'luxon';
 import { configuration } from '@configurations';
-import { ReportService } from '@shared/report';
 import { AccountReportsPageState } from './reports.state';
 import { castArray } from 'lodash';
 
