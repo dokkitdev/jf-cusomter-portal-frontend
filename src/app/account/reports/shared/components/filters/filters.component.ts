@@ -13,14 +13,12 @@ import { AccountReportsFilterForm } from '@app/account/reports/shared/forms';
 export class AccountReportsFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountReportsFilterForm>>;
   public filterValues$: Observable<Array<FilterValue>>;
-  public getCreatedAtFilter$: Observable<(date: Date) => boolean>;
 
   constructor(
     private facade: AccountReportsPageFacade
   ) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
-    this.getCreatedAtFilter$ = this.facade.getCreatedAtFilter$();
   }
 
   public formActionTriggered(action: Actions<any>): void {

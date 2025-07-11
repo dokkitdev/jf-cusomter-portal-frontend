@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
-import { Report, ReportFilters, ReportRelationType, ReportSortField, ReportType } from '@shared/report';
+import { Report, ReportFilters, ReportRelationType, ReportSortField } from '@shared/report';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { AccountReportsQueryParameters } from './shared/models';
 import { PaginationResponse } from '@shared/pagination';
@@ -15,7 +15,6 @@ import { AccountReportsFilterForm } from './shared/forms';
 import { FilterValue } from '@shared/filter-values';
 import { DateTime } from 'luxon';
 import { configuration } from '@configurations';
-import { getEndDateFilter, getStartDateFilter } from '@shared/form-datepicker';
 import { ReportService } from '@shared/report';
 import { AccountReportsPageState } from './reports.state';
 import { castArray } from 'lodash';
@@ -163,15 +162,6 @@ export class AccountReportsPageFacade {
 
   public removeFilter(filter: FilterValue): void {
     this.handleFormStateAction(new SetValueAction(filter.id, undefined));
-  }
-
-  //TODO: limit date to today
-  public getCreatedAtFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.createdAt))
-      );
   }
 
   private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
