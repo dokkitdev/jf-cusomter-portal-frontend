@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@shared/notification';
 import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
-import { EMPTY, exhaustMap, filter, Observable, withLatestFrom } from 'rxjs';
+import { filter, Observable, tap, withLatestFrom } from 'rxjs';
 import { AccountReportsWarehousePageState } from './warehouse.state';
 import { AccountReportsWarehousePageForm } from './shared/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -85,13 +85,15 @@ export class AccountReportsWarehousePageFacade {
           this.formState$
         ),
         filter(([_, formState]) => formState.isValid),
-        exhaustMap(([_, { value }]) => {
-          this.updateIsSendingRequest(true);
-          this.toggleDisablingForm(true);
+        tap(() => this.notificationService.error(
+          this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION')
+        ))
+        // exhaustMap(([_, { value }]) => {
+        //   this.updateIsSendingRequest(true);
+        //   this.toggleDisablingForm(true);
 
-          return EMPTY;
-          // return this.tryToGenerateReport(value.period);
-        })
+        //   return this.tryToGenerateReport(value.period);
+        // })
       )
     );
   }
