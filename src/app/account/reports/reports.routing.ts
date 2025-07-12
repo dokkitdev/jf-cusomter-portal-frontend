@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'repair-response',
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
+  },
+  {
+    path: 'warehouse',
+    loadChildren: () => import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
   }
 ];
 
