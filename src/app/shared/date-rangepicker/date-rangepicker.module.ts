@@ -9,12 +9,10 @@ import { ComponentStore } from '@ngrx/component-store';
 import { DateRangepickerFacade } from './date-rangepicker.facade';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DateRangepickerDirective } from './date-rangepicker.directive';
 import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [
-    DateRangepickerDirective,
     DateRangepickerComponent
   ],
   imports: [
