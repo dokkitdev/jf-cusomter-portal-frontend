@@ -1,0 +1,67 @@
+<div class="date-rangepicker">
+  <ng-container *ngrxLet="isOpened$; let isOpened">
+    <div
+      *ngrxLet="positionY$; let positionY"
+      [ngClass]="{
+        opened: isOpened,
+        'opened-below': isOpened && positionY === 'below',
+        'opened-above': isOpened && positionY === 'above'
+      }"
+      class="form-group form-group-datepicker">
+      <label
+        *ngIf="label"
+        [for]="startDateControlState.id"
+        [ngClass]="{ required: isRequired }"
+        class="form-group-label">
+        {{ label }}
+      </label>
+      <div class="dropdown custom-select">
+        <a (click)="picker.open()">
+          <mat-date-range-input
+            [rangePicker]="picker"
+            [disabled]="isDisabled"
+            (positionYChanged)="positionYChanged($event)"
+            datepickerPositionY
+            class="form-control">
+            <input
+              [ngrxFormControlState]="startDateControlState"
+              [ngrxValueConverter]="dateValueConverter"
+              [placeholder]="placeholder || ''"
+              [ngClass]="{
+                'form-control-error': startDateControlState.isSubmitted && startDateControlState.isInvalid
+              }"
+              (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+              readonly
+              matStartDate />
+            <input
+              [ngrxFormControlState]="endDateControlState"
+              [ngrxValueConverter]="dateValueConverter"
+              [ngClass]="{
+                'form-control-error': endDateControlState.isSubmitted && endDateControlState.isInvalid
+              }"
+              (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
+              readonly
+              matEndDate />
+          </mat-date-range-input>
+          <span class="form-group-daterangepicker-icon icon icon-calendar"></span>
+        </a>
+        <mat-date-range-picker
+          #picker
+          (closed)="datePickerClosed()"
+          (opened)="datePickerOpened()"
+          [xPosition]="xPosition">
+        </mat-date-range-picker>
+      </div>
+      <validation-errors
+        *ngIf="startDateControlState.isSubmitted && startDateControlState.isInvalid"
+        [controlErrors]="startDateControlState.errors"
+        [messages]="validationMessages">
+      </validation-errors>
+      <validation-errors
+        *ngIf="endDateControlState.isSubmitted && endDateControlState.isInvalid"
+        [controlErrors]="endDateControlState.errors"
+        [messages]="validationMessages">
+      </validation-errors>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,19 @@
+@import 'vars';
+
+:host ::ng-deep .date-rangepicker {margin-bottom: 32px;
+  .mat-date-range-input {font-size: 1rem;
+    input {cursor: pointer;}
+  }
+  .form-group {margin-bottom: 0;
+    &-datepicker {
+      &.opened {
+        &-below {
+          .form-control {border-bottom-color: $primary !important; border-radius: 3px;}
+        }
+        &-above {
+          .form-control {border-top-color: $primary !important; border-radius: 3px;}
+        }
+      }
+    }
+  }
+}

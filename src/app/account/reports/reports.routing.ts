@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'repair-response',
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
+  },
+  {
+    path: 'zero',
+    loadChildren: () => import('./zero/zero.module').then((module) => module.AccountReportsZeroPageModule)
   }
 ];
 
