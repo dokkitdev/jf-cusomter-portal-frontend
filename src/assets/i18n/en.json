@@ -640,7 +640,7 @@
       "TEXT_HIDE": "Hide"
     },
     "NOTIFICATIONS": {
-      "TEXT_UNDER_CONSTRUCTION": "Sorry, t  his functionality is under construction",
+      "TEXT_UNDER_CONSTRUCTION": "Sorry, this functionality is under construction",
       "TEXT_ERROR": "Something went wrong. Please try again.",
       "TEXT_CSV_EXPORT_ERROR": "Too many records to export"
     },
