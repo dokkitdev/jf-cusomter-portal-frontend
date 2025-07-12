@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'warehouse',
     loadChildren: () => import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
+  },
+  {
+    path: 'zero',
+    loadChildren: () => import('./zero/zero.module').then((module) => module.AccountReportsZeroPageModule)
   }
 ];
 

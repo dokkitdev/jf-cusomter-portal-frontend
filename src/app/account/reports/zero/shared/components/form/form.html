@@ -1,0 +1,24 @@
+<form
+  *ngrxLet="formState$; let formState"
+  [ngrxFormState]="formState"
+  (submit)="formSubmitted()"
+  (ngrxFormsAction)="formActionTriggered($event)"
+  class="form">
+  <h5>{{ 'ACCOUNT.REPORTS.ZERO.TEXT_LABEL' | translate }}</h5>
+  <date-rangepicker
+    [startDateControlState]="formState.controls.periodDateFrom"
+    [endDateControlState]="formState.controls.periodDateTo"
+    [placeholder]="'ACCOUNT.REPORTS.ZERO.TEXT_PLACEHOLDER' | translate"
+    [isRequired]="false"
+    (controlStateActionTriggered)="formActionTriggered($event)">
+  </date-rangepicker>
+  <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="page-buttons">
+    <btn
+      [isLoading]="isSendingRequest"
+      [isDisabled]="formState.isDisabled"
+      [isBlock]="true"
+      type="submit">
+      {{ 'ACCOUNT.REPORTS.ZERO.BUTTON_SUBMIT' | translate }}
+    </btn>
+  </div>
+</form>
