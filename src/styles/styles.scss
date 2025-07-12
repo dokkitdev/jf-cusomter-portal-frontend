@@ -14,9 +14,10 @@ input, select, textarea, button {outline: none; font-family: $font; font-size: 1
 
 /* text */
 p {margin: 0 0 1rem 0; padding: 0;}
-h1, h2, h3, h4 {margin: 0 0 1rem 0; font-weight: bold; padding: 0;}
+h1, h2, h3, h4, h5{margin: 0 0 1rem 0; font-weight: bold; padding: 0;}
 h1 {font-size: $title;}
 h2 {font-size: $large;}
+h5 {font-size: $big; margin-bottom: 2rem;}
 
 /* links */
 a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer;

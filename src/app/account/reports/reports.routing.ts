@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
   },
   {
+    path: 'warehouse',
+    loadChildren: () => import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
+  },
+  {
     path: 'zero',
     loadChildren: () => import('./zero/zero.module').then((module) => module.AccountReportsZeroPageModule)
   }
