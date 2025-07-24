@@ -172,9 +172,10 @@
       }
     }
   },
-  "defaultProject": "jf-customer-portal-frontend",
   "cli": {
     "analytics": false,
-    "defaultCollection": "@ronas-it/angular-schematics"
+    "schematicCollections": [
+      "@ronas-it/angular-schematics"
+    ]
   }
 }
