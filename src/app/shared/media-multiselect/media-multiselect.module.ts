@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { MediaMultiselectFacade } from './media-multiselect.facade';
 import { TranslateModule } from '@ngx-translate/core';
 import { MediaModule } from '@shared/media';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MediaMultiselectItemComponent } from './components/item/item.component';
@@ -20,7 +20,7 @@ import { NgxFilesizeModule } from 'ngx-filesize';
     CommonModule,
     TranslateModule,
     MediaModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     NgxDropzoneModule,
     NgForTrackByPropertyModule,
     NgxFilesizeModule

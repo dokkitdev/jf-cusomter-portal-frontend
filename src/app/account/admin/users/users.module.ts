@@ -23,7 +23,7 @@ import { AccountAdminUsersItemComponent } from './shared/components/item/item.co
 import { AccountAdminUsersItemsComponent } from './shared/components/items/items.component';
 import { AccountAdminUsersFiltersComponent } from './shared/components/filters/filters.component';
 import { AccountAdminUsersItemsHeaderComponent } from './shared/components/items-header/items-header.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { AccountAdminUsersRoleComponent } from './shared/components/role/role.component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -47,7 +47,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FilterSelectTextModule,
     FilterValuesModule,
     AccountCustomerSelectModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     ButtonModule,
     TableContainerModule,
     NgForTrackByPropertyModule,

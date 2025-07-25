@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { AccountDialogJobRequestComponent } from './dialog-job-request.component';
 import { FormTextareaModule } from '@shared/form-textarea';
 import { TranslateModule } from '@ngx-translate/core';
@@ -20,7 +20,7 @@ import { FormTextModule } from '@shared/form-text';
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     FormTextModule,
     FormTextareaModule,
     MediaMultiselectModule,

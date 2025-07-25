@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountSitesPageFacade } from './sites.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { SiteModule } from '@shared/site';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -39,7 +39,7 @@ import { NotificationModule } from '@shared/notification';
     TranslateModule,
     AccountSitesPageRoutingModule,
     SiteModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,

@@ -9,7 +9,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { FormTextModule } from '@shared/form-text';
 import { AccountProfileFormComponent } from './shared/components/form/form.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { NotificationModule } from '@shared/notification';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ButtonModule } from '@shared/button';
@@ -26,7 +26,7 @@ import { ButtonModule } from '@shared/button';
     AccountProfilePageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule

@@ -11,7 +11,7 @@ import { CustomSelectOptionComponent } from './components/option/option.componen
 import { CustomSelectNotFoundComponent } from './components/not-found/not-found.component';
 import { CustomSelectTriggerComponent } from './components/trigger/trigger.component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { CustomSelectFilterComponent } from './components/filter/filter.component';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { CustomSelectFilterComponent } from './components/filter/filter.componen
     ValidationErrorsModule,
     InfiniteScrollModule,
     LoadingSpinnerModule,
-    ReactiveComponentModule
+    LetModule, PushModule
   ],
   declarations: [
     CustomSelectComponent,

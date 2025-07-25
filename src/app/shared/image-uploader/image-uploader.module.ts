@@ -6,7 +6,7 @@ import { ImageUploaderFacade } from './image-uploader.facade';
 import { TranslateModule } from '@ngx-translate/core';
 import { MediaModule } from '@shared/media';
 import { ProgressBarModule } from '@shared/progress-bar';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -24,7 +24,7 @@ import { NgxFilesizeModule } from 'ngx-filesize';
     NgrxFormsModule,
     MediaModule,
     ProgressBarModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     LoadingSpinnerModule,
     NgxDropzoneModule,
     ValidationErrorsModule,

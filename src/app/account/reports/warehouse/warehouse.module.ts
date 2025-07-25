@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountReportsWarehousePageFacade } from './warehouse.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsWarehouseFormComponent } from './shared/components/form/form.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { ButtonModule } from '@shared/button';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { NotificationModule } from '@shared/notification';
@@ -26,7 +26,7 @@ import { FormRadioModule } from '@shared/form-radio';
     AccountReportsWarehousePageRoutingModule,
     NgrxFormsModule,
     FormRadioModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule

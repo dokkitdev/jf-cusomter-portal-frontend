@@ -14,7 +14,7 @@ import { AccountDocumentsFiltersComponent } from './shared/components/filters/fi
 import { DocumentModule } from '@shared/document';
 import { MediaModule } from '@shared/media';
 import { FileModule } from '@shared/file';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -39,7 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DocumentModule,
     MediaModule,
     FileModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,

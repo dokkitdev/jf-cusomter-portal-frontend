@@ -5,7 +5,7 @@ import { AccountJobsViewPageRoutingModule } from './view.routing';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AccountJobsViewPageFacade } from './view.facade';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 import { JobModule } from '@shared/job';
 import { AccountJobsViewInfoComponent } from './shared/components/info/info.component';
 import { AccountJobsViewEngineersComponent } from './shared/components/engineers/engineers.component';
@@ -40,7 +40,7 @@ import { SectionModule } from '@shared/section';
     RouterModule,
     TranslateModule,
     AccountJobsViewPageRoutingModule,
-    ReactiveComponentModule,
+    LetModule, PushModule,
     JobModule,
     FileModule,
     LoadingSpinnerModule,

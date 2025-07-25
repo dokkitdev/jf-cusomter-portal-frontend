@@ -11,7 +11,7 @@ import { CustomMultiselectOptionComponent } from './components/option/option.com
 import { CustomMultiselectNotFoundComponent } from './components/not-found/not-found.component';
 import { CustomMultiselectTriggerComponent } from './components/trigger/trigger.component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule, PushModule } from '@ngrx/component';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { ReactiveComponentModule } from '@ngrx/component';
     ValidationErrorsModule,
     InfiniteScrollModule,
     LoadingSpinnerModule,
-    ReactiveComponentModule
+    LetModule, PushModule
   ],
   declarations: [
     CustomMultiselectComponent,
