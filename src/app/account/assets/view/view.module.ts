@@ -5,7 +5,7 @@ import { AccountAssetsViewPageRoutingModule } from './view.routing';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AccountAssetsViewPageFacade } from './view.facade';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { AssetModule } from '@shared/asset';
 import { FileModule } from '@shared/file';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
@@ -32,7 +32,7 @@ import { ComponentStore } from '@ngrx/component-store';
     RouterModule,
     TranslateModule,
     AccountAssetsViewPageRoutingModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     AssetModule,
     FileModule,
     LoadingSpinnerModule,

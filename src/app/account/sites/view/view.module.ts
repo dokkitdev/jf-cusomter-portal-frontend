@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AccountSitesViewPageFacade } from './view.facade';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { SiteModule } from '@shared/site';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ComponentStore } from '@ngrx/component-store';
@@ -34,7 +34,7 @@ import { AccountDialogJobRequestModule } from '@app/account/shared/dialog-job-re
     TranslateModule,
     NgrxFormsModule,
     AccountSitesViewPageRoutingModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     SiteModule,
     LoadingSpinnerModule,
     FormGroupModule,

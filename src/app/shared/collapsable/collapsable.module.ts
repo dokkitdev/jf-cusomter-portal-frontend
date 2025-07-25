@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { CollapsableComponent } from './collapsable.component';
 import { CollapsableDirective } from './collapsable.directive';
 
@@ -11,7 +11,7 @@ import { CollapsableDirective } from './collapsable.directive';
   ],
   imports: [
     CommonModule,
-    LetModule, PushModule
+    LetDirective, PushPipe
   ],
   exports: [
     CollapsableComponent

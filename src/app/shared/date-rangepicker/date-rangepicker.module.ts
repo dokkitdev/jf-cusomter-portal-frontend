@@ -9,7 +9,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { DateRangepickerFacade } from './date-rangepicker.facade';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { LetModule, PushModule } from '@ngrx/component';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    LetModule, PushModule
+    LetDirective, PushPipe
   ],
   providers: [
     DateRangepickerFacade,

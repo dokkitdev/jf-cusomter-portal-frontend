@@ -9,7 +9,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { PublicResetPasswordFormComponent } from './shared/components/form/form.component';
 import { PublicResetPasswordRequestErrorComponent } from './shared/components/request-error/request-error.component';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { FormTextModule } from '@shared/form-text';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { PublicLayoutModule } from '../shared/layout';
@@ -29,7 +29,7 @@ import { ButtonModule } from '@shared/button';
     TranslateModule,
     PublicResetPasswordPageRoutingModule,
     NgrxFormsModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     FormTextModule,
     LoadingSpinnerModule,
     PublicLayoutModule,

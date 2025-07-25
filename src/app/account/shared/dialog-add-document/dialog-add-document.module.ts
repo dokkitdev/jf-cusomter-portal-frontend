@@ -2,7 +2,7 @@ import { ButtonModule } from '@shared/button';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { AccountDialogAddDocumentComponent } from './dialog-add-document.component';
 import { FormTextModule } from '@shared/form-text';
@@ -21,7 +21,7 @@ import { ImageUploaderModule } from '@shared/image-uploader';
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     LoadingSpinnerModule,
     DocumentModule,
     FormTextModule,

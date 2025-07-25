@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountAssetTestsItemComponent } from './components/item/item.component';
 import { AccountAssetTestsItemsComponent } from './components/items/items.component';
 import { AccountAssetTestsItemsHeaderComponent } from './components/items-header/items-header.component';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -25,7 +25,7 @@ import { SnakeModule } from '@shared/snake';
     CommonModule,
     RouterModule,
     TranslateModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,

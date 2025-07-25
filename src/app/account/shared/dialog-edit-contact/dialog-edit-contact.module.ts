@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { AccountDialogEditContactComponent } from './dialog-edit-contact.component';
 import { FormTextModule } from '@shared/form-text';
@@ -20,7 +20,7 @@ import { ButtonModule } from '@shared/button';
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     LoadingSpinnerModule,
     FormTextModule,
     AccountCustomerSelectModule,

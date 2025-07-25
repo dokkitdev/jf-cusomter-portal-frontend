@@ -15,7 +15,7 @@ import { AccountAdminDocumentsHeaderComponent } from './shared/components/header
 import { DocumentModule } from '@shared/document';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { HeaderSortModule } from '@shared/header-sort';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { TableContainerModule } from '@shared/table-container';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { NotificationModule } from '@shared/notification';
@@ -41,7 +41,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DocumentModule,
     LoadingSpinnerModule,
     HeaderSortModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     TableContainerModule,
     NgForTrackByPropertyModule,
     NotificationModule,

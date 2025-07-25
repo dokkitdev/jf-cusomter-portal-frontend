@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FilterSelectTextComponent } from './filter-select-text.component';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { CustomSelectModule } from '@shared/custom-select';
 import { DropdownModule } from '@shared/dropdown';
 
@@ -12,7 +12,7 @@ import { DropdownModule } from '@shared/dropdown';
     NgrxFormsModule,
     DropdownModule,
     CustomSelectModule,
-    LetModule, PushModule
+    LetDirective, PushPipe
   ],
   declarations: [
     FilterSelectTextComponent

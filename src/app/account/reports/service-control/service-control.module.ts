@@ -22,7 +22,7 @@ import { AccountReportsServiceControlItemsHeaderComponent } from './shared/compo
 import { AccountReportsServiceControlHeaderComponent } from './shared/components/header/header.component';
 import { AccountReportsServiceControlFiltersComponent } from './shared/components/filters/filters.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { AssetModule } from '@shared/asset';
 import { ButtonModule } from '@shared/button';
 import { FileModule } from '@shared/file';
@@ -45,7 +45,7 @@ import { NotificationModule } from '@shared/notification';
     TableContainerModule,
     NgxPaginationModule,
     PaginationElementsModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     AssetModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AccountCustomersItemComponent } from './components/item/item.component';
 import { AccountCustomersItemAddComponent } from './components/item-add/item-add.component';
-import { LetModule, PushModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { AccountCustomerSelectModule } from '../customer-select';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     TranslateModule,
     NgrxFormsModule,
-    LetModule, PushModule,
+    LetDirective, PushPipe,
     NgForTrackByPropertyModule,
     AccountCustomerSelectModule
   ],

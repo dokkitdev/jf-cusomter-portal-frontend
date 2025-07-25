@@ -140,16 +140,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "jf-customer-portal-frontend:build:production"
+              "buildTarget": "jf-customer-portal-frontend:build:production"
             },
             "staging": {
-              "browserTarget": "jf-customer-portal-frontend:build:staging"
+              "buildTarget": "jf-customer-portal-frontend:build:staging"
             },
             "development": {
-              "browserTarget": "jf-customer-portal-frontend:build:development"
+              "buildTarget": "jf-customer-portal-frontend:build:development"
             },
             "local": {
-              "browserTarget": "jf-customer-portal-frontend:build:local"
+              "buildTarget": "jf-customer-portal-frontend:build:local"
             }
           },
           "defaultConfiguration": "development"
@@ -157,7 +157,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "jf-customer-portal-frontend:build"
+            "buildTarget": "jf-customer-portal-frontend:build"
           }
         },
         "lint": {
