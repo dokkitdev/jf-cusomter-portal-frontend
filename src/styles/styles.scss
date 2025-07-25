@@ -478,7 +478,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     z-index: 999; cursor: pointer;
   }
   .mat-mdc-form-field {max-width: 100%; --mdc-typography-body1-line-height: 20px;
-    --mdc-typography-body1-letter-spacing: 0;
+    --mdc-typography-body1-letter-spacing: 0; --mdc-filled-text-field-label-text-color: $primary-dark;
     &.mat-form-field-should-float .mat-form-field-label {opacity: 0;}
     .mat-mdc-form-field-bottom-align::before {display: none;}
     .mat-mdc-floating-label {top: 0; padding: 28px 22px 2px 10px; box-sizing: border-box; color: $primary-dark;
@@ -488,7 +488,7 @@ a {text-decoration: none; color: $primary; transition: all 0.6s; cursor: pointer
     &-infix {padding: 0 !important; font-family: $font; min-height: auto;
       .icon {position: absolute; top: 0; right: 0; margin: 9px; opacity: 0.6; pointer-events: none;}
     }
-    .mat-mdc-text-field-wrapper {padding: 0 !important; border-radius: 8px;}
+    .mat-mdc-text-field-wrapper {padding: 0 !important; border-radius: 8px; height: 25px;}
     .mdc-notched-outline, .mdc-line-ripple {display: none;}
   }
   .form-control {border: none; border-radius: 8px; padding: 13px 14px; background-color: $lighter-gray;

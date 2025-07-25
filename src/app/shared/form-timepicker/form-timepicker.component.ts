@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
-import { configuration } from '@configurations';
 import { ValidationMessages } from '@shared/validation-errors';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
-import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 
 @Component({
   selector: 'form-timepicker',
@@ -24,10 +22,7 @@ export class FormTimepickerComponent {
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<string>>;
 
-  public theme: NgxMaterialTimepickerTheme;
-
   constructor() {
     this.controlStateActionTriggered = new EventEmitter<Actions<string>>();
-    this.theme = configuration.timepickerTheme;
   }
 }

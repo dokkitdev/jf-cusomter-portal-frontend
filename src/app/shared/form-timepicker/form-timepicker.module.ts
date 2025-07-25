@@ -3,7 +3,7 @@ import { FormTimepickerComponent } from './form-timepicker.component';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { ValidationErrorsModule } from '@shared/validation-errors';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     CommonModule,
     NgrxFormsModule,
     ValidationErrorsModule,
-    NgxMaterialTimepickerModule
+    NgxMatTimepickerModule
   ],
   exports: [
     FormTimepickerComponent
