@@ -3,10 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountDialogViewAssetTestReadingsData } from './models';
 
 @Component({
-  selector: 'account-dialog-view-asset-test-readings',
-  templateUrl: 'dialog-view-asset-test-readings.html',
-  styleUrls: ['dialog-view-asset-test-readings.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-dialog-view-asset-test-readings',
+    templateUrl: 'dialog-view-asset-test-readings.html',
+    styleUrls: ['dialog-view-asset-test-readings.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDialogViewAssetTestReadingsComponent {
   constructor(

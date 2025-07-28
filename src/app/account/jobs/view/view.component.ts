@@ -5,10 +5,11 @@ import { Job } from '@shared/job';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 
 @Component({
-  selector: 'account-jobs-view-page',
-  templateUrl: 'view.html',
-  styleUrls: ['view.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-jobs-view-page',
+    templateUrl: 'view.html',
+    styleUrls: ['view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsViewPageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;

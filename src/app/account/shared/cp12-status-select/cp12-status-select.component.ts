@@ -6,14 +6,15 @@ import { ValidationMessages } from '@shared/validation-errors';
 import { CustomSelectOption } from '@shared/custom-select';
 
 @Component({
-  selector: 'account-cp12-status-select',
-  templateUrl: 'cp12-status-select.html',
-  styleUrls: ['cp12-status-select.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountCP12StatusSelectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-cp12-status-select',
+    templateUrl: 'cp12-status-select.html',
+    styleUrls: ['cp12-status-select.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountCP12StatusSelectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountCp12StatusSelectComponent {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

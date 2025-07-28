@@ -5,10 +5,11 @@ import { AccountReportsKPIPageFacade } from '../../../kpi.facade';
 import { AccountReportsKPIQueryParameters } from '../../models';
 
 @Component({
-  selector: 'reports-kpi-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reports-kpi-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsKPIItemsHeaderComponent {
   public parameters$: Observable<AccountReportsKPIQueryParameters>;

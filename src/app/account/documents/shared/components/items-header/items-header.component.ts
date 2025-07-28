@@ -5,10 +5,11 @@ import { AccountDocumentsPageFacade } from '../../../documents.facade';
 import { AccountDocumentsQueryParameters } from '../../models';
 
 @Component({
-  selector: 'documents-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'documents-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDocumentsItemsHeaderComponent {
   public parameters$: Observable<AccountDocumentsQueryParameters>;

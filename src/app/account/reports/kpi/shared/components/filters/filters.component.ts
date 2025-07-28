@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 import { AccountReportsKPIFilterForm } from '../../forms';
 
 @Component({
-  selector: 'reports-kpi-filters',
-  templateUrl: 'filters.html',
-  styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reports-kpi-filters',
+    templateUrl: 'filters.html',
+    styleUrls: ['filters.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsKPIFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountReportsKPIFilterForm>>;

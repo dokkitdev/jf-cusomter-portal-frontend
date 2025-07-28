@@ -3,10 +3,11 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { Asset } from '@shared/asset';
 
 @Component({
-  selector: 'reports-service-control-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reports-service-control-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsServiceControlItemComponent {
   @Input() item: Asset;

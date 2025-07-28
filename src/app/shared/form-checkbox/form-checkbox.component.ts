@@ -2,17 +2,18 @@ import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, EventEmi
 import { FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxCheckboxViewAdapter, Actions } from 'ngrx-forms';
 
 @Component({
-  selector: 'form-checkbox',
-  templateUrl: 'form-checkbox.html',
-  styleUrls: ['form-checkbox.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxCheckboxViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'form-checkbox',
+    templateUrl: 'form-checkbox.html',
+    styleUrls: ['form-checkbox.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxCheckboxViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class FormCheckboxComponent {
   @Input() controlState: FormControlState<boolean>;

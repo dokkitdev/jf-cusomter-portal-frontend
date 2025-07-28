@@ -16,19 +16,20 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { FileSizeConfigs } from '@shared/file-size';
 
 @Component({
-  selector: 'media-multiselect',
-  templateUrl: 'media-multiselect.html',
-  styleUrls: ['media-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    MediaMultiselectFacade,
-    ComponentStore,
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'media-multiselect',
+    templateUrl: 'media-multiselect.html',
+    styleUrls: ['media-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        MediaMultiselectFacade,
+        ComponentStore,
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class MediaMultiselectComponent implements OnDestroy {
   @Input() placeholder: string;

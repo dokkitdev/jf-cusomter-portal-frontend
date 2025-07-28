@@ -7,10 +7,11 @@ import { AccountReportsServiceControlFilterForm } from '../../forms';
 import { Site } from '@shared/site';
 
 @Component({
-  selector: 'reports-service-control-filters',
-  templateUrl: 'filters.html',
-  styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reports-service-control-filters',
+    templateUrl: 'filters.html',
+    styleUrls: ['filters.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsServiceControlFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountReportsServiceControlFilterForm>>;

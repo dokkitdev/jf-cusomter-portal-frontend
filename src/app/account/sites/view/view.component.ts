@@ -8,10 +8,11 @@ import { Contact } from '@shared/contact';
 import { Site } from '@shared/site';
 
 @Component({
-  selector: 'account-sites-view-page',
-  templateUrl: 'view.html',
-  styleUrls: ['view.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-sites-view-page',
+    templateUrl: 'view.html',
+    styleUrls: ['view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountSitesViewPageComponent implements OnInit, OnDestroy {
   public formState$: Observable<FormGroupState<AccountSiteViewEditForm>>;

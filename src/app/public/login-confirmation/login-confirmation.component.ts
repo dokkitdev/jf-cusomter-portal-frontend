@@ -12,10 +12,11 @@ import IMask from 'imask';
 import { configuration } from '@configurations';
 
 @Component({
-  selector: 'public-login-confirmation',
-  templateUrl: 'login-confirmation.html',
-  styleUrls: ['login-confirmation.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'public-login-confirmation',
+    templateUrl: 'login-confirmation.html',
+    styleUrls: ['login-confirmation.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicLoginConfirmationPageComponent implements OnInit, OnDestroy {
   public formState$: Observable<

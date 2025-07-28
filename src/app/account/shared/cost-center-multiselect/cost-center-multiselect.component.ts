@@ -15,19 +15,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-cost-center-multiselect',
-  templateUrl: 'cost-center-multiselect.html',
-  styleUrls: ['cost-center-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountCostCenterMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-cost-center-multiselect',
+    templateUrl: 'cost-center-multiselect.html',
+    styleUrls: ['cost-center-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountCostCenterMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountCostCenterMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

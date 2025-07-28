@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/
 import { AccountDocumentsPageFacade } from './documents.facade';
 
 @Component({
-  selector: 'account-documents-page',
-  templateUrl: 'documents.html',
-  styleUrls: ['documents.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-documents-page',
+    templateUrl: 'documents.html',
+    styleUrls: ['documents.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDocumentsPageComponent implements OnInit, OnDestroy {
   constructor(

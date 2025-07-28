@@ -7,19 +7,20 @@ import { AccountCustomAssetTypeMultiselectComponentFacade } from './custom-asset
 import { CustomSelectOption } from '@shared/custom-select';
 
 @Component({
-  selector: 'account-custom-asset-type-multiselect',
-  templateUrl: 'custom-asset-type-multiselect.html',
-  styleUrls: ['custom-asset-type-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountCustomAssetTypeMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-custom-asset-type-multiselect',
+    templateUrl: 'custom-asset-type-multiselect.html',
+    styleUrls: ['custom-asset-type-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountCustomAssetTypeMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountCustomAssetTypeMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

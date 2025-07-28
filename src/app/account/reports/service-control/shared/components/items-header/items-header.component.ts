@@ -5,10 +5,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AssetSortField } from '@shared/asset';
 
 @Component({
-  selector: 'reports-service-control-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reports-service-control-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsServiceControlItemsHeaderComponent {
   public parameters$: Observable<AccountReportsServiceControlQueryParameters>;

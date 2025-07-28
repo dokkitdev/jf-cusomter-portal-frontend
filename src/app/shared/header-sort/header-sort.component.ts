@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { HeaderSortParameters } from './models';
 
 @Component({
-  selector: 'header-sort',
-  templateUrl: 'header-sort.html',
-  styleUrls: ['header-sort.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'header-sort',
+    templateUrl: 'header-sort.html',
+    styleUrls: ['header-sort.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class HeaderSortComponent {
   @Input() orderBy: string;

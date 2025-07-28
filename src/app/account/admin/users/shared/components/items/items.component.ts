@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'admin-users-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'admin-users-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountAdminUsersItemsComponent {
   public items$: Observable<Array<User>>;

@@ -4,10 +4,11 @@ import { FormControlValueTypes } from 'ngrx-forms';
 import { once } from 'lodash';
 
 @Component({
-  selector: 'custom-select-trigger',
-  templateUrl: 'trigger.html',
-  styleUrls: ['trigger.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'custom-select-trigger',
+    templateUrl: 'trigger.html',
+    styleUrls: ['trigger.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CustomSelectTriggerComponent<T extends FormControlValueTypes, V> {
   @Input() customTemplate: TemplateRef<any>;

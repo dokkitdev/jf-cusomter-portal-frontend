@@ -3,10 +3,11 @@ import { PublicForgotPasswordPageFacade } from '@app/public/forgot-password/forg
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'forgot-password-message',
-  templateUrl: 'message.html',
-  styleUrls: ['message.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'forgot-password-message',
+    templateUrl: 'message.html',
+    styleUrls: ['message.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicForgotPasswordMessageComponent {
   public isRecoveryEmailSent$: Observable<boolean>;

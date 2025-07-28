@@ -5,10 +5,11 @@ import { PublicLoginPageForm } from './shared/forms';
 import { PublicLoginPageFacade } from './login.facade';
 
 @Component({
-  selector: 'public-login-page',
-  templateUrl: 'login.html',
-  styleUrls: ['login.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'public-login-page',
+    templateUrl: 'login.html',
+    styleUrls: ['login.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicLoginPageComponent implements OnDestroy {
   public formState$: Observable<FormGroupState<PublicLoginPageForm>>;

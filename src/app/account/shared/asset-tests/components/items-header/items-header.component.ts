@@ -5,10 +5,11 @@ import { AccountAssetTestsQueryParameters } from '../../models';
 import { AssetTestSortField } from '../../enums';
 
 @Component({
-  selector: 'asset-tests-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'asset-tests-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetTestsItemsHeaderComponent {
   public parameters$: Observable<AccountAssetTestsQueryParameters>;

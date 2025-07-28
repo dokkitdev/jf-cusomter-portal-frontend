@@ -5,10 +5,11 @@ import { DashboardStatistic } from '@shared/dashboard';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 
 @Component({
-  selector: 'dashboard-page',
-  templateUrl: 'dashboard.html',
-  styleUrls: ['dashboard.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'dashboard-page',
+    templateUrl: 'dashboard.html',
+    styleUrls: ['dashboard.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDashboardPageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;

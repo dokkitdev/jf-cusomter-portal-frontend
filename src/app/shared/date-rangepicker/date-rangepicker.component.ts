@@ -13,19 +13,20 @@ import { dateValueConverter } from '@shared/date-converter';
 import { DateRangepickerFacade } from './date-rangepicker.facade';
 
 @Component({
-  selector: 'date-rangepicker',
-  templateUrl: 'date-rangepicker.html',
-  styleUrls: ['date-rangepicker.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    DateRangepickerFacade,
-    ComponentStore,
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'date-rangepicker',
+    templateUrl: 'date-rangepicker.html',
+    styleUrls: ['date-rangepicker.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        DateRangepickerFacade,
+        ComponentStore,
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class DateRangepickerComponent {
   @Input() startDateControlState: FormControlState<string>;

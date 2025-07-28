@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
 import { AccountProfilePageForm } from '../../forms';
 
 @Component({
-  selector: 'account-profile-form',
-  templateUrl: 'form.html',
-  styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'account-profile-form',
+    templateUrl: 'form.html',
+    styleUrls: ['form.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountProfileFormComponent {
   public isSubmitting$: Observable<boolean>;

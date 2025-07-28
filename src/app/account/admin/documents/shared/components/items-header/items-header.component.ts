@@ -5,10 +5,11 @@ import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
 import { AccountAdminDocumentsQueryParameters } from '../../models';
 
 @Component({
-  selector: 'admin-documents-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'admin-documents-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAdminDocumentsItemsHeaderComponent {
   public parameters$: Observable<AccountAdminDocumentsQueryParameters>;

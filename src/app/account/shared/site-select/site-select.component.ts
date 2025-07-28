@@ -18,19 +18,20 @@ import { SiteIDField } from './types';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-site-select',
-  templateUrl: 'site-select.html',
-  styleUrls: ['site-select.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountSiteSelectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-site-select',
+    templateUrl: 'site-select.html',
+    styleUrls: ['site-select.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountSiteSelectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountSiteSelectComponent implements OnInit, OnDestroy {
   @Input()

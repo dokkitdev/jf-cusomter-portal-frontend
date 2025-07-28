@@ -7,10 +7,11 @@ import { Actions, FormGroupState } from 'ngrx-forms';
 import { FilterValue } from '@shared/filter-values';
 
 @Component({
-  selector: 'admin-users-filters',
-  templateUrl: 'filters.html',
-  styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'admin-users-filters',
+    templateUrl: 'filters.html',
+    styleUrls: ['filters.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAdminUsersFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountAdminUsersFilterForm>>;

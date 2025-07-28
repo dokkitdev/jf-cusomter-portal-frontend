@@ -5,10 +5,11 @@ import { AccountSiteContactsQueryParameters } from '../../models';
 import { SiteContactSortField } from '../../enums';
 
 @Component({
-  selector: 'account-site-contacts-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-site-contacts-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountSiteContactsItemsHeaderComponent {
   public parameters$: Observable<AccountSiteContactsQueryParameters>;

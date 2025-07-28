@@ -5,10 +5,11 @@ import { AccountReportsZeroPageFacade } from '@app/account/reports/zero/zero.fac
 import { AccountReportsZeroPageForm } from '../../forms';
 
 @Component({
-  selector: 'account-reports-zero-form',
-  templateUrl: 'form.html',
-  styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-reports-zero-form',
+    templateUrl: 'form.html',
+    styleUrls: ['form.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsZeroFormComponent {
   public isSendingRequest$: Observable<boolean>;

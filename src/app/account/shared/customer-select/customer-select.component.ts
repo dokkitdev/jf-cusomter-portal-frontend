@@ -17,19 +17,20 @@ import { Observable } from 'rxjs';
 import { ComponentStore } from '@ngrx/component-store';
 
 @Component({
-  selector: 'account-customer-select',
-  templateUrl: 'customer-select.html',
-  styleUrls: ['customer-select.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountCustomerSelectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-customer-select',
+    templateUrl: 'customer-select.html',
+    styleUrls: ['customer-select.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountCustomerSelectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   @Input()

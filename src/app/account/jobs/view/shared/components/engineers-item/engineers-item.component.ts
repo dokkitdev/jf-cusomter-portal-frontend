@@ -3,10 +3,11 @@ import { configuration } from '@configurations';
 import { JobSchedule } from '@shared/job';
 
 @Component({
-  selector: 'jobs-view-engineers-item',
-  templateUrl: 'engineers-item.html',
-  styleUrls: ['engineers-item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-view-engineers-item',
+    templateUrl: 'engineers-item.html',
+    styleUrls: ['engineers-item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsViewEngineersItemComponent {
   @Input() item: JobSchedule;

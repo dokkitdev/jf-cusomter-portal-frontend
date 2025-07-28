@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
 import { Media } from '@shared/media';
 
 @Component({
-  selector: 'media-multiselect-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'media-multiselect-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MediaMultiselectItemComponent {
   @Input() item: Media;

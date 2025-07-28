@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
 
 @Component({
-  selector: 'admin-documents-header',
-  templateUrl: 'header.html',
-  styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'admin-documents-header',
+    templateUrl: 'header.html',
+    styleUrls: ['header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAdminDocumentsHeaderComponent {
   constructor(

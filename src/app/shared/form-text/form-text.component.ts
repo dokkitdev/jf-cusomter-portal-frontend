@@ -4,17 +4,18 @@ import { ValidationMessages } from '@shared/validation-errors';
 import { FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER, Actions } from 'ngrx-forms';
 
 @Component({
-  selector: 'form-text',
-  templateUrl: 'form-text.html',
-  styleUrls: ['form-text.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'form-text',
+    templateUrl: 'form-text.html',
+    styleUrls: ['form-text.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class FormTextComponent {
   @Input() controlState: FormControlState<string>;

@@ -4,10 +4,11 @@ import { configuration } from '@configurations';
 import { JobWorkOrder } from '@shared/job';
 
 @Component({
-  selector: 'jobs-view-notes-item',
-  templateUrl: 'notes-item.html',
-  styleUrls: ['notes-item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-view-notes-item',
+    templateUrl: 'notes-item.html',
+    styleUrls: ['notes-item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsViewNotesItemComponent {
   @Input() item: JobWorkOrder;

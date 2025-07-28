@@ -13,19 +13,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'existence-select',
-  templateUrl: 'existence-select.html',
-  styleUrls: ['existence-select.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    ExistenceSelectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'existence-select',
+    templateUrl: 'existence-select.html',
+    styleUrls: ['existence-select.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        ExistenceSelectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class ExistenceSelectComponent {
   @Input() controlState: FormControlState<number>;

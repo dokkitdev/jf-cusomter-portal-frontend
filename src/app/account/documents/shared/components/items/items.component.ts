@@ -5,11 +5,12 @@ import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'documents-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'documents-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountDocumentsItemsComponent {
   public items$: Observable<Array<Document>>;

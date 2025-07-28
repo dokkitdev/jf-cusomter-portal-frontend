@@ -13,19 +13,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-job-stage-multiselect',
-  templateUrl: 'job-stage-multiselect.html',
-  styleUrls: ['job-stage-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountJobStageMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-job-stage-multiselect',
+    templateUrl: 'job-stage-multiselect.html',
+    styleUrls: ['job-stage-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountJobStageMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountJobStageMultiselectComponent {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

@@ -3,10 +3,11 @@ import { AssetAttachment } from '@shared/asset';
 import { AccountAssetsViewPageFacade } from '../../../view.facade';
 
 @Component({
-  selector: 'account-assets-view-attachments',
-  templateUrl: 'attachments.html',
-  styleUrls: ['attachments.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-assets-view-attachments',
+    templateUrl: 'attachments.html',
+    styleUrls: ['attachments.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetsViewAttachmentsComponent {
   @Input() items: Array<AssetAttachment>;

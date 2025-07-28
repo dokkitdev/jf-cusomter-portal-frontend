@@ -5,11 +5,12 @@ import { heightCollapseAnimation } from '@shared/animations';
 import { Contact } from '@shared/contact';
 
 @Component({
-  selector: 'account-site-contacts-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'account-site-contacts-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountSiteContactsItemsComponent {
   public items$: Observable<Array<Contact>>;

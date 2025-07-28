@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 import { AccountJobsFilterForm } from '../../forms';
 
 @Component({
-  selector: 'jobs-filters',
-  templateUrl: 'filters.html',
-  styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-filters',
+    templateUrl: 'filters.html',
+    styleUrls: ['filters.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountJobsFilterForm>>;

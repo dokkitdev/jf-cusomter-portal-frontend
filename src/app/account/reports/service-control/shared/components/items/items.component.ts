@@ -5,11 +5,12 @@ import { Asset } from '@shared/asset';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'reports-service-control-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'reports-service-control-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountReportsServiceControlItemsComponent {
   public items$: Observable<Array<Asset>>;

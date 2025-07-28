@@ -17,17 +17,18 @@ import {
 } from 'ngrx-forms';
 
 @Component({
-  selector: 'filter-select-text',
-  templateUrl: 'filter-select-text.html',
-  styleUrls: ['filter-select-text.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'filter-select-text',
+    templateUrl: 'filter-select-text.html',
+    styleUrls: ['filter-select-text.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class FilterSelectTextComponent<T extends FormControlValueTypes> {
   @ViewChild('control') controlElementRef: ElementRef;

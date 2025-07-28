@@ -3,10 +3,11 @@ import { JobAttachment } from '@shared/job';
 import { AccountJobsViewPageFacade } from '../../../view.facade';
 
 @Component({
-  selector: 'jobs-view-attachments',
-  templateUrl: 'attachments.html',
-  styleUrls: ['attachments.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-view-attachments',
+    templateUrl: 'attachments.html',
+    styleUrls: ['attachments.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsViewAttachmentsComponent {
   @Input() attachments: Array<JobAttachment>;

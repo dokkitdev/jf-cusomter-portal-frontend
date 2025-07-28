@@ -16,19 +16,20 @@ import { Observable } from 'rxjs';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-asset-service-level-multiselect',
-  templateUrl: 'asset-service-level-multiselect.html',
-  styleUrls: ['asset-service-level-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountAssetServiceLevelMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-asset-service-level-multiselect',
+    templateUrl: 'asset-service-level-multiselect.html',
+    styleUrls: ['asset-service-level-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountAssetServiceLevelMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAssetServiceLevelMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormArrayState<string>;

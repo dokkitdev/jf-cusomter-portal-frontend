@@ -12,7 +12,8 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[dropdown]'
+    selector: '[dropdown]',
+    standalone: false
 })
 export class DropdownDirective implements OnDestroy, AfterViewInit, AfterViewChecked {
   @Input() id: string;

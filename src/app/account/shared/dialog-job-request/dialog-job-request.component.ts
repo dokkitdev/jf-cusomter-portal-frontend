@@ -10,14 +10,15 @@ import { configuration } from '@configurations';
 import { AccountDialogJobRequestData } from './models';
 
 @Component({
-  selector: 'account-dialog-job-request',
-  templateUrl: 'dialog-job-request.html',
-  styleUrls: ['dialog-job-request.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountDialogJobRequestComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-dialog-job-request',
+    templateUrl: 'dialog-job-request.html',
+    styleUrls: ['dialog-job-request.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountDialogJobRequestComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountDialogJobRequestComponent implements OnInit, OnDestroy {
   public isSendingRequest$: Observable<boolean>;

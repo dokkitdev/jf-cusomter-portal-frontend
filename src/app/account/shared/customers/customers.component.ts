@@ -7,20 +7,21 @@ import { heightCollapseAnimation } from '@shared/animations';
 import { Actions, FormArrayState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 
 @Component({
-  selector: 'account-customers',
-  templateUrl: 'customers.html',
-  styleUrls: ['customers.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountCustomersComponentFacade,
-    ComponentStore,
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ],
-  animations: [heightCollapseAnimation]
+    selector: 'account-customers',
+    templateUrl: 'customers.html',
+    styleUrls: ['customers.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountCustomersComponentFacade,
+        ComponentStore,
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountCustomersComponent implements OnDestroy {
   @Input()

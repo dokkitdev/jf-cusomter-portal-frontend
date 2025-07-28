@@ -5,10 +5,11 @@ import { AccountJobsPageFacade } from '../../../jobs.facade';
 import { AccountJobsQueryParameters } from '../../models';
 
 @Component({
-  selector: 'jobs-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsItemsHeaderComponent {
   public parameters$: Observable<AccountJobsQueryParameters>;

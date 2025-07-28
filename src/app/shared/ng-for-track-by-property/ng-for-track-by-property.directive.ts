@@ -3,7 +3,8 @@ import { NgForOf } from '@angular/common';
 import { get } from 'lodash';
 
 @Directive({
-  selector: '[ngForTrackByProperty]',
+    selector: '[ngForTrackByProperty]',
+    standalone: false
 })
 export class NgForTrackByPropertyDirective<T> {
   @Input() public ngForTrackByProperty: keyof T;

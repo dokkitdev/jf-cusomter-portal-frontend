@@ -7,14 +7,15 @@ import { AccountAdminUsersItemComponentFacade } from './item.facade';
 import { configuration } from '@configurations';
 
 @Component({
-  selector: 'admin-users-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountAdminUsersItemComponentFacade,
-    ComponentStore
-  ]
+    selector: 'admin-users-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountAdminUsersItemComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAdminUsersItemComponent {
   @Input() item: User;

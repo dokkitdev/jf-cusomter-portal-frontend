@@ -3,10 +3,11 @@ import { PublicLoginConfirmationPageFacade } from '@app/public/login-confirmatio
 import { map, Observable } from 'rxjs';
 
 @Component({
-  selector: 'login-confirmation-message',
-  templateUrl: 'message.html',
-  styleUrls: ['message.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'login-confirmation-message',
+    templateUrl: 'message.html',
+    styleUrls: ['message.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicLoginConfirmationMessageComponent {
   public email$: Observable<string>;

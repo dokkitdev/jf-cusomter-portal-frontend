@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { PublicResetPasswordPageFacade } from './reset-password.facade';
 
 @Component({
-  selector: 'public-reset-password-page',
-  templateUrl: 'reset-password.html',
-  styleUrls: ['reset-password.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'public-reset-password-page',
+    templateUrl: 'reset-password.html',
+    styleUrls: ['reset-password.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicResetPasswordPageComponent implements OnInit, OnDestroy {
   public isNewUser$: Observable<boolean>;

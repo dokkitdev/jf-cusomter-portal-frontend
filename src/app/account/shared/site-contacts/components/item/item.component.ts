@@ -6,14 +6,15 @@ import { Observable, Subject } from 'rxjs';
 import { AccountSiteContactsItemComponentFacade } from './item.facade';
 
 @Component({
-  selector: 'account-site-contacts-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountSiteContactsItemComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-site-contacts-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountSiteContactsItemComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountSiteContactsItemComponent {
   @Input() item: Contact;

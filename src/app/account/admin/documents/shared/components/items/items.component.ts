@@ -5,11 +5,12 @@ import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'admin-documents-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'admin-documents-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountAdminDocumentsItemsComponent {
   public items$: Observable<Array<Document>>;

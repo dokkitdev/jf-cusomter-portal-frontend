@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { AccountJobsPageFacade } from './jobs.facade';
 
 @Component({
-  selector: 'account-jobs-page',
-  templateUrl: 'jobs.html',
-  styleUrls: ['jobs.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-jobs-page',
+    templateUrl: 'jobs.html',
+    styleUrls: ['jobs.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;

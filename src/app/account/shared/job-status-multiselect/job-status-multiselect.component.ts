@@ -15,19 +15,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-job-status-multiselect',
-  templateUrl: 'job-status-multiselect.html',
-  styleUrls: ['job-status-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountJobStatusMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-job-status-multiselect',
+    templateUrl: 'job-status-multiselect.html',
+    styleUrls: ['job-status-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountJobStatusMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountJobStatusMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

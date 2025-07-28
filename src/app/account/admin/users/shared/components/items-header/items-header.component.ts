@@ -5,10 +5,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountAdminUsersQueryParameters } from '../../models';
 
 @Component({
-  selector: 'admin-users-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'admin-users-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAdminUsersItemsHeaderComponent {
   public parameters$: Observable<AccountAdminUsersQueryParameters>;

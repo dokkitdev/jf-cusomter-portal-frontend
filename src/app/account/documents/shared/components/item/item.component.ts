@@ -5,10 +5,11 @@ import { Document } from '@shared/document';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 
 @Component({
-  selector: 'documents-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'documents-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDocumentsItemComponent {
   @Input() item: Document;

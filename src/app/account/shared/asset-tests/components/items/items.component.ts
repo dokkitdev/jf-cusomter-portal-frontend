@@ -5,11 +5,12 @@ import { heightCollapseAnimation } from '@shared/animations';
 import { AssetTest } from '@shared/asset';
 
 @Component({
-  selector: 'asset-tests-items',
-  templateUrl: 'items.html',
-  styleUrls: ['items.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'asset-tests-items',
+    templateUrl: 'items.html',
+    styleUrls: ['items.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountAssetTestsItemsComponent {
   public items$: Observable<Array<AssetTest>>;

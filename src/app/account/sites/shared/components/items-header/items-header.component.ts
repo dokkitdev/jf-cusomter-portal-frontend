@@ -5,10 +5,11 @@ import { AccountSitesPageFacade } from '../../../sites.facade';
 import { AccountSitesQueryParameters } from '../../models';
 
 @Component({
-  selector: 'sites-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'sites-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountSitesItemsHeaderComponent {
   public parameters$: Observable<AccountSitesQueryParameters>;

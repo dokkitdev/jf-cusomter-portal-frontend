@@ -3,10 +3,11 @@ import { configuration } from '@configurations';
 import { Asset } from '@shared/asset';
 
 @Component({
-  selector: 'assets-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'assets-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetsItemComponent {
   @Input() item: Asset;

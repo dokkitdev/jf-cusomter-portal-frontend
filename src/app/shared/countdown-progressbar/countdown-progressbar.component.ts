@@ -11,10 +11,11 @@ import {
 import { configuration } from '@configurations';
 
 @Component({
-  selector: 'countdown-progressbar',
-  templateUrl: 'countdown-progressbar.html',
-  styleUrls: ['countdown-progressbar.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'countdown-progressbar',
+    templateUrl: 'countdown-progressbar.html',
+    styleUrls: ['countdown-progressbar.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CountdownProgressbarComponent implements OnInit, OnDestroy {
   @Input() timerMilliseconds: number;

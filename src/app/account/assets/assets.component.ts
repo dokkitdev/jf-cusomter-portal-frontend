@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { AccountAssetsPageFacade } from './assets.facade';
 
 @Component({
-  selector: 'account-assets-page',
-  templateUrl: 'assets.html',
-  styleUrls: ['assets.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-assets-page',
+    templateUrl: 'assets.html',
+    styleUrls: ['assets.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetsPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;

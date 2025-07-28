@@ -7,19 +7,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'form-datepicker',
-  templateUrl: 'form-datepicker.html',
-  styleUrls: ['form-datepicker.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    FormDatepickerFacade,
-    ComponentStore
-  ]
+    selector: 'form-datepicker',
+    templateUrl: 'form-datepicker.html',
+    styleUrls: ['form-datepicker.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        FormDatepickerFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class FormDatepickerComponent {
   @Input() controlState: FormControlState<string>;

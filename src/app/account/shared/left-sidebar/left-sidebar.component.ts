@@ -5,11 +5,12 @@ import { User } from '@shared/user';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-  selector: 'account-left-sidebar',
-  templateUrl: 'left-sidebar.html',
-  styleUrls: ['left-sidebar.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+    selector: 'account-left-sidebar',
+    templateUrl: 'left-sidebar.html',
+    styleUrls: ['left-sidebar.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [heightCollapseAnimation],
+    standalone: false
 })
 export class AccountLeftSidebarComponent implements OnDestroy {
   public profile$: Observable<User>;

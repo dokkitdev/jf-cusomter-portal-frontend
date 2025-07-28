@@ -14,19 +14,20 @@ import { AssetTestResult } from '@shared/asset';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-  selector: 'account-asset-test-result-select',
-  templateUrl: 'asset-test-result-select.html',
-  styleUrls: ['asset-test-result-select.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountAssetTestResultSelectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-asset-test-result-select',
+    templateUrl: 'asset-test-result-select.html',
+    styleUrls: ['asset-test-result-select.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountAssetTestResultSelectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAssetTestResultSelectComponent {
   @Input() controlState: FormControlState<AssetTestResult>;

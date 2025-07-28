@@ -5,10 +5,11 @@ import { Asset } from '@shared/asset';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 
 @Component({
-  selector: 'account-assets-view-page',
-  templateUrl: 'view.html',
-  styleUrls: ['view.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-assets-view-page',
+    templateUrl: 'view.html',
+    styleUrls: ['view.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetsViewPageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;

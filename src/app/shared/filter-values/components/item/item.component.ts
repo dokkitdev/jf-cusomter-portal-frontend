@@ -3,10 +3,11 @@ import { FilterValuesFacade } from '../../filter-values.facade';
 import { FilterValue } from '../../models';
 
 @Component({
-  selector: 'filter-values-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'filter-values-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class FilterValuesItemComponent {
   @Input() item: FilterValue;

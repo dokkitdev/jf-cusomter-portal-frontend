@@ -4,10 +4,11 @@ import { configuration } from '@configurations';
 import { Job } from '@shared/job';
 
 @Component({
-  selector: 'jobs-view-info',
-  templateUrl: 'info.html',
-  styleUrls: ['info.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'jobs-view-info',
+    templateUrl: 'info.html',
+    styleUrls: ['info.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountJobsViewInfoComponent {
   @Input() job: Job;

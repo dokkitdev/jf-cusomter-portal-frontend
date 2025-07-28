@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { AccountSitesViewPageFacade } from '../../../view.facade';
 
 @Component({
-  selector: 'sites-view-header',
-  templateUrl: 'header.html',
-  styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'sites-view-header',
+    templateUrl: 'header.html',
+    styleUrls: ['header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountSitesViewHeaderComponent {
   public site$: Observable<Site>;

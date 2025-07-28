@@ -4,14 +4,15 @@ import { AssetTest } from '@shared/asset';
 import { AccountAssetTestsComponentFacade } from './asset-tests.facade';
 
 @Component({
-  selector: 'account-asset-tests',
-  templateUrl: 'asset-tests.html',
-  styleUrls: ['asset-tests.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountAssetTestsComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-asset-tests',
+    templateUrl: 'asset-tests.html',
+    styleUrls: ['asset-tests.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountAssetTestsComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAssetTestsComponent implements OnDestroy {
   @Input()

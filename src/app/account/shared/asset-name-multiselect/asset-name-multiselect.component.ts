@@ -7,19 +7,20 @@ import { AccountAssetNameMultiselectComponentFacade } from './asset-name-multise
 import { CustomSelectOption } from '@shared/custom-select';
 
 @Component({
-  selector: 'account-asset-name-multiselect',
-  templateUrl: 'asset-name-multiselect.html',
-  styleUrls: ['asset-name-multiselect.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    },
-    AccountAssetNameMultiselectComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-asset-name-multiselect',
+    templateUrl: 'asset-name-multiselect.html',
+    styleUrls: ['asset-name-multiselect.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        },
+        AccountAssetNameMultiselectComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAssetNameMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;

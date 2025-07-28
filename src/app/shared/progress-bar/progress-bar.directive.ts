@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[progressBar]'
+    selector: '[progressBar]',
+    standalone: false
 })
 export class ProgressBarDirective implements OnChanges {
   @Input() progress: number;

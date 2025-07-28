@@ -5,10 +5,11 @@ import { AccountReportsWarehousePageFacade } from '@app/account/reports/warehous
 import { AccountReportsWarehousePageForm } from '@app/account/reports/warehouse/shared/forms';
 
 @Component({
-  selector: 'account-reports-warehouse-form',
-  templateUrl: 'form.html',
-  styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'account-reports-warehouse-form',
+    templateUrl: 'form.html',
+    styleUrls: ['form.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountReportsWarehouseFormComponent {
   public isSendingRequest$: Observable<boolean>;

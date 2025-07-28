@@ -6,10 +6,11 @@ import { AccountSitesViewPageFacade } from '../../../view.facade';
 import { AccountSiteViewEditForm } from '../../forms';
 
 @Component({
-  selector: 'sites-view-form',
-  templateUrl: 'form.html',
-  styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'sites-view-form',
+    templateUrl: 'form.html',
+    styleUrls: ['form.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountSitesViewFormComponent {
   public formState$: Observable<FormGroupState<AccountSiteViewEditForm>>;

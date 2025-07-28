@@ -4,10 +4,11 @@ import { DashboardStatistic } from '@shared/dashboard';
 import { JobStage } from '@shared/job';
 
 @Component({
-  selector: 'dashboard-statistic-jobs',
-  templateUrl: 'statistic-jobs.html',
-  styleUrls: ['statistic-jobs.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'dashboard-statistic-jobs',
+    templateUrl: 'statistic-jobs.html',
+    styleUrls: ['statistic-jobs.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountDashboardStatisticJobsComponent {
   @Input() statistic: DashboardStatistic;

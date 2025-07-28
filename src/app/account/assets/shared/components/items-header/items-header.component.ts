@@ -5,10 +5,11 @@ import { AccountAssetsPageFacade } from '../../../assets.facade';
 import { AccountAssetsQueryParameters } from '../../models';
 
 @Component({
-  selector: 'assets-items-header',
-  templateUrl: 'items-header.html',
-  styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'assets-items-header',
+    templateUrl: 'items-header.html',
+    styleUrls: ['items-header.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AccountAssetsItemsHeaderComponent {
   public parameters$: Observable<AccountAssetsQueryParameters>;

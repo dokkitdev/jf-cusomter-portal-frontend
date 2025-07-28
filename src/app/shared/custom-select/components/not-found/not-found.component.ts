@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular/core';
 
 @Component({
-  selector: 'custom-select-not-found',
-  templateUrl: 'not-found.html',
-  styleUrls: ['not-found.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'custom-select-not-found',
+    templateUrl: 'not-found.html',
+    styleUrls: ['not-found.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CustomSelectNotFoundComponent {
   @Input() customTemplate: TemplateRef<any>;

@@ -7,14 +7,15 @@ import { Observable, Subject } from 'rxjs';
 import { AccountAdminDocumentsItemComponentFacade } from './item.facade';
 
 @Component({
-  selector: 'admin-documents-item',
-  templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountAdminDocumentsItemComponentFacade,
-    ComponentStore
-  ]
+    selector: 'admin-documents-item',
+    templateUrl: 'item.html',
+    styleUrls: ['item.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountAdminDocumentsItemComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountAdminDocumentsItemComponent {
   @Input() item: Document;

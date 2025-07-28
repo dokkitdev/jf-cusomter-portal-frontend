@@ -2,7 +2,8 @@ import { AfterViewInit, Directive, Input, ElementRef, Renderer2 } from '@angular
 import { configuration } from '@configurations';
 
 @Directive({
-  selector: '[collapsable]'
+    selector: '[collapsable]',
+    standalone: false
 })
 export class CollapsableDirective implements AfterViewInit {
   @Input() collapsableHeight: number;

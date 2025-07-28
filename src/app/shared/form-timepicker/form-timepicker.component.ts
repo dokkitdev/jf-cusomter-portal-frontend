@@ -3,17 +3,18 @@ import { ValidationMessages } from '@shared/validation-errors';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 
 @Component({
-  selector: 'form-timepicker',
-  templateUrl: 'form-timepicker.html',
-  styleUrls: ['form-timepicker.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NGRX_FORM_VIEW_ADAPTER,
-      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-      multi: true
-    }
-  ]
+    selector: 'form-timepicker',
+    templateUrl: 'form-timepicker.html',
+    styleUrls: ['form-timepicker.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NGRX_FORM_VIEW_ADAPTER,
+            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class FormTimepickerComponent {
   @Input() controlState: FormControlState<string>;

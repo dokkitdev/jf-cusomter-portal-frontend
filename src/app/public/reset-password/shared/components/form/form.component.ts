@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { PublicResetPasswordPageForm } from '../../forms';
 
 @Component({
-  selector: 'reset-password-form',
-  templateUrl: 'form.html',
-  styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'reset-password-form',
+    templateUrl: 'form.html',
+    styleUrls: ['form.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PublicResetPasswordFormComponent {
   public isSubmitting$: Observable<boolean>;

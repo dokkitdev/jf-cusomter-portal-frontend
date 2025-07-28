@@ -5,14 +5,15 @@ import { Subject } from 'rxjs';
 import { AccountSiteContactsComponentFacade } from './site-contacts.facade';
 
 @Component({
-  selector: 'account-site-contacts',
-  templateUrl: 'site-contacts.html',
-  styleUrls: ['site-contacts.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountSiteContactsComponentFacade,
-    ComponentStore
-  ]
+    selector: 'account-site-contacts',
+    templateUrl: 'site-contacts.html',
+    styleUrls: ['site-contacts.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        AccountSiteContactsComponentFacade,
+        ComponentStore
+    ],
+    standalone: false
 })
 export class AccountSiteContactsComponent implements OnDestroy {
   @Input()
