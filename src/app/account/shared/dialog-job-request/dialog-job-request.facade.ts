@@ -10,7 +10,8 @@ import {
   validate
 } from 'ngrx-forms';
 import { AccountDialogJobRequestForm } from './forms';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { AccountDialogJobRequestComponentState } from './dialog-job-request.state';
 import { trimmedRequired } from '@shared/validators';
 import { filter, switchMap } from 'rxjs/operators';
@@ -19,7 +20,6 @@ import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
 import { Media } from '@shared/media';
-import { concatLatestFrom } from '@ngrx/effects';
 import { maxLength } from 'ngrx-forms/validation';
 
 @Injectable()

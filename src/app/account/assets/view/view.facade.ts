@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Asset, AssetAttachment, AssetRelationType, AssetService } from '@shared/asset';
 import { AccountAssetsViewPageState } from './view.state';
 import { Router } from '@angular/router';
@@ -10,7 +11,6 @@ import { FileService } from '@shared/file';
 import { NavigationSelectors, NavigationService } from '@shared/navigation';
 import { exhaustMap, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { concatLatestFrom } from '@ngrx/effects';
 
 @Injectable()
 export class AccountAssetsViewPageFacade {

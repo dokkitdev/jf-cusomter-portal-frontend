@@ -10,9 +10,10 @@ import {
   validate
 } from 'ngrx-forms';
 import { AccountDialogAddDocumentForm } from './forms';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDialogAddDocumentComponentState } from './dialog-add-document.state';
-import { maxLength, required } from 'ngrx-forms/validation';
+import { maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';

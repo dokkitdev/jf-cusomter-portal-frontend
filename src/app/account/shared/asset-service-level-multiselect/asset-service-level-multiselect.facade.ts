@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { CustomSelectOption } from '@shared/custom-select/models';
 import { AssetService, AssetServiceLevel } from '@shared/asset';
 import { Observable } from 'rxjs';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountAssetServiceLevelMultiselectComponentState } from './asset-service-level-multiselect.state';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { AccountSiteSelectComponentState } from './site-select.state';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
 import { Site, SiteFilters, SiteService } from '@shared/site';
@@ -10,7 +10,7 @@ import { unionBy } from 'lodash';
 import { TranslateService } from '@ngx-translate/core';
 import { FormControlState } from 'ngrx-forms';
 import { SiteIDField } from './types';
-import { concatLatestFrom } from '@ngrx/effects';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class AccountSiteSelectComponentFacade {

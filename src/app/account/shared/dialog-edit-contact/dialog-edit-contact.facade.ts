@@ -11,7 +11,8 @@ import {
   validate
 } from 'ngrx-forms';
 import { AccountDialogEditContactForm } from './forms';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDialogEditContactComponentState } from './dialog-edit-contact.state';
 import { email, maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';

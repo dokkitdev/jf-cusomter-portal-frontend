@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Job, JobAttachment, JobRelationType, JobService } from '@shared/job';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { AccountJobsViewPageState } from './view.state';
 import { exhaustMap, switchMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FileService } from '@shared/file';
 import { UserService } from '@shared/user';
-import { concatLatestFrom } from '@ngrx/effects';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class AccountJobsViewPageFacade {

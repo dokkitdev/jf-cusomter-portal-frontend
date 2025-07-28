@@ -16,7 +16,7 @@ const {
 export class NavigationSelectors {
   public static selectCurrentRoute: (state: AppState) => any = selectCurrentRoute;
   public static selectQueryParams: (state: AppState) => Params = selectQueryParams;
-  public static selectQueryParam: (param: string) => (state: AppState) => string | undefined = selectQueryParam;
+  public static selectQueryParam: (param: string) => (state: AppState) => string | Array<string> | undefined = selectQueryParam;
   public static selectRouteParams: (state: AppState) => Params = selectRouteParams;
   public static selectRouteParam: (param: string) => (state: AppState) => string | undefined = selectRouteParam;
   public static selectRouteData: (state: AppState) => Data = selectRouteData;

@@ -1,7 +1,8 @@
 import { AccountAssetNameMultiselectComponentState } from './asset-name-multiselect.state';
 import { AssetName, AssetService } from '@shared/asset';
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { Observable, Subject } from 'rxjs';
 import { CustomSelectOption } from '@shared/custom-select/models';
 import { map, switchMap } from 'rxjs/operators';

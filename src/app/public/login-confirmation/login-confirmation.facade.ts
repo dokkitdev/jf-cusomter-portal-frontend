@@ -11,7 +11,8 @@ import {
   validate,
 } from 'ngrx-forms';
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Observable } from 'rxjs';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';
 import { AuthResponse } from '@ronas-it/angular-common';
@@ -25,7 +26,6 @@ import { NavigationSelectors } from '@shared/navigation';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { PublicLoginConfirmationQueryParameters } from './shared/models';
-import { concatLatestFrom } from '@ngrx/effects';
 
 @Injectable()
 export class PublicLoginConfirmationPageFacade {

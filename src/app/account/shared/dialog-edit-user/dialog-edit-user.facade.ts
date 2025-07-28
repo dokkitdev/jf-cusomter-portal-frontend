@@ -13,7 +13,8 @@ import {
   validate
 } from 'ngrx-forms';
 import { AccountDialogEditUserForm } from './forms';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDialogEditUserComponentState } from './dialog-edit-user.state';
 import { email, maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, tap, withLatestFrom } from 'rxjs/operators';

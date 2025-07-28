@@ -11,15 +11,14 @@ import {
 } from 'ngrx-forms';
 import { PublicLoginPageForm } from './shared/forms';
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { Observable } from 'rxjs';
 import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
-import { AuthCredentials, AuthResponse } from '@ronas-it/angular-common';
 import { AuthService } from '@shared/auth';
 import { Router } from '@angular/router';
 import { email as emailValidation, required } from 'ngrx-forms/validation';
 import { PublicLoginPageState } from './login.state';
-import { User } from '@shared/user';
+import { tapResponse } from '@ngrx/operators';
 
 @Injectable()
 export class PublicLoginPageFacade {

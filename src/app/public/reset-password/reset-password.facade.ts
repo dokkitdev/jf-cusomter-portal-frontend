@@ -11,7 +11,7 @@ import {
 } from 'ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { AuthService, RestorePasswordRequest } from '@shared/auth';
 import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
 import { equalTo, minLength, required } from 'ngrx-forms/validation';
@@ -22,6 +22,7 @@ import { containDigit } from '@shared/validators';
 import { NavigationSelectors } from '@shared/navigation';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
+import { tapResponse } from '@ngrx/operators';
 
 @Injectable()
 export class PublicResetPasswordPageFacade {

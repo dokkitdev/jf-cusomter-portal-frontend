@@ -3,7 +3,8 @@ import {
   AccountDialogEditContactComponent,
   AccountDialogEditContactData
 } from '@app/account/shared/dialog-edit-contact';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '@shared/dialog';
 import { DialogConfirmationComponent, DialogConfirmationConfig } from '@shared/dialog-confirmation';

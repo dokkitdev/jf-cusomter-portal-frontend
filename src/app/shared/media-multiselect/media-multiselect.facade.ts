@@ -5,7 +5,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { MediaMultiselectComponentState } from './media-multiselect.state';
 import { cloneDeep } from 'lodash';
 import { tap } from 'rxjs/operators';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class MediaMultiselectFacade {

@@ -3,7 +3,8 @@ import {
   AccountDialogEditUserActions,
   AccountDialogEditUserComponent
 } from '@app/account/shared/dialog-edit-user';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Customer } from '@shared/customer';

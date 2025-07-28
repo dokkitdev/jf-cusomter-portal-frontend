@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { AccountSitesViewPageState } from './view.state';
 import { Router } from '@angular/router';
 import { Site, SiteRelationType, SiteService } from '@shared/site';
@@ -32,7 +33,6 @@ import {
   AccountDialogJobRequestComponent,
   AccountDialogJobRequestData
 } from '@app/account/shared/dialog-job-request';
-import { concatLatestFrom } from '@ngrx/effects';
 
 @Injectable()
 export class AccountSitesViewPageFacade {

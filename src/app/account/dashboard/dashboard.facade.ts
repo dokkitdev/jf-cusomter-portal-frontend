@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDashboardPageState } from './dashboard.state';
 import { switchMap } from 'rxjs/operators';
 import { DashboardService, DashboardStatistic } from '@shared/dashboard';

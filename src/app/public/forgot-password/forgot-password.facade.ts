@@ -11,7 +11,8 @@ import {
 } from 'ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AuthService } from '@shared/auth';
 import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
 import { email, required } from 'ngrx-forms/validation';

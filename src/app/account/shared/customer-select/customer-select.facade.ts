@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountCustomerSelectComponentState } from './customer-select.state';
 import { combineLatest, EMPTY, Observable } from 'rxjs';
 import { Customer, CustomerFilters, CustomerService } from '@shared/customer';

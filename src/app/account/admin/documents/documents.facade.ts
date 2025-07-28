@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AccountDialogAddDocumentComponent } from '@app/account/shared/dialog-add-document';
 import { AccountDialogAddDocumentActions } from '@app/account/shared/dialog-add-document/store';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { DialogService } from '@shared/dialog';

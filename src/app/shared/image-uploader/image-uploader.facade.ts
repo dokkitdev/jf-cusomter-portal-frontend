@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Media } from '@shared/media';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { ImageUploaderComponentState } from './image-uploader.state';
 import { switchMap, tap, filter } from 'rxjs/operators';
 import { MediaService } from '../media/media.service';
@@ -9,6 +9,7 @@ import { isNumber } from 'lodash';
 import { Actions, SetValueAction, MarkAsDirtyAction } from 'ngrx-forms';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@shared/notification';
+import { tapResponse } from '@ngrx/operators';
 
 @Injectable()
 export class ImageUploaderFacade {
