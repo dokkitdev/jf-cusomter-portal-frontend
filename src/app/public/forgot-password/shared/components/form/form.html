@@ -4,7 +4,9 @@
   (submit)="formSubmitted()"
   (ngrxFormsAction)="formActionTriggered($event)"
   class="forgot-form">
-  <forgot-password-request-error *ngIf="isSubmittingFailed$ | async"></forgot-password-request-error>
+  @if (isSubmittingFailed$ | async) {
+    <forgot-password-request-error></forgot-password-request-error>
+  }
   <form-text
     [controlState]="formState.controls.email"
     [validationMessages]="{

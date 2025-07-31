@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActiveToast, ToastrService } from 'ngx-toastr';
+import { ActiveToast, IndividualConfig, ToastrService } from 'ngx-toastr';
 import { NotificationComponent } from '@shared/notification';
-import { IndividualConfig } from 'ngx-toastr/toastr/toastr-config';
 
 @Injectable()
 export class NotificationService {

@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .customers {margin-bottom: 20px;
   &-item {position: relative;

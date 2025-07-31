@@ -8,7 +8,7 @@
         {{ 'ACCOUNT.ASSETS.VIEW.TEXT_PAGE_TITLE' | translate }} {{ asset?.assetID }}
       </h2>
     </div>
-    <ng-container *ngIf="!isLoading; else loading">
+    @if (!isLoading) {
       <account-assets-view-info [asset]="asset"></account-assets-view-info>
       <div class="row">
         <div class="col col-50">
@@ -19,9 +19,8 @@
         </div>
       </div>
       <account-asset-tests [items]="asset.testRecords"></account-asset-tests>
-    </ng-container>
+    } @else {
+      <loading-spinner [diameter]="spinnerDiameter.HUGE"></loading-spinner>
+    }
   </ng-container>
-  <ng-template #loading>
-    <loading-spinner [diameter]="spinnerDiameter.HUGE"></loading-spinner>
-  </ng-template>
 </div>

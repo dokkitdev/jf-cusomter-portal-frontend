@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .date-rangepicker {margin-bottom: 32px;
   .mat-date-range-input {font-size: 1rem;

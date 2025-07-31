@@ -1,10 +1,10 @@
 <div *ngrxLet="site$; let site" class="page siteview">
   <sites-view-header></sites-view-header>
-  <loading-spinner
-    *ngIf="isLoading$ | async; else details"
-    [diameter]="spinnerDiameter.HUGE">
-  </loading-spinner>
-  <ng-template #details>
+  @if (isLoading$ | async) {
+    <loading-spinner
+      [diameter]="spinnerDiameter.HUGE">
+    </loading-spinner>
+  } @else {
     <sites-view-form></sites-view-form>
     <account-site-contacts
       [siteID]="site.id"
@@ -13,5 +13,5 @@
       (contactUpdated)="contactUpdated($event)"
       (contactDeleted)="contactDeleted($event)">
     </account-site-contacts>
-  </ng-template>
+  }
 </div>

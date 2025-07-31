@@ -1,14 +1,17 @@
 <div class="section">
-  <div *ngIf="name" class="section-title">
-    <span class="section-title-icon">
-      <ng-content select="section-icon"></ng-content>
-    </span>
-    <span class="section-title-name">{{ name }}</span>
-  </div>
-  <div *ngIf="isNoContent; else content" class="section-nocontent">
-    {{ 'SHARED.SECTION.TEXT_NO_CONTENT' | translate }}
-  </div>
-  <ng-template #content>
+  @if (name) {
+    <div class="section-title">
+      <span class="section-title-icon">
+        <ng-content select="section-icon"></ng-content>
+      </span>
+      <span class="section-title-name">{{ name }}</span>
+    </div>
+  }
+  @if (isNoContent) {
+    <div class="section-nocontent">
+      {{ 'SHARED.SECTION.TEXT_NO_CONTENT' | translate }}
+    </div>
+  } @else {
     <ng-content></ng-content>
-  </ng-template>
+  }
 </div>

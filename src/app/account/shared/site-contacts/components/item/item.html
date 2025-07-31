@@ -12,14 +12,13 @@
   </div>
   <div class="table-cell sitecontacts-position">{{ item.position }}</div>
   <div class="table-cell sitecontacts-actions">
-    <ng-container *ngIf="!(isSendingRequest$ | async); else sendingRequest">
+    @if (!(isSendingRequest$ | async)) {
       <a (click)="editButtonClicked()" class="table-action">{{ 'ACCOUNT.SHARED.SITE_CONTACTS.LINK_EDIT' | translate }}</a>
       <a (click)="deleteButtonClicked()" class="table-action table-action-caution">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.LINK_DELETE' | translate }}
       </a>
-    </ng-container>
-    <ng-template #sendingRequest>
+    } @else {
       <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
-    </ng-template>
+    }
   </div>
 </div>

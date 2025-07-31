@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .servicecontrol {
   &-uprn {flex: 0 0 120px; min-width: 120px;}

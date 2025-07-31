@@ -1,4 +1,4 @@
-import IMask from 'imask';
+import { Masked } from 'imask';
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, Inject } from '@angular/core';
 import { AccountDialogEditContactComponentFacade } from './dialog-edit-contact.facade';
 import { Observable } from 'rxjs';
@@ -26,7 +26,7 @@ export class AccountDialogEditContactComponent implements OnInit, OnDestroy {
   public isSendingRequest$: Observable<boolean>;
   public contact$: Observable<Contact>;
   public formState$: Observable<FormGroupState<AccountDialogEditContactForm>>;
-  public phoneMask: IMask.AnyMasked;
+  public phoneMask: Masked;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: AccountDialogEditContactData,

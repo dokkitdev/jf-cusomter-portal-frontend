@@ -1,19 +1,22 @@
 <div [ngClass]="{ disabled: controlState?.isDisabled || isDisabled }" class="checkbox">
   <label>
-    <ng-container *ngIf="controlState; else viewState">
+    @if (controlState) {
       <input
         [ngrxFormControlState]="controlState"
         (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
         type="checkbox">
-      <span class="checkbox-icon"></span>
-      <span *ngIf="label" class="checkbox-title">{{ label }}</span>
-    </ng-container>
-    <ng-template #viewState>
-      <a (click)="toggleClicked.emit()">
-        <input [checked]="isChecked" type="checkbox">
         <span class="checkbox-icon"></span>
-        <span *ngIf="label" class="checkbox-title">{{ label }}</span>
-      </a>
-    </ng-template>
-  </label>
-</div>
+        @if (label) {
+          <span class="checkbox-title">{{ label }}</span>
+        }
+      } @else {
+        <a (click)="toggleClicked.emit()">
+          <input [checked]="isChecked" type="checkbox">
+          <span class="checkbox-icon"></span>
+          @if (label) {
+            <span class="checkbox-title">{{ label }}</span>
+          }
+        </a>
+      }
+    </label>
+  </div>

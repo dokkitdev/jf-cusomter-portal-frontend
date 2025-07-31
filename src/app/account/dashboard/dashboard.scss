@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .dashboard {
   .statistic {display: flex; align-items: center; padding: 20px; padding-right: 52px;

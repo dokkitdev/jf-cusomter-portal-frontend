@@ -45,25 +45,28 @@
         {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_CUSTOMER' | translate }}
       </form-radio>
     </div>
-    <div *ngIf="isRoleCustomer$ | async" [@heightCollapse]>
-      <account-customers
-        *ngrxLet="user$; let user"
-        [controlState]="formState.controls.customerIDs"
+    @if (isRoleCustomer$ | async) {
+      <div [@heightCollapse]>
+        <account-customers
+          *ngrxLet="user$; let user"
+          [controlState]="formState.controls.customerIDs"
         [groupValidationMessages]="{
           positiveNumber: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_GROUP_IS_REQUIRED' | translate
         }"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </account-customers>
-    </div>
-    <form-group
-      *ngIf="!isEditMode"
-      label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
-      <form-checkbox
-        [controlState]="formState.controls.isSendEmail"
-        (controlStateActionTriggered)="formActionTriggered($event)"
-        label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_EMAIL' | translate }}">
-      </form-checkbox>
-    </form-group>
+          (controlStateActionTriggered)="formActionTriggered($event)">
+        </account-customers>
+      </div>
+    }
+    @if (!isEditMode) {
+      <form-group
+        label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
+        <form-checkbox
+          [controlState]="formState.controls.isSendEmail"
+          (controlStateActionTriggered)="formActionTriggered($event)"
+          label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_EMAIL' | translate }}">
+        </form-checkbox>
+      </form-group>
+    }
     <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
       <div class="dialog-edit-button">
         <btn

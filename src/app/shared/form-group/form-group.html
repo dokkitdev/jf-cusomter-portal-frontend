@@ -1,4 +1,6 @@
 <div class="form-group">
-  <span *ngIf="label" class="form-label">{{ label }}</span>
+  @if (label) {
+    <span class="form-label">{{ label }}</span>
+  }
   <ng-content></ng-content>
 </div>

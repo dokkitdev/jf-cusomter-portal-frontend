@@ -1,46 +1,56 @@
-<div *ngIf="'ACCOUNT.ASSETS.VIEW.' as translations" class="row">
-  <div class="col col-50">
-    <div class="section">
-      <property>
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_CUSTOMER' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ asset.site?.customer?.name }}</ng-container>
-      </property>
-      <property>
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_SITE' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">
-          <a [routerLink]="['/account/sites', asset.site?.id]">{{ asset.site?.name }}</a>
-        </ng-container>
-      </property>
-      <property *ngIf="asset.lastTestDate">
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_LAST_TEST_DATE' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ asset.lastTestDate | date: dateFormat }}</ng-container>
-      </property>
-      <property *ngIf="asset.nextServiceDate">
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_NEXT_SERVICE_DATE' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ asset.nextServiceDate | date: dateFormat }}</ng-container>
-      </property>
+@if ('ACCOUNT.ASSETS.VIEW.'; as translations) {
+  <div class="row">
+    <div class="col col-50">
+      <div class="section">
+        <property>
+          <ng-container ngProjectAs="name">{{ translations + 'TEXT_CUSTOMER' | translate }}</ng-container>
+          <ng-container ngProjectAs="value">{{ asset.site?.customer?.name }}</ng-container>
+        </property>
+        <property>
+          <ng-container ngProjectAs="name">{{ translations + 'TEXT_SITE' | translate }}</ng-container>
+          <ng-container ngProjectAs="value">
+            <a [routerLink]="['/account/sites', asset.site?.id]">{{ asset.site?.name }}</a>
+          </ng-container>
+        </property>
+        @if (asset.lastTestDate) {
+          <property>
+            <ng-container ngProjectAs="name">{{ translations + 'TEXT_LAST_TEST_DATE' | translate }}</ng-container>
+            <ng-container ngProjectAs="value">{{ asset.lastTestDate | date: dateFormat }}</ng-container>
+          </property>
+        }
+        @if (asset.nextServiceDate) {
+          <property>
+            <ng-container ngProjectAs="name">{{ translations + 'TEXT_NEXT_SERVICE_DATE' | translate }}</ng-container>
+            <ng-container ngProjectAs="value">{{ asset.nextServiceDate | date: dateFormat }}</ng-container>
+          </property>
+        }
+      </div>
+    </div>
+    <div class="col col-50">
+      <div class="section">
+        <property>
+          <ng-container ngProjectAs="name">{{ translations + 'TEXT_ASSET_NAME' | translate }}</ng-container>
+          <ng-container ngProjectAs="value">{{ asset.name }}</ng-container>
+        </property>
+        @if (asset.lastTestResult) {
+          <property>
+            <ng-container ngProjectAs="name">{{ translations + 'TEXT_LAST_TEST_RESULT' | translate }}</ng-container>
+            <ng-container ngProjectAs="value">{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + asset.lastTestResult | snake | uppercase | translate }}</ng-container>
+          </property>
+        }
+        @if (asset.serviceLevelName) {
+          <property>
+            <ng-container ngProjectAs="name">{{ translations + 'TEXT_SERVICE_LEVEL' | translate }}</ng-container>
+            <ng-container ngProjectAs="value">{{ asset.serviceLevelName }}</ng-container>
+          </property>
+        }
+        <property>
+          <ng-container ngProjectAs="name">{{ translations + 'TEXT_ARCHIVED' | translate }}</ng-container>
+          <ng-container ngProjectAs="value">
+            {{ translations + 'TEXT_ARCHIVED_' + ((asset.isArchived) ? 'TRUE' : 'FALSE') | translate }}
+          </ng-container>
+        </property>
+      </div>
     </div>
   </div>
-  <div class="col col-50">
-    <div class="section">
-      <property>
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_ASSET_NAME' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ asset.name }}</ng-container>
-      </property>
-      <property *ngIf="asset.lastTestResult">
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_LAST_TEST_RESULT' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + asset.lastTestResult | snake | uppercase | translate }}</ng-container>
-      </property>
-      <property *ngIf="asset.serviceLevelName">
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_SERVICE_LEVEL' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">{{ asset.serviceLevelName }}</ng-container>
-      </property>
-      <property>
-        <ng-container ngProjectAs="name">{{ translations + 'TEXT_ARCHIVED' | translate }}</ng-container>
-        <ng-container ngProjectAs="value">
-          {{ translations + 'TEXT_ARCHIVED_' + ((asset.isArchived) ? 'TRUE' : 'FALSE') | translate }}
-        </ng-container>
-      </property>
-    </div>
-  </div>
-</div>
+}

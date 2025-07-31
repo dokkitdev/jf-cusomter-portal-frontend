@@ -1,6 +1,6 @@
-import { DOCUMENT } from '@angular/common';
+
 import { WINDOW } from 'ngx-window-token';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, DOCUMENT } from '@angular/core';
 
 @Injectable()
 export class FileService {

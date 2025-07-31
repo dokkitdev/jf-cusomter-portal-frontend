@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .kpi {
   &-status {flex: 0 0 70px; min-width: 70px;

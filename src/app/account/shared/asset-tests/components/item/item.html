@@ -13,11 +13,12 @@
     {{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.result | snake | uppercase | translate }}
   </div>
   <div class="table-cell assettests-readings">
-    <a
-      *ngIf="item.readings?.length"
-      (click)="viewReadingsClicked()"
-      class="table-action">
-      {{ 'ACCOUNT.SHARED.ASSET_TESTS.LINK_VIEW' | translate }}
-    </a>
+    @if (item.readings?.length) {
+      <a
+        (click)="viewReadingsClicked()"
+        class="table-action">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.LINK_VIEW' | translate }}
+      </a>
+    }
   </div>
 </div>

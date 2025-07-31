@@ -1,7 +1,7 @@
 <public-layout
   title="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_PAGE_TITLE' | translate }}"
   page="login-confirmation"
->
+  >
   <login-confirmation-message></login-confirmation-message>
 
   <form
@@ -10,10 +10,11 @@
     (submit)="formSubmitted()"
     (ngrxFormsAction)="formActionTriggered($event)"
     class="login-confirmation-form"
-  >
-    <login-confirmation-request-error
-      *ngIf="isConfirmLoginFailed$ | async"
-    ></login-confirmation-request-error>
+    >
+    @if (isConfirmLoginFailed$ | async) {
+      <login-confirmation-request-error
+      ></login-confirmation-request-error>
+    }
     <form-text
       [controlState]="formState.controls.email"
       [validationMessages]="{
@@ -25,7 +26,7 @@
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_EMAIL_PLACEHOLDER' | translate }}"
       type="email"
       autocomplete="email"
-    >
+      >
     </form-text>
     <form-text
       [controlState]="formState.controls.code"
@@ -36,7 +37,7 @@
   }"
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_CODE_PLACEHOLDER' | translate }}"
-    >
+      >
     </form-text>
     <form-text
       [controlState]="formState.controls.password"
@@ -47,7 +48,7 @@
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_PASSWORD_PLACEHOLDER' | translate }}"
       type="password"
       autocomplete="current-password"
-    >
+      >
     </form-text>
     <btn [isBlock]="true" [isLoading]="isSubmitting$ | async" type="submit">
       {{ 'PUBLIC.LOGIN_CONFIRMATION.BUTTON_SIGN_IN' | translate }}
@@ -57,7 +58,7 @@
     <route-link
       route="/forgot-password"
       title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_FORGOT_PASSWORD' | translate }}"
-    >
+      >
     </route-link>
   </div>
   <div class="auth-actions">
@@ -65,7 +66,7 @@
       [hasIcon]="true"
       route="/login"
       title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_BACK' | translate }}"
-    >
+      >
       <span
         ngProjectAs="route-icon"
         class="icon icon-arrow-left icon-mask"

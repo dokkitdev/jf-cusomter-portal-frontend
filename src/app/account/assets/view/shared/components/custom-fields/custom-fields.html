@@ -2,8 +2,10 @@
   [isNoContent]="!items?.length"
   name="{{ 'ACCOUNT.ASSETS.VIEW.TEXT_CUSTOM_FIELDS' | translate }}">
   <span ngProjectAs="section-icon" class="icon icon-quote icon-mask icon-mask-dark-blue"></span>
-  <property *ngFor="let item of items | slice: 0: countOfDisplayedCustomFields; trackByProperty: 'id'">
-    <ng-container ngProjectAs="name">{{ item.name }}</ng-container>
-    <ng-container ngProjectAs="value">{{ item.value }}</ng-container>
-  </property>
+  @for (item of items | slice: 0: countOfDisplayedCustomFields; track item) {
+    <property>
+      <ng-container ngProjectAs="name">{{ item.name }}</ng-container>
+      <ng-container ngProjectAs="value">{{ item.value }}</ng-container>
+    </property>
+  }
 </section>

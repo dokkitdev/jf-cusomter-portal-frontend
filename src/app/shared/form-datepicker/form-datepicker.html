@@ -17,16 +17,17 @@
       class="form-control"
       readonly
       matInput>
-    <span class="form-group-datepicker-icon"></span>
-    <mat-datepicker
-      (closed)="datePickerClosed()"
-      (opened)="datePickerOpened()"
-      #picker>
-    </mat-datepicker>
-  </mat-form-field>
-  <validation-errors
-    *ngIf="controlState.isSubmitted && controlState.isInvalid"
-    [controlErrors]="controlState.errors"
-    [messages]="validationMessages">
-  </validation-errors>
-</div>
+      <span class="form-group-datepicker-icon"></span>
+      <mat-datepicker
+        (closed)="datePickerClosed()"
+        (opened)="datePickerOpened()"
+        #picker>
+      </mat-datepicker>
+    </mat-form-field>
+    @if (controlState.isSubmitted && controlState.isInvalid) {
+      <validation-errors
+        [controlErrors]="controlState.errors"
+        [messages]="validationMessages">
+      </validation-errors>
+    }
+  </div>

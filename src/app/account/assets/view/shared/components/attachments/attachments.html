@@ -2,7 +2,9 @@
   [isNoContent]="!items?.length"
   name="{{ 'ACCOUNT.ASSETS.VIEW.TEXT_ATTACHMENTS' | translate }}">
   <span ngProjectAs="section-icon" class="icon icon-clip icon-mask icon-mask-dark-blue"></span>
-  <div *ngFor="let item of items; trackByProperty: 'id'" class="assetview-attachment">
-    <a (click)="downloadAttachmentClicked(item)" class="link">{{ item.name }}</a>
-  </div>
+  @for (item of items; track item) {
+    <div class="assetview-attachment">
+      <a (click)="downloadAttachmentClicked(item)" class="link">{{ item.name }}</a>
+    </div>
+  }
 </section>

@@ -3,15 +3,14 @@
   <div class="table-cell admindocuments-description">{{ item.description }}</div>
   <div class="table-cell admindocuments-createdat">{{ item.createdAt | date: dateFormat }}</div>
   <div class="table-cell admindocuments-actions">
-    <ng-container *ngIf="!(isSendingRequest$ | async); else sendingRequest">
+    @if (!(isSendingRequest$ | async)) {
       <a (click)="viewMediaClicked()" class="table-action table-action-info">{{ 'ACCOUNT.ADMIN.DOCUMENTS.LINK_VIEW' | translate }}</a>
       <a (click)="downloadMediaClicked()" class="table-action">{{ 'ACCOUNT.ADMIN.DOCUMENTS.LINK_DOWNLOAD' | translate }}</a>
       <a (click)="deleteButtonClicked()" class="table-action table-action-caution">
         {{ 'ACCOUNT.ADMIN.DOCUMENTS.LINK_DELETE' | translate }}
       </a>
-    </ng-container>
-    <ng-template #sendingRequest>
+    } @else {
       <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
-    </ng-template>
+    }
   </div>
 </div>

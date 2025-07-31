@@ -1,5 +1,7 @@
 <div class="form-group">
-  <label *ngIf="label" class="form-label">{{ label }}</label>
+  @if (label) {
+    <label class="form-label">{{ label }}</label>
+  }
   <ng-container *ngrxLet="items$; let items">
     <div
       [ngClass]="{ disabled: isDisabled }"
@@ -14,24 +16,31 @@
         ngx-dropzone>
       </div>
       <div class="multiuploader-content">
-        <div *ngIf="!items.length" class="imageuploader-placeholder">
-          <span class="imageuploader-icon"></span>
-          <span>{{ placeholder || ('SHARED.MEDIA_MULTISELECT.TEXT_PLACEHOLDER' | translate) }}</span>
-        </div>
-        <div *ngIf="items.length" class="multiuploader-items">
-          <media-multiselect-item
-            *ngFor="let item of items; let i = index; trackByProperty"
-            [item]="item"
-            (removeFile)="removeFileClicked(i)">
-          </media-multiselect-item>
-        </div>
+        @if (!items.length) {
+          <div class="imageuploader-placeholder">
+            <span class="imageuploader-icon"></span>
+            <span>{{ placeholder || ('SHARED.MEDIA_MULTISELECT.TEXT_PLACEHOLDER' | translate) }}</span>
+          </div>
+        }
+        @if (items.length) {
+          <div class="multiuploader-items">
+            @for (item of items; track item; let i = $index) {
+              <media-multiselect-item
+                [item]="item"
+                (removeFile)="removeFileClicked(i)">
+              </media-multiselect-item>
+            }
+          </div>
+        }
       </div>
     </div>
     <div class="imageuploader-info">
       <span>{{ extensionRequirements }}</span>
-      <span *ngIf="maxFileSize">
-        {{ 'SHARED.MEDIA_MULTISELECT.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: fileSizeConfigs } }}
-      </span>
+      @if (maxFileSize) {
+        <span>
+          {{ 'SHARED.MEDIA_MULTISELECT.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: fileSizeConfigs } }}
+        </span>
+      }
     </div>
   </ng-container>
 </div>

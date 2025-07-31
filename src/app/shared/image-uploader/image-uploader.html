@@ -10,35 +10,36 @@
       (change)="fileSelected($event)"
       class="imageuploader-area"
       ngx-dropzone>
-      <ng-container *ngIf="isUploading; else noLoading">
+      @if (isUploading) {
         <span [progress]="progress$ | async" class="imageuploader-progress-bar" progressBar></span>
         <span class="imageuploader-thumbnail">
           <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
         </span>
         <span class="imageuploader-uploading">{{ 'SHARED.IMAGE_UPLOADER.TEXT_UPLOADING' | translate }}</span>
-      </ng-container>
-      <ng-template #noLoading>
-        <ng-container *ngIf="controlState.value; else noImage">
+      } @else {
+        @if (controlState.value) {
           <span class="imageuploader-name">{{ image?.name }}</span>
-        </ng-container>
-        <ng-template #noImage>
+        } @else {
           <div class="imageuploader-placeholder">
             <span class="imageuploader-icon"></span>
             <span>{{ placeholder || ('SHARED.IMAGE_UPLOADER.TEXT_PLACEHOLDER' | translate) }}</span>
           </div>
-        </ng-template>
-      </ng-template>
+        }
+      }
     </div>
     <div class="imageuploader-info">
       <span>{{ extensionRequirements }}</span>
-      <span *ngIf="maxFileSize">
-        {{ 'SHARED.IMAGE_UPLOADER.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: fileSizeConfigs } }}
-      </span>
+      @if (maxFileSize) {
+        <span>
+          {{ 'SHARED.IMAGE_UPLOADER.TEXT_MAX_SIZE' | translate: { size: maxFileSize | filesize: fileSizeConfigs } }}
+        </span>
+      }
     </div>
   </div>
-  <validation-errors
-    *ngIf="controlState.isSubmitted && controlState.isInvalid"
-    [controlErrors]="controlState.errors"
-    [messages]="validationMessages">
-  </validation-errors>
+  @if (controlState.isSubmitted && controlState.isInvalid) {
+    <validation-errors
+      [controlErrors]="controlState.errors"
+      [messages]="validationMessages">
+    </validation-errors>
+  }
 </div>

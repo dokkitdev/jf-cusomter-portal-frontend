@@ -1,4 +1,4 @@
-@import 'vars';
+@use 'vars' as *;
 
 :host ::ng-deep .jobs {
   &-icon {flex: 0 0 35px; min-width: 35px;

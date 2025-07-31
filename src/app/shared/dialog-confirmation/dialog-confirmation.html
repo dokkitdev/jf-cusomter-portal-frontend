@@ -3,11 +3,12 @@
   <h1 class="dialog-title">
     {{ data.title }}
   </h1>
-  <div
-    *ngIf="data.text"
-    class="dialog-message">
-    {{ data.text }}
-  </div>
+  @if (data.text) {
+    <div
+      class="dialog-message">
+      {{ data.text }}
+    </div>
+  }
   <div class="dialog-buttons">
     <button
       (click)="closeButtonClicked()"

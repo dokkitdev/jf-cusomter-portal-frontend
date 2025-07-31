@@ -1,56 +1,58 @@
-<div *ngIf="'ACCOUNT.SHARED.DIALOG_JOB_REQUEST.' as translations" class="dialog-edit jobrequest">
-  <h2 class="dialog-edit-title">
-    {{ translations + 'TEXT_TITLE' | translate }}
-  </h2>
-  <div class="dialog-edit-note">
-    {{ translations + 'TEXT_NOTE' | translate }}
-  </div>
-  <form
-    *ngrxLet="formState$; let formState"
-    [ngrxFormState]="formState"
-    (ngrxFormsAction)="formActionTriggered($event)"
-    (submit)="formSubmitted()"
-    class="form">
-    <form-text
-      [controlState]="formState.controls.name"
+@if ('ACCOUNT.SHARED.DIALOG_JOB_REQUEST.'; as translations) {
+  <div class="dialog-edit jobrequest">
+    <h2 class="dialog-edit-title">
+      {{ translations + 'TEXT_TITLE' | translate }}
+    </h2>
+    <div class="dialog-edit-note">
+      {{ translations + 'TEXT_NOTE' | translate }}
+    </div>
+    <form
+      *ngrxLet="formState$; let formState"
+      [ngrxFormState]="formState"
+      (ngrxFormsAction)="formActionTriggered($event)"
+      (submit)="formSubmitted()"
+      class="form">
+      <form-text
+        [controlState]="formState.controls.name"
       [validationMessages]="{
         trimmedRequired: translations + 'ERRORS.TEXT_NAME_IS_REQUIRED' | translate,
         maxLength: translations + 'ERRORS.TEXT_NAME_MAX_LENGTH' | translate
       }"
-      (controlStateActionTriggered)="formActionTriggered($event)"
-      label="{{ translations + 'TEXT_NAME' | translate }}">
-    </form-text>
-    <form-textarea
-      [controlState]="formState.controls.description"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ translations + 'TEXT_NAME' | translate }}">
+      </form-text>
+      <form-textarea
+        [controlState]="formState.controls.description"
       [validationMessages]="{
         trimmedRequired: translations + 'ERRORS.TEXT_DESCRIPTION_IS_REQUIRED' | translate
       }"
-      (controlStateActionTriggered)="formActionTriggered($event)"
-      label="{{ translations + 'TEXT_DESCRIPTION' | translate }}">
-    </form-textarea>
-    <media-multiselect
-      [maxFileSize]="maxFileSize"
-      [isDisabled]="formState.isDisabled"
-      (itemsChanged)="attachmentsChanged($event)">
-    </media-multiselect>
-    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
-      <div class="dialog-edit-button">
-        <btn
-          [isDisabled]="isSendingRequest"
-          (clicked)="cancelClicked()"
-          type="button"
-          variant="outline">
-          {{ translations + 'BUTTON_CANCEL' | translate }}
-        </btn>
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        label="{{ translations + 'TEXT_DESCRIPTION' | translate }}">
+      </form-textarea>
+      <media-multiselect
+        [maxFileSize]="maxFileSize"
+        [isDisabled]="formState.isDisabled"
+        (itemsChanged)="attachmentsChanged($event)">
+      </media-multiselect>
+      <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+        <div class="dialog-edit-button">
+          <btn
+            [isDisabled]="isSendingRequest"
+            (clicked)="cancelClicked()"
+            type="button"
+            variant="outline">
+            {{ translations + 'BUTTON_CANCEL' | translate }}
+          </btn>
+        </div>
+        <div class="dialog-edit-button">
+          <btn
+            [isLoading]="isSendingRequest"
+            [isDisabled]="formState.isPristine"
+            type="submit">
+            {{ translations + 'BUTTON_SEND' | translate }}
+          </btn>
+        </div>
       </div>
-      <div class="dialog-edit-button">
-        <btn
-          [isLoading]="isSendingRequest"
-          [isDisabled]="formState.isPristine"
-          type="submit">
-          {{ translations + 'BUTTON_SEND' | translate }}
-        </btn>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+}
