@@ -2,8 +2,6 @@ import { FileService } from './file.service';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  providers: [
-    FileService
-  ]
+  providers: [FileService]
 })
-export class FileModule { }
+export class FileModule {}

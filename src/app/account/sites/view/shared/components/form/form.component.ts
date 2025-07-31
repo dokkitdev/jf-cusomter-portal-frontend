@@ -9,16 +9,15 @@ import { AccountSiteViewEditForm } from '../../forms';
   selector: 'sites-view-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesViewFormComponent {
   public formState$: Observable<FormGroupState<AccountSiteViewEditForm>>;
   public isSubmitting$: Observable<boolean>;
   public contactOptions$: Observable<Array<CustomSelectOption>>;
 
-  constructor(
-    private facade: AccountSitesViewPageFacade
-  ) {
+  constructor(private facade: AccountSitesViewPageFacade) {
     this.formState$ = this.facade.formState$;
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.contactOptions$ = this.facade.contactOptions$;

@@ -10,7 +10,8 @@ import { Site } from '@shared/site';
   selector: 'reports-service-control-filters',
   templateUrl: 'filters.html',
   styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsServiceControlFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountReportsServiceControlFilterForm>>;
@@ -20,9 +21,7 @@ export class AccountReportsServiceControlFiltersComponent {
   public getStartJobLoggedCompletionDateFilter$: Observable<(date: Date) => boolean>;
   public getEndJobLoggedCompletionDateFilter$: Observable<(date: Date) => boolean>;
 
-  constructor(
-    private facade: AccountReportsServiceControlFacade
-  ) {
+  constructor(private facade: AccountReportsServiceControlFacade) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
     this.getStartJobDueDateFilter$ = this.facade.getStartJobDueDateFilter$();

@@ -2,12 +2,11 @@
   *ngrxLet="isRecoveryEmailSent$; let isRecoveryEmailSent"
   [ngClass]="{ 'forgot-message-sent': isRecoveryEmailSent }"
   class="forgot-message">
-  <ng-container *ngIf="isRecoveryEmailSent; else default">
+  @if (isRecoveryEmailSent) {
     <div>{{ 'PUBLIC.FORGOT_PASSWORD.TEXT_SENT_MESSAGE_1' | translate }}</div>
     <div>{{ 'PUBLIC.FORGOT_PASSWORD.TEXT_SENT_MESSAGE_2' | translate }}</div>
-  </ng-container>
-  <ng-template #default>
+  } @else {
     <div>{{ 'PUBLIC.FORGOT_PASSWORD.TEXT_MESSAGE_1' | translate }}</div>
     <div>{{ 'PUBLIC.FORGOT_PASSWORD.TEXT_MESSAGE_2' | translate }}</div>
-  </ng-template>
+  }
 </div>

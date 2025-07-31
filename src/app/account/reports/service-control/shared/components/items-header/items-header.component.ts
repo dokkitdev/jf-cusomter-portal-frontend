@@ -8,15 +8,14 @@ import { AssetSortField } from '@shared/asset';
   selector: 'reports-service-control-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsServiceControlItemsHeaderComponent {
   public parameters$: Observable<AccountReportsServiceControlQueryParameters>;
   public assetSortField: typeof AssetSortField;
 
-  constructor(
-    private facade: AccountReportsServiceControlFacade
-  ) {
+  constructor(private facade: AccountReportsServiceControlFacade) {
     this.parameters$ = this.facade.parameters$;
     this.assetSortField = AssetSortField;
   }

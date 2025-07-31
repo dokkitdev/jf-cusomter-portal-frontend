@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'property',
   templateUrl: 'property.html',
   styleUrls: ['property.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class PropertyComponent { }
+export class PropertyComponent {}

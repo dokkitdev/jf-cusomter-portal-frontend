@@ -3,11 +3,7 @@ import { NgModule } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    DashboardService
-  ]
+  imports: [CommonModule],
+  providers: [DashboardService]
 })
-export class DashboardModule { }
+export class DashboardModule {}

@@ -1,27 +1,33 @@
-<div *ngrxLet="site$; let site" class="page-header">
+<div
+  *ngrxLet="site$; let site"
+  class="page-header">
   <h2 class="page-title">
-    <a (click)="backClicked()" class="link-back">
+    <a
+      (click)="backClicked()"
+      class="link-back">
       <span class="icon icon-back icon-mask icon-mask-dark-blue"></span>
     </a>
     {{ 'ACCOUNT.SITES.VIEW.TEXT_PAGE_TITLE' | translate }} {{ site.siteID }}
   </h2>
   <ng-container *ngrxLet="profile$; let profile">
-    <div *ngIf="!(isLoading$ | async)" class="page-actions">
-      <a
-        routerLink="/account/jobs"
-        [queryParams]="{ siteID: site.id }"
-        class="button button-primary page-action">
-        {{ 'ACCOUNT.SITES.VIEW.BUTTON_VIEW_JOBS' | translate }}
-      </a>
-      <a
-        routerLink="/account/assets"
-        [queryParams]="{ siteID: site.id }"
-        class="button button-primary page-action">
-        {{ 'ACCOUNT.SITES.VIEW.BUTTON_VIEW_ASSETS' | translate }}
-      </a>
-      <btn (clicked)="sendJobRequestClicked()">
-        {{ 'ACCOUNT.SITES.VIEW.BUTTON_REQUEST_JOB' | translate }}
-      </btn>
-    </div>
+    @if (!(isLoading$ | async)) {
+      <div class="page-actions">
+        <a
+          routerLink="/account/jobs"
+          [queryParams]="{ siteID: site.id }"
+          class="button button-primary page-action">
+          {{ 'ACCOUNT.SITES.VIEW.BUTTON_VIEW_JOBS' | translate }}
+        </a>
+        <a
+          routerLink="/account/assets"
+          [queryParams]="{ siteID: site.id }"
+          class="button button-primary page-action">
+          {{ 'ACCOUNT.SITES.VIEW.BUTTON_VIEW_ASSETS' | translate }}
+        </a>
+        <btn (clicked)="sendJobRequestClicked()">
+          {{ 'ACCOUNT.SITES.VIEW.BUTTON_REQUEST_JOB' | translate }}
+        </btn>
+      </div>
+    }
   </ng-container>
 </div>

@@ -7,16 +7,15 @@ import { Observable } from 'rxjs';
   selector: 'custom-select-filter',
   templateUrl: 'filter.html',
   styleUrls: ['filter.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CustomSelectFilterComponent<T extends FormControlValueTypes> {
   @ViewChild('control') controlElementRef: ElementRef;
 
   public filterControlState$: Observable<FormControlState<string>>;
 
-  constructor(
-    protected facade: CustomSelectFacade<T>
-  ) {
+  constructor(protected facade: CustomSelectFacade<T>) {
     this.filterControlState$ = this.facade.filterControlState$;
   }
 

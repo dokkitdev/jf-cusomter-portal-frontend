@@ -5,7 +5,8 @@ import { ButtonSize, ButtonType, ButtonVariant } from './types';
   selector: 'btn',
   templateUrl: 'button.html',
   styleUrls: ['button.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ButtonComponent {
   @Input() type: ButtonType;

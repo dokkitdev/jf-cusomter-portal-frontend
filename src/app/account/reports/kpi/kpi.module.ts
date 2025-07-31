@@ -11,7 +11,7 @@ import { AccountReportsKPIItemsComponent } from './shared/components/items/items
 import { AccountReportsKPIItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { AccountReportsKPIFiltersComponent } from './shared/components/filters/filters.component';
 import { JobModule } from '@shared/job';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -41,7 +41,8 @@ import { FormTimepickerModule } from '@shared/form-timepicker';
     TranslateModule,
     AccountReportsKPIRoutingModule,
     JobModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -57,9 +58,6 @@ import { FormTimepickerModule } from '@shared/form-timepicker';
     NotificationModule,
     AccountCostCenterMultiselectModule
   ],
-  providers: [
-    AccountReportsKPIPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsKPIPageFacade, ComponentStore]
 })
-export class AccountReportsKPIModule { }
+export class AccountReportsKPIModule {}

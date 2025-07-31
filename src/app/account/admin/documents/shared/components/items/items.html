@@ -5,25 +5,32 @@
   <div class="table">
     <admin-documents-items-header></admin-documents-items-header>
     <div class="table-content">
-      <div
-        *ngFor="let item of items | paginate: {
-          id: paginationId$ | async,
-          itemsPerPage: perPage$ | async,
-          currentPage: currentPage$ | async,
-          totalItems: totalItems$ | async
-        }; trackByProperty: 'id'"
-        [@heightCollapse]
-        class="table-content-row">
-        <admin-documents-item
-          [item]="item"
-          (deletingSuccess)="itemDeleted($event)">
-        </admin-documents-item>
-      </div>
+      @for (
+        item of items
+          | paginate
+            : {
+                id: paginationId$ | async,
+                itemsPerPage: perPage$ | async,
+                currentPage: currentPage$ | async,
+                totalItems: totalItems$ | async
+              };
+        track item
+      ) {
+        <div
+          [@heightCollapse]
+          class="table-content-row">
+          <admin-documents-item
+            [item]="item"
+            (deletingSuccess)="itemDeleted($event)">
+          </admin-documents-item>
+        </div>
+      }
     </div>
-    <pagination-elements
-      *ngIf="hasPagination$ | async"
-      [paginationId]="paginationId$ | async"
-      (pageChanged)="pageChanged($event)">
-    </pagination-elements>
+    @if (hasPagination$ | async) {
+      <pagination-elements
+        [paginationId]="paginationId$ | async"
+        (pageChanged)="pageChanged($event)">
+      </pagination-elements>
+    }
   </div>
 </table-container>

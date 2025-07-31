@@ -68,51 +68,39 @@ export class AccountLeftSidebarFacade {
   }
 
   private toggleStateIsReportsMenuOpened(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isReportsMenuOpened: !state.isReportsMenuOpened
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isReportsMenuOpened: !state.isReportsMenuOpened
+    }))();
   }
 
   private updateStateIsReportsMenuItemActive(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isReportsMenuItemActive: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isReportsMenuItemActive: value
+    }))();
   }
 
   private toggleStateIsAdminMenuOpened(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isAdminMenuOpened: !state.isAdminMenuOpened
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isAdminMenuOpened: !state.isAdminMenuOpened
+    }))();
   }
 
   private updateStateIsAdminMenuItemActive(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isAdminMenuItemActive: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isAdminMenuItemActive: value
+    }))();
   }
 
   private registerSidebarNavigationEffect(): void {
     this.componentStore.effect(() =>
       this.router.events.pipe(
         filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd),
-        tap((event: NavigationEnd) =>
-          this.updateStateIsAdminMenuItemActive(event.url.includes('admin'))
-        ),
-        tap((event: NavigationEnd) =>
-          this.updateStateIsReportsMenuItemActive(event.url.includes('reports'))
-        )
+        tap((event: NavigationEnd) => this.updateStateIsAdminMenuItemActive(event.url.includes('admin'))),
+        tap((event: NavigationEnd) => this.updateStateIsReportsMenuItemActive(event.url.includes('reports')))
       )
     );
   }
@@ -120,11 +108,13 @@ export class AccountLeftSidebarFacade {
   private registerLogoutEffect(): void {
     this.logoutEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
       origin$.pipe(
-        map(() => this.dialogService.open(DialogConfirmationComponent, {
-          data: new DialogConfirmationConfig({
-            title: this.translateService.instant('ACCOUNT.SIDEBAR.DIALOG_LOGOUT.TEXT_TITLE')
+        map(() =>
+          this.dialogService.open(DialogConfirmationComponent, {
+            data: new DialogConfirmationConfig({
+              title: this.translateService.instant('ACCOUNT.SIDEBAR.DIALOG_LOGOUT.TEXT_TITLE')
+            })
           })
-        })),
+        ),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {
           if (result) {

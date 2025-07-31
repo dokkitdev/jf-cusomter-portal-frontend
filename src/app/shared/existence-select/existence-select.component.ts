@@ -1,11 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter } from 'ngrx-forms';
 import { ExistenceSelectComponentFacade } from './existence-select.facade';
 import { CustomSelectOption } from '@shared/custom-select';
@@ -25,7 +18,8 @@ import { Observable } from 'rxjs';
     },
     ExistenceSelectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class ExistenceSelectComponent {
   @Input() controlState: FormControlState<number>;
@@ -44,9 +38,7 @@ export class ExistenceSelectComponent {
 
   public options$: Observable<Array<CustomSelectOption<boolean>>>;
 
-  constructor(
-    private facade: ExistenceSelectComponentFacade
-  ) {
+  constructor(private facade: ExistenceSelectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options$ = this.facade.options$;
   }

@@ -5,7 +5,8 @@ import { Media } from '@shared/media';
   selector: 'media-multiselect-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class MediaMultiselectItemComponent {
   @Input() item: Media;

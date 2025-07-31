@@ -1,4 +1,4 @@
-import IMask from 'imask';
+import { Masked } from 'imask';
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
 import { ValidationMessages } from '@shared/validation-errors';
 import { FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER, Actions } from 'ngrx-forms';
@@ -14,7 +14,8 @@ import { FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER, Actio
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class FormTextComponent {
   @Input() controlState: FormControlState<string>;
@@ -24,7 +25,7 @@ export class FormTextComponent {
   @Input() label: string;
   @Input() description: string;
   @Input() validationMessages: ValidationMessages;
-  @Input() mask: IMask.AnyMasked;
+  @Input() mask: Masked;
 
   @Output() controlStateActionTriggered: EventEmitter<Actions<any>>;
 

@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormTextModule } from '@shared/form-text';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { PublicLayoutModule } from '../shared/layout';
 import { RouteLinkModule } from '@shared/route-link';
 import { FormErrorModule } from '@shared/form-error';
@@ -20,7 +20,7 @@ import { PublicLoginConfirmationRequestErrorComponent } from './shared/component
   declarations: [
     PublicLoginConfirmationPageComponent,
     PublicLoginConfirmationMessageComponent,
-    PublicLoginConfirmationRequestErrorComponent,
+    PublicLoginConfirmationRequestErrorComponent
   ],
   imports: [
     CommonModule,
@@ -29,12 +29,13 @@ import { PublicLoginConfirmationRequestErrorComponent } from './shared/component
     PublicLoginConfirmationPageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     PublicLayoutModule,
     RouteLinkModule,
     FormErrorModule,
-    ButtonModule,
+    ButtonModule
   ],
-  providers: [PublicLoginConfirmationPageFacade, ComponentStore],
+  providers: [PublicLoginConfirmationPageFacade, ComponentStore]
 })
 export class PublicLoginConfirmationPageModule {}

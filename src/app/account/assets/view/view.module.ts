@@ -5,7 +5,7 @@ import { AccountAssetsViewPageRoutingModule } from './view.routing';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AccountAssetsViewPageFacade } from './view.facade';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { AssetModule } from '@shared/asset';
 import { FileModule } from '@shared/file';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
@@ -32,7 +32,8 @@ import { ComponentStore } from '@ngrx/component-store';
     RouterModule,
     TranslateModule,
     AccountAssetsViewPageRoutingModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     AssetModule,
     FileModule,
     LoadingSpinnerModule,
@@ -43,9 +44,6 @@ import { ComponentStore } from '@ngrx/component-store';
     SnakeModule,
     AccountAssetTestsModule
   ],
-  providers: [
-    AccountAssetsViewPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAssetsViewPageFacade, ComponentStore]
 })
-export class AccountAssetsViewPageModule { }
+export class AccountAssetsViewPageModule {}

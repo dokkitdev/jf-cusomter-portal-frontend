@@ -30,7 +30,8 @@ import { ValidationMessages } from '@shared/validation-errors';
     },
     AccountSiteSelectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountSiteSelectComponent implements OnInit, OnDestroy {
   @Input()
@@ -54,9 +55,7 @@ export class AccountSiteSelectComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
   public hasNextItems$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountSiteSelectComponentFacade
-  ) {
+  constructor(private facade: AccountSiteSelectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.selectedSiteChanged = new EventEmitter<Site>();
     this.controlState$ = this.facade.controlState$;

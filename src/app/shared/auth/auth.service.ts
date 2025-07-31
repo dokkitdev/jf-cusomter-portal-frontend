@@ -1,7 +1,4 @@
-import {
-  AuthResponse,
-  AuthService as CommonAuthService,
-} from '@ronas-it/angular-common';
+import { AuthResponse, AuthService as CommonAuthService } from '@ronas-it/angular-common';
 import { Injectable, Injector } from '@angular/core';
 import { User } from '@shared/user';
 import { Observable } from 'rxjs';
@@ -20,13 +17,8 @@ export class AuthService extends CommonAuthService<User> {
     this.endpoint = '/auth';
   }
 
-  public signIn(
-    credentials: AuthCredentials,
-    remember: boolean
-  ): Observable<AuthResponse<User>> {
-    return super
-      .authorize(credentials, remember)
-      .pipe(switchMap((authResponse) => this.refreshProfile(authResponse)));
+  public signIn(credentials: AuthCredentials, remember: boolean): Observable<AuthResponse<User>> {
+    return super.authorize(credentials, remember).pipe(switchMap((authResponse) => this.refreshProfile(authResponse)));
   }
 
   public sendAuthCode(email: string): Observable<void> {
@@ -37,9 +29,7 @@ export class AuthService extends CommonAuthService<User> {
     return this.apiService.post(`${this.endpoint}/forgot-password`, { email });
   }
 
-  public restorePasswordRequest(
-    request: RestorePasswordRequest
-  ): Observable<void> {
+  public restorePasswordRequest(request: RestorePasswordRequest): Observable<void> {
     return this.apiService.post(
       `${this.endpoint}/restore-password`,
       classToPlain(request, { groups: [ClassGroup.MAIN] })
@@ -50,9 +40,7 @@ export class AuthService extends CommonAuthService<User> {
     return this.apiService.post(`${this.endpoint}/token/check`, { token });
   }
 
-  private refreshProfile(
-    authResponse: AuthResponse<User>
-  ): Observable<AuthResponse<User>> {
+  private refreshProfile(authResponse: AuthResponse<User>): Observable<AuthResponse<User>> {
     return this.userService.refreshProfile().pipe(map(() => authResponse));
   }
 }

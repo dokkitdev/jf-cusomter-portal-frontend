@@ -6,14 +6,13 @@ import { AccountReportsKPIPageFacade } from './kpi.facade';
   selector: 'account-reports-kpi-page',
   templateUrl: 'kpi.html',
   styleUrls: ['kpi.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsKPIComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountReportsKPIPageFacade
-  ) {
+  constructor(private facade: AccountReportsKPIPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

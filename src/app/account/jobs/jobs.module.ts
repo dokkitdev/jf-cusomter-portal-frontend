@@ -11,7 +11,7 @@ import { AccountJobsItemsComponent } from './shared/components/items/items.compo
 import { AccountJobsItemsHeaderComponent } from './shared/components/items-header/items-header.component';
 import { AccountJobsFiltersComponent } from './shared/components/filters/filters.component';
 import { JobModule } from '@shared/job';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -43,7 +43,8 @@ import { NotificationModule } from '@shared/notification';
     TranslateModule,
     AccountJobsPageRoutingModule,
     JobModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -61,9 +62,6 @@ import { NotificationModule } from '@shared/notification';
     ButtonModule,
     NotificationModule
   ],
-  providers: [
-    AccountJobsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountJobsPageFacade, ComponentStore]
 })
-export class AccountJobsPageModule { }
+export class AccountJobsPageModule {}

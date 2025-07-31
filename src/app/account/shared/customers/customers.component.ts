@@ -20,7 +20,8 @@ import { Actions, FormArrayState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER
       multi: true
     }
   ],
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountCustomersComponent implements OnDestroy {
   @Input()
@@ -34,9 +35,7 @@ export class AccountCustomersComponent implements OnDestroy {
   public controlState$: Observable<FormArrayState<number>>;
   public excludeCustomerID$: Observable<Array<number>>;
 
-  constructor(
-    private facade: AccountCustomersComponentFacade
-  ) {
+  constructor(private facade: AccountCustomersComponentFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.controlState$ = this.facade.controlState$;
     this.excludeCustomerID$ = this.facade.excludeCustomerID$;

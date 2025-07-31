@@ -12,7 +12,8 @@ import { FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxCheckboxViewAdapter, Acti
       useExisting: forwardRef(() => NgrxCheckboxViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class FormCheckboxComponent {
   @Input() controlState: FormControlState<boolean>;

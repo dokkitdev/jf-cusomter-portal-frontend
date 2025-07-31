@@ -4,6 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'dialog-view-asset-test-readings-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class AccountDialogViewAssetTestReadingsItemsHeaderComponent { }
+export class AccountDialogViewAssetTestReadingsItemsHeaderComponent {}

@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AccountSitesViewPageFacade } from './view.facade';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { SiteModule } from '@shared/site';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ComponentStore } from '@ngrx/component-store';
@@ -23,18 +23,15 @@ import { AccountSiteContactsModule } from '@app/account/shared/site-contacts';
 import { AccountDialogJobRequestModule } from '@app/account/shared/dialog-job-request';
 
 @NgModule({
-  declarations: [
-    AccountSitesViewPageComponent,
-    AccountSitesViewFormComponent,
-    AccountSitesViewHeaderComponent
-  ],
+  declarations: [AccountSitesViewPageComponent, AccountSitesViewFormComponent, AccountSitesViewHeaderComponent],
   imports: [
     CommonModule,
     RouterModule,
     TranslateModule,
     NgrxFormsModule,
     AccountSitesViewPageRoutingModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     SiteModule,
     LoadingSpinnerModule,
     FormGroupModule,
@@ -47,9 +44,6 @@ import { AccountDialogJobRequestModule } from '@app/account/shared/dialog-job-re
     AccountSiteContactsModule,
     AccountDialogJobRequestModule
   ],
-  providers: [
-    AccountSitesViewPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountSitesViewPageFacade, ComponentStore]
 })
-export class AccountSitesViewPageModule { }
+export class AccountSitesViewPageModule {}

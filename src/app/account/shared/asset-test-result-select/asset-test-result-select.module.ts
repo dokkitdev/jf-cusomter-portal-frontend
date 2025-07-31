@@ -4,15 +4,8 @@ import { AccountAssetTestResultSelectComponent } from './asset-test-result-selec
 import { CustomSelectModule } from '@shared/custom-select';
 
 @NgModule({
-  declarations: [
-    AccountAssetTestResultSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    CustomSelectModule
-  ],
-  exports: [
-    AccountAssetTestResultSelectComponent
-  ]
+  declarations: [AccountAssetTestResultSelectComponent],
+  imports: [CommonModule, CustomSelectModule],
+  exports: [AccountAssetTestResultSelectComponent]
 })
-export class AccountAssetTestResultSelectModule { }
+export class AccountAssetTestResultSelectModule {}

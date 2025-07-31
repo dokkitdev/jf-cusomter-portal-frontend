@@ -7,7 +7,8 @@ import { once } from 'lodash';
   selector: 'custom-select-trigger',
   templateUrl: 'trigger.html',
   styleUrls: ['trigger.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CustomSelectTriggerComponent<T extends FormControlValueTypes, V> {
   @Input() customTemplate: TemplateRef<any>;
@@ -19,9 +20,7 @@ export class CustomSelectTriggerComponent<T extends FormControlValueTypes, V> {
   @Output() firstClick: EventEmitter<void>;
 
   public get triggerText(): string {
-    return (this.isPermanentlyShowPlaceholder)
-      ? this.placeholder
-      : this.selectedOption?.title || this.placeholder;
+    return this.isPermanentlyShowPlaceholder ? this.placeholder : this.selectedOption?.title || this.placeholder;
   }
 
   public onceClick: () => void;

@@ -32,7 +32,8 @@ import { FileSizeConfigs } from '@shared/file-size';
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class ImageUploaderComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<number>;
@@ -59,9 +60,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   public spinnerDiameter: typeof SpinnerDiameter;
   public fileSizeConfigs: FileSizeConfigs;
 
-  constructor(
-    private facade: ImageUploaderFacade
-  ) {
+  constructor(private facade: ImageUploaderFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.startUploading = this.facade.startUploading;
     this.endUploading = this.facade.endUploading;

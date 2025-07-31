@@ -11,10 +11,8 @@ import { configuration } from '@configurations';
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountAdminUsersItemComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountAdminUsersItemComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountAdminUsersItemComponent {
   @Input() item: User;
@@ -25,9 +23,7 @@ export class AccountAdminUsersItemComponent {
   public spinnerDiameter: typeof SpinnerDiameter;
   public dateFormat: string;
 
-  constructor(
-    private facade: AccountAdminUsersItemComponentFacade
-  ) {
+  constructor(private facade: AccountAdminUsersItemComponentFacade) {
     this.deletingSuccess = this.facade.deletingSuccessSubject;
     this.isSendingRequest$ = this.facade.isSendingRequest$;
     this.spinnerDiameter = SpinnerDiameter;

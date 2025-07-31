@@ -4,6 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'reports-service-control-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class AccountReportsServiceControlHeaderComponent { }
+export class AccountReportsServiceControlHeaderComponent {}

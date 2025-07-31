@@ -6,11 +6,11 @@ export class AssetCustomField {
   public id: number;
 
   @Expose({ groups: [ClassGroup.MAIN] })
-  @Transform(({ value }) => (value) ? value : null, { toPlainOnly: true })
+  @Transform(({ value }) => (value ? value : null), { toPlainOnly: true })
   public name: string;
 
   @Expose({ groups: [ClassGroup.MAIN] })
-  @Transform(({ value }) => (value) ? value : null, { toPlainOnly: true })
+  @Transform(({ value }) => (value ? value : null), { toPlainOnly: true })
   public value: string;
 
   @Expose({ name: 'simpro_custom_field_id', groups: [ClassGroup.MAIN] })

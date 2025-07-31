@@ -1,32 +1,52 @@
 <div class="table-head">
-  <div *ngrxLet="parameters$; let parameters" class="table-row">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
     <div class="table-cell sitecontacts-title">
-      <header-sort [orderBy]="siteContactSortField.TITLE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.TITLE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_TITLE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sitecontacts-name">
-      <header-sort [orderBy]="siteContactSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_NAME' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sitecontacts-email">
-      <header-sort [orderBy]="siteContactSortField.EMAIL" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.EMAIL"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_EMAIL' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sitecontacts-phone">
-      <header-sort [orderBy]="siteContactSortField.WORK_PHONE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.WORK_PHONE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_PHONE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sitecontacts-mobile">
-      <header-sort [orderBy]="siteContactSortField.CELL_PHONE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.CELL_PHONE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_MOBILE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sitecontacts-position">
-      <header-sort [orderBy]="siteContactSortField.POSITION" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteContactSortField.POSITION"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SHARED.SITE_CONTACTS.ITEMS_HEADER.TEXT_POSITION' | translate }}
       </header-sort>
     </div>

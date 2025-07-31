@@ -35,7 +35,8 @@ import { ValidationMessages } from '@shared/validation-errors';
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   @Input()
@@ -70,9 +71,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   public getIsSelected$: (id: T) => Observable<boolean>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    protected facade: CustomMultiselectFacade<T>
-  ) {
+  constructor(protected facade: CustomMultiselectFacade<T>) {
     this.placeholder = '';
     this.hasTriggerIcon = true;
     this.position = 'left';

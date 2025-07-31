@@ -4,7 +4,9 @@
   (opened)="dropdownToggleOpened($event)"
   class="dropdown filter-select"
   dropdown>
-  <a #trigger class="dropdown-trigger filter-select-trigger">
+  <a
+    #trigger
+    class="dropdown-trigger filter-select-trigger">
     {{ name }}
     <span class="dropdown-trigger-icon"></span>
   </a>
@@ -17,6 +19,6 @@
       (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
       (keyup.enter)="dropdownClosed()"
       #control
-      class="filter-select-control">
+      class="filter-select-control" />
   </div>
 </div>

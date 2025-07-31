@@ -2,7 +2,7 @@ import { ButtonModule } from '@shared/button';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { AccountDialogAddDocumentComponent } from './dialog-add-document.component';
 import { FormTextModule } from '@shared/form-text';
@@ -13,15 +13,14 @@ import { FormTextareaModule } from '@shared/form-textarea';
 import { ImageUploaderModule } from '@shared/image-uploader';
 
 @NgModule({
-  declarations: [
-    AccountDialogAddDocumentComponent
-  ],
+  declarations: [AccountDialogAddDocumentComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     DocumentModule,
     FormTextModule,
@@ -29,8 +28,6 @@ import { ImageUploaderModule } from '@shared/image-uploader';
     ImageUploaderModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogAddDocumentComponent
-  ]
+  exports: [AccountDialogAddDocumentComponent]
 })
-export class AccountDialogAddDocumentModule { }
+export class AccountDialogAddDocumentModule {}

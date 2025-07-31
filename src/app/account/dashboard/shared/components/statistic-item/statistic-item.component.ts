@@ -5,7 +5,8 @@ import { Params } from '@angular/router';
   selector: 'dashboard-statistic-item',
   templateUrl: 'statistic-item.html',
   styleUrls: ['statistic-item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDashboardStatisticItemComponent {
   @Input() name: string;

@@ -9,14 +9,13 @@ import { Contact } from '@shared/contact';
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountSiteContactsItemsComponent {
   public items$: Observable<Array<Contact>>;
 
-  constructor(
-    private facade: AccountSiteContactsComponentFacade
-  ) {
+  constructor(private facade: AccountSiteContactsComponentFacade) {
     this.items$ = this.facade.sortedItems$;
   }
 

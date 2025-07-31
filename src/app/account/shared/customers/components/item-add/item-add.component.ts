@@ -4,7 +4,8 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from 
   selector: 'account-customers-item-add',
   templateUrl: 'item-add.html',
   styleUrls: ['item-add.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountCustomersItemAddComponent {
   @Input() isDisabled: boolean;

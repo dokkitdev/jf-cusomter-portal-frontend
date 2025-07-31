@@ -8,16 +8,15 @@ import { SpinnerDiameter } from '@shared/loading-spinner';
   selector: 'account-jobs-view-page',
   templateUrl: 'view.html',
   styleUrls: ['view.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewPageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
   public job$: Observable<Job>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    private facade: AccountJobsViewPageFacade
-  ) {
+  constructor(private facade: AccountJobsViewPageFacade) {
     this.isLoading$ = this.facade.isLoading$;
     this.job$ = this.facade.job$;
     this.spinnerDiameter = SpinnerDiameter;

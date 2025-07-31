@@ -14,7 +14,9 @@ export class Media {
 
   @Type(() => Object)
   @Transform(({ obj }) => obj.file)
-  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING, ClassGroup.CREATING] })
+  @Expose({
+    groups: [ClassGroup.MAIN, ClassGroup.UPDATING, ClassGroup.CREATING]
+  })
   public file: File;
 
   constructor(model: Partial<Media> = {}) {

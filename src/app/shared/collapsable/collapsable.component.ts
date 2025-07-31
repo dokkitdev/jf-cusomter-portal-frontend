@@ -8,17 +8,13 @@ import { CollapsableFacade } from './collapsable.facade';
   templateUrl: 'collapsable.html',
   styleUrls: ['collapsable.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    CollapsableFacade,
-    ComponentStore
-  ]
+  providers: [CollapsableFacade, ComponentStore],
+  standalone: false
 })
 export class CollapsableComponent {
   public isCollapsed$: Observable<boolean>;
 
-  constructor(
-    private facade: CollapsableFacade
-  ) {
+  constructor(private facade: CollapsableFacade) {
     this.isCollapsed$ = this.facade.isCollapsed$;
   }
 

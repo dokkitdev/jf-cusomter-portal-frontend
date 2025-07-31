@@ -1,14 +1,6 @@
 import { ValidationMessages } from '@shared/validation-errors';
 import { Customer } from '@shared/customer';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  OnDestroy,
-  EventEmitter,
-  forwardRef
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, OnDestroy, EventEmitter, forwardRef } from '@angular/core';
 import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 import { Subject } from 'rxjs';
 
@@ -23,7 +15,8 @@ import { Subject } from 'rxjs';
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class AccountCustomersItemComponent implements OnDestroy {
   @Input() controlState: FormControlState<number>;

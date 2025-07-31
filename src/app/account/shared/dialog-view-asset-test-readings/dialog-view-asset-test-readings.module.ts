@@ -25,8 +25,6 @@ import { ButtonModule } from '@shared/button';
     TableContainerModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogViewAssetTestReadingsComponent
-  ]
+  exports: [AccountDialogViewAssetTestReadingsComponent]
 })
-export class AccountDialogViewAssetTestReadingsModule { }
+export class AccountDialogViewAssetTestReadingsModule {}

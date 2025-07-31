@@ -1,14 +1,18 @@
 <section
   [isNoContent]="!schedules?.length"
   name="{{ 'ACCOUNT.JOBS.VIEW.TEXT_ENGINEERS' | translate }}">
-  <span ngProjectAs="section-icon" class="icon icon-employees icon-mask icon-mask-dark-blue"></span>
+  <span
+    ngProjectAs="section-icon"
+    class="icon icon-employees icon-mask icon-mask-dark-blue"></span>
   <div class="jobview-schedules">
     <div class="table">
       <jobs-view-engineers-items-header></jobs-view-engineers-items-header>
       <div class="table-content">
-        <div *ngFor="let item of schedules; trackByProperty: 'id'" class="table-content-row">
-          <jobs-view-engineers-item [item]="item"></jobs-view-engineers-item>
-        </div>
+        @for (item of schedules; track item) {
+          <div class="table-content-row">
+            <jobs-view-engineers-item [item]="item"></jobs-view-engineers-item>
+          </div>
+        }
       </div>
     </div>
   </div>

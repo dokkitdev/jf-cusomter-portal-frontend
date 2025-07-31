@@ -5,12 +5,12 @@ import { PublicLoginConfirmationPageComponent } from './login-confirmation.compo
 const routes: Routes = [
   {
     path: '',
-    component: PublicLoginConfirmationPageComponent,
-  },
+    component: PublicLoginConfirmationPageComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class PublicLoginConfirmationPageRoutingModule {}

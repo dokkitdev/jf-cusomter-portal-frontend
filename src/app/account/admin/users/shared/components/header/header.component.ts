@@ -5,12 +5,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'admin-users-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminUsersHeaderComponent {
-  constructor(
-    private facade: AccountAdminUsersPageFacade
-  ) { }
+  constructor(private facade: AccountAdminUsersPageFacade) {}
 
   public newUserButtonClicked(): void {
     this.facade.createItem();

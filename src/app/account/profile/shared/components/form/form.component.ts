@@ -10,16 +10,15 @@ import { AccountProfilePageForm } from '../../forms';
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountProfileFormComponent {
   public isSubmitting$: Observable<boolean>;
   public isPasswordBlockVisible$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AccountProfilePageForm>>;
 
-  constructor(
-    private facade: AccountProfilePageFacade
-  ) {
+  constructor(private facade: AccountProfilePageFacade) {
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isPasswordBlockVisible$ = this.facade.isPasswordBlockVisible$;
     this.formState$ = this.facade.formState$;

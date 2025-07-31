@@ -8,15 +8,14 @@ import { AccountReportsKPIQueryParameters } from '../../models';
   selector: 'reports-kpi-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsKPIItemsHeaderComponent {
   public parameters$: Observable<AccountReportsKPIQueryParameters>;
   public jobSortField: typeof JobSortField;
 
-  constructor(
-    private facade: AccountReportsKPIPageFacade
-  ) {
+  constructor(private facade: AccountReportsKPIPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.jobSortField = JobSortField;
   }

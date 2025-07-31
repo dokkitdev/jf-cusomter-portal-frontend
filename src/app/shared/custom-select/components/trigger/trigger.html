@@ -10,7 +10,9 @@
     (click)="triggerClicked()"
     class="dropdown-trigger">
     {{ triggerText }}
-    <span *ngIf="hasTriggerIcon" class="dropdown-trigger-icon"></span>
+    @if (hasTriggerIcon) {
+      <span class="dropdown-trigger-icon"></span>
+    }
   </a>
 </ng-template>
 <ng-template

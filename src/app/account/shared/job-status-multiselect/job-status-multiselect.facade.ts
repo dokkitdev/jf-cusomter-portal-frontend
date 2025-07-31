@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountJobStatusMultiselectComponentState } from './job-status-multiselect.state';
 import { Observable, Subject } from 'rxjs';
 import { CustomSelectOption } from '@shared/custom-select/models';
@@ -19,11 +20,14 @@ export class AccountJobStatusMultiselectComponentFacade {
 
   public get options$(): Observable<Array<CustomSelectOption<string>>> {
     return this.items$.pipe(
-      map((items) => items.map((item) =>
-        new CustomSelectOption({
-          id: item.name,
-          title: item.name
-        }))
+      map((items) =>
+        items.map(
+          (item) =>
+            new CustomSelectOption({
+              id: item.name,
+              title: item.name
+            })
+        )
       )
     );
   }
@@ -51,21 +55,17 @@ export class AccountJobStatusMultiselectComponentFacade {
   }
 
   private updateStateItems(items: Array<JobStatus> = []): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -74,17 +74,15 @@ export class AccountJobStatusMultiselectComponentFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.jobService
-            .getStatuses()
-            .pipe(
-              tapResponse(
-                (items) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(items);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.jobService.getStatuses().pipe(
+            tapResponse(
+              (items) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(items);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );

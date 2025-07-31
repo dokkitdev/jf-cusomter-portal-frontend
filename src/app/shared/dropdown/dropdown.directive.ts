@@ -12,7 +12,8 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[dropdown]'
+  selector: '[dropdown]',
+  standalone: false
 })
 export class DropdownDirective implements OnDestroy, AfterViewInit, AfterViewChecked {
   @Input() id: string;
@@ -40,9 +41,7 @@ export class DropdownDirective implements OnDestroy, AfterViewInit, AfterViewChe
   public ngAfterViewInit(): void {
     const linkElement = this.elementRef.nativeElement.querySelector('.dropdown-trigger');
     if (linkElement) {
-      this.subscriptions.push(
-        this.renderer.listen(linkElement, 'click', this.toggle.bind(this))
-      );
+      this.subscriptions.push(this.renderer.listen(linkElement, 'click', this.toggle.bind(this)));
     }
   }
 

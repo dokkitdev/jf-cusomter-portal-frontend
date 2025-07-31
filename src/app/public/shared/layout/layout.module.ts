@@ -3,14 +3,8 @@ import { NgModule } from '@angular/core';
 import { PublicLayoutComponent } from './layout.component';
 
 @NgModule({
-  declarations: [
-    PublicLayoutComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    PublicLayoutComponent
-  ]
+  declarations: [PublicLayoutComponent],
+  imports: [CommonModule],
+  exports: [PublicLayoutComponent]
 })
-export class PublicLayoutModule { }
+export class PublicLayoutModule {}

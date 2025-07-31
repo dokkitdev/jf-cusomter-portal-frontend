@@ -5,16 +5,8 @@ import { ExistenceSelectComponent } from './existence-select.component';
 import { CustomSelectModule } from '@shared/custom-select';
 
 @NgModule({
-  declarations: [
-    ExistenceSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CustomSelectModule
-  ],
-  exports: [
-    ExistenceSelectComponent
-  ]
+  declarations: [ExistenceSelectComponent],
+  imports: [CommonModule, TranslateModule, CustomSelectModule],
+  exports: [ExistenceSelectComponent]
 })
-export class ExistenceSelectModule { }
+export class ExistenceSelectModule {}

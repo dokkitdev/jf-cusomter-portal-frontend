@@ -7,7 +7,8 @@ import { JobWorkOrder } from '@shared/job';
   selector: 'jobs-view-notes-item',
   templateUrl: 'notes-item.html',
   styleUrls: ['notes-item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewNotesItemComponent {
   @Input() item: JobWorkOrder;
@@ -18,9 +19,7 @@ export class AccountJobsViewNotesItemComponent {
 
   public dateFormat: string;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
+  constructor(private sanitizer: DomSanitizer) {
     this.dateFormat = configuration.dateFormats.jobDate;
   }
 }

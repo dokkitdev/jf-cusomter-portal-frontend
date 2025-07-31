@@ -4,27 +4,22 @@ import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { AccountCustomersItemComponent } from './components/item/item.component';
 import { AccountCustomersItemAddComponent } from './components/item-add/item-add.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { AccountCustomerSelectModule } from '../customer-select';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    AccountCustomersComponent,
-    AccountCustomersItemComponent,
-    AccountCustomersItemAddComponent
-  ],
+  declarations: [AccountCustomersComponent, AccountCustomersItemComponent, AccountCustomersItemAddComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgrxFormsModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     AccountCustomerSelectModule
   ],
-  exports: [
-    AccountCustomersComponent
-  ]
+  exports: [AccountCustomersComponent]
 })
-export class AccountCustomersModule { }
+export class AccountCustomersModule {}

@@ -6,14 +6,13 @@ import { AccountAssetsPageFacade } from './assets.facade';
   selector: 'account-assets-page',
   templateUrl: 'assets.html',
   styleUrls: ['assets.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountAssetsPageFacade
-  ) {
+  constructor(private facade: AccountAssetsPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

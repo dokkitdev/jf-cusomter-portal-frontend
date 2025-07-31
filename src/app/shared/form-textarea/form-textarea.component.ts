@@ -13,7 +13,8 @@ import { Actions, FormControlState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPT
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class FormTextareaComponent {
   @Input() controlState: FormControlState<string>;

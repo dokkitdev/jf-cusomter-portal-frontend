@@ -9,7 +9,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountAdminUsersItemsComponent {
   public items$: Observable<Array<User>>;
@@ -20,9 +21,7 @@ export class AccountAdminUsersItemsComponent {
   public hasPagination$: Observable<boolean>;
   public paginationId$: Observable<string>;
 
-  constructor(
-    private facade: AccountAdminUsersPageFacade
-  ) {
+  constructor(private facade: AccountAdminUsersPageFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

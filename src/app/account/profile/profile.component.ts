@@ -6,14 +6,13 @@ import { AccountProfilePageFacade } from './profile.facade';
   selector: 'account-profile-page',
   templateUrl: 'profile.html',
   styleUrls: ['profile.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountProfilePageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountProfilePageFacade
-  ) {
+  constructor(private facade: AccountProfilePageFacade) {
     this.isLoading$ = this.facade.isLoading$;
   }
 

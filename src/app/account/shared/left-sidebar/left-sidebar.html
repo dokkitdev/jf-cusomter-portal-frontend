@@ -38,32 +38,36 @@
           <span class="icon icon-quote icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS' | translate }}</span>
         </a>
-        <div *ngIf="isReportsMenuOpened$ | async" [@heightCollapse] class="sidebar-section-admin">
-          <a
-            routerLink="/account/reports/service-control"
-            routerLinkActive="active"
-            class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_SERVICE_CONTROL' | translate }}</span>
-          </a>
-          <a
-            routerLink="/account/reports/repair-response"
-            routerLinkActive="active"
-            class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_KPI' | translate }}</span>
-          </a>
-          <a
-            routerLink="/account/reports/warehouse"
-            routerLinkActive="active"
-            class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_WAREHOUSE' | translate }}</span>
-          </a>
-          <a
-            routerLink="/account/reports/zero"
-            routerLinkActive="active"
-            class="sidebar-item">
-            <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_ZERO' | translate }}</span>
-          </a>
-        </div>
+        @if (isReportsMenuOpened$ | async) {
+          <div
+            [@heightCollapse]
+            class="sidebar-section-admin">
+            <a
+              routerLink="/account/reports/service-control"
+              routerLinkActive="active"
+              class="sidebar-item">
+              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_SERVICE_CONTROL' | translate }}</span>
+            </a>
+            <a
+              routerLink="/account/reports/repair-response"
+              routerLinkActive="active"
+              class="sidebar-item">
+              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_KPI' | translate }}</span>
+            </a>
+            <a
+              routerLink="/account/reports/warehouse"
+              routerLinkActive="active"
+              class="sidebar-item">
+              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_WAREHOUSE' | translate }}</span>
+            </a>
+            <a
+              routerLink="/account/reports/zero"
+              routerLinkActive="active"
+              class="sidebar-item">
+              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS_ZERO' | translate }}</span>
+            </a>
+          </div>
+        }
         <a
           routerLink="/account/documents"
           routerLinkActive="active"
@@ -71,7 +75,7 @@
           <span class="icon icon-attachment icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_DOCUMENTS' | translate }}</span>
         </a>
-        <ng-container *ngIf="isAdmin$ | async">
+        @if (isAdmin$ | async) {
           <a
             (click)="toggleAdminMenu()"
             [ngClass]="{ active: isAdminMenuItemActive$ | async }"
@@ -79,23 +83,29 @@
             <span class="icon icon-settings icon-mask"></span>
             <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN' | translate }}</span>
           </a>
-          <div *ngIf="isAdminMenuOpened$ | async" [@heightCollapse] class="sidebar-section-admin">
-            <a
-              routerLink="/account/admin/users"
-              routerLinkActive="active"
-              class="sidebar-item">
-              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_USERS' | translate }}</span>
-            </a>
-            <a
-              routerLink="/account/admin/documents"
-              routerLinkActive="active"
-              class="sidebar-item">
-              <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_DOCUMENTS' | translate }}</span>
-            </a>
-          </div>
-        </ng-container>
+          @if (isAdminMenuOpened$ | async) {
+            <div
+              [@heightCollapse]
+              class="sidebar-section-admin">
+              <a
+                routerLink="/account/admin/users"
+                routerLinkActive="active"
+                class="sidebar-item">
+                <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_USERS' | translate }}</span>
+              </a>
+              <a
+                routerLink="/account/admin/documents"
+                routerLinkActive="active"
+                class="sidebar-item">
+                <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN_DOCUMENTS' | translate }}</span>
+              </a>
+            </div>
+          }
+        }
       </div>
-      <div *ngrxLet="profile$; let profile" class="sidebar-section">
+      <div
+        *ngrxLet="profile$; let profile"
+        class="sidebar-section">
         <a
           routerLink="/account/profile"
           routerLinkActive="active"
@@ -103,7 +113,9 @@
           <span class="icon icon-profile icon-mask"></span>
           <span class="sidebar-label">{{ profile?.name }}</span>
         </a>
-        <a (click)="logout()" class="sidebar-item">
+        <a
+          (click)="logout()"
+          class="sidebar-item">
           <span class="icon icon-logout icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_LOGOUT' | translate }}</span>
         </a>

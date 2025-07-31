@@ -5,16 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CustomMultiselectModule } from '@shared/custom-multiselect';
 
 @NgModule({
-  declarations: [
-    AccountAssetNameMultiselectComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CustomMultiselectModule
-  ],
-  exports: [
-    AccountAssetNameMultiselectComponent
-  ]
+  declarations: [AccountAssetNameMultiselectComponent],
+  imports: [CommonModule, TranslateModule, CustomMultiselectModule],
+  exports: [AccountAssetNameMultiselectComponent]
 })
-export class AccountAssetNameMultiselectModule { }
+export class AccountAssetNameMultiselectModule {}

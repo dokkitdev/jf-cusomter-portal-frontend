@@ -10,10 +10,18 @@
   <div class="table-cell assets-make">{{ item.make }}</div>
   <div class="table-cell assets-model">{{ item.model }}</div>
   <div class="table-cell assets-testresult">
-    <span *ngIf="item.lastTestResult">{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.lastTestResult | snake | uppercase | translate }}</span>
+    @if (item.lastTestResult) {
+      <span>{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.lastTestResult | snake | uppercase | translate }}</span>
+    }
   </div>
-  <div class="table-cell assets-testdate">{{ item.lastTestDate | date: dateFormat }}</div>
+  <div class="table-cell assets-testdate">
+    {{ item.lastTestDate | date: dateFormat }}
+  </div>
   <div class="table-cell assets-servicelevel">{{ item.serviceLevelName }}</div>
-  <div class="table-cell assets-servicedate">{{ item.nextServiceDate | date: dateFormat }}</div>
-  <div class="table-cell assets-expirydate">{{ item.expiryDate | date: dateFormat }}</div>
+  <div class="table-cell assets-servicedate">
+    {{ item.nextServiceDate | date: dateFormat }}
+  </div>
+  <div class="table-cell assets-expirydate">
+    {{ item.expiryDate | date: dateFormat }}
+  </div>
 </div>

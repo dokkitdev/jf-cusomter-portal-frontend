@@ -1,63 +1,72 @@
-<label *ngIf="label" class="form-label">
-  {{ label }}
-</label>
-<div
-  *ngIf="!(isDisabled$ | async) && !isManuallyDisabled; else disabledDropdown"
-  [class.dropdown-left]="position === 'left'"
-  [class.dropdown-right]="position === 'right'"
-  (opened)="dropdownToggleOpened($event)"
-  class="dropdown custom-select"
-  dropdown>
-  <custom-select-trigger
-    [customTemplate]="triggerTemplate"
-    [selectedOption]="selectedOption$ | async"
-    [hasTriggerIcon]="hasTriggerIcon"
-    [placeholder]="placeholder"
-    [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
-    (firstClick)="triggerFirstClicked()">
-  </custom-select-trigger>
-
-  <div [ngClass]="{ 'dropdown-content-scrollable': hasScroll }" class="dropdown-content">
-    <custom-select-filter *ngIf="hasFilter" #filter></custom-select-filter>
+@if (label) {
+  <label class="form-label"> {{ label }} </label>
+}
+@if (!(isDisabled$ | async) && !isManuallyDisabled) {
+  <div
+    [class.dropdown-left]="position === 'left'"
+    [class.dropdown-right]="position === 'right'"
+    (opened)="dropdownToggleOpened($event)"
+    class="dropdown custom-select"
+    dropdown>
+    <custom-select-trigger
+      [customTemplate]="triggerTemplate"
+      [selectedOption]="selectedOption$ | async"
+      [hasTriggerIcon]="hasTriggerIcon"
+      [placeholder]="placeholder"
+      [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+      (firstClick)="triggerFirstClicked()">
+    </custom-select-trigger>
     <div
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
-      [scrollWindow]="false"
-      [infiniteScrollDisabled]="isLoading || !hasNextItems"
-      [ngClass]="{ 'dropdown-scroll': hasScroll }"
-      (scrolled)="scrolled()"
-      infiniteScroll>
-      <div *ngrxLet="options$; let options" class="dropdown-items">
-        <custom-select-option
-          *ngFor="let option of options; trackByProperty: 'id'"
-          (optionClick)="optionClicked(option)"
-          [option]="option"
-          [customTemplate]="optionTemplate">
-        </custom-select-option>
-        <custom-select-not-found
-          *ngIf="!options?.length && !isLoading"
-          [customTemplate]="notFoundTemplate">
-        </custom-select-not-found>
-        <div *ngIf="isLoading" class="dropdown-item disabled">
-          <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
+      [ngClass]="{ 'dropdown-content-scrollable': hasScroll }"
+      class="dropdown-content">
+      @if (hasFilter) {
+        <custom-select-filter #filter></custom-select-filter>
+      }
+      <div
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        [scrollWindow]="false"
+        [infiniteScrollDisabled]="isLoading || !hasNextItems"
+        [ngClass]="{ 'dropdown-scroll': hasScroll }"
+        (scrolled)="scrolled()"
+        infiniteScroll>
+        <div
+          *ngrxLet="options$; let options"
+          class="dropdown-items">
+          @for (option of options; track option) {
+            <custom-select-option
+              (optionClick)="optionClicked(option)"
+              [option]="option"
+              [customTemplate]="optionTemplate">
+            </custom-select-option>
+          }
+          @if (!options?.length && !isLoading) {
+            <custom-select-not-found [customTemplate]="notFoundTemplate"> </custom-select-not-found>
+          }
+          @if (isLoading) {
+            <div class="dropdown-item disabled">
+              <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
+            </div>
+          }
         </div>
       </div>
     </div>
   </div>
-</div>
-<ng-template #disabledDropdown>
-  <div
-    class="dropdown custom-select disabled">
+} @else {
+  <div class="dropdown custom-select disabled">
     <a class="dropdown-trigger">
       <span class="dropdown-trigger-placeholder">{{ (selectedOption$ | async)?.title || placeholder }}</span>
-      <span *ngIf="hasTriggerIcon" class="dropdown-trigger-icon"></span>
+      @if (hasTriggerIcon) {
+        <span class="dropdown-trigger-icon"></span>
+      }
     </a>
   </div>
-</ng-template>
+}
 <ng-container *ngrxLet="controlState$; let controlState">
-  <validation-errors
-    *ngIf="controlState.isSubmitted && controlState.isInvalid"
-    [controlErrors]="controlState.errors"
-    [messages]="validationMessages">
-  </validation-errors>
+  @if (controlState.isSubmitted && controlState.isInvalid) {
+    <validation-errors
+      [controlErrors]="controlState.errors"
+      [messages]="validationMessages">
+    </validation-errors>
+  }
 </ng-container>

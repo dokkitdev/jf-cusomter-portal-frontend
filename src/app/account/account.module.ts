@@ -6,14 +6,7 @@ import { AccountRoutingModule } from './account.routing';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    AccountComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AccountRoutingModule,
-    AccountLeftSidebarModule
-  ]
+  declarations: [AccountComponent],
+  imports: [CommonModule, RouterModule, AccountRoutingModule, AccountLeftSidebarModule]
 })
-export class AccountModule { }
+export class AccountModule {}

@@ -27,7 +27,8 @@ import {
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class FilterSelectTextComponent<T extends FormControlValueTypes> {
   @ViewChild('control') controlElementRef: ElementRef;

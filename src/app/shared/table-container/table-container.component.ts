@@ -5,7 +5,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'table-container',
   templateUrl: 'table-container.html',
   styleUrls: ['table-container.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class TableContainerComponent {
   @Input() isLoading: boolean;

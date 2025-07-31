@@ -5,7 +5,8 @@ import { SpinnerDiameter } from './enums';
   selector: 'loading-spinner',
   templateUrl: 'loading-spinner.html',
   styleUrls: ['loading-spinner.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class LoadingSpinnerComponent {
   @Input() diameter: SpinnerDiameter;

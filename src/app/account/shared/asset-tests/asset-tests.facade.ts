@@ -6,13 +6,16 @@ import { orderBy } from 'lodash';
 import { Observable } from 'rxjs';
 import { AccountAssetTestsQueryParameters } from './models';
 import { AccountAssetTestsComponentState } from './asset-tests.state';
-import { AccountDialogViewAssetTestReadingsComponent, AccountDialogViewAssetTestReadingsData } from '../dialog-view-asset-test-readings';
+import {
+  AccountDialogViewAssetTestReadingsComponent,
+  AccountDialogViewAssetTestReadingsData
+} from '../dialog-view-asset-test-readings';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AccountAssetTestsComponentFacade {
   public get sortedItems$(): Observable<Array<AssetTest>> {
-    return this.componentStore.select((state) => orderBy(state.items, state.orderBy, (state.desc) ? 'desc' : 'asc'));
+    return this.componentStore.select((state) => orderBy(state.items, state.orderBy, state.desc ? 'desc' : 'asc'));
   }
 
   public get parameters$(): Observable<AccountAssetTestsQueryParameters> {
@@ -50,31 +53,31 @@ export class AccountAssetTestsComponentFacade {
   }
 
   private updateItems(items: Array<AssetTest>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateStateSort(parameters: AccountAssetTestsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc
+    }))();
   }
 
   private registerOpenViewReadingsDialogEffect(): void {
     this.openViewReadingsDialogEffect$ = this.componentStore.effect((origin$: Observable<AssetTest>) =>
       origin$.pipe(
-        map((assetTest) => this.dialogService.open(AccountDialogViewAssetTestReadingsComponent, {
-          autoFocus: false,
-          data: new AccountDialogViewAssetTestReadingsData({ readings: assetTest.readings })
-        }))
+        map((assetTest) =>
+          this.dialogService.open(AccountDialogViewAssetTestReadingsComponent, {
+            autoFocus: false,
+            data: new AccountDialogViewAssetTestReadingsData({
+              readings: assetTest.readings
+            })
+          })
+        )
       )
     );
   }

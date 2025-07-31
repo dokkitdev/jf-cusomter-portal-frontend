@@ -4,7 +4,8 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   selector: 'pagination-elements',
   templateUrl: 'pagination-elements.html',
   styleUrls: ['pagination-elements.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PaginationElementsComponent {
   @Input() paginationId: number;

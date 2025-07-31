@@ -6,7 +6,7 @@ import { AccountSiteContactsHeaderComponent } from './components/header/header.c
 import { AccountSiteContactsItemComponent } from './components/item/item.component';
 import { AccountSiteContactsItemsComponent } from './components/items/items.component';
 import { AccountSiteContactsItemsHeaderComponent } from './components/items-header/items-header.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -25,7 +25,8 @@ import { ButtonModule } from '@shared/button';
   imports: [
     CommonModule,
     TranslateModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -33,8 +34,6 @@ import { ButtonModule } from '@shared/button';
     AccountDialogEditContactModule,
     ButtonModule
   ],
-  exports: [
-    AccountSiteContactsComponent
-  ]
+  exports: [AccountSiteContactsComponent]
 })
-export class AccountSiteContactsModule { }
+export class AccountSiteContactsModule {}

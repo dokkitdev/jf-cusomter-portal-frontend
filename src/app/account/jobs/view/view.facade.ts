@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Job, JobAttachment, JobRelationType, JobService } from '@shared/job';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { AccountJobsViewPageState } from './view.state';
 import { exhaustMap, switchMap, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FileService } from '@shared/file';
 import { UserService } from '@shared/user';
-import { concatLatestFrom } from '@ngrx/effects';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class AccountJobsViewPageFacade {
@@ -66,30 +66,23 @@ export class AccountJobsViewPageFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateJob(job: Job): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        job
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      job
+    }))();
   }
 
   private registerInitPageEffect(): void {
     this.initPageEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.store.select(NavigationSelectors.selectRouteParam('id')),
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.store.select(NavigationSelectors.selectRouteParam('id')), this.relations$]),
         switchMap(([_, id, relations]) => {
           this.updateIsLoading(true);
 
@@ -106,23 +99,21 @@ export class AccountJobsViewPageFacade {
   }
 
   private tryToLoadData(id: number, relations: Array<JobRelationType>): Observable<Job> {
-    return this.jobService
-      .get(id, relations)
-      .pipe(
-        tapResponse(
-          (response) => {
-            this.updateJob(response);
-            this.updateIsLoading(false);
-          },
-          (response: HttpErrorResponse) => {
-            this.updateIsLoading(false);
+    return this.jobService.get(id, relations).pipe(
+      tapResponse(
+        (response) => {
+          this.updateJob(response);
+          this.updateIsLoading(false);
+        },
+        (response: HttpErrorResponse) => {
+          this.updateIsLoading(false);
 
-            if (response.status === HttpStatusCode.NotFound) {
-              this.redirectToJobsPage();
-            }
+          if (response.status === HttpStatusCode.NotFound) {
+            this.redirectToJobsPage();
           }
-        )
-      );
+        }
+      )
+    );
   }
 
   private registerDownloadAttachmentEffect(): void {
@@ -131,9 +122,7 @@ export class AccountJobsViewPageFacade {
         exhaustMap((attachment) =>
           this.jobService
             .downloadAttachment(attachment.id)
-            .pipe(
-              tap((response) => this.fileService.openInNewTab(response))
-            )
+            .pipe(tap((response) => this.fileService.openInNewTab(response)))
         )
       )
     );

@@ -1,8 +1,16 @@
 <section
   [isNoContent]="!attachments?.length"
   name="{{ 'ACCOUNT.JOBS.VIEW.TEXT_ATTACHMENTS' | translate }}">
-  <span ngProjectAs="section-icon" class="icon icon-attachment icon-mask icon-mask-dark-blue"></span>
-  <div *ngFor="let item of attachments; trackByProperty: 'id'" class="jobview-attachment">
-    <a (click)="downloadAttachmentClicked(item)" class="link">{{ item.name }}</a>
-  </div>
+  <span
+    ngProjectAs="section-icon"
+    class="icon icon-attachment icon-mask icon-mask-dark-blue"></span>
+  @for (item of attachments; track item) {
+    <div class="jobview-attachment">
+      <a
+        (click)="downloadAttachmentClicked(item)"
+        class="link"
+        >{{ item.name }}</a
+      >
+    </div>
+  }
 </section>

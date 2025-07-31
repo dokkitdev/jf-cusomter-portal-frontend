@@ -6,7 +6,7 @@ import { ImageUploaderFacade } from './image-uploader.facade';
 import { TranslateModule } from '@ngx-translate/core';
 import { MediaModule } from '@shared/media';
 import { ProgressBarModule } from '@shared/progress-bar';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgxDropzoneModule } from 'ngx-dropzone';
@@ -15,28 +15,22 @@ import { NotificationModule } from '@shared/notification';
 import { NgxFilesizeModule } from 'ngx-filesize';
 
 @NgModule({
-  declarations: [
-    ImageUploaderComponent
-  ],
+  declarations: [ImageUploaderComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgrxFormsModule,
     MediaModule,
     ProgressBarModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     NgxDropzoneModule,
     ValidationErrorsModule,
     NotificationModule,
     NgxFilesizeModule
   ],
-  exports: [
-    ImageUploaderComponent
-  ],
-  providers: [
-    ImageUploaderFacade,
-    ComponentStore
-  ]
+  exports: [ImageUploaderComponent],
+  providers: [ImageUploaderFacade, ComponentStore]
 })
-export class ImageUploaderModule { }
+export class ImageUploaderModule {}

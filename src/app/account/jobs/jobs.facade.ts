@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { configuration } from '@configurations';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FileService } from '@shared/file';
@@ -115,26 +115,33 @@ export class AccountJobsPageFacade {
   }
 
   public get filters$(): Observable<JobFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        map((filterFormStateValue) => new JobFilters({
-          jobID: filterFormStateValue.jobID || undefined,
-          siteID: filterFormStateValue.siteID || undefined,
-          orderNo: filterFormStateValue.orderNo || undefined,
-          uprn: filterFormStateValue.uprn || undefined,
-          siteName: filterFormStateValue.siteName || undefined,
-          postalCode: filterFormStateValue.postalCode || undefined,
-          costCenterName: (unbox(filterFormStateValue.costCenterName).length) ? unbox(filterFormStateValue.costCenterName) : undefined,
-          stage: (unbox(filterFormStateValue.stage).length) ? unbox(filterFormStateValue.stage) : undefined,
-          appointmentFrom: filterFormStateValue.appointmentFrom || undefined,
-          appointmentTo: filterFormStateValue.appointmentTo || undefined,
-          dateCreated: filterFormStateValue.dateCreated || undefined,
-          outOfHours: filterFormStateValue.outOfHours,
-          startTimeFrom: (filterFormStateValue.startTimeFrom) ? DateTime.fromISO(filterFormStateValue.startTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
-          startTimeTo: (filterFormStateValue.startTimeTo) ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      map(
+        (filterFormStateValue) =>
+          new JobFilters({
+            jobID: filterFormStateValue.jobID || undefined,
+            siteID: filterFormStateValue.siteID || undefined,
+            orderNo: filterFormStateValue.orderNo || undefined,
+            uprn: filterFormStateValue.uprn || undefined,
+            siteName: filterFormStateValue.siteName || undefined,
+            postalCode: filterFormStateValue.postalCode || undefined,
+            costCenterName: unbox(filterFormStateValue.costCenterName).length
+              ? unbox(filterFormStateValue.costCenterName)
+              : undefined,
+            stage: unbox(filterFormStateValue.stage).length ? unbox(filterFormStateValue.stage) : undefined,
+            appointmentFrom: filterFormStateValue.appointmentFrom || undefined,
+            appointmentTo: filterFormStateValue.appointmentTo || undefined,
+            dateCreated: filterFormStateValue.dateCreated || undefined,
+            outOfHours: filterFormStateValue.outOfHours,
+            startTimeFrom: filterFormStateValue.startTimeFrom
+              ? DateTime.fromISO(filterFormStateValue.startTimeFrom).toFormat(configuration.dateFormats.scheduleFilter)
+              : undefined,
+            startTimeTo: filterFormStateValue.startTimeTo
+              ? DateTime.fromISO(filterFormStateValue.startTimeTo).toFormat(configuration.dateFormats.scheduleFilter)
+              : undefined
+          })
+      )
+    );
   }
 
   public get filterValues$(): Observable<Array<FilterValue>> {
@@ -146,16 +153,20 @@ export class AccountJobsPageFacade {
         filterValues.push(this.createFilterValue(formState.controls.siteID));
       }
       if (formState.value.dateCreated) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.dateCreated.id,
-          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_CREATED_TODAY')
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.dateCreated.id,
+            value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_CREATED_TODAY')
+          })
+        );
       }
       if (formState.value.outOfHours) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.outOfHours.id,
-          value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_OUT_OF_HOURS')
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.outOfHours.id,
+            value: this.translateService.instant('ACCOUNT.JOBS.FILTERS.TEXT_OUT_OF_HOURS')
+          })
+        );
       }
       if (formState.value.jobID) {
         filterValues.push(this.createFilterValue(formState.controls.jobID));
@@ -176,19 +187,29 @@ export class AccountJobsPageFacade {
         filterValues.push(new FilterValue({ id: formState.controls.costCenterName.id, value }))
       );
       unbox(formState.value.stage).forEach((value) =>
-        filterValues.push(new FilterValue({ id: formState.controls.stage.id, value, status: this.getJobStageFilterStatus(value) }))
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.stage.id,
+            value,
+            status: this.getJobStageFilterStatus(value)
+          })
+        )
       );
       if (formState.value.appointmentFrom) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.appointmentFrom.id,
-          value: DateTime.fromISO(formState.value.appointmentFrom).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.appointmentFrom.id,
+            value: DateTime.fromISO(formState.value.appointmentFrom).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
       if (formState.value.appointmentTo) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.appointmentTo.id,
-          value: DateTime.fromISO(formState.value.appointmentTo).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.appointmentTo.id,
+            value: DateTime.fromISO(formState.value.appointmentTo).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
       if (formState.value.startTimeFrom) {
         filterValues.push(this.createFilterValue(formState.controls.startTimeFrom));
@@ -263,19 +284,11 @@ export class AccountJobsPageFacade {
   }
 
   public getStartAppointmentDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.appointmentTo))
-      );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.appointmentTo)));
   }
 
   public getEndAppointmentDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getEndDateFilter(formState.value.appointmentFrom))
-      );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.appointmentFrom)));
   }
 
   private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
@@ -296,104 +309,89 @@ export class AccountJobsPageFacade {
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsExporting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isExporting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isExporting: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Job>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountJobsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountJobsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountJobsFilterForm>(
-          state.filterFormState,
-          {
-            siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
-            jobID: setValue(parameters.jobID || state.filterFormState.value.jobID),
-            orderNo: setValue(parameters.orderNo || state.filterFormState.value.orderNo),
-            uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
-            siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
-            postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
-            costCenterName: setValue((parameters.costCenterName) ? box(parameters.costCenterName) : state.filterFormState.value.costCenterName),
-            stage: setValue((parameters.stage) ? box(parameters.stage) : state.filterFormState.value.stage),
-            appointmentFrom: setValue(parameters.appointmentFrom || state.filterFormState.value.appointmentFrom),
-            appointmentTo: setValue(parameters.appointmentTo || state.filterFormState.value.appointmentTo),
-            dateCreated: setValue(parameters.dateCreated || state.filterFormState.value.dateCreated),
-            outOfHours: setValue((parameters.outOfHours !== undefined) ? parameters.outOfHours : state.filterFormState.value.outOfHours),
-            startTimeFrom: setValue(parameters.startTimeFrom || state.filterFormState.value.startTimeFrom),
-            startTimeTo: setValue(parameters.startTimeTo || state.filterFormState.value.startTimeTo)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountJobsFilterForm>(state.filterFormState, {
+        siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
+        jobID: setValue(parameters.jobID || state.filterFormState.value.jobID),
+        orderNo: setValue(parameters.orderNo || state.filterFormState.value.orderNo),
+        uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
+        siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
+        postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
+        costCenterName: setValue(
+          parameters.costCenterName ? box(parameters.costCenterName) : state.filterFormState.value.costCenterName
+        ),
+        stage: setValue(parameters.stage ? box(parameters.stage) : state.filterFormState.value.stage),
+        appointmentFrom: setValue(parameters.appointmentFrom || state.filterFormState.value.appointmentFrom),
+        appointmentTo: setValue(parameters.appointmentTo || state.filterFormState.value.appointmentTo),
+        dateCreated: setValue(parameters.dateCreated || state.filterFormState.value.dateCreated),
+        outOfHours: setValue(
+          parameters.outOfHours !== undefined ? parameters.outOfHours : state.filterFormState.value.outOfHours
+        ),
+        startTimeFrom: setValue(parameters.startTimeFrom || state.filterFormState.value.startTimeFrom),
+        startTimeTo: setValue(parameters.startTimeTo || state.filterFormState.value.startTimeTo)
       })
-    )();
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -404,30 +402,28 @@ export class AccountJobsPageFacade {
           this.updateIsLoading(true);
 
           const parameters = new AccountJobsQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
-            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
-            jobID: (queryParams.jobID) ? parseInt(queryParams.jobID, 10) : undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
+            siteID: queryParams.siteID ? parseInt(queryParams.siteID, 10) : undefined,
+            jobID: queryParams.jobID ? parseInt(queryParams.jobID, 10) : undefined,
             orderNo: queryParams.orderNo || undefined,
             uprn: queryParams.uprn || undefined,
             siteName: queryParams.siteName || undefined,
             postalCode: queryParams.postalCode || undefined,
-            costCenterName: (queryParams.costCenterName) ? castArray(queryParams.costCenterName) : undefined,
-            stage: (queryParams.stage) ? castArray(queryParams.stage) : undefined,
+            costCenterName: queryParams.costCenterName ? castArray(queryParams.costCenterName) : undefined,
+            stage: queryParams.stage ? castArray(queryParams.stage) : undefined,
             appointmentFrom: queryParams.appointmentFrom || undefined,
             appointmentTo: queryParams.appointmentTo || undefined,
             dateCreated: queryParams.dateCreated || undefined,
-            outOfHours: (queryParams.outOfHours !== undefined) ? queryParams.outOfHours === 'true' : undefined,
+            outOfHours: queryParams.outOfHours !== undefined ? queryParams.outOfHours === 'true' : undefined,
             startTimeFrom: queryParams.startTimeFrom || undefined,
             startTimeTo: queryParams.startTimeTo || undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -448,56 +444,69 @@ export class AccountJobsPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.relations$,
-          this.countRelations$,
-          this.filters$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.relations$, this.countRelations$, this.filters$]),
         switchMap(([targetPage, parameters, relations, countRelations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: {
-              page,
-              orderBy,
-              desc,
-              jobID: filters.jobID,
-              siteID: filters.siteID,
-              orderNo: filters.orderNo,
-              uprn: filters.uprn,
-              siteName: filters.siteName,
-              postalCode: filters.postalCode,
-              costCenterName: filters.costCenterName,
-              stage: filters.stage,
-              appointmentFrom: filters.appointmentFrom,
-              appointmentTo: filters.appointmentTo,
-              dateCreated: filters.dateCreated,
-              outOfHours: filters.outOfHours,
-              startTimeFrom: parameters.startTimeFrom || undefined,
-              startTimeTo: parameters.startTimeTo || undefined
-            }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                jobID: filters.jobID,
+                siteID: filters.siteID,
+                orderNo: filters.orderNo,
+                uprn: filters.uprn,
+                siteName: filters.siteName,
+                postalCode: filters.postalCode,
+                costCenterName: filters.costCenterName,
+                stage: filters.stage,
+                appointmentFrom: filters.appointmentFrom,
+                appointmentTo: filters.appointmentTo,
+                dateCreated: filters.dateCreated,
+                outOfHours: filters.outOfHours,
+                startTimeFrom: parameters.startTimeFrom || undefined,
+                startTimeTo: parameters.startTimeTo || undefined
+              }
+            })
+          );
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters });
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            countRelations,
+            filters
+          });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: JobSortField,
-    desc: boolean,
-    relations: Array<JobRelationType>,
-    countRelations: Array<JobCountRelationType>,
-    filters: JobFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    countRelations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: JobSortField;
+    desc: boolean;
+    relations: Array<JobRelationType>;
+    countRelations: Array<JobCountRelationType>;
+    filters: JobFilters;
   }): Observable<any> {
     return this.jobService
       .search({
@@ -523,37 +532,28 @@ export class AccountJobsPageFacade {
   private registerExportCSVEffect(): void {
     this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.filters$,
-          this.relations$,
-          this.countRelations$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.filters$, this.relations$, this.countRelations$]),
         switchMap(([_, parameters, filters, relations, countRelations]) => {
           this.updateIsExporting(true);
 
-          return this.jobService
-            .exportCSV({ ...parameters, filters, relations, countRelations })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.jobs);
-                },
-                (response: HttpErrorResponse) => {
-                  this.updateIsExporting(false);
+          return this.jobService.exportCSV({ ...parameters, filters, relations, countRelations }).pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsExporting(false);
+                this.fileService.saveFile(response, configuration.exportCSV.jobs);
+              },
+              (response: HttpErrorResponse) => {
+                this.updateIsExporting(false);
 
-                  const errorTranslationKey =
-                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
-                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
-                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+                const errorTranslationKey =
+                  response.status === HttpStatusCode.BadGateway || response.status === 0
+                    ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                    : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
 
-                  this.notificationService.error(
-                    this.translateService.instant(errorTranslationKey)
-                  );
-                }
-              )
-            );
+                this.notificationService.error(this.translateService.instant(errorTranslationKey));
+              }
+            )
+          );
         })
       )
     );

@@ -6,7 +6,8 @@ import { FormControlValueTypes } from 'ngrx-forms';
   selector: 'custom-multiselect-option',
   templateUrl: 'option.html',
   styleUrls: ['option.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CustomMultiselectOptionComponent<T extends FormControlValueTypes, V> {
   @Input() option: CustomSelectOption<T, V>;

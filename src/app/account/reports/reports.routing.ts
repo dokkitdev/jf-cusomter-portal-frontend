@@ -1,28 +1,32 @@
-import { AccountReportsPageComponent } from './reports.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: AccountReportsPageComponent,
     pathMatch: 'full',
     redirectTo: 'service-control'
   },
   {
     path: 'service-control',
-    loadChildren: () => import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
   },
   {
     path: 'repair-response',
+    pathMatch: 'full',
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
   },
   {
     path: 'warehouse',
-    loadChildren: () => import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
   },
   {
     path: 'zero',
+    pathMatch: 'full',
     loadChildren: () => import('./zero/zero.module').then((module) => module.AccountReportsZeroPageModule)
   }
 ];
@@ -31,4 +35,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccountReportsPageRoutingModule { }
+export class AccountReportsPageRoutingModule {}

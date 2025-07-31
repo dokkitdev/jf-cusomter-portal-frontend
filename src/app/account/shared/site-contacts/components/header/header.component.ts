@@ -5,12 +5,11 @@ import { AccountSiteContactsComponentFacade } from '../../site-contacts.facade';
   selector: 'account-site-contacts-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSiteContactsHeaderComponent {
-  constructor(
-    private facade: AccountSiteContactsComponentFacade
-  ) { }
+  constructor(private facade: AccountSiteContactsComponentFacade) {}
 
   public createContactButtonClicked(): void {
     this.facade.createItem();

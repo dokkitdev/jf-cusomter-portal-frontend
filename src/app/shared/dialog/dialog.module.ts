@@ -3,11 +3,7 @@ import { DialogService } from './dialog.service';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  imports: [
-    MatDialogModule
-  ],
-  providers: [
-    DialogService
-  ]
+  imports: [MatDialogModule],
+  providers: [DialogService]
 })
-export class DialogModule { }
+export class DialogModule {}

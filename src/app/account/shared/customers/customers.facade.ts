@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Actions, AddArrayControlAction, FormArrayState, MarkAsSubmittedAction, RemoveArrayControlAction, SetUserDefinedPropertyAction } from 'ngrx-forms';
+import {
+  Actions,
+  AddArrayControlAction,
+  FormArrayState,
+  MarkAsSubmittedAction,
+  RemoveArrayControlAction,
+  SetUserDefinedPropertyAction
+} from 'ngrx-forms';
 import { Observable, Subject } from 'rxjs';
 import { tap, withLatestFrom } from 'rxjs/operators';
 import { AccountCustomersComponentState } from './customers.state';
@@ -21,9 +28,7 @@ export class AccountCustomersComponentFacade {
   private addNewItemEffect$: () => Observable<void>;
   private removeItemEffect$: (index: number) => Observable<void>;
 
-  constructor(
-    private readonly componentStore: ComponentStore<AccountCustomersComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<AccountCustomersComponentState>) {
     this.controlStateActionTriggered = new Subject();
 
     this.resetState();
@@ -52,34 +57,28 @@ export class AccountCustomersComponentFacade {
   }
 
   private updateControlState(controlState: FormArrayState<number>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        controlState
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      controlState
+    }))();
   }
 
   private updateExcludeCustomerID(id: number, index: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        excludeCustomerID: (() => {
-          const newArray = [...state.excludeCustomerID];
-          newArray[index] = id;
+    this.componentStore.updater((state) => ({
+      ...state,
+      excludeCustomerID: (() => {
+        const newArray = [...state.excludeCustomerID];
+        newArray[index] = id;
 
-          return newArray;
-        })()
-      })
-    )();
+        return newArray;
+      })()
+    }))();
   }
 
   private registerAddNewItemEffect(): void {
     this.addNewItemEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.controlState$
-        ),
+        withLatestFrom(this.controlState$),
         tap(([_, controlState]) => {
           this.controlStateActionTriggered.next(new AddArrayControlAction(controlState.id, 0));
           this.controlStateActionTriggered.next(
@@ -97,12 +96,9 @@ export class AccountCustomersComponentFacade {
   private registerRemoveItemEffect(): void {
     this.removeItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.controlState$
-        ),
-        tap(([id, controlState]) => this.controlStateActionTriggered.next(
-            new RemoveArrayControlAction(controlState.id, id)
-          )
+        withLatestFrom(this.controlState$),
+        tap(([id, controlState]) =>
+          this.controlStateActionTriggered.next(new RemoveArrayControlAction(controlState.id, id))
         )
       )
     );

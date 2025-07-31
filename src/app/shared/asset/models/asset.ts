@@ -35,7 +35,9 @@ export class Asset {
   @Expose({ groups: [ClassGroup.MAIN] })
   public model: string;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'last_cp12_date', groups: [ClassGroup.MAIN] })
   public lastCp12Date: DateTime;
 
@@ -54,19 +56,27 @@ export class Asset {
   @Expose({ name: 'archived', groups: [ClassGroup.MAIN] })
   public isArchived: boolean;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'last_test_date', groups: [ClassGroup.MAIN] })
   public lastTestDate: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'next_service_date', groups: [ClassGroup.MAIN] })
   public nextServiceDate: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'expiry_date', groups: [ClassGroup.MAIN] })
   public expiryDate: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'sortable_date', groups: [ClassGroup.MAIN] })
   public sortableDate: DateTime;
 
@@ -109,23 +119,33 @@ export class Asset {
   @Expose({ name: 'next_schedule', groups: [ClassGroup.MAIN] })
   public nextSchedule?: JobSchedule;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'no_access_date_1', groups: [ClassGroup.MAIN] })
   public noAccessDate1?: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'no_access_date_2', groups: [ClassGroup.MAIN] })
   public noAccessDate2?: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'no_access_date_3', groups: [ClassGroup.MAIN] })
   public noAccessDate3?: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'no_access_date_4', groups: [ClassGroup.MAIN] })
   public noAccessDate4?: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'no_access_date_5', groups: [ClassGroup.MAIN] })
   public noAccessDate5?: DateTime;
 

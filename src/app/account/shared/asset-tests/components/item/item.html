@@ -1,6 +1,8 @@
 <div class="table-row">
   <div class="table-cell assettests-engineer">{{ item.engineerName }}</div>
-  <div class="table-cell assettests-date">{{ item.testDate | date: dateFormat }}</div>
+  <div class="table-cell assettests-date">
+    {{ item.testDate | date: dateFormat }}
+  </div>
   <div class="table-cell assettests-jobid">
     <a [routerLink]="['/account/jobs', item.job?.id]">
       {{ item.job?.jobID }}
@@ -13,11 +15,12 @@
     {{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + item.result | snake | uppercase | translate }}
   </div>
   <div class="table-cell assettests-readings">
-    <a
-      *ngIf="item.readings?.length"
-      (click)="viewReadingsClicked()"
-      class="table-action">
-      {{ 'ACCOUNT.SHARED.ASSET_TESTS.LINK_VIEW' | translate }}
-    </a>
+    @if (item.readings?.length) {
+      <a
+        (click)="viewReadingsClicked()"
+        class="table-action">
+        {{ 'ACCOUNT.SHARED.ASSET_TESTS.LINK_VIEW' | translate }}
+      </a>
+    }
   </div>
 </div>

@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountDashboardPageFacade } from './dashboard.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { DashboardModule } from '@shared/dashboard';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { NotificationModule } from '@shared/notification';
 import { AccountDashboardStatisticComponent } from './shared/components/statistic/statistic.component';
@@ -31,13 +31,11 @@ import { AccountDashboardStatisticLinksComponent } from './shared/components/sta
     TranslateModule,
     AccountDashboardPageRoutingModule,
     DashboardModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     NotificationModule
   ],
-  providers: [
-    AccountDashboardPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountDashboardPageFacade, ComponentStore]
 })
-export class AccountDashboardPageModule { }
+export class AccountDashboardPageModule {}

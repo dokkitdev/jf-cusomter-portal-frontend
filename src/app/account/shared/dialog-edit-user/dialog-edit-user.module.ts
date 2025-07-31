@@ -4,7 +4,7 @@ import { NotificationModule } from '@shared/notification';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { AccountDialogEditUserComponent } from './dialog-edit-user.component';
 import { FormTextModule } from '@shared/form-text';
@@ -16,15 +16,14 @@ import { FormGroupModule } from '@shared/form-group';
 import { AccountCustomersModule } from '../customers';
 
 @NgModule({
-  declarations: [
-    AccountDialogEditUserComponent
-  ],
+  declarations: [AccountDialogEditUserComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     FormTextModule,
     AccountCustomerSelectModule,
@@ -35,8 +34,6 @@ import { AccountCustomersModule } from '../customers';
     ButtonModule,
     FormRadioModule
   ],
-  exports: [
-    AccountDialogEditUserComponent
-  ]
+  exports: [AccountDialogEditUserComponent]
 })
-export class AccountDialogEditUserModule { }
+export class AccountDialogEditUserModule {}

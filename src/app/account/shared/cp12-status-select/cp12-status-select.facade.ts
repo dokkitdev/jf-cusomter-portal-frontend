@@ -7,14 +7,14 @@ import { snakeCase } from 'lodash';
 @Injectable()
 export class AccountCP12StatusSelectComponentFacade {
   public get options(): Array<CustomSelectOption<string>> {
-    return Object.values(AssetCp12Status)
-      .map((stage) => new CustomSelectOption<string>({
-        id: stage,
-        title: this.translateService.instant('SHARED.CP12_STATUS.TEXT_' + snakeCase(stage).toUpperCase())
-      }));
+    return Object.values(AssetCp12Status).map(
+      (stage) =>
+        new CustomSelectOption<string>({
+          id: stage,
+          title: this.translateService.instant('SHARED.CP12_STATUS.TEXT_' + snakeCase(stage).toUpperCase())
+        })
+    );
   }
 
-  constructor(
-    private readonly translateService: TranslateService
-  ) { }
+  constructor(private readonly translateService: TranslateService) {}
 }

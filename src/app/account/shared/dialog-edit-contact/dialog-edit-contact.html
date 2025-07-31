@@ -1,6 +1,8 @@
-<div *ngrxLet="isEditMode$; let isEditMode" class="dialog-edit editcontact">
+<div
+  *ngrxLet="isEditMode$; let isEditMode"
+  class="dialog-edit editcontact">
   <h2 class="dialog-edit-title">
-    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_TITLE_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_TITLE_' + (isEditMode ? 'UPDATE' : 'CREATE') | translate }}
   </h2>
   <form
     *ngrxLet="formState$; let formState"
@@ -68,7 +70,9 @@
       (controlStateActionTriggered)="formActionTriggered($event)"
       label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.TEXT_POSITION' | translate }}">
     </form-text>
-    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+    <div
+      *ngrxLet="isSendingRequest$; let isSendingRequest"
+      class="dialog-edit-buttons">
       <div class="dialog-edit-button">
         <btn
           [isDisabled]="isSendingRequest"
@@ -83,7 +87,7 @@
           [isLoading]="isSendingRequest"
           [isDisabled]="formState.isPristine"
           type="submit">
-          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.BUTTON_' + (isEditMode ? 'UPDATE' : 'CREATE') | translate }}
         </btn>
       </div>
     </div>

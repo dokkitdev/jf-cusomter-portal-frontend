@@ -8,15 +8,14 @@ import { AccountReportsZeroPageForm } from '../../forms';
   selector: 'account-reports-zero-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsZeroFormComponent {
   public isSendingRequest$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AccountReportsZeroPageForm>>;
 
-  constructor(
-    private facade: AccountReportsZeroPageFacade
-  ) {
+  constructor(private facade: AccountReportsZeroPageFacade) {
     this.isSendingRequest$ = this.facade.isSendingRequest$;
     this.formState$ = this.facade.formState$;
   }

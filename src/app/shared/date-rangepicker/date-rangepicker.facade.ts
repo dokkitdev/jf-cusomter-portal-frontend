@@ -17,9 +17,7 @@ export class DateRangepickerFacade {
   private updateStateIsOpened: (isOpened: boolean) => void;
   private updateStatePositionY: (positionY: DatepickerDropdownPositionY) => void;
 
-  constructor(
-    private readonly componentStore: ComponentStore<FormDateRangepickerComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<FormDateRangepickerComponentState>) {
     this.resetState();
 
     this.registerUpdateStateIsOpened();
@@ -43,22 +41,18 @@ export class DateRangepickerFacade {
   }
 
   private registerUpdateStateIsOpened(): void {
-    this.updateStateIsOpened = (isOpened: boolean) => this.componentStore
-      .updater(
-        (state) => ({
-          ...state,
-          isOpened
-        })
-      )();
+    this.updateStateIsOpened = (isOpened: boolean) =>
+      this.componentStore.updater((state) => ({
+        ...state,
+        isOpened
+      }))();
   }
 
   private registerUpdateStatePositionY(): void {
-    this.updateStatePositionY = (positionY: DatepickerDropdownPositionY) => this.componentStore
-      .updater(
-        (state) => ({
-          ...state,
-          positionY
-        })
-      )();
+    this.updateStatePositionY = (positionY: DatepickerDropdownPositionY) =>
+      this.componentStore.updater((state) => ({
+        ...state,
+        positionY
+      }))();
   }
 }

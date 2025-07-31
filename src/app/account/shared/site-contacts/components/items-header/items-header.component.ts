@@ -8,15 +8,14 @@ import { SiteContactSortField } from '../../enums';
   selector: 'account-site-contacts-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSiteContactsItemsHeaderComponent {
   public parameters$: Observable<AccountSiteContactsQueryParameters>;
   public siteContactSortField: typeof SiteContactSortField;
 
-  constructor(
-    private facade: AccountSiteContactsComponentFacade
-  ) {
+  constructor(private facade: AccountSiteContactsComponentFacade) {
     this.parameters$ = this.facade.parameters$;
     this.siteContactSortField = SiteContactSortField;
   }

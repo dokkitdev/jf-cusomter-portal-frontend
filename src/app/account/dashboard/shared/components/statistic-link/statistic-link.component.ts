@@ -4,7 +4,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   selector: 'dashboard-statistic-link',
   templateUrl: 'statistic-link.html',
   styleUrls: ['statistic-link.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDashboardStatisticLinkComponent {
   @Input() name: string;

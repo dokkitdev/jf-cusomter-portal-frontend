@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@shared/store';
 import { Document, DocumentFilters, DocumentRelationType, DocumentService, DocumentSortField } from '@shared/document';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDocumentsPageState } from './documents.state';
 import { AccountDocumentsQueryParameters } from './shared/models';
 import { PaginationResponse } from '@shared/pagination';
@@ -11,7 +12,15 @@ import { exhaustMap, map, switchMap, tap, withLatestFrom } from 'rxjs/operators'
 import { NavigationActions, NavigationSelectors } from '@shared/navigation';
 import { Media, MediaService } from '@shared/media';
 import { FileService } from '@shared/file';
-import { Actions, FormControlState, formGroupReducer, FormGroupState, setValue, SetValueAction, updateGroup } from 'ngrx-forms';
+import {
+  Actions,
+  FormControlState,
+  formGroupReducer,
+  FormGroupState,
+  setValue,
+  SetValueAction,
+  updateGroup
+} from 'ngrx-forms';
 import { AccountDocumentsFilterForm } from './shared/forms';
 import { FilterValue } from '@shared/filter-values';
 import { DateTime } from 'luxon';
@@ -74,16 +83,17 @@ export class AccountDocumentsPageFacade {
   }
 
   public get filters$(): Observable<DocumentFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        map((filterFormStateValue) => new DocumentFilters({
-          title: filterFormStateValue.title || undefined,
-          query: filterFormStateValue.query || undefined,
-          createdAtFrom: filterFormStateValue.createdAtFrom || undefined,
-          createdAtTo: filterFormStateValue.createdAtTo || undefined
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      map(
+        (filterFormStateValue) =>
+          new DocumentFilters({
+            title: filterFormStateValue.title || undefined,
+            query: filterFormStateValue.query || undefined,
+            createdAtFrom: filterFormStateValue.createdAtFrom || undefined,
+            createdAtTo: filterFormStateValue.createdAtTo || undefined
+          })
+      )
+    );
   }
 
   public get filterValues$(): Observable<Array<FilterValue>> {
@@ -98,16 +108,20 @@ export class AccountDocumentsPageFacade {
         filterValues.push(this.createFilterValue(formState.controls.query));
       }
       if (formState.value.createdAtFrom) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.createdAtFrom.id,
-          value: DateTime.fromISO(formState.value.createdAtFrom).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.createdAtFrom.id,
+            value: DateTime.fromISO(formState.value.createdAtFrom).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
       if (formState.value.createdAtTo) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.createdAtTo.id,
-          value: DateTime.fromISO(formState.value.createdAtTo).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.createdAtTo.id,
+            value: DateTime.fromISO(formState.value.createdAtTo).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
 
       return filterValues;
@@ -148,7 +162,6 @@ export class AccountDocumentsPageFacade {
     this.loadItemsByParametersEffect$(page);
   }
 
-
   public loadItemsByPage(page: number): void {
     this.loadItemsByPageEffect$(page);
   }
@@ -180,19 +193,11 @@ export class AccountDocumentsPageFacade {
   }
 
   public getStartCreatedAtFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.createdAtTo))
-      );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.createdAtTo)));
   }
 
   public getEndCreatedAtFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getEndDateFilter(formState.value.createdAtFrom))
-      );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.createdAtFrom)));
   }
 
   private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
@@ -200,100 +205,81 @@ export class AccountDocumentsPageFacade {
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Document>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountDocumentsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountDocumentsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountDocumentsFilterForm>(
-          state.filterFormState,
-          {
-            query: setValue(parameters.query || state.filterFormState.value.query),
-            title: setValue(parameters.title || state.filterFormState.value.title),
-            createdAtFrom: setValue(parameters.createdAtFrom || state.filterFormState.value.createdAtFrom),
-            createdAtTo: setValue(parameters.createdAtTo || state.filterFormState.value.createdAtTo)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountDocumentsFilterForm>(state.filterFormState, {
+        query: setValue(parameters.query || state.filterFormState.value.query),
+        title: setValue(parameters.title || state.filterFormState.value.title),
+        createdAtFrom: setValue(parameters.createdAtFrom || state.filterFormState.value.createdAtFrom),
+        createdAtTo: setValue(parameters.createdAtTo || state.filterFormState.value.createdAtTo)
       })
-    )();
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectQueryParams)
-        ),
+        withLatestFrom(this.store.select(NavigationSelectors.selectQueryParams)),
         tap(([_, queryParams]) => {
           this.updateIsLoading(true);
 
           const parameters = new AccountDocumentsQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
             title: queryParams.title || undefined,
             query: queryParams.query || undefined,
             createdAtFrom: queryParams.createdAtFrom || undefined,
@@ -302,9 +288,7 @@ export class AccountDocumentsPageFacade {
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -313,44 +297,56 @@ export class AccountDocumentsPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.parameters$,
-          this.relations$,
-          this.filters$
-        ),
+        withLatestFrom(this.parameters$, this.relations$, this.filters$),
         switchMap(([targetPage, parameters, relations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: {
-              page,
-              orderBy,
-              desc,
-              title: filters.title,
-              query: filters.query,
-              createdAtFrom: filters.createdAtFrom,
-              createdAtTo: filters.createdAtTo
-            }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                title: filters.title,
+                query: filters.query,
+                createdAtFrom: filters.createdAtFrom,
+                createdAtTo: filters.createdAtTo
+              }
+            })
+          );
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters });
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            filters
+          });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: DocumentSortField,
-    desc: boolean,
-    relations: Array<DocumentRelationType>,
-    filters: DocumentFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: DocumentSortField;
+    desc: boolean;
+    relations: Array<DocumentRelationType>;
+    filters: DocumentFilters;
   }): Observable<any> {
     return this.documentService
       .search({
@@ -388,11 +384,7 @@ export class AccountDocumentsPageFacade {
     this.viewMediaEffect$ = this.componentStore.effect((origin$: Observable<Media>) =>
       origin$.pipe(
         exhaustMap((media) =>
-          this.mediaService
-            .getBlob(media.id)
-            .pipe(
-              tap((response) => this.fileService.openInNewTab(response))
-            )
+          this.mediaService.getBlob(media.id).pipe(tap((response) => this.fileService.openInNewTab(response)))
         )
       )
     );
@@ -402,11 +394,7 @@ export class AccountDocumentsPageFacade {
     this.downloadMediaEffect$ = this.componentStore.effect((origin$: Observable<Media>) =>
       origin$.pipe(
         exhaustMap((media) =>
-          this.mediaService
-            .getBlob(media.id)
-            .pipe(
-              tap((response) => this.fileService.saveFile(response, media.name))
-            )
+          this.mediaService.getBlob(media.id).pipe(tap((response) => this.fileService.saveFile(response, media.name)))
         )
       )
     );

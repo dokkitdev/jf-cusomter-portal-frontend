@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import {
   SetValueAction,
   MarkAsDirtyAction,
@@ -46,9 +46,7 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
 
   private changeOptionEffect$: (optionValue: T) => Observable<void>;
 
-  constructor(
-    private readonly componentStore: ComponentStore<CustomSelectComponentState<T>>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<CustomSelectComponentState<T>>) {
     this.controlStateActionTriggered = new Subject();
     this.selectedOptionChanged = new Subject();
     this.filterChanged = new Subject();
@@ -80,39 +78,31 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
   }
 
   private updateControlState(controlState: FormControlState<T>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        controlState
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      controlState
+    }))();
   }
 
   private updateOptions(options: Array<CustomSelectOption<T>>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        options
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      options
+    }))();
   }
 
   private updateSelectedOption(option: CustomSelectOption<T> | undefined): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedOption: option
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      selectedOption: option
+    }))();
   }
 
   private updateFilterState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterControlState: formStateReducer(state.filterControlState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterControlState: formStateReducer(state.filterControlState, action)
+    }))();
   }
 
   private registerChangeOptionEffect(): void {
@@ -120,14 +110,10 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
       origin$.pipe(
         concatLatestFrom(() => this.controlState$),
         tap(([optionValue, controlState]) => {
-          this.controlStateActionTriggered.next(
-            new SetValueAction(controlState.id, optionValue)
-          );
+          this.controlStateActionTriggered.next(new SetValueAction(controlState.id, optionValue));
 
           if (controlState.isPristine) {
-            this.controlStateActionTriggered.next(
-              new MarkAsDirtyAction(controlState.id)
-            );
+            this.controlStateActionTriggered.next(new MarkAsDirtyAction(controlState.id));
           }
         })
       )
@@ -136,24 +122,18 @@ export class CustomSelectFacade<T extends FormControlValueTypes> {
 
   private registerHandleFilterChangesEffect(): void {
     this.componentStore.effect(() =>
-      this
-        .filterQuery$
-        .pipe(
-          skip(1),
-          debounceTime(300),
-          distinctUntilChanged(),
-          tap((query) => this.filterChanged.next(query))
-        )
+      this.filterQuery$.pipe(
+        skip(1),
+        debounceTime(300),
+        distinctUntilChanged(),
+        tap((query) => this.filterChanged.next(query))
+      )
     );
   }
 
   private registerSetSelectedOptionEffect(): void {
     this.componentStore.effect(() =>
-      combineLatest([
-        this.controlState$,
-        this.options$
-      ])
-      .pipe(
+      combineLatest([this.controlState$, this.options$]).pipe(
         tap(([controlState, options]) => {
           const selectedOption = options.find((option) => option.id === controlState.value);
 

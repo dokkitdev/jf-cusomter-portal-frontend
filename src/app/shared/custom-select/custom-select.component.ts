@@ -36,7 +36,8 @@ import { CustomSelectFilterComponent } from './components/filter/filter.componen
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class CustomSelectComponent<T extends FormControlValueTypes> {
   @ViewChild('filter') filterElementRef: CustomSelectFilterComponent<string>;
@@ -76,9 +77,7 @@ export class CustomSelectComponent<T extends FormControlValueTypes> {
   public isDisabled$: Observable<boolean>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    protected facade: CustomSelectFacade<T>
-  ) {
+  constructor(protected facade: CustomSelectFacade<T>) {
     this.placeholder = '';
     this.label = '';
     this.hasTriggerIcon = true;

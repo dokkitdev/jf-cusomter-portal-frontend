@@ -8,15 +8,14 @@ import { AccountReportsWarehousePageForm } from '@app/account/reports/warehouse/
   selector: 'account-reports-warehouse-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsWarehouseFormComponent {
   public isSendingRequest$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AccountReportsWarehousePageForm>>;
 
-  constructor(
-    private facade: AccountReportsWarehousePageFacade
-  ) {
+  constructor(private facade: AccountReportsWarehousePageFacade) {
     this.isSendingRequest$ = this.facade.isSendingRequest$;
     this.formState$ = this.facade.formState$;
   }

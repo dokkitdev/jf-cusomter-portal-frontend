@@ -3,14 +3,8 @@ import { DropdownDirective } from './dropdown.directive';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    DropdownDirective
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    DropdownDirective
-  ]
+  declarations: [DropdownDirective],
+  imports: [CommonModule],
+  exports: [DropdownDirective]
 })
-export class DropdownModule { }
+export class DropdownModule {}

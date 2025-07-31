@@ -8,15 +8,14 @@ import { AccountSitesViewPageFacade } from '../../../view.facade';
   selector: 'sites-view-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesViewHeaderComponent {
   public site$: Observable<Site>;
   public profile$: Observable<User>;
 
-  constructor(
-    private facade: AccountSitesViewPageFacade
-  ) {
+  constructor(private facade: AccountSitesViewPageFacade) {
     this.site$ = this.facade.site$;
     this.profile$ = this.facade.profile$;
   }

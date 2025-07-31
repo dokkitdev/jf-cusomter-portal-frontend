@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { configuration } from '@configurations';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { FileService } from '@shared/file';
@@ -94,21 +94,31 @@ export class AccountReportsKPIPageFacade {
   }
 
   public get filters$(): Observable<JobFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        map((filterFormStateValue) => new JobFilters({
-          uprn: filterFormStateValue.uprn || undefined,
-          costCenterName: (unbox(filterFormStateValue.costCenterName).length) ? unbox(filterFormStateValue.costCenterName) : undefined,
-          archived: filterFormStateValue.archived,
-          stage: (filterFormStateValue.archived === undefined) ? [] : this.getArchivedFilterStages(filterFormStateValue.archived),
-          dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
-          dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined,
-          isRepair: filterFormStateValue.isRepair,
-          safeTimeFrom: (filterFormStateValue.safeTimeFrom) ? DateTime.fromISO(filterFormStateValue.safeTimeFrom).toFormat(configuration.dateFormats.scheduleFilter) : undefined,
-          safeTimeTo: (filterFormStateValue.safeTimeTo) ? DateTime.fromISO(filterFormStateValue.safeTimeTo).toFormat(configuration.dateFormats.scheduleFilter) : undefined
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      map(
+        (filterFormStateValue) =>
+          new JobFilters({
+            uprn: filterFormStateValue.uprn || undefined,
+            costCenterName: unbox(filterFormStateValue.costCenterName).length
+              ? unbox(filterFormStateValue.costCenterName)
+              : undefined,
+            archived: filterFormStateValue.archived,
+            stage:
+              filterFormStateValue.archived === undefined
+                ? []
+                : this.getArchivedFilterStages(filterFormStateValue.archived),
+            dateCreatedFrom: filterFormStateValue.dateCreatedFrom || undefined,
+            dateCreatedTo: filterFormStateValue.dateCreatedTo || undefined,
+            isRepair: filterFormStateValue.isRepair,
+            safeTimeFrom: filterFormStateValue.safeTimeFrom
+              ? DateTime.fromISO(filterFormStateValue.safeTimeFrom).toFormat(configuration.dateFormats.scheduleFilter)
+              : undefined,
+            safeTimeTo: filterFormStateValue.safeTimeTo
+              ? DateTime.fromISO(filterFormStateValue.safeTimeTo).toFormat(configuration.dateFormats.scheduleFilter)
+              : undefined
+          })
+      )
+    );
   }
 
   public get filterValues$(): Observable<Array<FilterValue>> {
@@ -120,22 +130,30 @@ export class AccountReportsKPIPageFacade {
         filterValues.push(this.createFilterValue(formState.controls.uprn));
       }
       if (formState.value.archived !== undefined) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.archived.id,
-          value: this.translateService.instant('ACCOUNT.REPORTS.KPI.FILTERS.TEXT_ARCHIVED_' + ((formState.value.archived) ? 'YES' : 'NO'))
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.archived.id,
+            value: this.translateService.instant(
+              'ACCOUNT.REPORTS.KPI.FILTERS.TEXT_ARCHIVED_' + (formState.value.archived ? 'YES' : 'NO')
+            )
+          })
+        );
       }
       if (formState.value.dateCreatedFrom) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.dateCreatedFrom.id,
-          value: DateTime.fromISO(formState.value.dateCreatedFrom).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.dateCreatedFrom.id,
+            value: DateTime.fromISO(formState.value.dateCreatedFrom).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
       if (formState.value.dateCreatedTo) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.dateCreatedTo.id,
-          value: DateTime.fromISO(formState.value.dateCreatedTo).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.dateCreatedTo.id,
+            value: DateTime.fromISO(formState.value.dateCreatedTo).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
       if (formState.value.safeTimeFrom) {
         filterValues.push(this.createFilterValue(formState.controls.safeTimeFrom));
@@ -216,19 +234,11 @@ export class AccountReportsKPIPageFacade {
   }
 
   public getStartCreatedDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.dateCreatedTo))
-      );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.dateCreatedTo)));
   }
 
   public getEndCreatedDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getEndDateFilter(formState.value.dateCreatedFrom))
-      );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.dateCreatedFrom)));
   }
 
   private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
@@ -236,96 +246,79 @@ export class AccountReportsKPIPageFacade {
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsExporting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isExporting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isExporting: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Job>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountReportsKPIQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountReportsKPIQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountReportsKPIFilterForm>(
-          state.filterFormState,
-          {
-            uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
-            archived: setValue((parameters.archived !== undefined) ? parameters.archived : state.filterFormState.value.archived),
-            dateCreatedFrom: setValue(parameters.dateCreatedFrom || state.filterFormState.value.dateCreatedFrom),
-            dateCreatedTo: setValue(parameters.dateCreatedTo || state.filterFormState.value.dateCreatedTo),
-            safeTimeFrom: setValue(parameters.safeTimeFrom || state.filterFormState.value.safeTimeFrom),
-            safeTimeTo: setValue(parameters.safeTimeTo || state.filterFormState.value.safeTimeTo)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountReportsKPIFilterForm>(state.filterFormState, {
+        uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
+        archived: setValue(
+          parameters.archived !== undefined ? parameters.archived : state.filterFormState.value.archived
+        ),
+        dateCreatedFrom: setValue(parameters.dateCreatedFrom || state.filterFormState.value.dateCreatedFrom),
+        dateCreatedTo: setValue(parameters.dateCreatedTo || state.filterFormState.value.dateCreatedTo),
+        safeTimeFrom: setValue(parameters.safeTimeFrom || state.filterFormState.value.safeTimeFrom),
+        safeTimeTo: setValue(parameters.safeTimeTo || state.filterFormState.value.safeTimeTo)
       })
-    )();
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -336,20 +329,18 @@ export class AccountReportsKPIPageFacade {
           this.updateIsLoading(true);
 
           const parameters = new AccountReportsKPIQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
             uprn: queryParams.uprn || undefined,
-            archived: (queryParams.archived !== undefined) ? queryParams.archived === 'true' : undefined,
+            archived: queryParams.archived !== undefined ? queryParams.archived === 'true' : undefined,
             dateCreatedFrom: queryParams.dateCreatedFrom || undefined,
             dateCreatedTo: queryParams.dateCreatedTo || undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -370,47 +361,59 @@ export class AccountReportsKPIPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.relations$,
-          this.filters$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.relations$, this.filters$]),
         switchMap(([targetPage, parameters, relations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: {
-              page,
-              orderBy,
-              desc,
-              uprn: filters.uprn,
-              costCenterName: filters.costCenterName,
-              archived: filters.archived,
-              dateCreatedFrom: filters.dateCreatedFrom || undefined,
-              dateCreatedTo: filters.dateCreatedTo || undefined,
-              safeTimeFrom: filters.safeTimeFrom || undefined,
-              safeTimeTo: filters.safeTimeTo || undefined
-            }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                uprn: filters.uprn,
+                costCenterName: filters.costCenterName,
+                archived: filters.archived,
+                dateCreatedFrom: filters.dateCreatedFrom || undefined,
+                dateCreatedTo: filters.dateCreatedTo || undefined,
+                safeTimeFrom: filters.safeTimeFrom || undefined,
+                safeTimeTo: filters.safeTimeTo || undefined
+              }
+            })
+          );
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters });
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            filters
+          });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: JobSortField,
-    desc: boolean,
-    relations: Array<JobRelationType>,
-    filters: JobFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: JobSortField;
+    desc: boolean;
+    relations: Array<JobRelationType>;
+    filters: JobFilters;
   }): Observable<any> {
     return this.jobService
       .search({
@@ -435,38 +438,30 @@ export class AccountReportsKPIPageFacade {
   private registerExportCSVEffect(): void {
     this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.filters$,
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.filters$, this.relations$]),
         switchMap(([_, parameters, filters, relations]) => {
           this.updateIsExporting(true);
 
-          return this.jobService
-            .exportReportCSV({ ...parameters, filters, relations })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  const date = DateTime.now().toFormat(configuration.dateFormats.reports.kpiDate);
+          return this.jobService.exportReportCSV({ ...parameters, filters, relations }).pipe(
+            tapResponse(
+              (response) => {
+                const date = DateTime.now().toFormat(configuration.dateFormats.reports.kpiDate);
 
-                  this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.jobsReport(date));
-                },
-                (response: HttpErrorResponse) => {
-                  this.updateIsExporting(false);
+                this.updateIsExporting(false);
+                this.fileService.saveFile(response, configuration.exportCSV.jobsReport(date));
+              },
+              (response: HttpErrorResponse) => {
+                this.updateIsExporting(false);
 
-                  const errorTranslationKey =
-                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
-                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
-                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+                const errorTranslationKey =
+                  response.status === HttpStatusCode.BadGateway || response.status === 0
+                    ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                    : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
 
-                  this.notificationService.error(
-                    this.translateService.instant(errorTranslationKey)
-                  );
-                }
-              )
-            );
+                this.notificationService.error(this.translateService.instant(errorTranslationKey));
+              }
+            )
+          );
         })
       )
     );

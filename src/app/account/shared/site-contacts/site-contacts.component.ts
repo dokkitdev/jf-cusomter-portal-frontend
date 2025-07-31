@@ -9,10 +9,8 @@ import { AccountSiteContactsComponentFacade } from './site-contacts.facade';
   templateUrl: 'site-contacts.html',
   styleUrls: ['site-contacts.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountSiteContactsComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountSiteContactsComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountSiteContactsComponent implements OnDestroy {
   @Input()
@@ -28,9 +26,7 @@ export class AccountSiteContactsComponent implements OnDestroy {
   @Output() contactUpdated: Subject<Contact>;
   @Output() contactDeleted: Subject<number>;
 
-  constructor(
-    private facade: AccountSiteContactsComponentFacade
-  ) {
+  constructor(private facade: AccountSiteContactsComponentFacade) {
     this.contactCreated = this.facade.contactCreatedSubject;
     this.contactUpdated = this.facade.contactUpdatedSubject;
     this.contactDeleted = this.facade.contactDeletedSubject;

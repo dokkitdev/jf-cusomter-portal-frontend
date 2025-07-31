@@ -10,17 +10,17 @@ import { DashboardStatistic } from './models';
 export class DashboardService {
   public endpoint: string;
 
-  constructor(
-    private apiService: ApiService
-  ) {
+  constructor(private apiService: ApiService) {
     this.endpoint = '/dashboard';
   }
 
   public getStatistic(): Observable<DashboardStatistic> {
-    return this.apiService
-      .get<DashboardStatistic>(`${this.endpoint}`)
-      .pipe(
-        map((response) => plainToClass(DashboardStatistic, response, { groups: [ClassGroup.MAIN] }))
-      );
+    return this.apiService.get<DashboardStatistic>(`${this.endpoint}`).pipe(
+      map((response) =>
+        plainToClass(DashboardStatistic, response, {
+          groups: [ClassGroup.MAIN]
+        })
+      )
+    );
   }
 }

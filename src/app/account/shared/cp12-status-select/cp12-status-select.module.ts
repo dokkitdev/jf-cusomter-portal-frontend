@@ -5,16 +5,8 @@ import { AccountCp12StatusSelectComponent } from './cp12-status-select.component
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    AccountCp12StatusSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CustomSelectModule
-  ],
-  exports: [
-    AccountCp12StatusSelectComponent
-  ]
+  declarations: [AccountCp12StatusSelectComponent],
+  imports: [CommonModule, TranslateModule, CustomSelectModule],
+  exports: [AccountCp12StatusSelectComponent]
 })
-export class AccountCp12StatusSelectModule { }
+export class AccountCp12StatusSelectModule {}

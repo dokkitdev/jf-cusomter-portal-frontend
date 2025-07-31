@@ -6,14 +6,13 @@ import { PublicResetPasswordPageFacade } from './reset-password.facade';
   selector: 'public-reset-password-page',
   templateUrl: 'reset-password.html',
   styleUrls: ['reset-password.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicResetPasswordPageComponent implements OnInit, OnDestroy {
   public isNewUser$: Observable<boolean>;
 
-  constructor(
-    private facade: PublicResetPasswordPageFacade
-  ) {
+  constructor(private facade: PublicResetPasswordPageFacade) {
     this.isNewUser$ = this.facade.isNewUser$;
   }
 

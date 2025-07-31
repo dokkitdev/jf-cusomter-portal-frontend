@@ -6,14 +6,13 @@ import { AccountJobsPageFacade } from './jobs.facade';
   selector: 'account-jobs-page',
   templateUrl: 'jobs.html',
   styleUrls: ['jobs.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountJobsPageFacade
-  ) {
+  constructor(private facade: AccountJobsPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

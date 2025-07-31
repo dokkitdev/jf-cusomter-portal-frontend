@@ -8,15 +8,14 @@ import { AccountAssetsQueryParameters } from '../../models';
   selector: 'assets-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsItemsHeaderComponent {
   public parameters$: Observable<AccountAssetsQueryParameters>;
   public assetSortField: typeof AssetSortField;
 
-  constructor(
-    private facade: AccountAssetsPageFacade
-  ) {
+  constructor(private facade: AccountAssetsPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.assetSortField = AssetSortField;
   }

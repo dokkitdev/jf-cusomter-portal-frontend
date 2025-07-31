@@ -5,7 +5,8 @@ import { HeaderSortParameters } from './models';
   selector: 'header-sort',
   templateUrl: 'header-sort.html',
   styleUrls: ['header-sort.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeaderSortComponent {
   @Input() orderBy: string;
@@ -18,7 +19,7 @@ export class HeaderSortComponent {
   }
 
   public changeSortClicked(): void {
-    const desc = (this.orderBy === this.parameters.orderBy) ? !this.parameters.desc : false;
+    const desc = this.orderBy === this.parameters.orderBy ? !this.parameters.desc : false;
 
     this.sortChanged.emit(new HeaderSortParameters({ orderBy: this.orderBy, desc }));
   }

@@ -4,6 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   selector: 'dashboard-statistic-links',
   templateUrl: 'statistic-links.html',
   styleUrls: ['statistic-links.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class AccountDashboardStatisticLinksComponent { }
+export class AccountDashboardStatisticLinksComponent {}

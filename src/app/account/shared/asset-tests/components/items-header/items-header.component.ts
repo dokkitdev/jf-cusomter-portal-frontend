@@ -8,15 +8,14 @@ import { AssetTestSortField } from '../../enums';
   selector: 'asset-tests-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetTestsItemsHeaderComponent {
   public parameters$: Observable<AccountAssetTestsQueryParameters>;
   public assetTestSortField: typeof AssetTestSortField;
 
-  constructor(
-    private facade: AccountAssetTestsComponentFacade
-  ) {
+  constructor(private facade: AccountAssetTestsComponentFacade) {
     this.parameters$ = this.facade.parameters$;
     this.assetTestSortField = AssetTestSortField;
   }

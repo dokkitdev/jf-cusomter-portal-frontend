@@ -13,26 +13,38 @@ import { CustomerSortField } from './enums';
 export class CustomerService {
   public endpoint: string;
 
-  constructor(
-    private apiService: ApiService
-  ) {
+  constructor(private apiService: ApiService) {
     this.endpoint = '/customers';
   }
 
-  public search({ page, perPage, orderBy, desc, filters }: {
-    page?: number,
-    perPage?: number,
-    orderBy?: CustomerSortField,
-    desc?: boolean,
-    filters?: CustomerFilters
+  public search({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    filters
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: CustomerSortField;
+    desc?: boolean;
+    filters?: CustomerFilters;
   } = {}): Observable<PaginationResponse<Customer>> {
-    const request = new CustomerPaginationRequest({ ...filters, page, perPage, orderBy, desc });
+    const request = new CustomerPaginationRequest({
+      ...filters,
+      page,
+      perPage,
+      orderBy,
+      desc
+    });
 
     return this.apiService
-      .get<PaginationResponse<Customer>>(this.endpoint, omitBy(classToPlain<CustomerPaginationRequest>(request), isUndefined))
+      .get<
+        PaginationResponse<Customer>
+      >(this.endpoint, omitBy(classToPlain<CustomerPaginationRequest>(request), isUndefined))
       .pipe(
-        map((response) => plainToClassFromExist(
-          new PaginationResponse<Customer>(Customer), response, { groups: [ClassGroup.MAIN] })
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<Customer>(Customer), response, { groups: [ClassGroup.MAIN] })
         )
       );
   }
@@ -40,8 +52,6 @@ export class CustomerService {
   public get(id: number): Observable<Customer> {
     return this.apiService
       .get<Customer>(`${this.endpoint}/${id}`)
-      .pipe(
-        map((response) => plainToClass(Customer, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(Customer, response, { groups: [ClassGroup.MAIN] })));
   }
 }

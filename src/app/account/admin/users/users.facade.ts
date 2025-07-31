@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-  AccountDialogEditUserActions,
-  AccountDialogEditUserComponent
-} from '@app/account/shared/dialog-edit-user';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { AccountDialogEditUserActions, AccountDialogEditUserComponent } from '@app/account/shared/dialog-edit-user';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Customer } from '@shared/customer';
@@ -84,15 +82,16 @@ export class AccountAdminUsersPageFacade {
   }
 
   public get filters$(): Observable<UserFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        map((filterFormStateValue) => new UserFilters({
-          customerIds: (filterFormStateValue.simproCustomerID) ? [filterFormStateValue.simproCustomerID] : undefined,
-          name: filterFormStateValue.name || undefined,
-          email: filterFormStateValue.email || undefined
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      map(
+        (filterFormStateValue) =>
+          new UserFilters({
+            customerIds: filterFormStateValue.simproCustomerID ? [filterFormStateValue.simproCustomerID] : undefined,
+            name: filterFormStateValue.name || undefined,
+            email: filterFormStateValue.email || undefined
+          })
+      )
+    );
   }
 
   public get filterValues$(): Observable<Array<FilterValue>> {
@@ -108,7 +107,10 @@ export class AccountAdminUsersPageFacade {
       }
       if (formState.value.simproCustomerID && state.selectedCustomer) {
         filterValues.push(
-          new FilterValue({ id: formState.controls.simproCustomerID.id, value: state.selectedCustomer.name })
+          new FilterValue({
+            id: formState.controls.simproCustomerID.id,
+            value: state.selectedCustomer.name
+          })
         );
       }
 
@@ -189,136 +191,111 @@ export class AccountAdminUsersPageFacade {
   }
 
   private updateFormState(action: FormActions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<User>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private deleteItemFromList(id: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: filterArray(state.items, (item) => item.id !== id),
-        totalItems: state.totalItems - 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: filterArray(state.items, (item) => item.id !== id),
+      totalItems: state.totalItems - 1
+    }))();
   }
 
   private addItemToList(user: User): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: [user, ...state.items],
-        totalItems: state.totalItems + 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: [user, ...state.items],
+      totalItems: state.totalItems + 1
+    }))();
   }
 
   private updateItemInList(user: User): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: (() => {
-          const index = findIndex(state.items, { id: user.id });
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: (() => {
+        const index = findIndex(state.items, { id: user.id });
 
-          return (index !== -1)
-            ? [...state.items.slice(0, index), user, ...state.items.slice(index + 1)]
-            : state.items;
-        })()
-      })
-    )();
+        return index !== -1 ? [...state.items.slice(0, index), user, ...state.items.slice(index + 1)] : state.items;
+      })()
+    }))();
   }
 
   private updateSelectedCustomer(customer: Customer): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedCustomer: customer
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      selectedCustomer: customer
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountAdminUsersQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountAdminUsersQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountAdminUsersFilterForm>(
-          state.filterFormState,
-          {
-            simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
-            name: setValue(parameters.name || state.filterFormState.value.name),
-            email: setValue(parameters.email || state.filterFormState.value.email)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountAdminUsersFilterForm>(state.filterFormState, {
+        simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
+        name: setValue(parameters.name || state.filterFormState.value.name),
+        email: setValue(parameters.email || state.filterFormState.value.email)
       })
-    )();
+    }))();
   }
 
   private registerOpenCreateUserDialogEffect(): void {
     this.openCreateUserDialogEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        map(() => this.dialogService.open(AccountDialogEditUserComponent, {
-          autoFocus: false
-        }))
+        map(() =>
+          this.dialogService.open(AccountDialogEditUserComponent, {
+            autoFocus: false
+          })
+        )
       )
     );
   }
@@ -326,26 +303,22 @@ export class AccountAdminUsersPageFacade {
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectQueryParams)
-        ),
+        withLatestFrom(this.store.select(NavigationSelectors.selectQueryParams)),
         tap(([_, queryParams]) => {
           this.updateIsLoading(true);
 
           const parameters = new AccountAdminUsersQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
-            simproCustomerID: (queryParams.simproCustomerID) ? parseInt(queryParams.simproCustomerID, 10) : undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
+            simproCustomerID: queryParams.simproCustomerID ? parseInt(queryParams.simproCustomerID, 10) : undefined,
             name: queryParams.name || undefined,
             email: queryParams.email || undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -366,40 +339,52 @@ export class AccountAdminUsersPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.parameters$,
-          this.relations$,
-          this.filters$
-        ),
+        withLatestFrom(this.parameters$, this.relations$, this.filters$),
         switchMap(([_, parameters, relations, filters]) => {
           const { page, perPage, orderBy, desc } = parameters;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: {
-              page,
-              orderBy,
-              desc,
-              simproCustomerID: filters.customerIds,
-              name: filters.name,
-              email: filters.email
-            }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                simproCustomerID: filters.customerIds,
+                name: filters.name,
+                email: filters.email
+              }
+            })
+          );
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters });
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            filters
+          });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: UserSortField,
-    desc: boolean,
-    relations: Array<UserRelationType>,
-    filters: UserFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: UserSortField;
+    desc: boolean;
+    relations: Array<UserRelationType>;
+    filters: UserFilters;
   }): Observable<any> {
     return this.userService
       .search({
@@ -425,14 +410,9 @@ export class AccountAdminUsersPageFacade {
     this.componentStore.effect(() =>
       this.actions$.pipe(
         ofType(AccountDialogEditUserActions.createUserSuccess),
-        withLatestFrom(
-          this.relations$
-        ),
-        mergeMap(([{ userID }, relations]) => this.userService
-          .get(userID, relations)
-          .pipe(
-            tap((user) => this.addItemToList(user))
-          )
+        withLatestFrom(this.relations$),
+        mergeMap(([{ userID }, relations]) =>
+          this.userService.get(userID, relations).pipe(tap((user) => this.addItemToList(user)))
         )
       )
     );
@@ -442,15 +422,10 @@ export class AccountAdminUsersPageFacade {
     this.componentStore.effect(() =>
       this.actions$.pipe(
         ofType(AccountDialogEditUserActions.updateUserSuccess),
-        withLatestFrom(
-          this.relations$
-        ),
-        mergeMap(([{ userID }, relations]) => this.userService
-          .get(userID, relations)
-          .pipe(
-            withLatestFrom(
-              this.userService.profile$
-            ),
+        withLatestFrom(this.relations$),
+        mergeMap(([{ userID }, relations]) =>
+          this.userService.get(userID, relations).pipe(
+            withLatestFrom(this.userService.profile$),
             tap(([user, profile]) => {
               this.updateItemInList(user);
 

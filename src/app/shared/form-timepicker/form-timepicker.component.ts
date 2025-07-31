@@ -15,7 +15,8 @@ import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
       useExisting: forwardRef(() => NgrxDefaultViewAdapter),
       multi: true
     }
-  ]
+  ],
+  standalone: false
 })
 export class FormTimepickerComponent {
   @Input() controlState: FormControlState<string>;

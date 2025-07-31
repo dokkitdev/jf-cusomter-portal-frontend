@@ -6,14 +6,13 @@ import { AccountSitesPageFacade } from './sites.facade';
   selector: 'account-sites-page',
   templateUrl: 'sites.html',
   styleUrls: ['sites.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountSitesPageFacade
-  ) {
+  constructor(private facade: AccountSitesPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

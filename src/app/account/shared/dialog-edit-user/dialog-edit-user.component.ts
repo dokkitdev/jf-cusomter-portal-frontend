@@ -14,11 +14,9 @@ import { AccountDialogEditUserData } from './models';
   templateUrl: 'dialog-edit-user.html',
   styleUrls: ['dialog-edit-user.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountDialogEditUserComponentFacade,
-    ComponentStore
-  ],
-  animations: [heightCollapseAnimation]
+  providers: [AccountDialogEditUserComponentFacade, ComponentStore],
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountDialogEditUserComponent implements OnInit, OnDestroy {
   public isEditMode$: Observable<boolean>;

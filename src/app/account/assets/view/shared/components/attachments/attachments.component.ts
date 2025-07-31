@@ -6,14 +6,13 @@ import { AccountAssetsViewPageFacade } from '../../../view.facade';
   selector: 'account-assets-view-attachments',
   templateUrl: 'attachments.html',
   styleUrls: ['attachments.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsViewAttachmentsComponent {
   @Input() items: Array<AssetAttachment>;
 
-  constructor(
-    private facade: AccountAssetsViewPageFacade
-  ) { }
+  constructor(private facade: AccountAssetsViewPageFacade) {}
 
   public downloadAttachmentClicked(item: AssetAttachment): void {
     this.facade.downloadAttachment(item);

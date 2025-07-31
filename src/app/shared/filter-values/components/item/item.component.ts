@@ -6,14 +6,13 @@ import { FilterValue } from '../../models';
   selector: 'filter-values-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FilterValuesItemComponent {
   @Input() item: FilterValue;
 
-  constructor(
-    private facade: FilterValuesFacade
-  ) { }
+  constructor(private facade: FilterValuesFacade) {}
 
   public removeFilterClicked(): void {
     this.facade.removeItem(this.item);

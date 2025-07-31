@@ -6,7 +6,8 @@ import { Asset } from '@shared/asset';
   selector: 'account-assets-view-info',
   templateUrl: 'info.html',
   styleUrls: ['info.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsViewInfoComponent {
   @Input() asset: Asset;

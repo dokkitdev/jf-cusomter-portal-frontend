@@ -5,12 +5,11 @@ import { AccountDocumentsPageFacade } from './documents.facade';
   selector: 'account-documents-page',
   templateUrl: 'documents.html',
   styleUrls: ['documents.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDocumentsPageComponent implements OnInit, OnDestroy {
-  constructor(
-    private facade: AccountDocumentsPageFacade
-  ) { }
+  constructor(private facade: AccountDocumentsPageFacade) {}
 
   public ngOnInit(): void {
     this.facade.loadItems();

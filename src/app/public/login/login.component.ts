@@ -8,16 +8,15 @@ import { PublicLoginPageFacade } from './login.facade';
   selector: 'public-login-page',
   templateUrl: 'login.html',
   styleUrls: ['login.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicLoginPageComponent implements OnDestroy {
   public formState$: Observable<FormGroupState<PublicLoginPageForm>>;
   public isSubmitting$: Observable<boolean>;
   public isLoginFailed$: Observable<boolean>;
 
-  constructor(
-    private facade: PublicLoginPageFacade
-  ) {
+  constructor(private facade: PublicLoginPageFacade) {
     this.formState$ = this.facade.formState$;
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isLoginFailed$ = this.facade.isLoginFailed$;

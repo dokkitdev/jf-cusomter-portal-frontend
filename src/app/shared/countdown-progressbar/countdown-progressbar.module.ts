@@ -3,14 +3,8 @@ import { CountdownProgressbarComponent } from './countdown-progressbar.component
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-    CountdownProgressbarComponent
-  ],
-  exports: [
-    CountdownProgressbarComponent
-  ]
+  imports: [CommonModule],
+  declarations: [CountdownProgressbarComponent],
+  exports: [CountdownProgressbarComponent]
 })
-export class CountdownProgressbarModule { }
+export class CountdownProgressbarModule {}

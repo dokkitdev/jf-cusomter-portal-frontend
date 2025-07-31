@@ -8,18 +8,16 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class ExistenceSelectComponentFacade {
   public get options$(): Observable<Array<CustomSelectOption<boolean>>> {
-    return this.componentStore.select((state) =>
-      [
-        new CustomSelectOption({
-          id: true,
-          title: state.positiveTitle || this.translateService.instant('SHARED.EXISTENCE_SELECT.TEXT_YES')
-        }),
-        new CustomSelectOption({
-          id: false,
-          title: state.negativeTitle || this.translateService.instant('SHARED.EXISTENCE_SELECT.TEXT_NO')
-        })
-      ]
-    );
+    return this.componentStore.select((state) => [
+      new CustomSelectOption({
+        id: true,
+        title: state.positiveTitle || this.translateService.instant('SHARED.EXISTENCE_SELECT.TEXT_YES')
+      }),
+      new CustomSelectOption({
+        id: false,
+        title: state.negativeTitle || this.translateService.instant('SHARED.EXISTENCE_SELECT.TEXT_NO')
+      })
+    ]);
   }
 
   constructor(
@@ -42,20 +40,16 @@ export class ExistenceSelectComponentFacade {
   }
 
   private updatePositiveTitle(value: string): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        positiveTitle: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      positiveTitle: value
+    }))();
   }
 
   private updateNegativeTitle(value: string): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        negativeTitle: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      negativeTitle: value
+    }))();
   }
 }

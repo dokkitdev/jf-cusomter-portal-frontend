@@ -1,11 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter, Boxed } from 'ngrx-forms';
 import { AccountJobStageMultiselectComponentFacade } from './job-stage-multiselect.facade';
 import { CustomSelectOption } from '@shared/custom-select/models';
@@ -25,7 +18,8 @@ import { ValidationMessages } from '@shared/validation-errors';
     },
     AccountJobStageMultiselectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountJobStageMultiselectComponent {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;
@@ -37,9 +31,7 @@ export class AccountJobStageMultiselectComponent {
 
   public options: Array<CustomSelectOption<string>>;
 
-  constructor(
-    private facade: AccountJobStageMultiselectComponentFacade
-  ) {
+  constructor(private facade: AccountJobStageMultiselectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options = this.facade.options;
   }

@@ -6,7 +6,8 @@ import { JobSchedule } from '@shared/job';
   selector: 'jobs-view-engineers-item',
   templateUrl: 'engineers-item.html',
   styleUrls: ['engineers-item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewEngineersItemComponent {
   @Input() item: JobSchedule;

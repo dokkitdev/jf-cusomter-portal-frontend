@@ -28,7 +28,8 @@ import { ValidationMessages } from '@shared/validation-errors';
     },
     AccountAssetServiceLevelMultiselectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountAssetServiceLevelMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormArrayState<string>;
@@ -41,9 +42,7 @@ export class AccountAssetServiceLevelMultiselectComponent implements OnInit, OnD
   public options$: Observable<Array<CustomSelectOption<string>>>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountAssetServiceLevelMultiselectComponentFacade
-  ) {
+  constructor(private facade: AccountAssetServiceLevelMultiselectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options$ = this.facade.options$;
     this.isLoading$ = this.facade.isLoading$;

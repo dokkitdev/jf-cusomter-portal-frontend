@@ -5,16 +5,8 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { ValidationErrorsModule } from '@shared/validation-errors';
 
 @NgModule({
-  declarations: [
-    FormTextareaComponent
-  ],
-  imports: [
-    CommonModule,
-    NgrxFormsModule,
-    ValidationErrorsModule
-  ],
-  exports: [
-    FormTextareaComponent
-  ]
+  declarations: [FormTextareaComponent],
+  imports: [CommonModule, NgrxFormsModule, ValidationErrorsModule],
+  exports: [FormTextareaComponent]
 })
-export class FormTextareaModule { }
+export class FormTextareaModule {}

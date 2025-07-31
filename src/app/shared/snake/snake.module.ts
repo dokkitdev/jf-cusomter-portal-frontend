@@ -3,14 +3,8 @@ import { NgModule } from '@angular/core';
 import { SnakePipe } from './snake.pipe';
 
 @NgModule({
-  declarations: [
-    SnakePipe
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    SnakePipe
-  ]
+  declarations: [SnakePipe],
+  imports: [CommonModule],
+  exports: [SnakePipe]
 })
-export class SnakeModule { }
+export class SnakeModule {}

@@ -9,7 +9,8 @@ import { Job } from '@shared/job';
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountReportsKPIItemComponent {
   @Input() item: Job;
@@ -21,9 +22,7 @@ export class AccountReportsKPIItemComponent {
   public dateFormat: string;
   public timeFormat: string;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
+  constructor(private sanitizer: DomSanitizer) {
     this.dateFormat = configuration.dateFormats.jobDate;
     this.timeFormat = configuration.dateFormats.jobTime;
   }

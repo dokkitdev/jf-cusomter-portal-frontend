@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { AccountDialogJobRequestComponent } from './dialog-job-request.component';
 import { FormTextareaModule } from '@shared/form-textarea';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,23 +12,20 @@ import { ButtonModule } from '@shared/button';
 import { FormTextModule } from '@shared/form-text';
 
 @NgModule({
-  declarations: [
-    AccountDialogJobRequestComponent
-  ],
+  declarations: [AccountDialogJobRequestComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     FormTextModule,
     FormTextareaModule,
     MediaMultiselectModule,
     JobModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogJobRequestComponent
-  ]
+  exports: [AccountDialogJobRequestComponent]
 })
-export class AccountDialogJobRequestModule { }
+export class AccountDialogJobRequestModule {}

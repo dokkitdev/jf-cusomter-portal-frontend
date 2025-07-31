@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { AccountDialogEditContactComponent } from './dialog-edit-contact.component';
 import { FormTextModule } from '@shared/form-text';
@@ -12,23 +12,20 @@ import { ContactModule } from '@shared/contact';
 import { ButtonModule } from '@shared/button';
 
 @NgModule({
-  declarations: [
-    AccountDialogEditContactComponent
-  ],
+  declarations: [AccountDialogEditContactComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     FormTextModule,
     AccountCustomerSelectModule,
     ContactModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogEditContactComponent
-  ]
+  exports: [AccountDialogEditContactComponent]
 })
-export class AccountDialogEditContactModule { }
+export class AccountDialogEditContactModule {}

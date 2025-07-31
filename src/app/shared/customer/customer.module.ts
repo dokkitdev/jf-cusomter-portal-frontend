@@ -3,11 +3,7 @@ import { NgModule } from '@angular/core';
 import { CustomerService } from './customer.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    CustomerService
-  ]
+  imports: [CommonModule],
+  providers: [CustomerService]
 })
-export class CustomerModule { }
+export class CustomerModule {}

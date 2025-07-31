@@ -10,10 +10,8 @@ import { AccountSiteContactsItemComponentFacade } from './item.facade';
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountSiteContactsItemComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountSiteContactsItemComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountSiteContactsItemComponent {
   @Input() item: Contact;
@@ -23,9 +21,7 @@ export class AccountSiteContactsItemComponent {
   public isSendingRequest$: Observable<boolean>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    private facade: AccountSiteContactsItemComponentFacade
-  ) {
+  constructor(private facade: AccountSiteContactsItemComponentFacade) {
     this.isSendingRequest$ = this.facade.isSendingRequest$;
     this.deletingSuccess = this.facade.deletingSuccessSubject;
     this.spinnerDiameter = SpinnerDiameter;

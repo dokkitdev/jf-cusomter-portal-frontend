@@ -4,15 +4,8 @@ import { ValidationErrorsComponent } from './validation-errors.component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 
 @NgModule({
-  declarations: [
-    ValidationErrorsComponent
-  ],
-  imports: [
-    CommonModule,
-    NgForTrackByPropertyModule
-  ],
-  exports: [
-    ValidationErrorsComponent
-  ]
+  declarations: [ValidationErrorsComponent],
+  imports: [CommonModule, NgForTrackByPropertyModule],
+  exports: [ValidationErrorsComponent]
 })
-export class ValidationErrorsModule { }
+export class ValidationErrorsModule {}

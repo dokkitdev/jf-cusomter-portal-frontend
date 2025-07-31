@@ -5,21 +5,13 @@
     'servicecontrol-row-ontime': item.isOnTime
   }"
   class="table-row servicecontrol-row">
-  <div class="table-cell servicecontrol-uprn">
-    {{ item.site?.uprn }}
-  </div>
-  <div class="table-cell servicecontrol-assetid">
-    {{ item.assetID }}
-  </div>
-  <div class="table-cell servicecontrol-orderno">
-    {{ item.job?.orderNo }}
-  </div>
+  <div class="table-cell servicecontrol-uprn">{{ item.site?.uprn }}</div>
+  <div class="table-cell servicecontrol-assetid">{{ item.assetID }}</div>
+  <div class="table-cell servicecontrol-orderno">{{ item.job?.orderNo }}</div>
   <div class="table-cell servicecontrol-customer">
     {{ item.jobCustomer?.name }}
   </div>
-  <div class="table-cell servicecontrol-sitename">
-    {{ item.site?.name }}
-  </div>
+  <div class="table-cell servicecontrol-sitename">{{ item.site?.name }}</div>
   <div class="table-cell servicecontrol-siteaddress">
     <div>{{ item.site?.fullAddress }}</div>
     <div>{{ item.site?.postalCode }}</div>
@@ -65,7 +57,5 @@
       {{ item.job?.status }}
     </span>
   </div>
-  <div class="table-cell servicecontrol-jobnumber">
-    {{ item.job?.jobID }}
-  </div>
+  <div class="table-cell servicecontrol-jobnumber">{{ item.job?.jobID }}</div>
 </div>

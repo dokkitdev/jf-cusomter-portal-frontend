@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountSitesPageFacade } from './sites.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { SiteModule } from '@shared/site';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -39,7 +39,8 @@ import { NotificationModule } from '@shared/notification';
     TranslateModule,
     AccountSitesPageRoutingModule,
     SiteModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -53,9 +54,6 @@ import { NotificationModule } from '@shared/notification';
     ButtonModule,
     NotificationModule
   ],
-  providers: [
-    AccountSitesPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountSitesPageFacade, ComponentStore]
 })
-export class AccountSitesPageModule { }
+export class AccountSitesPageModule {}

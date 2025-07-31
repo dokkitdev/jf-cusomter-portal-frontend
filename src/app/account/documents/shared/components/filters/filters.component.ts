@@ -9,7 +9,8 @@ import { AccountDocumentsFilterForm } from '../../forms';
   selector: 'documents-filters',
   templateUrl: 'filters.html',
   styleUrls: ['filters.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDocumentsFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountDocumentsFilterForm>>;
@@ -17,9 +18,7 @@ export class AccountDocumentsFiltersComponent {
   public getStartCreatedAtFilter$: Observable<(date: Date) => boolean>;
   public getEndCreatedAtFilter$: Observable<(date: Date) => boolean>;
 
-  constructor(
-    private facade: AccountDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountDocumentsPageFacade) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
     this.getStartCreatedAtFilter$ = this.facade.getStartCreatedAtFilter$();

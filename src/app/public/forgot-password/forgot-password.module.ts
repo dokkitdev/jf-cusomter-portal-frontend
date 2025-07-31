@@ -8,7 +8,7 @@ import { PublicForgotPasswordPageFacade } from './forgot-password.facade';
 import { FormTextModule } from '@shared/form-text';
 import { ComponentStore } from '@ngrx/component-store';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { PublicForgotPasswordMessageComponent } from './shared/components/message/message.component';
 import { PublicForgotPasswordFormComponent } from './shared/components/form/form.component';
 import { PublicForgotPasswordRequestErrorComponent } from './shared/components/request-error/request-error.component';
@@ -29,7 +29,8 @@ import { ButtonModule } from '@shared/button';
     RouterModule,
     TranslateModule,
     NgrxFormsModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     PublicForgotPasswordPageRoutingModule,
     FormTextModule,
     PublicLayoutModule,
@@ -37,9 +38,6 @@ import { ButtonModule } from '@shared/button';
     FormErrorModule,
     ButtonModule
   ],
-  providers: [
-    PublicForgotPasswordPageFacade,
-    ComponentStore
-  ]
+  providers: [PublicForgotPasswordPageFacade, ComponentStore]
 })
-export class PublicForgotPasswordPageModule { }
+export class PublicForgotPasswordPageModule {}

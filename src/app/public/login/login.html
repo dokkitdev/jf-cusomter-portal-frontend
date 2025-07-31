@@ -1,14 +1,12 @@
 <public-layout
   title="{{ 'PUBLIC.LOGIN.TEXT_PAGE_TITLE' | translate }}"
-  page="login"
->
+  page="login">
   <form
     *ngrxLet="formState$; let formState"
     [ngrxFormState]="formState"
     (submit)="formSubmitted()"
     (ngrxFormsAction)="formActionTriggered($event)"
-    class="login-form"
-  >
+    class="login-form">
     <form-text
       [controlState]="formState.controls.email"
       [validationMessages]="{
@@ -18,10 +16,12 @@
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'PUBLIC.LOGIN.TEXT_EMAIL_PLACEHOLDER' | translate }}"
       type="email"
-      autocomplete="email"
-    >
+      autocomplete="email">
     </form-text>
-    <btn [isBlock]="true" [isLoading]="isSubmitting$ | async" type="submit">
+    <btn
+      [isBlock]="true"
+      [isLoading]="isSubmitting$ | async"
+      type="submit">
       {{ 'PUBLIC.LOGIN.BUTTON_SEND_CODE' | translate }}
     </btn>
   </form>

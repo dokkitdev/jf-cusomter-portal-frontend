@@ -7,7 +7,8 @@ import { AssetReading } from '@shared/asset';
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountDialogViewAssetTestReadingsItemsComponent {
   @Input() items: Array<AssetReading>;

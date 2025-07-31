@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@shared/notification';
 import { User, UserService } from '@shared/user';
@@ -82,130 +83,95 @@ export class AccountProfilePageFacade {
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountProfilePageForm>(
-          state.formState,
-          {
-            name: validate(trimmedRequired),
-            email: validate(email, trimmedRequired),
-            oldPassword: (control, formState) => validate(control,
-              (formState.value.shouldValidatePassword)
-                ? [trimmedRequired]
-                : []
-            ),
-            password: (control, formState) => validate(control,
-              (formState.value.shouldValidatePassword)
-                ? [trimmedRequired, containDigit, minLength(8)]
-                : []
-            ),
-            passwordConfirmation: (control, formState) => validate(control,
-              (formState.value.shouldValidatePassword)
-                ? [trimmedRequired, equalTo(formState.value.password)]
-                : []
-            )
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountProfilePageForm>(state.formState, {
+        name: validate(trimmedRequired),
+        email: validate(email, trimmedRequired),
+        oldPassword: (control, formState) =>
+          validate(control, formState.value.shouldValidatePassword ? [trimmedRequired] : []),
+        password: (control, formState) =>
+          validate(
+            control,
+            formState.value.shouldValidatePassword ? [trimmedRequired, containDigit, minLength(8)] : []
+          ),
+        passwordConfirmation: (control, formState) =>
+          validate(
+            control,
+            formState.value.shouldValidatePassword ? [trimmedRequired, equalTo(formState.value.password)] : []
+          )
       })
-    )();
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private updateProfileFormState(profile: User): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountProfilePageForm>(
-          state.formState,
-          {
-            name: setValue(profile.name),
-            email: setValue(profile.email)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountProfilePageForm>(state.formState, {
+        name: setValue(profile.name),
+        email: setValue(profile.email)
       })
-    )();
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsSubmitting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSubmitting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSubmitting: value
+    }))();
   }
 
   private updateIsPasswordBlockVisible(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isPasswordBlockVisible: value,
-        formState: updateGroup<AccountProfilePageForm>(
-          state.formState,
-          {
-            shouldValidatePassword: setValue(value)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      isPasswordBlockVisible: value,
+      formState: updateGroup<AccountProfilePageForm>(state.formState, {
+        shouldValidatePassword: setValue(value)
       })
-    )();
+    }))();
 
     this.validateForm();
   }
 
   private resetFormPasswords(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountProfilePageForm>(
-          state.formState,
-          {
-            oldPassword: setValue(''),
-            password: setValue(''),
-            passwordConfirmation: setValue('')
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountProfilePageForm>(state.formState, {
+        oldPassword: setValue(''),
+        password: setValue(''),
+        passwordConfirmation: setValue('')
       })
-    )();
+    }))();
 
     this.validateForm();
   }
 
   private markFormAsUnsubmitted(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: markAsUnsubmitted(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: markAsUnsubmitted(state.formState)
+    }))();
 
     this.validateForm();
   }
@@ -220,7 +186,9 @@ export class AccountProfilePageFacade {
         errorMessage = response.error.error;
       }
     }
-    this.notificationService.error(errorMessage || this.translateService.instant('ACCOUNT.PROFILE.NOTIFICATIONS.TEXT_ERROR'));
+    this.notificationService.error(
+      errorMessage || this.translateService.instant('ACCOUNT.PROFILE.NOTIFICATIONS.TEXT_ERROR')
+    );
   }
 
   private registerInitFormEffect(): void {
@@ -229,17 +197,15 @@ export class AccountProfilePageFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.userService
-            .loadProfile()
-            .pipe(
-              tapResponse(
-                (profile) => {
-                  this.updateIsLoading(false);
-                  this.updateProfileFormState(profile);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.userService.loadProfile().pipe(
+            tapResponse(
+              (profile) => {
+                this.updateIsLoading(false);
+                this.updateProfileFormState(profile);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );
@@ -248,11 +214,7 @@ export class AccountProfilePageFacade {
   private registerSaveChangesEffect(): void {
     this.saveChangesEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$,
-          this.isPasswordBlockVisible$,
-          this.profile$
-        ),
+        withLatestFrom(this.formState$, this.isPasswordBlockVisible$, this.profile$),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, isPasswordBlockVisible, profile]) => {
           this.updateIsSubmitting(true);
@@ -279,28 +241,26 @@ export class AccountProfilePageFacade {
   }
 
   private tryToUpdateProfile(profile: User, changedProfile: User): Observable<void> {
-    return this.userService
-      .updateProfile(changedProfile)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSubmitting(false);
-            this.toggleDisablingForm(false);
-            this.updateIsPasswordBlockVisible(false);
-            this.resetFormPasswords();
-            this.markFormAsUnsubmitted();
-            this.userService.setProfile(new User({ ...profile, name: changedProfile.name }));
+    return this.userService.updateProfile(changedProfile).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSubmitting(false);
+          this.toggleDisablingForm(false);
+          this.updateIsPasswordBlockVisible(false);
+          this.resetFormPasswords();
+          this.markFormAsUnsubmitted();
+          this.userService.setProfile(new User({ ...profile, name: changedProfile.name }));
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.PROFILE.NOTIFICATIONS.TEXT_PROFILE_UPDATED')
-            );
-          },
-          (errorResponse) => {
-            this.updateIsSubmitting(false);
-            this.toggleDisablingForm(false);
-            this.showErrorNotification(errorResponse);
-          }
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.PROFILE.NOTIFICATIONS.TEXT_PROFILE_UPDATED')
+          );
+        },
+        (errorResponse) => {
+          this.updateIsSubmitting(false);
+          this.toggleDisablingForm(false);
+          this.showErrorNotification(errorResponse);
+        }
+      )
+    );
   }
 }

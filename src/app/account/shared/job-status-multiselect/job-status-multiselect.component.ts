@@ -1,12 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  forwardRef,
-  Input,
-  Output,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, forwardRef, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter, Boxed } from 'ngrx-forms';
 import { AccountJobStatusMultiselectComponentFacade } from './job-status-multiselect.facade';
 import { CustomSelectOption } from '@shared/custom-select/models';
@@ -27,7 +19,8 @@ import { ValidationMessages } from '@shared/validation-errors';
     },
     AccountJobStatusMultiselectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountJobStatusMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;
@@ -39,9 +32,7 @@ export class AccountJobStatusMultiselectComponent implements OnInit, OnDestroy {
   public options$: Observable<Array<CustomSelectOption<string>>>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountJobStatusMultiselectComponentFacade
-  ) {
+  constructor(private facade: AccountJobStatusMultiselectComponentFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.options$ = this.facade.options$;
     this.isLoading$ = this.facade.isLoading$;

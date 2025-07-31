@@ -29,7 +29,8 @@ import { ComponentStore } from '@ngrx/component-store';
     },
     AccountCustomerSelectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   @Input()
@@ -59,9 +60,7 @@ export class AccountCustomerSelectComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
   public hasNextItems$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountCustomerSelectComponentFacade
-  ) {
+  constructor(private facade: AccountCustomerSelectComponentFacade) {
     this.label = '';
     this.placeholder = '';
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();

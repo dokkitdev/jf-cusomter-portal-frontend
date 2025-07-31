@@ -6,14 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    AccountReportsPageComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    TranslateModule,
-    AccountReportsPageRoutingModule
-  ]
+  declarations: [AccountReportsPageComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, AccountReportsPageRoutingModule]
 })
-export class AccountReportsPageModule { }
+export class AccountReportsPageModule {}

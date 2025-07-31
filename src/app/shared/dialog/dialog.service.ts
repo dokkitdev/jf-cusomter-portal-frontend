@@ -5,15 +5,16 @@ import { configuration } from '@configurations';
 
 @Injectable()
 export class DialogService {
-  constructor(
-    private matDialog: MatDialog
-  ) { }
+  constructor(private matDialog: MatDialog) {}
 
   public open<Component, Data = any>(
     component: ComponentType<Component>,
     config: MatDialogConfig<Data> = {}
   ): MatDialogRef<Component> {
-    return this.matDialog.open(component, { ...configuration.dialog, ...config });
+    return this.matDialog.open(component, {
+      ...configuration.dialog,
+      ...config
+    });
   }
 
   public close(id?: string, result?: any): void {

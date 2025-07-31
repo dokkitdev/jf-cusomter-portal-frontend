@@ -5,12 +5,11 @@ import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
   selector: 'admin-documents-header',
   templateUrl: 'header.html',
   styleUrls: ['header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminDocumentsHeaderComponent {
-  constructor(
-    private facade: AccountAdminDocumentsPageFacade
-  ) { }
+  constructor(private facade: AccountAdminDocumentsPageFacade) {}
 
   public newDocumentButtonClicked(): void {
     this.facade.openAddDocumentDialog();

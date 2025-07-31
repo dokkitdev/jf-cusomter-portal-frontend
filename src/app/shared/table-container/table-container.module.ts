@@ -5,16 +5,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 
 @NgModule({
-  declarations: [
-    TableContainerComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    LoadingSpinnerModule
-  ],
-  exports: [
-    TableContainerComponent
-  ]
+  declarations: [TableContainerComponent],
+  imports: [CommonModule, TranslateModule, LoadingSpinnerModule],
+  exports: [TableContainerComponent]
 })
-export class TableContainerModule { }
+export class TableContainerModule {}

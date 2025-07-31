@@ -14,10 +14,8 @@ import { AccountDialogJobRequestData } from './models';
   templateUrl: 'dialog-job-request.html',
   styleUrls: ['dialog-job-request.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountDialogJobRequestComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountDialogJobRequestComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountDialogJobRequestComponent implements OnInit, OnDestroy {
   public isSendingRequest$: Observable<boolean>;

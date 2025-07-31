@@ -6,7 +6,8 @@ import { Site } from '@shared/site';
   selector: 'sites-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesItemComponent {
   @Input() item: Site;

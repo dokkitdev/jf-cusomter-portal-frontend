@@ -1,7 +1,7 @@
-<ng-container *ngFor="let controlError of controlErrors | keyvalue: orderFunction; let i = index; trackByProperty">
-  <div
-    *ngIf="i === 0 && hasMessage(controlError.key)"
-    class="form-helper form-helper-error">
-    {{ messages[controlError.key] }}
-  </div>
-</ng-container>
+@for (controlError of controlErrors | keyvalue: orderFunction; track controlError; let i = $index) {
+  @if (i === 0 && hasMessage(controlError.key)) {
+    <div class="form-helper form-helper-error">
+      {{ messages[controlError.key] }}
+    </div>
+  }
+}

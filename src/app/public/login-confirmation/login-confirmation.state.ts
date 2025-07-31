@@ -9,9 +9,6 @@ export class PublicLoginConfirmationPageState {
   constructor() {
     this.isSubmitting = false;
     this.isConfirmLoginFailed = false;
-    this.formState = createFormGroupState(
-      'PublicLoginConfirmationForm',
-      new PublicLoginConfirmationPageForm()
-    );
+    this.formState = createFormGroupState('PublicLoginConfirmationForm', new PublicLoginConfirmationPageForm());
   }
 }

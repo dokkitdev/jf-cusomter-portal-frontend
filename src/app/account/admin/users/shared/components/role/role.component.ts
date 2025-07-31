@@ -5,7 +5,8 @@ import { User, UserRole } from '@shared/user';
   selector: 'admin-users-role',
   templateUrl: 'role.html',
   styleUrls: ['role.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminUsersRoleComponent {
   @Input() item: User;

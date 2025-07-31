@@ -4,12 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  providers: [
-    NavigationService
-  ]
+  imports: [CommonModule, RouterModule],
+  providers: [NavigationService]
 })
-export class NavigationModule { }
+export class NavigationModule {}

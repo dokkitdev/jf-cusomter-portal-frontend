@@ -7,13 +7,12 @@ import { map, Observable } from 'rxjs';
   templateUrl: 'message.html',
   styleUrls: ['message.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicLoginConfirmationMessageComponent {
   public email$: Observable<string>;
 
   constructor(private facade: PublicLoginConfirmationPageFacade) {
-    this.email$ = this.facade.formState$.pipe(
-      map((state) => state.value.email)
-    );
+    this.email$ = this.facade.formState$.pipe(map((state) => state.value.email));
   }
 }

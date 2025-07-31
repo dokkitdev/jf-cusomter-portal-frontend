@@ -1,13 +1,13 @@
 import without from 'lodash/without';
 import castArray from 'lodash/castArray';
 import { AccountReportsServiceControlFilterForm } from './shared/forms/filter';
-import { concatLatestFrom } from '@ngrx/effects';
+import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { AccountReportsServiceControlQueryParameters } from './shared/models/query-parameters';
 import { switchMap } from 'rxjs/operators';
 import { Observable, tap, map } from 'rxjs';
 import { Asset, AssetRelationType, AssetService, AssetSortField, AssetFilters, AssetCp12Status } from '@shared/asset';
 import { AccountReportsServiceControlState } from './service-control.state';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
 import { Injectable } from '@angular/core';
 import { PaginationResponse } from '@shared/pagination';
 import { AppState } from '@shared/store';
@@ -47,7 +47,7 @@ export class AccountReportsServiceControlFacade {
 
   public get items$(): Observable<Array<Asset>> {
     return this.componentStore.select((state) => state.items);
-  };
+  }
 
   public get hasPagination$(): Observable<boolean> {
     return this.componentStore.select((state) => state.totalItems > 0);
@@ -67,7 +67,7 @@ export class AccountReportsServiceControlFacade {
 
   public get paginationID$(): Observable<string> {
     return this.componentStore.select((state) => state.paginationId);
-  };
+  }
 
   public get parameters$(): Observable<AccountReportsServiceControlQueryParameters> {
     return this.componentStore.select((state) => ({
@@ -113,39 +113,53 @@ export class AccountReportsServiceControlFacade {
       }
 
       unbox(formState.value.jobStage).forEach((jobStage: JobStage) =>
-        filterValues.push(new FilterValue({
-          id: formState.controls.jobStage.id,
-          value: jobStage,
-          status: this.getJobStageFilterStatus(jobStage)
-        }))
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobStage.id,
+            value: jobStage,
+            status: this.getJobStageFilterStatus(jobStage)
+          })
+        )
       );
 
       if (formState.value.jobDueDateFrom) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.jobDueDateFrom.id,
-          value: DateTime.fromISO(formState.value.jobDueDateFrom).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobDueDateFrom.id,
+            value: DateTime.fromISO(formState.value.jobDueDateFrom).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
 
       if (formState.value.jobDueDateTo) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.jobDueDateTo.id,
-          value: DateTime.fromISO(formState.value.jobDueDateTo).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobDueDateTo.id,
+            value: DateTime.fromISO(formState.value.jobDueDateTo).toFormat(configuration.dateFormats.filterDate)
+          })
+        );
       }
 
       if (formState.value.jobLoggedCompletionDateFrom) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.jobLoggedCompletionDateFrom.id,
-          value: DateTime.fromISO(formState.value.jobLoggedCompletionDateFrom).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobLoggedCompletionDateFrom.id,
+            value: DateTime.fromISO(formState.value.jobLoggedCompletionDateFrom).toFormat(
+              configuration.dateFormats.filterDate
+            )
+          })
+        );
       }
 
       if (formState.value.jobLoggedCompletionDateTo) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.jobLoggedCompletionDateTo.id,
-          value: DateTime.fromISO(formState.value.jobLoggedCompletionDateTo).toFormat(configuration.dateFormats.filterDate)
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.jobLoggedCompletionDateTo.id,
+            value: DateTime.fromISO(formState.value.jobLoggedCompletionDateTo).toFormat(
+              configuration.dateFormats.filterDate
+            )
+          })
+        );
       }
 
       if (formState.value.CP12Status) {
@@ -160,10 +174,12 @@ export class AccountReportsServiceControlFacade {
       }
 
       unbox(formState.value.customAssetTypeValue).forEach((assetType: string) =>
-        filterValues.push(new FilterValue({
-          id: formState.controls.customAssetTypeValue.id,
-          value: assetType
-        }))
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.customAssetTypeValue.id,
+            value: assetType
+          })
+        )
       );
 
       return filterValues;
@@ -171,26 +187,24 @@ export class AccountReportsServiceControlFacade {
   }
 
   public get filters$(): Observable<AssetFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        concatLatestFrom(() => [
-          this.assetType$,
-          this.report$
-        ]),
-        map(([filterFormStateValue, assetType, report]) => new AssetFilters({
-          siteID: filterFormStateValue.siteID || undefined,
-          jobStage: unbox(filterFormStateValue.jobStage) || undefined,
-          jobDueDateFrom: filterFormStateValue.jobDueDateFrom || undefined,
-          jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined,
-          jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
-          jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
-          CP12Status: filterFormStateValue.CP12Status || undefined,
-          customAssetTypeValue: unbox(filterFormStateValue.customAssetTypeValue) || undefined,
-          assetType,
-          report
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      concatLatestFrom(() => [this.assetType$, this.report$]),
+      map(
+        ([filterFormStateValue, assetType, report]) =>
+          new AssetFilters({
+            siteID: filterFormStateValue.siteID || undefined,
+            jobStage: unbox(filterFormStateValue.jobStage) || undefined,
+            jobDueDateFrom: filterFormStateValue.jobDueDateFrom || undefined,
+            jobDueDateTo: filterFormStateValue.jobDueDateTo || undefined,
+            jobLoggedCompletionDateFrom: filterFormStateValue.jobLoggedCompletionDateFrom || undefined,
+            jobLoggedCompletionDateTo: filterFormStateValue.jobLoggedCompletionDateTo || undefined,
+            CP12Status: filterFormStateValue.CP12Status || undefined,
+            customAssetTypeValue: unbox(filterFormStateValue.customAssetTypeValue) || undefined,
+            assetType,
+            report
+          })
+      )
+    );
   }
 
   private loadItemsEffect$: () => Observable<void>;
@@ -267,35 +281,23 @@ export class AccountReportsServiceControlFacade {
   }
 
   public getStartJobDueDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.jobDueDateTo))
-      );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.jobDueDateTo)));
   }
 
   public getEndJobDueDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getEndDateFilter(formState.value.jobDueDateFrom))
-      );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.jobDueDateFrom)));
   }
 
   public getStartJobLoggedCompletionDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getStartDateFilter(formState.value.jobLoggedCompletionDateTo))
-      );
+    return this.filterFormState$.pipe(
+      map((formState) => getStartDateFilter(formState.value.jobLoggedCompletionDateTo))
+    );
   }
 
   public getEndJobLoggedCompletionDateFilter$(): Observable<(date: Date) => boolean> {
-    return this
-      .filterFormState$
-      .pipe(
-        map((formState) => getEndDateFilter(formState.value.jobLoggedCompletionDateFrom))
-      );
+    return this.filterFormState$.pipe(
+      map((formState) => getEndDateFilter(formState.value.jobLoggedCompletionDateFrom))
+    );
   }
 
   private getJobStageFilterStatus(stage: JobStage | undefined): FilterValueStatus {
@@ -325,107 +327,94 @@ export class AccountReportsServiceControlFacade {
   }
 
   private updateFormState(action: FormActions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(isLoading: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading
+    }))();
   }
 
   private updateIsExporting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isExporting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isExporting: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Asset>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountReportsServiceControlQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: parameters.desc || state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountReportsServiceControlFilterForm>(
-          state.filterFormState,
-          {
-            siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
-            jobStage: setValue((parameters.jobStage) ? box(parameters.jobStage) : state.filterFormState.value.jobStage),
-            jobDueDateFrom: setValue(parameters.jobDueDateFrom || state.filterFormState.value.jobDueDateFrom),
-            jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo),
-            jobLoggedCompletionDateFrom: setValue(parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom),
-            jobLoggedCompletionDateTo: setValue(parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo),
-            CP12Status: setValue(parameters.CP12Status || state.filterFormState.value.CP12Status),
-            customAssetTypeValue: setValue((parameters.customAssetTypeValue) ? box(parameters.customAssetTypeValue) : state.filterFormState.value.customAssetTypeValue)
-          }
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc || state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountReportsServiceControlFilterForm>(state.filterFormState, {
+        siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
+        jobStage: setValue(parameters.jobStage ? box(parameters.jobStage) : state.filterFormState.value.jobStage),
+        jobDueDateFrom: setValue(parameters.jobDueDateFrom || state.filterFormState.value.jobDueDateFrom),
+        jobDueDateTo: setValue(parameters.jobDueDateTo || state.filterFormState.value.jobDueDateTo),
+        jobLoggedCompletionDateFrom: setValue(
+          parameters.jobLoggedCompletionDateFrom || state.filterFormState.value.jobLoggedCompletionDateFrom
+        ),
+        jobLoggedCompletionDateTo: setValue(
+          parameters.jobLoggedCompletionDateTo || state.filterFormState.value.jobLoggedCompletionDateTo
+        ),
+        CP12Status: setValue(parameters.CP12Status || state.filterFormState.value.CP12Status),
+        customAssetTypeValue: setValue(
+          parameters.customAssetTypeValue
+            ? box(parameters.customAssetTypeValue)
+            : state.filterFormState.value.customAssetTypeValue
         )
       })
-    )();
+    }))();
   }
 
   private updateStateSort(parameters: AccountReportsServiceControlQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateSelectedSite(selectedSite: Site): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedSite
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      selectedSite
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -436,24 +425,24 @@ export class AccountReportsServiceControlFacade {
           this.updateIsLoading(true);
 
           const parameters = new AccountReportsServiceControlQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
             desc: queryParams.desc === 'true',
-            siteID: (queryParams.siteID) ? parseInt(queryParams.siteID, 10) : undefined,
-            jobStage: (queryParams.jobStage) ? castArray(queryParams.jobStage) : undefined,
+            siteID: queryParams.siteID ? parseInt(queryParams.siteID, 10) : undefined,
+            jobStage: queryParams.jobStage ? castArray(queryParams.jobStage) : undefined,
             jobDueDateFrom: queryParams.jobDueDateFrom || undefined,
             jobDueDateTo: queryParams.jobDueDateTo || undefined,
             jobLoggedCompletionDateFrom: queryParams.jobLoggedCompletionDateFrom || undefined,
             jobLoggedCompletionDateTo: queryParams.jobLoggedCompletionDateTo || undefined,
             CP12Status: queryParams.CP12Status || undefined,
-            customAssetTypeValue: (queryParams.customAssetTypeValue) ? castArray(queryParams.customAssetTypeValue) : undefined
+            customAssetTypeValue: queryParams.customAssetTypeValue
+              ? castArray(queryParams.customAssetTypeValue)
+              : undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -461,17 +450,13 @@ export class AccountReportsServiceControlFacade {
 
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
-      origin$
-        .pipe(
-          concatLatestFrom(() => [
-            this.parameters$,
-            this.relations$,
-            this.filters$
-          ]),
-          switchMap(([_, parameters, relations, filters]) => {
-            const { page, perPage, orderBy, desc } = parameters;
+      origin$.pipe(
+        concatLatestFrom(() => [this.parameters$, this.relations$, this.filters$]),
+        switchMap(([_, parameters, relations, filters]) => {
+          const { page, perPage, orderBy, desc } = parameters;
 
-            this.store.dispatch(NavigationActions.mergeQueryParams({
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
               queryParams: {
                 page,
                 orderBy,
@@ -485,19 +470,20 @@ export class AccountReportsServiceControlFacade {
                 CP12Status: filters.CP12Status,
                 customAssetTypeValue: filters.customAssetTypeValue
               }
-            }));
-            this.updateIsLoading(true);
+            })
+          );
+          this.updateIsLoading(true);
 
-            return this.tryLoadItemsByParameters({
-              page,
-              perPage,
-              orderBy,
-              desc,
-              relations,
-              filters
-            });
-          })
-        )
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            filters
+          });
+        })
+      )
     );
   }
 
@@ -513,22 +499,27 @@ export class AccountReportsServiceControlFacade {
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: AssetSortField,
-    desc: boolean,
-    relations: Array<AssetRelationType>,
-    filters: AssetFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: AssetSortField;
+    desc: boolean;
+    relations: Array<AssetRelationType>;
+    filters: AssetFilters;
   }): Observable<PaginationResponse<Asset>> {
-    return this.assetService
-      .search({ page, perPage, orderBy, desc, relations, filters })
-      .pipe(
-        tapResponse(
-          (response) => this.onLoadItemsSuccess(response),
-          (error: Error) => this.onLoadItemsError(error)
-        )
-      );
+    return this.assetService.search({ page, perPage, orderBy, desc, relations, filters }).pipe(
+      tapResponse(
+        (response) => this.onLoadItemsSuccess(response),
+        (error: Error) => this.onLoadItemsError(error)
+      )
+    );
   }
 
   private onLoadItemsSuccess(response: PaginationResponse<Asset>): void {
@@ -543,40 +534,30 @@ export class AccountReportsServiceControlFacade {
   private registerExportCSVEffect(): void {
     this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.filters$,
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.filters$, this.relations$]),
         switchMap(([_, parameters, filters, relations]) => {
           this.updateIsExporting(true);
 
-          return this.assetService
-            .exportReportCSV({ ...parameters, filters, relations })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  const date = DateTime
-                    .now()
-                    .toFormat(configuration.dateFormats.reports.serviceControlDateCSV);
+          return this.assetService.exportReportCSV({ ...parameters, filters, relations }).pipe(
+            tapResponse(
+              (response) => {
+                const date = DateTime.now().toFormat(configuration.dateFormats.reports.serviceControlDateCSV);
 
-                  this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.assetsReport(date));
-                },
-                (response: HttpErrorResponse) => {
-                  this.updateIsExporting(false);
+                this.updateIsExporting(false);
+                this.fileService.saveFile(response, configuration.exportCSV.assetsReport(date));
+              },
+              (response: HttpErrorResponse) => {
+                this.updateIsExporting(false);
 
-                  const errorTranslationKey =
-                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
-                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
-                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+                const errorTranslationKey =
+                  response.status === HttpStatusCode.BadGateway || response.status === 0
+                    ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                    : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
 
-                  this.notificationService.error(
-                    this.translateService.instant(errorTranslationKey)
-                  );
-                }
-              )
-            );
+                this.notificationService.error(this.translateService.instant(errorTranslationKey));
+              }
+            )
+          );
         })
       )
     );

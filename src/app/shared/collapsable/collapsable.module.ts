@@ -1,20 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { CollapsableComponent } from './collapsable.component';
 import { CollapsableDirective } from './collapsable.directive';
 
 @NgModule({
-  declarations: [
-    CollapsableComponent,
-    CollapsableDirective
-  ],
-  imports: [
-    CommonModule,
-    ReactiveComponentModule
-  ],
-  exports: [
-    CollapsableComponent
-  ]
+  declarations: [CollapsableComponent, CollapsableDirective],
+  imports: [CommonModule, LetDirective, PushPipe],
+  exports: [CollapsableComponent]
 })
-export class CollapsableModule { }
+export class CollapsableModule {}

@@ -8,10 +8,8 @@ import { AccountAssetTestsComponentFacade } from './asset-tests.facade';
   templateUrl: 'asset-tests.html',
   styleUrls: ['asset-tests.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountAssetTestsComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountAssetTestsComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountAssetTestsComponent implements OnDestroy {
   @Input()
@@ -19,9 +17,7 @@ export class AccountAssetTestsComponent implements OnDestroy {
     this.facade.setItems(value);
   }
 
-  constructor(
-    private facade: AccountAssetTestsComponentFacade
-  ) { }
+  constructor(private facade: AccountAssetTestsComponentFacade) {}
 
   public ngOnDestroy(): void {
     this.facade.resetState();

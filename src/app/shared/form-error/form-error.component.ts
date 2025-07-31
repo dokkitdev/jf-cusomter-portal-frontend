@@ -4,7 +4,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   selector: 'form-error',
   templateUrl: 'form-error.html',
   styleUrls: ['form-error.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FormErrorComponent {
   @Input() title: string;

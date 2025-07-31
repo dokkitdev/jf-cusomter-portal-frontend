@@ -8,15 +8,14 @@ import { AccountDocumentsQueryParameters } from '../../models';
   selector: 'documents-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDocumentsItemsHeaderComponent {
   public parameters$: Observable<AccountDocumentsQueryParameters>;
   public documentSortField: typeof DocumentSortField;
 
-  constructor(
-    private facade: AccountDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountDocumentsPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.documentSortField = DocumentSortField;
   }

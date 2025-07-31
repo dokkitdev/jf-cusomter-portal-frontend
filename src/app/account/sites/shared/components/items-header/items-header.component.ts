@@ -8,15 +8,14 @@ import { AccountSitesQueryParameters } from '../../models';
   selector: 'sites-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesItemsHeaderComponent {
   public parameters$: Observable<AccountSitesQueryParameters>;
   public siteSortField: typeof SiteSortField;
 
-  constructor(
-    private facade: AccountSitesPageFacade
-  ) {
+  constructor(private facade: AccountSitesPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.siteSortField = SiteSortField;
   }

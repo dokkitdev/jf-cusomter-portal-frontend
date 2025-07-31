@@ -1,7 +1,5 @@
 <div class="table-row">
-  <div class="table-cell sites-customer">
-    {{ item.customer?.name }}
-  </div>
+  <div class="table-cell sites-customer">{{ item.customer?.name }}</div>
   <div class="table-cell sites-name">
     <a [routerLink]="['/account/sites', item.id]">{{ item.name }}</a>
   </div>
@@ -10,7 +8,7 @@
   <div class="table-cell sites-postcode">{{ item.postalCode }}</div>
   <div class="table-cell sites-contact">{{ item.primaryContact?.name }}</div>
   <div class="table-cell sites-jobs">
-    <ng-container *ngIf="item.openJobsCount; else noOpenJobs">
+    @if (item.openJobsCount) {
       <a
         routerLink="/account/jobs"
         [queryParams]="{
@@ -19,7 +17,8 @@
         }">
         {{ item.openJobsCount }}
       </a>
-    </ng-container>
-    <ng-template #noOpenJobs>0</ng-template>
+    } @else {
+      0
+    }
   </div>
 </div>

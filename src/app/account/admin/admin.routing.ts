@@ -1,11 +1,9 @@
-import { AccountAdminPageComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: AccountAdminPageComponent,
     pathMatch: 'full',
     redirectTo: 'users'
   },
@@ -23,4 +21,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccountAdminPageRoutingModule { }
+export class AccountAdminPageRoutingModule {}

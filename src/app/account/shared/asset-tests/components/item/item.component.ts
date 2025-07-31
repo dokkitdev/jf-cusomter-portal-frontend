@@ -8,7 +8,8 @@ import { AccountAssetTestsComponentFacade } from '../../asset-tests.facade';
   selector: 'asset-tests-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetTestsItemComponent {
   @Input() item: AssetTest;

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { CustomSelectOption } from '@shared/custom-select/models';
 import { AssetService, AssetServiceLevel } from '@shared/asset';
 import { Observable } from 'rxjs';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountAssetServiceLevelMultiselectComponentState } from './asset-service-level-multiselect.state';
 
@@ -18,11 +19,14 @@ export class AccountAssetServiceLevelMultiselectComponentFacade {
 
   public get options$(): Observable<Array<CustomSelectOption<string>>> {
     return this.items$.pipe(
-      map((items) => items.map((item) =>
-        new CustomSelectOption({
-          id: item.name,
-          title: item.name
-        }))
+      map((items) =>
+        items.map(
+          (item) =>
+            new CustomSelectOption({
+              id: item.name,
+              title: item.name
+            })
+        )
       )
     );
   }
@@ -46,21 +50,17 @@ export class AccountAssetServiceLevelMultiselectComponentFacade {
   }
 
   private updateStateItems(items: Array<AssetServiceLevel> = []): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -69,17 +69,15 @@ export class AccountAssetServiceLevelMultiselectComponentFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.assetService
-            .getServiceLevels()
-            .pipe(
-              tapResponse(
-                (items) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(items);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.assetService.getServiceLevels().pipe(
+            tapResponse(
+              (items) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(items);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );

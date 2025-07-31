@@ -7,7 +7,7 @@ export class NavigationService {
   constructor(
     private location: Location,
     private router: Router
-  ) { }
+  ) {}
 
   public back(fallbackURL?: string): void {
     if (history.length > 1) {

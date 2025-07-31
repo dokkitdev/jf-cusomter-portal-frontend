@@ -4,15 +4,8 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { FormCheckboxComponent } from './form-checkbox.component';
 
 @NgModule({
-  declarations: [
-    FormCheckboxComponent
-  ],
-  imports: [
-    CommonModule,
-    NgrxFormsModule
-  ],
-  exports: [
-    FormCheckboxComponent
-  ]
+  declarations: [FormCheckboxComponent],
+  imports: [CommonModule, NgrxFormsModule],
+  exports: [FormCheckboxComponent]
 })
-export class FormCheckboxModule { }
+export class FormCheckboxModule {}

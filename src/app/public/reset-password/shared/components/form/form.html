@@ -1,16 +1,20 @@
-<loading-spinner *ngIf="isTokenChecking$ | async; else form"></loading-spinner>
-<ng-template #form>
+@if (isTokenChecking$ | async) {
+  <loading-spinner></loading-spinner>
+} @else {
   <ng-container *ngrxLet="isNewUser$; let isNewUser">
-    <div *ngIf="isInvalidToken$ | async; else resetForm" class="reset-message">
-      {{ 'PUBLIC.RESET_PASSWORD.TEXT_' + ((isNewUser) ? 'ADD' : 'RESET') + '_INCORRECT_TOKEN_MESSAGE' | translate }}
-    </div>
-    <ng-template #resetForm>
+    @if (isInvalidToken$ | async) {
+      <div class="reset-message">
+        {{ 'PUBLIC.RESET_PASSWORD.TEXT_' + (isNewUser ? 'ADD' : 'RESET') + '_INCORRECT_TOKEN_MESSAGE' | translate }}
+      </div>
+    } @else {
       <form
         *ngrxLet="formState$; let formState"
         [ngrxFormState]="formState"
         (submit)="formSubmitted()"
         (ngrxFormsAction)="formActionTriggered($event)">
-        <reset-password-request-error *ngIf="isSubmittingFailed$ | async"></reset-password-request-error>
+        @if (isSubmittingFailed$ | async) {
+          <reset-password-request-error></reset-password-request-error>
+        }
         <form-text
           [controlState]="formState.controls.password"
           [validationMessages]="{
@@ -38,9 +42,9 @@
           [isLoading]="isSubmitting$ | async"
           [isBlock]="true"
           type="submit">
-          {{ 'PUBLIC.RESET_PASSWORD.BUTTON_' + ((isNewUser) ? 'ADD' : 'RESET') | translate }}
+          {{ 'PUBLIC.RESET_PASSWORD.BUTTON_' + (isNewUser ? 'ADD' : 'RESET') | translate }}
         </btn>
       </form>
-    </ng-template>
+    }
   </ng-container>
-</ng-template>
+}

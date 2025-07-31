@@ -1,65 +1,71 @@
-<dashboard-statistic *ngIf="'ACCOUNT.DASHBOARD.' as translations">
-  <div ngProjectAs="icon" class="statistic-icon statistic-icon-blue">
-    <span class="icon icon-job-big icon-mask icon-mask-blue icon-big"></span>
-    <div class="statistic-icon-name">{{ translations + 'TEXT_JOBS' | translate }}</div>
-  </div>
-  <ng-container ngProjectAs="items">
-    <dashboard-statistic-item
-      [value]="statistic.todaysJobsTotal"
-      [queryParams]="{
-        stage: jobStage.PENDING,
-        dateCreated: todayDate
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_TODAYS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.outOfHoursJobsTotal"
-      [queryParams]="{
-        outOfHours: true
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_OUT_OF_HOURS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.pendingJobsTotal"
-      [queryParams]="{
-        stage: jobStage.PENDING
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_PENDING_JOBS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.progressJobsTotal"
-      [queryParams]="{
-        stage: jobStage.PROGRESS
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_IN_PROGRESS_JOBS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.completeJobsTotal"
-      [queryParams]="{
-        stage: jobStage.COMPLETE
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_COMPLETED_JOBS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.invoicedJobsTotal"
-      [queryParams]="{
-        stage: jobStage.INVOICED
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_INVOICED_JOBS' | translate }}">
-    </dashboard-statistic-item>
-    <dashboard-statistic-item
-      [value]="statistic.archivedJobsTotal"
-      [queryParams]="{
-        stage: jobStage.ARCHIVED
-      }"
-      route="/account/jobs"
-      name="{{ translations + 'LINK_ARCHIVED_JOBS' | translate }}">
-    </dashboard-statistic-item>
-  </ng-container>
-</dashboard-statistic>
+@if ('ACCOUNT.DASHBOARD.'; as translations) {
+  <dashboard-statistic>
+    <div
+      ngProjectAs="icon"
+      class="statistic-icon statistic-icon-blue">
+      <span class="icon icon-job-big icon-mask icon-mask-blue icon-big"></span>
+      <div class="statistic-icon-name">
+        {{ translations + 'TEXT_JOBS' | translate }}
+      </div>
+    </div>
+    <ng-container ngProjectAs="items">
+      <dashboard-statistic-item
+        [value]="statistic.todaysJobsTotal"
+        [queryParams]="{
+          stage: jobStage.PENDING,
+          dateCreated: todayDate
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_TODAYS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.outOfHoursJobsTotal"
+        [queryParams]="{
+          outOfHours: true
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_OUT_OF_HOURS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.pendingJobsTotal"
+        [queryParams]="{
+          stage: jobStage.PENDING
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_PENDING_JOBS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.progressJobsTotal"
+        [queryParams]="{
+          stage: jobStage.PROGRESS
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_IN_PROGRESS_JOBS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.completeJobsTotal"
+        [queryParams]="{
+          stage: jobStage.COMPLETE
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_COMPLETED_JOBS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.invoicedJobsTotal"
+        [queryParams]="{
+          stage: jobStage.INVOICED
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_INVOICED_JOBS' | translate }}">
+      </dashboard-statistic-item>
+      <dashboard-statistic-item
+        [value]="statistic.archivedJobsTotal"
+        [queryParams]="{
+          stage: jobStage.ARCHIVED
+        }"
+        route="/account/jobs"
+        name="{{ translations + 'LINK_ARCHIVED_JOBS' | translate }}">
+      </dashboard-statistic-item>
+    </ng-container>
+  </dashboard-statistic>
+}

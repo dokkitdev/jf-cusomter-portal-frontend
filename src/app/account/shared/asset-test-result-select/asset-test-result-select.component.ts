@@ -1,11 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { Actions, FormControlState, NGRX_FORM_VIEW_ADAPTER, NgrxDefaultViewAdapter } from 'ngrx-forms';
 import { AccountAssetTestResultSelectComponentFacade } from './asset-test-result-select.facade';
 import { CustomSelectOption } from '@shared/custom-select/models';
@@ -26,7 +19,8 @@ import { ValidationMessages } from '@shared/validation-errors';
     },
     AccountAssetTestResultSelectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountAssetTestResultSelectComponent {
   @Input() controlState: FormControlState<AssetTestResult>;
@@ -38,9 +32,7 @@ export class AccountAssetTestResultSelectComponent {
 
   public options: Array<CustomSelectOption<string>>;
 
-  constructor(
-    private facade: AccountAssetTestResultSelectComponentFacade
-  ) {
+  constructor(private facade: AccountAssetTestResultSelectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options = this.facade.options;
   }

@@ -1,5 +1,7 @@
 <div class="table-head">
-  <div *ngrxLet="parameters$; let parameters" class="table-row">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
     <div class="table-cell servicecontrol-uprn">
       <header-sort
         [orderBy]="assetSortField.SITE_UPRN"
@@ -82,41 +84,41 @@
     </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
-      [orderBy]="assetSortField.NO_ACCESS_DATE_1"
-      [parameters]="parameters"
-      (sortChanged)="sortChanged($event)">
+        [orderBy]="assetSortField.NO_ACCESS_DATE_1"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_1' | translate }}
       </header-sort>
     </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
-      [orderBy]="assetSortField.NO_ACCESS_DATE_2"
-      [parameters]="parameters"
-      (sortChanged)="sortChanged($event)">
+        [orderBy]="assetSortField.NO_ACCESS_DATE_2"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_2' | translate }}
       </header-sort>
     </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
-      [orderBy]="assetSortField.NO_ACCESS_DATE_3"
-      [parameters]="parameters"
-      (sortChanged)="sortChanged($event)">
+        [orderBy]="assetSortField.NO_ACCESS_DATE_3"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_3' | translate }}
       </header-sort>
     </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
-      [orderBy]="assetSortField.NO_ACCESS_DATE_4"
-      [parameters]="parameters"
-      (sortChanged)="sortChanged($event)">
+        [orderBy]="assetSortField.NO_ACCESS_DATE_4"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_4' | translate }}
       </header-sort>
     </div>
     <div class="table-cell servicecontrol-noaccess">
       <header-sort
-      [orderBy]="assetSortField.NO_ACCESS_DATE_5"
-      [parameters]="parameters"
-      (sortChanged)="sortChanged($event)">
+        [orderBy]="assetSortField.NO_ACCESS_DATE_5"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_5' | translate }}
       </header-sort>
     </div>

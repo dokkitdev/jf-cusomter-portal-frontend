@@ -8,15 +8,14 @@ import { AccountJobsQueryParameters } from '../../models';
   selector: 'jobs-items-header',
   templateUrl: 'items-header.html',
   styleUrls: ['items-header.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsItemsHeaderComponent {
   public parameters$: Observable<AccountJobsQueryParameters>;
   public jobSortField: typeof JobSortField;
 
-  constructor(
-    private facade: AccountJobsPageFacade
-  ) {
+  constructor(private facade: AccountJobsPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.jobSortField = JobSortField;
   }

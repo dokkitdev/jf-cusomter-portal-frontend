@@ -1,17 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { concatLatestFrom } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { CustomSelectOption } from '@shared/custom-select';
 import { xor } from 'lodash';
-import {
-  SetValueAction,
-  Actions,
-  FormControlState,
-  FormControlValueTypes,
-  Boxed,
-  unbox,
-  box
-} from 'ngrx-forms';
+import { SetValueAction, Actions, FormControlState, FormControlValueTypes, Boxed, unbox, box } from 'ngrx-forms';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { CustomMultiselectComponentState } from './custom-multiselect.state';
@@ -35,9 +27,7 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
 
   private changeOptionEffect$: (optionValue: T) => Observable<void>;
 
-  constructor(
-    private readonly componentStore: ComponentStore<CustomMultiselectComponentState<T>>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<CustomMultiselectComponentState<T>>) {
     this.controlStateActionTriggered = new Subject();
     this.filterChanged = new Subject();
 
@@ -62,29 +52,21 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
   }
 
   public getIsSelected$(id: T): Observable<boolean> {
-    return this
-      .controlState$
-      .pipe(
-        map((controlState) => unbox(controlState.value).includes(id))
-      );
+    return this.controlState$.pipe(map((controlState) => unbox(controlState.value).includes(id)));
   }
 
   private updateControlState(controlState: FormControlState<Boxed<Array<T>>>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        controlState
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      controlState
+    }))();
   }
 
   private updateOptions(options: Array<CustomSelectOption<T>>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        options
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      options
+    }))();
   }
 
   private registerChangeOptionEffect(): void {
@@ -95,9 +77,7 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
           const value = unbox(controlState.value);
           const options = xor(value, [optionValue]);
 
-          this.controlStateActionTriggered.next(
-            new SetValueAction(controlState.id, box(options))
-          );
+          this.controlStateActionTriggered.next(new SetValueAction(controlState.id, box(options)));
         })
       )
     );

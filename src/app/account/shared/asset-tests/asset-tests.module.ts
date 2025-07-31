@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountAssetTestsItemComponent } from './components/item/item.component';
 import { AccountAssetTestsItemsComponent } from './components/items/items.component';
 import { AccountAssetTestsItemsHeaderComponent } from './components/items-header/items-header.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -25,7 +25,8 @@ import { SnakeModule } from '@shared/snake';
     CommonModule,
     RouterModule,
     TranslateModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -33,8 +34,6 @@ import { SnakeModule } from '@shared/snake';
     AccountDialogViewAssetTestReadingsModule,
     SnakeModule
   ],
-  exports: [
-    AccountAssetTestsComponent
-  ]
+  exports: [AccountAssetTestsComponent]
 })
-export class AccountAssetTestsModule { }
+export class AccountAssetTestsModule {}

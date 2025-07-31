@@ -1,7 +1,6 @@
 <a (click)="changeSortClicked()">
   <ng-content></ng-content>
-  <span
-    *ngIf="parameters.orderBy === orderBy"
-    class="table-head-icon table-head-icon-{{ (parameters.desc) ? 'up' : 'down' }}">
-  </span>
+  @if (parameters.orderBy === orderBy) {
+    <span class="table-head-icon table-head-icon-{{ parameters.desc ? 'up' : 'down' }}"> </span>
+  }
 </a>

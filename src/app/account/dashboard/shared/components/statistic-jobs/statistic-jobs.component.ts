@@ -7,7 +7,8 @@ import { JobStage } from '@shared/job';
   selector: 'dashboard-statistic-jobs',
   templateUrl: 'statistic-jobs.html',
   styleUrls: ['statistic-jobs.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDashboardStatisticJobsComponent {
   @Input() statistic: DashboardStatistic;
@@ -15,9 +16,7 @@ export class AccountDashboardStatisticJobsComponent {
   public jobStage: typeof JobStage;
   public todayDate: string;
 
-  constructor(
-    private facade: AccountDashboardPageFacade
-  ) {
+  constructor(private facade: AccountDashboardPageFacade) {
     this.jobStage = JobStage;
     this.todayDate = this.facade.todayDate;
   }

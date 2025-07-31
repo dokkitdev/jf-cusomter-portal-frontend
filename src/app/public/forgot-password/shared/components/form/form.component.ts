@@ -8,16 +8,15 @@ import { PublicForgotPasswordPageForm } from '../../forms';
   selector: 'forgot-password-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicForgotPasswordFormComponent {
   public isSubmitting$: Observable<boolean>;
   public isSubmittingFailed$: Observable<boolean>;
   public formState$: Observable<FormGroupState<PublicForgotPasswordPageForm>>;
 
-  constructor(
-    private facade: PublicForgotPasswordPageFacade
-  ) {
+  constructor(private facade: PublicForgotPasswordPageFacade) {
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isSubmittingFailed$ = this.facade.isSubmittingFailed$;
     this.formState$ = this.facade.formState$;

@@ -5,13 +5,7 @@ import { PublicRoutingModule } from './public.routing';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [
-    PublicComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    PublicRoutingModule
-  ]
+  declarations: [PublicComponent],
+  imports: [CommonModule, RouterModule, PublicRoutingModule]
 })
-export class PublicModule { }
+export class PublicModule {}

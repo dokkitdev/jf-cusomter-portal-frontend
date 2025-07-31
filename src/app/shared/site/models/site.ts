@@ -25,10 +25,16 @@ export class Site {
   @Expose({ groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
   public county: string;
 
-  @Expose({ name: 'postal_code', groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
+  @Expose({
+    name: 'postal_code',
+    groups: [ClassGroup.MAIN, ClassGroup.UPDATING]
+  })
   public postalCode: string;
 
-  @Expose({ name: 'primary_site_contact_id', groups: [ClassGroup.MAIN, ClassGroup.UPDATING] })
+  @Expose({
+    name: 'primary_site_contact_id',
+    groups: [ClassGroup.MAIN, ClassGroup.UPDATING]
+  })
   public primaryContactID: number;
 
   @Expose({ name: 'open_jobs_count', groups: [ClassGroup.MAIN] })

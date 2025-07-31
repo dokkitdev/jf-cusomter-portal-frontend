@@ -1,12 +1,20 @@
 <div class="table-head">
-  <div *ngrxLet="parameters$; let parameters" class="table-row">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
     <div class="table-cell adminusers-name">
-      <header-sort [orderBy]="userSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="userSortField.NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_NAME' | translate }}
       </header-sort>
     </div>
     <div class="table-cell adminusers-email">
-      <header-sort [orderBy]="userSortField.EMAIL" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="userSortField.EMAIL"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.ADMIN.USERS.ITEMS_HEADER.TEXT_EMAIL' | translate }}
       </header-sort>
     </div>

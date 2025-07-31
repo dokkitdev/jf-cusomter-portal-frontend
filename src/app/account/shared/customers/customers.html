@@ -1,14 +1,17 @@
-<div *ngrxLet="controlState$; let controlState" class="customers">
-  <account-customers-item
-    *ngFor="let control of controlState.controls; let i = index; trackByProperty: 'userDefinedProperties.id'"
-    [controlState]="control"
-    [groupValidationMessages]="groupValidationMessages"
-    [@heightCollapse]
-    [excludeCustomerID]="excludeCustomerID$ | async"
-    (controlStateActionTriggered)="controlStateActionTriggered.next($event)"
-    (removeItem)="removeItemClicked(i)"
-    (selectValue)="valueSelected($event, i)">
-  </account-customers-item>
+<div
+  *ngrxLet="controlState$; let controlState"
+  class="customers">
+  @for (control of controlState.controls; track control; let i = $index) {
+    <account-customers-item
+      [controlState]="control"
+      [groupValidationMessages]="groupValidationMessages"
+      [@heightCollapse]
+      [excludeCustomerID]="excludeCustomerID$ | async"
+      (controlStateActionTriggered)="controlStateActionTriggered.next($event)"
+      (removeItem)="removeItemClicked(i)"
+      (selectValue)="valueSelected($event, i)">
+    </account-customers-item>
+  }
   <account-customers-item-add
     [isDisabled]="controlState.isDisabled"
     (addNewItem)="addNewItemClicked()">

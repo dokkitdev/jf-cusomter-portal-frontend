@@ -3,11 +3,7 @@ import { NgModule } from '@angular/core';
 import { DocumentService } from './document.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    DocumentService
-  ]
+  imports: [CommonModule],
+  providers: [DocumentService]
 })
-export class DocumentModule { }
+export class DocumentModule {}

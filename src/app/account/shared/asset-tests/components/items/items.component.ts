@@ -9,14 +9,13 @@ import { AssetTest } from '@shared/asset';
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountAssetTestsItemsComponent {
   public items$: Observable<Array<AssetTest>>;
 
-  constructor(
-    private facade: AccountAssetTestsComponentFacade
-  ) {
+  constructor(private facade: AccountAssetTestsComponentFacade) {
     this.items$ = this.facade.sortedItems$;
   }
 }

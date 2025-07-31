@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  Actions,
-  disable,
-  enable,
-  formGroupReducer,
-  FormGroupState,
-  updateGroup,
-  validate
-} from 'ngrx-forms';
+import { Actions, disable, enable, formGroupReducer, FormGroupState, updateGroup, validate } from 'ngrx-forms';
 import { AccountDialogAddDocumentForm } from './forms';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { AccountDialogAddDocumentComponentState } from './dialog-add-document.state';
-import { maxLength, required } from 'ngrx-forms/validation';
+import { maxLength } from 'ngrx-forms/validation';
 import { exhaustMap, filter, withLatestFrom } from 'rxjs/operators';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
@@ -76,72 +69,57 @@ export class AccountDialogAddDocumentComponentFacade {
   }
 
   private updateIsEditMode(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isEditMode: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isEditMode: value
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountDialogAddDocumentForm>(
-          state.formState,
-          {
-            title: validate(trimmedRequired, maxLength(255)),
-            description: validate(trimmedRequired),
-            mediaID: validate(positiveNumber)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountDialogAddDocumentForm>(state.formState, {
+        title: validate(trimmedRequired, maxLength(255)),
+        description: validate(trimmedRequired),
+        mediaID: validate(positiveNumber)
       })
-    )();
+    }))();
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private registerSaveChangesEffect(): void {
     this.saveChangesEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$,
-          this.document$
-        ),
+        withLatestFrom(this.formState$, this.document$),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, document]) => {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
-          const changedDocument = new Document({ id: document.id, ...formState.value });
+          const changedDocument = new Document({
+            id: document.id,
+            ...formState.value
+          });
 
           return this.tryToCreateDocument(changedDocument);
         })
@@ -161,24 +139,26 @@ export class AccountDialogAddDocumentComponentFacade {
   }
 
   private tryToCreateDocument(document: Document): Observable<Document> {
-    return this.documentService
-      .create(document)
-      .pipe(
-        tapResponse(
-          (response: Document) => {
-            this.updateIsSendingRequest(false);
-            this.toggleDisablingForm(false);
+    return this.documentService.create(document).pipe(
+      tapResponse(
+        (response: Document) => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
 
-            this.dialogService.close();
+          this.dialogService.close();
 
-            this.store.dispatch(AccountDialogAddDocumentActions.createDocumentSuccess({ documentID: response.id }));
+          this.store.dispatch(
+            AccountDialogAddDocumentActions.createDocumentSuccess({
+              documentID: response.id
+            })
+          );
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.NOTIFICATIONS.TEXT_DOCUMENT_CREATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.DIALOG_ADD_DOCUMENT.NOTIFICATIONS.TEXT_DOCUMENT_CREATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 }

@@ -6,14 +6,13 @@ import { AccountJobsViewPageFacade } from '../../../view.facade';
   selector: 'jobs-view-attachments',
   templateUrl: 'attachments.html',
   styleUrls: ['attachments.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewAttachmentsComponent {
   @Input() attachments: Array<JobAttachment>;
 
-  constructor(
-    private facade: AccountJobsViewPageFacade
-  ) { }
+  constructor(private facade: AccountJobsViewPageFacade) {}
 
   public downloadAttachmentClicked(item: JobAttachment): void {
     this.facade.downloadAttachment(item);

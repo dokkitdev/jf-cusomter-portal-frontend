@@ -15,15 +15,21 @@ export class JobSchedule {
   @Expose({ name: 'schedule_id', groups: [ClassGroup.MAIN] })
   public scheduleID: number;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'start_time', groups: [ClassGroup.MAIN] })
   public startTime: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'end_time', groups: [ClassGroup.MAIN] })
   public endTime: DateTime;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ groups: [ClassGroup.MAIN] })
   public date: DateTime;
 

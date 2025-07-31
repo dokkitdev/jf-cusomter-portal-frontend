@@ -5,16 +5,8 @@ import { FormRadioComponent } from './form-radio.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    FormRadioComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    NgrxFormsModule
-  ],
-  exports: [
-    FormRadioComponent
-  ]
+  declarations: [FormRadioComponent],
+  imports: [CommonModule, TranslateModule, NgrxFormsModule],
+  exports: [FormRadioComponent]
 })
-export class FormRadioModule { }
+export class FormRadioModule {}

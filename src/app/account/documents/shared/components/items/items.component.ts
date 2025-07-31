@@ -9,7 +9,8 @@ import { heightCollapseAnimation } from '@shared/animations';
   templateUrl: 'items.html',
   styleUrls: ['items.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [heightCollapseAnimation]
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountDocumentsItemsComponent {
   public items$: Observable<Array<Document>>;
@@ -20,9 +21,7 @@ export class AccountDocumentsItemsComponent {
   public paginationId$: Observable<string>;
   public hasPagination$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountDocumentsPageFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

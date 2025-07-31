@@ -5,12 +5,11 @@ import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/
   selector: 'account-admin-users-page',
   templateUrl: 'users.html',
   styleUrls: ['users.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminUsersPageComponent implements OnInit, OnDestroy {
-  constructor(
-    private facade: AccountAdminUsersPageFacade
-  ) { }
+  constructor(private facade: AccountAdminUsersPageFacade) {}
 
   public ngOnInit(): void {
     this.facade.loadItems();

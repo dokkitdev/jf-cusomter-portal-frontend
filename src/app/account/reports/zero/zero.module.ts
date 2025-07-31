@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountReportsZeroPageFacade } from './zero.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsZeroFormComponent } from './shared/components/form/form.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { ButtonModule } from '@shared/button';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { NotificationModule } from '@shared/notification';
@@ -16,10 +16,7 @@ import { FormRadioModule } from '@shared/form-radio';
 import { DateRangepickerModule } from '@shared/date-rangepicker';
 
 @NgModule({
-  declarations: [
-    AccountReportsZeroPageComponent,
-    AccountReportsZeroFormComponent
-  ],
+  declarations: [AccountReportsZeroPageComponent, AccountReportsZeroFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -27,15 +24,13 @@ import { DateRangepickerModule } from '@shared/date-rangepicker';
     AccountReportsZeroPageRoutingModule,
     NgrxFormsModule,
     FormRadioModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule,
     DateRangepickerModule
   ],
-  providers: [
-    AccountReportsZeroPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsZeroPageFacade, ComponentStore]
 })
-export class AccountReportsZeroPageModule { }
+export class AccountReportsZeroPageModule {}

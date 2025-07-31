@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'form-group',
   templateUrl: 'form-group.html',
   styleUrls: ['form-group.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FormGroupComponent {
   @Input() label: string;

@@ -7,7 +7,8 @@ import { ValidationMessages } from './models';
   selector: 'validation-errors',
   templateUrl: 'validation-errors.html',
   styleUrls: ['validation-errors.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ValidationErrorsComponent {
   @Input() messages: ValidationMessages;

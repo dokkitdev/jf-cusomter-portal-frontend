@@ -10,10 +10,8 @@ import { CustomSelectOption } from '@shared/custom-select';
   templateUrl: 'cp12-status-select.html',
   styleUrls: ['cp12-status-select.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountCP12StatusSelectComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountCP12StatusSelectComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountCp12StatusSelectComponent {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;
@@ -24,9 +22,7 @@ export class AccountCp12StatusSelectComponent {
 
   public options: Array<CustomSelectOption<string>>;
 
-  constructor(
-    private facade: AccountCP12StatusSelectComponentFacade
-  ) {
+  constructor(private facade: AccountCP12StatusSelectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options = this.facade.options;
   }

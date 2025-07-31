@@ -15,25 +15,17 @@
     "emitDecoratorMetadata": false,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2021", "dom"],
     "paths": {
-      "@shared/*": [
-        "src/app/shared/*"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@configurations": [
-        "src/configurations/configuration"
-      ]
+      "@shared/*": ["src/app/shared/*"],
+      "@app/*": ["src/app/*"],
+      "@configurations": ["src/configurations/configuration"]
     },
     "strictPropertyInitialization": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

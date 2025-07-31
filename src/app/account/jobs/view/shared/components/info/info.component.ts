@@ -7,7 +7,8 @@ import { Job } from '@shared/job';
   selector: 'jobs-view-info',
   templateUrl: 'info.html',
   styleUrls: ['info.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewInfoComponent {
   @Input() job: Job;
@@ -19,9 +20,7 @@ export class AccountJobsViewInfoComponent {
   public dateFormat: string;
   public timeFormat: string;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
+  constructor(private sanitizer: DomSanitizer) {
     this.dateFormat = configuration.dateFormats.jobDate;
     this.timeFormat = configuration.dateFormats.jobTime;
   }

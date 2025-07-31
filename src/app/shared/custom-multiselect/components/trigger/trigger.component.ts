@@ -4,7 +4,8 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
   selector: 'custom-multiselect-trigger',
   templateUrl: 'trigger.html',
   styleUrls: ['trigger.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CustomMultiselectTriggerComponent {
   @Input() customTemplate: TemplateRef<any>;

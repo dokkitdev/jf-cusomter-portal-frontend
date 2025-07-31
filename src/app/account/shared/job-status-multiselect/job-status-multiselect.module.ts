@@ -5,16 +5,8 @@ import { CustomMultiselectModule } from '@shared/custom-multiselect';
 import { JobModule } from '@shared/job';
 
 @NgModule({
-  declarations: [
-    AccountJobStatusMultiselectComponent
-  ],
-  imports: [
-    CommonModule,
-    CustomMultiselectModule,
-    JobModule
-  ],
-  exports: [
-    AccountJobStatusMultiselectComponent
-  ]
+  declarations: [AccountJobStatusMultiselectComponent],
+  imports: [CommonModule, CustomMultiselectModule, JobModule],
+  exports: [AccountJobStatusMultiselectComponent]
 })
-export class AccountJobStatusMultiselectModule { }
+export class AccountJobStatusMultiselectModule {}

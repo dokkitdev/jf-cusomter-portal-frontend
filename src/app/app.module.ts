@@ -21,9 +21,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { CustomDateAdapter } from '@shared/date-adapter';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,9 +37,7 @@ import { CustomDateAdapter } from '@shared/date-adapter';
     }),
     AuthModule,
     UserModule,
-    EffectsModule.forRoot([
-      NavigationEffects
-    ]),
+    EffectsModule.forRoot([NavigationEffects]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot<AppState>({
       router: routerReducer
@@ -54,8 +50,11 @@ import { CustomDateAdapter } from '@shared/date-adapter';
   ],
   providers: [
     { provide: DateAdapter, useClass: CustomDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: configuration.datepicker.dateFormats }
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: configuration.datepicker.dateFormats
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

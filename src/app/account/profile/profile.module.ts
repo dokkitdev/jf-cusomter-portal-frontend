@@ -9,16 +9,13 @@ import { ComponentStore } from '@ngrx/component-store';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { FormTextModule } from '@shared/form-text';
 import { AccountProfileFormComponent } from './shared/components/form/form.component';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NotificationModule } from '@shared/notification';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ButtonModule } from '@shared/button';
 
 @NgModule({
-  declarations: [
-    AccountProfilePageComponent,
-    AccountProfileFormComponent
-  ],
+  declarations: [AccountProfilePageComponent, AccountProfileFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,14 +23,12 @@ import { ButtonModule } from '@shared/button';
     AccountProfilePageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule
   ],
-  providers: [
-    AccountProfilePageFacade,
-    ComponentStore
-  ]
+  providers: [AccountProfilePageFacade, ComponentStore]
 })
-export class AccountProfilePageModule { }
+export class AccountProfilePageModule {}

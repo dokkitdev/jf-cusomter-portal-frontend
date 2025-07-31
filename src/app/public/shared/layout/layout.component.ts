@@ -4,7 +4,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   selector: 'public-layout',
   templateUrl: 'layout.html',
   styleUrls: ['layout.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicLayoutComponent {
   @Input() title: string;

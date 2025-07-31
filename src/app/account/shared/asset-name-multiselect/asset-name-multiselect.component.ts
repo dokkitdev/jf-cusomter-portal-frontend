@@ -19,7 +19,8 @@ import { CustomSelectOption } from '@shared/custom-select';
     },
     AccountAssetNameMultiselectComponentFacade,
     ComponentStore
-  ]
+  ],
+  standalone: false
 })
 export class AccountAssetNameMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<Boxed<Array<string>>>;
@@ -31,9 +32,7 @@ export class AccountAssetNameMultiselectComponent implements OnInit, OnDestroy {
   public options$: Observable<Array<CustomSelectOption<string>>>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountAssetNameMultiselectComponentFacade
-  ) {
+  constructor(private facade: AccountAssetNameMultiselectComponentFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.options$ = this.facade.options$;
     this.isLoading$ = this.facade.isLoading$;

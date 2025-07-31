@@ -3,7 +3,12 @@
     [attr.height]="svgSize"
     [attr.width]="svgSize"
     [attr.stroke-dasharray]="circleArea">
-    <text x="50%" y="70%" text-anchor="middle">{{ displaySeconds }}</text>
+    <text
+      x="50%"
+      y="70%"
+      text-anchor="middle">
+      {{ displaySeconds }}
+    </text>
     <circle
       [attr.cx]="position"
       [attr.cy]="position"

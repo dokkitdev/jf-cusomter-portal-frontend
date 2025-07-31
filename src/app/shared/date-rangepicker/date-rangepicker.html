@@ -8,13 +8,14 @@
         'opened-above': isOpened && positionY === 'above'
       }"
       class="form-group form-group-datepicker">
-      <label
-        *ngIf="label"
-        [for]="startDateControlState.id"
-        [ngClass]="{ required: isRequired }"
-        class="form-group-label">
-        {{ label }}
-      </label>
+      @if (label) {
+        <label
+          [for]="startDateControlState.id"
+          [ngClass]="{ required: isRequired }"
+          class="form-group-label">
+          {{ label }}
+        </label>
+      }
       <div class="dropdown custom-select">
         <a (click)="picker.open()">
           <mat-date-range-input
@@ -51,16 +52,18 @@
           [xPosition]="xPosition">
         </mat-date-range-picker>
       </div>
-      <validation-errors
-        *ngIf="startDateControlState.isSubmitted && startDateControlState.isInvalid"
-        [controlErrors]="startDateControlState.errors"
-        [messages]="validationMessages">
-      </validation-errors>
-      <validation-errors
-        *ngIf="endDateControlState.isSubmitted && endDateControlState.isInvalid"
-        [controlErrors]="endDateControlState.errors"
-        [messages]="validationMessages">
-      </validation-errors>
+      @if (startDateControlState.isSubmitted && startDateControlState.isInvalid) {
+        <validation-errors
+          [controlErrors]="startDateControlState.errors"
+          [messages]="validationMessages">
+        </validation-errors>
+      }
+      @if (endDateControlState.isSubmitted && endDateControlState.isInvalid) {
+        <validation-errors
+          [controlErrors]="endDateControlState.errors"
+          [messages]="validationMessages">
+        </validation-errors>
+      }
     </div>
   </ng-container>
 </div>

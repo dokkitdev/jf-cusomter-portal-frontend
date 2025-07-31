@@ -5,7 +5,8 @@ import { AssetReading } from '@shared/asset';
   selector: 'dialog-view-asset-test-readings-item',
   templateUrl: 'item.html',
   styleUrls: ['item.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDialogViewAssetTestReadingsItemComponent {
   @Input() item: AssetReading;

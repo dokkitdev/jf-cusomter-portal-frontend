@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountAssetsPageFacade } from './assets.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { AssetModule } from '@shared/asset';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -44,7 +44,8 @@ import { AccountAssetNameMultiselectModule } from '../shared/asset-name-multisel
     TranslateModule,
     AccountAssetsPageRoutingModule,
     AssetModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -63,9 +64,6 @@ import { AccountAssetNameMultiselectModule } from '../shared/asset-name-multisel
     NotificationModule,
     AccountAssetNameMultiselectModule
   ],
-  providers: [
-    AccountAssetsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAssetsPageFacade, ComponentStore]
 })
-export class AccountAssetsPageModule { }
+export class AccountAssetsPageModule {}

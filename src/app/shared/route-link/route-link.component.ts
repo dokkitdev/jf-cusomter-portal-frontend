@@ -4,7 +4,8 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   selector: 'route-link',
   templateUrl: 'route-link.html',
   styleUrls: ['route-link.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class RouteLinkComponent {
   @Input() route: string;

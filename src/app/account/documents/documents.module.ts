@@ -14,7 +14,7 @@ import { AccountDocumentsFiltersComponent } from './shared/components/filters/fi
 import { DocumentModule } from '@shared/document';
 import { MediaModule } from '@shared/media';
 import { FileModule } from '@shared/file';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { HeaderSortModule } from '@shared/header-sort';
 import { TableContainerModule } from '@shared/table-container';
@@ -39,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DocumentModule,
     MediaModule,
     FileModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -49,9 +50,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     PaginationElementsModule
   ],
-  providers: [
-    AccountDocumentsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountDocumentsPageFacade, ComponentStore]
 })
-export class AccountDocumentsPageModule { }
+export class AccountDocumentsPageModule {}

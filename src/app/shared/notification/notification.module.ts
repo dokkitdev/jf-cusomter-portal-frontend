@@ -5,18 +5,9 @@ import { NotificationService } from './notification.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  imports: [
-    TranslateModule,
-    CountdownProgressbarModule
-  ],
-  declarations: [
-    NotificationComponent
-  ],
-  exports: [
-    NotificationComponent
-  ],
-  providers: [
-    NotificationService
-  ]
+  imports: [TranslateModule, CountdownProgressbarModule],
+  declarations: [NotificationComponent],
+  exports: [NotificationComponent],
+  providers: [NotificationService]
 })
-export class NotificationModule { }
+export class NotificationModule {}

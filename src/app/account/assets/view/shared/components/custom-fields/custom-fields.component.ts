@@ -6,7 +6,8 @@ import { AssetCustomField } from '@shared/asset';
   selector: 'account-assets-view-custom-fields',
   templateUrl: 'custom-fields.html',
   styleUrls: ['custom-fields.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsViewCustomFieldsComponent {
   @Input() items: Array<AssetCustomField>;

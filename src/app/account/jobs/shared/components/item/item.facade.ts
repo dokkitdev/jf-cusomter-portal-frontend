@@ -9,9 +9,7 @@ export class AccountJobsItemComponentFacade {
     return this.componentStore.select((store) => store.isDescriptionOpened);
   }
 
-  constructor(
-    private readonly componentStore: ComponentStore<AccountJobsItemComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<AccountJobsItemComponentState>) {
     this.resetState();
   }
 
@@ -24,11 +22,9 @@ export class AccountJobsItemComponentFacade {
   }
 
   private toggleStateIsDescriptionOpened(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isDescriptionOpened: !state.isDescriptionOpened
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isDescriptionOpened: !state.isDescriptionOpened
+    }))();
   }
 }

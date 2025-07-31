@@ -8,7 +8,8 @@ import { PublicResetPasswordPageForm } from '../../forms';
   selector: 'reset-password-form',
   templateUrl: 'form.html',
   styleUrls: ['form.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicResetPasswordFormComponent {
   public isSubmitting$: Observable<boolean>;
@@ -18,9 +19,7 @@ export class PublicResetPasswordFormComponent {
   public isNewUser$: Observable<boolean>;
   public formState$: Observable<FormGroupState<PublicResetPasswordPageForm>>;
 
-  constructor(
-    private facade: PublicResetPasswordPageFacade
-  ) {
+  constructor(private facade: PublicResetPasswordPageFacade) {
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isSubmittingFailed$ = this.facade.isSubmittingFailed$;
     this.isTokenChecking$ = this.facade.isTokenChecking$;

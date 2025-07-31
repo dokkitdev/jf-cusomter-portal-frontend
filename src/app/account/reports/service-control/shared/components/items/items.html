@@ -5,22 +5,29 @@
   <div class="table">
     <reports-service-control-items-header></reports-service-control-items-header>
     <div class="table-content">
-      <div
-        *ngFor="let item of items | paginate: {
-          id: paginationID$ | async,
-          itemsPerPage: perPage$ | async,
-          currentPage: currentPage$ | async,
-          totalItems: totalItems$ | async
-        }; trackByProperty: 'id'"
-        [@heightCollapse]
-        class="table-content-row">
-        <reports-service-control-item [item]="item"></reports-service-control-item>
-      </div>
+      @for (
+        item of items
+          | paginate
+            : {
+                id: paginationID$ | async,
+                itemsPerPage: perPage$ | async,
+                currentPage: currentPage$ | async,
+                totalItems: totalItems$ | async
+              };
+        track item
+      ) {
+        <div
+          [@heightCollapse]
+          class="table-content-row">
+          <reports-service-control-item [item]="item"></reports-service-control-item>
+        </div>
+      }
     </div>
   </div>
 </table-container>
-<pagination-elements
-  *ngIf="hasPagination$ | async"
-  [paginationId]="paginationID$ | async"
-  (pageChanged)="pageChanged($event)">
-</pagination-elements>
+@if (hasPagination$ | async) {
+  <pagination-elements
+    [paginationId]="paginationID$ | async"
+    (pageChanged)="pageChanged($event)">
+  </pagination-elements>
+}

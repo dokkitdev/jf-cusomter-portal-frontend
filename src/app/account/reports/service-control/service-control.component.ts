@@ -6,14 +6,13 @@ import { Observable } from 'rxjs';
   selector: 'account-reports-service-control-page',
   templateUrl: 'service-control.html',
   styleUrls: ['service-control.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsServiceControlPageComponent implements OnInit {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    public facade: AccountReportsServiceControlFacade
-  ) {
+  constructor(public facade: AccountReportsServiceControlFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

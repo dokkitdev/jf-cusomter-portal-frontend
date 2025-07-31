@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AccountDialogAddDocumentComponent } from '@app/account/shared/dialog-add-document';
 import { AccountDialogAddDocumentActions } from '@app/account/shared/dialog-add-document/store';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { DialogService } from '@shared/dialog';
@@ -113,84 +114,72 @@ export class AccountAdminDocumentsPageFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Document>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private addItemToList(document: Document): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: [document, ...state.items],
-        totalItems: state.totalItems + 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: [document, ...state.items],
+      totalItems: state.totalItems + 1
+    }))();
   }
 
   private deleteItemFromList(id: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: filter(state.items, (item) => item.id !== id),
-        totalItems: state.totalItems - 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: filter(state.items, (item) => item.id !== id),
+      totalItems: state.totalItems - 1
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountAdminDocumentsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountAdminDocumentsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page
+    }))();
   }
 
   private registerOpenAddDocumentDialogEffect(): void {
     this.openAddDocumentDialogEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        map(() => this.dialogService.open(AccountDialogAddDocumentComponent, {
-          autoFocus: false
-        }))
+        map(() =>
+          this.dialogService.open(AccountDialogAddDocumentComponent, {
+            autoFocus: false
+          })
+        )
       )
     );
   }
@@ -198,23 +187,19 @@ export class AccountAdminDocumentsPageFacade {
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectQueryParams)
-        ),
+        withLatestFrom(this.store.select(NavigationSelectors.selectQueryParams)),
         tap(([_, queryParams]) => {
           this.updateIsLoading(true);
 
           const parameters = new AccountAdminDocumentsQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -223,19 +208,18 @@ export class AccountAdminDocumentsPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.parameters$,
-          this.relations$
-        ),
+        withLatestFrom(this.parameters$, this.relations$),
         switchMap(([targetPage, parameters, relations]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: { page, orderBy, desc }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: { page, orderBy, desc }
+            })
+          );
           this.updateIsLoading(true);
 
           return this.tryLoadItemsByParameters(page, perPage, orderBy, desc, relations);
@@ -245,7 +229,11 @@ export class AccountAdminDocumentsPageFacade {
   }
 
   private tryLoadItemsByParameters(
-    page: number, perPage: number, orderBy: DocumentSortField, desc: boolean, relations: Array<DocumentRelationType>
+    page: number,
+    perPage: number,
+    orderBy: DocumentSortField,
+    desc: boolean,
+    relations: Array<DocumentRelationType>
   ): Observable<any> {
     return this.documentService
       .search({
@@ -282,14 +270,9 @@ export class AccountAdminDocumentsPageFacade {
     this.componentStore.effect(() =>
       this.actions$.pipe(
         ofType(AccountDialogAddDocumentActions.createDocumentSuccess),
-        withLatestFrom(
-          this.relations$
-        ),
-        mergeMap(([{ documentID }, relations]) => this.documentService
-          .get(documentID, relations)
-          .pipe(
-            tap((document) => this.addItemToList(document))
-          )
+        withLatestFrom(this.relations$),
+        mergeMap(([{ documentID }, relations]) =>
+          this.documentService.get(documentID, relations).pipe(tap((document) => this.addItemToList(document)))
         )
       )
     );

@@ -5,16 +5,8 @@ import { PaginationElementsComponent } from './pagination-elements.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    PaginationElementsComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    NgxPaginationModule
-  ],
-  exports: [
-    PaginationElementsComponent
-  ]
+  declarations: [PaginationElementsComponent],
+  imports: [CommonModule, TranslateModule, NgxPaginationModule],
+  exports: [PaginationElementsComponent]
 })
-export class PaginationElementsModule { }
+export class PaginationElementsModule {}

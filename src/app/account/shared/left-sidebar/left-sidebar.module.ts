@@ -5,28 +5,22 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AccountLeftSidebarComponent } from './left-sidebar.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetDirective, PushPipe } from '@ngrx/component';
 import { DialogModule } from '@shared/dialog';
 import { DialogConfirmationModule } from '@shared/dialog-confirmation';
 
 @NgModule({
-  declarations: [
-    AccountLeftSidebarComponent
-  ],
+  declarations: [AccountLeftSidebarComponent],
   imports: [
     CommonModule,
     TranslateModule,
     RouterModule,
-    ReactiveComponentModule,
+    LetDirective,
+    PushPipe,
     DialogModule,
     DialogConfirmationModule
   ],
-  providers: [
-    AccountLeftSidebarFacade,
-    ComponentStore
-  ],
-  exports: [
-    AccountLeftSidebarComponent
-  ]
+  providers: [AccountLeftSidebarFacade, ComponentStore],
+  exports: [AccountLeftSidebarComponent]
 })
-export class AccountLeftSidebarModule { }
+export class AccountLeftSidebarModule {}

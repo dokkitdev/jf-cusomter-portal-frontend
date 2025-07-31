@@ -8,9 +8,7 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { ValidationErrorsModule } from '@shared/validation-errors';
 
 @NgModule({
-  declarations: [
-    FormDatepickerComponent
-  ],
+  declarations: [FormDatepickerComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
@@ -19,8 +17,6 @@ import { ValidationErrorsModule } from '@shared/validation-errors';
     MatFormFieldModule,
     MatInputModule
   ],
-  exports: [
-    FormDatepickerComponent
-  ]
+  exports: [FormDatepickerComponent]
 })
-export class FormDatepickerModule { }
+export class FormDatepickerModule {}

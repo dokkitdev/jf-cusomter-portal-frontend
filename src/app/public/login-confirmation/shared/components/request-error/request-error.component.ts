@@ -5,5 +5,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   templateUrl: 'request-error.html',
   styleUrls: ['request-error.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicLoginConfirmationRequestErrorComponent {}

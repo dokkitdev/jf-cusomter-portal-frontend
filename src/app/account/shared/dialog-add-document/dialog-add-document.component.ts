@@ -13,10 +13,8 @@ import { configuration } from '@configurations';
   templateUrl: 'dialog-add-document.html',
   styleUrls: ['dialog-add-document.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    AccountDialogAddDocumentComponentFacade,
-    ComponentStore
-  ]
+  providers: [AccountDialogAddDocumentComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountDialogAddDocumentComponent implements OnDestroy {
   public isEditMode$: Observable<boolean>;

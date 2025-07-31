@@ -4,15 +4,16 @@
   <div class="table">
     <asset-tests-items-header></asset-tests-items-header>
     <div class="table-content">
-      <div
-        *ngFor="let item of items; trackByProperty: 'id'"
-        [@heightCollapse]
-        class="table-content-row">
-        <asset-tests-item
-          [item]="item"
-          (deletingSuccess)="itemDeleted($event)">
-        </asset-tests-item>
-      </div>
+      @for (item of items; track item) {
+        <div
+          [@heightCollapse]
+          class="table-content-row">
+          <asset-tests-item
+            [item]="item"
+            (deletingSuccess)="itemDeleted($event)">
+          </asset-tests-item>
+        </div>
+      }
     </div>
   </div>
 </table-container>

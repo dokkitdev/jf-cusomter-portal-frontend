@@ -1,8 +1,12 @@
 <ng-container>
   <div class="table-row">
     <div class="table-cell kpi-status">
-      <span *ngIf="item.isOnTime" class="kpi-status-ontime">{{ 'ACCOUNT.REPORTS.KPI.TEXT_ON_TIME' | translate }}</span>
-      <span *ngIf="item.isLate" class="kpi-status-late">{{ 'ACCOUNT.REPORTS.KPI.TEXT_LATE' | translate }}</span>
+      @if (item.isOnTime) {
+        <span class="kpi-status-ontime">{{ 'ACCOUNT.REPORTS.KPI.TEXT_ON_TIME' | translate }}</span>
+      }
+      @if (item.isLate) {
+        <span class="kpi-status-late">{{ 'ACCOUNT.REPORTS.KPI.TEXT_LATE' | translate }}</span>
+      }
     </div>
     <div class="table-cell kpi-uprn">
       <a

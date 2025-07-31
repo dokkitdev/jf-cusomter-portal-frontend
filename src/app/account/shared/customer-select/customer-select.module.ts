@@ -6,17 +6,8 @@ import { CustomSelectModule } from '@shared/custom-select';
 import { CustomerModule } from '@shared/customer';
 
 @NgModule({
-  declarations: [
-    AccountCustomerSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CustomSelectModule,
-    CustomerModule
-  ],
-  exports: [
-    AccountCustomerSelectComponent
-  ]
+  declarations: [AccountCustomerSelectComponent],
+  imports: [CommonModule, TranslateModule, CustomSelectModule, CustomerModule],
+  exports: [AccountCustomerSelectComponent]
 })
-export class AccountCustomerSelectModule { }
+export class AccountCustomerSelectModule {}
