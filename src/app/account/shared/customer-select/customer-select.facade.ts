@@ -30,12 +30,15 @@ export class AccountCustomerSelectComponentFacade {
   }
 
   public get parameters$(): Observable<CustomerQueryParameters> {
-    return this.componentStore.select((state) => new CustomerQueryParameters({
-      page: state.page,
-      perPage: state.perPage,
-      orderBy: state.orderBy,
-      desc: state.desc
-    }));
+    return this.componentStore.select(
+      (state) =>
+        new CustomerQueryParameters({
+          page: state.page,
+          perPage: state.perPage,
+          orderBy: state.orderBy,
+          desc: state.desc
+        })
+    );
   }
 
   public get controlState$(): Observable<FormControlState<number>> {
@@ -51,25 +54,20 @@ export class AccountCustomerSelectComponentFacade {
   }
 
   public get options$(): Observable<Array<CustomSelectOption<number | string>>> {
-    return combineLatest([
-      this.items$,
-      this.excludeID$,
-      this.controlState$,
-      this.idField$
-    ])
-    .pipe(
+    return combineLatest([this.items$, this.excludeID$, this.controlState$, this.idField$]).pipe(
       map(([items, excludeID, controlState, idField]) =>
         items
           .filter((item) => !excludeID.includes(item.id) || controlState.value === item.id)
-          .map((item) =>
-            new CustomSelectOption<number | string>({
-              id: item[idField],
-              title: this.translateService.instant('ACCOUNT.SHARED.CUSTOMER_SELECT.TEXT_ITEM', {
-                name: item.name,
-                id: item.customerID
-              }),
-              data: item
-            })
+          .map(
+            (item) =>
+              new CustomSelectOption<number | string>({
+                id: item[idField],
+                title: this.translateService.instant('ACCOUNT.SHARED.CUSTOMER_SELECT.TEXT_ITEM', {
+                  name: item.name,
+                  id: item.customerID
+                }),
+                data: item
+              })
           )
       )
     );
@@ -129,101 +127,80 @@ export class AccountCustomerSelectComponentFacade {
   }
 
   private updateControlState(controlState: FormControlState<number>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        controlState
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      controlState
+    }))();
   }
 
   private updateStateNextPage(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: state.page + 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: state.page + 1
+    }))();
   }
 
   private updateStateItems(items: Array<Customer> = [], totalItems: number = 0): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: unionBy(state.items, items, 'id'),
-        totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: unionBy(state.items, items, 'id'),
+      totalItems
+    }))();
   }
 
   private addItem(item: Customer): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: unionBy(state.items, [item], 'id')
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: unionBy(state.items, [item], 'id')
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateFilters(filters: CustomerFilters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filters,
-        items: [],
-        page: 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filters,
+      items: [],
+      page: 1
+    }))();
   }
 
   private updateExcludeID(excludeID: Array<number>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        excludeID
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      excludeID
+    }))();
   }
 
   private updateIDField(idField: keyof Customer): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        idField
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      idField
+    }))();
   }
 
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.parameters$,
-          this.filters$
-        ),
+        withLatestFrom(this.parameters$, this.filters$),
         switchMap(([_, parameters, filters]) => {
           this.updateIsLoading(true);
 
-          return this.customerService
-            .search({ ...parameters, filters })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(response.items, response.totalItems);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.customerService.search({ ...parameters, filters }).pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(response.items, response.totalItems);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );
@@ -232,29 +209,22 @@ export class AccountCustomerSelectComponentFacade {
   private registerLoadInitialItemEffect(): void {
     this.loadInitialItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.controlState$
-        ),
-        switchMap(([_, controlState]) => (controlState.value)
-          ? this.tryToLoadItem(controlState.value)
-          : EMPTY
-        )
+        withLatestFrom(this.controlState$),
+        switchMap(([_, controlState]) => (controlState.value ? this.tryToLoadItem(controlState.value) : EMPTY))
       )
     );
   }
 
   private tryToLoadItem(id: number): Observable<Customer> {
-    return this.customerService
-      .get(id)
-      .pipe(
-        tapResponse(
-          (item) => {
-            if (item.id) {
-              this.addItem(item);
-            }
-          },
-          () =>  EMPTY
-        )
-      );
+    return this.customerService.get(id).pipe(
+      tapResponse(
+        (item) => {
+          if (item.id) {
+            this.addItem(item);
+          }
+        },
+        () => EMPTY
+      )
+    );
   }
 }

@@ -5,16 +5,8 @@ import { CustomMultiselectModule } from '@shared/custom-multiselect';
 import { AssetModule } from '@shared/asset';
 
 @NgModule({
-  declarations: [
-    AccountAssetServiceLevelMultiselectComponent
-  ],
-  imports: [
-    CommonModule,
-    CustomMultiselectModule,
-    AssetModule
-  ],
-  exports: [
-    AccountAssetServiceLevelMultiselectComponent
-  ]
+  declarations: [AccountAssetServiceLevelMultiselectComponent],
+  imports: [CommonModule, CustomMultiselectModule, AssetModule],
+  exports: [AccountAssetServiceLevelMultiselectComponent]
 })
-export class AccountAssetServiceLevelMultiselectModule { }
+export class AccountAssetServiceLevelMultiselectModule {}

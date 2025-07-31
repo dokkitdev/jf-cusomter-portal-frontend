@@ -6,17 +6,8 @@ import { ValidationErrorsModule } from '@shared/validation-errors';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
-  declarations: [
-    FormTimepickerComponent
-  ],
-  imports: [
-    CommonModule,
-    NgrxFormsModule,
-    ValidationErrorsModule,
-    NgxMaterialTimepickerModule
-  ],
-  exports: [
-    FormTimepickerComponent
-  ]
+  declarations: [FormTimepickerComponent],
+  imports: [CommonModule, NgrxFormsModule, ValidationErrorsModule, NgxMaterialTimepickerModule],
+  exports: [FormTimepickerComponent]
 })
-export class FormTimepickerModule { }
+export class FormTimepickerModule {}

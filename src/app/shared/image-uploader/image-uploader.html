@@ -1,5 +1,9 @@
-<div *ngrxLet="isUploading$; let isUploading" class="form-group">
-  <div *ngrxLet="image$; let image" class="imageuploader">
+<div
+  *ngrxLet="isUploading$; let isUploading"
+  class="form-group">
+  <div
+    *ngrxLet="image$; let image"
+    class="imageuploader">
     <div
       [multiple]="false"
       [accept]="acceptingFiles"
@@ -11,7 +15,10 @@
       class="imageuploader-area"
       ngx-dropzone>
       @if (isUploading) {
-        <span [progress]="progress$ | async" class="imageuploader-progress-bar" progressBar></span>
+        <span
+          [progress]="progress$ | async"
+          class="imageuploader-progress-bar"
+          progressBar></span>
         <span class="imageuploader-thumbnail">
           <loading-spinner [diameter]="spinnerDiameter.SMALL"></loading-spinner>
         </span>

@@ -23,12 +23,13 @@ import { ButtonModule } from '@shared/button';
     PublicLoginPageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     PublicLayoutModule,
     RouteLinkModule,
     FormErrorModule,
-    ButtonModule,
+    ButtonModule
   ],
-  providers: [PublicLoginPageFacade, ComponentStore],
+  providers: [PublicLoginPageFacade, ComponentStore]
 })
 export class PublicLoginPageModule {}

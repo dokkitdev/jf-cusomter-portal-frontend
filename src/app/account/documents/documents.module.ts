@@ -39,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DocumentModule,
     MediaModule,
     FileModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -49,9 +50,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     PaginationElementsModule
   ],
-  providers: [
-    AccountDocumentsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountDocumentsPageFacade, ComponentStore]
 })
-export class AccountDocumentsPageModule { }
+export class AccountDocumentsPageModule {}

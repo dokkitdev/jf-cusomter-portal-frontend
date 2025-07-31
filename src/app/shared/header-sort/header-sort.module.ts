@@ -3,14 +3,8 @@ import { HeaderSortComponent } from './header-sort.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    HeaderSortComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    HeaderSortComponent
-  ]
+  declarations: [HeaderSortComponent],
+  imports: [CommonModule],
+  exports: [HeaderSortComponent]
 })
-export class HeaderSortModule { }
+export class HeaderSortModule {}

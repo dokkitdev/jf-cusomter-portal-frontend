@@ -5,12 +5,12 @@ import { Asset } from '@shared/asset';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-    selector: 'reports-service-control-items',
-    templateUrl: 'items.html',
-    styleUrls: ['items.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'reports-service-control-items',
+  templateUrl: 'items.html',
+  styleUrls: ['items.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountReportsServiceControlItemsComponent {
   public items$: Observable<Array<Asset>>;
@@ -21,9 +21,7 @@ export class AccountReportsServiceControlItemsComponent {
   public hasPagination$: Observable<boolean>;
   public paginationID$: Observable<string>;
 
-  constructor(
-    private facade: AccountReportsServiceControlFacade
-  ) {
+  constructor(private facade: AccountReportsServiceControlFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

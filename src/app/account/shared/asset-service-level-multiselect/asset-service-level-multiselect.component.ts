@@ -16,20 +16,20 @@ import { Observable } from 'rxjs';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-    selector: 'account-asset-service-level-multiselect',
-    templateUrl: 'asset-service-level-multiselect.html',
-    styleUrls: ['asset-service-level-multiselect.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        },
-        AccountAssetServiceLevelMultiselectComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'account-asset-service-level-multiselect',
+  templateUrl: 'asset-service-level-multiselect.html',
+  styleUrls: ['asset-service-level-multiselect.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    },
+    AccountAssetServiceLevelMultiselectComponentFacade,
+    ComponentStore
+  ],
+  standalone: false
 })
 export class AccountAssetServiceLevelMultiselectComponent implements OnInit, OnDestroy {
   @Input() controlState: FormArrayState<string>;
@@ -42,9 +42,7 @@ export class AccountAssetServiceLevelMultiselectComponent implements OnInit, OnD
   public options$: Observable<Array<CustomSelectOption<string>>>;
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountAssetServiceLevelMultiselectComponentFacade
-  ) {
+  constructor(private facade: AccountAssetServiceLevelMultiselectComponentFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
     this.options$ = this.facade.options$;
     this.isLoading$ = this.facade.isLoading$;

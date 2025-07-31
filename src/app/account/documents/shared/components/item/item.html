@@ -1,9 +1,19 @@
 <div class="table-row">
   <div class="table-cell documents-filename">{{ item.title }}</div>
   <div class="table-cell documents-description">{{ item.description }}</div>
-  <div class="table-cell documents-uploaded">{{ item.createdAt | date: dateFormat }}</div>
+  <div class="table-cell documents-uploaded">
+    {{ item.createdAt | date: dateFormat }}
+  </div>
   <div class="table-cell documents-actions">
-    <a (click)="viewMediaClicked()" class="table-action table-action-info">{{ 'ACCOUNT.DOCUMENTS.LINK_VIEW' | translate }}</a>
-    <a (click)="downloadMediaClicked()" class="table-action">{{ 'ACCOUNT.DOCUMENTS.LINK_DOWNLOAD' | translate }}</a>
+    <a
+      (click)="viewMediaClicked()"
+      class="table-action table-action-info"
+      >{{ 'ACCOUNT.DOCUMENTS.LINK_VIEW' | translate }}</a
+    >
+    <a
+      (click)="downloadMediaClicked()"
+      class="table-action"
+      >{{ 'ACCOUNT.DOCUMENTS.LINK_DOWNLOAD' | translate }}</a
+    >
   </div>
 </div>

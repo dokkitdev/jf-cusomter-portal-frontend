@@ -39,7 +39,8 @@ import { NotificationModule } from '@shared/notification';
     TranslateModule,
     AccountSitesPageRoutingModule,
     SiteModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -53,9 +54,6 @@ import { NotificationModule } from '@shared/notification';
     ButtonModule,
     NotificationModule
   ],
-  providers: [
-    AccountSitesPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountSitesPageFacade, ComponentStore]
 })
-export class AccountSitesPageModule { }
+export class AccountSitesPageModule {}

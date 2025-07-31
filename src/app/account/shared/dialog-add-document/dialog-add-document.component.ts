@@ -9,15 +9,12 @@ import { Document } from '@shared/document';
 import { configuration } from '@configurations';
 
 @Component({
-    selector: 'account-dialog-add-document',
-    templateUrl: 'dialog-add-document.html',
-    styleUrls: ['dialog-add-document.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        AccountDialogAddDocumentComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'account-dialog-add-document',
+  templateUrl: 'dialog-add-document.html',
+  styleUrls: ['dialog-add-document.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AccountDialogAddDocumentComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountDialogAddDocumentComponent implements OnDestroy {
   public isEditMode$: Observable<boolean>;

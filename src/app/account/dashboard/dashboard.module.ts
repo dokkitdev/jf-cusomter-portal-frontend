@@ -31,13 +31,11 @@ import { AccountDashboardStatisticLinksComponent } from './shared/components/sta
     TranslateModule,
     AccountDashboardPageRoutingModule,
     DashboardModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     NotificationModule
   ],
-  providers: [
-    AccountDashboardPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountDashboardPageFacade, ComponentStore]
 })
-export class AccountDashboardPageModule { }
+export class AccountDashboardPageModule {}

@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 import { AccountAssetsFilterForm } from '../../forms';
 
 @Component({
-    selector: 'assets-filters',
-    templateUrl: 'filters.html',
-    styleUrls: ['filters.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'assets-filters',
+  templateUrl: 'filters.html',
+  styleUrls: ['filters.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountAssetsFilterForm>>;
@@ -21,9 +21,7 @@ export class AccountAssetsFiltersComponent {
   public getStartNextServiceDateFilter$: Observable<(date: Date) => boolean>;
   public getEndNextServiceDateFilter$: Observable<(date: Date) => boolean>;
 
-  constructor(
-    private facade: AccountAssetsPageFacade
-  ) {
+  constructor(private facade: AccountAssetsPageFacade) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
     this.getStartLastTestDateFilter$ = this.facade.getStartLastTestDateFilter$();

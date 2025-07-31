@@ -9,23 +9,36 @@ export class User extends AbstractUser {
   @Expose({ groups: [ClassGroup.MAIN] })
   public id: number;
 
-  @Expose({ name: 'role_id', groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
+  @Expose({
+    name: 'role_id',
+    groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING]
+  })
   public roleID: UserRole;
 
-  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
+  @Expose({
+    groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING]
+  })
   public name: string;
 
-  @Expose({ groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
+  @Expose({
+    groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING]
+  })
   public email: string;
 
   @Expose({ groups: [ClassGroup.MAIN] })
   @Type(() => Customer)
   public customers?: Array<Customer>;
 
-  @Expose({ name: 'customer_ids', groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING] })
+  @Expose({
+    name: 'customer_ids',
+    groups: [ClassGroup.MAIN, ClassGroup.CREATING, ClassGroup.UPDATING]
+  })
   public customerIDs: Array<number>;
 
-  @Expose({ name: 'is_send_email', groups: [ClassGroup.MAIN, ClassGroup.CREATING] })
+  @Expose({
+    name: 'is_send_email',
+    groups: [ClassGroup.MAIN, ClassGroup.CREATING]
+  })
   public isSendEmail: boolean;
 
   @Expose({ groups: [ClassGroup.UPDATING] })

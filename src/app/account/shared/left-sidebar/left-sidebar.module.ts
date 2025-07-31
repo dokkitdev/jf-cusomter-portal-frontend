@@ -10,23 +10,17 @@ import { DialogModule } from '@shared/dialog';
 import { DialogConfirmationModule } from '@shared/dialog-confirmation';
 
 @NgModule({
-  declarations: [
-    AccountLeftSidebarComponent
-  ],
+  declarations: [AccountLeftSidebarComponent],
   imports: [
     CommonModule,
     TranslateModule,
     RouterModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     DialogModule,
     DialogConfirmationModule
   ],
-  providers: [
-    AccountLeftSidebarFacade,
-    ComponentStore
-  ],
-  exports: [
-    AccountLeftSidebarComponent
-  ]
+  providers: [AccountLeftSidebarFacade, ComponentStore],
+  exports: [AccountLeftSidebarComponent]
 })
-export class AccountLeftSidebarModule { }
+export class AccountLeftSidebarModule {}

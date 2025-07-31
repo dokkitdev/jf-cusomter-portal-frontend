@@ -15,28 +15,22 @@ import { NotificationModule } from '@shared/notification';
 import { NgxFilesizeModule } from 'ngx-filesize';
 
 @NgModule({
-  declarations: [
-    ImageUploaderComponent
-  ],
+  declarations: [ImageUploaderComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgrxFormsModule,
     MediaModule,
     ProgressBarModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     NgxDropzoneModule,
     ValidationErrorsModule,
     NotificationModule,
     NgxFilesizeModule
   ],
-  exports: [
-    ImageUploaderComponent
-  ],
-  providers: [
-    ImageUploaderFacade,
-    ComponentStore
-  ]
+  exports: [ImageUploaderComponent],
+  providers: [ImageUploaderFacade, ComponentStore]
 })
-export class ImageUploaderModule { }
+export class ImageUploaderModule {}

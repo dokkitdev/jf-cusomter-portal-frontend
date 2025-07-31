@@ -50,44 +50,34 @@ export class AccountReportsWarehousePageFacade {
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private registerGenerateReportEffect(): void {
     this.generateReportEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$
-        ),
+        withLatestFrom(this.formState$),
         filter(([_, formState]) => formState.isValid),
-        tap(() => this.notificationService.error(
-          this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION')
-        ))
+        tap(() =>
+          this.notificationService.error(this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION'))
+        )
         // exhaustMap(([_, { value }]) => {
         //   this.updateIsSendingRequest(true);
         //   this.toggleDisablingForm(true);

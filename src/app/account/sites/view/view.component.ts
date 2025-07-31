@@ -8,11 +8,11 @@ import { Contact } from '@shared/contact';
 import { Site } from '@shared/site';
 
 @Component({
-    selector: 'account-sites-view-page',
-    templateUrl: 'view.html',
-    styleUrls: ['view.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'account-sites-view-page',
+  templateUrl: 'view.html',
+  styleUrls: ['view.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesViewPageComponent implements OnInit, OnDestroy {
   public formState$: Observable<FormGroupState<AccountSiteViewEditForm>>;
@@ -21,9 +21,7 @@ export class AccountSitesViewPageComponent implements OnInit, OnDestroy {
   public contacts$: Observable<Array<Contact>>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    private facade: AccountSitesViewPageFacade
-  ) {
+  constructor(private facade: AccountSitesViewPageFacade) {
     this.formState$ = this.facade.formState$;
     this.isLoading$ = this.facade.isLoading$;
     this.site$ = this.facade.site$;

@@ -29,7 +29,8 @@ import { ButtonModule } from '@shared/button';
     TranslateModule,
     PublicResetPasswordPageRoutingModule,
     NgrxFormsModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     FormTextModule,
     LoadingSpinnerModule,
     PublicLayoutModule,
@@ -37,9 +38,6 @@ import { ButtonModule } from '@shared/button';
     FormErrorModule,
     ButtonModule
   ],
-  providers: [
-    PublicResetPasswordPageFacade,
-    ComponentStore
-  ]
+  providers: [PublicResetPasswordPageFacade, ComponentStore]
 })
-export class PublicResetPasswordPageModule { }
+export class PublicResetPasswordPageModule {}

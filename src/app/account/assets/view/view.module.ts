@@ -32,7 +32,8 @@ import { ComponentStore } from '@ngrx/component-store';
     RouterModule,
     TranslateModule,
     AccountAssetsViewPageRoutingModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     AssetModule,
     FileModule,
     LoadingSpinnerModule,
@@ -43,9 +44,6 @@ import { ComponentStore } from '@ngrx/component-store';
     SnakeModule,
     AccountAssetTestsModule
   ],
-  providers: [
-    AccountAssetsViewPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAssetsViewPageFacade, ComponentStore]
 })
-export class AccountAssetsViewPageModule { }
+export class AccountAssetsViewPageModule {}

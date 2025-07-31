@@ -17,7 +17,7 @@ export class CustomDateAdapter extends NativeDateAdapter {
   }
 
   public format(date: Date, format: string): string {
-    return (format)
+    return format
       ? DateTime.fromJSDate(date).setLocale(this.translateService.currentLang).toFormat(format)
       : date.toDateString();
   }

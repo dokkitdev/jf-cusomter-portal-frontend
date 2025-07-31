@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { HeaderSortParameters } from './models';
 
 @Component({
-    selector: 'header-sort',
-    templateUrl: 'header-sort.html',
-    styleUrls: ['header-sort.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'header-sort',
+  templateUrl: 'header-sort.html',
+  styleUrls: ['header-sort.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class HeaderSortComponent {
   @Input() orderBy: string;
@@ -19,7 +19,7 @@ export class HeaderSortComponent {
   }
 
   public changeSortClicked(): void {
-    const desc = (this.orderBy === this.parameters.orderBy) ? !this.parameters.desc : false;
+    const desc = this.orderBy === this.parameters.orderBy ? !this.parameters.desc : false;
 
     this.sortChanged.emit(new HeaderSortParameters({ orderBy: this.orderBy, desc }));
   }

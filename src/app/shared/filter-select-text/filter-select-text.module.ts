@@ -7,18 +7,8 @@ import { CustomSelectModule } from '@shared/custom-select';
 import { DropdownModule } from '@shared/dropdown';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NgrxFormsModule,
-    DropdownModule,
-    CustomSelectModule,
-    LetDirective, PushPipe
-  ],
-  declarations: [
-    FilterSelectTextComponent
-  ],
-  exports: [
-    FilterSelectTextComponent
-  ]
+  imports: [CommonModule, NgrxFormsModule, DropdownModule, CustomSelectModule, LetDirective, PushPipe],
+  declarations: [FilterSelectTextComponent],
+  exports: [FilterSelectTextComponent]
 })
-export class FilterSelectTextModule { }
+export class FilterSelectTextModule {}

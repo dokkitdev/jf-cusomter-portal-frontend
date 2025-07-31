@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  Input,
-  OnDestroy,
-  Output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, Input, OnDestroy, Output } from '@angular/core';
 import { configuration } from '@configurations';
 import { MediaMultiselectFacade } from './media-multiselect.facade';
 import { NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
@@ -16,20 +9,20 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { FileSizeConfigs } from '@shared/file-size';
 
 @Component({
-    selector: 'media-multiselect',
-    templateUrl: 'media-multiselect.html',
-    styleUrls: ['media-multiselect.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        MediaMultiselectFacade,
-        ComponentStore,
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        }
-    ],
-    standalone: false
+  selector: 'media-multiselect',
+  templateUrl: 'media-multiselect.html',
+  styleUrls: ['media-multiselect.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    MediaMultiselectFacade,
+    ComponentStore,
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    }
+  ],
+  standalone: false
 })
 export class MediaMultiselectComponent implements OnDestroy {
   @Input() placeholder: string;
@@ -51,9 +44,7 @@ export class MediaMultiselectComponent implements OnDestroy {
   public items$: Observable<Array<Media>>;
   public fileSizeConfigs: FileSizeConfigs;
 
-  constructor(
-    private facade: MediaMultiselectFacade
-  ) {
+  constructor(private facade: MediaMultiselectFacade) {
     this.itemsChanged = this.facade.itemsChanged;
     this.items$ = this.facade.items$;
     this.allowedFileExtensions = configuration.allowedFileExtensions.default;

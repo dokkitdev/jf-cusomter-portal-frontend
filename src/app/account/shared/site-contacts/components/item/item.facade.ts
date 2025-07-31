@@ -52,21 +52,25 @@ export class AccountSiteContactsItemComponentFacade {
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private registerOpenEditContactDialogEffect(): void {
     this.openEditContactDialogEffect$ = this.componentStore.effect((origin$: Observable<Contact>) =>
       origin$.pipe(
-        map((contact) => this.dialogService.open(AccountDialogEditContactComponent, {
-          autoFocus: false,
-          data: new AccountDialogEditContactData({ isEditMode: true, siteID: contact.siteID, contact })
-        }))
+        map((contact) =>
+          this.dialogService.open(AccountDialogEditContactComponent, {
+            autoFocus: false,
+            data: new AccountDialogEditContactData({
+              isEditMode: true,
+              siteID: contact.siteID,
+              contact
+            })
+          })
+        )
       )
     );
   }
@@ -74,15 +78,21 @@ export class AccountSiteContactsItemComponentFacade {
   private registerDeleteItemEffect(): void {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: new DialogConfirmationConfig({
-            title: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
-            text: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
-            cancelButtonText: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
-            confirmButtonText: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
-            resultData: id
+        map((id) =>
+          this.dialogService.open(DialogConfirmationComponent, {
+            data: new DialogConfirmationConfig({
+              title: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
+              text: this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
+              cancelButtonText: this.translateService.instant(
+                'ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'
+              ),
+              confirmButtonText: this.translateService.instant(
+                'ACCOUNT.SHARED.SITE_CONTACTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'
+              ),
+              resultData: id
+            })
           })
-        })),
+        ),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {
           if (result) {
@@ -98,27 +108,25 @@ export class AccountSiteContactsItemComponentFacade {
   }
 
   private tryToDeleteContact(id: number): Observable<void> {
-    return this.contactService
-      .delete(id)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSendingRequest(false);
+    return this.contactService.delete(id).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.deletingSuccessSubject.next(id);
+          this.deletingSuccessSubject.next(id);
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.NOTIFICATIONS.TEXT_CONTACT_DELETED')
-            );
-          },
-          () => {
-            this.updateIsSendingRequest(false);
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.NOTIFICATIONS.TEXT_CONTACT_DELETED')
+          );
+        },
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.notificationService.error(
-              this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.NOTIFICATIONS.TEXT_ERROR')
-            );
-          }
-        )
-      );
+          this.notificationService.error(
+            this.translateService.instant('ACCOUNT.SHARED.SITE_CONTACTS.NOTIFICATIONS.TEXT_ERROR')
+          );
+        }
+      )
+    );
   }
 }

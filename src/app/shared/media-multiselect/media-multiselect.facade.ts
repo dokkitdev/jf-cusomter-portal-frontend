@@ -17,9 +17,7 @@ export class MediaMultiselectFacade {
 
   private itemsChangedEffect$: () => Observable<void>;
 
-  constructor(
-    private readonly componentStore: ComponentStore<MediaMultiselectComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<MediaMultiselectComponentState>) {
     this.itemsChanged = new Subject();
 
     this.resetState();
@@ -41,21 +39,17 @@ export class MediaMultiselectFacade {
   }
 
   private updateItemsAppend(value: Array<Media> = []): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: [...state.items, ...value]
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: [...state.items, ...value]
+    }))();
   }
 
   private removeItemByIndex(index: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: this.removeItemFromArray(state.items, index)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: this.removeItemFromArray(state.items, index)
+    }))();
   }
 
   private removeItemFromArray<T>(array: Array<T>, index: number): Array<T> {

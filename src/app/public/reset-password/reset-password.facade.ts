@@ -88,111 +88,90 @@ export class PublicResetPasswordPageFacade {
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<PublicResetPasswordPageForm>(
-          state.formState,
-          {
-            password: validate(required, containDigit, minLength(8)),
-            confirmPassword: (controlState, formState) =>
-              validate(controlState, required, equalTo(formState.value.password))
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<PublicResetPasswordPageForm>(state.formState, {
+        password: validate(required, containDigit, minLength(8)),
+        confirmPassword: (controlState, formState) =>
+          validate(controlState, required, equalTo(formState.value.password))
       })
-    )();
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private markFormStateAsSubmitted(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: markAsSubmitted(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: markAsSubmitted(state.formState)
+    }))();
   }
 
   private updateIsNewUser(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isNewUser: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isNewUser: value
+    }))();
   }
 
   private updateStateDueToStartRestore(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: disable(state.formState),
-        isSubmitting: true,
-        isSubmittingFailed: false
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: disable(state.formState),
+      isSubmitting: true,
+      isSubmittingFailed: false
+    }))();
   }
 
   private updateStateDueToFailedRestore(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: enable(state.formState),
-        isSubmitting: false,
-        isSubmittingFailed: true
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: enable(state.formState),
+      isSubmitting: false,
+      isSubmittingFailed: true
+    }))();
   }
 
   private updateStateDueToStartCheckToken(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isTokenChecking: true
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isTokenChecking: true
+    }))();
   }
 
   private updateStateDueToSuccessCheckToken(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isTokenChecking: false
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isTokenChecking: false
+    }))();
   }
 
   private updateStateDueToFailedCheckToken(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isTokenChecking: false,
-        isInvalidToken: true
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isTokenChecking: false,
+      isInvalidToken: true
+    }))();
   }
 
   private registerTryRestorePasswordEffect(): void {
     this.tryRestorePasswordEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$,
-          this.store.select(NavigationSelectors.selectRouteParam('token'))
-        ),
+        withLatestFrom(this.formState$, this.store.select(NavigationSelectors.selectRouteParam('token'))),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, token]) => {
           this.updateStateDueToStartRestore();
 
           return this.tryRestorePassword(
-            new RestorePasswordRequest({ password: formState.value.password, token })
+            new RestorePasswordRequest({
+              password: formState.value.password,
+              token
+            })
           );
         })
       )
@@ -202,9 +181,7 @@ export class PublicResetPasswordPageFacade {
   private registerCheckRestoreTokenEffect(): void {
     this.checkRestoreTokenEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectRouteParam('token'))
-        ),
+        withLatestFrom(this.store.select(NavigationSelectors.selectRouteParam('token'))),
         exhaustMap(([_, token]) => {
           this.updateIsNewUser(this.router.url.includes('add-password'));
           this.updateStateDueToStartCheckToken();
@@ -216,24 +193,20 @@ export class PublicResetPasswordPageFacade {
   }
 
   private tryRestorePassword(request: RestorePasswordRequest): Observable<void> {
-    return this.authService
-      .restorePasswordRequest(request)
-      .pipe(
-        tapResponse(
-          () => this.router.navigateByUrl('/login'),
-          () => this.updateStateDueToFailedRestore()
-        )
-      );
+    return this.authService.restorePasswordRequest(request).pipe(
+      tapResponse(
+        () => this.router.navigateByUrl('/login'),
+        () => this.updateStateDueToFailedRestore()
+      )
+    );
   }
 
   private tryCheckRestoreToken(token: string): Observable<void> {
-    return this.authService
-      .checkRestoreToken(token)
-      .pipe(
-        tapResponse(
-          () => this.updateStateDueToSuccessCheckToken(),
-          () => this.updateStateDueToFailedCheckToken()
-        )
-      );
+    return this.authService.checkRestoreToken(token).pipe(
+      tapResponse(
+        () => this.updateStateDueToSuccessCheckToken(),
+        () => this.updateStateDueToFailedCheckToken()
+      )
+    );
   }
 }

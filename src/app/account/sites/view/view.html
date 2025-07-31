@@ -1,9 +1,9 @@
-<div *ngrxLet="site$; let site" class="page siteview">
+<div
+  *ngrxLet="site$; let site"
+  class="page siteview">
   <sites-view-header></sites-view-header>
   @if (isLoading$ | async) {
-    <loading-spinner
-      [diameter]="spinnerDiameter.HUGE">
-    </loading-spinner>
+    <loading-spinner [diameter]="spinnerDiameter.HUGE"> </loading-spinner>
   } @else {
     <sites-view-form></sites-view-form>
     <account-site-contacts

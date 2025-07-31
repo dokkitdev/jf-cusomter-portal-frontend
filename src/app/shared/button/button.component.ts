@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { ButtonSize, ButtonType, ButtonVariant } from './types';
 
 @Component({
-    selector: 'btn',
-    templateUrl: 'button.html',
-    styleUrls: ['button.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'btn',
+  templateUrl: 'button.html',
+  styleUrls: ['button.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ButtonComponent {
   @Input() type: ButtonType;

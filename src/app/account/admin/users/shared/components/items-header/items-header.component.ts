@@ -5,19 +5,17 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountAdminUsersQueryParameters } from '../../models';
 
 @Component({
-    selector: 'admin-users-items-header',
-    templateUrl: 'items-header.html',
-    styleUrls: ['items-header.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'admin-users-items-header',
+  templateUrl: 'items-header.html',
+  styleUrls: ['items-header.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminUsersItemsHeaderComponent {
   public parameters$: Observable<AccountAdminUsersQueryParameters>;
   public userSortField: typeof UserSortField;
 
-  constructor(
-    private facade: AccountAdminUsersPageFacade
-  ) {
+  constructor(private facade: AccountAdminUsersPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.userSortField = UserSortField;
   }

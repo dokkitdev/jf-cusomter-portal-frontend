@@ -9,10 +9,7 @@ import { NotificationService } from '@shared/notification';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { exhaustMap, map, switchMap } from 'rxjs/operators';
 import { AccountAdminUsersItemComponentState } from './item.state';
-import {
-  AccountDialogEditUserComponent,
-  AccountDialogEditUserData
-} from '@app/account/shared/dialog-edit-user';
+import { AccountDialogEditUserComponent, AccountDialogEditUserData } from '@app/account/shared/dialog-edit-user';
 
 @Injectable()
 export class AccountAdminUsersItemComponentFacade {
@@ -58,21 +55,21 @@ export class AccountAdminUsersItemComponentFacade {
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private registerOpenEditUserDialogEffect(): void {
     this.openEditUserDialogEffect$ = this.componentStore.effect((origin$: Observable<User>) =>
       origin$.pipe(
-        map((user) => this.dialogService.open(AccountDialogEditUserComponent, {
-          autoFocus: false,
-          data: new AccountDialogEditUserData({ isEditMode: true, user })
-        }))
+        map((user) =>
+          this.dialogService.open(AccountDialogEditUserComponent, {
+            autoFocus: false,
+            data: new AccountDialogEditUserData({ isEditMode: true, user })
+          })
+        )
       )
     );
   }
@@ -83,26 +80,24 @@ export class AccountAdminUsersItemComponentFacade {
         exhaustMap((user) => {
           this.updateIsSendingRequest(true);
 
-          return this.userService
-            .resendInvitation(user.id)
-            .pipe(
-              tapResponse(
-                () => {
-                  this.updateIsSendingRequest(false);
+          return this.userService.resendInvitation(user.id).pipe(
+            tapResponse(
+              () => {
+                this.updateIsSendingRequest(false);
 
-                  this.notificationService.success(
-                    this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_INVITATION_RESENT')
-                  );
-                },
-                () => {
-                  this.updateIsSendingRequest(false);
+                this.notificationService.success(
+                  this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_INVITATION_RESENT')
+                );
+              },
+              () => {
+                this.updateIsSendingRequest(false);
 
-                  this.notificationService.error(
-                    this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_ERROR')
-                  );
-                }
-              )
-            );
+                this.notificationService.error(
+                  this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_ERROR')
+                );
+              }
+            )
+          );
         })
       )
     );
@@ -111,15 +106,17 @@ export class AccountAdminUsersItemComponentFacade {
   private registerDeleteItemEffect(): void {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: new DialogConfirmationConfig({
-            title: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
-            text: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
-            cancelButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
-            confirmButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
-            resultData: id
+        map((id) =>
+          this.dialogService.open(DialogConfirmationComponent, {
+            data: new DialogConfirmationConfig({
+              title: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
+              text: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
+              cancelButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
+              confirmButtonText: this.translateService.instant('ACCOUNT.ADMIN.USERS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
+              resultData: id
+            })
           })
-        })),
+        ),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {
           if (result) {
@@ -135,27 +132,23 @@ export class AccountAdminUsersItemComponentFacade {
   }
 
   private tryToDeleteUser(id: number): Observable<void> {
-    return this.userService
-      .delete(id)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSendingRequest(false);
+    return this.userService.delete(id).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.deletingSuccessSubject.next(id);
+          this.deletingSuccessSubject.next(id);
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_USER_DELETED')
-            );
-          },
-          () => {
-            this.updateIsSendingRequest(false);
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_USER_DELETED')
+          );
+        },
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.notificationService.error(
-              this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_ERROR')
-            );
-          }
-        )
-      );
+          this.notificationService.error(this.translateService.instant('ACCOUNT.ADMIN.USERS.NOTIFICATIONS.TEXT_ERROR'));
+        }
+      )
+    );
   }
 }

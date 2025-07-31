@@ -1,6 +1,10 @@
-<div *ngrxLet="dashboardStatistic$; let statistic" class="page dashboard">
+<div
+  *ngrxLet="dashboardStatistic$; let statistic"
+  class="page dashboard">
   <div class="page-header">
-    <h2 class="page-title">{{ 'ACCOUNT.DASHBOARD.TEXT_PAGE_TITLE' | translate }}</h2>
+    <h2 class="page-title">
+      {{ 'ACCOUNT.DASHBOARD.TEXT_PAGE_TITLE' | translate }}
+    </h2>
   </div>
   @if (isLoading$ | async) {
     <loading-spinner [diameter]="spinnerDiameter.HUGE"></loading-spinner>

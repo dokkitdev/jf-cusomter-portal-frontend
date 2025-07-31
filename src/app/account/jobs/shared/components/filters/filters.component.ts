@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 import { AccountJobsFilterForm } from '../../forms';
 
 @Component({
-    selector: 'jobs-filters',
-    templateUrl: 'filters.html',
-    styleUrls: ['filters.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'jobs-filters',
+  templateUrl: 'filters.html',
+  styleUrls: ['filters.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountJobsFilterForm>>;
@@ -18,9 +18,7 @@ export class AccountJobsFiltersComponent {
   public getStartAppointmentDateFilter$: Observable<(date: Date) => boolean>;
   public getEndAppointmentDateFilter$: Observable<(date: Date) => boolean>;
 
-  constructor(
-    private facade: AccountJobsPageFacade
-  ) {
+  constructor(private facade: AccountJobsPageFacade) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
     this.getStartAppointmentDateFilter$ = this.facade.getStartAppointmentDateFilter$();

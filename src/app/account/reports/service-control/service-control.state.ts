@@ -38,7 +38,10 @@ export class AccountReportsServiceControlState {
       'next_schedule'
     ];
     this.paginationId = 'account-reports-service-control-pagination';
-    this.filterFormState = createFormGroupState('AccountReportsServiceControlFilterForm', new AccountReportsServiceControlFilterForm());
+    this.filterFormState = createFormGroupState(
+      'AccountReportsServiceControlFilterForm',
+      new AccountReportsServiceControlFilterForm()
+    );
     this.selectedSite = undefined;
     this.report = true;
     this.assetType = 4;

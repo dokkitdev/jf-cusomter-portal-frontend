@@ -39,7 +39,9 @@
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS' | translate }}</span>
         </a>
         @if (isReportsMenuOpened$ | async) {
-          <div [@heightCollapse] class="sidebar-section-admin">
+          <div
+            [@heightCollapse]
+            class="sidebar-section-admin">
             <a
               routerLink="/account/reports/service-control"
               routerLinkActive="active"
@@ -82,7 +84,9 @@
             <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_ADMIN' | translate }}</span>
           </a>
           @if (isAdminMenuOpened$ | async) {
-            <div [@heightCollapse] class="sidebar-section-admin">
+            <div
+              [@heightCollapse]
+              class="sidebar-section-admin">
               <a
                 routerLink="/account/admin/users"
                 routerLinkActive="active"
@@ -99,7 +103,9 @@
           }
         }
       </div>
-      <div *ngrxLet="profile$; let profile" class="sidebar-section">
+      <div
+        *ngrxLet="profile$; let profile"
+        class="sidebar-section">
         <a
           routerLink="/account/profile"
           routerLinkActive="active"
@@ -107,7 +113,9 @@
           <span class="icon icon-profile icon-mask"></span>
           <span class="sidebar-label">{{ profile?.name }}</span>
         </a>
-        <a (click)="logout()" class="sidebar-item">
+        <a
+          (click)="logout()"
+          class="sidebar-item">
           <span class="icon icon-logout icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_LOGOUT' | translate }}</span>
         </a>

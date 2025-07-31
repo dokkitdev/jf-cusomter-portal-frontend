@@ -1,8 +1,12 @@
-<div *ngrxLet="asset$; let asset" class="page assetview">
+<div
+  *ngrxLet="asset$; let asset"
+  class="page assetview">
   <ng-container *ngrxLet="isLoading$; let isLoading">
     <div class="page-header">
       <h2 class="page-title">
-        <a (click)="backClicked()" class="link-back">
+        <a
+          (click)="backClicked()"
+          class="link-back">
           <span class="icon icon-back icon-mask icon-mask-dark-blue"></span>
         </a>
         {{ 'ACCOUNT.ASSETS.VIEW.TEXT_PAGE_TITLE' | translate }} {{ asset?.assetID }}

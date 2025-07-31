@@ -1,4 +1,6 @@
-<div *ngrxLet="controlState$; let controlState" class="customers">
+<div
+  *ngrxLet="controlState$; let controlState"
+  class="customers">
   @for (control of controlState.controls; track control; let i = $index) {
     <account-customers-item
       [controlState]="control"

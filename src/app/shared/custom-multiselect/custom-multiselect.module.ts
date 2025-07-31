@@ -23,16 +23,15 @@ import { LetDirective, PushPipe } from '@ngrx/component';
     ValidationErrorsModule,
     InfiniteScrollModule,
     LoadingSpinnerModule,
-    LetDirective, PushPipe
+    LetDirective,
+    PushPipe
   ],
   declarations: [
     CustomMultiselectComponent,
     CustomMultiselectTriggerComponent,
     CustomMultiselectOptionComponent,
-    CustomMultiselectNotFoundComponent,
+    CustomMultiselectNotFoundComponent
   ],
-  exports: [
-    CustomMultiselectComponent
-  ]
+  exports: [CustomMultiselectComponent]
 })
-export class CustomMultiselectModule { }
+export class CustomMultiselectModule {}

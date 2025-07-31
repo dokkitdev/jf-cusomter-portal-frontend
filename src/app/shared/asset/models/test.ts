@@ -29,7 +29,9 @@ export class AssetTest {
   @Expose({ groups: [ClassGroup.MAIN] })
   public job?: Job;
 
-  @Transform(({ value }) => (value) ? DateTime.fromISO(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ name: 'test_date', groups: [ClassGroup.MAIN] })
   public testDate: DateTime;
 

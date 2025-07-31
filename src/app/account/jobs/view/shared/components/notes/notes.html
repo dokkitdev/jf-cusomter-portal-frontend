@@ -1,12 +1,12 @@
 <section
   [isNoContent]="!notes?.length"
   name="{{ 'ACCOUNT.JOBS.VIEW.TEXT_NOTES' | translate }}">
-  <span ngProjectAs="section-icon" class="icon icon-edit icon-mask icon-mask-dark-blue"></span>
+  <span
+    ngProjectAs="section-icon"
+    class="icon icon-edit icon-mask icon-mask-dark-blue"></span>
   <div class="jobview-notes">
     @for (item of notes; track item) {
-      <jobs-view-notes-item
-        [item]="item">
-      </jobs-view-notes-item>
+      <jobs-view-notes-item [item]="item"> </jobs-view-notes-item>
     }
   </div>
 </section>

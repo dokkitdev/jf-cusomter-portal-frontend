@@ -41,7 +41,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DocumentModule,
     LoadingSpinnerModule,
     HeaderSortModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     TableContainerModule,
     NgForTrackByPropertyModule,
     NotificationModule,
@@ -53,9 +54,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AccountDialogAddDocumentModule,
     ButtonModule
   ],
-  providers: [
-    AccountAdminDocumentsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAdminDocumentsPageFacade, ComponentStore]
 })
-export class AccountAdminDocumentsPageModule { }
+export class AccountAdminDocumentsPageModule {}

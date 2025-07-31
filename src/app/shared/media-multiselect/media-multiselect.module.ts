@@ -12,25 +12,18 @@ import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { NgxFilesizeModule } from 'ngx-filesize';
 
 @NgModule({
-  declarations: [
-    MediaMultiselectComponent,
-    MediaMultiselectItemComponent
-  ],
+  declarations: [MediaMultiselectComponent, MediaMultiselectItemComponent],
   imports: [
     CommonModule,
     TranslateModule,
     MediaModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgxDropzoneModule,
     NgForTrackByPropertyModule,
     NgxFilesizeModule
   ],
-  exports: [
-    MediaMultiselectComponent
-  ],
-  providers: [
-    MediaMultiselectFacade,
-    ComponentStore
-  ]
+  exports: [MediaMultiselectComponent],
+  providers: [MediaMultiselectFacade, ComponentStore]
 })
-export class MediaMultiselectModule { }
+export class MediaMultiselectModule {}

@@ -4,11 +4,11 @@ import { configuration } from '@configurations';
 import { Job } from '@shared/job';
 
 @Component({
-    selector: 'jobs-view-info',
-    templateUrl: 'info.html',
-    styleUrls: ['info.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'jobs-view-info',
+  templateUrl: 'info.html',
+  styleUrls: ['info.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountJobsViewInfoComponent {
   @Input() job: Job;
@@ -20,9 +20,7 @@ export class AccountJobsViewInfoComponent {
   public dateFormat: string;
   public timeFormat: string;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
+  constructor(private sanitizer: DomSanitizer) {
     this.dateFormat = configuration.dateFormats.jobDate;
     this.timeFormat = configuration.dateFormats.jobTime;
   }

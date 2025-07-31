@@ -2,8 +2,12 @@
   <div class="table-row">
     <div class="table-cell jobs-icon">
       @if (item.description) {
-        <a (click)="toggleDescriptionClicked()" class="jobs-icon-action">
-          <span [ngClass]="{ 'accordionplus-opened': isDescriptionOpened }" class="accordionplus"></span>
+        <a
+          (click)="toggleDescriptionClicked()"
+          class="jobs-icon-action">
+          <span
+            [ngClass]="{ 'accordionplus-opened': isDescriptionOpened }"
+            class="accordionplus"></span>
         </a>
       }
     </div>
@@ -30,11 +34,11 @@
     <div class="table-cell jobs-stage">
       @if (item.stage) {
         <span
-        [ngClass]="{
-          'badge-archived': item.isArchived,
-          'badge-complete': item.isCompleted,
-          'badge-pending': item.isPending
-        }"
+          [ngClass]="{
+            'badge-archived': item.isArchived,
+            'badge-complete': item.isCompleted,
+            'badge-pending': item.isPending
+          }"
           class="badge">
           {{ 'SHARED.JOB_STAGE.TEXT_' + item.stage | uppercase | translate }}
         </span>
@@ -43,11 +47,11 @@
     <div class="table-cell jobs-status">
       @if (item.status) {
         <span
-        [ngClass]="{
-          'badge-archived': item.isArchived,
-          'badge-complete': item.isCompleted,
-          'badge-pending': item.isPending
-        }"
+          [ngClass]="{
+            'badge-archived': item.isArchived,
+            'badge-complete': item.isCompleted,
+            'badge-pending': item.isPending
+          }"
           class="badge">
           {{ item.status }}
         </span>
@@ -59,7 +63,9 @@
       <div>{{ item.madeSafeDate | date: dateFormat }}</div>
       <div>{{ item.madeSafeDate | date: timeFormat }}</div>
     </div>
-    <div class="table-cell jobs-completion">{{ item.completionDate | date: dateFormat }}</div>
+    <div class="table-cell jobs-completion">
+      {{ item.completionDate | date: dateFormat }}
+    </div>
     <div class="table-cell jobs-due">{{ item.dueDate | date: dateFormat }}</div>
     <div class="table-cell jobs-appointment">
       @if (item.recentSchedule) {
@@ -76,7 +82,9 @@
       [@heightCollapse]
       class="table-row table-row-small">
       <div class="table-cell jobs-icon"></div>
-      <div class="table-cell jobs-description">{{ 'ACCOUNT.JOBS.TEXT_DESCRIPTION' | translate }}</div>
+      <div class="table-cell jobs-description">
+        {{ 'ACCOUNT.JOBS.TEXT_DESCRIPTION' | translate }}
+      </div>
       <div class="table-cell">
         <span [innerHTML]="description"></span>
       </div>

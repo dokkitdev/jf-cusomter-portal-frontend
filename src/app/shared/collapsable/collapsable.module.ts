@@ -5,16 +5,8 @@ import { CollapsableComponent } from './collapsable.component';
 import { CollapsableDirective } from './collapsable.directive';
 
 @NgModule({
-  declarations: [
-    CollapsableComponent,
-    CollapsableDirective
-  ],
-  imports: [
-    CommonModule,
-    LetDirective, PushPipe
-  ],
-  exports: [
-    CollapsableComponent
-  ]
+  declarations: [CollapsableComponent, CollapsableDirective],
+  imports: [CommonModule, LetDirective, PushPipe],
+  exports: [CollapsableComponent]
 })
-export class CollapsableModule { }
+export class CollapsableModule {}

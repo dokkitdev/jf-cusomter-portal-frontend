@@ -9,9 +9,7 @@ export class CollapsableFacade {
     return this.componentStore.select((state) => state.isCollapsed);
   }
 
-  constructor(
-    private readonly componentStore: ComponentStore<CollapsableComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<CollapsableComponentState>) {
     this.resetState();
   }
 
@@ -24,11 +22,9 @@ export class CollapsableFacade {
   }
 
   private toggleStateIsCollapsed(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isCollapsed: !state.isCollapsed
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isCollapsed: !state.isCollapsed
+    }))();
   }
 }

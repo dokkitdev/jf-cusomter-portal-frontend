@@ -5,12 +5,12 @@ import { User } from '@shared/user';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-    selector: 'account-left-sidebar',
-    templateUrl: 'left-sidebar.html',
-    styleUrls: ['left-sidebar.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'account-left-sidebar',
+  templateUrl: 'left-sidebar.html',
+  styleUrls: ['left-sidebar.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountLeftSidebarComponent implements OnDestroy {
   public profile$: Observable<User>;
@@ -20,9 +20,7 @@ export class AccountLeftSidebarComponent implements OnDestroy {
   public isAdminMenuOpened$: Observable<boolean>;
   public isAdminMenuItemActive$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountLeftSidebarFacade
-  ) {
+  constructor(private facade: AccountLeftSidebarFacade) {
     this.profile$ = this.facade.profile$;
     this.isAdmin$ = this.facade.isAdmin$;
     this.isReportsMenuOpened$ = this.facade.isReportsMenuOpened$;

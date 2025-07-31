@@ -92,97 +92,73 @@ export class AccountDialogEditContactComponentFacade {
   }
 
   private updateIsEditMode(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isEditMode: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isEditMode: value
+    }))();
   }
 
   private updateSiteID(id: number | undefined): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        siteID: id
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      siteID: id
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountDialogEditContactForm>(
-          state.formState,
-          {
-            title: validate(maxLength(255)),
-            givenName: validate(trimmedRequired, maxLength(255)),
-            familyName: validate(maxLength(255)),
-            email: validate(email),
-            position: validate(maxLength(255))
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountDialogEditContactForm>(state.formState, {
+        title: validate(maxLength(255)),
+        givenName: validate(trimmedRequired, maxLength(255)),
+        familyName: validate(maxLength(255)),
+        email: validate(email),
+        position: validate(maxLength(255))
       })
-    )();
+    }))();
   }
 
   private updateContactFormState(contact: Contact): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        contact,
-        formState: updateGroup<AccountDialogEditContactForm>(
-          state.formState,
-          {
-            title: setValue(contact.title),
-            givenName: setValue(contact.givenName),
-            familyName: setValue(contact.familyName),
-            email: setValue(contact.email),
-            workPhone: setValue(contact.workPhone),
-            cellPhone: setValue(contact.cellPhone),
-            position: setValue(contact.position)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      contact,
+      formState: updateGroup<AccountDialogEditContactForm>(state.formState, {
+        title: setValue(contact.title),
+        givenName: setValue(contact.givenName),
+        familyName: setValue(contact.familyName),
+        email: setValue(contact.email),
+        workPhone: setValue(contact.workPhone),
+        cellPhone: setValue(contact.cellPhone),
+        position: setValue(contact.position)
       })
-    )();
+    }))();
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private registerInitComponentEffect(): void {
     this.initComponentEffect$ = this.componentStore.effect((origin$: Observable<Contact>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.isEditMode$
-        ),
+        withLatestFrom(this.isEditMode$),
         filter(([_, isEditMode]) => isEditMode),
         tap(([contact]) => this.updateContactFormState(contact))
       )
@@ -192,22 +168,19 @@ export class AccountDialogEditContactComponentFacade {
   private registerSaveChangesEffect(): void {
     this.saveChangesEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$,
-          this.isEditMode$,
-          this.contact$,
-          this.siteID$
-        ),
+        withLatestFrom(this.formState$, this.isEditMode$, this.contact$, this.siteID$),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, isEditMode, contact, siteID]) => {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
-          const changedContact = new Contact({ ...formState.value, siteID, id: contact.id });
+          const changedContact = new Contact({
+            ...formState.value,
+            siteID,
+            id: contact.id
+          });
 
-          return (isEditMode)
-            ? this.tryToUpdateContact(changedContact)
-            : this.tryToCreateContact(changedContact);
+          return isEditMode ? this.tryToUpdateContact(changedContact) : this.tryToCreateContact(changedContact);
         })
       )
     );
@@ -225,46 +198,46 @@ export class AccountDialogEditContactComponentFacade {
   }
 
   private tryToCreateContact(contact: Contact): Observable<Contact> {
-    return this.contactService
-      .create(contact)
-      .pipe(
-        tapResponse(
-          (response) => {
-            this.updateIsSendingRequest(false);
-            this.toggleDisablingForm(false);
+    return this.contactService.create(contact).pipe(
+      tapResponse(
+        (response) => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
 
-            this.dialogService.close();
+          this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditContactActions.createContactSuccess({ contact: response }));
+          this.store.dispatch(
+            AccountDialogEditContactActions.createContactSuccess({
+              contact: response
+            })
+          );
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_CREATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_CREATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 
   private tryToUpdateContact(contact: Contact): Observable<void> {
-    return this.contactService
-      .update(contact)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSendingRequest(false);
-            this.toggleDisablingForm(false);
+    return this.contactService.update(contact).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
 
-            this.dialogService.close();
+          this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditContactActions.updateContactSuccess({ contact }));
+          this.store.dispatch(AccountDialogEditContactActions.updateContactSuccess({ contact }));
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_UPDATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_CONTACT.NOTIFICATIONS.TEXT_CONTACT_UPDATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 }

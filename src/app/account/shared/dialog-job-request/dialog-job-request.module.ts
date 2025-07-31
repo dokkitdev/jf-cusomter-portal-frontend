@@ -12,23 +12,20 @@ import { ButtonModule } from '@shared/button';
 import { FormTextModule } from '@shared/form-text';
 
 @NgModule({
-  declarations: [
-    AccountDialogJobRequestComponent
-  ],
+  declarations: [AccountDialogJobRequestComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     FormTextModule,
     FormTextareaModule,
     MediaMultiselectModule,
     JobModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogJobRequestComponent
-  ]
+  exports: [AccountDialogJobRequestComponent]
 })
-export class AccountDialogJobRequestModule { }
+export class AccountDialogJobRequestModule {}

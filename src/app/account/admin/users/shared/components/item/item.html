@@ -1,7 +1,11 @@
 <div class="table-row">
   <div class="table-cell adminusers-name">{{ item.name }}</div>
   <div class="table-cell adminusers-email">
-    <a href="mailto:{{ item.email }}" target="_blank">{{ item.email }}</a>
+    <a
+      href="mailto:{{ item.email }}"
+      target="_blank"
+      >{{ item.email }}</a
+    >
   </div>
   <div class="table-cell adminusers-customer">
     @for (customer of item.customers; track customer) {
@@ -17,9 +21,19 @@
   </div>
   <div class="table-cell adminusers-actions">
     @if (!(isSendingRequest$ | async)) {
-      <a (click)="editButtonClicked()" class="table-action">{{ 'ACCOUNT.ADMIN.USERS.LINK_EDIT' | translate }}</a>
-      <a (click)="resendInvitationEmailButtonClicked()" class="table-action table-action-info">{{ 'ACCOUNT.ADMIN.USERS.LINK_RESEND' | translate }}</a>
-      <a (click)="deleteButtonClicked()" class="table-action table-action-caution">
+      <a
+        (click)="editButtonClicked()"
+        class="table-action"
+        >{{ 'ACCOUNT.ADMIN.USERS.LINK_EDIT' | translate }}</a
+      >
+      <a
+        (click)="resendInvitationEmailButtonClicked()"
+        class="table-action table-action-info"
+        >{{ 'ACCOUNT.ADMIN.USERS.LINK_RESEND' | translate }}</a
+      >
+      <a
+        (click)="deleteButtonClicked()"
+        class="table-action table-action-caution">
         {{ 'ACCOUNT.ADMIN.USERS.LINK_DELETE' | translate }}
       </a>
     } @else {

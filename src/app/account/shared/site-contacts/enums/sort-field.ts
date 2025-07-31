@@ -1,5 +1,5 @@
 export enum SiteContactSortField {
-  NAME =  'name',
+  NAME = 'name',
   TITLE = 'title',
   EMAIL = 'email',
   WORK_PHONE = 'workPhone',

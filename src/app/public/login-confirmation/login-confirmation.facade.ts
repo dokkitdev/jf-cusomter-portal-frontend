@@ -8,7 +8,7 @@ import {
   MarkAsSubmittedAction,
   setValue,
   updateGroup,
-  validate,
+  validate
 } from 'ngrx-forms';
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
@@ -37,9 +37,7 @@ export class PublicLoginConfirmationPageFacade {
     return this.componentStore.select((state) => state.isConfirmLoginFailed);
   }
 
-  public get formState$(): Observable<
-    FormGroupState<PublicLoginConfirmationPageForm>
-  > {
+  public get formState$(): Observable<FormGroupState<PublicLoginConfirmationPageForm>> {
     return this.componentStore.select((state) => state.formState);
   }
 
@@ -87,15 +85,15 @@ export class PublicLoginConfirmationPageFacade {
       formState: updateGroup<PublicLoginConfirmationPageForm>(state.formState, {
         email: validate(required, email),
         code: validate(required, minLength(6)),
-        password: validate(required),
-      }),
+        password: validate(required)
+      })
     }))();
   }
 
   private updateFormState(action: Actions<any>): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: formGroupReducer(state.formState, action),
+      formState: formGroupReducer(state.formState, action)
     }))();
   }
 
@@ -104,7 +102,7 @@ export class PublicLoginConfirmationPageFacade {
       ...state,
       formState: disable(state.formState),
       isSubmitting: true,
-      isConfirmLoginFailed: false,
+      isConfirmLoginFailed: false
     }))();
   }
 
@@ -113,30 +111,29 @@ export class PublicLoginConfirmationPageFacade {
       ...state,
       formState: enable(state.formState),
       isSubmitting: false,
-      isConfirmLoginFailed: true,
+      isConfirmLoginFailed: true
     }))();
   }
 
   private markFormStateAsSubmitted(): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: markAsSubmitted(state.formState),
+      formState: markAsSubmitted(state.formState)
     }))();
   }
 
   private registerTryConfirmLoginEffect(): void {
-    this.tryConfirmLogin$ = this.componentStore.effect(
-      (origin$: Observable<string>) =>
-        origin$.pipe(
-          withLatestFrom(this.formState$),
-          filter(([_, formState]) => formState.isValid),
-          exhaustMap(([_, formState]) => {
-            this.updateStateDueToStartLogin();
-            const credentials = new AuthCredentials(formState.value);
+    this.tryConfirmLogin$ = this.componentStore.effect((origin$: Observable<string>) =>
+      origin$.pipe(
+        withLatestFrom(this.formState$),
+        filter(([_, formState]) => formState.isValid),
+        exhaustMap(([_, formState]) => {
+          this.updateStateDueToStartLogin();
+          const credentials = new AuthCredentials(formState.value);
 
-            return this.tryConfirmLogin(credentials);
-          })
-        )
+          return this.tryConfirmLogin(credentials);
+        })
+      )
     );
   }
 
@@ -144,44 +141,37 @@ export class PublicLoginConfirmationPageFacade {
     this.componentStore.updater((state) => ({
       ...state,
       formState: updateGroup<PublicLoginConfirmationPageForm>(state.formState, {
-        email: (control) => disable(control),
-      }),
+        email: (control) => disable(control)
+      })
     }))();
   }
 
-  private updateFormByQueryParams(
-    parameters: PublicLoginConfirmationQueryParameters
-  ): void {
+  private updateFormByQueryParams(parameters: PublicLoginConfirmationQueryParameters): void {
     this.componentStore.updater((state) => ({
       ...state,
       email,
       formState: updateGroup<PublicLoginConfirmationPageForm>(state.formState, {
-        email: setValue(parameters.email as string),
-      }),
+        email: setValue(parameters.email as string)
+      })
     }))();
   }
 
   private registerFillFormByQueryParams(): void {
-    this.fillFormByQueryParams$ = this.componentStore.effect(
-      (origin$: Observable<string>) =>
-        origin$.pipe(
-          concatLatestFrom(() =>
-            this.store.select(NavigationSelectors.selectQueryParams)
-          ),
-          tap(([_, queryParams]) => {
-            const parameters = new PublicLoginConfirmationQueryParameters({
-              email: queryParams.email,
-            });
+    this.fillFormByQueryParams$ = this.componentStore.effect((origin$: Observable<string>) =>
+      origin$.pipe(
+        concatLatestFrom(() => this.store.select(NavigationSelectors.selectQueryParams)),
+        tap(([_, queryParams]) => {
+          const parameters = new PublicLoginConfirmationQueryParameters({
+            email: queryParams.email
+          });
 
-            this.updateFormByQueryParams(parameters);
-          })
-        )
+          this.updateFormByQueryParams(parameters);
+        })
+      )
     );
   }
 
-  private tryConfirmLogin(
-    credentials: AuthCredentials
-  ): Observable<AuthResponse<User>> {
+  private tryConfirmLogin(credentials: AuthCredentials): Observable<AuthResponse<User>> {
     return this.authService.signIn(credentials, true).pipe(
       tapResponse(
         () => this.router.navigate(['/account']),

@@ -1,7 +1,9 @@
 <section
   [isNoContent]="!schedules?.length"
   name="{{ 'ACCOUNT.JOBS.VIEW.TEXT_ENGINEERS' | translate }}">
-  <span ngProjectAs="section-icon" class="icon icon-employees icon-mask icon-mask-dark-blue"></span>
+  <span
+    ngProjectAs="section-icon"
+    class="icon icon-employees icon-mask icon-mask-dark-blue"></span>
   <div class="jobview-schedules">
     <div class="table">
       <jobs-view-engineers-items-header></jobs-view-engineers-items-header>

@@ -3,11 +3,11 @@ import { CustomSelectOption } from '@shared/custom-select';
 import { FormControlValueTypes } from 'ngrx-forms';
 
 @Component({
-    selector: 'custom-select-option',
-    templateUrl: 'option.html',
-    styleUrls: ['option.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'custom-select-option',
+  templateUrl: 'option.html',
+  styleUrls: ['option.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CustomSelectOptionComponent<T extends FormControlValueTypes, V> {
   @Input() option: CustomSelectOption<T, V>;

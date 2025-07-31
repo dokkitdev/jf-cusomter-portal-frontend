@@ -3,11 +3,11 @@ import { configuration } from '@configurations';
 import { AssetCustomField } from '@shared/asset';
 
 @Component({
-    selector: 'account-assets-view-custom-fields',
-    templateUrl: 'custom-fields.html',
-    styleUrls: ['custom-fields.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'account-assets-view-custom-fields',
+  templateUrl: 'custom-fields.html',
+  styleUrls: ['custom-fields.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetsViewCustomFieldsComponent {
   @Input() items: Array<AssetCustomField>;

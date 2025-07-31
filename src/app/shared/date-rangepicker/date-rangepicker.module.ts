@@ -12,9 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { LetDirective, PushPipe } from '@ngrx/component';
 
 @NgModule({
-  declarations: [
-    DateRangepickerComponent
-  ],
+  declarations: [DateRangepickerComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
@@ -23,14 +21,10 @@ import { LetDirective, PushPipe } from '@ngrx/component';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    LetDirective, PushPipe
+    LetDirective,
+    PushPipe
   ],
-  providers: [
-    DateRangepickerFacade,
-    ComponentStore
-  ],
-  exports: [
-    DateRangepickerComponent
-  ]
+  providers: [DateRangepickerFacade, ComponentStore],
+  exports: [DateRangepickerComponent]
 })
-export class DateRangepickerModule { }
+export class DateRangepickerModule {}

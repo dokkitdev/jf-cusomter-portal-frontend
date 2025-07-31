@@ -9,9 +9,7 @@ export class FormDatepickerFacade {
     return this.componentStore.select((state) => state.isOpened);
   }
 
-  constructor(
-    private readonly componentStore: ComponentStore<FormDatepickerComponentState>
-  ) {
+  constructor(private readonly componentStore: ComponentStore<FormDatepickerComponentState>) {
     this.resetState();
   }
 
@@ -28,11 +26,9 @@ export class FormDatepickerFacade {
   }
 
   private updateStateIsOpened(isOpened: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isOpened
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isOpened
+    }))();
   }
 }

@@ -12,7 +12,9 @@
     [isRequired]="false"
     (controlStateActionTriggered)="formActionTriggered($event)">
   </date-rangepicker>
-  <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="page-buttons">
+  <div
+    *ngrxLet="isSendingRequest$; let isSendingRequest"
+    class="page-buttons">
     <btn
       [isLoading]="isSendingRequest"
       [isDisabled]="formState.isDisabled"

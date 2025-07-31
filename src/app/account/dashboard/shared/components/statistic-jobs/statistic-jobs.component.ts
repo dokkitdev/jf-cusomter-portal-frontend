@@ -4,11 +4,11 @@ import { DashboardStatistic } from '@shared/dashboard';
 import { JobStage } from '@shared/job';
 
 @Component({
-    selector: 'dashboard-statistic-jobs',
-    templateUrl: 'statistic-jobs.html',
-    styleUrls: ['statistic-jobs.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'dashboard-statistic-jobs',
+  templateUrl: 'statistic-jobs.html',
+  styleUrls: ['statistic-jobs.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDashboardStatisticJobsComponent {
   @Input() statistic: DashboardStatistic;
@@ -16,9 +16,7 @@ export class AccountDashboardStatisticJobsComponent {
   public jobStage: typeof JobStage;
   public todayDate: string;
 
-  constructor(
-    private facade: AccountDashboardPageFacade
-  ) {
+  constructor(private facade: AccountDashboardPageFacade) {
     this.jobStage = JobStage;
     this.todayDate = this.facade.todayDate;
   }

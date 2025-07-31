@@ -1,37 +1,60 @@
 <div class="table-head">
-  <div *ngrxLet="parameters$; let parameters" class="table-row">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
     <div class="table-cell sites-customer">
-      <header-sort [orderBy]="siteSortField.CUSTOMER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.CUSTOMER_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-name">
-      <header-sort [orderBy]="siteSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_SITE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-uprn">
-      <header-sort [orderBy]="siteSortField.UPRN" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.UPRN"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-address">
-      <header-sort [orderBy]="siteSortField.ADDRESS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.ADDRESS"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_SITE_ADDRESS' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-postcode">
-      <header-sort [orderBy]="siteSortField.POSTAL_CODE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.POSTAL_CODE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_POSTCODE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-contact">
-      <header-sort [orderBy]="siteSortField.PRIMARY_CONTACT_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.PRIMARY_CONTACT_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_PRIMARY_CONTACT' | translate }}
       </header-sort>
     </div>
     <div class="table-cell sites-jobs">
-      <header-sort [orderBy]="siteSortField.OPEN_JOBS_COUNT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="siteSortField.OPEN_JOBS_COUNT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.SITES.ITEMS_HEADER.TEXT_OPEN_JOBS' | translate }}
       </header-sort>
     </div>

@@ -45,21 +45,17 @@ export class AccountDashboardPageFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateDashboardStatistic(value: DashboardStatistic): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        dashboardStatistic: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      dashboardStatistic: value
+    }))();
   }
 
   private registerloadDashboardStatistic(): void {
@@ -68,22 +64,20 @@ export class AccountDashboardPageFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.dashboardService
-            .getStatistic()
-            .pipe(
-              tapResponse(
-                (response) => {
-                  this.updateIsLoading(false);
-                  this.updateDashboardStatistic(response);
-                },
-                () => {
-                  this.updateIsLoading(false);
-                  this.notificationService.error(
-                    this.translateService.instant('ACCOUNT.DASHBOARD.NOTIFICATIONS.TEXT_ERROR')
-                  );
-                }
-              )
-            );
+          return this.dashboardService.getStatistic().pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsLoading(false);
+                this.updateDashboardStatistic(response);
+              },
+              () => {
+                this.updateIsLoading(false);
+                this.notificationService.error(
+                  this.translateService.instant('ACCOUNT.DASHBOARD.NOTIFICATIONS.TEXT_ERROR')
+                );
+              }
+            )
+          );
         })
       )
     );

@@ -30,36 +30,46 @@ export class UserService extends CommonUserService<User> {
   }
 
   public get isAdmin$(): Observable<boolean> {
-    return this
-      .profile$
-      .pipe(
-        map((profile) => profile.roleID === UserRole.ADMIN)
-      );
+    return this.profile$.pipe(map((profile) => profile.roleID === UserRole.ADMIN));
   }
 
-  constructor(
-    protected injector: Injector
-  ) {
+  constructor(protected injector: Injector) {
     super(injector);
 
     this.endpoint = '/users';
   }
 
-  public search({ page, perPage, orderBy, desc, relations, filters }: {
-    page?: number,
-    perPage?: number,
-    orderBy?: UserSortField,
-    desc?: boolean,
-    relations?: Array<UserRelationType>,
-    filters?: UserFilters
+  public search({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    filters
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: UserSortField;
+    desc?: boolean;
+    relations?: Array<UserRelationType>;
+    filters?: UserFilters;
   } = {}): Observable<PaginationResponse<User>> {
-    const request = new UserPaginationRequest({ ...filters, page, perPage, orderBy, desc, relations });
+    const request = new UserPaginationRequest({
+      ...filters,
+      page,
+      perPage,
+      orderBy,
+      desc,
+      relations
+    });
 
     return this.apiService
       .get<PaginationResponse<User>>(this.endpoint, omitBy(classToPlain<UserPaginationRequest>(request), isUndefined))
       .pipe(
-        map((response) => plainToClassFromExist(
-          new PaginationResponse<User>(User), response, { groups: [ClassGroup.MAIN] })
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<User>(User), response, {
+            groups: [ClassGroup.MAIN]
+          })
         )
       );
   }
@@ -67,17 +77,13 @@ export class UserService extends CommonUserService<User> {
   public get(id: number, relations?: Array<UserRelationType>): Observable<User> {
     return this.apiService
       .get<User>(`${this.endpoint}/${id}`, omitBy({ with: relations }, isUndefined))
-      .pipe(
-        map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public create(user: User): Observable<User> {
     return this.apiService
       .post<User>(this.endpoint, classToPlain(user, { groups: [ClassGroup.CREATING] }))
-      .pipe(
-        map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(User, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public update(user: User): Observable<void> {

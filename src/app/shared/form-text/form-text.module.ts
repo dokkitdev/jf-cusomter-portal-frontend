@@ -6,17 +6,8 @@ import { ValidationErrorsModule } from '@shared/validation-errors';
 import { IMaskModule } from 'angular-imask';
 
 @NgModule({
-  declarations: [
-    FormTextComponent
-  ],
-  imports: [
-    CommonModule,
-    NgrxFormsModule,
-    ValidationErrorsModule,
-    IMaskModule
-  ],
-  exports: [
-    FormTextComponent
-  ]
+  declarations: [FormTextComponent],
+  imports: [CommonModule, NgrxFormsModule, ValidationErrorsModule, IMaskModule],
+  exports: [FormTextComponent]
 })
-export class FormTextModule { }
+export class FormTextModule {}

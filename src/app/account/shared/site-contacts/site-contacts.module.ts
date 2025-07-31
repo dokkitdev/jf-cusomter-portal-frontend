@@ -25,7 +25,8 @@ import { ButtonModule } from '@shared/button';
   imports: [
     CommonModule,
     TranslateModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -33,8 +34,6 @@ import { ButtonModule } from '@shared/button';
     AccountDialogEditContactModule,
     ButtonModule
   ],
-  exports: [
-    AccountSiteContactsComponent
-  ]
+  exports: [AccountSiteContactsComponent]
 })
-export class AccountSiteContactsModule { }
+export class AccountSiteContactsModule {}

@@ -20,11 +20,14 @@ export class AccountCostCenterMultiselectComponentFacade {
 
   public get options$(): Observable<Array<CustomSelectOption<string>>> {
     return this.items$.pipe(
-      map((items) => items.map((item) =>
-        new CustomSelectOption({
-          id: item.name,
-          title: item.name
-        }))
+      map((items) =>
+        items.map(
+          (item) =>
+            new CustomSelectOption({
+              id: item.name,
+              title: item.name
+            })
+        )
       )
     );
   }
@@ -52,21 +55,17 @@ export class AccountCostCenterMultiselectComponentFacade {
   }
 
   private updateStateItems(items: Array<JobCostCenter> = []): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -75,17 +74,15 @@ export class AccountCostCenterMultiselectComponentFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.jobService
-            .getCostCenters()
-            .pipe(
-              tapResponse(
-                (items) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(items);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.jobService.getCostCenters().pipe(
+            tapResponse(
+              (items) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(items);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );

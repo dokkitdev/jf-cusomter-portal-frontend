@@ -21,9 +21,9 @@ export class PaginationResponse<T> {
   public items: Array<T>;
 
   @Exclude()
-  private type: new() => T;
+  private type: new () => T;
 
-  constructor(type: new() => T) {
+  constructor(type: new () => T) {
     this.type = type;
   }
 }

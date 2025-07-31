@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path: 'service-control',
     pathMatch: 'full',
-    loadChildren: () => import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
+    loadChildren: () =>
+      import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
   },
   {
     path: 'repair-response',
@@ -20,7 +21,8 @@ const routes: Routes = [
   {
     path: 'warehouse',
     pathMatch: 'full',
-    loadChildren: () => import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
+    loadChildren: () =>
+      import('./warehouse/warehouse.module').then((module) => module.AccountReportsWarehousePageModule)
   },
   {
     path: 'zero',
@@ -33,4 +35,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AccountReportsPageRoutingModule { }
+export class AccountReportsPageRoutingModule {}

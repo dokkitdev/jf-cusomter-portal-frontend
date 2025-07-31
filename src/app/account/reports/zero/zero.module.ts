@@ -16,10 +16,7 @@ import { FormRadioModule } from '@shared/form-radio';
 import { DateRangepickerModule } from '@shared/date-rangepicker';
 
 @NgModule({
-  declarations: [
-    AccountReportsZeroPageComponent,
-    AccountReportsZeroFormComponent
-  ],
+  declarations: [AccountReportsZeroPageComponent, AccountReportsZeroFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -27,15 +24,13 @@ import { DateRangepickerModule } from '@shared/date-rangepicker';
     AccountReportsZeroPageRoutingModule,
     NgrxFormsModule,
     FormRadioModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule,
     DateRangepickerModule
   ],
-  providers: [
-    AccountReportsZeroPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsZeroPageFacade, ComponentStore]
 })
-export class AccountReportsZeroPageModule { }
+export class AccountReportsZeroPageModule {}

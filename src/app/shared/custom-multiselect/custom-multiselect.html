@@ -12,7 +12,9 @@
       [placeholder]="placeholder"
       [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder">
     </custom-multiselect-trigger>
-    <div [ngClass]="{ 'dropdown-content-scrollable': hasScroll }" class="dropdown-content">
+    <div
+      [ngClass]="{ 'dropdown-content-scrollable': hasScroll }"
+      class="dropdown-content">
       <div
         [infiniteScrollDistance]="2"
         [infiniteScrollThrottle]="50"
@@ -21,7 +23,9 @@
         [ngClass]="{ 'dropdown-scroll': hasScroll }"
         (scrolled)="scrolled()"
         infiniteScroll>
-        <div *ngrxLet="options$; let options" class="dropdown-items">
+        <div
+          *ngrxLet="options$; let options"
+          class="dropdown-items">
           @for (option of options; track option) {
             <custom-multiselect-option
               (optionClick)="optionClicked(option)"
@@ -32,9 +36,7 @@
             </custom-multiselect-option>
           }
           @if (!options?.length && !isLoading) {
-            <custom-multiselect-not-found
-              [customTemplate]="notFoundTemplate">
-            </custom-multiselect-not-found>
+            <custom-multiselect-not-found [customTemplate]="notFoundTemplate"> </custom-multiselect-not-found>
           }
           @if (isLoading) {
             <div class="dropdown-item disabled">
@@ -46,8 +48,7 @@
     </div>
   </div>
 } @else {
-  <div
-    class="dropdown custom-select disabled">
+  <div class="dropdown custom-select disabled">
     <a class="dropdown-trigger">
       <span class="dropdown-trigger-placeholder">{{ (selectedOption$ | async)?.title || placeholder }}</span>
       @if (hasTriggerIcon) {

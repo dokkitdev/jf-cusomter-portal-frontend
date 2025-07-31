@@ -6,19 +6,9 @@ import { NgForTrackByPropertyModule } from '@shared/ng-for-track-by-property';
 import { FilterValuesFacade } from './filter-values.facade';
 
 @NgModule({
-  declarations: [
-    FilterValuesComponent,
-    FilterValuesItemComponent
-  ],
-  imports: [
-    CommonModule,
-    NgForTrackByPropertyModule
-  ],
-  exports: [
-    FilterValuesComponent
-  ],
-  providers: [
-    FilterValuesFacade
-  ]
+  declarations: [FilterValuesComponent, FilterValuesItemComponent],
+  imports: [CommonModule, NgForTrackByPropertyModule],
+  exports: [FilterValuesComponent],
+  providers: [FilterValuesFacade]
 })
-export class FilterValuesModule { }
+export class FilterValuesModule {}

@@ -29,10 +29,7 @@ import { CustomSelectOption } from '@shared/custom-select';
 import { Contact } from '@shared/contact';
 import { findIndex } from 'lodash';
 import { User, UserService } from '@shared/user';
-import {
-  AccountDialogJobRequestComponent,
-  AccountDialogJobRequestData
-} from '@app/account/shared/dialog-job-request';
+import { AccountDialogJobRequestComponent, AccountDialogJobRequestData } from '@app/account/shared/dialog-job-request';
 
 @Injectable()
 export class AccountSitesViewPageFacade {
@@ -61,12 +58,15 @@ export class AccountSitesViewPageFacade {
   }
 
   public get contactOptions$(): Observable<Array<CustomSelectOption>> {
-    return this.componentStore.select((state) => state.contacts.map((contact) =>
-      new CustomSelectOption({
-        id: contact.id,
-        title: contact.fullName
-      })
-    ));
+    return this.componentStore.select((state) =>
+      state.contacts.map(
+        (contact) =>
+          new CustomSelectOption({
+            id: contact.id,
+            title: contact.fullName
+          })
+      )
+    );
   }
 
   public get relations$(): Observable<Array<SiteRelationType>> {
@@ -138,142 +138,108 @@ export class AccountSitesViewPageFacade {
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountSiteViewEditForm>(
-          state.formState,
-          {
-            name: validate(trimmedRequired)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountSiteViewEditForm>(state.formState, {
+        name: validate(trimmedRequired)
       })
-    )();
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private disableNotEditableControls(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountSiteViewEditForm>(
-          state.formState,
-          {
-            customerName: (control) => disable(control)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountSiteViewEditForm>(state.formState, {
+        customerName: (control) => disable(control)
       })
-    )();
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsSubmitting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSubmitting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSubmitting: value
+    }))();
   }
 
   private updateSite(site: Site): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        site,
-        contacts: site.contacts || [],
-        formState: updateGroup<AccountSiteViewEditForm>(
-          state.formState,
-          {
-            uprn: setValue(site.uprn || ''),
-            name: setValue(site.name || ''),
-            address: setValue(site.address || ''),
-            postalCode: setValue(site.postalCode || ''),
-            city: setValue(site.city || ''),
-            county: setValue(site.county || ''),
-            primaryContactID: setValue(site.primaryContact?.id),
-            customerName: (control) => setValue(control,
-              (site.customer)
-                ? this.translateService.instant('ACCOUNT.SITES.VIEW.TEXT_CUSTOMER_NAME', {
-                    name: site.customer.name,
-                    id: site.customer.customerID
-                  }) as string
-                : ''
-            )
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      site,
+      contacts: site.contacts || [],
+      formState: updateGroup<AccountSiteViewEditForm>(state.formState, {
+        uprn: setValue(site.uprn || ''),
+        name: setValue(site.name || ''),
+        address: setValue(site.address || ''),
+        postalCode: setValue(site.postalCode || ''),
+        city: setValue(site.city || ''),
+        county: setValue(site.county || ''),
+        primaryContactID: setValue(site.primaryContact?.id),
+        customerName: (control) =>
+          setValue(
+            control,
+            site.customer
+              ? (this.translateService.instant('ACCOUNT.SITES.VIEW.TEXT_CUSTOMER_NAME', {
+                  name: site.customer.name,
+                  id: site.customer.customerID
+                }) as string)
+              : ''
+          )
       })
-    )();
+    }))();
   }
 
   private addCreatedContact(item: Contact): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        contacts: [item, ...state.contacts]
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      contacts: [item, ...state.contacts]
+    }))();
   }
 
   private updateChangedContact(item: Contact): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        contacts: (() => {
-          const index = findIndex(state.contacts, { id: item.id });
+    this.componentStore.updater((state) => ({
+      ...state,
+      contacts: (() => {
+        const index = findIndex(state.contacts, { id: item.id });
 
-          return (index !== -1)
-            ? [...state.contacts.slice(0, index), item, ...state.contacts.slice(index + 1)]
-            : state.contacts;
-        })()
-      })
-    )();
+        return index !== -1
+          ? [...state.contacts.slice(0, index), item, ...state.contacts.slice(index + 1)]
+          : state.contacts;
+      })()
+    }))();
   }
 
   private removeContactFromState(id: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        contacts: state.contacts.filter((item) => item.id !== id),
-        formState: updateGroup<AccountSiteViewEditForm>(
-          state.formState,
-          {
-            primaryContactID: setValue(
-              (state.formState.value.primaryContactID === id)
-                ? undefined
-                : state.formState.value.primaryContactID
-            )
-          }
+    this.componentStore.updater((state) => ({
+      ...state,
+      contacts: state.contacts.filter((item) => item.id !== id),
+      formState: updateGroup<AccountSiteViewEditForm>(state.formState, {
+        primaryContactID: setValue(
+          state.formState.value.primaryContactID === id ? undefined : state.formState.value.primaryContactID
         )
       })
-    )();
+    }))();
   }
 
   private endRequestFailed(errorResponse: unknown): void {
@@ -292,10 +258,12 @@ export class AccountSitesViewPageFacade {
     this.openJobRequestDialogEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
         concatLatestFrom(() => this.site$),
-        map(([_, site]) => this.dialogService.open(AccountDialogJobRequestComponent, {
-          autoFocus: false,
-          data: new AccountDialogJobRequestData({ siteID: site.id })
-        }))
+        map(([_, site]) =>
+          this.dialogService.open(AccountDialogJobRequestComponent, {
+            autoFocus: false,
+            data: new AccountDialogJobRequestData({ siteID: site.id })
+          })
+        )
       )
     );
   }
@@ -303,10 +271,7 @@ export class AccountSitesViewPageFacade {
   private registerInitPageEffect(): void {
     this.initPageEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.store.select(NavigationSelectors.selectRouteParam('id')),
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.store.select(NavigationSelectors.selectRouteParam('id')), this.relations$]),
         switchMap(([_, id, relations]) => {
           this.updateIsLoading(true);
 
@@ -323,33 +288,28 @@ export class AccountSitesViewPageFacade {
   }
 
   private tryToLoadData(id: number, relations: Array<SiteRelationType>): Observable<Site> {
-    return this.siteService
-      .get(id, relations)
-      .pipe(
-        tapResponse(
-          (response) => {
-            this.updateSite(response);
-            this.disableNotEditableControls();
-            this.updateIsLoading(false);
-          },
-          (response: HttpErrorResponse) => {
-            this.updateIsLoading(false);
+    return this.siteService.get(id, relations).pipe(
+      tapResponse(
+        (response) => {
+          this.updateSite(response);
+          this.disableNotEditableControls();
+          this.updateIsLoading(false);
+        },
+        (response: HttpErrorResponse) => {
+          this.updateIsLoading(false);
 
-            if (response.status === HttpStatusCode.NotFound) {
-              this.redirectToSitesPage();
-            }
+          if (response.status === HttpStatusCode.NotFound) {
+            this.redirectToSitesPage();
           }
-        )
-      );
+        }
+      )
+    );
   }
 
   private registerSaveChangesEffect(): void {
     this.saveChangesEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.formState$,
-          this.site$
-        ]),
+        concatLatestFrom(() => [this.formState$, this.site$]),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, site]) => {
           this.updateIsSubmitting(true);
@@ -367,21 +327,19 @@ export class AccountSitesViewPageFacade {
   }
 
   private tryToUpdateSite(site: Site): Observable<void> {
-    return this.siteService
-      .update(site)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSubmitting(false);
-            this.toggleDisablingForm(false);
-            this.disableNotEditableControls();
+    return this.siteService.update(site).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSubmitting(false);
+          this.toggleDisablingForm(false);
+          this.disableNotEditableControls();
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SITES.VIEW.NOTIFICATIONS.TEXT_SITE_UPDATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SITES.VIEW.NOTIFICATIONS.TEXT_SITE_UPDATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 }

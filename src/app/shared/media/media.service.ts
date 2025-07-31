@@ -11,40 +11,38 @@ import { ClassGroup } from '@shared/class-group';
 export class MediaService {
   private endpoint: string;
 
-  constructor(
-    private apiService: ApiService
-  ) {
+  constructor(private apiService: ApiService) {
     this.endpoint = '/media';
   }
 
   public getBlob(id: number): Observable<Blob> {
     return this.apiService
-      .get<HttpResponse<Blob>>(`${this.endpoint}/${id}/download`, {}, {
-        responseType: 'blob',
-        observe: 'response'
-      })
-      .pipe(
-        map((response) => (response.body as Blob))
-      );
+      .get<HttpResponse<Blob>>(
+        `${this.endpoint}/${id}/download`,
+        {},
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
   }
 
   public get(id: number): Observable<Media> {
     return this.apiService
       .get<Media>(`${this.endpoint}/${id}`)
-      .pipe(
-        map((response) => plainToClass(Media, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(Media, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public createWithProgress(media: Media): Observable<Media | number> {
     return this.apiService
-      .post<HttpProgressEvent | HttpResponse<Media>>(
-        this.endpoint,
-        classToPlainFromExist(media, { file: media.file }, { groups: [ClassGroup.CREATING] }),
-        { reportProgress: true, observe: 'events' }
-      )
+      .post<
+        HttpProgressEvent | HttpResponse<Media>
+      >(this.endpoint, classToPlainFromExist(media, { file: media.file }, { groups: [ClassGroup.CREATING] }), { reportProgress: true, observe: 'events' })
       .pipe(
-        filter((response) => response.type === HttpEventType.UploadProgress || !!(response as HttpResponse<Media>).body),
+        filter(
+          (response) => response.type === HttpEventType.UploadProgress || !!(response as HttpResponse<Media>).body
+        ),
         map((response) => {
           if (response.type === HttpEventType.UploadProgress) {
             if (response.total) {
@@ -54,7 +52,9 @@ export class MediaService {
             }
           }
 
-          return plainToClass(Media, (response as HttpResponse<Media>).body, { groups: [ClassGroup.MAIN] });
+          return plainToClass(Media, (response as HttpResponse<Media>).body, {
+            groups: [ClassGroup.MAIN]
+          });
         })
       );
   }

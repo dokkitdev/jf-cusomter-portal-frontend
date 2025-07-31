@@ -45,7 +45,8 @@ import { NotificationModule } from '@shared/notification';
     TableContainerModule,
     NgxPaginationModule,
     PaginationElementsModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     AssetModule,
     NgForTrackByPropertyModule,
     HeaderSortModule,
@@ -59,9 +60,6 @@ import { NotificationModule } from '@shared/notification';
     AccountCp12StatusSelectModule,
     AccountCustomAssetTypeMultiselectModule
   ],
-  providers: [
-    AccountReportsServiceControlFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsServiceControlFacade, ComponentStore]
 })
-export class AccountReportsServiceControlPageModule { }
+export class AccountReportsServiceControlPageModule {}

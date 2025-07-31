@@ -4,9 +4,7 @@ import { NotificationComponent } from '@shared/notification';
 
 @Injectable()
 export class NotificationService {
-  constructor(
-    private toastr: ToastrService
-  ) { }
+  constructor(private toastr: ToastrService) {}
 
   public success(message: string, config: Partial<IndividualConfig> = {}): ActiveToast<NotificationComponent> {
     return this.toastr.success(message, undefined, config);

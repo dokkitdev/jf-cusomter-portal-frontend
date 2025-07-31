@@ -10,21 +10,16 @@ import { AccountCustomerSelectModule } from '../customer-select';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    AccountCustomersComponent,
-    AccountCustomersItemComponent,
-    AccountCustomersItemAddComponent
-  ],
+  declarations: [AccountCustomersComponent, AccountCustomersItemComponent, AccountCustomersItemAddComponent],
   imports: [
     CommonModule,
     TranslateModule,
     NgrxFormsModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     AccountCustomerSelectModule
   ],
-  exports: [
-    AccountCustomersComponent
-  ]
+  exports: [AccountCustomersComponent]
 })
-export class AccountCustomersModule { }
+export class AccountCustomersModule {}

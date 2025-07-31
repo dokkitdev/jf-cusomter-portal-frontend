@@ -5,11 +5,11 @@ import { Document } from '@shared/document';
 import { SpinnerDiameter } from '@shared/loading-spinner';
 
 @Component({
-    selector: 'documents-item',
-    templateUrl: 'item.html',
-    styleUrls: ['item.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'documents-item',
+  templateUrl: 'item.html',
+  styleUrls: ['item.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountDocumentsItemComponent {
   @Input() item: Document;
@@ -17,9 +17,7 @@ export class AccountDocumentsItemComponent {
   public spinnerDiameter: typeof SpinnerDiameter;
   public dateFormat: string;
 
-  constructor(
-    private facade: AccountDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountDocumentsPageFacade) {
     this.spinnerDiameter = SpinnerDiameter;
     this.dateFormat = configuration.dateFormats.documentDate;
   }

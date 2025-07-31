@@ -1,6 +1,8 @@
 <div class="table-row">
   <div class="table-cell jobview-schedules-engineer">{{ item.name }}</div>
-  <div class="table-cell jobview-schedules-date">{{ item.date | date: dateFormat }}</div>
+  <div class="table-cell jobview-schedules-date">
+    {{ item.date | date: dateFormat }}
+  </div>
   <div class="table-cell jobview-schedules-time">
     {{ item.startTime | date: timeFormat }}–{{ item.endTime | date: timeFormat }}
   </div>

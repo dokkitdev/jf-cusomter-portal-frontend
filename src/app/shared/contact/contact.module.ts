@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { ContactService } from './contact.service';
 
 @NgModule({
-  providers: [
-    ContactService
-  ]
+  providers: [ContactService]
 })
-export class ContactModule { }
+export class ContactModule {}

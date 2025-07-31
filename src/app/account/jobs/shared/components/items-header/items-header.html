@@ -1,83 +1,133 @@
 <div class="table-head">
-  <div *ngrxLet="parameters$; let parameters" class="table-row">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
     <div class="table-cell jobs-icon"></div>
     <div class="table-cell jobs-title">
-      <header-sort [orderBy]="jobSortField.JOB_ID" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.JOB_ID"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_JOB' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-order">
-      <header-sort [orderBy]="jobSortField.ORDER_NO" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.ORDER_NO"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_ORDER_NO' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-name">
-      <header-sort [orderBy]="jobSortField.NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_JOB_NAME' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-customer">
-      <header-sort [orderBy]="jobSortField.CUSTOMER_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.CUSTOMER_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-uprn">
-      <header-sort [orderBy]="jobSortField.SITE_UPRN" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.SITE_UPRN"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-sitename">
-      <header-sort [orderBy]="jobSortField.SITE_NAME" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.SITE_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SITE_NAME' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-postalcode">
-      <header-sort [orderBy]="jobSortField.POSTCODE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.POSTCODE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_POSTCODE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-cost">
-      <header-sort [orderBy]="jobSortField.COST_CENTER" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.COST_CENTER"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COST_CENTRE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-priority">
-      <header-sort [orderBy]="jobSortField.PRIORITY" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.PRIORITY"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_PRIORITY' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-stage">
-      <header-sort [orderBy]="jobSortField.STAGE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.STAGE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_STAGE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-status">
-      <header-sort [orderBy]="jobSortField.STATUS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.STATUS"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_STATUS' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-madesafe">
-      <header-sort [orderBy]="jobSortField.MADE_SAFE_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.MADE_SAFE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_MADE_SAFE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-completion">
-      <header-sort [orderBy]="jobSortField.COMPLETION_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.COMPLETION_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_COMPLETION_DATE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-due">
-      <header-sort [orderBy]="jobSortField.DUE_DATE" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.DUE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_DUE_DATE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-appointment">
-      <header-sort [orderBy]="jobSortField.APPOINTMENT" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.APPOINTMENT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_SCHEDULED_DATE' | translate }}
       </header-sort>
     </div>
     <div class="table-cell jobs-attachments">
-      <header-sort [orderBy]="jobSortField.ATTACHMENTS" [parameters]="parameters" (sortChanged)="sortChanged($event)">
+      <header-sort
+        [orderBy]="jobSortField.ATTACHMENTS"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
         {{ 'ACCOUNT.JOBS.ITEMS_HEADER.TEXT_ATTACHMENTS' | translate }}
       </header-sort>
     </div>

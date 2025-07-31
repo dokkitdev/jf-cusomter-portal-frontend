@@ -4,15 +4,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    SectionComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule
-  ],
-  exports: [
-    SectionComponent
-  ]
+  declarations: [SectionComponent],
+  imports: [CommonModule, TranslateModule],
+  exports: [SectionComponent]
 })
-export class SectionModule { }
+export class SectionModule {}

@@ -23,20 +23,20 @@ import { CustomSelectOption } from '@shared/custom-select';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-    selector: 'custom-multiselect',
-    templateUrl: 'custom-multiselect.html',
-    styleUrls: ['custom-multiselect.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        CustomMultiselectFacade,
-        ComponentStore,
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        }
-    ],
-    standalone: false
+  selector: 'custom-multiselect',
+  templateUrl: 'custom-multiselect.html',
+  styleUrls: ['custom-multiselect.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    CustomMultiselectFacade,
+    ComponentStore,
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    }
+  ],
+  standalone: false
 })
 export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   @Input()
@@ -71,9 +71,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   public getIsSelected$: (id: T) => Observable<boolean>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
-  constructor(
-    protected facade: CustomMultiselectFacade<T>
-  ) {
+  constructor(protected facade: CustomMultiselectFacade<T>) {
     this.placeholder = '';
     this.hasTriggerIcon = true;
     this.position = 'left';

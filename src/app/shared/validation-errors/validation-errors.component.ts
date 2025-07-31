@@ -4,11 +4,11 @@ import { KeyValue } from '@angular/common';
 import { ValidationMessages } from './models';
 
 @Component({
-    selector: 'validation-errors',
-    templateUrl: 'validation-errors.html',
-    styleUrls: ['validation-errors.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'validation-errors',
+  templateUrl: 'validation-errors.html',
+  styleUrls: ['validation-errors.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class ValidationErrorsComponent {
   @Input() messages: ValidationMessages;

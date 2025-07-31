@@ -1,7 +1,11 @@
 <div class="page-header">
-  <h2 class="page-title">{{ 'ACCOUNT.ADMIN.DOCUMENTS.TEXT_PAGE_TITLE' | translate }}</h2>
+  <h2 class="page-title">
+    {{ 'ACCOUNT.ADMIN.DOCUMENTS.TEXT_PAGE_TITLE' | translate }}
+  </h2>
   <div class="page-actions">
-    <btn (clicked)="newDocumentButtonClicked()" variant="primary">
+    <btn
+      (clicked)="newDocumentButtonClicked()"
+      variant="primary">
       {{ 'ACCOUNT.ADMIN.DOCUMENTS.BUTTON_NEW_DOCUMENT' | translate }}
     </btn>
   </div>

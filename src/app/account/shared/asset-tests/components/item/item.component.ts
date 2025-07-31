@@ -5,11 +5,11 @@ import { AssetTest } from '@shared/asset';
 import { AccountAssetTestsComponentFacade } from '../../asset-tests.facade';
 
 @Component({
-    selector: 'asset-tests-item',
-    templateUrl: 'item.html',
-    styleUrls: ['item.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'asset-tests-item',
+  templateUrl: 'item.html',
+  styleUrls: ['item.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAssetTestsItemComponent {
   @Input() item: AssetTest;

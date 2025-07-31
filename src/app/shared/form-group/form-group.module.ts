@@ -3,14 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormGroupComponent } from './form-group.component';
 
 @NgModule({
-  declarations: [
-    FormGroupComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    FormGroupComponent
-  ]
+  declarations: [FormGroupComponent],
+  imports: [CommonModule],
+  exports: [FormGroupComponent]
 })
-export class FormGroupModule { }
+export class FormGroupModule {}

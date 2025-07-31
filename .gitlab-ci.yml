@@ -50,7 +50,7 @@ eslint:
 
 build_development:
   environment:
-    name: "development"
+    name: 'development'
   <<: *build
   except:
     - production
@@ -58,7 +58,7 @@ build_development:
 
 build_production:
   environment:
-    name: "production"
+    name: 'production'
   <<: *build
   script:
     - npx ng build -c=production

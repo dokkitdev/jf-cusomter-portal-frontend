@@ -7,15 +7,12 @@ import { Observable, Subject } from 'rxjs';
 import { AccountAdminDocumentsItemComponentFacade } from './item.facade';
 
 @Component({
-    selector: 'admin-documents-item',
-    templateUrl: 'item.html',
-    styleUrls: ['item.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        AccountAdminDocumentsItemComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'admin-documents-item',
+  templateUrl: 'item.html',
+  styleUrls: ['item.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AccountAdminDocumentsItemComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountAdminDocumentsItemComponent {
   @Input() item: Document;
@@ -26,9 +23,7 @@ export class AccountAdminDocumentsItemComponent {
   public spinnerDiameter: typeof SpinnerDiameter;
   public dateFormat: string;
 
-  constructor(
-    private facade: AccountAdminDocumentsItemComponentFacade
-  ) {
+  constructor(private facade: AccountAdminDocumentsItemComponentFacade) {
     this.deletingSuccess = this.facade.deletingSuccessSubject;
     this.isSendingRequest$ = this.facade.isSendingRequest$;
     this.spinnerDiameter = SpinnerDiameter;

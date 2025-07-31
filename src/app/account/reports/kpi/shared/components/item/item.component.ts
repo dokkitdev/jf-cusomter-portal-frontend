@@ -5,12 +5,12 @@ import { heightCollapseAnimation } from '@shared/animations';
 import { Job } from '@shared/job';
 
 @Component({
-    selector: 'reports-kpi-item',
-    templateUrl: 'item.html',
-    styleUrls: ['item.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'reports-kpi-item',
+  templateUrl: 'item.html',
+  styleUrls: ['item.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountReportsKPIItemComponent {
   @Input() item: Job;
@@ -22,9 +22,7 @@ export class AccountReportsKPIItemComponent {
   public dateFormat: string;
   public timeFormat: string;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
+  constructor(private sanitizer: DomSanitizer) {
     this.dateFormat = configuration.dateFormats.jobDate;
     this.timeFormat = configuration.dateFormats.jobTime;
   }

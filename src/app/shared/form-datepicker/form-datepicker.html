@@ -1,7 +1,9 @@
 <div
   [ngClass]="{ opened: isOpened$ | async }"
   class="form-group form-group-datepicker">
-  <div (click)="picker.open()" class="form-group-datepicker-toggler"></div>
+  <div
+    (click)="picker.open()"
+    class="form-group-datepicker-toggler"></div>
   <mat-form-field>
     <mat-label>{{ placeholder }}</mat-label>
     <input
@@ -16,18 +18,18 @@
       (ngrxFormsAction)="controlStateActionTriggered.emit($event)"
       class="form-control"
       readonly
-      matInput>
-      <span class="form-group-datepicker-icon"></span>
-      <mat-datepicker
-        (closed)="datePickerClosed()"
-        (opened)="datePickerOpened()"
-        #picker>
-      </mat-datepicker>
-    </mat-form-field>
-    @if (controlState.isSubmitted && controlState.isInvalid) {
-      <validation-errors
-        [controlErrors]="controlState.errors"
-        [messages]="validationMessages">
-      </validation-errors>
-    }
-  </div>
+      matInput />
+    <span class="form-group-datepicker-icon"></span>
+    <mat-datepicker
+      (closed)="datePickerClosed()"
+      (opened)="datePickerOpened()"
+      #picker>
+    </mat-datepicker>
+  </mat-form-field>
+  @if (controlState.isSubmitted && controlState.isInvalid) {
+    <validation-errors
+      [controlErrors]="controlState.errors"
+      [messages]="validationMessages">
+    </validation-errors>
+  }
+</div>

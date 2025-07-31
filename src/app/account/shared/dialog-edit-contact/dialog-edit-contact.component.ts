@@ -11,15 +11,12 @@ import { configuration } from '@configurations';
 import { AccountDialogEditContactData } from './models';
 
 @Component({
-    selector: 'account-dialog-edit-contact',
-    templateUrl: 'dialog-edit-contact.html',
-    styleUrls: ['dialog-edit-contact.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        AccountDialogEditContactComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'account-dialog-edit-contact',
+  templateUrl: 'dialog-edit-contact.html',
+  styleUrls: ['dialog-edit-contact.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AccountDialogEditContactComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountDialogEditContactComponent implements OnInit, OnDestroy {
   public isEditMode$: Observable<boolean>;

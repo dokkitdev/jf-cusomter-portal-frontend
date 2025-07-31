@@ -64,30 +64,23 @@ export class AccountAssetsViewPageFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateAsset(asset: Asset): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        asset
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      asset
+    }))();
   }
 
   private registerInitPageEffect(): void {
     this.initPageEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.store.select(NavigationSelectors.selectRouteParam('id')),
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.store.select(NavigationSelectors.selectRouteParam('id')), this.relations$]),
         switchMap(([_, id, relations]) => {
           this.updateIsLoading(true);
 
@@ -104,23 +97,21 @@ export class AccountAssetsViewPageFacade {
   }
 
   private tryToLoadData(id: number, relations: Array<AssetRelationType>): Observable<Asset> {
-    return this.assetService
-      .get(id, relations)
-      .pipe(
-        tapResponse(
-          (response) => {
-            this.updateAsset(response);
-            this.updateIsLoading(false);
-          },
-          (response: HttpErrorResponse) => {
-            this.updateIsLoading(false);
+    return this.assetService.get(id, relations).pipe(
+      tapResponse(
+        (response) => {
+          this.updateAsset(response);
+          this.updateIsLoading(false);
+        },
+        (response: HttpErrorResponse) => {
+          this.updateIsLoading(false);
 
-            if (response.status === HttpStatusCode.NotFound) {
-              this.redirectToAssetsPage();
-            }
+          if (response.status === HttpStatusCode.NotFound) {
+            this.redirectToAssetsPage();
           }
-        )
-      );
+        }
+      )
+    );
   }
 
   private registerDownloadAttachmentEffect(): void {
@@ -129,9 +120,7 @@ export class AccountAssetsViewPageFacade {
         exhaustMap((attachment) =>
           this.assetService
             .downloadAttachment(attachment.id)
-            .pipe(
-              tap((response) => this.fileService.openInNewTab(response))
-            )
+            .pipe(tap((response) => this.fileService.openInNewTab(response)))
         )
       )
     );

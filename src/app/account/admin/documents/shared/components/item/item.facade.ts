@@ -58,26 +58,30 @@ export class AccountAdminDocumentsItemComponentFacade {
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private registerDeleteItemEffect(): void {
     this.deleteItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        map((id) => this.dialogService.open(DialogConfirmationComponent, {
-          data: new DialogConfirmationConfig({
-            title: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
-            text: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
-            cancelButtonText: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'),
-            confirmButtonText: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'),
-            resultData: id
+        map((id) =>
+          this.dialogService.open(DialogConfirmationComponent, {
+            data: new DialogConfirmationConfig({
+              title: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_TITLE'),
+              text: this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.TEXT_MESSAGE'),
+              cancelButtonText: this.translateService.instant(
+                'ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CANCEL'
+              ),
+              confirmButtonText: this.translateService.instant(
+                'ACCOUNT.ADMIN.DOCUMENTS.DIALOG_DELETE_ITEM.BUTTON_CONFIRM'
+              ),
+              resultData: id
+            })
           })
-        })),
+        ),
         switchMap((dialogRef) => dialogRef.afterClosed()),
         exhaustMap((result) => {
           if (result) {
@@ -93,39 +97,33 @@ export class AccountAdminDocumentsItemComponentFacade {
   }
 
   private tryToDeleteDocument(id: number): Observable<void> {
-    return this.documentService
-      .delete(id)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSendingRequest(false);
+    return this.documentService.delete(id).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.deletingSuccessSubject.next(id);
+          this.deletingSuccessSubject.next(id);
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.NOTIFICATIONS.TEXT_DOCUMENT_DELETED')
-            );
-          },
-          () => {
-            this.updateIsSendingRequest(false);
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.NOTIFICATIONS.TEXT_DOCUMENT_DELETED')
+          );
+        },
+        () => {
+          this.updateIsSendingRequest(false);
 
-            this.notificationService.error(
-              this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.NOTIFICATIONS.TEXT_ERROR')
-            );
-          }
-        )
-      );
+          this.notificationService.error(
+            this.translateService.instant('ACCOUNT.ADMIN.DOCUMENTS.NOTIFICATIONS.TEXT_ERROR')
+          );
+        }
+      )
+    );
   }
 
   private registerViewMediaEffect(): void {
     this.viewMediaEffect$ = this.componentStore.effect((origin$: Observable<Media>) =>
       origin$.pipe(
         exhaustMap((media) =>
-          this.mediaService
-            .getBlob(media.id)
-            .pipe(
-              tap((response) => this.fileService.openInNewTab(response))
-            )
+          this.mediaService.getBlob(media.id).pipe(tap((response) => this.fileService.openInNewTab(response)))
         )
       )
     );
@@ -135,11 +133,7 @@ export class AccountAdminDocumentsItemComponentFacade {
     this.downloadMediaEffect$ = this.componentStore.effect((origin$: Observable<Media>) =>
       origin$.pipe(
         exhaustMap((media) =>
-          this.mediaService
-            .getBlob(media.id)
-            .pipe(
-              tap((response) => this.fileService.saveFile(response, media.name))
-            )
+          this.mediaService.getBlob(media.id).pipe(tap((response) => this.fileService.saveFile(response, media.name)))
         )
       )
     );

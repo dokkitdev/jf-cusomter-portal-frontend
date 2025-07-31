@@ -95,19 +95,20 @@ export class AccountSitesPageFacade {
   }
 
   public get filters$(): Observable<SiteFilters> {
-    return this
-      .filterFormStateValue$
-      .pipe(
-        map((filterFormStateValue) => new SiteFilters({
-          customerIds: (filterFormStateValue.customerID) ? [filterFormStateValue.customerID] : undefined,
-          name: filterFormStateValue.name || undefined,
-          uprn: filterFormStateValue.uprn || undefined,
-          query: filterFormStateValue.query || undefined,
-          postalCode: filterFormStateValue.postalCode || undefined,
-          primaryContactQuery: filterFormStateValue.primaryContactQuery || undefined,
-          hasOpenJobs: filterFormStateValue.hasOpenJobs
-        }))
-      );
+    return this.filterFormStateValue$.pipe(
+      map(
+        (filterFormStateValue) =>
+          new SiteFilters({
+            customerIds: filterFormStateValue.customerID ? [filterFormStateValue.customerID] : undefined,
+            name: filterFormStateValue.name || undefined,
+            uprn: filterFormStateValue.uprn || undefined,
+            query: filterFormStateValue.query || undefined,
+            postalCode: filterFormStateValue.postalCode || undefined,
+            primaryContactQuery: filterFormStateValue.primaryContactQuery || undefined,
+            hasOpenJobs: filterFormStateValue.hasOpenJobs
+          })
+      )
+    );
   }
 
   public get filterValues$(): Observable<Array<FilterValue>> {
@@ -117,7 +118,10 @@ export class AccountSitesPageFacade {
 
       if (formState.value.customerID && state.selectedCustomer) {
         filterValues.push(
-          new FilterValue({ id: formState.controls.customerID.id, value: state.selectedCustomer.name })
+          new FilterValue({
+            id: formState.controls.customerID.id,
+            value: state.selectedCustomer.name
+          })
         );
       }
       if (formState.value.name) {
@@ -136,10 +140,14 @@ export class AccountSitesPageFacade {
         filterValues.push(this.createFilterValue(formState.controls.primaryContactQuery));
       }
       if (formState.value.hasOpenJobs !== undefined) {
-        filterValues.push(new FilterValue({
-          id: formState.controls.hasOpenJobs.id,
-          value: this.translateService.instant('ACCOUNT.SITES.FILTERS.TEXT_OPEN_JOBS_' + ((formState.value.hasOpenJobs) ? 'YES' : 'NO'))
-        }));
+        filterValues.push(
+          new FilterValue({
+            id: formState.controls.hasOpenJobs.id,
+            value: this.translateService.instant(
+              'ACCOUNT.SITES.FILTERS.TEXT_OPEN_JOBS_' + (formState.value.hasOpenJobs ? 'YES' : 'NO')
+            )
+          })
+        );
       }
 
       return filterValues;
@@ -214,135 +222,114 @@ export class AccountSitesPageFacade {
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filterFormState: formGroupReducer(state.filterFormState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filterFormState: formGroupReducer(state.filterFormState, action)
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsExporting(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isExporting: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isExporting: value
+    }))();
   }
 
   private updateItems(response: PaginationResponse<Site>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: response.items,
-        totalItems: response.totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: response.items,
+      totalItems: response.totalItems
+    }))();
   }
 
   private updateSelectedCustomer(customer: Customer): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        selectedCustomer: customer
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      selectedCustomer: customer
+    }))();
   }
 
   private resetPagination(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updatePage(pageNumber: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: pageNumber,
-        items: []
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: pageNumber,
+      items: []
+    }))();
   }
 
   private updateStateSort(parameters: AccountSitesQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc,
-        page: 1,
-        items: [],
-        totalItems: 0
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc,
+      page: 1,
+      items: [],
+      totalItems: 0
+    }))();
   }
 
   private updateQueryParameters(parameters: AccountSitesQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy || state.orderBy,
-        desc: (parameters.desc !== undefined) ? parameters.desc : state.desc,
-        page: parameters.page || state.page,
-        filterFormState: updateGroup<AccountSitesFilterForm>(
-          state.filterFormState,
-          {
-            customerID: setValue(parameters.customerID || state.filterFormState.value.customerID),
-            name: setValue(parameters.name || state.filterFormState.value.name),
-            uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
-            query: setValue(parameters.query || state.filterFormState.value.query),
-            postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
-            primaryContactQuery: setValue(parameters.primaryContactQuery || state.filterFormState.value.primaryContactQuery),
-            hasOpenJobs: setValue((parameters.hasOpenJobs !== undefined) ? parameters.hasOpenJobs : state.filterFormState.value.hasOpenJobs)
-          }
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy || state.orderBy,
+      desc: parameters.desc !== undefined ? parameters.desc : state.desc,
+      page: parameters.page || state.page,
+      filterFormState: updateGroup<AccountSitesFilterForm>(state.filterFormState, {
+        customerID: setValue(parameters.customerID || state.filterFormState.value.customerID),
+        name: setValue(parameters.name || state.filterFormState.value.name),
+        uprn: setValue(parameters.uprn || state.filterFormState.value.uprn),
+        query: setValue(parameters.query || state.filterFormState.value.query),
+        postalCode: setValue(parameters.postalCode || state.filterFormState.value.postalCode),
+        primaryContactQuery: setValue(
+          parameters.primaryContactQuery || state.filterFormState.value.primaryContactQuery
+        ),
+        hasOpenJobs: setValue(
+          parameters.hasOpenJobs !== undefined ? parameters.hasOpenJobs : state.filterFormState.value.hasOpenJobs
         )
       })
-    )();
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
     this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.store.select(NavigationSelectors.selectQueryParams)
-        ),
+        withLatestFrom(this.store.select(NavigationSelectors.selectQueryParams)),
         tap(([_, queryParams]) => {
           this.updateIsLoading(true);
 
           const parameters = new AccountSitesQueryParameters({
-            page: (queryParams.page) ? parseInt(queryParams.page, 10) : undefined,
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
             orderBy: queryParams.orderBy || undefined,
-            desc: (queryParams.desc !== undefined) ? queryParams.desc === 'true' : undefined,
-            customerID: (queryParams.customerID) ? parseInt(queryParams.customerID, 10) : undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
+            customerID: queryParams.customerID ? parseInt(queryParams.customerID, 10) : undefined,
             name: queryParams.name || undefined,
             uprn: queryParams.uprn || undefined,
             query: queryParams.query || undefined,
             postalCode: queryParams.postalCode || undefined,
             primaryContactQuery: queryParams.primaryContactQuery || undefined,
-            hasOpenJobs: (queryParams.hasOpenJobs !== undefined) ? queryParams.hasOpenJobs === 'true' : undefined
+            hasOpenJobs: queryParams.hasOpenJobs !== undefined ? queryParams.hasOpenJobs === 'true' : undefined
           });
 
           this.updateQueryParameters(parameters);
 
-          return (parameters.page > 1)
-            ? this.loadItemsByPage(parameters.page)
-            : this.loadItemsByParameters();
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
         })
       )
     );
@@ -363,49 +350,62 @@ export class AccountSitesPageFacade {
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.parameters$,
-          this.relations$,
-          this.countRelations$,
-          this.filters$
-        ),
+        withLatestFrom(this.parameters$, this.relations$, this.countRelations$, this.filters$),
         switchMap(([targetPage, parameters, relations, countRelations, filters]) => {
           const page = targetPage || parameters.page;
           const perPage = parameters.perPage;
           const orderBy = parameters.orderBy;
           const desc = parameters.desc;
 
-          this.store.dispatch(NavigationActions.mergeQueryParams({
-            queryParams: {
-              page,
-              orderBy,
-              desc,
-              customerID: filters.customerIds,
-              name: filters.name,
-              uprn: filters.uprn,
-              query: filters.query,
-              postalCode: filters.postalCode,
-              primaryContactQuery: filters.primaryContactQuery,
-              hasOpenJobs: filters.hasOpenJobs
-            }
-          }));
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                customerID: filters.customerIds,
+                name: filters.name,
+                uprn: filters.uprn,
+                query: filters.query,
+                postalCode: filters.postalCode,
+                primaryContactQuery: filters.primaryContactQuery,
+                hasOpenJobs: filters.hasOpenJobs
+              }
+            })
+          );
 
           this.updateIsLoading(true);
 
-          return this.tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters });
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            countRelations,
+            filters
+          });
         })
       )
     );
   }
 
-  private tryLoadItemsByParameters({ page, perPage, orderBy, desc, relations, countRelations, filters }: {
-    page: number,
-    perPage: number,
-    orderBy: SiteSortField,
-    desc: boolean,
-    relations: Array<SiteRelationType>,
-    countRelations: Array<SiteCountRelationType>,
-    filters: SiteFilters
+  private tryLoadItemsByParameters({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    countRelations,
+    filters
+  }: {
+    page: number;
+    perPage: number;
+    orderBy: SiteSortField;
+    desc: boolean;
+    relations: Array<SiteRelationType>;
+    countRelations: Array<SiteCountRelationType>;
+    filters: SiteFilters;
   }): Observable<any> {
     return this.siteService
       .search({
@@ -431,37 +431,28 @@ export class AccountSitesPageFacade {
   private registerExportCSVEffect(): void {
     this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.filters$,
-          this.relations$,
-          this.countRelations$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.filters$, this.relations$, this.countRelations$]),
         switchMap(([_, parameters, filters, relations, countRelations]) => {
           this.updateIsExporting(true);
 
-          return this.siteService
-            .exportCSV({ ...parameters, filters, relations, countRelations })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  this.updateIsExporting(false);
-                  this.fileService.saveFile(response, configuration.exportCSV.sites);
-                },
-                (response: HttpErrorResponse) => {
-                  this.updateIsExporting(false);
+          return this.siteService.exportCSV({ ...parameters, filters, relations, countRelations }).pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsExporting(false);
+                this.fileService.saveFile(response, configuration.exportCSV.sites);
+              },
+              (response: HttpErrorResponse) => {
+                this.updateIsExporting(false);
 
-                  const errorTranslationKey =
-                    (response.status === HttpStatusCode.BadGateway || response.status === 0)
-                      ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
-                      : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+                const errorTranslationKey =
+                  response.status === HttpStatusCode.BadGateway || response.status === 0
+                    ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                    : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
 
-                  this.notificationService.error(
-                    this.translateService.instant(errorTranslationKey)
-                  );
-                }
-              )
-            );
+                this.notificationService.error(this.translateService.instant(errorTranslationKey));
+              }
+            )
+          );
         })
       )
     );

@@ -1,6 +1,8 @@
-<div *ngrxLet="isEditMode$; let isEditMode" class="dialog-edit edituser">
+<div
+  *ngrxLet="isEditMode$; let isEditMode"
+  class="dialog-edit edituser">
   <h2 class="dialog-edit-title">
-    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_TITLE_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+    {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_TITLE_' + (isEditMode ? 'UPDATE' : 'CREATE') | translate }}
   </h2>
   <form
     *ngrxLet="formState$; let formState"
@@ -50,16 +52,15 @@
         <account-customers
           *ngrxLet="user$; let user"
           [controlState]="formState.controls.customerIDs"
-        [groupValidationMessages]="{
-          positiveNumber: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_GROUP_IS_REQUIRED' | translate
-        }"
+          [groupValidationMessages]="{
+            positiveNumber: 'ACCOUNT.SHARED.DIALOG_EDIT_USER.ERRORS.TEXT_GROUP_IS_REQUIRED' | translate
+          }"
           (controlStateActionTriggered)="formActionTriggered($event)">
         </account-customers>
       </div>
     }
     @if (!isEditMode) {
-      <form-group
-        label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
+      <form-group label="{{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.TEXT_SEND_INVITE' | translate }}">
         <form-checkbox
           [controlState]="formState.controls.isSendEmail"
           (controlStateActionTriggered)="formActionTriggered($event)"
@@ -67,7 +68,9 @@
         </form-checkbox>
       </form-group>
     }
-    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+    <div
+      *ngrxLet="isSendingRequest$; let isSendingRequest"
+      class="dialog-edit-buttons">
       <div class="dialog-edit-button">
         <btn
           [isDisabled]="isSendingRequest"
@@ -82,7 +85,7 @@
           [isLoading]="isSendingRequest"
           [isDisabled]="formState.isPristine"
           type="submit">
-          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_' + ((isEditMode) ? 'UPDATE' : 'CREATE') | translate }}
+          {{ 'ACCOUNT.SHARED.DIALOG_EDIT_USER.BUTTON_' + (isEditMode ? 'UPDATE' : 'CREATE') | translate }}
         </btn>
       </div>
     </div>

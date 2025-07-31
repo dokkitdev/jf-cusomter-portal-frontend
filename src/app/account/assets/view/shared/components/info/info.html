@@ -35,7 +35,9 @@
         @if (asset.lastTestResult) {
           <property>
             <ng-container ngProjectAs="name">{{ translations + 'TEXT_LAST_TEST_RESULT' | translate }}</ng-container>
-            <ng-container ngProjectAs="value">{{ 'SHARED.ASSET_TEST_RESULT.TEXT_' + asset.lastTestResult | snake | uppercase | translate }}</ng-container>
+            <ng-container ngProjectAs="value">{{
+              'SHARED.ASSET_TEST_RESULT.TEXT_' + asset.lastTestResult | snake | uppercase | translate
+            }}</ng-container>
           </property>
         }
         @if (asset.serviceLevelName) {
@@ -47,7 +49,7 @@
         <property>
           <ng-container ngProjectAs="name">{{ translations + 'TEXT_ARCHIVED' | translate }}</ng-container>
           <ng-container ngProjectAs="value">
-            {{ translations + 'TEXT_ARCHIVED_' + ((asset.isArchived) ? 'TRUE' : 'FALSE') | translate }}
+            {{ translations + 'TEXT_ARCHIVED_' + (asset.isArchived ? 'TRUE' : 'FALSE') | translate }}
           </ng-container>
         </property>
       </div>

@@ -47,7 +47,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FilterSelectTextModule,
     FilterValuesModule,
     AccountCustomerSelectModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     ButtonModule,
     TableContainerModule,
     NgForTrackByPropertyModule,
@@ -59,9 +60,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     PaginationElementsModule
   ],
-  providers: [
-    AccountAdminUsersPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAdminUsersPageFacade, ComponentStore]
 })
-export class AccountAdminUsersPageModule { }
+export class AccountAdminUsersPageModule {}

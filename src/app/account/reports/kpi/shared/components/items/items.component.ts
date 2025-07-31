@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-    selector: 'reports-kpi-items',
-    templateUrl: 'items.html',
-    styleUrls: ['items.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'reports-kpi-items',
+  templateUrl: 'items.html',
+  styleUrls: ['items.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountReportsKPIItemsComponent {
   public items$: Observable<Array<Job>>;
@@ -21,9 +21,7 @@ export class AccountReportsKPIItemsComponent {
   public hasPagination$: Observable<boolean>;
   public paginationID$: Observable<string>;
 
-  constructor(
-    private facade: AccountReportsKPIPageFacade
-  ) {
+  constructor(private facade: AccountReportsKPIPageFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

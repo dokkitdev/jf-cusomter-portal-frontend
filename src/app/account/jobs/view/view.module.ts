@@ -40,7 +40,8 @@ import { SectionModule } from '@shared/section';
     RouterModule,
     TranslateModule,
     AccountJobsViewPageRoutingModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     JobModule,
     FileModule,
     LoadingSpinnerModule,
@@ -51,9 +52,6 @@ import { SectionModule } from '@shared/section';
     PropertyModule,
     SectionModule
   ],
-  providers: [
-    AccountJobsViewPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountJobsViewPageFacade, ComponentStore]
 })
-export class AccountJobsViewPageModule { }
+export class AccountJobsViewPageModule {}

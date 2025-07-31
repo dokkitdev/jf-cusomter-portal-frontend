@@ -66,30 +66,23 @@ export class AccountJobsViewPageFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateJob(job: Job): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        job
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      job
+    }))();
   }
 
   private registerInitPageEffect(): void {
     this.initPageEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.store.select(NavigationSelectors.selectRouteParam('id')),
-          this.relations$
-        ]),
+        concatLatestFrom(() => [this.store.select(NavigationSelectors.selectRouteParam('id')), this.relations$]),
         switchMap(([_, id, relations]) => {
           this.updateIsLoading(true);
 
@@ -106,23 +99,21 @@ export class AccountJobsViewPageFacade {
   }
 
   private tryToLoadData(id: number, relations: Array<JobRelationType>): Observable<Job> {
-    return this.jobService
-      .get(id, relations)
-      .pipe(
-        tapResponse(
-          (response) => {
-            this.updateJob(response);
-            this.updateIsLoading(false);
-          },
-          (response: HttpErrorResponse) => {
-            this.updateIsLoading(false);
+    return this.jobService.get(id, relations).pipe(
+      tapResponse(
+        (response) => {
+          this.updateJob(response);
+          this.updateIsLoading(false);
+        },
+        (response: HttpErrorResponse) => {
+          this.updateIsLoading(false);
 
-            if (response.status === HttpStatusCode.NotFound) {
-              this.redirectToJobsPage();
-            }
+          if (response.status === HttpStatusCode.NotFound) {
+            this.redirectToJobsPage();
           }
-        )
-      );
+        }
+      )
+    );
   }
 
   private registerDownloadAttachmentEffect(): void {
@@ -131,9 +122,7 @@ export class AccountJobsViewPageFacade {
         exhaustMap((attachment) =>
           this.jobService
             .downloadAttachment(attachment.id)
-            .pipe(
-              tap((response) => this.fileService.openInNewTab(response))
-            )
+            .pipe(tap((response) => this.fileService.openInNewTab(response)))
         )
       )
     );

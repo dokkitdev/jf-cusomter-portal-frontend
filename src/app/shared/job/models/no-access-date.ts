@@ -9,7 +9,9 @@ export class NoAccessDate {
   @Expose({ name: 'job_id', groups: [ClassGroup.MAIN] })
   public jobId: number;
 
-  @Transform(({ value }) => (value) ? DateTime.fromSQL(value) : value, { toClassOnly: true })
+  @Transform(({ value }) => (value ? DateTime.fromSQL(value) : value), {
+    toClassOnly: true
+  })
   @Expose({ groups: [ClassGroup.MAIN] })
   public date: number;
 

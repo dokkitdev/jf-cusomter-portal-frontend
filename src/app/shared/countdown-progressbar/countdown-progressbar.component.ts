@@ -11,11 +11,11 @@ import {
 import { configuration } from '@configurations';
 
 @Component({
-    selector: 'countdown-progressbar',
-    templateUrl: 'countdown-progressbar.html',
-    styleUrls: ['countdown-progressbar.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'countdown-progressbar',
+  templateUrl: 'countdown-progressbar.html',
+  styleUrls: ['countdown-progressbar.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class CountdownProgressbarComponent implements OnInit, OnDestroy {
   @Input() timerMilliseconds: number;
@@ -48,9 +48,7 @@ export class CountdownProgressbarComponent implements OnInit, OnDestroy {
     return this.radius * Math.PI * 2;
   }
 
-  constructor(
-    public changeDetector: ChangeDetectorRef
-  ) {
+  constructor(public changeDetector: ChangeDetectorRef) {
     this.countdownEnd = new EventEmitter();
     this.radius = configuration.countdownProgressbar.radius;
     this.strokeWidth = configuration.countdownProgressbar.strokeWidth;

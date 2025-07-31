@@ -7,7 +7,7 @@ import {
   markAsSubmitted,
   MarkAsSubmittedAction,
   updateGroup,
-  validate,
+  validate
 } from 'ngrx-forms';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -33,9 +33,7 @@ export class PublicForgotPasswordPageFacade {
     return this.componentStore.select((state) => state.isRecoveryEmailSent);
   }
 
-  public get formState$(): Observable<
-    FormGroupState<PublicForgotPasswordPageForm>
-  > {
+  public get formState$(): Observable<FormGroupState<PublicForgotPasswordPageForm>> {
     return this.componentStore.select((state) => state.formState);
   }
 
@@ -72,22 +70,22 @@ export class PublicForgotPasswordPageFacade {
     this.componentStore.updater((state) => ({
       ...state,
       formState: updateGroup<PublicForgotPasswordPageForm>(state.formState, {
-        email: validate(required, email),
-      }),
+        email: validate(required, email)
+      })
     }))();
   }
 
   private updateFormState(action: Actions<any>): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: formGroupReducer(state.formState, action),
+      formState: formGroupReducer(state.formState, action)
     }))();
   }
 
   private markFormStateAsSubmitted(): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: markAsSubmitted(state.formState),
+      formState: markAsSubmitted(state.formState)
     }))();
   }
 
@@ -96,7 +94,7 @@ export class PublicForgotPasswordPageFacade {
       ...state,
       formState: disable(state.formState),
       isSubmitting: true,
-      isSubmittingFailed: false,
+      isSubmittingFailed: false
     }))();
   }
 
@@ -105,7 +103,7 @@ export class PublicForgotPasswordPageFacade {
       ...state,
       formState: disable(state.formState),
       isSubmitting: false,
-      isRecoveryEmailSent: true,
+      isRecoveryEmailSent: true
     }))();
   }
 
@@ -114,22 +112,21 @@ export class PublicForgotPasswordPageFacade {
       ...state,
       formState: enable(state.formState),
       isSubmitting: false,
-      isSubmittingFailed: true,
+      isSubmittingFailed: true
     }))();
   }
 
   private registerTrySendRecoveryEmailEffect(): void {
-    this.trySendRecoveryEmailEffect$ = this.componentStore.effect(
-      (origin$: Observable<string>) =>
-        origin$.pipe(
-          withLatestFrom(this.formState$),
-          filter(([_, formState]) => formState.isValid),
-          exhaustMap(([_, formState]) => {
-            this.updateStateDueToStartRequest();
+    this.trySendRecoveryEmailEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
+      origin$.pipe(
+        withLatestFrom(this.formState$),
+        filter(([_, formState]) => formState.isValid),
+        exhaustMap(([_, formState]) => {
+          this.updateStateDueToStartRequest();
 
-            return this.trySendRecoveryEmail(formState.value.email);
-          })
-        )
+          return this.trySendRecoveryEmail(formState.value.email);
+        })
+      )
     );
   }
 

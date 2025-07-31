@@ -7,7 +7,7 @@ import {
   markAsSubmitted,
   MarkAsSubmittedAction,
   updateGroup,
-  validate,
+  validate
 } from 'ngrx-forms';
 import { PublicLoginPageForm } from './shared/forms';
 import { Injectable } from '@angular/core';
@@ -68,15 +68,15 @@ export class PublicLoginPageFacade {
     this.componentStore.updater((state) => ({
       ...state,
       formState: updateGroup<PublicLoginPageForm>(state.formState, {
-        email: validate(required, emailValidation),
-      }),
+        email: validate(required, emailValidation)
+      })
     }))();
   }
 
   private updateFormState(action: Actions<any>): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: formGroupReducer(state.formState, action),
+      formState: formGroupReducer(state.formState, action)
     }))();
   }
 
@@ -85,7 +85,7 @@ export class PublicLoginPageFacade {
       ...state,
       formState: disable(state.formState),
       isSubmitting: true,
-      isLoginFailed: false,
+      isLoginFailed: false
     }))();
   }
 
@@ -94,29 +94,28 @@ export class PublicLoginPageFacade {
       ...state,
       formState: enable(state.formState),
       isSubmitting: false,
-      isLoginFailed: true,
+      isLoginFailed: true
     }))();
   }
 
   private markFormStateAsSubmitted(): void {
     this.componentStore.updater((state) => ({
       ...state,
-      formState: markAsSubmitted(state.formState),
+      formState: markAsSubmitted(state.formState)
     }))();
   }
 
   private registerTryLoginEffect(): void {
-    this.tryLoginEffect$ = this.componentStore.effect(
-      (origin$: Observable<string>) =>
-        origin$.pipe(
-          withLatestFrom(this.formState$),
-          filter(([_, formState]) => formState.isValid),
-          exhaustMap(([_, formState]) => {
-            this.updateStateDueToStartLogin();
+    this.tryLoginEffect$ = this.componentStore.effect((origin$: Observable<string>) =>
+      origin$.pipe(
+        withLatestFrom(this.formState$),
+        filter(([_, formState]) => formState.isValid),
+        exhaustMap(([_, formState]) => {
+          this.updateStateDueToStartLogin();
 
-            return this.tryAuthorize(formState.value.email);
-          })
-        )
+          return this.tryAuthorize(formState.value.email);
+        })
+      )
     );
   }
 
@@ -125,7 +124,7 @@ export class PublicLoginPageFacade {
       tapResponse(
         () =>
           this.router.navigate(['/login-confirmation'], {
-            queryParams: { email },
+            queryParams: { email }
           }),
         () => this.updateStateDueToFailedLogin()
       )

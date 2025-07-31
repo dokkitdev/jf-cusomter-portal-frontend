@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-    selector: 'app-account-root',
-    templateUrl: 'account.html',
-    styleUrls: ['account.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'app-account-root',
+  templateUrl: 'account.html',
+  styleUrls: ['account.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
-export class AccountComponent { }
+export class AccountComponent {}

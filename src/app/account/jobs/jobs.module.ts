@@ -43,7 +43,8 @@ import { NotificationModule } from '@shared/notification';
     TranslateModule,
     AccountJobsPageRoutingModule,
     JobModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -61,9 +62,6 @@ import { NotificationModule } from '@shared/notification';
     ButtonModule,
     NotificationModule
   ],
-  providers: [
-    AccountJobsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountJobsPageFacade, ComponentStore]
 })
-export class AccountJobsPageModule { }
+export class AccountJobsPageModule {}

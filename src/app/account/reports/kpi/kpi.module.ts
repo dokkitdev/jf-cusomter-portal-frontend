@@ -41,7 +41,8 @@ import { FormTimepickerModule } from '@shared/form-timepicker';
     TranslateModule,
     AccountReportsKPIRoutingModule,
     JobModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -57,9 +58,6 @@ import { FormTimepickerModule } from '@shared/form-timepicker';
     NotificationModule,
     AccountCostCenterMultiselectModule
   ],
-  providers: [
-    AccountReportsKPIPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsKPIPageFacade, ComponentStore]
 })
-export class AccountReportsKPIModule { }
+export class AccountReportsKPIModule {}

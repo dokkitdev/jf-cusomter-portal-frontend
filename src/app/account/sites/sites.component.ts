@@ -3,18 +3,16 @@ import { Observable } from 'rxjs';
 import { AccountSitesPageFacade } from './sites.facade';
 
 @Component({
-    selector: 'account-sites-page',
-    templateUrl: 'sites.html',
-    styleUrls: ['sites.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'account-sites-page',
+  templateUrl: 'sites.html',
+  styleUrls: ['sites.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesPageComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountSitesPageFacade
-  ) {
+  constructor(private facade: AccountSitesPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

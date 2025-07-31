@@ -20,11 +20,14 @@ export class AccountCustomAssetTypeMultiselectComponentFacade {
 
   public get options$(): Observable<Array<CustomSelectOption<string>>> {
     return this.items$.pipe(
-      map((items) => items.map((item) =>
-        new CustomSelectOption({
-          id: item,
-          title: item
-        }))
+      map((items) =>
+        items.map(
+          (item) =>
+            new CustomSelectOption({
+              id: item,
+              title: item
+            })
+        )
       )
     );
   }
@@ -52,21 +55,17 @@ export class AccountCustomAssetTypeMultiselectComponentFacade {
   }
 
   private updateStateItems(items: Array<string> = []): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private registerLoadItemsEffect(): void {
@@ -75,17 +74,15 @@ export class AccountCustomAssetTypeMultiselectComponentFacade {
         switchMap(() => {
           this.updateIsLoading(true);
 
-          return this.assetService
-            .getCustomAssetTypes()
-            .pipe(
-              tapResponse(
-                (items) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(items);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.assetService.getCustomAssetTypes().pipe(
+            tapResponse(
+              (items) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(items);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );

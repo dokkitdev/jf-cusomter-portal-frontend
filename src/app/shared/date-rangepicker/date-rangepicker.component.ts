@@ -5,7 +5,8 @@ import {
   FormControlState,
   NGRX_FORM_VIEW_ADAPTER,
   NgrxDefaultViewAdapter,
-  NgrxValueConverter, SetValueAction
+  NgrxValueConverter,
+  SetValueAction
 } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { DatepickerDropdownPositionX, DatepickerDropdownPositionY } from '@angular/material/datepicker';
@@ -13,20 +14,20 @@ import { dateValueConverter } from '@shared/date-converter';
 import { DateRangepickerFacade } from './date-rangepicker.facade';
 
 @Component({
-    selector: 'date-rangepicker',
-    templateUrl: 'date-rangepicker.html',
-    styleUrls: ['date-rangepicker.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        DateRangepickerFacade,
-        ComponentStore,
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        }
-    ],
-    standalone: false
+  selector: 'date-rangepicker',
+  templateUrl: 'date-rangepicker.html',
+  styleUrls: ['date-rangepicker.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    DateRangepickerFacade,
+    ComponentStore,
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    }
+  ],
+  standalone: false
 })
 export class DateRangepickerComponent {
   @Input() startDateControlState: FormControlState<string>;
@@ -49,9 +50,7 @@ export class DateRangepickerComponent {
   public isOpened$: Observable<boolean>;
   public positionY$: Observable<DatepickerDropdownPositionY>;
 
-  constructor(
-    private facade: DateRangepickerFacade
-  ) {
+  constructor(private facade: DateRangepickerFacade) {
     this.cleared = new EventEmitter();
     this.controlStateActionTriggered = new EventEmitter<Actions<any>>();
 
@@ -73,12 +72,8 @@ export class DateRangepickerComponent {
   }
 
   public resetTriggered(): void {
-    this.controlStateActionTriggered.emit(
-      new SetValueAction(this.startDateControlState.id, undefined)
-    );
-    this.controlStateActionTriggered.emit(
-      new SetValueAction(this.endDateControlState.id, undefined)
-    );
+    this.controlStateActionTriggered.emit(new SetValueAction(this.startDateControlState.id, undefined));
+    this.controlStateActionTriggered.emit(new SetValueAction(this.endDateControlState.id, undefined));
 
     this.cleared.emit();
   }

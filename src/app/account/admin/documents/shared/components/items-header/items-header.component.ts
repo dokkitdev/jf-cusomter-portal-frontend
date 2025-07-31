@@ -5,19 +5,17 @@ import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
 import { AccountAdminDocumentsQueryParameters } from '../../models';
 
 @Component({
-    selector: 'admin-documents-items-header',
-    templateUrl: 'items-header.html',
-    styleUrls: ['items-header.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'admin-documents-items-header',
+  templateUrl: 'items-header.html',
+  styleUrls: ['items-header.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountAdminDocumentsItemsHeaderComponent {
   public parameters$: Observable<AccountAdminDocumentsQueryParameters>;
   public documentSortField: typeof DocumentSortField;
 
-  constructor(
-    private facade: AccountAdminDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountAdminDocumentsPageFacade) {
     this.parameters$ = this.facade.parameters$;
     this.documentSortField = DocumentSortField;
   }

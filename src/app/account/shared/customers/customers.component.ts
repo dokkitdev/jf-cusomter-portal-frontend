@@ -7,21 +7,21 @@ import { heightCollapseAnimation } from '@shared/animations';
 import { Actions, FormArrayState, NgrxDefaultViewAdapter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
 
 @Component({
-    selector: 'account-customers',
-    templateUrl: 'customers.html',
-    styleUrls: ['customers.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        AccountCustomersComponentFacade,
-        ComponentStore,
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        }
-    ],
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'account-customers',
+  templateUrl: 'customers.html',
+  styleUrls: ['customers.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    AccountCustomersComponentFacade,
+    ComponentStore,
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    }
+  ],
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountCustomersComponent implements OnDestroy {
   @Input()
@@ -35,9 +35,7 @@ export class AccountCustomersComponent implements OnDestroy {
   public controlState$: Observable<FormArrayState<number>>;
   public excludeCustomerID$: Observable<Array<number>>;
 
-  constructor(
-    private facade: AccountCustomersComponentFacade
-  ) {
+  constructor(private facade: AccountCustomersComponentFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.controlState$ = this.facade.controlState$;
     this.excludeCustomerID$ = this.facade.excludeCustomerID$;

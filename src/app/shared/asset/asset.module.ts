@@ -3,11 +3,7 @@ import { NgModule } from '@angular/core';
 import { AssetService } from './asset.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  providers: [
-    AssetService
-  ]
+  imports: [CommonModule],
+  providers: [AssetService]
 })
-export class AssetModule { }
+export class AssetModule {}

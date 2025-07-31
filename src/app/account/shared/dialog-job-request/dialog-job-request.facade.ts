@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  Actions,
-  disable,
-  enable,
-  formGroupReducer,
-  FormGroupState,
-  updateGroup,
-  validate
-} from 'ngrx-forms';
+import { Actions, disable, enable, formGroupReducer, FormGroupState, updateGroup, validate } from 'ngrx-forms';
 import { AccountDialogJobRequestForm } from './forms';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse, concatLatestFrom } from '@ngrx/operators';
@@ -77,75 +69,54 @@ export class AccountDialogJobRequestComponentFacade {
   }
 
   private updataSiteID(siteID: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        siteID
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      siteID
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private updateAttachments(items: Array<Media>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        attachments: items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      attachments: items
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountDialogJobRequestForm>(
-          state.formState,
-          {
-            name: validate(trimmedRequired, maxLength(50)),
-            description: validate(trimmedRequired)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountDialogJobRequestForm>(state.formState, {
+        name: validate(trimmedRequired, maxLength(50)),
+        description: validate(trimmedRequired)
       })
-    )();
+    }))();
   }
 
   private registerCreateRequestEffect(): void {
     this.createRequestEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.formState$,
-          this.attachments$,
-          this.siteID$
-        ]),
+        concatLatestFrom(() => [this.formState$, this.attachments$, this.siteID$]),
         filter(([_, formState]) => formState.isValid),
         switchMap(([_, formState, attachments, siteID]) => {
           this.updateIsSendingRequest(true);
@@ -158,30 +129,28 @@ export class AccountDialogJobRequestComponentFacade {
             files: attachments.map((item) => item.file)
           });
 
-          return this.jobService
-            .createRequest(request)
-            .pipe(
-              tapResponse(
-                () => {
-                  this.updateIsSendingRequest(false);
-                  this.toggleDisablingForm(false);
+          return this.jobService.createRequest(request).pipe(
+            tapResponse(
+              () => {
+                this.updateIsSendingRequest(false);
+                this.toggleDisablingForm(false);
 
-                  this.dialogService.close();
+                this.dialogService.close();
 
-                  this.notificationService.success(
-                    this.translateService.instant('ACCOUNT.SHARED.DIALOG_JOB_REQUEST.NOTIFICATIONS.TEXT_REQUEST_CREATED')
-                  );
-                },
-                () => {
-                  this.updateIsSendingRequest(false);
-                  this.toggleDisablingForm(false);
+                this.notificationService.success(
+                  this.translateService.instant('ACCOUNT.SHARED.DIALOG_JOB_REQUEST.NOTIFICATIONS.TEXT_REQUEST_CREATED')
+                );
+              },
+              () => {
+                this.updateIsSendingRequest(false);
+                this.toggleDisablingForm(false);
 
-                  this.notificationService.error(
-                    this.translateService.instant('ACCOUNT.SHARED.DIALOG_JOB_REQUEST.NOTIFICATIONS.TEXT_ERROR')
-                  );
-                }
-              )
-            );
+                this.notificationService.error(
+                  this.translateService.instant('ACCOUNT.SHARED.DIALOG_JOB_REQUEST.NOTIFICATIONS.TEXT_ERROR')
+                );
+              }
+            )
+          );
         })
       )
     );

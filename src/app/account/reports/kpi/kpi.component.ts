@@ -3,18 +3,16 @@ import { Observable } from 'rxjs';
 import { AccountReportsKPIPageFacade } from './kpi.facade';
 
 @Component({
-    selector: 'account-reports-kpi-page',
-    templateUrl: 'kpi.html',
-    styleUrls: ['kpi.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'account-reports-kpi-page',
+  templateUrl: 'kpi.html',
+  styleUrls: ['kpi.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountReportsKPIComponent implements OnInit, OnDestroy {
   public isExporting$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountReportsKPIPageFacade
-  ) {
+  constructor(private facade: AccountReportsKPIPageFacade) {
     this.isExporting$ = this.facade.isExporting$;
   }
 

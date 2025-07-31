@@ -4,20 +4,18 @@ import { FilterValue } from './models';
 import { Subject } from 'rxjs';
 
 @Component({
-    selector: 'filter-values',
-    templateUrl: 'filter-values.html',
-    styleUrls: ['filter-values.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'filter-values',
+  templateUrl: 'filter-values.html',
+  styleUrls: ['filter-values.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class FilterValuesComponent {
   @Input() items: Array<FilterValue>;
 
   @Output() filterRemoved: Subject<FilterValue>;
 
-  constructor(
-    private facade: FilterValuesFacade
-  ) {
+  constructor(private facade: FilterValuesFacade) {
     this.filterRemoved = this.facade.filterRemovedSubject;
   }
 }

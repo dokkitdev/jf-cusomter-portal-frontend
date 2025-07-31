@@ -69,6 +69,7 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsdoc": "^52.0.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
+    "prettier": "^3.6.2",
     "typescript": "~5.8.3"
   }
 }

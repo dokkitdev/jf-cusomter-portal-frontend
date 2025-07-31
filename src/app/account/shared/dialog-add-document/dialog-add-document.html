@@ -33,7 +33,9 @@
       }"
       (controlStateActionTriggered)="formActionTriggered($event)">
     </image-uploader>
-    <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+    <div
+      *ngrxLet="isSendingRequest$; let isSendingRequest"
+      class="dialog-edit-buttons">
       <div class="dialog-edit-button">
         <btn
           [disabled]="isSendingRequest"

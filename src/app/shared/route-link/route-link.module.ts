@@ -4,15 +4,8 @@ import { RouterModule } from '@angular/router';
 import { RouteLinkComponent } from './route-link.component';
 
 @NgModule({
-  declarations: [
-    RouteLinkComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
-  exports: [
-    RouteLinkComponent
-  ]
+  declarations: [RouteLinkComponent],
+  imports: [CommonModule, RouterModule],
+  exports: [RouteLinkComponent]
 })
-export class RouteLinkModule { }
+export class RouteLinkModule {}

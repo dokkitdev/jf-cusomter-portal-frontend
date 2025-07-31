@@ -15,10 +15,7 @@ import { NgrxFormsModule } from 'ngrx-forms';
 import { FormRadioModule } from '@shared/form-radio';
 
 @NgModule({
-  declarations: [
-    AccountReportsWarehousePageComponent,
-    AccountReportsWarehouseFormComponent
-  ],
+  declarations: [AccountReportsWarehousePageComponent, AccountReportsWarehouseFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,14 +23,12 @@ import { FormRadioModule } from '@shared/form-radio';
     AccountReportsWarehousePageRoutingModule,
     NgrxFormsModule,
     FormRadioModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule
   ],
-  providers: [
-    AccountReportsWarehousePageFacade,
-    ComponentStore
-  ]
+  providers: [AccountReportsWarehousePageFacade, ComponentStore]
 })
-export class AccountReportsWarehousePageModule { }
+export class AccountReportsWarehousePageModule {}

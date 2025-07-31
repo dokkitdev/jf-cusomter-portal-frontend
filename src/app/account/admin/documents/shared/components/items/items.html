@@ -5,12 +5,17 @@
   <div class="table">
     <admin-documents-items-header></admin-documents-items-header>
     <div class="table-content">
-      @for (item of items | paginate: {
-        id: paginationId$ | async,
-        itemsPerPage: perPage$ | async,
-        currentPage: currentPage$ | async,
-        totalItems: totalItems$ | async
-        }; track item) {
+      @for (
+        item of items
+          | paginate
+            : {
+                id: paginationId$ | async,
+                itemsPerPage: perPage$ | async,
+                currentPage: currentPage$ | async,
+                totalItems: totalItems$ | async
+              };
+        track item
+      ) {
         <div
           [@heightCollapse]
           class="table-content-row">

@@ -20,7 +20,7 @@ import { PublicLoginConfirmationRequestErrorComponent } from './shared/component
   declarations: [
     PublicLoginConfirmationPageComponent,
     PublicLoginConfirmationMessageComponent,
-    PublicLoginConfirmationRequestErrorComponent,
+    PublicLoginConfirmationRequestErrorComponent
   ],
   imports: [
     CommonModule,
@@ -29,12 +29,13 @@ import { PublicLoginConfirmationRequestErrorComponent } from './shared/component
     PublicLoginConfirmationPageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     PublicLayoutModule,
     RouteLinkModule,
     FormErrorModule,
-    ButtonModule,
+    ButtonModule
   ],
-  providers: [PublicLoginConfirmationPageFacade, ComponentStore],
+  providers: [PublicLoginConfirmationPageFacade, ComponentStore]
 })
 export class PublicLoginConfirmationPageModule {}

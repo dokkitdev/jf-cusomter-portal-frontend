@@ -16,15 +16,14 @@ import { FormGroupModule } from '@shared/form-group';
 import { AccountCustomersModule } from '../customers';
 
 @NgModule({
-  declarations: [
-    AccountDialogEditUserComponent
-  ],
+  declarations: [AccountDialogEditUserComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     FormTextModule,
     AccountCustomerSelectModule,
@@ -35,8 +34,6 @@ import { AccountCustomersModule } from '../customers';
     ButtonModule,
     FormRadioModule
   ],
-  exports: [
-    AccountDialogEditUserComponent
-  ]
+  exports: [AccountDialogEditUserComponent]
 })
-export class AccountDialogEditUserModule { }
+export class AccountDialogEditUserModule {}

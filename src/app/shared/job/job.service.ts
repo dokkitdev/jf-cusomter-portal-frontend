@@ -15,28 +15,44 @@ import { isUndefined, omitBy } from 'lodash';
 export class JobService {
   public endpoint: string;
 
-  constructor(
-    private apiService: ApiService
-  ) {
+  constructor(private apiService: ApiService) {
     this.endpoint = '/jobs';
   }
 
-  public search({ page, perPage, orderBy, desc, relations, countRelations, filters }: {
-    page?: number,
-    perPage?: number,
-    orderBy?: JobSortField,
-    desc?: boolean,
-    relations?: Array<JobRelationType>,
-    countRelations?: Array<JobCountRelationType>,
-    filters?: JobFilters
+  public search({
+    page,
+    perPage,
+    orderBy,
+    desc,
+    relations,
+    countRelations,
+    filters
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: JobSortField;
+    desc?: boolean;
+    relations?: Array<JobRelationType>;
+    countRelations?: Array<JobCountRelationType>;
+    filters?: JobFilters;
   } = {}): Observable<PaginationResponse<Job>> {
-    const request = new JobPaginationRequest({ ...filters, page, perPage, orderBy, desc, relations, countRelations });
+    const request = new JobPaginationRequest({
+      ...filters,
+      page,
+      perPage,
+      orderBy,
+      desc,
+      relations,
+      countRelations
+    });
 
     return this.apiService
       .get<PaginationResponse<Job>>(this.endpoint, omitBy(classToPlain<JobPaginationRequest>(request), isUndefined))
       .pipe(
-        map((response) => plainToClassFromExist(
-          new PaginationResponse<Job>(Job), response, { groups: [ClassGroup.MAIN] })
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<Job>(Job), response, {
+            groups: [ClassGroup.MAIN]
+          })
         )
       );
   }
@@ -44,80 +60,108 @@ export class JobService {
   public get(id: number, relations?: Array<JobRelationType>): Observable<Job> {
     return this.apiService
       .get<Job>(`${this.endpoint}/${id}`, omitBy({ with: relations }, isUndefined))
-      .pipe(
-        map((response) => plainToClass(Job, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(Job, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public getCostCenters(): Observable<Array<JobCostCenter>> {
     return this.apiService
       .get(`${this.endpoint}/cost-centers`)
-      .pipe(
-        map((response) => plainToClass(JobCostCenter, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(JobCostCenter, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public getStatuses(): Observable<Array<JobStatus>> {
     return this.apiService
       .get(`${this.endpoint}/statuses`)
-      .pipe(
-        map((response) => plainToClass(JobStatus, response, { groups: [ClassGroup.MAIN] }))
-      );
+      .pipe(map((response) => plainToClass(JobStatus, response, { groups: [ClassGroup.MAIN] })));
   }
 
   public downloadAttachment(id: number): Observable<Blob> {
     return this.apiService
-      .get<HttpResponse<Blob>>(`/job-attachments/download/${id}`, {}, {
-        responseType: 'blob',
-        observe: 'response'
-      })
-      .pipe(
-        map((response) => response.body as Blob)
-      );
+      .get<HttpResponse<Blob>>(
+        `/job-attachments/download/${id}`,
+        {},
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
   }
 
   public createRequest(request: JobRequest): Observable<void> {
-    const requestObject = classToPlain(request, { groups: [ClassGroup.CREATING] });
+    const requestObject = classToPlain(request, {
+      groups: [ClassGroup.CREATING]
+    });
     requestObject.files = request.files;
 
     return this.apiService.post(`${this.endpoint}/create-in-simpro`, requestObject);
   }
 
-  public exportCSV({ orderBy, desc, relations, countRelations, filters }: {
-    orderBy?: JobSortField,
-    desc?: boolean,
-    relations?: Array<JobRelationType>,
-    countRelations?: Array<JobCountRelationType>,
-    filters?: JobFilters
+  public exportCSV({
+    orderBy,
+    desc,
+    relations,
+    countRelations,
+    filters
+  }: {
+    orderBy?: JobSortField;
+    desc?: boolean;
+    relations?: Array<JobRelationType>;
+    countRelations?: Array<JobCountRelationType>;
+    filters?: JobFilters;
   } = {}): Observable<Blob> {
-    const request = new JobPaginationRequest({ ...filters, orderBy, desc, relations, countRelations, all: true });
+    const request = new JobPaginationRequest({
+      ...filters,
+      orderBy,
+      desc,
+      relations,
+      countRelations,
+      all: true
+    });
 
     return this.apiService
-      .get<HttpResponse<Blob>>(`${this.endpoint}/export`, omitBy(classToPlain<JobPaginationRequest>(request), isUndefined), {
-        responseType: 'blob',
-        observe: 'response'
-      })
-      .pipe(
-        map((response) => response.body as Blob)
-      );
+      .get<HttpResponse<Blob>>(
+        `${this.endpoint}/export`,
+        omitBy(classToPlain<JobPaginationRequest>(request), isUndefined),
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
   }
 
-  public exportReportCSV({ orderBy, desc, relations, countRelations, filters }: {
-    orderBy?: JobSortField,
-    desc?: boolean,
-    relations?: Array<JobRelationType>,
-    countRelations?: Array<JobCountRelationType>,
-    filters?: JobFilters
+  public exportReportCSV({
+    orderBy,
+    desc,
+    relations,
+    countRelations,
+    filters
+  }: {
+    orderBy?: JobSortField;
+    desc?: boolean;
+    relations?: Array<JobRelationType>;
+    countRelations?: Array<JobCountRelationType>;
+    filters?: JobFilters;
   } = {}): Observable<Blob> {
-    const request = new JobPaginationRequest({ ...filters, orderBy, desc, relations, countRelations, all: true });
+    const request = new JobPaginationRequest({
+      ...filters,
+      orderBy,
+      desc,
+      relations,
+      countRelations,
+      all: true
+    });
 
     return this.apiService
-      .get<HttpResponse<Blob>>(`${this.endpoint}/report/export`, omitBy(classToPlain<JobPaginationRequest>(request), isUndefined), {
-        responseType: 'blob',
-        observe: 'response'
-      })
-      .pipe(
-        map((response) => response.body as Blob)
-      );
+      .get<HttpResponse<Blob>>(
+        `${this.endpoint}/report/export`,
+        omitBy(classToPlain<JobPaginationRequest>(request), isUndefined),
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
   }
 }

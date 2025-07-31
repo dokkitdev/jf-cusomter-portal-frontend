@@ -15,10 +15,7 @@ import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ButtonModule } from '@shared/button';
 
 @NgModule({
-  declarations: [
-    AccountProfilePageComponent,
-    AccountProfileFormComponent
-  ],
+  declarations: [AccountProfilePageComponent, AccountProfileFormComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,14 +23,12 @@ import { ButtonModule } from '@shared/button';
     AccountProfilePageRoutingModule,
     NgrxFormsModule,
     FormTextModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule
   ],
-  providers: [
-    AccountProfilePageFacade,
-    ComponentStore
-  ]
+  providers: [AccountProfilePageFacade, ComponentStore]
 })
-export class AccountProfilePageModule { }
+export class AccountProfilePageModule {}

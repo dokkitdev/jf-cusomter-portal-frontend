@@ -1,7 +1,6 @@
 <public-layout
   title="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_PAGE_TITLE' | translate }}"
-  page="login-confirmation"
-  >
+  page="login-confirmation">
   <login-confirmation-message></login-confirmation-message>
 
   <form
@@ -9,68 +8,63 @@
     [ngrxFormState]="formState"
     (submit)="formSubmitted()"
     (ngrxFormsAction)="formActionTriggered($event)"
-    class="login-confirmation-form"
-    >
+    class="login-confirmation-form">
     @if (isConfirmLoginFailed$ | async) {
-      <login-confirmation-request-error
-      ></login-confirmation-request-error>
+      <login-confirmation-request-error></login-confirmation-request-error>
     }
     <form-text
       [controlState]="formState.controls.email"
       [validationMessages]="{
-      required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
-      email: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
-    }"
+        required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_REQUIRED' | translate,
+        email: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_EMAIL_IS_INVALID' | translate
+      }"
       [disabled]="true"
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_EMAIL_PLACEHOLDER' | translate }}"
       type="email"
-      autocomplete="email"
-      >
+      autocomplete="email">
     </form-text>
     <form-text
       [controlState]="formState.controls.code"
       [mask]="codeMask"
       [validationMessages]="{
-    required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_REQUIRED' | translate,
-    minLength: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_INVALID' | translate
-  }"
+        required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_REQUIRED' | translate,
+        minLength: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_CODE_IS_INVALID' | translate
+      }"
       (controlStateActionTriggered)="formActionTriggered($event)"
-      placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_CODE_PLACEHOLDER' | translate }}"
-      >
+      placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_CODE_PLACEHOLDER' | translate }}">
     </form-text>
     <form-text
       [controlState]="formState.controls.password"
       [validationMessages]="{
-      required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate
-    }"
+        required: 'PUBLIC.LOGIN_CONFIRMATION.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate
+      }"
       (controlStateActionTriggered)="formActionTriggered($event)"
       placeholder="{{ 'PUBLIC.LOGIN_CONFIRMATION.TEXT_PASSWORD_PLACEHOLDER' | translate }}"
       type="password"
-      autocomplete="current-password"
-      >
+      autocomplete="current-password">
     </form-text>
-    <btn [isBlock]="true" [isLoading]="isSubmitting$ | async" type="submit">
+    <btn
+      [isBlock]="true"
+      [isLoading]="isSubmitting$ | async"
+      type="submit">
       {{ 'PUBLIC.LOGIN_CONFIRMATION.BUTTON_SIGN_IN' | translate }}
     </btn>
   </form>
   <div class="auth-actions">
     <route-link
       route="/forgot-password"
-      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_FORGOT_PASSWORD' | translate }}"
-      >
+      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_FORGOT_PASSWORD' | translate }}">
     </route-link>
   </div>
   <div class="auth-actions">
     <route-link
       [hasIcon]="true"
       route="/login"
-      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_BACK' | translate }}"
-      >
+      title="{{ 'PUBLIC.LOGIN_CONFIRMATION.LINK_BACK' | translate }}">
       <span
         ngProjectAs="route-icon"
-        class="icon icon-arrow-left icon-mask"
-      ></span>
+        class="icon icon-arrow-left icon-mask"></span>
     </route-link>
   </div>
 </public-layout>

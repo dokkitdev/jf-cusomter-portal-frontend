@@ -6,15 +6,8 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [
-    PublicNotFoundPageComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    TranslateModule,
-    PublicNotFoundPageRoutingModule
-  ],
+  declarations: [PublicNotFoundPageComponent],
+  imports: [CommonModule, RouterModule, TranslateModule, PublicNotFoundPageRoutingModule],
   providers: []
 })
-export class PublicNotFoundPageModule { }
+export class PublicNotFoundPageModule {}

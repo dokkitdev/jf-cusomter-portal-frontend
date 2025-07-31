@@ -14,7 +14,7 @@ import { AccountSiteContactsComponentState } from './site-contacts.state';
 @Injectable()
 export class AccountSiteContactsComponentFacade {
   public get sortedItems$(): Observable<Array<Contact>> {
-    return this.componentStore.select((state) => orderBy(state.items, state.orderBy, (state.desc) ? 'desc' : 'asc'));
+    return this.componentStore.select((state) => orderBy(state.items, state.orderBy, state.desc ? 'desc' : 'asc'));
   }
 
   public get siteID$(): Observable<number | undefined> {
@@ -74,43 +74,37 @@ export class AccountSiteContactsComponentFacade {
   }
 
   private updateSiteID(id: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        siteID: id
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      siteID: id
+    }))();
   }
 
   private updateItems(items: Array<Contact>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items
+    }))();
   }
 
   private updateStateSort(parameters: AccountSiteContactsQueryParameters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        orderBy: parameters.orderBy,
-        desc: parameters.desc
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      orderBy: parameters.orderBy,
+      desc: parameters.desc
+    }))();
   }
 
   private registerOpenCreateContactDialogEffect(): void {
     this.openCreateContactDialogEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.siteID$
-        ),
-        map(([_, siteID]) => this.dialogService.open(AccountDialogEditContactComponent, {
-          autoFocus: false,
-          data: new AccountDialogEditContactData({ siteID })
-        }))
+        withLatestFrom(this.siteID$),
+        map(([_, siteID]) =>
+          this.dialogService.open(AccountDialogEditContactComponent, {
+            autoFocus: false,
+            data: new AccountDialogEditContactData({ siteID })
+          })
+        )
       )
     );
   }

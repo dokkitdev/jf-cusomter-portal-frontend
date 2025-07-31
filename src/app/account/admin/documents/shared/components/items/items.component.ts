@@ -5,12 +5,12 @@ import { AccountAdminDocumentsPageFacade } from '../../../documents.facade';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-    selector: 'admin-documents-items',
-    templateUrl: 'items.html',
-    styleUrls: ['items.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'admin-documents-items',
+  templateUrl: 'items.html',
+  styleUrls: ['items.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountAdminDocumentsItemsComponent {
   public items$: Observable<Array<Document>>;
@@ -21,9 +21,7 @@ export class AccountAdminDocumentsItemsComponent {
   public paginationId$: Observable<string>;
   public hasPagination$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountAdminDocumentsPageFacade
-  ) {
+  constructor(private facade: AccountAdminDocumentsPageFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

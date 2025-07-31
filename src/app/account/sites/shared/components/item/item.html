@@ -1,7 +1,5 @@
 <div class="table-row">
-  <div class="table-cell sites-customer">
-    {{ item.customer?.name }}
-  </div>
+  <div class="table-cell sites-customer">{{ item.customer?.name }}</div>
   <div class="table-cell sites-name">
     <a [routerLink]="['/account/sites', item.id]">{{ item.name }}</a>
   </div>

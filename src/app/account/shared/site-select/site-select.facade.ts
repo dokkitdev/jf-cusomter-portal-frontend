@@ -31,12 +31,15 @@ export class AccountSiteSelectComponentFacade {
   }
 
   public get parameters$(): Observable<SiteQueryParameters> {
-    return this.componentStore.select((state) => new SiteQueryParameters({
-      page: state.page,
-      perPage: state.perPage,
-      orderBy: state.orderBy,
-      desc: state.desc
-    }));
+    return this.componentStore.select(
+      (state) =>
+        new SiteQueryParameters({
+          page: state.page,
+          perPage: state.perPage,
+          orderBy: state.orderBy,
+          desc: state.desc
+        })
+    );
   }
 
   public get controlState$(): Observable<FormControlState<number>> {
@@ -48,21 +51,18 @@ export class AccountSiteSelectComponentFacade {
   }
 
   public get options$(): Observable<Array<CustomSelectOption<number | string, Site>>> {
-    return combineLatest([
-      this.items$,
-      this.idField$
-    ])
-    .pipe(
+    return combineLatest([this.items$, this.idField$]).pipe(
       map(([items, idField]) =>
-        items.map((item) =>
-          new CustomSelectOption<number | string>({
-            id: item[idField],
-            title: this.translateService.instant('ACCOUNT.SHARED.SITE_SELECT.TEXT_ITEM', {
-              name: item.name,
-              id: item.siteID
-            }),
-            data: item
-          })
+        items.map(
+          (item) =>
+            new CustomSelectOption<number | string>({
+              id: item[idField],
+              title: this.translateService.instant('ACCOUNT.SHARED.SITE_SELECT.TEXT_ITEM', {
+                name: item.name,
+                id: item.siteID
+              }),
+              data: item
+            })
         )
       )
     );
@@ -118,92 +118,73 @@ export class AccountSiteSelectComponentFacade {
   }
 
   private updateControlState(controlState: FormControlState<number>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        controlState
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      controlState
+    }))();
   }
 
   private updateStateNextPage(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        page: state.page + 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      page: state.page + 1
+    }))();
   }
 
   private updateStateItems(items: Array<Site> = [], totalItems: number = 0): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: unionBy(state.items, items, 'id'),
-        totalItems
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: unionBy(state.items, items, 'id'),
+      totalItems
+    }))();
   }
 
   private addItem(item: Site): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        items: unionBy(state.items, [item], 'id')
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      items: unionBy(state.items, [item], 'id')
+    }))();
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateFilters(filters: SiteFilters): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        filters,
-        items: [],
-        page: 1
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      filters,
+      items: [],
+      page: 1
+    }))();
   }
 
   private updateIDField(idField: SiteIDField): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        idField
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      idField
+    }))();
   }
 
   private registerLoadItemsByParametersEffect(): void {
     this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        concatLatestFrom(() => [
-          this.parameters$,
-          this.filters$
-        ]),
+        concatLatestFrom(() => [this.parameters$, this.filters$]),
         switchMap(([_, parameters, filters]) => {
           this.updateIsLoading(true);
 
-          return this.siteService
-            .search({ ...parameters, filters })
-            .pipe(
-              tapResponse(
-                (response) => {
-                  this.updateIsLoading(false);
-                  this.updateStateItems(response.items, response.totalItems);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.siteService.search({ ...parameters, filters }).pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsLoading(false);
+                this.updateStateItems(response.items, response.totalItems);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );
@@ -213,26 +194,21 @@ export class AccountSiteSelectComponentFacade {
     this.loadInitialItemEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
       origin$.pipe(
         concatLatestFrom(() => this.controlState$),
-        switchMap(([_, controlState]) => (controlState.value)
-          ? this.tryToLoadItem(controlState.value)
-          : EMPTY
-        )
+        switchMap(([_, controlState]) => (controlState.value ? this.tryToLoadItem(controlState.value) : EMPTY))
       )
     );
   }
 
   private tryToLoadItem(id: number): Observable<Site> {
-    return this.siteService
-      .get(id)
-      .pipe(
-        tapResponse(
-          (item) => {
-            if (item.id) {
-              this.addItem(item);
-            }
-          },
-          () =>  EMPTY
-        )
-      );
+    return this.siteService.get(id).pipe(
+      tapResponse(
+        (item) => {
+          if (item.id) {
+            this.addItem(item);
+          }
+        },
+        () => EMPTY
+      )
+    );
   }
 }

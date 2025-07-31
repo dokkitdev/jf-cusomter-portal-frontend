@@ -6,21 +6,19 @@ import { Observable } from 'rxjs';
 import { AccountProfilePageForm } from '../../forms';
 
 @Component({
-    selector: 'account-profile-form',
-    templateUrl: 'form.html',
-    styleUrls: ['form.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'account-profile-form',
+  templateUrl: 'form.html',
+  styleUrls: ['form.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountProfileFormComponent {
   public isSubmitting$: Observable<boolean>;
   public isPasswordBlockVisible$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AccountProfilePageForm>>;
 
-  constructor(
-    private facade: AccountProfilePageFacade
-  ) {
+  constructor(private facade: AccountProfilePageFacade) {
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isPasswordBlockVisible$ = this.facade.isPasswordBlockVisible$;
     this.formState$ = this.facade.formState$;

@@ -7,19 +7,17 @@ import { Observable } from 'rxjs';
 import { AccountSitesFilterForm } from '../../forms';
 
 @Component({
-    selector: 'sites-filters',
-    templateUrl: 'filters.html',
-    styleUrls: ['filters.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'sites-filters',
+  templateUrl: 'filters.html',
+  styleUrls: ['filters.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountSitesFiltersComponent {
   public filterFormState$: Observable<FormGroupState<AccountSitesFilterForm>>;
   public filterValues$: Observable<Array<FilterValue>>;
 
-  constructor(
-    private facade: AccountSitesPageFacade
-  ) {
+  constructor(private facade: AccountSitesPageFacade) {
     this.filterFormState$ = this.facade.filterFormState$;
     this.filterValues$ = this.facade.filterValues$;
   }

@@ -32,9 +32,9 @@
       <div [@heightCollapse]>
         <form-text
           [controlState]="formState.controls.oldPassword"
-        [validationMessages]="{
-          trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_CURRENT_PASSWORD_IS_REQUIRED' | translate
-        }"
+          [validationMessages]="{
+            trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_CURRENT_PASSWORD_IS_REQUIRED' | translate
+          }"
           (controlStateActionTriggered)="formActionTriggered($event)"
           type="password"
           autocomplete="current-password"
@@ -42,11 +42,11 @@
         </form-text>
         <form-text
           [controlState]="formState.controls.password"
-        [validationMessages]="{
-          trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate,
-          minLength: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_MIN_LENGTH' | translate: { min: 8 },
-          containDigit: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_MUST_CONTAIN_DIGIT' | translate
-        }"
+          [validationMessages]="{
+            trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_IS_REQUIRED' | translate,
+            minLength: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_MIN_LENGTH' | translate: { min: 8 },
+            containDigit: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_MUST_CONTAIN_DIGIT' | translate
+          }"
           (controlStateActionTriggered)="formActionTriggered($event)"
           type="password"
           autocomplete="new-password"
@@ -54,10 +54,10 @@
         </form-text>
         <form-text
           [controlState]="formState.controls.passwordConfirmation"
-        [validationMessages]="{
-          trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_CONFIRMATION_IS_REQUIRED' | translate,
-          equalTo: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_CONFIRMATION_SHOULD_MATCH' | translate
-        }"
+          [validationMessages]="{
+            trimmedRequired: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_CONFIRMATION_IS_REQUIRED' | translate,
+            equalTo: 'ACCOUNT.PROFILE.ERRORS.TEXT_PASSWORD_CONFIRMATION_SHOULD_MATCH' | translate
+          }"
           (controlStateActionTriggered)="formActionTriggered($event)"
           type="password"
           label="{{ 'ACCOUNT.PROFILE.TEXT_PASSWORD_CONFIRMATION' | translate }}">
@@ -65,7 +65,9 @@
       </div>
     }
   </ng-container>
-  <div *ngrxLet="isSubmitting$; let isSubmitting" class="page-buttons">
+  <div
+    *ngrxLet="isSubmitting$; let isSubmitting"
+    class="page-buttons">
     <btn
       [isLoading]="isSubmitting"
       [isDisabled]="formState.isPristine"

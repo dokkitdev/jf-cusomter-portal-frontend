@@ -1,9 +1,4 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
 import { Actions, FormGroupState } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { PublicLoginConfirmationPageForm } from './shared/forms';
@@ -12,16 +7,14 @@ import { Masked } from 'imask';
 import { configuration } from '@configurations';
 
 @Component({
-    selector: 'public-login-confirmation',
-    templateUrl: 'login-confirmation.html',
-    styleUrls: ['login-confirmation.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'public-login-confirmation',
+  templateUrl: 'login-confirmation.html',
+  styleUrls: ['login-confirmation.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicLoginConfirmationPageComponent implements OnInit, OnDestroy {
-  public formState$: Observable<
-    FormGroupState<PublicLoginConfirmationPageForm>
-  >;
+  public formState$: Observable<FormGroupState<PublicLoginConfirmationPageForm>>;
   public isSubmitting$: Observable<boolean>;
   public isConfirmLoginFailed$: Observable<boolean>;
   public codeMask: Masked;

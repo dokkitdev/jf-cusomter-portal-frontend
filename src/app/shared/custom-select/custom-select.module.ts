@@ -24,7 +24,8 @@ import { CustomSelectFilterComponent } from './components/filter/filter.componen
     ValidationErrorsModule,
     InfiniteScrollModule,
     LoadingSpinnerModule,
-    LetDirective, PushPipe
+    LetDirective,
+    PushPipe
   ],
   declarations: [
     CustomSelectComponent,
@@ -33,8 +34,6 @@ import { CustomSelectFilterComponent } from './components/filter/filter.componen
     CustomSelectNotFoundComponent,
     CustomSelectFilterComponent
   ],
-  exports: [
-    CustomSelectComponent
-  ]
+  exports: [CustomSelectComponent]
 })
-export class CustomSelectModule { }
+export class CustomSelectModule {}

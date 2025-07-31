@@ -12,23 +12,20 @@ import { ContactModule } from '@shared/contact';
 import { ButtonModule } from '@shared/button';
 
 @NgModule({
-  declarations: [
-    AccountDialogEditContactComponent
-  ],
+  declarations: [AccountDialogEditContactComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     FormTextModule,
     AccountCustomerSelectModule,
     ContactModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogEditContactComponent
-  ]
+  exports: [AccountDialogEditContactComponent]
 })
-export class AccountDialogEditContactModule { }
+export class AccountDialogEditContactModule {}

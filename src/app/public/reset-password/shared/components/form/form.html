@@ -4,7 +4,7 @@
   <ng-container *ngrxLet="isNewUser$; let isNewUser">
     @if (isInvalidToken$ | async) {
       <div class="reset-message">
-        {{ 'PUBLIC.RESET_PASSWORD.TEXT_' + ((isNewUser) ? 'ADD' : 'RESET') + '_INCORRECT_TOKEN_MESSAGE' | translate }}
+        {{ 'PUBLIC.RESET_PASSWORD.TEXT_' + (isNewUser ? 'ADD' : 'RESET') + '_INCORRECT_TOKEN_MESSAGE' | translate }}
       </div>
     } @else {
       <form
@@ -42,7 +42,7 @@
           [isLoading]="isSubmitting$ | async"
           [isBlock]="true"
           type="submit">
-          {{ 'PUBLIC.RESET_PASSWORD.BUTTON_' + ((isNewUser) ? 'ADD' : 'RESET') | translate }}
+          {{ 'PUBLIC.RESET_PASSWORD.BUTTON_' + (isNewUser ? 'ADD' : 'RESET') | translate }}
         </btn>
       </form>
     }

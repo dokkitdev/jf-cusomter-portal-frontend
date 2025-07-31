@@ -11,10 +11,7 @@ import { UserService } from './user.service';
       userService: UserService
     })
   ],
-  providers: [
-    UserService,
-    IsAdminGuard
-  ]
+  providers: [UserService, IsAdminGuard]
 })
 export class UserModule {
   constructor(@Optional() @SkipSelf() parentModule: UserModule) {

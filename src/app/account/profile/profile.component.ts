@@ -3,18 +3,16 @@ import { Observable } from 'rxjs';
 import { AccountProfilePageFacade } from './profile.facade';
 
 @Component({
-    selector: 'account-profile-page',
-    templateUrl: 'profile.html',
-    styleUrls: ['profile.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'account-profile-page',
+  templateUrl: 'profile.html',
+  styleUrls: ['profile.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class AccountProfilePageComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
 
-  constructor(
-    private facade: AccountProfilePageFacade
-  ) {
+  constructor(private facade: AccountProfilePageFacade) {
     this.isLoading$ = this.facade.isLoading$;
   }
 

@@ -5,13 +5,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse, concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  Asset,
-  AssetFilters,
-  AssetRelationType,
-  AssetService,
-  AssetSortField,
-} from '@shared/asset';
+import { Asset, AssetFilters, AssetRelationType, AssetService, AssetSortField } from '@shared/asset';
 import { Customer } from '@shared/customer';
 import { FileService } from '@shared/file';
 import { FilterValue } from '@shared/filter-values';
@@ -32,7 +26,7 @@ import {
   setValue,
   SetValueAction,
   unbox,
-  updateGroup,
+  updateGroup
 } from 'ngrx-forms';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -95,7 +89,7 @@ export class AccountAssetsPageFacade {
       lastTestDateFrom: state.filterFormState.value.lastTestDateFrom,
       lastTestDateTo: state.filterFormState.value.lastTestDateTo,
       nextServiceDateFrom: state.filterFormState.value.nextServiceDateFrom,
-      nextServiceDateTo: state.filterFormState.value.nextServiceDateTo,
+      nextServiceDateTo: state.filterFormState.value.nextServiceDateTo
     }));
   }
 
@@ -103,9 +97,7 @@ export class AccountAssetsPageFacade {
     return this.componentStore.select((state) => state.relations);
   }
 
-  public get filterFormState$(): Observable<
-    FormGroupState<AccountAssetsFilterForm>
-  > {
+  public get filterFormState$(): Observable<FormGroupState<AccountAssetsFilterForm>> {
     return this.componentStore.select((state) => state.filterFormState);
   }
 
@@ -119,12 +111,9 @@ export class AccountAssetsPageFacade {
         (filterFormStateValue) =>
           new AssetFilters({
             assetID: filterFormStateValue.assetID || undefined,
-            simproCustomerID:
-              filterFormStateValue.simproCustomerID || undefined,
+            simproCustomerID: filterFormStateValue.simproCustomerID || undefined,
             siteID: filterFormStateValue.siteID || undefined,
-            names: unbox(filterFormStateValue.names).length
-              ? unbox(filterFormStateValue.names)
-              : undefined,
+            names: unbox(filterFormStateValue.names).length ? unbox(filterFormStateValue.names) : undefined,
             siteUprn: filterFormStateValue.siteUprn || undefined,
             siteName: filterFormStateValue.siteName || undefined,
             location: filterFormStateValue.location || undefined,
@@ -132,17 +121,13 @@ export class AccountAssetsPageFacade {
             model: filterFormStateValue.model || undefined,
             archived: filterFormStateValue.archived,
             lastTestResult: filterFormStateValue.lastTestResult || undefined,
-            serviceLevelNames: unbox(filterFormStateValue.serviceLevelNames)
-              .length
+            serviceLevelNames: unbox(filterFormStateValue.serviceLevelNames).length
               ? unbox(filterFormStateValue.serviceLevelNames)
               : undefined,
-            lastTestDateFrom:
-              filterFormStateValue.lastTestDateFrom || undefined,
+            lastTestDateFrom: filterFormStateValue.lastTestDateFrom || undefined,
             lastTestDateTo: filterFormStateValue.lastTestDateTo || undefined,
-            nextServiceDateFrom:
-              filterFormStateValue.nextServiceDateFrom || undefined,
-            nextServiceDateTo:
-              filterFormStateValue.nextServiceDateTo || undefined,
+            nextServiceDateFrom: filterFormStateValue.nextServiceDateFrom || undefined,
+            nextServiceDateTo: filterFormStateValue.nextServiceDateTo || undefined
           })
       )
     );
@@ -163,7 +148,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.simproCustomerID.id,
-            value: state.selectedCustomer.name,
+            value: state.selectedCustomer.name
           })
         );
       }
@@ -174,9 +159,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(this.createFilterValue(formState.controls.siteName));
       }
       unbox(formState.value.names).forEach((value) =>
-        filterValues.push(
-          new FilterValue({ id: formState.controls.names.id, value })
-        )
+        filterValues.push(new FilterValue({ id: formState.controls.names.id, value }))
       );
       if (formState.value.location) {
         filterValues.push(this.createFilterValue(formState.controls.location));
@@ -192,22 +175,19 @@ export class AccountAssetsPageFacade {
           new FilterValue({
             id: formState.controls.archived.id,
             value: this.translateService.instant(
-              'ACCOUNT.ASSETS.FILTERS.TEXT_ARCHIVED_' +
-                (formState.value.archived ? 'YES' : 'NO')
-            ),
+              'ACCOUNT.ASSETS.FILTERS.TEXT_ARCHIVED_' + (formState.value.archived ? 'YES' : 'NO')
+            )
           })
         );
       }
       if (formState.value.lastTestResult) {
-        filterValues.push(
-          this.createFilterValue(formState.controls.lastTestResult)
-        );
+        filterValues.push(this.createFilterValue(formState.controls.lastTestResult));
       }
       unbox(formState.value.serviceLevelNames).forEach((value) =>
         filterValues.push(
           new FilterValue({
             id: formState.controls.serviceLevelNames.id,
-            value,
+            value
           })
         )
       );
@@ -215,9 +195,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.lastTestDateFrom.id,
-            value: DateTime.fromISO(formState.value.lastTestDateFrom).toFormat(
-              configuration.dateFormats.filterDate
-            ),
+            value: DateTime.fromISO(formState.value.lastTestDateFrom).toFormat(configuration.dateFormats.filterDate)
           })
         );
       }
@@ -225,9 +203,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.lastTestDateTo.id,
-            value: DateTime.fromISO(formState.value.lastTestDateTo).toFormat(
-              configuration.dateFormats.filterDate
-            ),
+            value: DateTime.fromISO(formState.value.lastTestDateTo).toFormat(configuration.dateFormats.filterDate)
           })
         );
       }
@@ -235,9 +211,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.nextServiceDateFrom.id,
-            value: DateTime.fromISO(
-              formState.value.nextServiceDateFrom
-            ).toFormat(configuration.dateFormats.filterDate),
+            value: DateTime.fromISO(formState.value.nextServiceDateFrom).toFormat(configuration.dateFormats.filterDate)
           })
         );
       }
@@ -245,9 +219,7 @@ export class AccountAssetsPageFacade {
         filterValues.push(
           new FilterValue({
             id: formState.controls.nextServiceDateTo.id,
-            value: DateTime.fromISO(formState.value.nextServiceDateTo).toFormat(
-              configuration.dateFormats.filterDate
-            ),
+            value: DateTime.fromISO(formState.value.nextServiceDateTo).toFormat(configuration.dateFormats.filterDate)
           })
         );
       }
@@ -322,53 +294,43 @@ export class AccountAssetsPageFacade {
   }
 
   public getStartLastTestDateFilter$(): Observable<(date: Date) => boolean> {
-    return this.filterFormState$.pipe(
-      map((formState) => getStartDateFilter(formState.value.lastTestDateTo))
-    );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.lastTestDateTo)));
   }
 
   public getEndLastTestDateFilter$(): Observable<(date: Date) => boolean> {
-    return this.filterFormState$.pipe(
-      map((formState) => getEndDateFilter(formState.value.lastTestDateFrom))
-    );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.lastTestDateFrom)));
   }
 
   public getStartNextServiceDateFilter$(): Observable<(date: Date) => boolean> {
-    return this.filterFormState$.pipe(
-      map((formState) => getStartDateFilter(formState.value.nextServiceDateTo))
-    );
+    return this.filterFormState$.pipe(map((formState) => getStartDateFilter(formState.value.nextServiceDateTo)));
   }
 
   public getEndNextServiceDateFilter$(): Observable<(date: Date) => boolean> {
-    return this.filterFormState$.pipe(
-      map((formState) => getEndDateFilter(formState.value.nextServiceDateFrom))
-    );
+    return this.filterFormState$.pipe(map((formState) => getEndDateFilter(formState.value.nextServiceDateFrom)));
   }
 
-  private createFilterValue(
-    control: FormControlState<string | number | undefined>
-  ): FilterValue {
+  private createFilterValue(control: FormControlState<string | number | undefined>): FilterValue {
     return new FilterValue({ id: control.id, value: control.value });
   }
 
   private updateFormState(action: Actions<any>): void {
     this.componentStore.updater((state) => ({
       ...state,
-      filterFormState: formGroupReducer(state.filterFormState, action),
+      filterFormState: formGroupReducer(state.filterFormState, action)
     }))();
   }
 
   private updateIsLoading(value: boolean): void {
     this.componentStore.updater((state) => ({
       ...state,
-      isLoading: value,
+      isLoading: value
     }))();
   }
 
   private updateIsExporting(value: boolean): void {
     this.componentStore.updater((state) => ({
       ...state,
-      isExporting: value,
+      isExporting: value
     }))();
   }
 
@@ -376,14 +338,14 @@ export class AccountAssetsPageFacade {
     this.componentStore.updater((state) => ({
       ...state,
       items: response.items,
-      totalItems: response.totalItems,
+      totalItems: response.totalItems
     }))();
   }
 
   private updateSelectedCustomer(customer: Customer): void {
     this.componentStore.updater((state) => ({
       ...state,
-      selectedCustomer: customer,
+      selectedCustomer: customer
     }))();
   }
 
@@ -392,7 +354,7 @@ export class AccountAssetsPageFacade {
       ...state,
       page: 1,
       items: [],
-      totalItems: 0,
+      totalItems: 0
     }))();
   }
 
@@ -400,7 +362,7 @@ export class AccountAssetsPageFacade {
     this.componentStore.updater((state) => ({
       ...state,
       page: pageNumber,
-      items: [],
+      items: []
     }))();
   }
 
@@ -411,210 +373,142 @@ export class AccountAssetsPageFacade {
       desc: parameters.desc,
       page: 1,
       items: [],
-      totalItems: 0,
+      totalItems: 0
     }))();
   }
 
-  private updateQueryParameters(
-    parameters: AccountAssetsQueryParameters
-  ): void {
+  private updateQueryParameters(parameters: AccountAssetsQueryParameters): void {
     this.componentStore.updater((state) => ({
       ...state,
       orderBy: parameters.orderBy || state.orderBy,
       desc: parameters.desc !== undefined ? parameters.desc : state.desc,
       page: parameters.page || state.page,
-      filterFormState: updateGroup<AccountAssetsFilterForm>(
-        state.filterFormState,
-        {
-          assetID: setValue(
-            parameters.assetID || state.filterFormState.value.assetID
-          ),
-          simproCustomerID: setValue(
-            parameters.simproCustomerID ||
-              state.filterFormState.value.simproCustomerID
-          ),
-          siteID: setValue(
-            parameters.siteID || state.filterFormState.value.siteID
-          ),
-          siteUprn: setValue(
-            parameters.siteUprn || state.filterFormState.value.siteUprn
-          ),
-          siteName: setValue(
-            parameters.siteName || state.filterFormState.value.siteName
-          ),
-          names: setValue(
-            parameters.names
-              ? box(parameters.names)
-              : state.filterFormState.value.names
-          ),
-          location: setValue(
-            parameters.location || state.filterFormState.value.location
-          ),
-          make: setValue(parameters.make || state.filterFormState.value.make),
-          model: setValue(
-            parameters.model || state.filterFormState.value.model
-          ),
-          archived: setValue(
-            parameters.archived !== undefined
-              ? parameters.archived
-              : state.filterFormState.value.archived
-          ),
-          lastTestResult: setValue(
-            parameters.lastTestResult ||
-              state.filterFormState.value.lastTestResult
-          ),
-          serviceLevelNames: setValue(
-            parameters.serviceLevelNames
-              ? box(parameters.serviceLevelNames)
-              : state.filterFormState.value.serviceLevelNames
-          ),
-          lastTestDateFrom: setValue(
-            parameters.lastTestDateFrom ||
-              state.filterFormState.value.lastTestDateFrom
-          ),
-          lastTestDateTo: setValue(
-            parameters.lastTestDateTo ||
-              state.filterFormState.value.lastTestDateTo
-          ),
-          nextServiceDateFrom: setValue(
-            parameters.nextServiceDateFrom ||
-              state.filterFormState.value.nextServiceDateFrom
-          ),
-          nextServiceDateTo: setValue(
-            parameters.nextServiceDateTo ||
-              state.filterFormState.value.nextServiceDateTo
-          ),
-        }
-      ),
+      filterFormState: updateGroup<AccountAssetsFilterForm>(state.filterFormState, {
+        assetID: setValue(parameters.assetID || state.filterFormState.value.assetID),
+        simproCustomerID: setValue(parameters.simproCustomerID || state.filterFormState.value.simproCustomerID),
+        siteID: setValue(parameters.siteID || state.filterFormState.value.siteID),
+        siteUprn: setValue(parameters.siteUprn || state.filterFormState.value.siteUprn),
+        siteName: setValue(parameters.siteName || state.filterFormState.value.siteName),
+        names: setValue(parameters.names ? box(parameters.names) : state.filterFormState.value.names),
+        location: setValue(parameters.location || state.filterFormState.value.location),
+        make: setValue(parameters.make || state.filterFormState.value.make),
+        model: setValue(parameters.model || state.filterFormState.value.model),
+        archived: setValue(
+          parameters.archived !== undefined ? parameters.archived : state.filterFormState.value.archived
+        ),
+        lastTestResult: setValue(parameters.lastTestResult || state.filterFormState.value.lastTestResult),
+        serviceLevelNames: setValue(
+          parameters.serviceLevelNames
+            ? box(parameters.serviceLevelNames)
+            : state.filterFormState.value.serviceLevelNames
+        ),
+        lastTestDateFrom: setValue(parameters.lastTestDateFrom || state.filterFormState.value.lastTestDateFrom),
+        lastTestDateTo: setValue(parameters.lastTestDateTo || state.filterFormState.value.lastTestDateTo),
+        nextServiceDateFrom: setValue(
+          parameters.nextServiceDateFrom || state.filterFormState.value.nextServiceDateFrom
+        ),
+        nextServiceDateTo: setValue(parameters.nextServiceDateTo || state.filterFormState.value.nextServiceDateTo)
+      })
     }))();
   }
 
   private registerLoadItemsEffect(): void {
-    this.loadItemsEffect$ = this.componentStore.effect(
-      (origin$: Observable<void>) =>
-        origin$.pipe(
-          concatLatestFrom(() =>
-            this.store.select(NavigationSelectors.selectQueryParams)
-          ),
-          tap(([_, queryParams]) => {
-            this.updateIsLoading(true);
+    this.loadItemsEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => this.store.select(NavigationSelectors.selectQueryParams)),
+        tap(([_, queryParams]) => {
+          this.updateIsLoading(true);
 
-            const parameters = new AccountAssetsQueryParameters({
-              page: queryParams.page
-                ? parseInt(queryParams.page, 10)
-                : undefined,
-              orderBy: queryParams.orderBy || undefined,
-              desc:
-                queryParams.desc !== undefined
-                  ? queryParams.desc === 'true'
-                  : undefined,
-              assetID: queryParams.assetID
-                ? parseInt(queryParams.assetID, 10)
-                : undefined,
-              simproCustomerID: queryParams.simproCustomerID
-                ? parseInt(queryParams.simproCustomerID, 10)
-                : undefined,
-              siteID: queryParams.siteID
-                ? parseInt(queryParams.siteID, 10)
-                : undefined,
-              siteUprn: queryParams.siteUprn || undefined,
-              siteName: queryParams.siteName || undefined,
-              names: queryParams.names
-                ? castArray(queryParams.names)
-                : undefined,
-              location: queryParams.location || undefined,
-              make: queryParams.make || undefined,
-              model: queryParams.model || undefined,
-              archived:
-                queryParams.hasOpenJobs !== undefined
-                  ? queryParams.archived === 'true'
-                  : undefined,
-              lastTestResult: queryParams.lastTestResult || undefined,
-              serviceLevelNames: queryParams.serviceLevelNames
-                ? castArray(queryParams.serviceLevelNames)
-                : undefined,
-              lastTestDateFrom: queryParams.lastTestDateFrom || undefined,
-              lastTestDateTo: queryParams.lastTestDateTo || undefined,
-              nextServiceDateFrom: queryParams.nextServiceDateFrom || undefined,
-              nextServiceDateTo: queryParams.nextServiceDateTo || undefined,
-            });
+          const parameters = new AccountAssetsQueryParameters({
+            page: queryParams.page ? parseInt(queryParams.page, 10) : undefined,
+            orderBy: queryParams.orderBy || undefined,
+            desc: queryParams.desc !== undefined ? queryParams.desc === 'true' : undefined,
+            assetID: queryParams.assetID ? parseInt(queryParams.assetID, 10) : undefined,
+            simproCustomerID: queryParams.simproCustomerID ? parseInt(queryParams.simproCustomerID, 10) : undefined,
+            siteID: queryParams.siteID ? parseInt(queryParams.siteID, 10) : undefined,
+            siteUprn: queryParams.siteUprn || undefined,
+            siteName: queryParams.siteName || undefined,
+            names: queryParams.names ? castArray(queryParams.names) : undefined,
+            location: queryParams.location || undefined,
+            make: queryParams.make || undefined,
+            model: queryParams.model || undefined,
+            archived: queryParams.hasOpenJobs !== undefined ? queryParams.archived === 'true' : undefined,
+            lastTestResult: queryParams.lastTestResult || undefined,
+            serviceLevelNames: queryParams.serviceLevelNames ? castArray(queryParams.serviceLevelNames) : undefined,
+            lastTestDateFrom: queryParams.lastTestDateFrom || undefined,
+            lastTestDateTo: queryParams.lastTestDateTo || undefined,
+            nextServiceDateFrom: queryParams.nextServiceDateFrom || undefined,
+            nextServiceDateTo: queryParams.nextServiceDateTo || undefined
+          });
 
-            this.updateQueryParameters(parameters);
+          this.updateQueryParameters(parameters);
 
-            return parameters.page > 1
-              ? this.loadItemsByPage(parameters.page)
-              : this.loadItemsByParameters();
-          })
-        )
+          return parameters.page > 1 ? this.loadItemsByPage(parameters.page) : this.loadItemsByParameters();
+        })
+      )
     );
   }
 
   private registerLoadItemsByPageEffect(): void {
-    this.loadItemsByPageEffect$ = this.componentStore.effect(
-      (origin$: Observable<number>) =>
-        origin$.pipe(
-          tap((page) => {
-            this.updatePage(page);
+    this.loadItemsByPageEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        tap((page) => {
+          this.updatePage(page);
 
-            this.loadItemsByParameters();
-          })
-        )
+          this.loadItemsByParameters();
+        })
+      )
     );
   }
 
   private registerLoadItemsByParametersEffect(): void {
-    this.loadItemsByParametersEffect$ = this.componentStore.effect(
-      (origin$: Observable<number>) =>
-        origin$.pipe(
-          concatLatestFrom(() => [
-            this.parameters$,
-            this.relations$,
-            this.filters$,
-          ]),
-          switchMap(([targetPage, parameters, relations, filters]) => {
-            const page = targetPage || parameters.page;
-            const perPage = parameters.perPage;
-            const orderBy = parameters.orderBy;
-            const desc = parameters.desc;
+    this.loadItemsByParametersEffect$ = this.componentStore.effect((origin$: Observable<number>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [this.parameters$, this.relations$, this.filters$]),
+        switchMap(([targetPage, parameters, relations, filters]) => {
+          const page = targetPage || parameters.page;
+          const perPage = parameters.perPage;
+          const orderBy = parameters.orderBy;
+          const desc = parameters.desc;
 
-            this.store.dispatch(
-              NavigationActions.mergeQueryParams({
-                queryParams: {
-                  page,
-                  orderBy,
-                  desc,
-                  assetID: filters.assetID,
-                  simproCustomerID: filters.simproCustomerID,
-                  siteID: filters.siteID,
-                  siteUprn: filters.siteUprn,
-                  siteName: filters.siteName,
-                  names: filters.names,
-                  location: filters.location,
-                  make: filters.make,
-                  model: filters.model,
-                  archived: filters.archived,
-                  lastTestResult: filters.lastTestResult,
-                  serviceLevelNames: filters.serviceLevelNames,
-                  lastTestDateFrom: filters.lastTestDateFrom,
-                  lastTestDateTo: filters.lastTestDateTo,
-                  nextServiceDateFrom: filters.nextServiceDateFrom,
-                  nextServiceDateTo: filters.nextServiceDateTo,
-                },
-              })
-            );
+          this.store.dispatch(
+            NavigationActions.mergeQueryParams({
+              queryParams: {
+                page,
+                orderBy,
+                desc,
+                assetID: filters.assetID,
+                simproCustomerID: filters.simproCustomerID,
+                siteID: filters.siteID,
+                siteUprn: filters.siteUprn,
+                siteName: filters.siteName,
+                names: filters.names,
+                location: filters.location,
+                make: filters.make,
+                model: filters.model,
+                archived: filters.archived,
+                lastTestResult: filters.lastTestResult,
+                serviceLevelNames: filters.serviceLevelNames,
+                lastTestDateFrom: filters.lastTestDateFrom,
+                lastTestDateTo: filters.lastTestDateTo,
+                nextServiceDateFrom: filters.nextServiceDateFrom,
+                nextServiceDateTo: filters.nextServiceDateTo
+              }
+            })
+          );
 
-            this.updateIsLoading(true);
+          this.updateIsLoading(true);
 
-            return this.tryLoadItemsByParameters({
-              page,
-              perPage,
-              orderBy,
-              desc,
-              relations,
-              filters,
-            });
-          })
-        )
+          return this.tryLoadItemsByParameters({
+            page,
+            perPage,
+            orderBy,
+            desc,
+            relations,
+            filters
+          });
+        })
+      )
     );
   }
 
@@ -624,7 +518,7 @@ export class AccountAssetsPageFacade {
     orderBy,
     desc,
     relations,
-    filters,
+    filters
   }: {
     page: number;
     perPage: number;
@@ -640,7 +534,7 @@ export class AccountAssetsPageFacade {
         orderBy,
         desc,
         relations,
-        filters,
+        filters
       })
       .pipe(
         tapResponse(
@@ -654,71 +548,51 @@ export class AccountAssetsPageFacade {
   }
 
   private registerExportCSVEffect(): void {
-    this.exportCSVEffect$ = this.componentStore.effect(
-      (origin$: Observable<void>) =>
-        origin$.pipe(
-          concatLatestFrom(() => [
-            this.parameters$,
-            this.filters$,
-            this.relations$,
-          ]),
-          switchMap(([_, parameters, filters, relations]) => {
-            this.updateIsExporting(true);
+    this.exportCSVEffect$ = this.componentStore.effect((origin$: Observable<void>) =>
+      origin$.pipe(
+        concatLatestFrom(() => [this.parameters$, this.filters$, this.relations$]),
+        switchMap(([_, parameters, filters, relations]) => {
+          this.updateIsExporting(true);
 
-            return this.assetService
-              .exportCSV({ ...parameters, filters, relations })
-              .pipe(
-                tapResponse(
-                  (response) => {
-                    this.updateIsExporting(false);
-                    this.fileService.saveFile(
-                      response,
-                      configuration.exportCSV.assets
-                    );
-                  },
-                  (response: HttpErrorResponse) => {
-                    this.updateIsExporting(false);
+          return this.assetService.exportCSV({ ...parameters, filters, relations }).pipe(
+            tapResponse(
+              (response) => {
+                this.updateIsExporting(false);
+                this.fileService.saveFile(response, configuration.exportCSV.assets);
+              },
+              (response: HttpErrorResponse) => {
+                this.updateIsExporting(false);
 
-                    const errorTranslationKey =
-                      response.status === HttpStatusCode.BadGateway ||
-                      response.status === 0
-                        ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
-                        : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
+                const errorTranslationKey =
+                  response.status === HttpStatusCode.BadGateway || response.status === 0
+                    ? 'SHARED.NOTIFICATIONS.TEXT_CSV_EXPORT_ERROR'
+                    : 'SHARED.NOTIFICATIONS.TEXT_ERROR';
 
-                    this.notificationService.error(
-                      this.translateService.instant(errorTranslationKey)
-                    );
-                  }
-                )
-              );
-          })
-        )
+                this.notificationService.error(this.translateService.instant(errorTranslationKey));
+              }
+            )
+          );
+        })
+      )
     );
   }
 
   private registerRemoveFilterEffect(): void {
-    this.removeFilterEffect$ = this.componentStore.effect(
-      (origin$: Observable<FilterValue>) =>
-        origin$.pipe(
-          concatLatestFrom(() => this.filterFormState$),
-          tap(([filter, formState]) => {
-            const controlName = filter.id.split(
-              '.'
-            )[1] as keyof AccountAssetsFilterForm;
+    this.removeFilterEffect$ = this.componentStore.effect((origin$: Observable<FilterValue>) =>
+      origin$.pipe(
+        concatLatestFrom(() => this.filterFormState$),
+        tap(([filter, formState]) => {
+          const controlName = filter.id.split('.')[1] as keyof AccountAssetsFilterForm;
 
-            let filterValue;
-            if (isBoxed(formState.controls[controlName].value)) {
-              const value = unbox(
-                formState.controls[controlName].value
-              ) as Array<string>;
-              filterValue = box(without(value, filter.value?.toString()));
-            }
+          let filterValue;
+          if (isBoxed(formState.controls[controlName].value)) {
+            const value = unbox(formState.controls[controlName].value) as Array<string>;
+            filterValue = box(without(value, filter.value?.toString()));
+          }
 
-            this.handleFormStateAction(
-              new SetValueAction(filter.id, filterValue)
-            );
-          })
-        )
+          this.handleFormStateAction(new SetValueAction(filter.id, filterValue));
+        })
+      )
     );
   }
 }

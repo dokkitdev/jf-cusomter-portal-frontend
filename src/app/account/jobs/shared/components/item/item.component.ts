@@ -8,16 +8,13 @@ import { Observable } from 'rxjs';
 import { AccountJobsItemComponentFacade } from './item.facade';
 
 @Component({
-    selector: 'jobs-item',
-    templateUrl: 'item.html',
-    styleUrls: ['item.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    providers: [
-        AccountJobsItemComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'jobs-item',
+  templateUrl: 'item.html',
+  styleUrls: ['item.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  providers: [AccountJobsItemComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountJobsItemComponent {
   @Input() item: Job;

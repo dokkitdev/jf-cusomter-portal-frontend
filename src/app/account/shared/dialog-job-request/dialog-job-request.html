@@ -14,18 +14,18 @@
       class="form">
       <form-text
         [controlState]="formState.controls.name"
-      [validationMessages]="{
-        trimmedRequired: translations + 'ERRORS.TEXT_NAME_IS_REQUIRED' | translate,
-        maxLength: translations + 'ERRORS.TEXT_NAME_MAX_LENGTH' | translate
-      }"
+        [validationMessages]="{
+          trimmedRequired: translations + 'ERRORS.TEXT_NAME_IS_REQUIRED' | translate,
+          maxLength: translations + 'ERRORS.TEXT_NAME_MAX_LENGTH' | translate
+        }"
         (controlStateActionTriggered)="formActionTriggered($event)"
         label="{{ translations + 'TEXT_NAME' | translate }}">
       </form-text>
       <form-textarea
         [controlState]="formState.controls.description"
-      [validationMessages]="{
-        trimmedRequired: translations + 'ERRORS.TEXT_DESCRIPTION_IS_REQUIRED' | translate
-      }"
+        [validationMessages]="{
+          trimmedRequired: translations + 'ERRORS.TEXT_DESCRIPTION_IS_REQUIRED' | translate
+        }"
         (controlStateActionTriggered)="formActionTriggered($event)"
         label="{{ translations + 'TEXT_DESCRIPTION' | translate }}">
       </form-textarea>
@@ -34,7 +34,9 @@
         [isDisabled]="formState.isDisabled"
         (itemsChanged)="attachmentsChanged($event)">
       </media-multiselect>
-      <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="dialog-edit-buttons">
+      <div
+        *ngrxLet="isSendingRequest$; let isSendingRequest"
+        class="dialog-edit-buttons">
         <div class="dialog-edit-button">
           <btn
             [isDisabled]="isSendingRequest"

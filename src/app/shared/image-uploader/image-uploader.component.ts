@@ -20,20 +20,20 @@ import { ValidationMessages } from '@shared/validation-errors';
 import { FileSizeConfigs } from '@shared/file-size';
 
 @Component({
-    selector: 'image-uploader',
-    templateUrl: 'image-uploader.html',
-    styleUrls: ['image-uploader.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        ImageUploaderFacade,
-        ComponentStore,
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        }
-    ],
-    standalone: false
+  selector: 'image-uploader',
+  templateUrl: 'image-uploader.html',
+  styleUrls: ['image-uploader.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    ImageUploaderFacade,
+    ComponentStore,
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    }
+  ],
+  standalone: false
 })
 export class ImageUploaderComponent implements OnInit, OnDestroy {
   @Input() controlState: FormControlState<number>;
@@ -60,9 +60,7 @@ export class ImageUploaderComponent implements OnInit, OnDestroy {
   public spinnerDiameter: typeof SpinnerDiameter;
   public fileSizeConfigs: FileSizeConfigs;
 
-  constructor(
-    private facade: ImageUploaderFacade
-  ) {
+  constructor(private facade: ImageUploaderFacade) {
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
     this.startUploading = this.facade.startUploading;
     this.endUploading = this.facade.endUploading;

@@ -13,15 +13,14 @@ import { FormTextareaModule } from '@shared/form-textarea';
 import { ImageUploaderModule } from '@shared/image-uploader';
 
 @NgModule({
-  declarations: [
-    AccountDialogAddDocumentComponent
-  ],
+  declarations: [AccountDialogAddDocumentComponent],
   imports: [
     CommonModule,
     NgrxFormsModule,
     TranslateModule,
     MatDialogModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     LoadingSpinnerModule,
     DocumentModule,
     FormTextModule,
@@ -29,8 +28,6 @@ import { ImageUploaderModule } from '@shared/image-uploader';
     ImageUploaderModule,
     ButtonModule
   ],
-  exports: [
-    AccountDialogAddDocumentComponent
-  ]
+  exports: [AccountDialogAddDocumentComponent]
 })
-export class AccountDialogAddDocumentModule { }
+export class AccountDialogAddDocumentModule {}

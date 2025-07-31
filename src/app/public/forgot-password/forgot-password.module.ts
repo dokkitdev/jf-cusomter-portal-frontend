@@ -29,7 +29,8 @@ import { ButtonModule } from '@shared/button';
     RouterModule,
     TranslateModule,
     NgrxFormsModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     PublicForgotPasswordPageRoutingModule,
     FormTextModule,
     PublicLayoutModule,
@@ -37,9 +38,6 @@ import { ButtonModule } from '@shared/button';
     FormErrorModule,
     ButtonModule
   ],
-  providers: [
-    PublicForgotPasswordPageFacade,
-    ComponentStore
-  ]
+  providers: [PublicForgotPasswordPageFacade, ComponentStore]
 })
-export class PublicForgotPasswordPageModule { }
+export class PublicForgotPasswordPageModule {}

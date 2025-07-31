@@ -26,24 +26,17 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
+              "includePaths": ["src/styles"]
             },
             "scripts": [],
-            "allowedCommonJsDependencies": [
-              "lodash"
-            ]
+            "allowedCommonJsDependencies": ["lodash"]
           },
           "configurations": {
             "production": {
@@ -163,10 +156,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -174,9 +164,7 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": [
-      "@ronas-it/angular-schematics"
-    ]
+    "schematicCollections": ["@ronas-it/angular-schematics"]
   },
   "schematics": {
     "@schematics/angular:component": {

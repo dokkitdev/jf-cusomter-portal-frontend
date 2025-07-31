@@ -53,10 +53,7 @@ export class AccountDialogEditUserComponentFacade {
   }
 
   public get isRoleCustomer$(): Observable<boolean> {
-    return this.componentStore.select(
-      this.userRole$,
-      (role: UserRole) => role === UserRole.CUSTOMER
-    );
+    return this.componentStore.select(this.userRole$, (role: UserRole) => role === UserRole.CUSTOMER);
   }
 
   private initComponentEffect$: (user: User) => Observable<void>;
@@ -103,86 +100,64 @@ export class AccountDialogEditUserComponentFacade {
   }
 
   private updateIsEditMode(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isEditMode: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isEditMode: value
+    }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: formGroupReducer(state.formState, action)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: formGroupReducer(state.formState, action)
+    }))();
   }
 
   private validateForm(): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: updateGroup<AccountDialogEditUserForm>(
-          state.formState,
-          {
-            name: validate(trimmedRequired, maxLength(255)),
-            email: validate(trimmedRequired, email),
-            customerIDs: updateArray(validate(positiveNumber))
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: updateGroup<AccountDialogEditUserForm>(state.formState, {
+        name: validate(trimmedRequired, maxLength(255)),
+        email: validate(trimmedRequired, email),
+        customerIDs: updateArray(validate(positiveNumber))
       })
-    )();
+    }))();
   }
 
   private updateIsSendingRequest(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isSendingRequest: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isSendingRequest: value
+    }))();
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        formState: (value)
-          ? disable(state.formState)
-          : enable(state.formState)
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      formState: value ? disable(state.formState) : enable(state.formState)
+    }))();
   }
 
   private updateUserFormState(user: User): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        user,
-        formState: updateGroup<AccountDialogEditUserForm>(
-          state.formState,
-          {
-            name: setValue(user.name),
-            email: setValue(user.email),
-            customerIDs: compose(
-              setValue(user.customers?.map((item) => item.id) || []),
-              updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
-            ),
-            roleID: setValue(user.roleID)
-          }
-        )
+    this.componentStore.updater((state) => ({
+      ...state,
+      user,
+      formState: updateGroup<AccountDialogEditUserForm>(state.formState, {
+        name: setValue(user.name),
+        email: setValue(user.email),
+        customerIDs: compose(
+          setValue(user.customers?.map((item) => item.id) || []),
+          updateArray((control) => setUserDefinedProperty(control, 'id', uuidv4()))
+        ),
+        roleID: setValue(user.roleID)
       })
-    )();
+    }))();
   }
 
   private registerInitComponentEffect(): void {
     this.initComponentEffect$ = this.componentStore.effect((origin$: Observable<User>) =>
       origin$.pipe(
-        withLatestFrom(
-          this.isEditMode$
-        ),
+        withLatestFrom(this.isEditMode$),
         filter(([_, isEditMode]) => isEditMode),
         tap(([user]) => this.updateUserFormState(user))
       )
@@ -192,28 +167,24 @@ export class AccountDialogEditUserComponentFacade {
   private registerSaveChangesEffect(): void {
     this.saveChangesEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
-        withLatestFrom(
-          this.formState$,
-          this.isEditMode$,
-          this.user$
-        ),
+        withLatestFrom(this.formState$, this.isEditMode$, this.user$),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, formState, isEditMode, user]) => {
           this.updateIsSendingRequest(true);
           this.toggleDisablingForm(true);
 
-          const omittedFields = keys(pickBy({
-            email: user.email === formState.value.email,
-            customerIDs: formState.value.roleID !== UserRole.CUSTOMER
-          }));
+          const omittedFields = keys(
+            pickBy({
+              email: user.email === formState.value.email,
+              customerIDs: formState.value.roleID !== UserRole.CUSTOMER
+            })
+          );
           const changedUser = new User({
             id: user.id,
             ...omit(formState.value, omittedFields)
           });
 
-          return (isEditMode)
-            ? this.tryToUpdateUser(changedUser)
-            : this.tryToCreateUser(changedUser);
+          return isEditMode ? this.tryToUpdateUser(changedUser) : this.tryToCreateUser(changedUser);
         })
       )
     );
@@ -231,46 +202,46 @@ export class AccountDialogEditUserComponentFacade {
   }
 
   private tryToCreateUser(user: User): Observable<User> {
-    return this.userService
-      .create(user)
-      .pipe(
-        tapResponse(
-          (response: User) => {
-            this.updateIsSendingRequest(false);
-            this.toggleDisablingForm(false);
+    return this.userService.create(user).pipe(
+      tapResponse(
+        (response: User) => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
 
-            this.dialogService.close();
+          this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditUserActions.createUserSuccess({ userID: response.id }));
+          this.store.dispatch(
+            AccountDialogEditUserActions.createUserSuccess({
+              userID: response.id
+            })
+          );
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_CREATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_CREATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 
   private tryToUpdateUser(user: User): Observable<void> {
-    return this.userService
-      .update(user)
-      .pipe(
-        tapResponse(
-          () => {
-            this.updateIsSendingRequest(false);
-            this.toggleDisablingForm(false);
+    return this.userService.update(user).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
 
-            this.dialogService.close();
+          this.dialogService.close();
 
-            this.store.dispatch(AccountDialogEditUserActions.updateUserSuccess({ userID: user.id }));
+          this.store.dispatch(AccountDialogEditUserActions.updateUserSuccess({ userID: user.id }));
 
-            this.notificationService.success(
-              this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_UPDATED')
-            );
-          },
-          (errorResponse) => this.endRequestFailed(errorResponse)
-        )
-      );
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.SHARED.DIALOG_EDIT_USER.NOTIFICATIONS.TEXT_USER_UPDATED')
+          );
+        },
+        (errorResponse) => this.endRequestFailed(errorResponse)
+      )
+    );
   }
 }

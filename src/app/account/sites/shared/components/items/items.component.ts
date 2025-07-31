@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
-    selector: 'sites-items',
-    templateUrl: 'items.html',
-    styleUrls: ['items.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [heightCollapseAnimation],
-    standalone: false
+  selector: 'sites-items',
+  templateUrl: 'items.html',
+  styleUrls: ['items.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [heightCollapseAnimation],
+  standalone: false
 })
 export class AccountSitesItemsComponent {
   public items$: Observable<Array<Site>>;
@@ -21,9 +21,7 @@ export class AccountSitesItemsComponent {
   public hasPagination$: Observable<boolean>;
   public paginationID$: Observable<string>;
 
-  constructor(
-    private facade: AccountSitesPageFacade
-  ) {
+  constructor(private facade: AccountSitesPageFacade) {
     this.items$ = this.facade.items$;
     this.isLoading$ = this.facade.isLoading$;
     this.perPage$ = this.facade.perPage$;

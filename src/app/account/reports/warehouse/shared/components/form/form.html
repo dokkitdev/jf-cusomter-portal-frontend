@@ -25,7 +25,9 @@
       {{ 'ACCOUNT.REPORTS.WAREHOUSE.TEXT_FOUR_DAYS' | translate }}
     </form-radio>
   </div>
-  <div *ngrxLet="isSendingRequest$; let isSendingRequest" class="page-buttons">
+  <div
+    *ngrxLet="isSendingRequest$; let isSendingRequest"
+    class="page-buttons">
     <btn
       [isLoading]="isSendingRequest"
       [isDisabled]="formState.isDisabled"

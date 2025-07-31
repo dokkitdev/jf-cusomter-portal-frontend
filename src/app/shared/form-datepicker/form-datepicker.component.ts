@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
-import { Actions, FormControlState, NgrxDefaultViewAdapter, NgrxValueConverter, NGRX_FORM_VIEW_ADAPTER } from 'ngrx-forms';
+import {
+  Actions,
+  FormControlState,
+  NgrxDefaultViewAdapter,
+  NgrxValueConverter,
+  NGRX_FORM_VIEW_ADAPTER
+} from 'ngrx-forms';
 import { dateValueConverter } from '@shared/date-converter';
 import { Observable } from 'rxjs';
 import { FormDatepickerFacade } from './form-datepicker.facade';
@@ -7,20 +13,20 @@ import { ComponentStore } from '@ngrx/component-store';
 import { ValidationMessages } from '@shared/validation-errors';
 
 @Component({
-    selector: 'form-datepicker',
-    templateUrl: 'form-datepicker.html',
-    styleUrls: ['form-datepicker.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: NGRX_FORM_VIEW_ADAPTER,
-            useExisting: forwardRef(() => NgrxDefaultViewAdapter),
-            multi: true
-        },
-        FormDatepickerFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'form-datepicker',
+  templateUrl: 'form-datepicker.html',
+  styleUrls: ['form-datepicker.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NGRX_FORM_VIEW_ADAPTER,
+      useExisting: forwardRef(() => NgrxDefaultViewAdapter),
+      multi: true
+    },
+    FormDatepickerFacade,
+    ComponentStore
+  ],
+  standalone: false
 })
 export class FormDatepickerComponent {
   @Input() controlState: FormControlState<string>;
@@ -35,9 +41,7 @@ export class FormDatepickerComponent {
 
   public isOpened$: Observable<boolean>;
 
-  constructor(
-    private facade: FormDatepickerFacade
-  ) {
+  constructor(private facade: FormDatepickerFacade) {
     this.controlStateActionTriggered = new EventEmitter<Actions<string>>();
     this.isOpened$ = this.facade.isOpened$;
   }

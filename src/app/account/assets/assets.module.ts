@@ -44,7 +44,8 @@ import { AccountAssetNameMultiselectModule } from '../shared/asset-name-multisel
     TranslateModule,
     AccountAssetsPageRoutingModule,
     AssetModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -63,9 +64,6 @@ import { AccountAssetNameMultiselectModule } from '../shared/asset-name-multisel
     NotificationModule,
     AccountAssetNameMultiselectModule
   ],
-  providers: [
-    AccountAssetsPageFacade,
-    ComponentStore
-  ]
+  providers: [AccountAssetsPageFacade, ComponentStore]
 })
-export class AccountAssetsPageModule { }
+export class AccountAssetsPageModule {}

@@ -65,39 +65,31 @@ export class ImageUploaderFacade {
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isLoading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isLoading: value
+    }))();
   }
 
   private updateIsUploading(value: boolean): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        isUploading: value
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      isUploading: value
+    }))();
   }
 
   private updateProgress(progress: number): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        progress
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      progress
+    }))();
   }
 
   private updateImage(image: Media): void {
-    this.componentStore.updater(
-      (state) => ({
-        ...state,
-        image
-      })
-    )();
+    this.componentStore.updater((state) => ({
+      ...state,
+      image
+    }))();
   }
 
   private registerUploadImageEffect(): void {
@@ -109,34 +101,32 @@ export class ImageUploaderFacade {
 
           const newMedia = new Media({ file });
 
-          return this.mediaService
-            .createWithProgress(newMedia)
-            .pipe(
-              tap((value) => {
-                if (isNumber(value)) {
-                  this.updateProgress(value);
-                }
-              }),
-              filter((response): response is Media => response instanceof Media),
-              tapResponse(
-                (response: Media) => {
-                  this.controlStateActionTriggered.emit(new SetValueAction(controlID, response.id));
-                  this.controlStateActionTriggered.emit(new MarkAsDirtyAction(controlID));
-                  this.endUploading.emit();
-                  this.updateIsUploading(false);
-                  this.updateImage(response);
-                  this.updateProgress(0);
-                },
-                () => {
-                  this.endUploading.emit();
-                  this.updateIsUploading(false);
-                  this.updateProgress(0);
-                  this.notificationService.error(
-                    this.translateService.instant('SHARED.IMAGE_UPLOADER.NOTIFICATIONS.TEXT_UPLOADING_ERROR')
-                  );
-                }
-              )
-            );
+          return this.mediaService.createWithProgress(newMedia).pipe(
+            tap((value) => {
+              if (isNumber(value)) {
+                this.updateProgress(value);
+              }
+            }),
+            filter((response): response is Media => response instanceof Media),
+            tapResponse(
+              (response: Media) => {
+                this.controlStateActionTriggered.emit(new SetValueAction(controlID, response.id));
+                this.controlStateActionTriggered.emit(new MarkAsDirtyAction(controlID));
+                this.endUploading.emit();
+                this.updateIsUploading(false);
+                this.updateImage(response);
+                this.updateProgress(0);
+              },
+              () => {
+                this.endUploading.emit();
+                this.updateIsUploading(false);
+                this.updateProgress(0);
+                this.notificationService.error(
+                  this.translateService.instant('SHARED.IMAGE_UPLOADER.NOTIFICATIONS.TEXT_UPLOADING_ERROR')
+                );
+              }
+            )
+          );
         })
       )
     );
@@ -148,17 +138,15 @@ export class ImageUploaderFacade {
         switchMap((mediaID) => {
           this.updateIsLoading(true);
 
-          return this.mediaService
-            .get(mediaID)
-            .pipe(
-              tapResponse(
-                (response: Media) => {
-                  this.updateIsLoading(false);
-                  this.updateImage(response);
-                },
-                () => this.updateIsLoading(false)
-              )
-            );
+          return this.mediaService.get(mediaID).pipe(
+            tapResponse(
+              (response: Media) => {
+                this.updateIsLoading(false);
+                this.updateImage(response);
+              },
+              () => this.updateIsLoading(false)
+            )
+          );
         })
       )
     );

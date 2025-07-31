@@ -25,7 +25,8 @@ import { SnakeModule } from '@shared/snake';
     CommonModule,
     RouterModule,
     TranslateModule,
-    LetDirective, PushPipe,
+    LetDirective,
+    PushPipe,
     NgForTrackByPropertyModule,
     HeaderSortModule,
     TableContainerModule,
@@ -33,8 +34,6 @@ import { SnakeModule } from '@shared/snake';
     AccountDialogViewAssetTestReadingsModule,
     SnakeModule
   ],
-  exports: [
-    AccountAssetTestsComponent
-  ]
+  exports: [AccountAssetTestsComponent]
 })
-export class AccountAssetTestsModule { }
+export class AccountAssetTestsModule {}

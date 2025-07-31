@@ -1,7 +1,6 @@
 @for (controlError of controlErrors | keyvalue: orderFunction; track controlError; let i = $index) {
   @if (i === 0 && hasMessage(controlError.key)) {
-    <div
-      class="form-helper form-helper-error">
+    <div class="form-helper form-helper-error">
       {{ messages[controlError.key] }}
     </div>
   }

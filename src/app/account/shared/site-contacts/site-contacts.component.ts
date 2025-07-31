@@ -5,15 +5,12 @@ import { Subject } from 'rxjs';
 import { AccountSiteContactsComponentFacade } from './site-contacts.facade';
 
 @Component({
-    selector: 'account-site-contacts',
-    templateUrl: 'site-contacts.html',
-    styleUrls: ['site-contacts.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        AccountSiteContactsComponentFacade,
-        ComponentStore
-    ],
-    standalone: false
+  selector: 'account-site-contacts',
+  templateUrl: 'site-contacts.html',
+  styleUrls: ['site-contacts.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AccountSiteContactsComponentFacade, ComponentStore],
+  standalone: false
 })
 export class AccountSiteContactsComponent implements OnDestroy {
   @Input()
@@ -29,9 +26,7 @@ export class AccountSiteContactsComponent implements OnDestroy {
   @Output() contactUpdated: Subject<Contact>;
   @Output() contactDeleted: Subject<number>;
 
-  constructor(
-    private facade: AccountSiteContactsComponentFacade
-  ) {
+  constructor(private facade: AccountSiteContactsComponentFacade) {
     this.contactCreated = this.facade.contactCreatedSubject;
     this.contactUpdated = this.facade.contactUpdatedSubject;
     this.contactDeleted = this.facade.contactDeletedSubject;

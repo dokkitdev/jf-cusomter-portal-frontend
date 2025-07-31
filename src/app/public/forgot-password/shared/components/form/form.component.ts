@@ -5,20 +5,18 @@ import { Observable } from 'rxjs';
 import { PublicForgotPasswordPageForm } from '../../forms';
 
 @Component({
-    selector: 'forgot-password-form',
-    templateUrl: 'form.html',
-    styleUrls: ['form.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'forgot-password-form',
+  templateUrl: 'form.html',
+  styleUrls: ['form.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false
 })
 export class PublicForgotPasswordFormComponent {
   public isSubmitting$: Observable<boolean>;
   public isSubmittingFailed$: Observable<boolean>;
   public formState$: Observable<FormGroupState<PublicForgotPasswordPageForm>>;
 
-  constructor(
-    private facade: PublicForgotPasswordPageFacade
-  ) {
+  constructor(private facade: PublicForgotPasswordPageFacade) {
     this.isSubmitting$ = this.facade.isSubmitting$;
     this.isSubmittingFailed$ = this.facade.isSubmittingFailed$;
     this.formState$ = this.facade.formState$;

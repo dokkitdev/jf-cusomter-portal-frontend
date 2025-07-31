@@ -1,4 +1,6 @@
-<div [ngClass]="{ 'table-container-empty': isNotFound || isLoading }" class="table-container">
+<div
+  [ngClass]="{ 'table-container-empty': isNotFound || isLoading }"
+  class="table-container">
   <ng-content></ng-content>
 </div>
 @if (isNotFound) {

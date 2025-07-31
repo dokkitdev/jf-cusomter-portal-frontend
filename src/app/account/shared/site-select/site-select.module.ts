@@ -6,17 +6,8 @@ import { CustomSelectModule } from '@shared/custom-select';
 import { SiteModule } from '@shared/site';
 
 @NgModule({
-  declarations: [
-    AccountSiteSelectComponent
-  ],
-  imports: [
-    CommonModule,
-    TranslateModule,
-    CustomSelectModule,
-    SiteModule
-  ],
-  exports: [
-    AccountSiteSelectComponent
-  ]
+  declarations: [AccountSiteSelectComponent],
+  imports: [CommonModule, TranslateModule, CustomSelectModule, SiteModule],
+  exports: [AccountSiteSelectComponent]
 })
-export class AccountSiteSelectModule { }
+export class AccountSiteSelectModule {}
