@@ -16,7 +16,7 @@ cache: &global_cache
 
 .build_template: &build
   stage: build
-  image: node:16
+  image: node:20
   script:
     - npm run-script build
   artifacts:
@@ -29,9 +29,9 @@ cache: &global_cache
 
 node_dependencies:
   stage: prepare
-  image: node:16
+  image: node:20
   script:
-    - npm i
+    - npm i --legacy-peer-deps
   cache:
     <<: *global_cache
     policy: pull-push
@@ -41,7 +41,7 @@ node_dependencies:
 
 eslint:
   stage: lint
-  image: node:16
+  image: node:20
   script:
     - npm run-script lint
   tags:
