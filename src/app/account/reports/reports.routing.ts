@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./service-control/service-control.module').then((module) => module.AccountReportsServiceControlPageModule)
   },
   {
+    path: 'ashp-unvented-service-control',
+    loadChildren: () => import('./ashp-unvented-service-control/ashp-unvented-service-control.module').then((module) => module.AccountReportsASHPUnventedServiceControlPageModule)
+  },
+  {
     path: 'repair-response',
     loadChildren: () => import('./kpi/kpi.module').then((module) => module.AccountReportsKPIModule)
   }

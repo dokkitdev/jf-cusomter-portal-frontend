@@ -1,0 +1,148 @@
+<div class="table-head">
+  <div *ngrxLet="parameters$; let parameters" class="table-row">
+    <div class="table-cell servicecontrol-uprn">
+      <header-sort
+        [orderBy]="assetSortField.SITE_UPRN"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_SITE_UPRN' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-assetid">
+      <header-sort
+        [orderBy]="assetSortField.ASSET_ID"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_ASSET_ID' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-orderno">
+      <header-sort
+        [orderBy]="assetSortField.JOB_ORDER_NO"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_ORDER_NO' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-customer">
+      <header-sort
+        [orderBy]="assetSortField.JOB_CUSTOMER_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_CUSTOMER' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-sitename">
+      <header-sort
+        [orderBy]="assetSortField.SITE_NAME"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_SITE_NAME' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-siteaddress">
+      <header-sort
+        [orderBy]="assetSortField.SITE_ADDRESS"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_SITE_ADDRESS' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-sitecontact">
+      <header-sort
+        [orderBy]="assetSortField.SITE_CONTACT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_SITE_CONTACT' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-completiondate">
+      <header-sort
+        [orderBy]="assetSortField.JOB_COMPLETION_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_COMPLETION_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-cp2date">
+      <header-sort
+        [orderBy]="assetSortField.SORTABLE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_LAST_CP12_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-nextservicedate">
+      <header-sort
+        [orderBy]="assetSortField.NEXT_SERVICE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NEXT_SERVICE_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-noaccess">
+      <header-sort
+      [orderBy]="assetSortField.NO_ACCESS_DATE_1"
+      [parameters]="parameters"
+      (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_1' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-noaccess">
+      <header-sort
+      [orderBy]="assetSortField.NO_ACCESS_DATE_2"
+      [parameters]="parameters"
+      (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_2' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-noaccess">
+      <header-sort
+      [orderBy]="assetSortField.NO_ACCESS_DATE_3"
+      [parameters]="parameters"
+      (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_3' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-noaccess">
+      <header-sort
+      [orderBy]="assetSortField.NO_ACCESS_DATE_4"
+      [parameters]="parameters"
+      (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_4' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-noaccess">
+      <header-sort
+      [orderBy]="assetSortField.NO_ACCESS_DATE_5"
+      [parameters]="parameters"
+      (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NO_ACCESS_5' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-nextscheduled">
+      <header-sort
+        [orderBy]="assetSortField.NEXT_SCHEDULE_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_NEXT_SCHEDULE_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-status">
+      <header-sort
+        [orderBy]="assetSortField.JOB_STATUS"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_STATUS' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell servicecontrol-jobnumber">
+      <header-sort
+        [orderBy]="assetSortField.JOB_ID"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.ITEMS_HEADER.TEXT_JOB_NUMBER' | translate }}
+      </header-sort>
+    </div>
+  </div>
+</div>
