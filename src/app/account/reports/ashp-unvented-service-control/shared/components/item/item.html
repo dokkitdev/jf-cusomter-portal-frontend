@@ -1,0 +1,71 @@
+<div
+  [ngClass]="{
+    'servicecontrol-row-overdue': item.isOverdue,
+    'servicecontrol-row-due': item.isDue,
+    'servicecontrol-row-ontime': item.isOnTime
+  }"
+  class="table-row servicecontrol-row">
+  <div class="table-cell servicecontrol-uprn">
+    {{ item.site?.uprn }}
+  </div>
+  <div class="table-cell servicecontrol-assetid">
+    {{ item.assetID }}
+  </div>
+  <div class="table-cell servicecontrol-orderno">
+    {{ item.job?.orderNo }}
+  </div>
+  <div class="table-cell servicecontrol-customer">
+    {{ item.jobCustomer?.name }}
+  </div>
+  <div class="table-cell servicecontrol-sitename">
+    {{ item.site?.name }}
+  </div>
+  <div class="table-cell servicecontrol-siteaddress">
+    <div>{{ item.site?.fullAddress }}</div>
+    <div>{{ item.site?.postalCode }}</div>
+  </div>
+  <div class="table-cell servicecontrol-sitecontact">
+    {{ item.site?.primaryContact?.fullName }}
+  </div>
+  <div class="table-cell servicecontrol-completiondate">
+    {{ item.job?.completionDate | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-cp2date">
+    {{ item?.sortableDate | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-nextservicedate">
+    {{ item?.nextServiceDate | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate1 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate2 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate3 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate4 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-noaccess">
+    {{ item.noAccessDate5 | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-nextscheduled">
+    {{ item.nextSchedule?.date | date: dateFormat }}
+  </div>
+  <div class="table-cell servicecontrol-status">
+    <span
+      [ngClass]="{
+        'badge-archived': item.job?.isArchived,
+        'badge-complete': item.job?.isCompleted,
+        'badge-pending': item.job?.isPending
+      }"
+      class="badge">
+      {{ item.job?.status }}
+    </span>
+  </div>
+  <div class="table-cell servicecontrol-jobnumber">
+    {{ item.job?.jobID }}
+  </div>
+</div>

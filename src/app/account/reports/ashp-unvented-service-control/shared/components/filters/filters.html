@@ -1,0 +1,62 @@
+<div class="servicecontrol-filters">
+  <div class="filters">
+    <form
+      *ngrxLet="filterFormState$; let filterFormState"
+      [ngrxFormState]="filterFormState"
+      (ngrxFormActions)="formActionTriggered($event)"
+      class="form">
+      <account-site-select
+        [controlState]="filterFormState.controls.siteID"
+        [isPermanentlyShowPlaceholder]="true"
+        (selectedSiteChanged)="selectedSiteChanged($event)"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_SITE' | translate }}">
+      </account-site-select>
+      <account-job-stage-multiselect
+        [controlState]="filterFormState.controls.jobStage"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_STAGE' | translate }}">
+      </account-job-stage-multiselect>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateFrom"
+        [dateFilter]="getStartJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobDueDateTo"
+        [dateFilter]="getEndJobDueDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_DUE_DATE_TO' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateFrom"
+        [dateFilter]="getStartJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_FROM' | translate }}">
+      </form-datepicker>
+      <form-datepicker
+        [controlState]="filterFormState.controls.jobLoggedCompletionDateTo"
+        [dateFilter]="getEndJobLoggedCompletionDateFilter$ | async"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_COMPLETION_TO' | translate }}">
+      </form-datepicker>
+      <account-cp12-status-select
+        [controlState]="filterFormState.controls.CP12Status"
+        [isPermanentlyShowPlaceholder]="true"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_CP12_STATUS' | translate }}">
+      </account-cp12-status-select>
+      <account-custom-asset-type-multiselect
+        [controlState]="filterFormState.controls.customAssetTypeValue"
+        (controlStateActionTriggered)="formActionTriggered($event)"
+        placeholder="{{ 'ACCOUNT.REPORTS.SERVICE_CONTROL.FILTERS.TEXT_ASSET_TYPE' | translate }}">
+      </account-custom-asset-type-multiselect>
+    </form>
+  </div>
+  <filter-values
+    [items]="filterValues$ | async"
+    (filterRemoved)="removeFilterClicked($event)">
+  </filter-values>
+</div>

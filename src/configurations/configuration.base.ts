@@ -99,6 +99,7 @@ export const initConfiguration = (configuration: any): any =>
         sites: 'sites.csv',
         assets: 'assets.csv',
         assetsReport: (date: string) => `JF_Service_Control_${date}.csv`,
+        assetsAshpReport: (date: string) => `JF_ASHP_Unvented_Service_Control_${date}.csv`,
       },
     },
     configuration
