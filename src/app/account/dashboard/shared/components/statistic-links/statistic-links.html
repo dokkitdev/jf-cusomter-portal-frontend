@@ -23,14 +23,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col col-50">
+    <div class="col col-33">
       <dashboard-statistic-link
         route="/account/reports/service-control"
         name="{{ translations + 'LINK_SERVICE_CONTROL_REPORT' | translate }}">
         <span ngProjectAs="icon" class="icon icon-report-big icon-mask icon-mask-dark-blue icon-big"></span>
       </dashboard-statistic-link>
     </div>
-    <div class="col col-50">
+    <div class="col col-33">
+      <dashboard-statistic-link
+        route="/account/reports/ashp-unvented-service-control"
+        name="{{ translations + 'LINK_ASHP_UNVENTED_SERVICE_CONTROL_REPORT' | translate }}">
+        <span ngProjectAs="icon" class="icon icon-report-big icon-mask icon-mask-dark-blue icon-big"></span>
+      </dashboard-statistic-link>
+    </div>
+    <div class="col col-33">
       <dashboard-statistic-link
         route="/account/reports/repair-response"
         name="{{ translations + 'LINK_KPI_REPORT' | translate }}">

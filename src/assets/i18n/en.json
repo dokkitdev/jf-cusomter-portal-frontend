@@ -101,6 +101,7 @@
       "LINK_ASSETS": "Assets",
       "LINK_DOCUMENTS": "Documents",
       "LINK_SERVICE_CONTROL_REPORT": "Service Control Report",
+      "LINK_ASHP_UNVENTED_SERVICE_CONTROL_REPORT": "ASHP/Unvented Service Control Report",
       "LINK_KPI_REPORT": "Repair Response Report",
       "NOTIFICATIONS": {
         "TEXT_ERROR": "Something went wrong. Please try again."
