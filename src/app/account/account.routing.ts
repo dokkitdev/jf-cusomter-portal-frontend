@@ -39,6 +39,10 @@ const routes: Routes = [
         loadChildren: () => import('./documents/documents.module').then((module) => module.AccountDocumentsPageModule)
       },
       {
+        path: 'templates',
+        loadChildren: () => import('./templates/templates.module').then((module) => module.AccountTemplatesPageModule)
+      },
+      {
         path: 'reports',
         loadChildren: () => import('./reports/reports.module').then((module) => module.AccountReportsPageModule)
       },

@@ -75,6 +75,13 @@
           <span class="icon icon-attachment icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_DOCUMENTS' | translate }}</span>
         </a>
+        <a
+          routerLink="/account/templates"
+          routerLinkActive="active"
+          class="sidebar-item">
+          <span class="icon icon-attachment icon-mask"></span>
+          <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_TEMPLATES' | translate }}</span>
+        </a>
         @if (isAdmin$ | async) {
           <a
             (click)="toggleAdminMenu()"

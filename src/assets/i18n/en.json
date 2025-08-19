@@ -80,6 +80,7 @@
       "LINK_REPORTS_ZERO": "Zero Report",
       "LINK_REPORTS_WAREHOUSE": "Warehouse",
       "LINK_DOCUMENTS": "Documents",
+      "LINK_TEMPLATES": "Templates",
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
       "LINK_ADMIN_DOCUMENTS": "Documents",
@@ -437,6 +438,24 @@
         "TEXT_DESCRIPTION": "Description",
         "TEXT_CREATED_AT_FROM": "Uploaded At From",
         "TEXT_CREATED_AT_TO": "Uploaded At To"
+      }
+    },
+    "TEMPLATES": {
+      "TEXT_PAGE_TITLE": "Templates",
+      "LINK_UPLOAD": "Upload",
+      "LINK_DOWNLOAD": "Download",
+      "CATEGORIES": {
+        "PRIVATE": "Private",
+        "HOUSING_AUTHORITIES": "Housing Authorities", 
+        "CHL_OTHER_LETTERS": "CHL Other Letters",
+        "CHL_GAS_LETTERS": "CHL Gas Letters",
+        "CHL_ELECTRIC_LETTERS": "CHL Electric Letters",
+        "APPOINTMENT_LETTER": "Appointment letter"
+      },
+      "TEMPLATES": {
+        "LETTER_NO_ACCESS_1": "Letter No Access 1 (Letter)",
+        "LETTER_NO_ACCESS_2": "Letter No Access 2 (Letter)",
+        "LETTER_NO_ACCESS_3": "Letter No Access 3 (Letter)"
       }
     },
     "PROFILE": {
