@@ -14,7 +14,7 @@ import { heightCollapseAnimation } from '@shared/animations';
 })
 export class AccountTemplatesItemsComponent {
   public isLoading$: Observable<boolean>;
-  public categories$: Observable<TemplateCategory[]>;
+  public categories$: Observable<Array<TemplateCategory>>;
 
   constructor(private facade: AccountTemplatesPageFacade) {
     this.isLoading$ = this.facade.isLoading$;

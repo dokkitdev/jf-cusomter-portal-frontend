@@ -9,7 +9,7 @@ export interface FileInputOptions {
 }
 
 export interface FileInputResult {
-  files: File[];
+  files: Array<File>;
   error?: string;
 }
 
@@ -38,9 +38,11 @@ export class FileInputService {
       if (files.length === 0) {
         result$.next({ files: [] });
         result$.complete();
+
         return;
       }
 
+      // Apply file filter if provided
       if (options.fileFilter) {
         const invalidFiles = files.filter((file) => !options.fileFilter!(file));
         if (invalidFiles.length > 0) {
@@ -49,6 +51,7 @@ export class FileInputService {
             error: options.validationError || 'Invalid file type selected'
           });
           result$.complete();
+
           return;
         }
       }

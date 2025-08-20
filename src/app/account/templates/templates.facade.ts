@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export interface AccountTemplatesPageState {
   isLoading: boolean;
-  categories: TemplateCategory[];
+  categories: Array<TemplateCategory>;
   error?: string;
 }
 
@@ -24,6 +24,66 @@ const initialState: AccountTemplatesPageState = {
 export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesPageState> {
   public readonly isLoading$ = this.select((state) => state.isLoading);
   public readonly categories$ = this.select((state) => state.categories);
+
+  private readonly uploadTemplateEffect = this.effect((data$: Observable<{ template: Template; file: File }>) =>
+    data$.pipe(
+      switchMap(({ template, file }) =>
+        this.templateService.uploadTemplate(template.name, file).pipe(
+          tapResponse(
+            () => {
+              this.notificationService.success(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_SUCCESS', {
+                  name: template.label
+                })
+              );
+            },
+            (error) => {
+              this.notificationService.error(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', {
+                  name: template.label
+                })
+              );
+              console.error('Upload failed:', error);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  private readonly downloadTemplateEffect = this.effect((template$: Observable<Template>) =>
+    template$.pipe(
+      switchMap((template) =>
+        this.templateService.downloadTemplate(template.name).pipe(
+          tapResponse(
+            (blob) => {
+              // Create filename from template label, defaulting to .docx extension
+              const filename = `${template.label}.docx`;
+              this.fileService.saveFile(blob, filename);
+            },
+            (error) => {
+              this.notificationService.error(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_DOWNLOAD_ERROR', {
+                  name: template.label
+                })
+              );
+              console.error('Download failed:', error);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  private readonly setLoading = this.updater<boolean>((state, isLoading) => ({
+    ...state,
+    isLoading
+  }));
+
+  private readonly setCategories = this.updater<Array<TemplateCategory>>((state, categories) => ({
+    ...state,
+    categories
+  }));
 
   constructor(
     private templateService: TemplateService,
@@ -71,6 +131,7 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
       next: (result) => {
         if (result.error) {
           this.notificationService.error(result.error);
+
           return;
         }
 
@@ -94,65 +155,6 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   public downloadTemplate(template: Template): void {
     this.downloadTemplateEffect(template);
   }
-
-  private readonly uploadTemplateEffect = this.effect((data$: Observable<{ template: Template; file: File }>) =>
-    data$.pipe(
-      switchMap(({ template, file }) =>
-        this.templateService.uploadTemplate(template.name, file).pipe(
-          tapResponse(
-            () => {
-              this.notificationService.success(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_SUCCESS', {
-                  name: template.label
-                })
-              );
-            },
-            (error) => {
-              this.notificationService.error(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', {
-                  name: template.label
-                })
-              );
-              console.error('Upload failed:', error);
-            }
-          )
-        )
-      )
-    )
-  );
-
-  private readonly downloadTemplateEffect = this.effect((template$: Observable<Template>) =>
-    template$.pipe(
-      switchMap((template) =>
-        this.templateService.downloadTemplate(template.name).pipe(
-          tapResponse(
-            (blob) => {
-              const filename = `${template.label}.docx`;
-              this.fileService.saveFile(blob, filename);
-            },
-            (error) => {
-              this.notificationService.error(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_DOWNLOAD_ERROR', {
-                  name: template.label
-                })
-              );
-              console.error('Download failed:', error);
-            }
-          )
-        )
-      )
-    )
-  );
-
-  private readonly setLoading = this.updater<boolean>((state, isLoading) => ({
-    ...state,
-    isLoading
-  }));
-
-  private readonly setCategories = this.updater<TemplateCategory[]>((state, categories) => ({
-    ...state,
-    categories
-  }));
 
   public resetState(): void {
     this.setState(initialState);

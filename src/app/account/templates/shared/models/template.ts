@@ -5,12 +5,12 @@ export interface Template {
 
 export interface TemplateCategory {
   group_label: string;
-  letter_templates: Template[];
+  letter_templates: Array<Template>;
   isExpanded: boolean;
 }
 
 export interface TemplateData {
-  categories: TemplateCategory[];
+  categories: Array<TemplateCategory>;
 }
 
 export interface LetterTemplateResponse {
@@ -20,5 +20,5 @@ export interface LetterTemplateResponse {
 
 export interface LetterTemplateGroupResponse {
   group_label: string;
-  letter_templates: LetterTemplateResponse[];
+  letter_templates: Array<LetterTemplateResponse>;
 }

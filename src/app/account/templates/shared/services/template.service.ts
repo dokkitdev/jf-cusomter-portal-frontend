@@ -13,8 +13,8 @@ export class TemplateService {
     this.endpoint = '/letter-templates';
   }
 
-  public getTemplates(): Observable<TemplateCategory[]> {
-    return this.apiService.get<LetterTemplateGroupResponse[]>(this.endpoint).pipe(
+  public getTemplates(): Observable<Array<TemplateCategory>> {
+    return this.apiService.get<Array<LetterTemplateGroupResponse>>(this.endpoint).pipe(
       map((response) =>
         response.map((group) => ({
           group_label: group.group_label,
