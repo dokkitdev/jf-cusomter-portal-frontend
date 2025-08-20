@@ -6,14 +6,13 @@ export interface Template {
 export interface TemplateCategory {
   group_label: string;
   letter_templates: Template[];
-  isExpanded: boolean; // Added for UI state
+  isExpanded: boolean;
 }
 
 export interface TemplateData {
   categories: TemplateCategory[];
 }
 
-// API Response interfaces (matching the exact API structure)
 export interface LetterTemplateResponse {
   name: string;
   label: string;
