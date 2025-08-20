@@ -444,8 +444,10 @@
       "TEXT_PAGE_TITLE": "Templates",
       "LINK_UPLOAD": "Upload",
       "LINK_DOWNLOAD": "Download",
-      "BUTTON_UPLOAD": "Upload",
-      "BUTTON_DOWNLOAD": "Download",
+      "CATEGORY": {
+        "BUTTON_UPLOAD": "Upload",
+        "BUTTON_DOWNLOAD": "Download"
+      },
       "CATEGORIES": {
         "PRIVATE": "Private",
         "HOUSING_AUTHORITIES": "Housing Authorities",
