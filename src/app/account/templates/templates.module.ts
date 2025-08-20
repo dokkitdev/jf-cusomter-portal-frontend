@@ -12,7 +12,7 @@ import { AccountTemplatesPageRoutingModule } from './templates.routing';
 import { TemplateService } from './shared/services';
 
 import { TableContainerModule } from '@shared/table-container';
-import { FileService } from '@shared/file';
+import { FileService, FileInputService } from '@shared/file';
 import { NotificationModule } from '@shared/notification';
 
 @NgModule({
@@ -26,6 +26,6 @@ import { NotificationModule } from '@shared/notification';
     AccountTemplatesPageRoutingModule,
     NotificationModule
   ],
-  providers: [AccountTemplatesPageFacade, ComponentStore, TemplateService, FileService]
+  providers: [AccountTemplatesPageFacade, ComponentStore, TemplateService, FileService, FileInputService]
 })
 export class AccountTemplatesPageModule {}

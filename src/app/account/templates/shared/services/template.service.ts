@@ -19,7 +19,7 @@ export class TemplateService {
         response.map((group) => ({
           group_label: group.group_label,
           letter_templates: group.letter_templates,
-          isExpanded: false // All categories start collapsed
+          isExpanded: false
         }))
       )
     );

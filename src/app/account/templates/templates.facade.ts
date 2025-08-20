@@ -5,7 +5,7 @@ import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs/operators';
 import { Template, TemplateCategory, TemplateData } from './shared/models';
 import { TemplateService } from './shared/services';
-import { FileService } from '@shared/file';
+import { FileService, FileInputService } from '@shared/file';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,6 +28,7 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   constructor(
     private templateService: TemplateService,
     private fileService: FileService,
+    private fileInputService: FileInputService,
     private notificationService: NotificationService,
     private translateService: TranslateService
   ) {
@@ -47,7 +48,9 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
           },
           (error) => {
             this.setLoading(false);
-            this.notificationService.error(this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_LOADING_ERROR'));
+            this.notificationService.error(
+              this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_LOADING_ERROR')
+            );
             console.error('Failed to load templates:', error);
           }
         )
@@ -61,6 +64,27 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
         category.group_label === categoryLabel ? { ...category, isExpanded: !category.isExpanded } : category
       )
     }));
+  }
+
+  public selectAndUploadTemplate(template: Template): void {
+    this.fileInputService.selectFiles(this.fileInputService.getDocxFileInputOptions()).subscribe({
+      next: (result) => {
+        if (result.error) {
+          this.notificationService.error(result.error);
+          return;
+        }
+
+        if (result.files.length > 0) {
+          this.uploadTemplateEffect({ template, file: result.files[0] });
+        }
+      },
+      error: (error) => {
+        this.notificationService.error(
+          this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', { name: template.label })
+        );
+        console.error('File selection failed:', error);
+      }
+    });
   }
 
   public uploadTemplate(template: Template, file: File): void {
@@ -78,12 +102,16 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
           tapResponse(
             () => {
               this.notificationService.success(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_SUCCESS', { name: template.label })
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_SUCCESS', {
+                  name: template.label
+                })
               );
             },
             (error) => {
               this.notificationService.error(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', { name: template.label })
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', {
+                  name: template.label
+                })
               );
               console.error('Upload failed:', error);
             }
@@ -99,13 +127,14 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
         this.templateService.downloadTemplate(template.name).pipe(
           tapResponse(
             (blob) => {
-              // Create filename from template label, defaulting to .docx extension
               const filename = `${template.label}.docx`;
               this.fileService.saveFile(blob, filename);
             },
             (error) => {
               this.notificationService.error(
-                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_DOWNLOAD_ERROR', { name: template.label })
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_DOWNLOAD_ERROR', {
+                  name: template.label
+                })
               );
               console.error('Download failed:', error);
             }

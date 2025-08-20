@@ -26,23 +26,7 @@ export class AccountTemplatesItemsComponent {
   }
 
   public onUploadClicked(template: Template): void {
-    // Handle file upload with .docx validation as per API requirement
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.docx';
-    input.onchange = (event: any) => {
-      const file = event.target.files[0];
-      if (file) {
-        // Validate file type (API only accepts .docx)
-        if (file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-          // Show error notification
-          alert('Please select a valid .docx file');
-          return;
-        }
-        this.facade.uploadTemplate(template, file);
-      }
-    };
-    input.click();
+    this.facade.selectAndUploadTemplate(template);
   }
 
   public onDownloadClicked(template: Template): void {
