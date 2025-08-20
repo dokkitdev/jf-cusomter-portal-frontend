@@ -1,53 +1,39 @@
 <table-container
   [isLoading]="isLoading$ | async"
   [itemsCount]="(categories$ | async)?.length || 0">
-  <div class="table templates-table">
-    <ng-container *ngFor="let category of categories$ | async; trackBy: trackByCategory; let i = index">
-      <!-- Category Header Row -->
-      <div
-        class="table-row category-row"
-        [class.expanded]="category.isExpanded"
-        [class.category-row-alternate]="i % 2 === 1">
-        <div
-          class="table-cell category-toggle"
-          (click)="toggleCategory(category.group_label)">
-          <a class="category-toggle-action">
-            <span
-              [ngClass]="{ 'accordionplus-opened': category.isExpanded }"
-              class="accordionplus"></span>
-          </a>
-        </div>
-        <div class="table-cell category-name">
-          {{ category.group_label }}
-        </div>
-      </div>
-
-      <!-- Template Rows -->
-      @if (category.isExpanded && category.letter_templates.length > 0) {
-        <div
-          [@heightCollapse]
-          class="template-rows-container">
+  <div class="table">
+    <div class="table-content">
+      <ng-container *ngFor="let category of categories$ | async; trackBy: trackByCategory; let i = index">
+        <div class="table-content-row">
           <div
-            class="table-row template-row"
-            *ngFor="let template of category.letter_templates; trackBy: trackByTemplate">
-            <div class="table-cell template-name">
-              {{ template.label }}
+            class="table-row templates-category-row"
+            [class.expanded]="category.isExpanded"
+            (click)="toggleCategory(category.group_label)">
+            <div class="table-cell templates-category-toggle">
+              <span
+                [ngClass]="{ 'accordionplus-opened': category.isExpanded }"
+                class="accordionplus"></span>
             </div>
-            <div class="table-cell template-actions">
-              <a
-                class="table-action"
-                (click)="onUploadClicked(template)">
-                Upload
-              </a>
-              <a
-                class="table-action"
-                (click)="onDownloadClicked(template)">
-                Download
-              </a>
+            <div class="table-cell templates-category-name">
+              {{ category.group_label }}
             </div>
           </div>
         </div>
-      }
-    </ng-container>
+
+        <ng-container *ngFor="let template of category.letter_templates; trackBy: trackByTemplate">
+          @if (category.isExpanded) {
+            <div
+              [@heightCollapse]
+              class="table-content-row">
+              <template-category
+                [template]="template"
+                (uploadClicked)="onUploadClicked($event)"
+                (downloadClicked)="onDownloadClicked($event)">
+              </template-category>
+            </div>
+          }
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
 </table-container>
