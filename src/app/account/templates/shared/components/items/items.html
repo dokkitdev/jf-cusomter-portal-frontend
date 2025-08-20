@@ -1,0 +1,39 @@
+<table-container
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="(categories$ | async)?.length || 0">
+  <div class="table">
+    <div class="table-content">
+      <ng-container *ngFor="let category of categories$ | async; trackBy: trackByCategory; let i = index">
+        <div class="table-content-row">
+          <div
+            class="table-row templates-category-row"
+            [class.expanded]="category.isExpanded"
+            (click)="toggleCategory(category.group_label)">
+            <div class="table-cell templates-category-toggle">
+              <span
+                [ngClass]="{ 'accordionplus-opened': category.isExpanded }"
+                class="accordionplus"></span>
+            </div>
+            <div class="table-cell templates-category-name">
+              {{ category.group_label }}
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngFor="let template of category.letter_templates; trackBy: trackByTemplate">
+          @if (category.isExpanded) {
+            <div
+              [@heightCollapse]
+              class="table-content-row">
+              <template-category
+                [template]="template"
+                (uploadClicked)="onUploadClicked($event)"
+                (downloadClicked)="onDownloadClicked($event)">
+              </template-category>
+            </div>
+          }
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</table-container>
