@@ -35,7 +35,7 @@
           (click)="toggleReportsMenu()"
           [ngClass]="{ active: isReportsMenuItemActive$ | async }"
           class="sidebar-item">
-          <span class="icon icon-quote icon-mask"></span>
+          <span class="icon icon-report icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_REPORTS' | translate }}</span>
         </a>
         @if (isReportsMenuOpened$ | async) {
@@ -79,7 +79,7 @@
           routerLink="/account/templates"
           routerLinkActive="active"
           class="sidebar-item">
-          <span class="icon icon-attachment icon-mask"></span>
+          <span class="icon icon-quote icon-mask"></span>
           <span class="sidebar-label">{{ 'ACCOUNT.SIDEBAR.LINK_TEMPLATES' | translate }}</span>
         </a>
         @if (isAdmin$ | async) {

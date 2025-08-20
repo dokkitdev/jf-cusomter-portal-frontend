@@ -4,8 +4,10 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs/operators';
 import { Template, TemplateCategory, TemplateData } from './shared/models';
-import { Media, MediaService } from '@shared/media';
+import { TemplateService } from './shared/services';
 import { FileService } from '@shared/file';
+import { NotificationService } from '@shared/notification';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface AccountTemplatesPageState {
   isLoading: boolean;
@@ -24,8 +26,10 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   public readonly categories$ = this.select((state) => state.categories);
 
   constructor(
-    private mediaService: MediaService,
-    private fileService: FileService
+    private templateService: TemplateService,
+    private fileService: FileService,
+    private notificationService: NotificationService,
+    private translateService: TranslateService
   ) {
     super(initialState);
   }
@@ -33,87 +37,78 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   public loadTemplates(): void {
     this.setLoading(true);
 
-    // Mock data based on Figma design
-    const mockData: TemplateData = {
-      categories: [
-        {
-          id: 'private',
-          name: 'Private',
-          isExpanded: false,
-          templates: [
-            { id: 'letter-no-access-1', name: 'Letter No Access 1 (Letter)', categoryId: 'private' },
-            { id: 'letter-no-access-2', name: 'Letter No Access 2 (Letter)', categoryId: 'private' },
-            { id: 'letter-no-access-3', name: 'Letter No Access 3 (Letter)', categoryId: 'private' }
-          ]
-        },
-        {
-          id: 'housing-authorities',
-          name: 'Housing Authorities',
-          isExpanded: false,
-          templates: []
-        },
-        {
-          id: 'chl-other-letters',
-          name: 'CHL Other Letters',
-          isExpanded: false,
-          templates: []
-        },
-        {
-          id: 'chl-gas-letters',
-          name: 'CHL Gas Letters',
-          isExpanded: false,
-          templates: []
-        },
-        {
-          id: 'chl-electric-letters',
-          name: 'CHL Electric Letters',
-          isExpanded: false,
-          templates: []
-        },
-        {
-          id: 'appointment-letter',
-          name: 'Appointment letter',
-          isExpanded: false,
-          templates: []
-        }
-      ]
-    };
-
-    setTimeout(() => {
-      this.setCategories(mockData.categories);
-      this.setLoading(false);
-    }, 500);
+    this.templateService
+      .getTemplates()
+      .pipe(
+        tapResponse(
+          (categories) => {
+            this.setCategories(categories);
+            this.setLoading(false);
+          },
+          (error) => {
+            this.setLoading(false);
+            this.notificationService.error(this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_LOADING_ERROR'));
+            console.error('Failed to load templates:', error);
+          }
+        )
+      )
+      .subscribe();
   }
 
-  public toggleCategory(categoryId: string): void {
+  public toggleCategory(categoryLabel: string): void {
     this.patchState((state) => ({
       categories: state.categories.map((category) =>
-        category.id === categoryId ? { ...category, isExpanded: !category.isExpanded } : category
+        category.group_label === categoryLabel ? { ...category, isExpanded: !category.isExpanded } : category
       )
     }));
   }
 
   public uploadTemplate(template: Template, file: File): void {
-    // Implementation would upload file and update template
-    console.log('Upload template:', template, file);
+    this.uploadTemplateEffect({ template, file });
   }
 
   public downloadTemplate(template: Template): void {
-    if (template.mediaId) {
-      this.downloadTemplateEffect(template.mediaId);
-    }
+    this.downloadTemplateEffect(template);
   }
 
-  private readonly downloadTemplateEffect = this.effect((mediaId$: Observable<number>) =>
-    mediaId$.pipe(
-      switchMap((mediaId) =>
-        this.mediaService.getBlob(mediaId).pipe(
+  private readonly uploadTemplateEffect = this.effect((data$: Observable<{ template: Template; file: File }>) =>
+    data$.pipe(
+      switchMap(({ template, file }) =>
+        this.templateService.uploadTemplate(template.name, file).pipe(
           tapResponse(
-            (response) => {
-              // Extract filename from template or use default
-              this.fileService.saveFile(response, 'template.pdf');
+            () => {
+              this.notificationService.success(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_SUCCESS', { name: template.label })
+              );
             },
-            (error) => console.error('Download failed:', error)
+            (error) => {
+              this.notificationService.error(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_UPLOAD_ERROR', { name: template.label })
+              );
+              console.error('Upload failed:', error);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  private readonly downloadTemplateEffect = this.effect((template$: Observable<Template>) =>
+    template$.pipe(
+      switchMap((template) =>
+        this.templateService.downloadTemplate(template.name).pipe(
+          tapResponse(
+            (blob) => {
+              // Create filename from template label, defaulting to .docx extension
+              const filename = `${template.label}.docx`;
+              this.fileService.saveFile(blob, filename);
+            },
+            (error) => {
+              this.notificationService.error(
+                this.translateService.instant('ACCOUNT.TEMPLATES.NOTIFICATIONS.TEXT_DOWNLOAD_ERROR', { name: template.label })
+              );
+              console.error('Download failed:', error);
+            }
           )
         )
       )

@@ -446,16 +446,17 @@
       "LINK_DOWNLOAD": "Download",
       "CATEGORIES": {
         "PRIVATE": "Private",
-        "HOUSING_AUTHORITIES": "Housing Authorities", 
+        "HOUSING_AUTHORITIES": "Housing Authorities",
         "CHL_OTHER_LETTERS": "CHL Other Letters",
         "CHL_GAS_LETTERS": "CHL Gas Letters",
         "CHL_ELECTRIC_LETTERS": "CHL Electric Letters",
         "APPOINTMENT_LETTER": "Appointment letter"
       },
-      "TEMPLATES": {
-        "LETTER_NO_ACCESS_1": "Letter No Access 1 (Letter)",
-        "LETTER_NO_ACCESS_2": "Letter No Access 2 (Letter)",
-        "LETTER_NO_ACCESS_3": "Letter No Access 3 (Letter)"
+      "NOTIFICATIONS": {
+        "TEXT_LOADING_ERROR": "Failed to load templates. Please try again.",
+        "TEXT_UPLOAD_SUCCESS": "{{name}} has been uploaded successfully.",
+        "TEXT_UPLOAD_ERROR": "Failed to upload {{name}}. Please try again.",
+        "TEXT_DOWNLOAD_ERROR": "Failed to download {{name}}. Please try again."
       }
     },
     "PROFILE": {

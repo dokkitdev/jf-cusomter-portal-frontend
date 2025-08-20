@@ -8,10 +8,11 @@ import { AccountTemplatesPageComponent } from './templates.component';
 import { AccountTemplatesPageFacade } from './templates.facade';
 import { AccountTemplatesItemsComponent } from './shared/components/items/items.component';
 import { AccountTemplatesPageRoutingModule } from './templates.routing';
+import { TemplateService } from './shared/services';
 
 import { TableContainerModule } from '@shared/table-container';
-import { MediaService } from '@shared/media';
 import { FileService } from '@shared/file';
+import { NotificationModule } from '@shared/notification';
 
 @NgModule({
   declarations: [AccountTemplatesPageComponent, AccountTemplatesItemsComponent],
@@ -21,8 +22,9 @@ import { FileService } from '@shared/file';
     LetDirective,
     PushPipe,
     TableContainerModule,
-    AccountTemplatesPageRoutingModule
+    AccountTemplatesPageRoutingModule,
+    NotificationModule
   ],
-  providers: [AccountTemplatesPageFacade, ComponentStore, MediaService, FileService]
+  providers: [AccountTemplatesPageFacade, ComponentStore, TemplateService, FileService]
 })
 export class AccountTemplatesPageModule {}

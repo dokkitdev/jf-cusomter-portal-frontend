@@ -10,7 +10,7 @@
         [class.category-row-alternate]="i % 2 === 1">
         <div
           class="table-cell category-toggle"
-          (click)="toggleCategory(category.id)">
+          (click)="toggleCategory(category.group_label)">
           <a class="category-toggle-action">
             <span
               [ngClass]="{ 'accordionplus-opened': category.isExpanded }"
@@ -18,20 +18,20 @@
           </a>
         </div>
         <div class="table-cell category-name">
-          {{ category.name }}
+          {{ category.group_label }}
         </div>
       </div>
 
       <!-- Template Rows -->
-      @if (category.isExpanded && category.templates.length > 0) {
+      @if (category.isExpanded && category.letter_templates.length > 0) {
         <div
           [@heightCollapse]
           class="template-rows-container">
           <div
             class="table-row template-row"
-            *ngFor="let template of category.templates; trackBy: trackByTemplate">
+            *ngFor="let template of category.letter_templates; trackBy: trackByTemplate">
             <div class="table-cell template-name">
-              {{ template.name }}
+              {{ template.label }}
             </div>
             <div class="table-cell template-actions">
               <a
