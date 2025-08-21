@@ -10,7 +10,7 @@ export class TemplateService {
   public endpoint: string;
 
   constructor(private apiService: ApiService) {
-    this.endpoint = '/letter-templates';
+    this.endpoint = '/notify/letter-templates';
   }
 
   public getTemplates(): Observable<Array<TemplateCategory>> {
@@ -34,7 +34,7 @@ export class TemplateService {
 
   public downloadTemplate(templateName: string): Observable<Blob> {
     return this.apiService
-      .post<HttpResponse<Blob>>(
+      .get<HttpResponse<Blob>>(
         `${this.endpoint}/${templateName}/download`,
         {},
         {
