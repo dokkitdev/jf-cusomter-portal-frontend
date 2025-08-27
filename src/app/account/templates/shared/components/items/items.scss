@@ -1,25 +1,13 @@
 :host {
   .templates-category {
-    &-toggle {
-      flex: 0 0 60px;
-      min-width: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    &-toggle {flex: 0 0 60px; min-width: 60px; display: flex;
+      align-items: center; justify-content: center;
     }
 
-    &-name {
-      flex: 1;
-      min-width: 200px;
-    }
+    &-name {flex: 1; min-width: 200px;}
 
-    &-row {
-      cursor: pointer;
-      font-weight: 700;
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-      width: 100%;
+    &-row {cursor: pointer; font-weight: 700; min-height: 60px; display: flex;
+      align-items: center; width: 100%;
     }
   }
 }

@@ -15,7 +15,6 @@ export class NotifyService {
     this.baseEndpoint = '/notify';
   }
 
-  // Warehouse Reports functionality
   public generateWarehouseReport(period: number): Observable<void> {
     const request = new WarehouseReportRequest(period);
     const requestBody = classToPlain(request, { groups: [ClassGroup.MAIN] });
