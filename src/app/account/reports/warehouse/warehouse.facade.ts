@@ -57,9 +57,9 @@ export class AccountReportsWarehousePageFacade {
   }
 
   public goToReports(): void {
-    // Navigation to reports page - this would typically use router
-    // For now, we'll just reset the state
+    // TODO: Implement navigation to reports page
     this.resetState();
+    this.notificationService.error(this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION'));
   }
 
   private getServerErrorMessage(response: unknown): string {
