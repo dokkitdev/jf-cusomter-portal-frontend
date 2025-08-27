@@ -8,19 +8,19 @@
           <div
             class="table-row templates-category-row"
             [class.expanded]="category.isExpanded"
-            (click)="toggleCategory(category.group_label)">
+            (click)="toggleCategory(category.groupLabel)">
             <div class="table-cell templates-category-toggle">
               <span
                 [ngClass]="{ 'accordionplus-opened': category.isExpanded }"
                 class="accordionplus"></span>
             </div>
             <div class="table-cell templates-category-name">
-              {{ category.group_label }}
+              {{ category.groupLabel }}
             </div>
           </div>
         </div>
 
-        <ng-container *ngFor="let template of category.letter_templates; trackBy: trackByTemplate">
+        <ng-container *ngFor="let template of category.letterTemplates; trackBy: trackByTemplate">
           @if (category.isExpanded) {
             <div
               [@heightCollapse]

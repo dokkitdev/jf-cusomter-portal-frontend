@@ -349,8 +349,14 @@
         "TEXT_THREE_DAYS": "Three days",
         "TEXT_FOUR_DAYS": "Four days",
         "BUTTON_SUBMIT": "Generate warehouse report",
+        "SUCCESS": {
+          "TEXT_MESSAGE": "Your report is being processed and will appear on the Reports page shortly!",
+          "BUTTON_GENERATE_NEW": "Generate New Warehouse Report",
+          "BUTTON_GO_TO_REPORTS": "Go to Reports"
+        },
         "NOTIFICATIONS": {
-          "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!"
+          "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!",
+          "TEXT_ERROR": "Something went wrong. Please try again."
         }
       },
       "ZERO": {

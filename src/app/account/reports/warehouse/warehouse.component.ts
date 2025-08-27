@@ -1,4 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AccountReportsWarehousePageFacade } from './warehouse.facade';
 
 @Component({
   selector: 'account-reports-warehouse-page',
@@ -7,4 +9,10 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class AccountReportsWarehousePageComponent {}
+export class AccountReportsWarehousePageComponent {
+  public isReportGenerated$: Observable<boolean>;
+
+  constructor(private facade: AccountReportsWarehousePageFacade) {
+    this.isReportGenerated$ = this.facade.isReportGenerated$;
+  }
+}

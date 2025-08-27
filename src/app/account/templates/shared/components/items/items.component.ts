@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountTemplatesPageFacade } from '@app/account/templates/templates.facade';
 import { Observable } from 'rxjs';
-import { TemplateCategory, Template } from '../../models';
+import { Template } from '../../models';
+import { TemplateCategory } from '@shared/notify';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
@@ -34,7 +35,7 @@ export class AccountTemplatesItemsComponent {
   }
 
   public trackByCategory(index: number, category: TemplateCategory): string {
-    return category.group_label;
+    return category.groupLabel;
   }
 
   public trackByTemplate(index: number, template: Template): string {

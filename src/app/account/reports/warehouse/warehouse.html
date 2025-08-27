@@ -5,6 +5,9 @@
     </h2>
   </div>
   <div class="box warehouse-box">
-    <account-reports-warehouse-form></account-reports-warehouse-form>
+    <div *ngrxLet="isReportGenerated$; let isReportGenerated">
+      <account-reports-warehouse-form *ngIf="!isReportGenerated"> </account-reports-warehouse-form>
+      <account-reports-warehouse-success *ngIf="isReportGenerated"> </account-reports-warehouse-success>
+    </div>
   </div>
 </div>
