@@ -3,15 +3,15 @@ import { Observable } from 'rxjs';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs/operators';
-import { Template, TemplateCategory, TemplateData } from './shared/models';
-import { TemplateService } from './shared/services';
+import { Template } from './shared/models';
+import { NotifyService, LetterTemplateGroup } from '@shared/notify';
 import { FileService, FileInputService } from '@shared/file';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
 
 export interface AccountTemplatesPageState {
   isLoading: boolean;
-  categories: Array<TemplateCategory>;
+  categories: Array<LetterTemplateGroup & { isExpanded: boolean }>;
   error?: string;
 }
 
@@ -28,7 +28,7 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   private readonly uploadTemplateEffect = this.effect((data$: Observable<{ template: Template; file: File }>) =>
     data$.pipe(
       switchMap(({ template, file }) =>
-        this.templateService.uploadTemplate(template.name, file).pipe(
+        this.notifyService.uploadLetterTemplate(template.name, file).pipe(
           tapResponse(
             () => {
               this.notificationService.success(
@@ -54,7 +54,7 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   private readonly downloadTemplateEffect = this.effect((template$: Observable<Template>) =>
     template$.pipe(
       switchMap((template) =>
-        this.templateService.downloadTemplate(template.name).pipe(
+        this.notifyService.downloadLetterTemplate(template.name).pipe(
           tapResponse(
             (blob) => {
               // Create filename from template label, defaulting to .docx extension
@@ -80,13 +80,13 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
     isLoading
   }));
 
-  private readonly setCategories = this.updater<Array<TemplateCategory>>((state, categories) => ({
+  private readonly setCategories = this.updater<Array<LetterTemplateGroup>>((state, categories) => ({
     ...state,
-    categories
+    categories: categories.map((category) => ({ ...category, isExpanded: false }))
   }));
 
   constructor(
-    private templateService: TemplateService,
+    private notifyService: NotifyService,
     private fileService: FileService,
     private fileInputService: FileInputService,
     private notificationService: NotificationService,
@@ -98,8 +98,8 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   public loadTemplates(): void {
     this.setLoading(true);
 
-    this.templateService
-      .getTemplates()
+    this.notifyService
+      .getLetterTemplates()
       .pipe(
         tapResponse(
           (categories) => {
@@ -121,7 +121,7 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
   public toggleCategory(categoryLabel: string): void {
     this.patchState((state) => ({
       categories: state.categories.map((category) =>
-        category.group_label === categoryLabel ? { ...category, isExpanded: !category.isExpanded } : category
+        category.groupLabel === categoryLabel ? { ...category, isExpanded: !category.isExpanded } : category
       )
     }));
   }

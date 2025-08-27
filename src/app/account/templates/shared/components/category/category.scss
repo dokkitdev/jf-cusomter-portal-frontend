@@ -1,13 +1,16 @@
 :host {
   .templates-template {
     &-name {
-      padding-left: 70px; min-width: 250px;
+      padding-left: 70px;
+      min-width: 250px;
     }
   }
 
   .table {
-    &-action .icon {margin-right: 0.533rem;}
-  
+    &-action .icon {
+      margin-right: 0.533rem;
+    }
+
     &-row {
       background-color: #ffffff !important;
     }

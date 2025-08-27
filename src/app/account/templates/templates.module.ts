@@ -9,7 +9,7 @@ import { AccountTemplatesPageFacade } from './templates.facade';
 import { AccountTemplatesItemsComponent } from './shared/components/items/items.component';
 import { AccountTemplateCategoryComponent } from './shared/components/category/category.component';
 import { AccountTemplatesPageRoutingModule } from './templates.routing';
-import { TemplateService } from './shared/services';
+import { NotifyModule } from '@shared/notify';
 
 import { TableContainerModule } from '@shared/table-container';
 import { FileService, FileInputService } from '@shared/file';
@@ -24,8 +24,9 @@ import { NotificationModule } from '@shared/notification';
     PushPipe,
     TableContainerModule,
     AccountTemplatesPageRoutingModule,
-    NotificationModule
+    NotificationModule,
+    NotifyModule
   ],
-  providers: [AccountTemplatesPageFacade, ComponentStore, TemplateService, FileService, FileInputService]
+  providers: [AccountTemplatesPageFacade, ComponentStore, FileService, FileInputService]
 })
 export class AccountTemplatesPageModule {}
