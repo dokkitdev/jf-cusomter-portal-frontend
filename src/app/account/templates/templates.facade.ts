@@ -4,14 +4,14 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs/operators';
 import { Template } from './shared/models';
-import { NotifyService, TemplateCategory } from '@shared/notify';
+import { NotifyService, LetterTemplateGroup } from '@shared/notify';
 import { FileService, FileInputService } from '@shared/file';
 import { NotificationService } from '@shared/notification';
 import { TranslateService } from '@ngx-translate/core';
 
 export interface AccountTemplatesPageState {
   isLoading: boolean;
-  categories: Array<TemplateCategory>;
+  categories: Array<LetterTemplateGroup & { isExpanded: boolean }>;
   error?: string;
 }
 
@@ -80,9 +80,9 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
     isLoading
   }));
 
-  private readonly setCategories = this.updater<Array<TemplateCategory>>((state, categories) => ({
+  private readonly setCategories = this.updater<Array<LetterTemplateGroup>>((state, categories) => ({
     ...state,
-    categories
+    categories: categories.map((category) => ({ ...category, isExpanded: false }))
   }));
 
   constructor(

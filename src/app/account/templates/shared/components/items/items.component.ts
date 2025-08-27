@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountTemplatesPageFacade } from '@app/account/templates/templates.facade';
 import { Observable } from 'rxjs';
 import { Template } from '../../models';
-import { TemplateCategory } from '@shared/notify';
+import { LetterTemplateGroup } from '@shared/notify';
 import { heightCollapseAnimation } from '@shared/animations';
 
 @Component({
@@ -15,7 +15,7 @@ import { heightCollapseAnimation } from '@shared/animations';
 })
 export class AccountTemplatesItemsComponent {
   public isLoading$: Observable<boolean>;
-  public categories$: Observable<Array<TemplateCategory>>;
+  public categories$: Observable<Array<LetterTemplateGroup & { isExpanded: boolean }>>;
 
   constructor(private facade: AccountTemplatesPageFacade) {
     this.isLoading$ = this.facade.isLoading$;
@@ -34,7 +34,7 @@ export class AccountTemplatesItemsComponent {
     this.facade.downloadTemplate(template);
   }
 
-  public trackByCategory(index: number, category: TemplateCategory): string {
+  public trackByCategory(index: number, category: LetterTemplateGroup & { isExpanded: boolean }): string {
     return category.groupLabel;
   }
 

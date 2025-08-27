@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { WarehouseReportRequest, LetterTemplateGroup, TemplateCategory } from './models';
+import { WarehouseReportRequest, LetterTemplateGroup } from './models';
 
 @Injectable()
 export class NotifyService {
@@ -23,15 +23,12 @@ export class NotifyService {
     return this.apiService.post<void>(`${this.baseEndpoint}/reports/warehouse`, requestBody);
   }
 
-  // Letter Templates functionality
-  public getLetterTemplates(): Observable<Array<TemplateCategory>> {
+  public getLetterTemplates(): Observable<Array<LetterTemplateGroup>> {
     return this.apiService
       .get<Array<LetterTemplateGroup>>(`${this.baseEndpoint}/letter-templates`)
       .pipe(
         map((response) =>
-          response
-            .map((group) => plainToClass(LetterTemplateGroup, group, { groups: [ClassGroup.MAIN] }))
-            .map((group) => new TemplateCategory(group.groupLabel, group.letterTemplates))
+          response.map((group) => plainToClass(LetterTemplateGroup, group, { groups: [ClassGroup.MAIN] }))
         )
       );
   }
