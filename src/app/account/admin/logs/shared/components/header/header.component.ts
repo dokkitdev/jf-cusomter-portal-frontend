@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AccountAdminLogsPageFacade } from '../../../logs.facade';
 import { Observable } from 'rxjs';
+import { AccountAdminLogsPageFacade } from '../../../logs.facade';
 import { AdminLogsTab } from '../../types';
 
 @Component({
@@ -17,7 +17,7 @@ export class AccountAdminLogsHeaderComponent {
     this.activeTab$ = this.facade.activeTab$;
   }
 
-  public tabChanged(tab: AdminLogsTab): void {
+  public changeTab(tab: 'system' | 'parsing'): void {
     this.facade.changeTab(tab);
   }
 }

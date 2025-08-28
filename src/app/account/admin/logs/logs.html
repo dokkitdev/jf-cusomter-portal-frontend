@@ -1,17 +1,8 @@
 <div class="page page-list adminlogs">
-  <div class="logs">
-    <admin-logs-header></admin-logs-header>
-    <div class="tab-content">
-      <div
-        *ngIf="(activeTab$ | async) === 'system'"
-        class="tab-panel">
-        <admin-logs-system-logs></admin-logs-system-logs>
-      </div>
-      <div
-        *ngIf="(activeTab$ | async) === 'parsing'"
-        class="tab-panel">
-        <admin-logs-parsing-logs></admin-logs-parsing-logs>
-      </div>
-    </div>
+  <admin-logs-header></admin-logs-header>
+
+  <div *ngrxLet="facade.activeTab$; let activeTab">
+    <admin-logs-system-logs *ngIf="activeTab === 'system'"></admin-logs-system-logs>
+    <admin-logs-parsing-logs *ngIf="activeTab === 'parsing'"></admin-logs-parsing-logs>
   </div>
 </div>

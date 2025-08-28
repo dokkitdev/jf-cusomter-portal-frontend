@@ -1,0 +1,15 @@
+<div class="table-row">
+  <div class="table-cell adminlogs-parsing-type">{{ item.parsingType }}</div>
+  <div class="table-cell adminlogs-parsing-date">
+    {{ item.parsingDate | date: dateFormat }}
+  </div>
+  <div class="table-cell adminlogs-total-count">{{ item.totalCount }}</div>
+  <div class="table-cell adminlogs-success-count">{{ item.successCount }}</div>
+  <div class="table-cell adminlogs-actions">
+    <a
+      (click)="openLogsDetailsDialog()"
+      class="table-action table-action-info">
+      {{ 'ACCOUNT.ADMIN.LOGS.BUTTON_SHOW' | translate }}
+    </a>
+  </div>
+</div>

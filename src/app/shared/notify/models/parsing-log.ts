@@ -1,4 +1,6 @@
+import { ClassGroup } from '@shared/class-group';
 import { Expose, Transform } from 'class-transformer';
+import { DateTime } from 'luxon';
 
 export class ParsingLog {
   @Expose()
@@ -7,8 +9,10 @@ export class ParsingLog {
   @Expose({ name: 'parsing_type' })
   public parsingType: string;
 
-  @Expose({ name: 'parsing_date' })
-  @Transform(({ value }) => new Date(value))
+  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+    toClassOnly: true
+  })
+  @Expose({ name: 'parsing_date', groups: [ClassGroup.MAIN] })
   public parsingDate: Date;
 
   @Expose({ name: 'total_count' })
@@ -23,13 +27,12 @@ export class ParsingLog {
   @Expose({ name: 'error_reasons' })
   public errorReasons: Array<string>;
 
-  @Expose({ name: 'created_at' })
-  @Transform(({ value }) => new Date(value))
+  // TODO: Remove this once the API is updated
+  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+    toClassOnly: true
+  })
+  @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })
   public createdAt: Date;
-
-  @Expose({ name: 'updated_at' })
-  @Transform(({ value }) => new Date(value))
-  public updatedAt: Date;
 
   constructor(model: Partial<ParsingLog> = {}) {
     Object.assign(this, model);

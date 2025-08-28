@@ -4,8 +4,11 @@ import { Observable, of } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
 import { tapResponse } from '@ngrx/operators';
 import { NotifyService, ParsingLog, SystemLog } from '@shared/notify';
+import { NotifySystemLogsSortField } from '@shared/notify/type/system-logs-sort-field';
+import { NotifyParsingLogsSortField } from '@shared/notify/type/parsing-logs-sort-field';
 import { NotificationService } from '@shared/notification';
 import { AdminLogsTab } from './shared/types';
+import { AccountAdminLogsQueryParameters } from './shared/query-parameters';
 
 export interface LogsState {
   systemLogs: Array<SystemLog>;
@@ -17,6 +20,8 @@ export interface LogsState {
   systemTotalPages: number;
   parsingTotalPages: number;
   activeTab: AdminLogsTab;
+  orderBy: NotifySystemLogsSortField | NotifyParsingLogsSortField;
+  desc: boolean;
 }
 
 const initialState: LogsState = {
@@ -28,12 +33,13 @@ const initialState: LogsState = {
   currentParsingPage: 1,
   systemTotalPages: 1,
   parsingTotalPages: 1,
-  activeTab: 'system'
+  activeTab: 'system',
+  orderBy: NotifySystemLogsSortField.CREATED_AT,
+  desc: true
 };
 
 @Injectable()
 export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
-  // Selectors
   public readonly systemLogs$ = this.select((state) => state.systemLogs);
   public readonly parsingLogs$ = this.select((state) => state.parsingLogs);
   public readonly isLoadingSystem$ = this.select((state) => state.isLoadingSystem);
@@ -43,6 +49,15 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
   public readonly systemTotalPages$ = this.select((state) => state.systemTotalPages);
   public readonly parsingTotalPages$ = this.select((state) => state.parsingTotalPages);
   public readonly activeTab$ = this.select((state) => state.activeTab);
+  public readonly orderBy$ = this.select((state) => state.orderBy);
+  public readonly desc$ = this.select((state) => state.desc);
+
+  public readonly parameters$ = this.select(
+    this.currentSystemPage$,
+    this.orderBy$,
+    this.desc$,
+    (page, orderBy, desc) => new AccountAdminLogsQueryParameters({ page, orderBy, desc })
+  );
 
   public readonly setActiveTab = this.updater((state, activeTab: AdminLogsTab) => ({
     ...state,
@@ -59,52 +74,74 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     currentParsingPage: page
   }));
 
+  public readonly updateSort = this.updater((state, parameters: AccountAdminLogsQueryParameters) => ({
+    ...state,
+    orderBy: parameters.orderBy,
+    desc: parameters.desc
+  }));
+
   // Effects
   public readonly loadSystemLogs = this.effect((page$: Observable<number>) =>
     page$.pipe(
       tap(() => this.patchState({ isLoadingSystem: true })),
-      switchMap((page) =>
-        this.notifyService.searchSystemLogs({ page }).pipe(
-          tapResponse(
-            (response) => {
-              this.patchState({
-                systemLogs: response.items,
-                systemTotalPages: response.lastPage,
-                isLoadingSystem: false
-              });
-            },
-            (error: unknown) => {
-              this.patchState({ isLoadingSystem: false });
-              const errorMessage = error instanceof Error ? error.message : 'Failed to load system logs';
-              this.notificationService.error(errorMessage);
-            }
-          )
-        )
-      )
+      switchMap((page) => {
+        const state = this.get();
+        return this.notifyService
+          .searchSystemLogs({
+            page,
+            orderBy: state.orderBy as NotifySystemLogsSortField,
+            desc: state.desc
+          })
+          .pipe(
+            tapResponse(
+              (response) => {
+                console.log('response', response);
+
+                this.patchState({
+                  systemLogs: response.items,
+                  systemTotalPages: response.lastPage,
+                  isLoadingSystem: false
+                });
+              },
+              (error: unknown) => {
+                this.patchState({ isLoadingSystem: false });
+                const errorMessage = error instanceof Error ? error.message : 'Failed to load system logs';
+                this.notificationService.error(errorMessage);
+              }
+            )
+          );
+      })
     )
   );
 
   public readonly loadParsingLogs = this.effect((page$: Observable<number>) =>
     page$.pipe(
       tap(() => this.patchState({ isLoadingParsing: true })),
-      switchMap((page) =>
-        this.notifyService.searchParsingLogs({ page }).pipe(
-          tapResponse(
-            (response) => {
-              this.patchState({
-                parsingLogs: response.items,
-                parsingTotalPages: response.lastPage,
-                isLoadingParsing: false
-              });
-            },
-            (error: unknown) => {
-              this.patchState({ isLoadingParsing: false });
-              const errorMessage = error instanceof Error ? error.message : 'Failed to load parsing logs';
-              this.notificationService.error(errorMessage);
-            }
-          )
-        )
-      )
+      switchMap((page) => {
+        const state = this.get();
+        return this.notifyService
+          .searchParsingLogs({
+            page,
+            orderBy: state.orderBy as NotifyParsingLogsSortField,
+            desc: state.desc
+          })
+          .pipe(
+            tapResponse(
+              (response) => {
+                this.patchState({
+                  parsingLogs: response.items,
+                  parsingTotalPages: response.lastPage,
+                  isLoadingParsing: false
+                });
+              },
+              (error: unknown) => {
+                this.patchState({ isLoadingParsing: false });
+                const errorMessage = error instanceof Error ? error.message : 'Failed to load parsing logs';
+                this.notificationService.error(errorMessage);
+              }
+            )
+          );
+      })
     )
   );
 
@@ -171,5 +208,19 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     } else if (tab === 'parsing' && this.get().parsingLogs.length === 0) {
       this.loadParsing();
     }
+  }
+
+  public changeSort(parameters: AccountAdminLogsQueryParameters): void {
+    this.updateSort(parameters);
+    // Reload data with new sorting
+    if (this.get().activeTab === 'system') {
+      this.loadSystem();
+    } else {
+      this.loadParsing();
+    }
+  }
+
+  public resetState(): void {
+    this.setState(initialState);
   }
 }

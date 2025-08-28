@@ -432,7 +432,15 @@
       "LOGS": {
         "TEXT_PAGE_TITLE": "Logs",
         "TEXT_TAB_SYSTEM": "System",
-        "TEXT_TAB_PARSING": "Parsing"
+        "TEXT_TAB_PARSING": "Parsing",
+        "SYSTEM_LOGS_HEADER": {
+          "TEXT_DATE": "Date",
+          "TEXT_TYPE": "Customer Type",
+          "TEXT_LETTERS_GENERATED": "Letters generated",
+          "TEXT_EMAIL_GENERATED": "Email generated"
+        },
+        "BUTTON_LETTERS": "Letters",
+        "BUTTON_SHOW": "Show"
       }
     },
     "DOCUMENTS": {

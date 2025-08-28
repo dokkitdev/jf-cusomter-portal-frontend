@@ -1,0 +1,41 @@
+<div class="table-head">
+  <div
+    *ngrxLet="parameters$; let parameters"
+    class="table-row">
+    <div class="table-cell adminlogs-parsing-type">
+      <header-sort
+        [orderBy]="logsSortField.PARSING_TYPE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_PARSING_TYPE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminlogs-parsing-date">
+      <header-sort
+        [orderBy]="logsSortField.PARSING_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_PARSING_DATE' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminlogs-total-count">
+      <header-sort
+        [orderBy]="logsSortField.TOTAL_COUNT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_TOTAL_COUNT' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminlogs-success-count">
+      <header-sort
+        [orderBy]="logsSortField.SUCCESS_COUNT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_SUCCESS_COUNT' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell adminlogs-actions">
+      {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_ACTIONS' | translate }}
+    </div>
+  </div>
+</div>

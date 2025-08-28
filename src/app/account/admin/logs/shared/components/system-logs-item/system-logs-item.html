@@ -1,0 +1,19 @@
+<div class="table-row">
+  <div class="table-cell logs-system-date">
+    {{ item.createdAt | date: dateFormat }}
+  </div>
+  <div class="table-cell logs-system-type">{{ item.reportType }}</div>
+  <div class="table-cell logs-system-letters">
+    {{ item.lettersGenerated }}
+  </div>
+  <div class="table-cell logs-system-email">
+    {{ item.emailGenerated || 0 }}
+  </div>
+  <div class="table-cell logs-system-actions">
+    <a
+      (click)="openLettersClicked()"
+      class="table-action">
+      {{ 'ACCOUNT.ADMIN.LOGS.BUTTON_LETTERS' | translate }}
+    </a>
+  </div>
+</div>

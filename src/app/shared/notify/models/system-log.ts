@@ -1,4 +1,6 @@
+import { ClassGroup } from '@shared/class-group';
 import { Expose, Transform } from 'class-transformer';
+import { DateTime } from 'luxon';
 
 export class SystemLog {
   @Expose()
@@ -10,16 +12,17 @@ export class SystemLog {
   @Expose({ name: 'letters_generated' })
   public lettersGenerated: number;
 
+  @Expose({ name: 'email_generated' })
+  public emailGenerated: number;
+
   @Expose({ name: 'is_finished' })
   public isFinished: boolean;
 
-  @Expose({ name: 'created_at' })
-  @Transform(({ value }) => new Date(value))
+  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+    toClassOnly: true
+  })
+  @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })
   public createdAt: Date;
-
-  @Expose({ name: 'updated_at' })
-  @Transform(({ value }) => new Date(value))
-  public updatedAt: Date;
 
   constructor(model: Partial<SystemLog> = {}) {
     Object.assign(this, model);
