@@ -84,6 +84,7 @@
       "LINK_ADMIN": "Admin",
       "LINK_ADMIN_USERS": "Users",
       "LINK_ADMIN_DOCUMENTS": "Documents",
+      "LINK_ADMIN_LOGS": "Logs",
       "LINK_LOGOUT": "Logout",
       "DIALOG_LOGOUT": {
         "TEXT_TITLE": "Log out?"

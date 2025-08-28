@@ -1,0 +1,175 @@
+import { Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { Observable, of } from 'rxjs';
+import { switchMap, tap, catchError } from 'rxjs/operators';
+import { tapResponse } from '@ngrx/operators';
+import { NotifyService, ParsingLog, SystemLog } from '@shared/notify';
+import { NotificationService } from '@shared/notification';
+
+export interface LogsState {
+  systemLogs: Array<SystemLog>;
+  parsingLogs: Array<ParsingLog>;
+  isLoadingSystem: boolean;
+  isLoadingParsing: boolean;
+  currentSystemPage: number;
+  currentParsingPage: number;
+  systemTotalPages: number;
+  parsingTotalPages: number;
+  activeTab: 'system' | 'parsing';
+}
+
+const initialState: LogsState = {
+  systemLogs: [],
+  parsingLogs: [],
+  isLoadingSystem: false,
+  isLoadingParsing: false,
+  currentSystemPage: 1,
+  currentParsingPage: 1,
+  systemTotalPages: 1,
+  parsingTotalPages: 1,
+  activeTab: 'system'
+};
+
+@Injectable()
+export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
+  // Selectors
+  public readonly systemLogs$ = this.select((state) => state.systemLogs);
+  public readonly parsingLogs$ = this.select((state) => state.parsingLogs);
+  public readonly isLoadingSystem$ = this.select((state) => state.isLoadingSystem);
+  public readonly isLoadingParsing$ = this.select((state) => state.isLoadingParsing);
+  public readonly currentSystemPage$ = this.select((state) => state.currentSystemPage);
+  public readonly currentParsingPage$ = this.select((state) => state.currentParsingPage);
+  public readonly systemTotalPages$ = this.select((state) => state.systemTotalPages);
+  public readonly parsingTotalPages$ = this.select((state) => state.parsingTotalPages);
+  public readonly activeTab$ = this.select((state) => state.activeTab);
+
+  // Updaters
+  public readonly setActiveTab = this.updater((state, activeTab: 'system' | 'parsing') => ({
+    ...state,
+    activeTab
+  }));
+
+  public readonly setSystemPage = this.updater((state, page: number) => ({
+    ...state,
+    currentSystemPage: page
+  }));
+
+  public readonly setParsingPage = this.updater((state, page: number) => ({
+    ...state,
+    currentParsingPage: page
+  }));
+
+  // Effects
+  public readonly loadSystemLogs = this.effect((page$: Observable<number>) =>
+    page$.pipe(
+      tap(() => this.patchState({ isLoadingSystem: true })),
+      switchMap((page) =>
+        this.notifyService.searchSystemLogs({ page }).pipe(
+          tapResponse(
+            (response) => {
+              this.patchState({
+                systemLogs: response.items,
+                systemTotalPages: response.lastPage,
+                isLoadingSystem: false
+              });
+            },
+            (error: unknown) => {
+              this.patchState({ isLoadingSystem: false });
+              const errorMessage = error instanceof Error ? error.message : 'Failed to load system logs';
+              this.notificationService.error(errorMessage);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  public readonly loadParsingLogs = this.effect((page$: Observable<number>) =>
+    page$.pipe(
+      tap(() => this.patchState({ isLoadingParsing: true })),
+      switchMap((page) =>
+        this.notifyService.searchParsingLogs({ page }).pipe(
+          tapResponse(
+            (response) => {
+              this.patchState({
+                parsingLogs: response.items,
+                parsingTotalPages: response.lastPage,
+                isLoadingParsing: false
+              });
+            },
+            (error: unknown) => {
+              this.patchState({ isLoadingParsing: false });
+              const errorMessage = error instanceof Error ? error.message : 'Failed to load parsing logs';
+              this.notificationService.error(errorMessage);
+            }
+          )
+        )
+      )
+    )
+  );
+
+  // public readonly downloadReportLetters = this.effect((reportId$: Observable<number>) =>
+  // reportId$.pipe(
+  //   switchMap((reportId) =>
+  //     this.notifyService.downloadReportLetters(reportId).pipe(
+  //       tapResponse(
+  //         (blob) => {
+  //           const url = window.URL.createObjectURL(blob);
+  //           const link = document.createElement('a');
+  //           link.href = url;
+  //           link.download = `report-${reportId}-letters.pdf`;
+  //           link.click();
+  //           window.URL.revokeObjectURL(url);
+  //         },
+  //         (error: unknown) => {
+  //           const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
+  //           this.notificationService.error(errorMessage);
+  //         }
+  //       ),
+  //       catchError((error: unknown) => {
+  //         const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
+  //         this.notificationService.error(errorMessage);
+  //         return of(null);
+  //       })
+  //     )
+  //   )
+  // )
+  // );
+
+  constructor(
+    private notifyService: NotifyService,
+    private notificationService: NotificationService
+  ) {
+    super(initialState);
+  }
+
+  // Public methods
+  public loadSystem(): void {
+    const currentPage = this.get().currentSystemPage;
+    this.loadSystemLogs(of(currentPage));
+  }
+
+  public loadParsing(): void {
+    const currentPage = this.get().currentParsingPage;
+    this.loadParsingLogs(of(currentPage));
+  }
+
+  public changeSystemPage(page: number): void {
+    this.setSystemPage(page);
+    this.loadSystemLogs(of(page));
+  }
+
+  public changeParsingPage(page: number): void {
+    this.setParsingPage(page);
+    this.loadParsingLogs(of(page));
+  }
+
+  public changeTab(tab: 'system' | 'parsing'): void {
+    this.setActiveTab(tab);
+    if (tab === 'system' && this.get().systemLogs.length === 0) {
+      this.loadSystem();
+    } else if (tab === 'parsing' && this.get().parsingLogs.length === 0) {
+      this.loadParsing();
+    }
+  }
+}
