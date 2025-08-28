@@ -27,10 +27,11 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
   public readonly activeTab$ = this.select((state) => state.activeTab);
   public readonly orderBy$ = this.select((state) => state.orderBy);
   public readonly desc$ = this.select((state) => state.desc);
-  public readonly systemPerPage$ = this.select((state) => state.systemPerPage);
-  public readonly parsingPerPage$ = this.select((state) => state.parsingPerPage);
-  public readonly systemPaginationId$ = this.select((state) => state.systemPaginationId);
-  public readonly parsingPaginationId$ = this.select((state) => state.parsingPaginationId);
+
+  public readonly systemPerPage$ = this.select((state) => 10); // Default page size
+  public readonly parsingPerPage$ = this.select((state) => 10); // Default page size
+  public readonly systemPaginationId$ = this.select((state) => 'system-logs-pagination');
+  public readonly parsingPaginationId$ = this.select((state) => 'parsing-logs-pagination');
 
   public readonly parameters$ = this.select(
     this.currentSystemPage$,
