@@ -3,9 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
-import { classToPlain, plainToClass } from 'class-transformer';
+import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { WarehouseReportRequest, LetterTemplateGroup } from './models';
+import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
+import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
+import { PaginationRequest, PaginationResponse } from '@shared/pagination';
+import { isUndefined, omitBy } from 'lodash';
 
 @Injectable()
 export class NotifyService {
@@ -13,6 +16,64 @@ export class NotifyService {
 
   constructor(private apiService: ApiService) {
     this.baseEndpoint = '/notify';
+  }
+
+  public searchSystemLogs({
+    page,
+    perPage,
+    orderBy,
+    desc
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: NotifySystemLogsSortField;
+    desc?: boolean;
+  } = {}): Observable<PaginationResponse<SystemLog>> {
+    const request = new PaginationRequest({
+      page,
+      perPage,
+      orderBy,
+      desc
+    });
+
+    return this.apiService
+      .get<
+        PaginationResponse<SystemLog>
+      >(`${this.baseEndpoint}/reports`, omitBy(classToPlain<PaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<SystemLog>(SystemLog), response, { groups: [ClassGroup.MAIN] })
+        )
+      );
+  }
+
+  public searchParsingLogs({
+    page,
+    perPage,
+    orderBy,
+    desc
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: NotifyParsingLogsSortField;
+    desc?: boolean;
+  } = {}): Observable<PaginationResponse<ParsingLog>> {
+    const request = new PaginationRequest({
+      page,
+      perPage,
+      orderBy,
+      desc
+    });
+
+    return this.apiService
+      .get<
+        PaginationResponse<ParsingLog>
+      >(`${this.baseEndpoint}/parsing-logs`, omitBy(classToPlain<PaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<ParsingLog>(ParsingLog), response, { groups: [ClassGroup.MAIN] })
+        )
+      );
   }
 
   public generateWarehouseReport(period: number): Observable<void> {
@@ -43,6 +104,19 @@ export class NotifyService {
     return this.apiService
       .get<HttpResponse<Blob>>(
         `${this.baseEndpoint}/letter-templates/${templateName}/download`,
+        {},
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
+  }
+
+  public downloadReportLetters(reportId: number): Observable<Blob> {
+    return this.apiService
+      .get<HttpResponse<Blob>>(
+        `${this.baseEndpoint}/reports/${reportId}/letters`,
         {},
         {
           responseType: 'blob',

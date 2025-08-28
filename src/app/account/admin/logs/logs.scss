@@ -1,0 +1,26 @@
+@use 'vars' as *;
+
+:host ::ng-deep .logs {
+  &-tabs {display: flex; flex-direction: row; gap: 8px; margin-bottom: 32px;
+    &-button {
+      button {border-radius: 20px; padding: 8px 20px; font-weight: 400;}
+    }
+  }
+
+  &-system {
+    &-date {flex: 1 1 200px; min-width: 200px;}
+    &-type {flex: 2 1 300px; min-width: 300px;}
+    &-letters {flex: 1 1 243px; min-width: 243px;}
+    &-email {flex: 1 1 243px; min-width: 243px;}
+    &-actions {flex: 0 0 60px; min-width: 60px;}
+  }
+
+  &-parsing {
+    &-created {flex: 1 1 200px; min-width: 200px;}
+    &-type {flex: 2 1 400px; min-width: 400px;}
+    &-total {flex: 1 1 150px; min-width: 150px;}
+    &-success {flex: 1 1 150px; min-width: 150px;}
+    &-parsing-date {flex: 1 1 150px; min-width: 150px;}
+    &-actions {flex: 0 0 60px; min-width: 60px;}
+  }
+}

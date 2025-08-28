@@ -1,0 +1,18 @@
+<div class="table-row">
+  <div class="table-cell logs-parsing-created">
+    {{ item.createdAt | date: dateTimeFormat }}
+  </div>
+  <div class="table-cell logs-parsing-type">{{ item.parsingType }}</div>
+  <div class="table-cell logs-parsing-total">{{ item.totalCount }}</div>
+  <div class="table-cell logs-parsing-success">{{ item.successCount }}</div>
+  <div class="table-cell logs-parsing-parsing-date">
+    {{ item.parsingDate | date: dateFormat }}
+  </div>
+  <div class="table-cell logs-parsing-actions">
+    <a
+      (click)="onShowClicked(item)"
+      class="table-action">
+      {{ 'ACCOUNT.ADMIN.LOGS.BUTTON_SHOW' | translate }}
+    </a>
+  </div>
+</div>

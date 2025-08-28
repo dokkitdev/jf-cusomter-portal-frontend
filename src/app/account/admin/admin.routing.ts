@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'documents',
     loadChildren: () => import('./documents/documents.module').then((module) => module.AccountAdminDocumentsPageModule)
+  },
+  {
+    path: 'logs',
+    loadChildren: () => import('./logs/logs.module').then((module) => module.AccountAdminLogsPageModule)
   }
 ];
 

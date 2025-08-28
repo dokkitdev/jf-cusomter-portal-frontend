@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h2 class="page-title">
+    {{ 'ACCOUNT.ADMIN.LOGS.TEXT_PAGE_TITLE' | translate }}
+  </h2>
+</div>
+<div class="logs-tabs">
+  <btn
+    class="logs-tabs-button"
+    [variant]="(activeTab$ | async) === 'system' ? 'primary' : 'ghost'"
+    (clicked)="changeTab('system')">
+    {{ 'ACCOUNT.ADMIN.LOGS.TEXT_TAB_SYSTEM' | translate }}
+  </btn>
+  <btn
+    class="logs-tabs-button"
+    [variant]="(activeTab$ | async) === 'parsing' ? 'primary' : 'ghost'"
+    (clicked)="changeTab('parsing')">
+    {{ 'ACCOUNT.ADMIN.LOGS.TEXT_TAB_PARSING' | translate }}
+  </btn>
+</div>
