@@ -10,10 +10,12 @@ import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { ButtonModule } from '@shared/button';
 import { NotifyModule } from '@shared/notify';
 import { NotificationModule } from '@shared/notification';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [AccountAdminLogsPageComponent],
   imports: [
+    MatTabsModule,
     CommonModule,
     RouterModule,
     TranslateModule,
