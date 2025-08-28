@@ -14,7 +14,11 @@ export class AccountAdminLogsParsingLogsItemComponent {
   @Output() showClicked = new EventEmitter<ParsingLog>();
 
   public get dateFormat(): string {
-    return configuration.dateFormats.documentDate;
+    return configuration.dateFormats.reports.logsDate;
+  }
+
+  public get dateTimeFormat(): string {
+    return configuration.dateFormats.reports.logsDateTime;
   }
 
   public onShowClicked(parsingLog: ParsingLog): void {

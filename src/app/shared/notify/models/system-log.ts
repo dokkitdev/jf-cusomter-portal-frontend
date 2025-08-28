@@ -18,8 +18,7 @@ export class SystemLog {
   @Expose({ name: 'is_finished' })
   public isFinished: boolean;
 
-  // TODO: Remove this once the API is updated
-  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
     toClassOnly: true
   })
   @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })

@@ -13,8 +13,8 @@ export class AccountAdminLogsSystemLogsItemComponent {
   @Input() item: SystemLog;
   @Output() openLettersClicked = new EventEmitter<SystemLog>();
 
-  public get dateFormat(): string {
-    return configuration.dateFormats.documentDate;
+  public get dateTimeFormat(): string {
+    return configuration.dateFormats.reports.logsDateTime;
   }
 
   public onOpenLettersClicked(systemLog: SystemLog): void {

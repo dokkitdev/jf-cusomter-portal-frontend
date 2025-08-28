@@ -9,8 +9,7 @@ export class ParsingLog {
   @Expose({ name: 'parsing_type' })
   public parsingType: string;
 
-  // TODO: Remove this once the API is updated
-  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
     toClassOnly: true
   })
   @Expose({ name: 'parsing_date', groups: [ClassGroup.MAIN] })
@@ -28,8 +27,7 @@ export class ParsingLog {
   @Expose({ name: 'error_reasons' })
   public errorReasons: Array<string>;
 
-  // TODO: Remove this once the API is updated
-  @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
+  @Transform(({ value }) => (value ? DateTime.fromISO(value) : value), {
     toClassOnly: true
   })
   @Expose({ name: 'created_at', groups: [ClassGroup.MAIN] })
