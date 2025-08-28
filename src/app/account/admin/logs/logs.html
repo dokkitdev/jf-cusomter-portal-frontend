@@ -1,20 +1,16 @@
 <div class="page page-list adminlogs">
   <div class="logs">
     <admin-logs-header></admin-logs-header>
-    <!-- Tab Content -->
     <div class="tab-content">
-      <!-- System Logs Tab -->
       <div
         *ngIf="(activeTab$ | async) === 'system'"
         class="tab-panel">
-        First
+        <admin-logs-system-logs></admin-logs-system-logs>
       </div>
-
-      <!-- Parsing Logs Tab -->
       <div
         *ngIf="(activeTab$ | async) === 'parsing'"
         class="tab-panel">
-        Second
+        <admin-logs-parsing-logs></admin-logs-parsing-logs>
       </div>
     </div>
   </div>
