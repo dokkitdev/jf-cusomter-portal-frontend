@@ -66,6 +66,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
       tap(() => this.patchState({ isLoadingSystem: true })),
       switchMap((page) => {
         const state = this.get();
+
         return this.notifyService
           .searchSystemLogs({
             page,
@@ -95,6 +96,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
       tap(() => this.patchState({ isLoadingParsing: true })),
       switchMap((page) => {
         const state = this.get();
+
         return this.notifyService
           .searchParsingLogs({
             page,
