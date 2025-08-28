@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
 import { tapResponse } from '@ngrx/operators';
 import { NotifyService, ParsingLog, SystemLog } from '@shared/notify';
@@ -82,8 +82,6 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
               },
               (error: unknown) => {
                 this.patchState({ isLoadingSystem: false });
-                const errorMessage = error instanceof Error ? error.message : 'Failed to load system logs';
-                this.notificationService.error(errorMessage);
               }
             )
           );
@@ -113,8 +111,6 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
               },
               (error: unknown) => {
                 this.patchState({ isLoadingParsing: false });
-                const errorMessage = error instanceof Error ? error.message : 'Failed to load parsing logs';
-                this.notificationService.error(errorMessage);
               }
             )
           );
@@ -130,16 +126,9 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
             (blob) => {
               this.fileService.saveFile(blob, `report-${reportId}-letters.pdf`);
             },
-            (error: unknown) => {
-              const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
-              this.notificationService.error(errorMessage);
-            }
+            (error: unknown) => of(null)
           ),
-          catchError((error: unknown) => {
-            const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
-            this.notificationService.error(errorMessage);
-            return of(null);
-          })
+          catchError((error: unknown) => of(null))
         )
       )
     )
