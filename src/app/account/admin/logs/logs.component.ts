@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
 import { AccountAdminLogsPageFacade } from './logs.facade';
 import { ParsingLog, SystemLog } from '@shared/notify';
+import { AdminLogsTab } from './shared/types';
 
 @Component({
   selector: 'app-account-admin-logs-page',
@@ -20,7 +20,7 @@ export class AccountAdminLogsPageComponent implements OnInit {
   public currentParsingPage$: Observable<number>;
   public systemTotalPages$: Observable<number>;
   public parsingTotalPages$: Observable<number>;
-  public activeTab$: Observable<'system' | 'parsing'>;
+  public activeTab$: Observable<AdminLogsTab>;
 
   // Column definitions for the tables
   public readonly systemDisplayedColumns = [
@@ -40,10 +40,7 @@ export class AccountAdminLogsPageComponent implements OnInit {
     'actions'
   ];
 
-  constructor(
-    private facade: AccountAdminLogsPageFacade,
-    private dialog: MatDialog
-  ) {
+  constructor(private facade: AccountAdminLogsPageFacade) {
     this.systemLogs$ = this.facade.systemLogs$;
     this.parsingLogs$ = this.facade.parsingLogs$;
     this.isLoadingSystem$ = this.facade.isLoadingSystem$;
@@ -67,14 +64,12 @@ export class AccountAdminLogsPageComponent implements OnInit {
     this.facade.changeParsingPage(page);
   }
 
-  public changeTab(tab: 'system' | 'parsing'): void {
+  public changeTab(tab: AdminLogsTab): void {
     this.facade.changeTab(tab);
   }
 
   public openLogsDetailsDialog(log: SystemLog | ParsingLog): void {
-    // this.dialog.open(LogsDetailsDialogComponent, {
-    //   data: { log },
-    //   width: '600px'
-    // });
+    // TODO: Implement logs details dialog
+    console.log('Opening logs details for:', log);
   }
 }

@@ -1,45 +1,9 @@
 @use 'vars' as *;
 
-.logs-page {
-  padding: $default;
-  
-  h1 {
-    margin-bottom: $default;
-    color: $text-main;
-    font-size: 24px;
-  }
-  
-  .tab-content {
-    margin-top: $default;
-  }
-  
-  .logs-table {
-    width: 100%;
-    
-    th, td {
-      padding: $default * 0.5;
-      text-align: left;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    
-    th {
-      background-color: #f5f5f5;
-      font-weight: 600;
-    }
-    
-    .status-finished {
-      color: #4caf50;
-      font-weight: 500;
-    }
-    
-    .status-pending {
-      color: #ff9800;
-      font-weight: 500;
-    }
-    
-    .actions {
-      display: flex;
-      gap: $default * 0.5;
+:host ::ng-deep .logs {
+  &-tabs {display: flex; flex-direction: row; gap: 8px;
+    &-button {
+      button {border-radius: 20px; padding: 8px 20px; font-weight: 400;}
     }
   }
 }

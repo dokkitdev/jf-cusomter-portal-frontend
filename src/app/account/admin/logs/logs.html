@@ -1,3 +1,21 @@
-<div class="logs-page">
-  <h1>{{ 'ACCOUNT.ADMIN.LOGS.TEXT_PAGE_TITLE' | translate }}</h1>
+<div class="page page-list adminlogs">
+  <div class="logs">
+    <admin-logs-header></admin-logs-header>
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- System Logs Tab -->
+      <div
+        *ngIf="(activeTab$ | async) === 'system'"
+        class="tab-panel">
+        First
+      </div>
+
+      <!-- Parsing Logs Tab -->
+      <div
+        *ngIf="(activeTab$ | async) === 'parsing'"
+        class="tab-panel">
+        Second
+      </div>
+    </div>
+  </div>
 </div>

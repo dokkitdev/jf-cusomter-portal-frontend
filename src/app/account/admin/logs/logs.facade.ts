@@ -5,6 +5,7 @@ import { switchMap, tap, catchError } from 'rxjs/operators';
 import { tapResponse } from '@ngrx/operators';
 import { NotifyService, ParsingLog, SystemLog } from '@shared/notify';
 import { NotificationService } from '@shared/notification';
+import { AdminLogsTab } from './shared/types';
 
 export interface LogsState {
   systemLogs: Array<SystemLog>;
@@ -15,7 +16,7 @@ export interface LogsState {
   currentParsingPage: number;
   systemTotalPages: number;
   parsingTotalPages: number;
-  activeTab: 'system' | 'parsing';
+  activeTab: AdminLogsTab;
 }
 
 const initialState: LogsState = {
@@ -43,8 +44,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
   public readonly parsingTotalPages$ = this.select((state) => state.parsingTotalPages);
   public readonly activeTab$ = this.select((state) => state.activeTab);
 
-  // Updaters
-  public readonly setActiveTab = this.updater((state, activeTab: 'system' | 'parsing') => ({
+  public readonly setActiveTab = this.updater((state, activeTab: AdminLogsTab) => ({
     ...state,
     activeTab
   }));
@@ -164,7 +164,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     this.loadParsingLogs(of(page));
   }
 
-  public changeTab(tab: 'system' | 'parsing'): void {
+  public changeTab(tab: AdminLogsTab): void {
     this.setActiveTab(tab);
     if (tab === 'system' && this.get().systemLogs.length === 0) {
       this.loadSystem();

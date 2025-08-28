@@ -428,6 +428,11 @@
           "TEXT_DOCUMENT_DELETED": "Document has been successfully deleted.",
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
+      },
+      "LOGS": {
+        "TEXT_PAGE_TITLE": "Logs",
+        "TEXT_TAB_SYSTEM": "System",
+        "TEXT_TAB_PARSING": "Parsing"
       }
     },
     "DOCUMENTS": {
