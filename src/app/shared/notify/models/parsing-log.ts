@@ -9,6 +9,7 @@ export class ParsingLog {
   @Expose({ name: 'parsing_type' })
   public parsingType: string;
 
+  // TODO: Remove this once the API is updated
   @Transform(({ value }) => (value ? DateTime.fromISO(value.replace('p', 'Z')) : value), {
     toClassOnly: true
   })
