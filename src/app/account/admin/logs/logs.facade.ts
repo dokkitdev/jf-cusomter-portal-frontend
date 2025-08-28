@@ -7,8 +7,11 @@ import { NotifyService, ParsingLog, SystemLog } from '@shared/notify';
 import { NotifySystemLogsSortField } from '@shared/notify/type/system-logs-sort-field';
 import { NotifyParsingLogsSortField } from '@shared/notify/type/parsing-logs-sort-field';
 import { NotificationService } from '@shared/notification';
+import { FileService } from '@shared/file';
+import { DialogService } from '@shared/dialog';
 import { AdminLogsTab } from './shared/types';
 import { AccountAdminLogsQueryParameters } from './shared/query-parameters';
+import { AdminLogsParsingLogsDialogComponent } from './shared/components/parsing-logs-dialog/parsing-logs-dialog.component';
 
 export interface LogsState {
   systemLogs: Array<SystemLog>;
@@ -94,8 +97,6 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
           .pipe(
             tapResponse(
               (response) => {
-                console.log('response', response);
-
                 this.patchState({
                   systemLogs: response.items,
                   systemTotalPages: response.lastPage,
@@ -144,37 +145,34 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     )
   );
 
-  // public readonly downloadReportLetters = this.effect((reportId$: Observable<number>) =>
-  // reportId$.pipe(
-  //   switchMap((reportId) =>
-  //     this.notifyService.downloadReportLetters(reportId).pipe(
-  //       tapResponse(
-  //         (blob) => {
-  //           const url = window.URL.createObjectURL(blob);
-  //           const link = document.createElement('a');
-  //           link.href = url;
-  //           link.download = `report-${reportId}-letters.pdf`;
-  //           link.click();
-  //           window.URL.revokeObjectURL(url);
-  //         },
-  //         (error: unknown) => {
-  //           const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
-  //           this.notificationService.error(errorMessage);
-  //         }
-  //       ),
-  //       catchError((error: unknown) => {
-  //         const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
-  //         this.notificationService.error(errorMessage);
-  //         return of(null);
-  //       })
-  //     )
-  //   )
-  // )
-  // );
+  public readonly downloadReportLetters = this.effect((reportId$: Observable<number>) =>
+    reportId$.pipe(
+      switchMap((reportId) =>
+        this.notifyService.downloadReportLetters(reportId).pipe(
+          tapResponse(
+            (blob) => {
+              this.fileService.saveFile(blob, `report-${reportId}-letters.pdf`);
+            },
+            (error: unknown) => {
+              const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
+              this.notificationService.error(errorMessage);
+            }
+          ),
+          catchError((error: unknown) => {
+            const errorMessage = error instanceof Error ? error.message : 'Failed to download report letters';
+            this.notificationService.error(errorMessage);
+            return of(null);
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private notifyService: NotifyService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private fileService: FileService,
+    private dialogService: DialogService
   ) {
     super(initialState);
   }
@@ -211,12 +209,24 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
 
   public changeSort(parameters: AccountAdminLogsQueryParameters): void {
     this.updateSort(parameters);
-    // Reload data with new sorting
+
     if (this.get().activeTab === 'system') {
       this.loadSystem();
     } else {
       this.loadParsing();
     }
+  }
+
+  public downloadLetters(reportId: number): void {
+    this.downloadReportLetters(of(reportId));
+  }
+
+  public openParsingLogsDialog(parsingLog: ParsingLog): void {
+    this.dialogService.open(AdminLogsParsingLogsDialogComponent, {
+      autoFocus: false,
+      disableClose: false,
+      data: { parsingLog }
+    });
   }
 
   public resetState(): void {

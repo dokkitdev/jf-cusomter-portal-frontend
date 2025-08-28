@@ -435,19 +435,46 @@
         "TEXT_TAB_PARSING": "Parsing",
         "SYSTEM_LOGS_HEADER": {
           "TEXT_DATE": "Date",
-          "TEXT_TYPE": "Customer Type",
-          "TEXT_LETTERS_GENERATED": "Letters generated",
-          "TEXT_EMAIL_GENERATED": "Email generated"
+          "TEXT_TYPE": "Type",
+          "TEXT_LETTERS_GENERATED": "Letters Generated",
+          "TEXT_EMAIL_GENERATED": "Email Generated"
         },
         "PARSING_LOGS_HEADER": {
-          "TEXT_CREATED": "Date Created",
+          "TEXT_CREATED": "Created",
           "TEXT_TYPE": "Type",
           "TEXT_TOTAL": "Total",
           "TEXT_SUCCESS": "Success",
-          "TEXT_PARSING_DATE": "Parsing for"
+          "TEXT_PARSING_DATE": "Parsing Date"
         },
-        "BUTTON_LETTERS": "Letters",
-        "BUTTON_SHOW": "Show"
+        "ITEMS_HEADER": {
+          "TEXT_ID": "ID",
+          "TEXT_REPORT_TYPE": "Report Type",
+          "TEXT_LETTERS_GENERATED": "Letters Generated",
+          "TEXT_IS_FINISHED": "Status",
+          "TEXT_CREATED_AT": "Created At",
+          "TEXT_PARSING_TYPE": "Parsing Type",
+          "TEXT_PARSING_DATE": "Parsing Date",
+          "TEXT_TOTAL_COUNT": "Total Count",
+          "TEXT_SUCCESS_COUNT": "Success Count",
+          "TEXT_ACTIONS": "Actions"
+        },
+        "PARSING_LOGS_DIALOG": {
+          "TEXT_IDS": "IDs: ",
+          "TEXT_ERRORS": "Errors: "
+        },
+        "BUTTON_SHOW": "Show",
+        "BUTTON_DOWNLOAD": "Download",
+        "BUTTON_LETTERS": "Letters"
+      },
+      "PARSING_LOGS_DIALOG": {
+        "TEXT_TITLE": "Parsing Log Details",
+        "TEXT_ID": "ID",
+        "TEXT_PARSING_TYPE": "Parsing Type",
+        "TEXT_PARSING_DATE": "Parsing Date",
+        "TEXT_TOTAL_COUNT": "Total Count",
+        "TEXT_SUCCESS_COUNT": "Success Count",
+        "TEXT_CREATED_AT": "Created At",
+        "BUTTON_CLOSE": "Close"
       }
     },
     "DOCUMENTS": {

@@ -1,0 +1,20 @@
+<div class="dialog-content parsing-logs-dialog">
+  <div class="dialog-body">
+    <div class="parsing-logs-dialog">
+      <div class="parsing-logs-dialog-item">
+        <h3>{{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_DIALOG.TEXT_IDS' | translate }}</h3>
+        <div class="parsing-logs-dialog-header-ids">
+          {{ parsingLog.ids.join(', ') }}
+        </div>
+      </div>
+      <div class="parsing-logs-dialog-item">
+        <h3>{{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_DIALOG.TEXT_ERRORS' | translate }}</h3>
+        <div class="parsing-logs-dialog-header-ids">
+          <div *ngFor="let error of parsingLog.errorReasons">
+            {{ error }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

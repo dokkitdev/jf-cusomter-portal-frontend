@@ -112,4 +112,17 @@ export class NotifyService {
       )
       .pipe(map((response) => response.body as Blob));
   }
+
+  public downloadReportLetters(reportId: number): Observable<Blob> {
+    return this.apiService
+      .get<HttpResponse<Blob>>(
+        `${this.baseEndpoint}/reports/${reportId}/letters`,
+        {},
+        {
+          responseType: 'blob',
+          observe: 'response'
+        }
+      )
+      .pipe(map((response) => response.body as Blob));
+  }
 }

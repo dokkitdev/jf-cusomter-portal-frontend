@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { SystemLog } from '@shared/notify';
 import { configuration } from '@configurations';
 
@@ -11,13 +11,13 @@ import { configuration } from '@configurations';
 })
 export class AccountAdminLogsSystemLogsItemComponent {
   @Input() item: SystemLog;
+  @Output() openLettersClicked = new EventEmitter<SystemLog>();
 
   public get dateFormat(): string {
     return configuration.dateFormats.documentDate;
   }
 
-  public openLettersClicked(): void {
-    // TODO: Implement logs details dialog
-    console.log('Opening logs details for:', this.item);
+  public onOpenLettersClicked(systemLog: SystemLog): void {
+    this.openLettersClicked.emit(systemLog);
   }
 }

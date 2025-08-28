@@ -19,20 +19,10 @@
       </header-sort>
     </div>
     <div class="table-cell logs-parsing-total">
-      <header-sort
-        [orderBy]="logsSortField.TOTAL_COUNT"
-        [parameters]="parameters"
-        (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_TOTAL' | translate }}
-      </header-sort>
+      {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_TOTAL' | translate }}
     </div>
     <div class="table-cell logs-parsing-success">
-      <header-sort
-        [orderBy]="logsSortField.SUCCESS_COUNT"
-        [parameters]="parameters"
-        (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_SUCCESS' | translate }}
-      </header-sort>
+      {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_SUCCESS' | translate }}
     </div>
     <div class="table-cell logs-parsing-parsing-date">
       <header-sort
@@ -42,5 +32,6 @@
         {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_PARSING_DATE' | translate }}
       </header-sort>
     </div>
+    <div class="table-cell logs-parsing-actions"></div>
   </div>
 </div>

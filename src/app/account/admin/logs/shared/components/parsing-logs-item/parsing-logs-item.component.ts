@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { ParsingLog } from '@shared/notify';
 import { configuration } from '@configurations';
 
@@ -11,13 +11,13 @@ import { configuration } from '@configurations';
 })
 export class AccountAdminLogsParsingLogsItemComponent {
   @Input() item: ParsingLog;
+  @Output() showClicked = new EventEmitter<ParsingLog>();
 
   public get dateFormat(): string {
     return configuration.dateFormats.documentDate;
   }
 
-  public openLogsDetailsDialog(): void {
-    // TODO: Implement logs details dialog
-    console.log('Opening logs details for:', this.item);
+  public onShowClicked(parsingLog: ParsingLog): void {
+    this.showClicked.emit(parsingLog);
   }
 }

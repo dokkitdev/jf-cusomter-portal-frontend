@@ -31,4 +31,8 @@ export class AccountAdminLogsParsingLogsComponent {
   public pageChanged(page: number): void {
     this.facade.changeParsingPage(page);
   }
+
+  public onShowClicked(parsingLog: ParsingLog): void {
+    this.facade.openParsingLogsDialog(parsingLog);
+  }
 }

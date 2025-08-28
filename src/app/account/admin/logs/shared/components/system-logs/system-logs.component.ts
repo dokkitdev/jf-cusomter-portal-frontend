@@ -31,4 +31,8 @@ export class AccountAdminLogsSystemLogsComponent {
   public pageChanged(page: number): void {
     this.facade.changeSystemPage(page);
   }
+
+  public onOpenLettersClicked(systemLog: SystemLog): void {
+    this.facade.downloadLetters(systemLog.id);
+  }
 }

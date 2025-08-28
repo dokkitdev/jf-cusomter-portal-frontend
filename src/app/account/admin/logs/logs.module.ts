@@ -15,6 +15,8 @@ import { NotifyModule } from '@shared/notify';
 import { NotificationModule } from '@shared/notification';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
+import { FileModule } from '@shared/file';
+import { DialogModule } from '@shared/dialog';
 import { AccountAdminLogsHeaderComponent } from './shared/components/header/header.component';
 import { AccountAdminLogsSystemLogsComponent } from './shared/components/system-logs/system-logs.component';
 import { AccountAdminLogsParsingLogsComponent } from './shared/components/parsing-logs/parsing-logs.component';
@@ -22,6 +24,7 @@ import { AccountAdminLogsSystemLogsHeaderComponent } from './shared/components/s
 import { AccountAdminLogsSystemLogsItemComponent } from './shared/components/system-logs-item/system-logs-item.component';
 import { AccountAdminLogsParsingLogsHeaderComponent } from './shared/components/parsing-logs-header/parsing-logs-header.component';
 import { AccountAdminLogsParsingLogsItemComponent } from './shared/components/parsing-logs-item/parsing-logs-item.component';
+import { AdminLogsParsingLogsDialogComponent } from './shared/components/parsing-logs-dialog/parsing-logs-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { AccountAdminLogsParsingLogsItemComponent } from './shared/components/pa
     AccountAdminLogsSystemLogsHeaderComponent,
     AccountAdminLogsSystemLogsItemComponent,
     AccountAdminLogsParsingLogsHeaderComponent,
-    AccountAdminLogsParsingLogsItemComponent
+    AccountAdminLogsParsingLogsItemComponent,
+    AdminLogsParsingLogsDialogComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { AccountAdminLogsParsingLogsItemComponent } from './shared/components/pa
     TableContainerModule,
     LetDirective,
     NgxPaginationModule,
-    HeaderSortModule
+    HeaderSortModule,
+    FileModule,
+    DialogModule
   ],
   providers: [AccountAdminLogsPageFacade]
 })

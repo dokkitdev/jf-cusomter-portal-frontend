@@ -19,7 +19,10 @@
         <div
           [@heightCollapse]
           class="table-content-row">
-          <admin-logs-system-logs-item [item]="item"> </admin-logs-system-logs-item>
+          <admin-logs-system-logs-item
+            [item]="item"
+            (openLettersClicked)="onOpenLettersClicked($event)">
+          </admin-logs-system-logs-item>
         </div>
       }
     </div>
