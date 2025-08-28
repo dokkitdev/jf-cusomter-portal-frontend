@@ -439,6 +439,13 @@
           "TEXT_LETTERS_GENERATED": "Letters generated",
           "TEXT_EMAIL_GENERATED": "Email generated"
         },
+        "PARSING_LOGS_HEADER": {
+          "TEXT_CREATED": "Date Created",
+          "TEXT_TYPE": "Type",
+          "TEXT_TOTAL": "Total",
+          "TEXT_SUCCESS": "Success",
+          "TEXT_PARSING_DATE": "Parsing for"
+        },
         "BUTTON_LETTERS": "Letters",
         "BUTTON_SHOW": "Show"
       }

@@ -1,11 +1,14 @@
 <div class="table-row">
-  <div class="table-cell adminlogs-parsing-type">{{ item.parsingType }}</div>
-  <div class="table-cell adminlogs-parsing-date">
+  <div class="table-cell logs-parsing-created">
+    {{ item.createdAt | date: dateFormat }}
+  </div>
+  <div class="table-cell logs-parsing-type">{{ item.parsingType }}</div>
+  <div class="table-cell logs-parsing-total">{{ item.totalCount }}</div>
+  <div class="table-cell logs-parsing-success">{{ item.successCount }}</div>
+  <div class="table-cell logs-parsing-parsing-date">
     {{ item.parsingDate | date: dateFormat }}
   </div>
-  <div class="table-cell adminlogs-total-count">{{ item.totalCount }}</div>
-  <div class="table-cell adminlogs-success-count">{{ item.successCount }}</div>
-  <div class="table-cell adminlogs-actions">
+  <div class="table-cell logs-parsing-actions">
     <a
       (click)="openLogsDetailsDialog()"
       class="table-action table-action-info">

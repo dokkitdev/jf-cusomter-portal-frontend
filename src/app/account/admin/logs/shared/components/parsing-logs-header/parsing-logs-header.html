@@ -2,40 +2,45 @@
   <div
     *ngrxLet="parameters$; let parameters"
     class="table-row">
-    <div class="table-cell adminlogs-parsing-type">
+    <div class="table-cell logs-parsing-created">
+      <header-sort
+        [orderBy]="logsSortField.CREATED_AT"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_CREATED' | translate }}
+      </header-sort>
+    </div>
+    <div class="table-cell logs-parsing-type">
       <header-sort
         [orderBy]="logsSortField.PARSING_TYPE"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_PARSING_TYPE' | translate }}
+        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_TYPE' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell adminlogs-parsing-date">
-      <header-sort
-        [orderBy]="logsSortField.PARSING_DATE"
-        [parameters]="parameters"
-        (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_PARSING_DATE' | translate }}
-      </header-sort>
-    </div>
-    <div class="table-cell adminlogs-total-count">
+    <div class="table-cell logs-parsing-total">
       <header-sort
         [orderBy]="logsSortField.TOTAL_COUNT"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_TOTAL_COUNT' | translate }}
+        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_TOTAL' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell adminlogs-success-count">
+    <div class="table-cell logs-parsing-success">
       <header-sort
         [orderBy]="logsSortField.SUCCESS_COUNT"
         [parameters]="parameters"
         (sortChanged)="sortChanged($event)">
-        {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_SUCCESS_COUNT' | translate }}
+        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_SUCCESS' | translate }}
       </header-sort>
     </div>
-    <div class="table-cell adminlogs-actions">
-      {{ 'ACCOUNT.ADMIN.LOGS.ITEMS_HEADER.TEXT_ACTIONS' | translate }}
+    <div class="table-cell logs-parsing-parsing-date">
+      <header-sort
+        [orderBy]="logsSortField.PARSING_DATE"
+        [parameters]="parameters"
+        (sortChanged)="sortChanged($event)">
+        {{ 'ACCOUNT.ADMIN.LOGS.PARSING_LOGS_HEADER.TEXT_PARSING_DATE' | translate }}
+      </header-sort>
     </div>
   </div>
 </div>
