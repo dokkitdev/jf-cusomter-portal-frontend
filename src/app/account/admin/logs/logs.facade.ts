@@ -80,7 +80,6 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     desc: parameters.desc
   }));
 
-  // Effects
   public readonly loadSystemLogs = this.effect((page$: Observable<number>) =>
     page$.pipe(
       tap(() => this.patchState({ isLoadingSystem: true })),
