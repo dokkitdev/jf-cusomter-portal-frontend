@@ -12,37 +12,10 @@ import { DialogService } from '@shared/dialog';
 import { AdminLogsTab } from './shared/types';
 import { AccountAdminLogsQueryParameters } from './shared/query-parameters';
 import { AdminLogsParsingLogsDialogComponent } from './shared/components/parsing-logs-dialog/parsing-logs-dialog.component';
-
-export interface LogsState {
-  systemLogs: Array<SystemLog>;
-  parsingLogs: Array<ParsingLog>;
-  isLoadingSystem: boolean;
-  isLoadingParsing: boolean;
-  currentSystemPage: number;
-  currentParsingPage: number;
-  systemTotalPages: number;
-  parsingTotalPages: number;
-  activeTab: AdminLogsTab;
-  orderBy: NotifySystemLogsSortField | NotifyParsingLogsSortField;
-  desc: boolean;
-}
-
-const initialState: LogsState = {
-  systemLogs: [],
-  parsingLogs: [],
-  isLoadingSystem: false,
-  isLoadingParsing: false,
-  currentSystemPage: 1,
-  currentParsingPage: 1,
-  systemTotalPages: 1,
-  parsingTotalPages: 1,
-  activeTab: 'system',
-  orderBy: NotifySystemLogsSortField.CREATED_AT,
-  desc: true
-};
+import { AccountAdminDocumentsPageState } from './logs.state';
 
 @Injectable()
-export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
+export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocumentsPageState> {
   public readonly systemLogs$ = this.select((state) => state.systemLogs);
   public readonly parsingLogs$ = this.select((state) => state.parsingLogs);
   public readonly isLoadingSystem$ = this.select((state) => state.isLoadingSystem);
@@ -54,6 +27,10 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
   public readonly activeTab$ = this.select((state) => state.activeTab);
   public readonly orderBy$ = this.select((state) => state.orderBy);
   public readonly desc$ = this.select((state) => state.desc);
+  public readonly systemPerPage$ = this.select((state) => state.systemPerPage);
+  public readonly parsingPerPage$ = this.select((state) => state.parsingPerPage);
+  public readonly systemPaginationId$ = this.select((state) => state.systemPaginationId);
+  public readonly parsingPaginationId$ = this.select((state) => state.parsingPaginationId);
 
   public readonly parameters$ = this.select(
     this.currentSystemPage$,
@@ -174,10 +151,9 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
     private fileService: FileService,
     private dialogService: DialogService
   ) {
-    super(initialState);
+    super(new AccountAdminDocumentsPageState());
   }
 
-  // Public methods
   public loadSystem(): void {
     const currentPage = this.get().currentSystemPage;
     this.loadSystemLogs(of(currentPage));
@@ -230,6 +206,6 @@ export class AccountAdminLogsPageFacade extends ComponentStore<LogsState> {
   }
 
   public resetState(): void {
-    this.setState(initialState);
+    this.setState(new AccountAdminDocumentsPageState());
   }
 }

@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountAdminLogsPageFacade } from '../../../logs.facade';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SystemLog } from '@shared/notify';
 import { heightCollapseAnimation } from '@shared/animations';
 import { map } from 'rxjs/operators';
@@ -19,6 +19,9 @@ export class AccountAdminLogsSystemLogsComponent {
   public currentPage$: Observable<number>;
   public totalPages$: Observable<number>;
   public hasPagination$: Observable<boolean>;
+  public perPage$: Observable<number>;
+  public totalItems$: Observable<number>;
+  public paginationId$: Observable<string>;
 
   constructor(private facade: AccountAdminLogsPageFacade) {
     this.items$ = this.facade.systemLogs$;
@@ -26,6 +29,9 @@ export class AccountAdminLogsSystemLogsComponent {
     this.currentPage$ = this.facade.currentSystemPage$;
     this.totalPages$ = this.facade.systemTotalPages$;
     this.hasPagination$ = this.facade.systemTotalPages$.pipe(map((totalPages) => totalPages > 1));
+    this.perPage$ = this.facade.systemPerPage$;
+    this.totalItems$ = this.facade.systemLogs$.pipe(map((logs) => logs.length));
+    this.paginationId$ = this.facade.systemPaginationId$;
   }
 
   public pageChanged(page: number): void {

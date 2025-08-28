@@ -1,25 +1,39 @@
-import { Document, DocumentRelationType, DocumentSortField } from '@shared/document';
+import { ParsingLog, SystemLog } from '@shared/notify';
+import { AdminLogsTab } from './shared/types';
+import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from '@shared/notify/type';
 
 export class AccountAdminDocumentsPageState {
-  public isLoading: boolean;
-  public items: Array<Document>;
-  public totalItems: number;
-  public page: number;
-  public perPage: number;
-  public orderBy: DocumentSortField;
-  public relations: Array<DocumentRelationType>;
+  public systemLogs: Array<SystemLog>;
+  public parsingLogs: Array<ParsingLog>;
+  public isLoadingSystem: boolean;
+  public isLoadingParsing: boolean;
+  public currentSystemPage: number;
+  public currentParsingPage: number;
+  public systemPerPage: number;
+  public parsingPerPage: number;
+  public systemTotalPages: number;
+  public parsingTotalPages: number;
+  public activeTab: AdminLogsTab;
+  public orderBy: NotifySystemLogsSortField | NotifyParsingLogsSortField;
   public desc: boolean;
-  public readonly paginationId: string;
+  public readonly systemPaginationId: string;
+  public readonly parsingPaginationId: string;
 
   constructor() {
-    this.isLoading = false;
-    this.items = [];
-    this.totalItems = 0;
-    this.page = 1;
-    this.perPage = 15;
-    this.orderBy = DocumentSortField.TITLE;
-    this.relations = ['media'];
-    this.desc = false;
-    this.paginationId = 'account-admin-documents-pagination';
+    this.systemLogs = [];
+    this.parsingLogs = [];
+    this.isLoadingSystem = false;
+    this.isLoadingParsing = false;
+    this.currentSystemPage = 1;
+    this.currentParsingPage = 1;
+    this.systemTotalPages = 1;
+    this.parsingTotalPages = 1;
+    this.systemPerPage = 15;
+    this.parsingPerPage = 15;
+    this.activeTab = 'system';
+    this.orderBy = NotifySystemLogsSortField.CREATED_AT;
+    this.desc = true;
+    this.systemPaginationId = 'system-logs-pagination';
+    this.parsingPaginationId = 'parsing-logs-pagination';
   }
 }

@@ -9,7 +9,7 @@
         item of items
           | paginate
             : {
-                id: paginationId$ | async,
+                id: paginationId,
                 itemsPerPage: perPage$ | async,
                 currentPage: currentPage$ | async,
                 totalItems: totalItems$ | async
@@ -28,7 +28,7 @@
     </div>
     @if (hasPagination$ | async) {
       <pagination-elements
-        [paginationId]="currentPage$ | async"
+        [paginationId]="paginationId"
         (pageChanged)="pageChanged($event)">
       </pagination-elements>
     }
