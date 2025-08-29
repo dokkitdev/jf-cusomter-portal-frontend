@@ -75,6 +75,7 @@
       "LINK_SITES": "Sites",
       "LINK_ASSETS": "Assets",
       "LINK_REPORTS": "Reports",
+      "LINK_REPORTS_GENERAL": "General",
       "LINK_REPORTS_SERVICE_CONTROL": "Service Control",
       "LINK_REPORTS_KPI": "Repair Response",
       "LINK_REPORTS_ZERO": "Zero Report",

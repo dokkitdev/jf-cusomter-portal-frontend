@@ -11,6 +11,7 @@ import { AccountReportsWarehousePageForm } from './shared/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotifyService } from '@shared/notify';
 import { tapResponse } from '@ngrx/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountReportsWarehousePageFacade {
@@ -30,7 +31,7 @@ export class AccountReportsWarehousePageFacade {
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsWarehousePageState>,
-    private readonly store: Store<AppState>,
+    private readonly router: Router,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
     private readonly notifyService: NotifyService
@@ -57,9 +58,8 @@ export class AccountReportsWarehousePageFacade {
   }
 
   public goToReports(): void {
-    // TODO: Implement navigation to reports page
     this.resetState();
-    this.notificationService.error(this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION'));
+    this.router.navigate(['/account/reports/general']);
   }
 
   private getServerErrorMessage(response: unknown): string {

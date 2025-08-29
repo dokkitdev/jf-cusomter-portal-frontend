@@ -28,6 +28,11 @@ const routes: Routes = [
     path: 'zero',
     pathMatch: 'full',
     loadChildren: () => import('./zero/zero.module').then((module) => module.AccountReportsZeroPageModule)
+  },
+  {
+    path: 'general',
+    pathMatch: 'full',
+    loadChildren: () => import('./general/general.module').then((module) => module.AccountReportsGeneralModule)
   }
 ];
 
