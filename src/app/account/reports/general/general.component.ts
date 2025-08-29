@@ -7,10 +7,4 @@ import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class AccountReportsGeneralComponent implements OnInit, OnDestroy {
-  constructor() {}
-
-  public ngOnInit(): void {}
-
-  public ngOnDestroy(): void {}
-}
+export class AccountReportsGeneralComponent {}
