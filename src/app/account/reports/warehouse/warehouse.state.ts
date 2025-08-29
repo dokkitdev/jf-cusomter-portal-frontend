@@ -8,7 +8,7 @@ export class AccountReportsWarehousePageState {
 
   constructor() {
     this.isSendingRequest = false;
-    this.isReportGenerated = true;
+    this.isReportGenerated = false;
     this.formState = createFormGroupState('AccountReportsWarehousePageForm', new AccountReportsWarehousePageForm());
   }
 }
