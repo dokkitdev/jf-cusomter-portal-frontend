@@ -51,10 +51,6 @@ export class AccountReportsZeroPageFacade {
     this.updateFormState(action);
   }
 
-  private getServerErrorMessage(response: unknown): string {
-    return (response as HttpErrorResponse).error.error;
-  }
-
   public generateNewReport(): void {
     this.updateIsReportGenerated(false);
   }
@@ -62,6 +58,10 @@ export class AccountReportsZeroPageFacade {
   public goToReports(): void {
     this.resetState();
     this.router.navigate(['/account/reports/general']);
+  }
+
+  private getServerErrorMessage(response: unknown): string {
+    return (response as HttpErrorResponse).error.error;
   }
 
   private updateFormState(action: Actions<any>): void {
