@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { AccountReportsGeneralPageFacade } from './general.facade';
 import { CsvReport } from './shared/models/csv-report';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'account-reports-general-page',
@@ -10,7 +11,11 @@ import { CsvReport } from './shared/models/csv-report';
   standalone: false
 })
 export class AccountReportsGeneralComponent implements OnInit, OnDestroy {
-  constructor(public facade: AccountReportsGeneralPageFacade) {}
+  public hasPagination$: Observable<boolean>;
+
+  constructor(public facade: AccountReportsGeneralPageFacade) {
+    this.hasPagination$ = this.facade.totalPages$.pipe(map((totalPages) => totalPages > 1));
+  }
 
   public ngOnInit(): void {
     this.facade.loadItems();
@@ -25,7 +30,7 @@ export class AccountReportsGeneralComponent implements OnInit, OnDestroy {
   }
 
   public onDownloadClicked(item: CsvReport): void {
-    // TODO: Implement download logic
+    this.facade.onDownloadClicked(item);
   }
 
   public onPageChanged(page: number): void {

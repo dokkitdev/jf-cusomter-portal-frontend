@@ -12,6 +12,7 @@ import { HeaderSortModule } from '@shared/header-sort';
 import { PaginationElementsModule } from '@shared/pagination-elements';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NotifyService } from '@shared/notify';
+import { FileService } from '@shared/file';
 
 @NgModule({
   declarations: [AccountReportsGeneralComponent],
@@ -26,6 +27,6 @@ import { NotifyService } from '@shared/notify';
     PaginationElementsModule,
     NgxPaginationModule
   ],
-  providers: [AccountReportsGeneralPageFacade, ComponentStore, NotifyService]
+  providers: [AccountReportsGeneralPageFacade, ComponentStore, NotifyService, FileService]
 })
 export class AccountReportsGeneralModule {}

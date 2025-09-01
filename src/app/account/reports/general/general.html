@@ -8,7 +8,7 @@
   <table-container
     *ngrxLet="facade.items$; let items"
     [isLoading]="facade.isLoading$ | async"
-    [itemsCount]="facade.totalItems$ | async">
+    [itemsCount]="items.length">
     <div class="table">
       <div class="table-head">
         <div class="table-row">
@@ -74,7 +74,7 @@
     </div>
   </table-container>
 
-  @if (facade.hasPagination$ | async) {
+  @if (hasPagination$ | async) {
     <pagination-elements
       [paginationId]="facade.paginationId$ | async"
       (pageChanged)="onPageChanged($event)">

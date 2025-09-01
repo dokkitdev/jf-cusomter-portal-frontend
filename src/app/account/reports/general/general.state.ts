@@ -6,7 +6,7 @@ export class AccountReportsGeneralPageState {
   public sortParameters: any = {};
   public page: number = 1;
   public perPage: number = 10;
-  public totalItems: number = 0;
+  public totalPages: number = 0;
   public paginationId: string = 'account-reports-general-pagination';
 
   constructor() {}
