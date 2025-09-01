@@ -14,6 +14,8 @@ import { NotificationModule } from '@shared/notification';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { FormRadioModule } from '@shared/form-radio';
 import { DateRangepickerModule } from '@shared/date-rangepicker';
+import { AccountSuccessBoxComponent } from '@app/account/shared/success-box/success-box.component';
+import { NotifyModule } from '@shared/notify';
 
 @NgModule({
   declarations: [AccountReportsZeroPageComponent, AccountReportsZeroFormComponent],
@@ -29,7 +31,9 @@ import { DateRangepickerModule } from '@shared/date-rangepicker';
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule,
-    DateRangepickerModule
+    DateRangepickerModule,
+    AccountSuccessBoxComponent,
+    NotifyModule
   ],
   providers: [AccountReportsZeroPageFacade, ComponentStore]
 })

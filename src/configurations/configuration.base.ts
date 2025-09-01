@@ -36,6 +36,7 @@ export const initConfiguration = (configuration: any): any =>
         reports: {
           serviceControlDate: 'dd/MM/yyyy',
           serviceControlDateCSV: 'yyyy-MM-dd',
+          zeroDate: 'yyyy-MM-dd',
           kpiDate: 'yyyy_MM_dd',
           logsDateTime: 'dd/MM/yyyy HH:mm:ss',
           logsDate: 'dd/MM/yyyy'

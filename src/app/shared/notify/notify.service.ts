@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
-import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
+import { instanceToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
 import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
+import { ZeroReportRequest } from './models/zero-report-request';
 
 @Injectable()
 export class NotifyService {
@@ -39,7 +40,7 @@ export class NotifyService {
     return this.apiService
       .get<
         PaginationResponse<SystemLog>
-      >(`${this.baseEndpoint}/reports`, omitBy(classToPlain<PaginationRequest>(request), isUndefined))
+      >(`${this.baseEndpoint}/reports`, omitBy(instanceToPlain<PaginationRequest>(request), isUndefined))
       .pipe(
         map((response) =>
           plainToClassFromExist(new PaginationResponse<SystemLog>(SystemLog), response, { groups: [ClassGroup.MAIN] })
@@ -68,7 +69,7 @@ export class NotifyService {
     return this.apiService
       .get<
         PaginationResponse<ParsingLog>
-      >(`${this.baseEndpoint}/parsing-logs`, omitBy(classToPlain<PaginationRequest>(request), isUndefined))
+      >(`${this.baseEndpoint}/parsing-logs`, omitBy(instanceToPlain<PaginationRequest>(request), isUndefined))
       .pipe(
         map((response) =>
           plainToClassFromExist(new PaginationResponse<ParsingLog>(ParsingLog), response, { groups: [ClassGroup.MAIN] })
@@ -78,9 +79,16 @@ export class NotifyService {
 
   public generateWarehouseReport(period: number): Observable<void> {
     const request = new WarehouseReportRequest(period);
-    const requestBody = classToPlain(request, { groups: [ClassGroup.MAIN] });
+    const requestBody = instanceToPlain(request, { groups: [ClassGroup.MAIN] });
 
     return this.apiService.post<void>(`${this.baseEndpoint}/reports/warehouse`, requestBody);
+  }
+
+  public generateZeroReport(dateFrom: string, dateTo: string): Observable<void> {
+    const request = new ZeroReportRequest({ dateFrom, dateTo });
+    const requestBody = instanceToPlain(request, { groups: [ClassGroup.MAIN] });
+
+    return this.apiService.post<void>(`${this.baseEndpoint}/csv-reports/zero`, requestBody);
   }
 
   public getLetterTemplates(): Observable<Array<LetterTemplateGroup>> {
