@@ -1,4 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AccountReportsZeroPageFacade } from './zero.facade';
 
 @Component({
   selector: 'account-reports-zero-page',
@@ -7,4 +9,18 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class AccountReportsZeroPageComponent {}
+export class AccountReportsZeroPageComponent {
+  public isReportGenerated$: Observable<boolean>;
+
+  constructor(private facade: AccountReportsZeroPageFacade) {
+    this.isReportGenerated$ = this.facade.isReportGenerated$;
+  }
+
+  public generateNewReport(): void {
+    this.facade.generateNewReport();
+  }
+
+  public goToReports(): void {
+    this.facade.goToReports();
+  }
+}

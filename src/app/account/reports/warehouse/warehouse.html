@@ -1,3 +1,5 @@
+@let isReportGenerated = isReportGenerated$ | async;
+
 <div class="page profile">
   <div class="page-header">
     <h2 class="page-title">
@@ -5,9 +7,15 @@
     </h2>
   </div>
   <div class="box warehouse-box">
-    <div *ngrxLet="isReportGenerated$; let isReportGenerated">
-      <account-reports-warehouse-form *ngIf="!isReportGenerated"> </account-reports-warehouse-form>
-      <account-reports-warehouse-success *ngIf="isReportGenerated"> </account-reports-warehouse-success>
-    </div>
+    @if (isReportGenerated) {
+      <account-success-box
+        [text]="'ACCOUNT.REPORTS.WAREHOUSE.SUCCESS.TEXT_MESSAGE' | translate"
+        [primaryButtonText]="'ACCOUNT.REPORTS.WAREHOUSE.SUCCESS.BUTTON_GENERATE_NEW' | translate"
+        [secondaryButtonText]="'ACCOUNT.REPORTS.WAREHOUSE.SUCCESS.BUTTON_GO_TO_REPORTS' | translate"
+        (primaryButtonClicked)="goToReports()"
+        (secondaryButtonClicked)="generateNewReport()" />
+    } @else {
+      <account-reports-warehouse-form />
+    }
   </div>
 </div>
