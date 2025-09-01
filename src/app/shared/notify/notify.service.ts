@@ -9,6 +9,7 @@ import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } fr
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
+import { CsvReport } from '../../account/reports/general/shared/models/csv-report';
 
 @Injectable()
 export class NotifyService {
@@ -72,6 +73,35 @@ export class NotifyService {
       .pipe(
         map((response) =>
           plainToClassFromExist(new PaginationResponse<ParsingLog>(ParsingLog), response, { groups: [ClassGroup.MAIN] })
+        )
+      );
+  }
+
+  public searchCsvReports({
+    page,
+    perPage,
+    orderBy,
+    desc
+  }: {
+    page?: number;
+    perPage?: number;
+    orderBy?: string;
+    desc?: boolean;
+  } = {}): Observable<PaginationResponse<CsvReport>> {
+    const request = new PaginationRequest({
+      page,
+      perPage,
+      orderBy,
+      desc
+    });
+
+    return this.apiService
+      .get<
+        PaginationResponse<CsvReport>
+      >(`${this.baseEndpoint}/csv-reports`, omitBy(classToPlain<PaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<CsvReport>(CsvReport), response, { groups: [ClassGroup.MAIN] })
         )
       );
   }

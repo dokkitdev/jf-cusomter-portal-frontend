@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { AccountReportsGeneralPageFacade } from './general.facade';
+import { CsvReport } from './shared/models/csv-report';
 
 @Component({
   selector: 'account-reports-general-page',
@@ -12,7 +13,7 @@ export class AccountReportsGeneralComponent implements OnInit, OnDestroy {
   constructor(public facade: AccountReportsGeneralPageFacade) {}
 
   public ngOnInit(): void {
-    // TODO: Add initialization logic
+    this.facade.loadItems();
   }
 
   public ngOnDestroy(): void {
@@ -23,7 +24,11 @@ export class AccountReportsGeneralComponent implements OnInit, OnDestroy {
     // TODO: Implement sorting logic
   }
 
-  public onDownloadClicked(item: any): void {
+  public onDownloadClicked(item: CsvReport): void {
     // TODO: Implement download logic
+  }
+
+  public onPageChanged(page: number): void {
+    // TODO: Implement page change logic
   }
 }

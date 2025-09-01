@@ -9,6 +9,9 @@ import { AccountReportsGeneralRoutingModule } from './general.routing';
 import { AccountReportsGeneralComponent } from './general.component';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
+import { PaginationElementsModule } from '@shared/pagination-elements';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NotifyService } from '@shared/notify';
 
 @NgModule({
   declarations: [AccountReportsGeneralComponent],
@@ -19,8 +22,10 @@ import { HeaderSortModule } from '@shared/header-sort';
     AccountReportsGeneralRoutingModule,
     TableContainerModule,
     HeaderSortModule,
-    LetDirective
+    LetDirective,
+    PaginationElementsModule,
+    NgxPaginationModule
   ],
-  providers: [AccountReportsGeneralPageFacade, ComponentStore]
+  providers: [AccountReportsGeneralPageFacade, ComponentStore, NotifyService]
 })
 export class AccountReportsGeneralModule {}
