@@ -5,9 +5,10 @@ export class AccountReportsGeneralPageState {
   public isLoading: boolean = false;
   public sortParameters: any = {};
   public page: number = 1;
-  public perPage: number = 10;
+  public perPage: number = 15;
   public totalPages: number = 0;
-  public paginationId: string = 'account-reports-general-pagination';
+  public totalItems: number = 0;
+  public paginationID: string = 'account-reports-general-pagination';
 
   constructor() {}
 }

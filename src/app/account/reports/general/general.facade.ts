@@ -18,11 +18,12 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
   public readonly perPage$ = this.select((state) => state.perPage);
   public readonly currentPage$ = this.select((state) => state.page);
   public readonly totalPages$ = this.select((state) => state.totalPages);
-  public readonly paginationId$ = this.select((state) => state.paginationId);
+  public readonly hasPagination$ = this.select((state) => state.totalItems > 0);
+  public readonly paginationID$ = this.select((state) => state.paginationID);
+  public readonly totalItems$ = this.select((state) => state.totalItems);
 
   private readonly loadItemsEffect$ = this.effect((origin$: Observable<void>) =>
     origin$.pipe(
-      tap(() => this.patchState({ isLoading: true })),
       switchMap(() => {
         const state = this.get();
         return this.notifyService
@@ -36,6 +37,16 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
               (error: Error) => this.onLoadItemsError(error)
             )
           );
+      })
+    )
+  );
+
+  private readonly loadItemsByPageEffect$ = this.effect((origin$: Observable<number>) =>
+    origin$.pipe(
+      tap((page) => {
+        this.patchState({ page });
+        this.updateIsLoading(true);
+        this.loadItems();
       })
     )
   );
@@ -63,8 +74,17 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
     super(new AccountReportsGeneralPageState());
   }
 
+  public resetState(): void {
+    this.setState(new AccountReportsGeneralPageState());
+  }
+
   public loadItems(): void {
+    this.updateIsLoading(true);
     this.loadItemsEffect$();
+  }
+
+  public loadItemsByPage(page: number): void {
+    this.loadItemsByPageEffect$(of(page));
   }
 
   public onSortChanged(event: any): void {
@@ -80,6 +100,7 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
     this.patchState({
       items: response.items,
       totalPages: response.lastPage,
+      totalItems: response.totalItems,
       isLoading: false
     });
   }
@@ -87,5 +108,14 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
   private onLoadItemsError(error: Error): void {
     this.patchState({ isLoading: false });
     // TODO: Handle error
+  }
+
+  private updateIsLoading(isLoading: boolean): void {
+    this.updater((state: AccountReportsGeneralPageState) => ({
+      ...state,
+      isLoading,
+      // Clear items when loading starts to ensure proper loading state
+      ...(isLoading && { items: [] })
+    }))();
   }
 }

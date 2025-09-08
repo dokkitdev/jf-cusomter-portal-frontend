@@ -6,16 +6,16 @@
   </div>
 
   <table-container
-    *ngrxLet="facade.items$; let items"
-    [isLoading]="facade.isLoading$ | async"
-    [itemsCount]="items.length">
+    *ngrxLet="items$; let items"
+    [isLoading]="isLoading$ | async"
+    [itemsCount]="items?.length">
     <div class="table">
       <div class="table-head">
         <div class="table-row">
           <div class="table-cell general-date">
             <header-sort
               [orderBy]="'created_at'"
-              [parameters]="facade.sortParameters$ | async"
+              [parameters]="sortParameters$ | async"
               (sortChanged)="onSortChanged($event)">
               {{ 'ACCOUNT.REPORTS.GENERAL.TABLE_HEADER_DATE' | translate }}
             </header-sort>
@@ -23,7 +23,7 @@
           <div class="table-cell general-type">
             <header-sort
               [orderBy]="'report_type'"
-              [parameters]="facade.sortParameters$ | async"
+              [parameters]="sortParameters$ | async"
               (sortChanged)="onSortChanged($event)">
               {{ 'ACCOUNT.REPORTS.GENERAL.TABLE_HEADER_REPORT_TYPE' | translate }}
             </header-sort>
@@ -31,7 +31,7 @@
           <div class="table-cell general-filename">
             <header-sort
               [orderBy]="'file_name'"
-              [parameters]="facade.sortParameters$ | async"
+              [parameters]="sortParameters$ | async"
               (sortChanged)="onSortChanged($event)">
               {{ 'ACCOUNT.REPORTS.GENERAL.TABLE_HEADER_FILENAME' | translate }}
             </header-sort>
@@ -44,14 +44,16 @@
           item of items
             | paginate
               : {
-                  id: facade.paginationId$ | async,
-                  itemsPerPage: facade.perPage$ | async,
-                  currentPage: facade.currentPage$ | async,
-                  totalItems: facade.totalItems$ | async
+                  id: paginationID$ | async,
+                  itemsPerPage: perPage$ | async,
+                  currentPage: currentPage$ | async,
+                  totalItems: totalItems$ | async
                 };
           track item.id
         ) {
-          <div class="table-content-row">
+          <div
+            [@heightCollapse]
+            class="table-content-row">
             <div class="table-row">
               <div class="table-cell general-date">
                 {{ item.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
@@ -76,7 +78,7 @@
 
   @if (hasPagination$ | async) {
     <pagination-elements
-      [paginationId]="facade.paginationId$ | async"
+      [paginationId]="paginationID$ | async"
       (pageChanged)="onPageChanged($event)">
     </pagination-elements>
   }
