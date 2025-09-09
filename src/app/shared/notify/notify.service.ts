@@ -9,7 +9,7 @@ import { WarehouseReportRequest, ZeroReportRequest, LetterTemplateGroup, SystemL
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
-import { CsvReport } from '../../account/reports/general/shared/models/csv-report';
+import { CsvReport } from '@shared/notify';
 
 @Injectable()
 export class NotifyService {

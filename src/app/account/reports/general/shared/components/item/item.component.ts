@@ -1,10 +1,9 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { CsvReport } from '../../models/csv-report';
+import { CsvReport } from '@shared/notify';
 
 @Component({
   selector: 'reports-general-item',
   templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

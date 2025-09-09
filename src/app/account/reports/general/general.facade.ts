@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { switchMap, catchError } from 'rxjs/operators';
 import { tapResponse } from '@ngrx/operators';
-import { catchError } from 'rxjs/operators';
-import { NotifyService } from '@shared/notify';
+import { NotifyService, CsvReport } from '@shared/notify';
 import { FileService } from '@shared/file';
 import { PaginationResponse } from '@shared/pagination';
-import { CsvReport } from './shared/models/csv-report';
 import { AccountReportsGeneralPageState } from './general.state';
-import { GeneralReportsSortField } from './shared/types/general-reports-sort-field';
 import { AccountReportsGeneralQueryParameters } from './shared/types/query-parameters';
 
 @Injectable()
@@ -53,6 +50,7 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
     origin$.pipe(
       switchMap(() => {
         const state = this.get();
+
         return this.notifyService
           .searchCsvReports({
             page: state.page,
