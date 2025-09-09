@@ -4,7 +4,6 @@ import { CsvReport } from '@shared/notify';
 @Component({
   selector: 'reports-general-item',
   templateUrl: 'item.html',
-  styleUrls: ['item.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
