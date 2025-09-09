@@ -1,6 +1,6 @@
 @use 'vars' as *;
 
-.warehouse-success {display: flex; flex-direction: column; gap: 36px; width: 478px;
+.successbox {display: flex; flex-direction: column; gap: 36px; width: 478px;
 
   &-content {display: flex; flex-direction: column; align-items: center; gap: 16px;}
 
@@ -8,7 +8,7 @@
     justify-content: center;
   }
 
-  &-message {font-family: $font; font-weight: 400; font-size: $default;
+  &-message {font-family: $font; font-weight: 400; font-size: $default; max-width: 250px;
     line-height: 1.25em; text-align: center; color: $text-main; margin: 0;
   }
 

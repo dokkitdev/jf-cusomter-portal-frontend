@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@shared/notification';
-import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
-import { filter, Observable, tap, withLatestFrom } from 'rxjs';
+import { exhaustMap, filter, Observable, withLatestFrom } from 'rxjs';
 import { AccountReportsZeroPageState } from './zero.state';
 import { AccountReportsZeroPageForm } from './shared/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { tapResponse } from '@ngrx/operators';
+import { NotifyService } from '@shared/notify';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountReportsZeroPageFacade {
@@ -20,13 +21,18 @@ export class AccountReportsZeroPageFacade {
     return this.componentStore.select((state) => state.formState);
   }
 
+  public get isReportGenerated$(): Observable<boolean> {
+    return this.componentStore.select((state) => state.isReportGenerated);
+  }
+
   private generateReportEffect$: () => Observable<void>;
 
   constructor(
     private readonly componentStore: ComponentStore<AccountReportsZeroPageState>,
-    private readonly store: Store<AppState>,
+    private readonly router: Router,
     private readonly notificationService: NotificationService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly notifyService: NotifyService
   ) {
     this.resetState();
 
@@ -43,6 +49,15 @@ export class AccountReportsZeroPageFacade {
 
   public handleFormStateAction(action: Actions<any>): void {
     this.updateFormState(action);
+  }
+
+  public generateNewReport(): void {
+    this.updateIsReportGenerated(false);
+  }
+
+  public goToReports(): void {
+    this.resetState();
+    this.router.navigate(['/account/reports/general']);
   }
 
   private getServerErrorMessage(response: unknown): string {
@@ -70,14 +85,49 @@ export class AccountReportsZeroPageFacade {
     }))();
   }
 
+  private updateIsReportGenerated(value: boolean): void {
+    this.componentStore.updater((state) => ({
+      ...state,
+      isReportGenerated: value
+    }))();
+  }
+
   private registerGenerateReportEffect(): void {
     this.generateReportEffect$ = this.componentStore.effect((origin$) =>
       origin$.pipe(
         withLatestFrom(this.formState$),
         filter(([_, formState]) => formState.isValid),
-        tap(() =>
-          this.notificationService.error(this.translateService.instant('SHARED.NOTIFICATIONS.TEXT_UNDER_CONSTRUCTION'))
-        )
+        exhaustMap(([_, { value }]) => {
+          this.updateIsSendingRequest(true);
+          this.toggleDisablingForm(true);
+
+          return this.tryToGenerateReport(value.periodDateFrom, value.periodDateTo);
+        })
+      )
+    );
+  }
+
+  private tryToGenerateReport(dateFrom: string, dateTo: string): Observable<void> {
+    return this.notifyService.generateZeroReport(dateFrom, dateTo).pipe(
+      tapResponse(
+        () => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
+          this.updateIsReportGenerated(true);
+
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.REPORTS.ZERO.NOTIFICATIONS.TEXT_REPORT_GENERATED')
+          );
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.updateIsSendingRequest(false);
+          this.toggleDisablingForm(false);
+
+          this.notificationService.error(
+            this.getServerErrorMessage(errorResponse) ||
+              this.translateService.instant('ACCOUNT.REPORTS.ZERO.NOTIFICATIONS.TEXT_ERROR')
+          );
+        }
       )
     );
   }

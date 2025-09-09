@@ -1,3 +1,5 @@
+@let isReportGenerated = isReportGenerated$ | async;
+
 <div class="page profile">
   <div class="page-header">
     <h2 class="page-title">
@@ -5,6 +7,15 @@
     </h2>
   </div>
   <div class="box zero-box">
-    <account-reports-zero-form></account-reports-zero-form>
+    @if (isReportGenerated) {
+      <account-success-box
+        [text]="'ACCOUNT.REPORTS.ZERO.SUCCESS.TEXT_MESSAGE' | translate"
+        [primaryButtonText]="'ACCOUNT.REPORTS.ZERO.SUCCESS.BUTTON_GENERATE_NEW' | translate"
+        [secondaryButtonText]="'ACCOUNT.REPORTS.ZERO.SUCCESS.BUTTON_GO_TO_REPORTS' | translate"
+        (primaryButtonClicked)="goToReports()"
+        (secondaryButtonClicked)="generateNewReport()" />
+    } @else {
+      <account-reports-zero-form />
+    }
   </div>
 </div>

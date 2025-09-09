@@ -15,4 +15,12 @@ export class AccountReportsWarehousePageComponent {
   constructor(private facade: AccountReportsWarehousePageFacade) {
     this.isReportGenerated$ = this.facade.isReportGenerated$;
   }
+
+  public generateNewReport(): void {
+    this.facade.generateNewReport();
+  }
+
+  public goToReports(): void {
+    this.facade.goToReports();
+  }
 }

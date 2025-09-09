@@ -1,0 +1,24 @@
+<div class="successbox">
+  <div class="successbox-content">
+    <div class="successbox-icon">
+      <div class="success"></div>
+    </div>
+    <p class="successbox-message">
+      {{ text() }}
+    </p>
+  </div>
+  <div class="successbox-actions">
+    <btn
+      variant="secondary"
+      isBlock="true"
+      (clicked)="secondaryButtonClicked.emit()">
+      {{ primaryButtonText() }}
+    </btn>
+    <btn
+      type="primary"
+      isBlock="true"
+      (clicked)="primaryButtonClicked.emit()">
+      {{ secondaryButtonText() }}
+    </btn>
+  </div>
+</div>
