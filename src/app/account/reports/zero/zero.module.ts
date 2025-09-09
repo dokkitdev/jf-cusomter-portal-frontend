@@ -7,29 +7,32 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccountReportsZeroPageFacade } from './zero.facade';
 import { ComponentStore } from '@ngrx/component-store';
 import { AccountReportsZeroFormComponent } from './shared/components/form/form.component';
+import { AccountReportsZeroSuccessComponent } from './shared/components/success/success.component';
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { ButtonModule } from '@shared/button';
 import { LoadingSpinnerModule } from '@shared/loading-spinner';
 import { NotificationModule } from '@shared/notification';
 import { NgrxFormsModule } from 'ngrx-forms';
-import { FormRadioModule } from '@shared/form-radio';
 import { DateRangepickerModule } from '@shared/date-rangepicker';
+import { NotifyModule } from '@shared/notify';
+import { ReportSuccessModule } from '@app/account/shared/report-success';
 
 @NgModule({
-  declarations: [AccountReportsZeroPageComponent, AccountReportsZeroFormComponent],
+  declarations: [AccountReportsZeroPageComponent, AccountReportsZeroFormComponent, AccountReportsZeroSuccessComponent],
   imports: [
     CommonModule,
     RouterModule,
     TranslateModule,
     AccountReportsZeroPageRoutingModule,
     NgrxFormsModule,
-    FormRadioModule,
+    DateRangepickerModule,
     LetDirective,
     PushPipe,
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule,
-    DateRangepickerModule
+    NotifyModule,
+    ReportSuccessModule
   ],
   providers: [AccountReportsZeroPageFacade, ComponentStore]
 })

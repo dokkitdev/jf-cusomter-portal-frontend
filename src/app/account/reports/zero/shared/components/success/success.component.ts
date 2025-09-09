@@ -1,14 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AccountReportsWarehousePageFacade } from '@app/account/reports/warehouse/warehouse.facade';
+import { AccountReportsZeroPageFacade } from '@app/account/reports/zero/zero.facade';
 
 @Component({
-  selector: 'account-reports-warehouse-success',
+  selector: 'account-reports-zero-success',
   templateUrl: 'success.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class AccountReportsWarehouseSuccessComponent {
-  constructor(private facade: AccountReportsWarehousePageFacade) {}
+export class AccountReportsZeroSuccessComponent {
+  constructor(private facade: AccountReportsZeroPageFacade) {}
 
   public generateNewReport(): void {
     this.facade.generateNewReport();

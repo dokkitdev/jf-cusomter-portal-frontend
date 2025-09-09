@@ -15,6 +15,7 @@ import { NotificationModule } from '@shared/notification';
 import { NgrxFormsModule } from 'ngrx-forms';
 import { FormRadioModule } from '@shared/form-radio';
 import { NotifyModule } from '@shared/notify';
+import { ReportSuccessModule } from '@app/account/shared/report-success';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NotifyModule } from '@shared/notify';
     NotificationModule,
     LoadingSpinnerModule,
     ButtonModule,
-    NotifyModule
+    NotifyModule,
+    ReportSuccessModule
   ],
   providers: [AccountReportsWarehousePageFacade, ComponentStore]
 })

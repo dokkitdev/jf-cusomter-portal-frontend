@@ -1,4 +1,5 @@
 export * from './warehouse-report-request';
+export * from './zero-report-request';
 export * from './letter-template';
 export * from './letter-template-group';
 export * from './system-log';

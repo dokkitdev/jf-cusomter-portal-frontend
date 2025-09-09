@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
+import { WarehouseReportRequest, ZeroReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
@@ -111,6 +111,13 @@ export class NotifyService {
     const requestBody = classToPlain(request, { groups: [ClassGroup.MAIN] });
 
     return this.apiService.post<void>(`${this.baseEndpoint}/reports/warehouse`, requestBody);
+  }
+
+  public generateZeroReport(dateFrom: string, dateTo: string): Observable<void> {
+    const request = new ZeroReportRequest(dateFrom, dateTo);
+    const requestBody = classToPlain(request, { groups: [ClassGroup.MAIN] });
+
+    return this.apiService.post<void>(`${this.baseEndpoint}/csv-reports/zero`, requestBody);
   }
 
   public getLetterTemplates(): Observable<Array<LetterTemplateGroup>> {

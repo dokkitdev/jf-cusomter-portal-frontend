@@ -1,0 +1,24 @@
+<div class="report-success">
+  <div class="report-success-content">
+    <div class="report-success-icon">
+      <div class="success"></div>
+    </div>
+    <p class="report-success-message">
+      {{ 'ACCOUNT.SHARED.REPORT_SUCCESS.TEXT_MESSAGE' | translate }}
+    </p>
+  </div>
+  <div class="report-success-actions">
+    <btn
+      variant="secondary"
+      (clicked)="onGenerateNewClicked()"
+      isBlock="true">
+      {{ generateNewButtonKey | translate }}
+    </btn>
+    <btn
+      type="primary"
+      isBlock="true"
+      (clicked)="onGoToReportsClicked()">
+      {{ 'ACCOUNT.SHARED.REPORT_SUCCESS.BUTTON_GO_TO_REPORTS' | translate }}
+    </btn>
+  </div>
+</div>

@@ -361,11 +361,6 @@
         "TEXT_THREE_DAYS": "Three days",
         "TEXT_FOUR_DAYS": "Four days",
         "BUTTON_SUBMIT": "Generate warehouse report",
-        "SUCCESS": {
-          "TEXT_MESSAGE": "Your report is being processed and will appear on the Reports page shortly!",
-          "BUTTON_GENERATE_NEW": "Generate New Warehouse Report",
-          "BUTTON_GO_TO_REPORTS": "Go to Reports"
-        },
         "NOTIFICATIONS": {
           "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!",
           "TEXT_ERROR": "Something went wrong. Please try again."
@@ -375,9 +370,18 @@
         "TEXT_PAGE_TITLE": "Zero Report",
         "TEXT_LABEL": "Select time period:",
         "TEXT_PLACEHOLDER": "Select",
+        "TEXT_DATE_FROM": "Date From",
+        "TEXT_DATE_TO": "Date To",
         "BUTTON_SUBMIT": "Generate zero report",
         "NOTIFICATIONS": {
-          "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!"
+          "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
+      "SUCCESS": {
+        "BUTTON_GENERATE_NEW": {
+          "WAREHOUSE": "Generate New Warehouse Report",
+          "ZERO": "Generate New Zero Report"
         }
       }
     },
@@ -553,6 +557,10 @@
       }
     },
     "SHARED": {
+      "REPORT_SUCCESS": {
+        "TEXT_MESSAGE": "Your report is being processed and will appear on the Reports page shortly!",
+        "BUTTON_GO_TO_REPORTS": "Go to Reports"
+      },
       "CUSTOMER_SELECT": {
         "TEXT_ITEM": "{{ name }} (ID: {{ id }})"
       },
