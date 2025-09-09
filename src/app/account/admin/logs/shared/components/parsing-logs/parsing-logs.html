@@ -1,7 +1,7 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [itemsCount]="items.length">
+  [itemsCount]="items?.length || 0">
   <div class="table">
     <admin-logs-parsing-logs-header></admin-logs-parsing-logs-header>
     <div class="table-content">
@@ -9,7 +9,7 @@
         item of items
           | paginate
             : {
-                id: paginationId$ | async,
+                id: paginationID$ | async,
                 itemsPerPage: perPage$ | async,
                 currentPage: currentPage$ | async,
                 totalItems: totalItems$ | async
@@ -26,9 +26,9 @@
         </div>
       }
     </div>
-    @if (hasPagination$ | async) {
+    @if ((hasPagination$ | async) && !(isLoading$ | async)) {
       <pagination-elements
-        [paginationId]="paginationId$ | async"
+        [paginationId]="paginationID$ | async"
         (pageChanged)="pageChanged($event)">
       </pagination-elements>
     }

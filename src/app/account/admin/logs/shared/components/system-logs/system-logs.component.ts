@@ -21,17 +21,17 @@ export class AccountAdminLogsSystemLogsComponent {
   public hasPagination$: Observable<boolean>;
   public perPage$: Observable<number>;
   public totalItems$: Observable<number>;
-  public paginationId$: Observable<string>;
+  public paginationID$: Observable<string>;
 
   constructor(private facade: AccountAdminLogsPageFacade) {
     this.items$ = this.facade.systemLogs$;
     this.isLoading$ = this.facade.isLoadingSystem$;
     this.currentPage$ = this.facade.currentSystemPage$;
     this.totalPages$ = this.facade.systemTotalPages$;
-    this.hasPagination$ = this.facade.systemTotalPages$.pipe(map((totalPages) => totalPages > 1));
+    this.hasPagination$ = this.facade.systemHasPagination$;
     this.perPage$ = this.facade.systemPerPage$;
-    this.totalItems$ = this.facade.systemLogs$.pipe(map((logs) => logs.length));
-    this.paginationId$ = this.facade.systemPaginationId$;
+    this.totalItems$ = this.facade.systemTotalItems$;
+    this.paginationID$ = this.facade.systemPaginationID$;
   }
 
   public pageChanged(page: number): void {

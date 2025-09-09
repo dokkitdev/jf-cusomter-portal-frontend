@@ -28,10 +28,14 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
   public readonly orderBy$ = this.select((state) => state.orderBy);
   public readonly desc$ = this.select((state) => state.desc);
 
-  public readonly systemPerPage$ = this.select((state) => 10); // Default page size
-  public readonly parsingPerPage$ = this.select((state) => 10); // Default page size
-  public readonly systemPaginationId$ = this.select((state) => 'system-logs-pagination');
-  public readonly parsingPaginationId$ = this.select((state) => 'parsing-logs-pagination');
+  public readonly systemPerPage$ = this.select((state) => state.systemPerPage);
+  public readonly parsingPerPage$ = this.select((state) => state.parsingPerPage);
+  public readonly systemPaginationID$ = this.select((state) => state.systemPaginationId);
+  public readonly parsingPaginationID$ = this.select((state) => state.parsingPaginationId);
+  public readonly systemTotalItems$ = this.select((state) => state.systemTotalItems);
+  public readonly parsingTotalItems$ = this.select((state) => state.parsingTotalItems);
+  public readonly systemHasPagination$ = this.select((state) => state.systemTotalItems > 0);
+  public readonly parsingHasPagination$ = this.select((state) => state.parsingTotalItems > 0);
 
   public readonly parameters$ = this.select(
     this.currentSystemPage$,
@@ -63,13 +67,13 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
 
   public readonly loadSystemLogs = this.effect((page$: Observable<number>) =>
     page$.pipe(
-      tap(() => this.patchState({ isLoadingSystem: true })),
       switchMap((page) => {
         const state = this.get();
 
         return this.notifyService
           .searchSystemLogs({
             page,
+            perPage: state.systemPerPage,
             orderBy: state.orderBy as NotifySystemLogsSortField,
             desc: state.desc
           })
@@ -79,6 +83,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
                 this.patchState({
                   systemLogs: response.items,
                   systemTotalPages: response.lastPage,
+                  systemTotalItems: response.totalItems,
                   isLoadingSystem: false
                 });
               },
@@ -93,13 +98,13 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
 
   public readonly loadParsingLogs = this.effect((page$: Observable<number>) =>
     page$.pipe(
-      tap(() => this.patchState({ isLoadingParsing: true })),
       switchMap((page) => {
         const state = this.get();
 
         return this.notifyService
           .searchParsingLogs({
             page,
+            perPage: state.parsingPerPage,
             orderBy: state.orderBy as NotifyParsingLogsSortField,
             desc: state.desc
           })
@@ -109,6 +114,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
                 this.patchState({
                   parsingLogs: response.items,
                   parsingTotalPages: response.lastPage,
+                  parsingTotalItems: response.totalItems,
                   isLoadingParsing: false
                 });
               },
@@ -148,21 +154,31 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
 
   public loadSystem(): void {
     const currentPage = this.get().currentSystemPage;
+    this.updateIsLoadingSystem(true);
     this.loadSystemLogs(of(currentPage));
   }
 
   public loadParsing(): void {
     const currentPage = this.get().currentParsingPage;
+    this.updateIsLoadingParsing(true);
     this.loadParsingLogs(of(currentPage));
   }
 
   public changeSystemPage(page: number): void {
     this.setSystemPage(page);
+    this.patchState({
+      isLoadingSystem: true,
+      systemLogs: [] // Clear the current items
+    });
     this.loadSystemLogs(of(page));
   }
 
   public changeParsingPage(page: number): void {
     this.setParsingPage(page);
+    this.patchState({
+      isLoadingParsing: true,
+      parsingLogs: [] // Clear the current items
+    });
     this.loadParsingLogs(of(page));
   }
 
@@ -199,5 +215,19 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
 
   public resetState(): void {
     this.setState(new AccountAdminDocumentsPageState());
+  }
+
+  private updateIsLoadingSystem(isLoading: boolean): void {
+    this.updater((state: AccountAdminDocumentsPageState) => ({
+      ...state,
+      isLoadingSystem: isLoading
+    }))();
+  }
+
+  private updateIsLoadingParsing(isLoading: boolean): void {
+    this.updater((state: AccountAdminDocumentsPageState) => ({
+      ...state,
+      isLoadingParsing: isLoading
+    }))();
   }
 }
