@@ -29,7 +29,7 @@
   </div>
 </table-container>
 
-@if ((hasPagination$ | async) && !(isLoading$ | async)) {
+@if (hasPagination$ | async) {
   <pagination-elements
     [paginationId]="paginationID$ | async"
     (pageChanged)="onPageChanged($event)">

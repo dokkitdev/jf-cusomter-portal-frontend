@@ -26,7 +26,7 @@
         </div>
       }
     </div>
-    @if ((hasPagination$ | async) && !(isLoading$ | async)) {
+    @if (hasPagination$ | async) {
       <pagination-elements
         [paginationId]="paginationID$ | async"
         (pageChanged)="pageChanged($event)">

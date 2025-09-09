@@ -7,7 +7,6 @@ import { GeneralReportsSortField } from '../../types/general-reports-sort-field'
 @Component({
   selector: 'reports-general-table-header',
   templateUrl: 'table-header.html',
-  styleUrls: ['table-header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
