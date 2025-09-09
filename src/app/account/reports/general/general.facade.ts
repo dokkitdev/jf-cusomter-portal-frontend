@@ -107,14 +107,12 @@ export class AccountReportsGeneralPageFacade extends ComponentStore<AccountRepor
 
   private onLoadItemsError(error: Error): void {
     this.patchState({ isLoading: false });
-    // TODO: Handle error
   }
 
   private updateIsLoading(isLoading: boolean): void {
     this.updater((state: AccountReportsGeneralPageState) => ({
       ...state,
       isLoading,
-      // Clear items when loading starts to ensure proper loading state
       ...(isLoading && { items: [] })
     }))();
   }

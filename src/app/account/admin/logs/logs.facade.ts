@@ -168,7 +168,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
     this.setSystemPage(page);
     this.patchState({
       isLoadingSystem: true,
-      systemLogs: [] // Clear the current items
+      systemLogs: []
     });
     this.loadSystemLogs(of(page));
   }
@@ -177,7 +177,7 @@ export class AccountAdminLogsPageFacade extends ComponentStore<AccountAdminDocum
     this.setParsingPage(page);
     this.patchState({
       isLoadingParsing: true,
-      parsingLogs: [] // Clear the current items
+      parsingLogs: []
     });
     this.loadParsingLogs(of(page));
   }
