@@ -10,6 +10,7 @@ import { AccountReportsGeneralComponent } from './general.component';
 import { AccountReportsGeneralHeaderComponent } from './shared/components/header/header.component';
 import { AccountReportsGeneralItemsComponent } from './shared/components/items/items.component';
 import { AccountReportsGeneralItemComponent } from './shared/components/item/item.component';
+import { AccountReportsGeneralTableHeaderComponent } from './shared/components/table-header/table-header.component';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
 import { PaginationElementsModule } from '@shared/pagination-elements';
@@ -22,7 +23,8 @@ import { FileService } from '@shared/file';
     AccountReportsGeneralComponent,
     AccountReportsGeneralHeaderComponent,
     AccountReportsGeneralItemsComponent,
-    AccountReportsGeneralItemComponent
+    AccountReportsGeneralItemComponent,
+    AccountReportsGeneralTableHeaderComponent
   ],
   imports: [
     CommonModule,

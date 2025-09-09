@@ -20,7 +20,6 @@ export class AccountReportsGeneralItemsComponent {
   public totalItems$: Observable<number>;
   public hasPagination$: Observable<boolean>;
   public paginationID$: Observable<string>;
-  public sortParameters$: Observable<any>;
 
   constructor(public facade: AccountReportsGeneralPageFacade) {
     this.items$ = this.facade.items$;
@@ -30,7 +29,6 @@ export class AccountReportsGeneralItemsComponent {
     this.totalItems$ = this.facade.totalItems$;
     this.hasPagination$ = this.facade.hasPagination$;
     this.paginationID$ = this.facade.paginationID$;
-    this.sortParameters$ = this.facade.sortParameters$;
   }
 
   public onDownloadClicked(item: CsvReport): void {
@@ -39,9 +37,5 @@ export class AccountReportsGeneralItemsComponent {
 
   public onPageChanged(page: number): void {
     this.facade.loadItemsByPage(page);
-  }
-
-  public onSortChanged(event: any): void {
-    this.facade.onSortChanged(event);
   }
 }
