@@ -3,3 +3,4 @@ export * from './letter-template';
 export * from './letter-template-group';
 export * from './system-log';
 export * from './parsing-log';
+export * from './csv-report';

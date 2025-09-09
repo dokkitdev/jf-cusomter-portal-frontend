@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AccountReportsGeneralPageFacade } from '../../../general.facade';
-import { CsvReport } from '../../models/csv-report';
+import { CsvReport } from '@shared/notify';
 import { Observable } from 'rxjs';
 import { heightCollapseAnimation } from '@shared/animations';
 

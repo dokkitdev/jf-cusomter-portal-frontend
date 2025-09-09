@@ -1,4 +1,4 @@
-import { CsvReport } from './shared/models/csv-report';
+import { CsvReport } from '@shared/notify';
 import { GeneralReportsSortField } from './shared/types/general-reports-sort-field';
 
 export class AccountReportsGeneralPageState {

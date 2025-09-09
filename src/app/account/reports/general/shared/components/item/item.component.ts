@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { CsvReport } from '../../models/csv-report';
+import { CsvReport } from '@shared/notify';
 
 @Component({
   selector: 'reports-general-item',

@@ -3,12 +3,10 @@ import { ComponentStore } from '@ngrx/component-store';
 import { Observable, of } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
 import { tapResponse } from '@ngrx/operators';
-import { NotifyService } from '@shared/notify';
+import { NotifyService, CsvReport } from '@shared/notify';
 import { FileService } from '@shared/file';
 import { PaginationResponse } from '@shared/pagination';
-import { CsvReport } from './shared/models/csv-report';
 import { AccountReportsGeneralPageState } from './general.state';
-import { GeneralReportsSortField } from './shared/types/general-reports-sort-field';
 import { AccountReportsGeneralQueryParameters } from './shared/types/query-parameters';
 
 @Injectable()
