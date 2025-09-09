@@ -6,7 +6,6 @@ import { AdminLogsTab } from '../../types';
 @Component({
   selector: 'admin-logs-header',
   templateUrl: 'header.html',
-  styleUrls: ['header.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })

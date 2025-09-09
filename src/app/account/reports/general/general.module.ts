@@ -3,12 +3,40 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { LetDirective } from '@ngrx/component';
 import { AccountReportsGeneralPageFacade } from './general.facade';
 import { AccountReportsGeneralRoutingModule } from './general.routing';
+import { AccountReportsGeneralComponent } from './general.component';
+import { AccountReportsGeneralHeaderComponent } from './shared/components/header/header.component';
+import { AccountReportsGeneralItemsComponent } from './shared/components/items/items.component';
+import { AccountReportsGeneralItemComponent } from './shared/components/item/item.component';
+import { AccountReportsGeneralTableHeaderComponent } from './shared/components/table-header/table-header.component';
+import { TableContainerModule } from '@shared/table-container';
+import { HeaderSortModule } from '@shared/header-sort';
+import { PaginationElementsModule } from '@shared/pagination-elements';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NotifyService } from '@shared/notify';
+import { FileService } from '@shared/file';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule, TranslateModule, AccountReportsGeneralRoutingModule],
-  providers: [AccountReportsGeneralPageFacade, ComponentStore]
+  declarations: [
+    AccountReportsGeneralComponent,
+    AccountReportsGeneralHeaderComponent,
+    AccountReportsGeneralItemsComponent,
+    AccountReportsGeneralItemComponent,
+    AccountReportsGeneralTableHeaderComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    AccountReportsGeneralRoutingModule,
+    TableContainerModule,
+    HeaderSortModule,
+    LetDirective,
+    PaginationElementsModule,
+    NgxPaginationModule
+  ],
+  providers: [AccountReportsGeneralPageFacade, ComponentStore, NotifyService, FileService]
 })
 export class AccountReportsGeneralModule {}

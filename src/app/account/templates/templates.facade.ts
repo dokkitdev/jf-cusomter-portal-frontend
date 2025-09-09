@@ -57,7 +57,6 @@ export class AccountTemplatesPageFacade extends ComponentStore<AccountTemplatesP
         this.notifyService.downloadLetterTemplate(template.name).pipe(
           tapResponse(
             (blob) => {
-              // Create filename from template label, defaulting to .docx extension
               const filename = `${template.label}.docx`;
               this.fileService.saveFile(blob, filename);
             },

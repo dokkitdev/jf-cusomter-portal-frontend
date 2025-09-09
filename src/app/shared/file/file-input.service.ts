@@ -42,7 +42,6 @@ export class FileInputService {
         return;
       }
 
-      // Apply file filter if provided
       if (options.fileFilter) {
         const invalidFiles = files.filter((file) => !options.fileFilter!(file));
         if (invalidFiles.length > 0) {

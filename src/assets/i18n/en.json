@@ -278,6 +278,16 @@
       }
     },
     "REPORTS": {
+      "GENERAL": {
+        "TEXT_PAGE_TITLE": "Report logs",
+        "FILTER_DATE": "Date",
+        "FILTER_TYPE": "Type",
+        "FILTER_FILENAME": "Filename",
+        "TABLE_HEADER_DATE": "Date",
+        "TABLE_HEADER_REPORT_TYPE": "Report Type",
+        "TABLE_HEADER_FILENAME": "Filename",
+        "LINK_DOWNLOAD": "Download"
+      },
       "SERVICE_CONTROL": {
         "TEXT_PAGE_TITLE": "Service Control Report",
         "LINK_CSV": "CSV",

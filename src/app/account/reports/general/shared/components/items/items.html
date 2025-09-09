@@ -1,9 +1,9 @@
 <table-container
   *ngrxLet="items$; let items"
   [isLoading]="isLoading$ | async"
-  [itemsCount]="items?.length || 0">
+  [itemsCount]="items?.length">
   <div class="table">
-    <admin-logs-parsing-logs-header></admin-logs-parsing-logs-header>
+    <reports-general-table-header></reports-general-table-header>
     <div class="table-content">
       @for (
         item of items
@@ -14,23 +14,24 @@
                 currentPage: currentPage$ | async,
                 totalItems: totalItems$ | async
               };
-        track item
+        track item.id
       ) {
         <div
           [@heightCollapse]
           class="table-content-row">
-          <admin-logs-parsing-logs-item
+          <reports-general-item
             [item]="item"
-            (showClicked)="onShowClicked($event)">
-          </admin-logs-parsing-logs-item>
+            (downloadClicked)="onDownloadClicked($event)">
+          </reports-general-item>
         </div>
       }
     </div>
-    @if (hasPagination$ | async) {
-      <pagination-elements
-        [paginationId]="paginationID$ | async"
-        (pageChanged)="pageChanged($event)">
-      </pagination-elements>
-    }
   </div>
 </table-container>
+
+@if (hasPagination$ | async) {
+  <pagination-elements
+    [paginationId]="paginationID$ | async"
+    (pageChanged)="onPageChanged($event)">
+  </pagination-elements>
+}

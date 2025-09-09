@@ -13,6 +13,8 @@ export class AccountAdminDocumentsPageState {
   public parsingPerPage: number;
   public systemTotalPages: number;
   public parsingTotalPages: number;
+  public systemTotalItems: number;
+  public parsingTotalItems: number;
   public activeTab: AdminLogsTab;
   public orderBy: NotifySystemLogsSortField | NotifyParsingLogsSortField;
   public desc: boolean;
@@ -28,6 +30,8 @@ export class AccountAdminDocumentsPageState {
     this.currentParsingPage = 1;
     this.systemTotalPages = 1;
     this.parsingTotalPages = 1;
+    this.systemTotalItems = 0;
+    this.parsingTotalItems = 0;
     this.systemPerPage = 15;
     this.parsingPerPage = 15;
     this.activeTab = 'system';
