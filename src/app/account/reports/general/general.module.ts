@@ -7,6 +7,9 @@ import { LetDirective } from '@ngrx/component';
 import { AccountReportsGeneralPageFacade } from './general.facade';
 import { AccountReportsGeneralRoutingModule } from './general.routing';
 import { AccountReportsGeneralComponent } from './general.component';
+import { AccountReportsGeneralHeaderComponent } from './shared/components/header/header.component';
+import { AccountReportsGeneralItemsComponent } from './shared/components/items/items.component';
+import { AccountReportsGeneralItemComponent } from './shared/components/item/item.component';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
 import { PaginationElementsModule } from '@shared/pagination-elements';
@@ -15,7 +18,12 @@ import { NotifyService } from '@shared/notify';
 import { FileService } from '@shared/file';
 
 @NgModule({
-  declarations: [AccountReportsGeneralComponent],
+  declarations: [
+    AccountReportsGeneralComponent,
+    AccountReportsGeneralHeaderComponent,
+    AccountReportsGeneralItemsComponent,
+    AccountReportsGeneralItemComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,

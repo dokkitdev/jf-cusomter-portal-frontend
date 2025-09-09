@@ -1,0 +1,16 @@
+<div class="table-row">
+  <div class="table-cell general-date">
+    {{ item.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
+  </div>
+  <div class="table-cell general-type">{{ item.reportType }}</div>
+  <div class="table-cell general-filename">
+    {{ item.fileName }}
+  </div>
+  <div class="table-cell general-actions">
+    <a
+      (click)="onDownloadClicked(item)"
+      class="table-action">
+      {{ 'ACCOUNT.REPORTS.GENERAL.LINK_DOWNLOAD' | translate }}
+    </a>
+  </div>
+</div>
