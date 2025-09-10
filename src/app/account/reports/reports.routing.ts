@@ -33,6 +33,11 @@ const routes: Routes = [
     path: 'general',
     pathMatch: 'full',
     loadChildren: () => import('./general/general.module').then((module) => module.AccountReportsGeneralModule)
+  },
+  {
+    path: 'asset',
+    pathMatch: 'full',
+    loadChildren: () => import('./asset/asset.module').then((module) => module.AccountReportsAssetPageModule)
   }
 ];
 

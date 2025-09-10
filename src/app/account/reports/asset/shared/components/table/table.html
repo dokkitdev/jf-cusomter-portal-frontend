@@ -1,0 +1,90 @@
+<table-container
+  [isLoading]="isLoading$ | async"
+  [itemsCount]="(items$ | async)?.length || 0">
+  <div class="table">
+    <div class="table-head">
+      <div class="table-row">
+        <div class="table-cell asset-site-id">
+          <header-sort
+            [orderBy]="sortField.SITE_ID"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SITE_ID' | translate }}
+          </header-sort>
+        </div>
+        <div class="table-cell asset-uprn">
+          <header-sort
+            [orderBy]="sortField.UPRN"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_UPRN' | translate }}
+          </header-sort>
+        </div>
+        <div class="table-cell asset-asset-id">
+          <header-sort
+            [orderBy]="sortField.ASSET_ID"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_ID' | translate }}
+          </header-sort>
+        </div>
+        <div class="table-cell asset-asset-type">
+          <header-sort
+            [orderBy]="sortField.ASSET_TYPE"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_TYPE' | translate }}
+          </header-sort>
+        </div>
+        <div class="table-cell asset-service-level">
+          <header-sort
+            [orderBy]="sortField.SERVICE_LEVEL_NAME"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SERVICE_LEVEL' | translate }}
+          </header-sort>
+        </div>
+        <div class="table-cell asset-error">
+          {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ERROR' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="table-content">
+      <div
+        *ngFor="
+          let item of items$
+            | async
+            | paginate
+              : {
+                  id: paginationID$ | async,
+                  itemsPerPage: perPage$ | async,
+                  currentPage: currentPage$ | async,
+                  totalItems: totalItems$ | async
+                };
+          trackBy: trackByAssetId
+        "
+        class="table-content-row">
+        <div class="table-row">
+          <div class="table-cell asset-site-id">{{ item.siteId }}</div>
+          <div class="table-cell asset-uprn">{{ item.uprn }}</div>
+          <div class="table-cell asset-asset-id">{{ item.assetId }}</div>
+          <div class="table-cell asset-asset-type">{{ item.assetType }}</div>
+          <div class="table-cell asset-service-level">{{ item.serviceLevelName || '-' }}</div>
+          <div class="table-cell asset-error">{{ item.errorText }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</table-container>
+
+<div
+  *ngIf="(hasPagination$ | async) && !(isLoading$ | async)"
+  class="pagination-container">
+  <pagination-elements
+    [paginationId]="paginationID$ | async"
+    [itemsPerPage]="perPage$ | async"
+    [currentPage]="currentPage$ | async"
+    [totalItems]="totalItems$ | async"
+    (pageChanged)="onPageChanged($event)">
+  </pagination-elements>
+</div>

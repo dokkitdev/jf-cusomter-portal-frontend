@@ -5,7 +5,16 @@ import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { classToPlain, instanceToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
+import {
+  WarehouseReportRequest,
+  LetterTemplateGroup,
+  SystemLog,
+  ParsingLog,
+  AssetReportItem,
+  AssetReportResponse,
+  AssetReportFilters,
+  AssetReportPaginationRequest
+} from './models';
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
@@ -175,5 +184,45 @@ export class NotifyService {
         }
       )
       .pipe(map((response) => response.body as Blob));
+  }
+
+  public getAssetReportFilters(): Observable<AssetReportFilters> {
+    return this.apiService.get<AssetReportFilters>(`${this.baseEndpoint}/asset-reports/validation/search-filters`).pipe(
+      map((response) => {
+        console.log('API response for filters:', response);
+
+        return plainToClass(AssetReportFilters, response);
+      })
+    );
+  }
+
+  public searchAssetReports(params: AssetReportPaginationRequest): Observable<PaginationResponse<AssetReportItem>> {
+    const request = new AssetReportPaginationRequest({
+      page: params.page,
+      perPage: params.perPage,
+      orderBy: params.orderBy,
+      desc: params.desc,
+      siteId: params.siteId,
+      serviceLevelNames: params.serviceLevelNames,
+      assetTypes: params.assetTypes,
+      jobStages: params.jobStages,
+      errorTypes: params.errorTypes
+    });
+
+    return this.apiService
+      .get<
+        PaginationResponse<AssetReportItem>
+      >(`${this.baseEndpoint}/asset-reports/validation`, omitBy(instanceToPlain<AssetReportPaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<AssetReportItem>(AssetReportItem), response, {
+            groups: [ClassGroup.MAIN]
+          })
+        )
+      );
+  }
+
+  public generateAssetReport(): Observable<void> {
+    return this.apiService.post<void>(`${this.baseEndpoint}/csv-reports/asset`, {});
   }
 }

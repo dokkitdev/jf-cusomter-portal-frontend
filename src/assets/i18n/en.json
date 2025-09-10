@@ -80,6 +80,7 @@
       "LINK_REPORTS_KPI": "Repair Response",
       "LINK_REPORTS_ZERO": "Zero Report",
       "LINK_REPORTS_WAREHOUSE": "Warehouse",
+      "LINK_REPORTS_ASSET": "Assets Report",
       "LINK_DOCUMENTS": "Documents",
       "LINK_TEMPLATES": "Templates",
       "LINK_ADMIN": "Admin",
@@ -383,6 +384,33 @@
         },
         "NOTIFICATIONS": {
           "TEXT_REPORT_GENERATED": "Your report is being processed and will appear on the Reports page shortly!",
+          "TEXT_ERROR": "Something went wrong. Please try again."
+        }
+      },
+      "ASSET": {
+        "TEXT_PAGE_TITLE": "Assets Report",
+        "TEXT_FILTER_TITLE": "Setup filters and generate report",
+        "BUTTON_GENERATE": "Generate Asset Report",
+        "FILTERS": {
+          "TEXT_SITE": "Site",
+          "TEXT_SITE_PLACEHOLDER": "Select",
+          "TEXT_SERVICE_LEVEL": "Service Level",
+          "TEXT_SERVICE_LEVEL_PLACEHOLDER": "Select",
+          "TEXT_ASSET_TYPE": "Asset Type",
+          "TEXT_ASSET_TYPE_PLACEHOLDER": "Select",
+          "TEXT_ERROR": "Error",
+          "TEXT_ERROR_PLACEHOLDER": "Select",
+          "TEXT_STAGE": "Stage",
+          "TEXT_STAGE_PLACEHOLDER": "Select"
+        },
+        "TABLE_HEADER_SITE_ID": "Site ID",
+        "TABLE_HEADER_UPRN": "~UPRN",
+        "TABLE_HEADER_ASSET_ID": "Asset ID",
+        "TABLE_HEADER_ASSET_TYPE": "Asset Type",
+        "TABLE_HEADER_SERVICE_LEVEL": "Service Level",
+        "TABLE_HEADER_ERROR": "Error",
+        "NOTIFICATIONS": {
+          "TEXT_REPORT_GENERATED": "Asset report generated successfully!",
           "TEXT_ERROR": "Something went wrong. Please try again."
         }
       }
