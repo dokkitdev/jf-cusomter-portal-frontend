@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '@shared/notification';
-import { NotifyService } from '@shared/notify';
+import { NotifyService, AssetReportItem, AssetReportPaginationRequest, AssetReportFilters } from '@shared/notify';
 import { AppState } from '@shared/store';
-import { Actions, disable, enable, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
+import { Actions, disable, enable, formGroupReducer, FormGroupState, SetValueAction, unbox } from 'ngrx-forms';
 import { AssetReportSortField } from '@shared/notify/types';
 import {
   exhaustMap,
@@ -22,16 +22,14 @@ import {
   of
 } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { unbox } from 'ngrx-forms';
-import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
+import { AccountReportsAssetPageState, AccountReportsAssetPageStateImpl, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
-import { AssetReportItem, AssetReportPaginationRequest, AssetReportFilters } from '@shared/notify';
 import { plainToClass } from 'class-transformer';
 import { CustomSelectOption } from '@shared/custom-select/models/select-option';
 
 @Injectable()
 export class AccountReportsAssetPageFacade extends ComponentStore<AccountReportsAssetPageState> {
-  public get items$(): Observable<AssetReportItem[]> {
+  public get items$(): Observable<Array<AssetReportItem>> {
     return this.select((state) => state.items);
   }
 
@@ -87,61 +85,66 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
     return this.select((state) => state.availableFilters);
   }
 
-  public get siteOptions$(): Observable<CustomSelectOption<number>[]> {
+  public get siteOptions$(): Observable<Array<CustomSelectOption<number>>> {
     return this.availableFilters$.pipe(
       startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.siteIds || !Array.isArray(filters.siteIds)) {
           return [];
         }
+
         return filters.siteIds.map((id: number) => new CustomSelectOption({ id, title: id.toString() }));
       })
     );
   }
 
-  public get serviceLevelOptions$(): Observable<CustomSelectOption<string>[]> {
+  public get serviceLevelOptions$(): Observable<Array<CustomSelectOption<string>>> {
     return this.availableFilters$.pipe(
       startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.serviceLevelNames || !Array.isArray(filters.serviceLevelNames)) {
           return [];
         }
+
         return filters.serviceLevelNames.map((name: string) => new CustomSelectOption({ id: name, title: name }));
       })
     );
   }
 
-  public get assetTypeOptions$(): Observable<CustomSelectOption<string>[]> {
+  public get assetTypeOptions$(): Observable<Array<CustomSelectOption<string>>> {
     return this.availableFilters$.pipe(
       startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.assetTypes || !Array.isArray(filters.assetTypes)) {
           return [];
         }
+
         return filters.assetTypes.map((type: string) => new CustomSelectOption({ id: type, title: type }));
       })
     );
   }
 
-  public get errorTypeOptions$(): Observable<CustomSelectOption<string>[]> {
+  public get errorTypeOptions$(): Observable<Array<CustomSelectOption<string>>> {
     return this.availableFilters$.pipe(
       startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.errorTypes || !Array.isArray(filters.errorTypes)) {
           return [];
         }
+
         return filters.errorTypes.map((type: string) => new CustomSelectOption({ id: type, title: type }));
       })
     );
   }
 
-  public get jobStageOptions$(): Observable<CustomSelectOption<string>[]> {
+  public get jobStageOptions$(): Observable<Array<CustomSelectOption<string>>> {
     return this.availableFilters$.pipe(
       startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.jobStages || !Array.isArray(filters.jobStages)) {
           return [];
         }
+
         return filters.jobStages.map((stage: string) => new CustomSelectOption({ id: stage, title: stage }));
       })
     );
@@ -175,13 +178,28 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
 
   private generateReportEffect$: () => Observable<void>;
 
+  private readonly loadItemsEffect$ = this.effect((origin$: Observable<void>) =>
+    origin$.pipe(
+      switchMap(() => {
+        const state = this.get();
+
+        return this.searchAssetReports(state.formState.value).pipe(
+          tapResponse(
+            (response) => this.onLoadItemsSuccess(response),
+            (error: HttpErrorResponse) => this.onLoadItemsError(error)
+          )
+        );
+      })
+    )
+  );
+
   constructor(
     private readonly store: Store<AppState>,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
     private readonly notifyService: NotifyService
   ) {
-    super(new AccountReportsAssetPageState());
+    super(new AccountReportsAssetPageStateImpl());
     this.resetState();
     this.registerGenerateReportEffect();
     this.loadAvailableFilters();
@@ -221,6 +239,20 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
 
     this.updateSort({ orderBy: field, desc });
     this.patchState({
+      isLoading: true,
+      items: []
+    });
+    this.loadItems();
+  }
+
+  public loadItems(): void {
+    this.setIsLoading(true);
+    this.loadItemsEffect$();
+  }
+
+  public refreshData(): void {
+    this.patchState({
+      page: 1,
       isLoading: true,
       items: []
     });
@@ -278,64 +310,20 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
           errorTypes: [],
           jobStages: []
         };
+
         this.patchState({ availableFilters: fallbackFilters });
       }
     });
   }
 
-  private readonly loadItemsEffect$ = this.effect((origin$: Observable<void>) =>
-    origin$.pipe(
-      switchMap(() => {
-        const state = this.get();
-
-        return this.searchAssetReports(state.formState.value).pipe(
-          tapResponse(
-            (response) => this.onLoadItemsSuccess(response),
-            (error: HttpErrorResponse) => this.onLoadItemsError(error)
-          )
-        );
-      })
-    )
-  );
-
-  private searchAssetReports(filters: AssetReportFormFilters): Observable<any> {
-    return this.select((state) => ({
-      page: state.page,
-      perPage: state.perPage,
-      orderBy: state.orderBy,
-      desc: state.desc
-    })).pipe(
-      map((state) => {
-        const queryParams = new AssetReportPaginationRequest({
-          page: state.page,
-          perPage: state.perPage,
-          orderBy: state.orderBy,
-          desc: state.desc,
-          siteId: filters.siteId || undefined,
-          serviceLevelNames: unbox(filters.serviceLevelNames),
-          assetTypes: unbox(filters.assetTypes),
-          jobStages: unbox(filters.jobStages),
-          errorTypes: unbox(filters.errorTypes)
-        });
-
-        return this.notifyService.searchAssetReports(queryParams);
-      }),
-      exhaustMap((obs) => obs)
-    );
-  }
-
-  public loadItems(): void {
-    this.setIsLoading(true);
-    this.loadItemsEffect$();
-  }
-
-  private updateItems(items: AssetReportItem[]): void {
+  private updateItems(items: Array<AssetReportItem>): void {
     this.patchState({ items });
   }
 
   private updatePagination(totalItems: number): void {
     this.patchState((state) => {
       const totalPages = Math.ceil(totalItems / state.perPage);
+
       return { totalItems, totalPages };
     });
   }
@@ -372,12 +360,29 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
     }))();
   }
 
-  public refreshData(): void {
-    this.patchState({
-      page: 1,
-      isLoading: true,
-      items: []
-    });
-    this.loadItems();
+  private searchAssetReports(filters: AssetReportFormFilters): Observable<any> {
+    return this.select((state) => ({
+      page: state.page,
+      perPage: state.perPage,
+      orderBy: state.orderBy,
+      desc: state.desc
+    })).pipe(
+      map((state) => {
+        const queryParams = new AssetReportPaginationRequest({
+          page: state.page,
+          perPage: state.perPage,
+          orderBy: state.orderBy,
+          desc: state.desc,
+          siteId: filters.siteId || undefined,
+          serviceLevelNames: unbox(filters.serviceLevelNames),
+          assetTypes: unbox(filters.assetTypes),
+          jobStages: unbox(filters.jobStages),
+          errorTypes: unbox(filters.errorTypes)
+        });
+
+        return this.notifyService.searchAssetReports(queryParams);
+      }),
+      exhaustMap((obs) => obs)
+    );
   }
 }

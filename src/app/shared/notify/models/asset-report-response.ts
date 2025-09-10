@@ -4,7 +4,7 @@ import { AssetReportItem } from './asset-report-item';
 export class AssetReportResponse {
   @Expose()
   @Type(() => AssetReportItem)
-  public data: AssetReportItem[];
+  public data: Array<AssetReportItem>;
 
   @Expose()
   public currentPage: number;

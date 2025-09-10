@@ -6,16 +6,16 @@ export class AssetReportPaginationRequest extends PaginationRequest {
   public siteId?: number;
 
   @Expose({ name: 'service_level_names' })
-  public serviceLevelNames?: string[];
+  public serviceLevelNames?: Array<string>;
 
   @Expose({ name: 'asset_types' })
-  public assetTypes?: string[];
+  public assetTypes?: Array<string>;
 
   @Expose({ name: 'job_stages' })
-  public jobStages?: string[];
+  public jobStages?: Array<string>;
 
   @Expose({ name: 'error_types' })
-  public errorTypes?: string[];
+  public errorTypes?: Array<string>;
 
   constructor(data: Partial<AssetReportPaginationRequest> = {}) {
     super(data);

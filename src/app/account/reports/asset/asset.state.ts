@@ -4,14 +4,14 @@ import { AssetReportSortField } from '@shared/notify/types';
 
 export interface AssetReportFormFilters {
   siteId: number | null;
-  serviceLevelNames: Boxed<string[]>;
-  assetTypes: Boxed<string[]>;
-  errorTypes: Boxed<string[]>;
-  jobStages: Boxed<string[]>;
+  serviceLevelNames: Boxed<Array<string>>;
+  assetTypes: Boxed<Array<string>>;
+  errorTypes: Boxed<Array<string>>;
+  jobStages: Boxed<Array<string>>;
 }
 
 export interface AccountReportsAssetPageState {
-  items: AssetReportItem[];
+  items: Array<AssetReportItem>;
   isLoading: boolean;
   isGeneratingReport: boolean;
   page: number;
@@ -24,16 +24,16 @@ export interface AccountReportsAssetPageState {
   filters: AssetReportFormFilters;
   formState: FormGroupState<AssetReportFormFilters>;
   availableFilters: {
-    siteIds: number[];
-    serviceLevelNames: string[];
-    assetTypes: string[];
-    errorTypes: string[];
-    jobStages: string[];
+    siteIds: Array<number>;
+    serviceLevelNames: Array<string>;
+    assetTypes: Array<string>;
+    errorTypes: Array<string>;
+    jobStages: Array<string>;
   };
 }
 
-export class AccountReportsAssetPageState {
-  public items: AssetReportItem[] = [];
+export class AccountReportsAssetPageStateImpl {
+  public items: Array<AssetReportItem> = [];
   public isLoading: boolean = false;
   public isGeneratingReport: boolean = false;
   public page: number = 1;
@@ -52,11 +52,11 @@ export class AccountReportsAssetPageState {
   };
   public formState: FormGroupState<AssetReportFormFilters> = null as any;
   public availableFilters: {
-    siteIds: number[];
-    serviceLevelNames: string[];
-    assetTypes: string[];
-    errorTypes: string[];
-    jobStages: string[];
+    siteIds: Array<number>;
+    serviceLevelNames: Array<string>;
+    assetTypes: Array<string>;
+    errorTypes: Array<string>;
+    jobStages: Array<string>;
   } = {
     siteIds: [],
     serviceLevelNames: [],

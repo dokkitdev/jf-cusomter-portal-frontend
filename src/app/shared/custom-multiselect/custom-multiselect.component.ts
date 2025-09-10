@@ -70,7 +70,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   public options$: Observable<Array<CustomSelectOption<T>>>;
   public isDisabled$: Observable<boolean>;
   public getIsSelected$: (id: T) => Observable<boolean>;
-  public selectedValues$: Observable<T[]>;
+  public selectedValues$: Observable<Array<T>>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
   constructor(protected facade: CustomMultiselectFacade<T>) {

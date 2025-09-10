@@ -13,7 +13,7 @@ import { HeaderSortParameters } from '@shared/header-sort';
   standalone: false
 })
 export class AccountReportsAssetTableComponent {
-  public items$: Observable<AssetReportItem[]>;
+  public items$: Observable<Array<AssetReportItem>>;
   public isLoading$: Observable<boolean>;
   public perPage$: Observable<number>;
   public currentPage$: Observable<number>;

@@ -190,6 +190,7 @@ export class NotifyService {
     return this.apiService.get<AssetReportFilters>(`${this.baseEndpoint}/asset-reports/validation/search-filters`).pipe(
       map((response) => {
         console.log('API response for filters:', response);
+
         return plainToClass(AssetReportFilters, response);
       })
     );
@@ -207,8 +208,6 @@ export class NotifyService {
       jobStages: params.jobStages,
       errorTypes: params.errorTypes
     });
-
-    console.log('order_by', params.orderBy);
 
     return this.apiService
       .get<

@@ -16,11 +16,11 @@ export class AccountReportsAssetFormComponent {
   public isSendingRequest$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AssetReportFormFilters>>;
   public availableFilters$: Observable<any>;
-  public siteOptions$: Observable<CustomSelectOption<number>[]>;
-  public serviceLevelOptions$: Observable<CustomSelectOption<string>[]>;
-  public assetTypeOptions$: Observable<CustomSelectOption<string>[]>;
-  public errorTypeOptions$: Observable<CustomSelectOption<string>[]>;
-  public jobStageOptions$: Observable<CustomSelectOption<string>[]>;
+  public siteOptions$: Observable<Array<CustomSelectOption<number>>>;
+  public serviceLevelOptions$: Observable<Array<CustomSelectOption<string>>>;
+  public assetTypeOptions$: Observable<Array<CustomSelectOption<string>>>;
+  public errorTypeOptions$: Observable<Array<CustomSelectOption<string>>>;
+  public jobStageOptions$: Observable<Array<CustomSelectOption<string>>>;
 
   constructor(private facade: AccountReportsAssetPageFacade) {
     this.isSendingRequest$ = this.facade.isGeneratingReport$;

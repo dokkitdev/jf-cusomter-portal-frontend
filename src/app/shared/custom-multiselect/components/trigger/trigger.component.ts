@@ -13,12 +13,12 @@ export class CustomMultiselectTriggerComponent {
   @Input() customTemplate: TemplateRef<any>;
   @Input() placeholder: string;
   @Input() hasTriggerIcon: boolean;
-  @Input() selectedValues$: Observable<any[]>;
-  @Input() options$: Observable<CustomSelectOption<any>[]>;
+  @Input() selectedValues$: Observable<Array<any>>;
+  @Input() options$: Observable<Array<CustomSelectOption<any>>>;
   @Input() showSelectedTags: boolean = false;
   @Output() tagRemoved = new EventEmitter<any>();
 
-  private options: CustomSelectOption<any>[] = [];
+  private options: Array<CustomSelectOption<any>> = [];
 
   constructor() {
     this.options$?.subscribe((options) => {
@@ -28,6 +28,7 @@ export class CustomMultiselectTriggerComponent {
 
   public getOptionTitle(value: any): string {
     const option = this.options.find((opt) => opt.id === value);
+
     return option ? option.title : value.toString();
   }
 
