@@ -12,6 +12,7 @@ import { createAssetFormState } from './shared/forms/asset-form';
 import { AssetReportItem, AssetReportQueryParams, AssetReportFilters } from '@shared/notify';
 import { tapResponse } from '@ngrx/operators';
 import { plainToClass } from 'class-transformer';
+import { CustomSelectOption } from '@shared/custom-select/models/select-option';
 
 @Injectable()
 export class AccountReportsAssetPageFacade {
@@ -61,6 +62,61 @@ export class AccountReportsAssetPageFacade {
 
   public get availableFilters$(): Observable<any> {
     return this.componentStore.select((state) => state.availableFilters);
+  }
+
+  public get siteOptions$(): Observable<CustomSelectOption<number>[]> {
+    return this.availableFilters$.pipe(
+      map((filters) => {
+        if (!filters?.siteIds || !Array.isArray(filters.siteIds)) {
+          return [];
+        }
+        return filters.siteIds.map((id: number) => new CustomSelectOption({ id, title: id.toString() }));
+      })
+    );
+  }
+
+  public get serviceLevelOptions$(): Observable<CustomSelectOption<string>[]> {
+    return this.availableFilters$.pipe(
+      map((filters) => {
+        if (!filters?.serviceLevelNames || !Array.isArray(filters.serviceLevelNames)) {
+          return [];
+        }
+        return filters.serviceLevelNames.map((name: string) => new CustomSelectOption({ id: name, title: name }));
+      })
+    );
+  }
+
+  public get assetTypeOptions$(): Observable<CustomSelectOption<string>[]> {
+    return this.availableFilters$.pipe(
+      map((filters) => {
+        if (!filters?.assetTypes || !Array.isArray(filters.assetTypes)) {
+          return [];
+        }
+        return filters.assetTypes.map((type: string) => new CustomSelectOption({ id: type, title: type }));
+      })
+    );
+  }
+
+  public get errorTypeOptions$(): Observable<CustomSelectOption<string>[]> {
+    return this.availableFilters$.pipe(
+      map((filters) => {
+        if (!filters?.errorTypes || !Array.isArray(filters.errorTypes)) {
+          return [];
+        }
+        return filters.errorTypes.map((type: string) => new CustomSelectOption({ id: type, title: type }));
+      })
+    );
+  }
+
+  public get jobStageOptions$(): Observable<CustomSelectOption<string>[]> {
+    return this.availableFilters$.pipe(
+      map((filters) => {
+        if (!filters?.jobStages || !Array.isArray(filters.jobStages)) {
+          return [];
+        }
+        return filters.jobStages.map((stage: string) => new CustomSelectOption({ id: stage, title: stage }));
+      })
+    );
   }
 
   public get parameters$(): Observable<any> {

@@ -16,12 +16,22 @@ export class AccountReportsAssetFormComponent implements OnInit, OnDestroy {
   public isSendingRequest$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AssetReportFormFilters>>;
   public availableFilters$: Observable<any>;
+  public siteOptions$: Observable<CustomSelectOption<number>[]>;
+  public serviceLevelOptions$: Observable<CustomSelectOption<string>[]>;
+  public assetTypeOptions$: Observable<CustomSelectOption<string>[]>;
+  public errorTypeOptions$: Observable<CustomSelectOption<string>[]>;
+  public jobStageOptions$: Observable<CustomSelectOption<string>[]>;
   private subscription: any;
 
   constructor(private facade: AccountReportsAssetPageFacade) {
     this.isSendingRequest$ = this.facade.isLoading$;
     this.formState$ = this.facade.formState$;
     this.availableFilters$ = this.facade.availableFilters$;
+    this.siteOptions$ = this.facade.siteOptions$;
+    this.serviceLevelOptions$ = this.facade.serviceLevelOptions$;
+    this.assetTypeOptions$ = this.facade.assetTypeOptions$;
+    this.errorTypeOptions$ = this.facade.errorTypeOptions$;
+    this.jobStageOptions$ = this.facade.jobStageOptions$;
   }
 
   public ngOnInit(): void {
@@ -44,40 +54,5 @@ export class AccountReportsAssetFormComponent implements OnInit, OnDestroy {
 
   public formActionTriggered(action: Actions<any>): void {
     this.facade.handleFormStateAction(action);
-  }
-
-  public getSiteOptions(siteIds: number[]): CustomSelectOption<number>[] {
-    if (!siteIds || !Array.isArray(siteIds)) {
-      return [];
-    }
-    return siteIds.map((id) => new CustomSelectOption({ id, title: id.toString() }));
-  }
-
-  public getServiceLevelOptions(serviceLevelNames: string[]): CustomSelectOption<string>[] {
-    if (!serviceLevelNames || !Array.isArray(serviceLevelNames)) {
-      return [];
-    }
-    return serviceLevelNames.map((name) => new CustomSelectOption({ id: name, title: name }));
-  }
-
-  public getAssetTypeOptions(assetTypes: string[]): CustomSelectOption<string>[] {
-    if (!assetTypes || !Array.isArray(assetTypes)) {
-      return [];
-    }
-    return assetTypes.map((type) => new CustomSelectOption({ id: type, title: type }));
-  }
-
-  public getErrorTypeOptions(errorTypes: string[]): CustomSelectOption<string>[] {
-    if (!errorTypes || !Array.isArray(errorTypes)) {
-      return [];
-    }
-    return errorTypes.map((type) => new CustomSelectOption({ id: type, title: type }));
-  }
-
-  public getJobStageOptions(jobStages: string[]): CustomSelectOption<string>[] {
-    if (!jobStages || !Array.isArray(jobStages)) {
-      return [];
-    }
-    return jobStages.map((stage) => new CustomSelectOption({ id: stage, title: stage }));
   }
 }

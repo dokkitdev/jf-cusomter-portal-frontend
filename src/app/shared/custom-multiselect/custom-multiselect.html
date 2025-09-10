@@ -26,7 +26,7 @@
         <div
           *ngrxLet="options$; let options"
           class="dropdown-items">
-          @for (option of options; track option) {
+          @for (option of options; track option.id) {
             <custom-multiselect-option
               (optionClick)="optionClicked(option)"
               [option]="option"
