@@ -23,7 +23,7 @@ export class AccountReportsAssetFormComponent {
   public jobStageOptions$: Observable<CustomSelectOption<string>[]>;
 
   constructor(private facade: AccountReportsAssetPageFacade) {
-    this.isSendingRequest$ = this.facade.isLoading$;
+    this.isSendingRequest$ = this.facade.isGeneratingReport$;
     this.formState$ = this.facade.formState$;
     this.availableFilters$ = this.facade.availableFilters$;
     this.siteOptions$ = this.facade.siteOptions$;

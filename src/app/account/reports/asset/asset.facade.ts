@@ -39,6 +39,10 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
     return this.select((state) => state.isLoading);
   }
 
+  public get isGeneratingReport$(): Observable<boolean> {
+    return this.select((state) => state.isGeneratingReport);
+  }
+
   public get page$(): Observable<number> {
     return this.select((state) => state.page);
   }
@@ -164,6 +168,11 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
     isLoading
   }));
 
+  public readonly setIsGeneratingReport = this.updater((state, isGeneratingReport: boolean) => ({
+    ...state,
+    isGeneratingReport
+  }));
+
   private generateReportEffect$: () => Observable<void>;
 
   constructor(
@@ -185,7 +194,6 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
   }
 
   public generateReport(): void {
-    // Generate the CSV report
     this.generateReportEffect$();
   }
 
@@ -225,7 +233,7 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
         withLatestFrom(this.formState$),
         filter(([_, formState]) => formState.isValid),
         exhaustMap(([_, { value }]) => {
-          this.updateIsLoading(true);
+          this.setIsGeneratingReport(true);
           this.toggleDisablingForm(true);
 
           return this.tryToGenerateReport(value);
@@ -236,17 +244,9 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
 
   private tryToGenerateReport(filters: AssetReportFormFilters): Observable<void> {
     return this.notifyService.generateAssetReport().pipe(
-      tap(() => {
-        this.updateIsLoading(false);
-        this.toggleDisablingForm(false);
-
-        this.notificationService.success(
-          this.translateService.instant('ACCOUNT.REPORTS.ASSET.NOTIFICATIONS.TEXT_REPORT_GENERATED')
-        );
-      }),
       tapResponse(
         () => {
-          this.updateIsLoading(false);
+          this.setIsGeneratingReport(false);
           this.toggleDisablingForm(false);
 
           this.notificationService.success(
@@ -254,7 +254,7 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
           );
         },
         (error) => {
-          this.updateIsLoading(false);
+          this.setIsGeneratingReport(false);
           this.toggleDisablingForm(false);
 
           this.notificationService.error(
@@ -266,16 +266,11 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
   }
 
   private loadAvailableFilters(): void {
-    // Load real filters from API
     this.notifyService.getAssetReportFilters().subscribe({
       next: (filters) => {
-        // The filters object is already transformed by the service
-        // Just use it directly
         this.patchState({ availableFilters: filters });
       },
       error: (error) => {
-        console.error('Error loading real filters:', error);
-        // Use minimal fallback data only on error
         const fallbackFilters = {
           siteIds: [],
           serviceLevelNames: [],

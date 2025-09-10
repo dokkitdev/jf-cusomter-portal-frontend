@@ -13,6 +13,7 @@ export interface AssetReportFormFilters {
 export interface AccountReportsAssetPageState {
   items: AssetReportItem[];
   isLoading: boolean;
+  isGeneratingReport: boolean;
   page: number;
   totalPages: number;
   totalItems: number;
@@ -34,6 +35,7 @@ export interface AccountReportsAssetPageState {
 export class AccountReportsAssetPageState {
   public items: AssetReportItem[] = [];
   public isLoading: boolean = false;
+  public isGeneratingReport: boolean = false;
   public page: number = 1;
   public totalPages: number = 0;
   public totalItems: number = 0;
