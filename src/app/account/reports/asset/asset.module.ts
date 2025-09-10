@@ -18,6 +18,7 @@ import { CustomMultiselectModule } from '@shared/custom-multiselect';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
 import { PaginationElementsModule } from '@shared/pagination-elements';
+import { NotifyService } from '@shared/notify';
 
 @NgModule({
   declarations: [AccountReportsAssetPageComponent, AccountReportsAssetFormComponent, AccountReportsAssetTableComponent],
@@ -38,6 +39,6 @@ import { PaginationElementsModule } from '@shared/pagination-elements';
     LoadingSpinnerModule,
     ButtonModule
   ],
-  providers: [AccountReportsAssetPageFacade, ComponentStore]
+  providers: [AccountReportsAssetPageFacade, ComponentStore, NotifyService]
 })
 export class AccountReportsAssetPageModule {}

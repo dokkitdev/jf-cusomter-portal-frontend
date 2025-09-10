@@ -5,7 +5,16 @@ import { map } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { classToPlain, instanceToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassGroup } from '@shared/class-group';
-import { WarehouseReportRequest, LetterTemplateGroup, SystemLog, ParsingLog } from './models';
+import {
+  WarehouseReportRequest,
+  LetterTemplateGroup,
+  SystemLog,
+  ParsingLog,
+  AssetReportItem,
+  AssetReportResponse,
+  AssetReportFilters,
+  AssetReportQueryParams
+} from './models';
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
 import { isUndefined, omitBy } from 'lodash';
@@ -175,5 +184,31 @@ export class NotifyService {
         }
       )
       .pipe(map((response) => response.body as Blob));
+  }
+
+  public getAssetReportValidation(): Observable<AssetReportResponse> {
+    return this.apiService
+      .get<AssetReportResponse>(`${this.baseEndpoint}/asset-reports/validation`)
+      .pipe(map((response) => plainToClass(AssetReportResponse, response)));
+  }
+
+  public getAssetReportFilters(): Observable<AssetReportFilters> {
+    return this.apiService.get<AssetReportFilters>(`${this.baseEndpoint}/asset-reports/validation/search-filters`).pipe(
+      map((response) => {
+        console.log('API response for filters:', response);
+        return plainToClass(AssetReportFilters, response);
+      })
+    );
+  }
+
+  public searchAssetReports(params: AssetReportQueryParams): Observable<AssetReportResponse> {
+    const queryParams = omitBy(instanceToPlain(params), isUndefined);
+    return this.apiService
+      .get<AssetReportResponse>(`${this.baseEndpoint}/csv-reports/asset`, queryParams)
+      .pipe(map((response) => plainToClass(AssetReportResponse, response)));
+  }
+
+  public generateAssetReport(): Observable<void> {
+    return this.apiService.post<void>(`${this.baseEndpoint}/csv-reports/asset`, {});
   }
 }

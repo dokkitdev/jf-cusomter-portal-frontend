@@ -1,78 +1,92 @@
-<form
-  *ngrxLet="formState$; let formState"
-  [ngrxFormState]="formState"
-  (submit)="formSubmitted()"
-  (ngrxFormsAction)="formActionTriggered($event)"
-  class="form">
-  <h5>{{ 'ACCOUNT.REPORTS.ASSET.TEXT_FILTER_TITLE' | translate }}</h5>
+<div *ngrxLet="formState$; let formState">
+  <div *ngrxLet="availableFilters$; let filters">
+    <form
+      [ngrxFormState]="formState"
+      (submit)="formSubmitted()"
+      (ngrxFormsAction)="formActionTriggered($event)"
+      class="form">
+      <h5>{{ 'ACCOUNT.REPORTS.ASSET.TEXT_FILTER_TITLE' | translate }}</h5>
 
-  <div class="form-row">
-    <div class="form-group">
-      <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SITE' | translate }}</label>
-      <custom-select
-        [controlState]="formState.controls.site"
-        [options]="sites"
-        [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SITE_PLACEHOLDER' | translate"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </custom-select>
-    </div>
+      <div
+        *ngIf="!filters || (filters.siteIds?.length === 0 && filters.assetTypes?.length === 0)"
+        class="loading-filters">
+        <p>Loading filter options...</p>
+      </div>
 
-    <div class="form-group">
-      <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SERVICE_LEVEL' | translate }}</label>
-      <custom-multiselect
-        [controlState]="formState.controls.serviceLevel"
-        [options]="serviceLevels"
-        [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SERVICE_LEVEL_PLACEHOLDER' | translate"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </custom-multiselect>
-    </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SITE' | translate }}</label>
+          <custom-select
+            [controlState]="formState.controls.siteId"
+            [options]="getSiteOptions(filters?.siteIds)"
+            [hasScroll]="true"
+            [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SITE_PLACEHOLDER' | translate"
+            (controlStateActionTriggered)="formActionTriggered($event)">
+          </custom-select>
+        </div>
 
-    <div class="form-group">
-      <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ASSET_TYPE' | translate }}</label>
-      <custom-multiselect
-        [controlState]="formState.controls.assetType"
-        [options]="assetTypes"
-        [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ASSET_TYPE_PLACEHOLDER' | translate"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </custom-multiselect>
-    </div>
+        <div class="form-group">
+          <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SERVICE_LEVEL' | translate }}</label>
+          <custom-multiselect
+            [controlState]="formState.controls.serviceLevelNames"
+            [options]="getServiceLevelOptions(filters?.serviceLevelNames)"
+            [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SERVICE_LEVEL_PLACEHOLDER' | translate"
+            [hasScroll]="true"
+            (controlStateActionTriggered)="formActionTriggered($event)">
+          </custom-multiselect>
+        </div>
+
+        <div class="form-group">
+          <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ASSET_TYPE' | translate }}</label>
+          <custom-multiselect
+            [controlState]="formState.controls.assetTypes"
+            [options]="getAssetTypeOptions(filters?.assetTypes)"
+            [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ASSET_TYPE_PLACEHOLDER' | translate"
+            [hasScroll]="true"
+            (controlStateActionTriggered)="formActionTriggered($event)">
+          </custom-multiselect>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ERROR' | translate }}</label>
+          <custom-multiselect
+            [controlState]="formState.controls.errorTypes"
+            [options]="getErrorTypeOptions(filters?.errorTypes)"
+            [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ERROR_PLACEHOLDER' | translate"
+            [hasScroll]="true"
+            (controlStateActionTriggered)="formActionTriggered($event)">
+          </custom-multiselect>
+        </div>
+
+        <div class="form-group">
+          <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_STAGE' | translate }}</label>
+          <custom-multiselect
+            [controlState]="formState.controls.jobStages"
+            [options]="getJobStageOptions(filters?.jobStages)"
+            [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_STAGE_PLACEHOLDER' | translate"
+            [hasScroll]="true"
+            (controlStateActionTriggered)="formActionTriggered($event)">
+          </custom-multiselect>
+        </div>
+
+        <div class="form-group">
+          <!-- Empty div for layout balance -->
+        </div>
+      </div>
+
+      <div
+        *ngrxLet="isSendingRequest$; let isSendingRequest"
+        class="page-buttons">
+        <btn
+          [isLoading]="isSendingRequest"
+          [isDisabled]="formState.isDisabled"
+          [isBlock]="true"
+          type="submit">
+          {{ 'ACCOUNT.REPORTS.ASSET.BUTTON_GENERATE' | translate }}
+        </btn>
+      </div>
+    </form>
   </div>
-
-  <div class="form-row">
-    <div class="form-group">
-      <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ERROR' | translate }}</label>
-      <custom-multiselect
-        [controlState]="formState.controls.error"
-        [options]="errors"
-        [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ERROR_PLACEHOLDER' | translate"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </custom-multiselect>
-    </div>
-
-    <div class="form-group">
-      <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_STAGE' | translate }}</label>
-      <custom-multiselect
-        [controlState]="formState.controls.stage"
-        [options]="stages"
-        [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_STAGE_PLACEHOLDER' | translate"
-        (controlStateActionTriggered)="formActionTriggered($event)">
-      </custom-multiselect>
-    </div>
-
-    <div class="form-group">
-      <!-- Empty div for layout balance -->
-    </div>
-  </div>
-
-  <div
-    *ngrxLet="isSendingRequest$; let isSendingRequest"
-    class="page-buttons">
-    <btn
-      [isLoading]="isSendingRequest"
-      [isDisabled]="formState.isDisabled"
-      [isBlock]="true"
-      type="submit">
-      {{ 'ACCOUNT.REPORTS.ASSET.BUTTON_GENERATE' | translate }}
-    </btn>
-  </div>
-</form>
+</div>

@@ -1,6 +1,14 @@
 @use 'vars' as *;
 
 .form {
+  .loading-filters {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+  }
+
+
   .form-row {
     display: flex;
     gap: 20px;

@@ -3,12 +3,15 @@ import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from '@shared/notification';
+import { NotifyService } from '@shared/notify';
 import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
 import { exhaustMap, filter, Observable, tap, withLatestFrom, map } from 'rxjs';
-import { AccountReportsAssetPageState, AssetReportItem, AssetReportFilters } from './asset.state';
+import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
+import { AssetReportItem, AssetReportQueryParams, AssetReportFilters } from '@shared/notify';
 import { tapResponse } from '@ngrx/operators';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class AccountReportsAssetPageFacade {
@@ -52,8 +55,12 @@ export class AccountReportsAssetPageFacade {
     return this.componentStore.select((state) => state.desc);
   }
 
-  public get formState$(): Observable<FormGroupState<AssetReportFilters>> {
+  public get formState$(): Observable<FormGroupState<AssetReportFormFilters>> {
     return this.componentStore.select((state) => state.formState);
+  }
+
+  public get availableFilters$(): Observable<any> {
+    return this.componentStore.select((state) => state.availableFilters);
   }
 
   public get parameters$(): Observable<any> {
@@ -70,10 +77,12 @@ export class AccountReportsAssetPageFacade {
     private readonly componentStore: ComponentStore<AccountReportsAssetPageState>,
     private readonly store: Store<AppState>,
     private readonly notificationService: NotificationService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly notifyService: NotifyService
   ) {
     this.resetState();
     this.registerGenerateReportEffect();
+    this.loadAvailableFilters();
   }
 
   public resetState(): void {
@@ -124,103 +133,101 @@ export class AccountReportsAssetPageFacade {
     );
   }
 
-  private tryToGenerateReport(filters: AssetReportFilters): Observable<void> {
-    return this.loadMockData(filters).pipe(
-      tap((data) => {
+  private tryToGenerateReport(filters: AssetReportFormFilters): Observable<void> {
+    return this.notifyService.generateAssetReport().pipe(
+      tap(() => {
         this.updateIsLoading(false);
         this.toggleDisablingForm(false);
-        this.updateItems(data);
-        this.updatePagination(data.length);
 
         this.notificationService.success(
           this.translateService.instant('ACCOUNT.REPORTS.ASSET.NOTIFICATIONS.TEXT_REPORT_GENERATED')
         );
       }),
-      map(() => void 0)
+      tapResponse(
+        () => {
+          this.updateIsLoading(false);
+          this.toggleDisablingForm(false);
+
+          this.notificationService.success(
+            this.translateService.instant('ACCOUNT.REPORTS.ASSET.NOTIFICATIONS.TEXT_REPORT_GENERATED')
+          );
+        },
+        (error) => {
+          this.updateIsLoading(false);
+          this.toggleDisablingForm(false);
+
+          this.notificationService.error(
+            this.translateService.instant('ACCOUNT.REPORTS.ASSET.NOTIFICATIONS.TEXT_ERROR')
+          );
+        }
+      )
     );
   }
 
-  private loadMockData(filters: AssetReportFilters): Observable<AssetReportItem[]> {
-    // Mock data based on the interface shown in the images
-    const mockData: AssetReportItem[] = [
-      {
-        siteId: '21693 Archived',
-        uprn: 'THECARRF01',
-        assetId: '130542',
-        assetType: 'Electric - Consumer Unit/Distribution System',
-        serviceLevel: '5 Year Test and Inspection',
-        error: 'Last service 1328 days ago'
+  private loadAvailableFilters(): void {
+    // Load real filters from API
+    this.notifyService.getAssetReportFilters().subscribe({
+      next: (filters) => {
+        // The filters object is already transformed by the service
+        // Just use it directly
+        this.componentStore.patchState({ availableFilters: filters });
       },
-      {
-        siteId: '21693 Archived',
-        uprn: 'THECARRF01',
-        assetId: '130542',
-        assetType: 'Electric - Consumer Unit/Distribution System',
-        serviceLevel: '5 Year Test and Inspection',
-        error: 'Service complete outside of due date 58 months 20 days'
-      },
-      {
-        siteId: '21693 Archived',
-        uprn: 'THECARRF01',
-        assetId: '130542',
-        assetType: 'Electric - Consumer Unit/Distribution System',
-        serviceLevel: '5 Year Test and Inspection',
-        error: 'Last service 1328 days ago'
-      },
-      {
-        siteId: '25107',
-        uprn: 'THECARRF02',
-        assetId: '130543',
-        assetType: 'Pipework',
-        serviceLevel: 'Annual',
-        error: 'Tag'
-      },
-      {
-        siteId: '25107',
-        uprn: 'THECARRF03',
-        assetId: '130544',
-        assetType: 'Heating System - Wet',
-        serviceLevel: '5 Year Test and Inspection',
-        error: 'Lorem ipsum very long text on this filter to test the field behavior'
+      error: (error) => {
+        console.error('Error loading real filters:', error);
+        // Use minimal fallback data only on error
+        const fallbackFilters = {
+          siteIds: [],
+          serviceLevelNames: [],
+          assetTypes: [],
+          errorTypes: [],
+          jobStages: []
+        };
+        this.componentStore.patchState({ availableFilters: fallbackFilters });
       }
-    ];
-
-    // Apply filters
-    let filteredData = mockData;
-
-    if (filters.site) {
-      filteredData = filteredData.filter((item) => item.siteId.includes(filters.site));
-    }
-
-    if (filters.serviceLevel.length > 0) {
-      filteredData = filteredData.filter((item) => filters.serviceLevel.includes(item.serviceLevel));
-    }
-
-    if (filters.assetType.length > 0) {
-      filteredData = filteredData.filter((item) => filters.assetType.includes(item.assetType));
-    }
-
-    if (filters.error.length > 0) {
-      filteredData = filteredData.filter((item) => filters.error.some((error) => item.error.includes(error)));
-    }
-
-    return new Observable((observer) => {
-      setTimeout(() => {
-        observer.next(filteredData);
-        observer.complete();
-      }, 1000); // Simulate API delay
     });
   }
 
-  private loadItems(): void {
+  private loadAssetReports(): void {
     this.componentStore
       .select((state) => state.filters)
-      .pipe(exhaustMap((filters) => this.loadMockData(filters)))
+      .pipe(exhaustMap((filters) => this.searchAssetReports(filters)))
       .subscribe((data) => {
-        this.updateItems(data);
-        this.updatePagination(data.length);
+        this.updateItems(data.data);
+        this.updatePagination(data.total);
         this.updateIsLoading(false);
       });
+  }
+
+  private searchAssetReports(filters: AssetReportFormFilters): Observable<any> {
+    return this.componentStore
+      .select((state) => ({
+        currentPage: state.currentPage,
+        perPage: state.perPage,
+        orderBy: state.orderBy,
+        desc: state.desc
+      }))
+      .pipe(
+        map((state) => {
+          const queryParams = new AssetReportQueryParams({
+            page: state.currentPage,
+            perPage: state.perPage,
+            orderBy: state.orderBy,
+            desc: state.desc,
+            siteId: filters.siteId || undefined,
+            serviceLevelNames: filters.serviceLevelNames,
+            assetTypes: filters.assetTypes,
+            jobStages: filters.jobStages,
+            errorTypes: filters.errorTypes
+          });
+
+          return this.notifyService.searchAssetReports(queryParams);
+        }),
+        exhaustMap((obs) => obs)
+      );
+  }
+
+  private loadItems(): void {
+    this.loadAssetReports();
   }
 
   private updateItems(items: AssetReportItem[]): void {

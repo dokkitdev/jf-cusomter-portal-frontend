@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountReportsAssetPageFacade } from '@app/account/reports/asset/asset.facade';
-import { AssetReportItem } from '@app/account/reports/asset/asset.state';
+import { AssetReportItem } from '@shared/notify';
 
 @Component({
   selector: 'account-reports-asset-table',
@@ -43,7 +43,7 @@ export class AccountReportsAssetTableComponent {
     this.facade.changeSort(field);
   }
 
-  public trackByAssetId(index: number, item: AssetReportItem): string {
-    return item.assetId;
+  public trackByAssetId(index: number, item: AssetReportItem): number {
+    return item.id;
   }
 }

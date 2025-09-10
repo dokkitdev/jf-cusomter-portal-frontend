@@ -6,7 +6,7 @@
       <div class="table-row">
         <div class="table-cell">
           <header-sort
-            [orderBy]="'siteId'"
+            [orderBy]="'site_id'"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SITE_ID' | translate }}
@@ -22,7 +22,7 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'assetId'"
+            [orderBy]="'asset_id'"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_ID' | translate }}
@@ -30,7 +30,7 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'assetType'"
+            [orderBy]="'asset_type'"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_TYPE' | translate }}
@@ -38,14 +38,19 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'serviceLevel'"
+            [orderBy]="'service_level_name'"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SERVICE_LEVEL' | translate }}
           </header-sort>
         </div>
         <div class="table-cell">
-          {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ERROR' | translate }}
+          <header-sort
+            [orderBy]="'error'"
+            [parameters]="parameters$ | async"
+            (sortChanged)="onSortChanged($event)">
+            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ERROR' | translate }}
+          </header-sort>
         </div>
       </div>
     </div>
@@ -58,8 +63,8 @@
           <div class="table-cell">{{ item.uprn }}</div>
           <div class="table-cell">{{ item.assetId }}</div>
           <div class="table-cell">{{ item.assetType }}</div>
-          <div class="table-cell">{{ item.serviceLevel }}</div>
-          <div class="table-cell">{{ item.error }}</div>
+          <div class="table-cell">{{ item.serviceLevelName || '-' }}</div>
+          <div class="table-cell">{{ item.errorText }}</div>
         </div>
       </div>
     </div>

@@ -1,20 +1,12 @@
 import { FormGroupState } from 'ngrx-forms';
+import { AssetReportItem } from '@shared/notify';
 
-export interface AssetReportItem {
-  siteId: string;
-  uprn: string;
-  assetId: string;
-  assetType: string;
-  serviceLevel: string;
-  error: string;
-}
-
-export interface AssetReportFilters {
-  site: string;
-  serviceLevel: string[];
-  assetType: string[];
-  error: string[];
-  stage: string[];
+export interface AssetReportFormFilters {
+  siteId: number | null;
+  serviceLevelNames: string[];
+  assetTypes: string[];
+  errorTypes: string[];
+  jobStages: string[];
 }
 
 export interface AccountReportsAssetPageState {
@@ -26,8 +18,15 @@ export interface AccountReportsAssetPageState {
   perPage: number;
   orderBy: string;
   desc: boolean;
-  filters: AssetReportFilters;
-  formState: FormGroupState<AssetReportFilters>;
+  filters: AssetReportFormFilters;
+  formState: FormGroupState<AssetReportFormFilters>;
+  availableFilters: {
+    siteIds: number[];
+    serviceLevelNames: string[];
+    assetTypes: string[];
+    errorTypes: string[];
+    jobStages: string[];
+  };
 }
 
 export class AccountReportsAssetPageState {
@@ -37,14 +36,27 @@ export class AccountReportsAssetPageState {
   public totalPages: number = 0;
   public totalItems: number = 0;
   public perPage: number = 20;
-  public orderBy: string = 'siteId';
+  public orderBy: string = 'site_id';
   public desc: boolean = false;
-  public filters: AssetReportFilters = {
-    site: '',
-    serviceLevel: [],
-    assetType: [],
-    error: [],
-    stage: []
+  public filters: AssetReportFormFilters = {
+    siteId: null,
+    serviceLevelNames: [],
+    assetTypes: [],
+    errorTypes: [],
+    jobStages: []
   };
-  public formState: FormGroupState<AssetReportFilters> = null as any;
+  public formState: FormGroupState<AssetReportFormFilters> = null as any;
+  public availableFilters: {
+    siteIds: number[];
+    serviceLevelNames: string[];
+    assetTypes: string[];
+    errorTypes: string[];
+    jobStages: string[];
+  } = {
+    siteIds: [],
+    serviceLevelNames: [],
+    assetTypes: [],
+    errorTypes: [],
+    jobStages: []
+  };
 }
