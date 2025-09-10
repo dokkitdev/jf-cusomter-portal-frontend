@@ -8,14 +8,11 @@
     font-style: italic;
   }
 
-
-  .form-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    .form-group {
-      flex: 1;
+  .row {
+    margin: 0 -8px; margin-bottom: 20px; align-items: flex-start;
+    .col {
+      padding: 0 8px;
+      .form-group {height: 100%; display: flex; flex-direction: column;}
     }
   }
 
