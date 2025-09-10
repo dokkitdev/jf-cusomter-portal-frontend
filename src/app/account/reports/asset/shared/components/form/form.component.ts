@@ -12,7 +12,7 @@ import { CustomSelectOption } from '@shared/custom-select/models/select-option';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false
 })
-export class AccountReportsAssetFormComponent implements OnInit, OnDestroy {
+export class AccountReportsAssetFormComponent {
   public isSendingRequest$: Observable<boolean>;
   public formState$: Observable<FormGroupState<AssetReportFormFilters>>;
   public availableFilters$: Observable<any>;
@@ -21,7 +21,6 @@ export class AccountReportsAssetFormComponent implements OnInit, OnDestroy {
   public assetTypeOptions$: Observable<CustomSelectOption<string>[]>;
   public errorTypeOptions$: Observable<CustomSelectOption<string>[]>;
   public jobStageOptions$: Observable<CustomSelectOption<string>[]>;
-  private subscription: any;
 
   constructor(private facade: AccountReportsAssetPageFacade) {
     this.isSendingRequest$ = this.facade.isLoading$;
@@ -32,20 +31,6 @@ export class AccountReportsAssetFormComponent implements OnInit, OnDestroy {
     this.assetTypeOptions$ = this.facade.assetTypeOptions$;
     this.errorTypeOptions$ = this.facade.errorTypeOptions$;
     this.jobStageOptions$ = this.facade.jobStageOptions$;
-  }
-
-  public ngOnInit(): void {
-    // Subscribe to filters for any necessary side effects
-    this.subscription = this.availableFilters$.subscribe((filters) => {
-      // Filters are now available for use
-      console.log('Filters are now available for use', filters);
-    });
-  }
-
-  public ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   public formSubmitted(): void {

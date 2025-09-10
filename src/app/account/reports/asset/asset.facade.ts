@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '@shared/notification';
 import { NotifyService } from '@shared/notify';
 import { AppState } from '@shared/store';
-import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
+import { Actions, disable, enable, formGroupReducer, FormGroupState, SetValueAction } from 'ngrx-forms';
 import { AssetReportSortField } from '@shared/notify/types';
 import {
   exhaustMap,
@@ -185,11 +185,17 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
   }
 
   public generateReport(): void {
+    // Generate the CSV report
     this.generateReportEffect$();
   }
 
   public handleFormStateAction(action: Actions<any>): void {
     this.updateFormState(action);
+
+    if (action instanceof SetValueAction) {
+      this.patchState({ page: 1 });
+      this.loadItems();
+    }
   }
 
   public changePage(page: number): void {
