@@ -1,8 +1,10 @@
 @use 'vars' as *;
 
-.pagination-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+:host ::ng-deep .asset {
+  &-site-id {flex: 1 1 120px; min-width: 120px;}
+  &-uprn {flex: 1 1 150px; min-width: 150px;}
+  &-asset-id {flex: 1 1 150px; min-width: 150px;}
+  &-asset-type {flex: 1 1 200px; min-width: 200px;}
+  &-service-level {flex: 1 1 200px; min-width: 200px;}
+  &-error {flex: 2 1 300px; min-width: 300px;}
 }
