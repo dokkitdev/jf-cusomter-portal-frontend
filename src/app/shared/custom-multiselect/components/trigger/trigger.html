@@ -8,13 +8,11 @@
     @if (showSelectedTags && (selectedValues$ | async)?.length > 0) {
       <div class="selected-tags">
         @for (value of selectedValues$ | async; track value) {
-          <span class="selected-tag">
-            {{ getOptionTitle(value) }}
+          <span class="selected-tags-item">
+            <span>{{ getOptionTitle(value) }}</span>
             <span
-              class="tag-remove"
-              (click)="removeTag($event, value)"
-              ><span class="selected-tag-close"></span
-            ></span>
+              class="selected-tags-item-remove"
+              (click)="removeTag($event, value)"></span>
           </span>
         }
       </div>

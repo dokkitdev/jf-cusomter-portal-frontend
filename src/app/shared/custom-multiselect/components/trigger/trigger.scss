@@ -1,63 +1,30 @@
+.dropdown-trigger {
+  &-show-selected {height: auto; min-height: 48px;}
+}
+
 .selected-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: flex-start;
-  min-height: 20px;
-  flex: 1;
-  margin-right: 8px;
-  padding: 2px 0;
-}
+  display: flex; flex-wrap: wrap; gap: 4px; align-items: flex-start;
+  min-height: 20px; flex: 1; margin-right: 8px; padding: 2px 0;
 
-.selected-tag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffffff;
-  color: #130c3d;
-  padding: 0px 2px 0px 8px;
-  border: 1px solid rgba(26, 69, 109, 0.1);
-  border-radius: 8px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.5em;
-  letter-spacing: -0.6153846383094788%;
-  height: 32px;
-  word-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
-  hyphens: auto;
-  flex-shrink: 1;
-  gap: 2px;
-}
+  &-item {
+    display: inline-flex; align-items: center; justify-content: center;
+    background-color: #ffffff; color: #130c3d; padding: 0px 2px 0px 8px;
+    border: 1px solid rgba(26, 69, 109, 0.1); border-radius: 8px;
+    font-family: 'Source Sans Pro', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.5em;
+    letter-spacing: -0.6153846383094788%; height: 32px; word-wrap: break-word;
+    word-break: break-word; white-space: normal; hyphens: auto; flex-shrink: 1; gap: 2px;
+    
+    &-remove {
+      display: flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; cursor: pointer; color: #9594a1; flex-shrink: 0;
+      border-radius: 50px; background-color: rgba(255, 255, 255, 0.1); font-size: 12px; font-weight: bold;
+      background-image: url(/assets/images/cross-small.svg);
 
-.selected-tag-close {
-    width: 16px; height: 16px;
-    background-image: url(/assets/images/cross-small.svg);  
-}
-
-.tag-remove {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  color: #9594a1;
-  flex-shrink: 0;
-  border-radius: 50px;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.tag-remove:hover {
-  color: #130c3d;
-  background-color: rgba(26, 69, 109, 0.1);
+      &:hover {color: #130c3d; background-color: rgba(26, 69, 109, 0.1);}
+    }
+  }
 }
 
 .placeholder-text {
-  flex: 1;
-  line-height: 20px;
+  flex: 1; line-height: 20px;
 }

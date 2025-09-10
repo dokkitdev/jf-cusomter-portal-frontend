@@ -6,13 +6,6 @@
       (ngrxFormsAction)="formActionTriggered($event)"
       class="form">
       <h5>{{ 'ACCOUNT.REPORTS.ASSET.TEXT_FILTER_TITLE' | translate }}</h5>
-
-      <div
-        *ngIf="!filters || (filters.siteIds?.length === 0 && filters.assetTypes?.length === 0)"
-        class="loading-filters">
-        <p>Loading filter options...</p>
-      </div>
-
       <div class="form-row">
         <div class="form-group">
           <label>{{ 'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SITE' | translate }}</label>
