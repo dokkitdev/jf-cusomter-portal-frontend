@@ -1,12 +1,11 @@
 @use 'vars' as *;
 
 .form {
-  .loading-filters {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-style: italic;
+  .loading-filters {text-align: center; padding: 20px;
+    color: #666; font-style: italic;
   }
+
+  label {font-size: $small; color: $label; line-height: 18px; pointer-events: none;}
 
   .row {
     margin: 0 -8px; margin-bottom: 20px; align-items: flex-start;
