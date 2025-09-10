@@ -59,6 +59,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   @Input() triggerTemplate: TemplateRef<any>;
   @Input() optionTemplate: TemplateRef<any>;
   @Input() notFoundTemplate: TemplateRef<any>;
+  @Input() showSelectedTags: boolean = false;
 
   @Output() controlStateActionTriggered: Subject<Actions<any>>;
   @Output() filterChanged: Subject<string>;
@@ -69,6 +70,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
   public options$: Observable<Array<CustomSelectOption<T>>>;
   public isDisabled$: Observable<boolean>;
   public getIsSelected$: (id: T) => Observable<boolean>;
+  public selectedValues$: Observable<T[]>;
   public spinnerDiameter: typeof SpinnerDiameter;
 
   constructor(protected facade: CustomMultiselectFacade<T>) {
@@ -79,6 +81,7 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
     this.options$ = this.facade.options$;
     this.isDisabled$ = this.facade.isDisabled$;
     this.getIsSelected$ = this.facade.getIsSelected$;
+    this.selectedValues$ = this.facade.selectedValues$;
     this.spinnerDiameter = SpinnerDiameter;
     this.loadNextPage = new EventEmitter();
     this.controlStateActionTriggered = this.facade.controlStateActionTriggered;
@@ -93,5 +96,9 @@ export class CustomMultiselectComponent<T extends FormControlValueTypes> {
     if (this.hasScroll) {
       this.loadNextPage.emit();
     }
+  }
+
+  public removeTag(value: T): void {
+    this.facade.changeOption(value);
   }
 }

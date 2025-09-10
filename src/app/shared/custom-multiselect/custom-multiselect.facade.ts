@@ -60,6 +60,15 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
     );
   }
 
+  public get selectedValues$(): Observable<T[]> {
+    return this.controlState$.pipe(
+      map((controlState) => {
+        const value = unbox(controlState.value);
+        return Array.isArray(value) ? value : [];
+      })
+    );
+  }
+
   private updateControlState(controlState: FormControlState<Boxed<Array<T>>>): void {
     this.componentStore.updater((state) => ({
       ...state,

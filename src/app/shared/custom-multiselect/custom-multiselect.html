@@ -10,7 +10,11 @@
       [selectedOption]="selectedOption$ | async"
       [hasTriggerIcon]="hasTriggerIcon"
       [placeholder]="placeholder"
-      [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder">
+      [isPermanentlyShowPlaceholder]="isPermanentlyShowPlaceholder"
+      [selectedValues$]="selectedValues$"
+      [options$]="options$"
+      [showSelectedTags]="showSelectedTags"
+      (tagRemoved)="removeTag($event)">
     </custom-multiselect-trigger>
     <div
       [ngClass]="{ 'dropdown-content-scrollable': hasScroll }"

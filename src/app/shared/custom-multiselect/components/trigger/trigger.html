@@ -3,7 +3,22 @@
   let-hasTriggerIcon="hasTriggerIcon"
   let-placeholder="placeholder">
   <a class="dropdown-trigger dropdown-trigger-placeholder">
-    {{ placeholder }}
+    @if (showSelectedTags && (selectedValues$ | async)?.length > 0) {
+      <div class="selected-tags">
+        @for (value of selectedValues$ | async; track value) {
+          <span class="selected-tag">
+            {{ getOptionTitle(value) }}
+            <span
+              class="tag-remove"
+              (click)="removeTag($event, value)"
+              >×</span
+            >
+          </span>
+        }
+      </div>
+    } @else {
+      <span class="placeholder-text">{{ placeholder }}</span>
+    }
     @if (hasTriggerIcon) {
       <span class="dropdown-trigger-icon"></span>
     }

@@ -32,6 +32,7 @@
             [options]="serviceLevelOptions$ | async"
             [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_SERVICE_LEVEL_PLACEHOLDER' | translate"
             [hasScroll]="true"
+            [showSelectedTags]="true"
             (controlStateActionTriggered)="formActionTriggered($event)">
           </custom-multiselect>
         </div>
@@ -43,6 +44,7 @@
             [options]="assetTypeOptions$ | async"
             [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ASSET_TYPE_PLACEHOLDER' | translate"
             [hasScroll]="true"
+            [showSelectedTags]="true"
             (controlStateActionTriggered)="formActionTriggered($event)">
           </custom-multiselect>
         </div>
@@ -56,6 +58,7 @@
             [options]="errorTypeOptions$ | async"
             [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_ERROR_PLACEHOLDER' | translate"
             [hasScroll]="true"
+            [showSelectedTags]="true"
             (controlStateActionTriggered)="formActionTriggered($event)">
           </custom-multiselect>
         </div>
@@ -67,6 +70,7 @@
             [options]="jobStageOptions$ | async"
             [placeholder]="'ACCOUNT.REPORTS.ASSET.FILTERS.TEXT_STAGE_PLACEHOLDER' | translate"
             [hasScroll]="true"
+            [showSelectedTags]="true"
             (controlStateActionTriggered)="formActionTriggered($event)">
           </custom-multiselect>
         </div>
