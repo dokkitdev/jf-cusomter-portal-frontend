@@ -2,7 +2,9 @@
   #defaultTemplate
   let-hasTriggerIcon="hasTriggerIcon"
   let-placeholder="placeholder">
-  <a class="dropdown-trigger dropdown-trigger-placeholder">
+  <a
+    class="dropdown-trigger dropdown-trigger-placeholder"
+    [ngClass]="{ 'dropdown-trigger-show-selected': showSelectedTags && (selectedValues$ | async)?.length > 0 }">
     @if (showSelectedTags && (selectedValues$ | async)?.length > 0) {
       <div class="selected-tags">
         @for (value of selectedValues$ | async; track value) {
@@ -11,8 +13,8 @@
             <span
               class="tag-remove"
               (click)="removeTag($event, value)"
-              >×</span
-            >
+              ><span class="selected-tag-close"></span
+            ></span>
           </span>
         }
       </div>

@@ -12,31 +12,49 @@
 .selected-tag {
   display: inline-flex;
   align-items: center;
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  line-height: 16px;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #130c3d;
+  padding: 0px 2px 0px 8px;
+  border: 1px solid rgba(26, 69, 109, 0.1);
+  border-radius: 8px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5em;
+  letter-spacing: -0.6153846383094788%;
+  height: 32px;
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;
   hyphens: auto;
   flex-shrink: 1;
-  min-height: 20px;
+  gap: 2px;
+}
+
+.selected-tag-close {
+    width: 16px; height: 16px;
+    background-image: url(/assets/images/cross-small.svg);  
 }
 
 .tag-remove {
-  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
   cursor: pointer;
+  color: #9594a1;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
   font-size: 12px;
   font-weight: bold;
-  color: #666;
-  flex-shrink: 0;
 }
 
 .tag-remove:hover {
-  color: #333;
+  color: #130c3d;
+  background-color: rgba(26, 69, 109, 0.1);
 }
 
 .placeholder-text {
