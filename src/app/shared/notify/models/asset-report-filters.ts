@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class AssetReportFilters {
   @Expose({ name: 'site_ids' })

@@ -8,21 +8,9 @@ import { NotifyService, AssetReportItem, AssetReportPaginationRequest, AssetRepo
 import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState, SetValueAction, unbox } from 'ngrx-forms';
 import { AssetReportSortField } from '@shared/notify/types';
-import {
-  exhaustMap,
-  filter,
-  Observable,
-  tap,
-  withLatestFrom,
-  map,
-  startWith,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-  of
-} from 'rxjs';
+import { exhaustMap, filter, Observable, withLatestFrom, map, startWith, switchMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { AccountReportsAssetPageState, AccountReportsAssetPageStateImpl, AssetReportFormFilters } from './asset.state';
+import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
 import { plainToClass } from 'class-transformer';
 import { CustomSelectOption } from '@shared/custom-select/models/select-option';
@@ -199,7 +187,7 @@ export class AccountReportsAssetPageFacade extends ComponentStore<AccountReports
     private readonly translateService: TranslateService,
     private readonly notifyService: NotifyService
   ) {
-    super(new AccountReportsAssetPageStateImpl());
+    super(new AccountReportsAssetPageState());
     this.resetState();
     this.registerGenerateReportEffect();
     this.loadAvailableFilters();

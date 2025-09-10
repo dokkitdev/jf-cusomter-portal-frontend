@@ -10,58 +10,52 @@ export interface AssetReportFormFilters {
   jobStages: Boxed<Array<string>>;
 }
 
-export interface AccountReportsAssetPageState {
-  items: Array<AssetReportItem>;
-  isLoading: boolean;
-  isGeneratingReport: boolean;
-  page: number;
-  totalPages: number;
-  totalItems: number;
-  perPage: number;
-  orderBy: AssetReportSortField;
-  desc: boolean;
-  paginationID: string;
-  filters: AssetReportFormFilters;
-  formState: FormGroupState<AssetReportFormFilters>;
-  availableFilters: {
-    siteIds: Array<number>;
-    serviceLevelNames: Array<string>;
-    assetTypes: Array<string>;
-    errorTypes: Array<string>;
-    jobStages: Array<string>;
-  };
-}
-
-export class AccountReportsAssetPageStateImpl {
-  public items: Array<AssetReportItem> = [];
-  public isLoading: boolean = false;
-  public isGeneratingReport: boolean = false;
-  public page: number = 1;
-  public totalPages: number = 0;
-  public totalItems: number = 0;
-  public perPage: number = 20;
-  public orderBy: AssetReportSortField = AssetReportSortField.SITE_ID;
-  public desc: boolean = false;
-  public paginationID: string = 'account-reports-asset-pagination';
-  public filters: AssetReportFormFilters = {
-    siteId: null,
-    serviceLevelNames: box([]),
-    assetTypes: box([]),
-    errorTypes: box([]),
-    jobStages: box([])
-  };
-  public formState: FormGroupState<AssetReportFormFilters> = null as any;
+export class AccountReportsAssetPageState {
+  public isLoading: boolean;
+  public isGeneratingReport: boolean;
+  public items: Array<AssetReportItem>;
+  public totalItems: number;
+  public totalPages: number;
+  public page: number;
+  public perPage: number;
+  public orderBy: AssetReportSortField;
+  public desc: boolean;
+  public filters: AssetReportFormFilters;
+  public formState: FormGroupState<AssetReportFormFilters>;
   public availableFilters: {
     siteIds: Array<number>;
     serviceLevelNames: Array<string>;
     assetTypes: Array<string>;
     errorTypes: Array<string>;
     jobStages: Array<string>;
-  } = {
-    siteIds: [],
-    serviceLevelNames: [],
-    assetTypes: [],
-    errorTypes: [],
-    jobStages: []
   };
+  public readonly paginationID: string;
+
+  constructor() {
+    this.isLoading = false;
+    this.isGeneratingReport = false;
+    this.items = [];
+    this.totalItems = 0;
+    this.totalPages = 0;
+    this.page = 1;
+    this.perPage = 20;
+    this.orderBy = AssetReportSortField.SITE_ID;
+    this.desc = false;
+    this.filters = {
+      siteId: null,
+      serviceLevelNames: box([]),
+      assetTypes: box([]),
+      errorTypes: box([]),
+      jobStages: box([])
+    };
+    this.formState = null as any;
+    this.availableFilters = {
+      siteIds: [],
+      serviceLevelNames: [],
+      assetTypes: [],
+      errorTypes: [],
+      jobStages: []
+    };
+    this.paginationID = 'account-reports-asset-pagination';
+  }
 }
