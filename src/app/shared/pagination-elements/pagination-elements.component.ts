@@ -8,7 +8,7 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   standalone: false
 })
 export class PaginationElementsComponent {
-  @Input() paginationId: number;
+  @Input() paginationId: string;
 
   @Output() pageChanged: EventEmitter<number>;
 

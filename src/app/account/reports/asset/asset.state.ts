@@ -1,5 +1,6 @@
 import { FormGroupState, Boxed, box } from 'ngrx-forms';
 import { AssetReportItem } from '@shared/notify';
+import { AssetReportSortField } from '@shared/notify/types';
 
 export interface AssetReportFormFilters {
   siteId: number | null;
@@ -12,12 +13,13 @@ export interface AssetReportFormFilters {
 export interface AccountReportsAssetPageState {
   items: AssetReportItem[];
   isLoading: boolean;
-  currentPage: number;
+  page: number;
   totalPages: number;
   totalItems: number;
   perPage: number;
-  orderBy: string;
+  orderBy: AssetReportSortField;
   desc: boolean;
+  paginationID: string;
   filters: AssetReportFormFilters;
   formState: FormGroupState<AssetReportFormFilters>;
   availableFilters: {
@@ -32,12 +34,13 @@ export interface AccountReportsAssetPageState {
 export class AccountReportsAssetPageState {
   public items: AssetReportItem[] = [];
   public isLoading: boolean = false;
-  public currentPage: number = 1;
+  public page: number = 1;
   public totalPages: number = 0;
   public totalItems: number = 0;
   public perPage: number = 20;
-  public orderBy: string = 'site_id';
+  public orderBy: AssetReportSortField = AssetReportSortField.SITE_ID;
   public desc: boolean = false;
+  public paginationID: string = 'account-reports-asset-pagination';
   public filters: AssetReportFormFilters = {
     siteId: null,
     serviceLevelNames: box([]),

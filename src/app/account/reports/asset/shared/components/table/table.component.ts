@@ -2,6 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountReportsAssetPageFacade } from '@app/account/reports/asset/asset.facade';
 import { AssetReportItem } from '@shared/notify';
+import { AssetReportSortField } from '@shared/notify/types';
+import { HeaderSortParameters } from '@shared/header-sort';
 
 @Component({
   selector: 'account-reports-asset-table',
@@ -18,9 +20,10 @@ export class AccountReportsAssetTableComponent {
   public totalItems$: Observable<number>;
   public hasPagination$: Observable<boolean>;
   public paginationID$: Observable<string>;
-  public orderBy$: Observable<string>;
+  public orderBy$: Observable<AssetReportSortField>;
   public desc$: Observable<boolean>;
   public parameters$: Observable<any>;
+  public sortField = AssetReportSortField;
 
   constructor(private facade: AccountReportsAssetPageFacade) {
     this.items$ = this.facade.items$;
@@ -39,8 +42,8 @@ export class AccountReportsAssetTableComponent {
     this.facade.changePage(page);
   }
 
-  public onSortChanged(field: string): void {
-    this.facade.changeSort(field);
+  public onSortChanged(parameters: HeaderSortParameters): void {
+    this.facade.changeSort(parameters.orderBy as AssetReportSortField);
   }
 
   public trackByAssetId(index: number, item: AssetReportItem): number {

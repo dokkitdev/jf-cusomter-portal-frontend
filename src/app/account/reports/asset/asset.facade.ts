@@ -2,67 +2,85 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '@shared/notification';
 import { NotifyService } from '@shared/notify';
 import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
-import { exhaustMap, filter, Observable, tap, withLatestFrom, map, startWith } from 'rxjs';
+import { AssetReportSortField } from '@shared/notify/types';
+import {
+  exhaustMap,
+  filter,
+  Observable,
+  tap,
+  withLatestFrom,
+  map,
+  startWith,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  of
+} from 'rxjs';
+import { tapResponse } from '@ngrx/operators';
 import { unbox } from 'ngrx-forms';
 import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
 import { AssetReportItem, AssetReportPaginationRequest, AssetReportFilters } from '@shared/notify';
-import { tapResponse } from '@ngrx/operators';
 import { plainToClass } from 'class-transformer';
 import { CustomSelectOption } from '@shared/custom-select/models/select-option';
 
 @Injectable()
-export class AccountReportsAssetPageFacade {
+export class AccountReportsAssetPageFacade extends ComponentStore<AccountReportsAssetPageState> {
   public get items$(): Observable<AssetReportItem[]> {
-    return this.componentStore.select((state) => state.items);
+    return this.select((state) => state.items);
   }
 
   public get isLoading$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.isLoading);
+    return this.select((state) => state.isLoading);
+  }
+
+  public get page$(): Observable<number> {
+    return this.select((state) => state.page);
   }
 
   public get currentPage$(): Observable<number> {
-    return this.componentStore.select((state) => state.currentPage);
+    return this.select((state) => state.page);
   }
 
   public get totalPages$(): Observable<number> {
-    return this.componentStore.select((state) => state.totalPages);
+    return this.select((state) => state.totalPages);
   }
 
   public get totalItems$(): Observable<number> {
-    return this.componentStore.select((state) => state.totalItems);
+    return this.select((state) => state.totalItems);
   }
 
   public get perPage$(): Observable<number> {
-    return this.componentStore.select((state) => state.perPage);
+    return this.select((state) => state.perPage);
   }
 
   public get hasPagination$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.totalPages > 1);
+    return this.select((state) => state.totalItems > 0);
   }
 
   public get paginationID$(): Observable<string> {
-    return this.componentStore.select(() => 'asset-report-pagination');
+    return this.select((state) => state.paginationID);
   }
 
-  public get orderBy$(): Observable<string> {
-    return this.componentStore.select((state) => state.orderBy);
+  public get orderBy$(): Observable<AssetReportSortField> {
+    return this.select((state) => state.orderBy);
   }
 
   public get desc$(): Observable<boolean> {
-    return this.componentStore.select((state) => state.desc);
+    return this.select((state) => state.desc);
   }
 
   public get formState$(): Observable<FormGroupState<AssetReportFormFilters>> {
-    return this.componentStore.select((state) => state.formState);
+    return this.select((state) => state.formState);
   }
 
   public get availableFilters$(): Observable<any> {
-    return this.componentStore.select((state) => state.availableFilters);
+    return this.select((state) => state.availableFilters);
   }
 
   public get siteOptions$(): Observable<CustomSelectOption<number>[]> {
@@ -126,22 +144,35 @@ export class AccountReportsAssetPageFacade {
   }
 
   public get parameters$(): Observable<any> {
-    return this.componentStore.select((state) => ({
-      currentPage: state.currentPage,
-      orderBy: state.orderBy,
-      desc: state.desc
-    }));
+    return this.select(this.page$, this.orderBy$, this.desc$, (page, orderBy, desc) => ({ page, orderBy, desc }));
   }
+
+  public readonly setPage = this.updater((state, page: number) => ({
+    ...state,
+    page
+  }));
+
+  public readonly updateSort = this.updater((state, parameters: { orderBy: AssetReportSortField; desc: boolean }) => ({
+    ...state,
+    orderBy: parameters.orderBy,
+    desc: parameters.desc,
+    page: 1
+  }));
+
+  public readonly setIsLoading = this.updater((state, isLoading: boolean) => ({
+    ...state,
+    isLoading
+  }));
 
   private generateReportEffect$: () => Observable<void>;
 
   constructor(
-    private readonly componentStore: ComponentStore<AccountReportsAssetPageState>,
     private readonly store: Store<AppState>,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
     private readonly notifyService: NotifyService
   ) {
+    super(new AccountReportsAssetPageState());
     this.resetState();
     this.registerGenerateReportEffect();
     this.loadAvailableFilters();
@@ -150,7 +181,7 @@ export class AccountReportsAssetPageFacade {
   public resetState(): void {
     const initialState = new AccountReportsAssetPageState();
     initialState.formState = createAssetFormState();
-    this.componentStore.setState(initialState);
+    this.setState(initialState);
   }
 
   public generateReport(): void {
@@ -162,26 +193,28 @@ export class AccountReportsAssetPageFacade {
   }
 
   public changePage(page: number): void {
-    this.componentStore.patchState({
-      currentPage: page,
+    this.setPage(page);
+    this.patchState({
       isLoading: true,
       items: []
     });
     this.loadItems();
   }
 
-  public changeSort(field: string): void {
-    this.componentStore.patchState((state) => ({
-      orderBy: field,
-      desc: state.orderBy === field ? !state.desc : false,
+  public changeSort(field: AssetReportSortField): void {
+    const currentState = this.get();
+    const desc = currentState.orderBy === field ? !currentState.desc : false;
+
+    this.updateSort({ orderBy: field, desc });
+    this.patchState({
       isLoading: true,
       items: []
-    }));
+    });
     this.loadItems();
   }
 
   private registerGenerateReportEffect(): void {
-    this.generateReportEffect$ = this.componentStore.effect((origin$) =>
+    this.generateReportEffect$ = this.effect((origin$) =>
       origin$.pipe(
         withLatestFrom(this.formState$),
         filter(([_, formState]) => formState.isValid),
@@ -232,7 +265,7 @@ export class AccountReportsAssetPageFacade {
       next: (filters) => {
         // The filters object is already transformed by the service
         // Just use it directly
-        this.componentStore.patchState({ availableFilters: filters });
+        this.patchState({ availableFilters: filters });
       },
       error: (error) => {
         console.error('Error loading real filters:', error);
@@ -244,80 +277,106 @@ export class AccountReportsAssetPageFacade {
           errorTypes: [],
           jobStages: []
         };
-        this.componentStore.patchState({ availableFilters: fallbackFilters });
+        this.patchState({ availableFilters: fallbackFilters });
       }
     });
   }
 
-  private loadAssetReports(): void {
-    this.componentStore
-      .select((state) => state.filters)
-      .pipe(exhaustMap((filters) => this.searchAssetReports(filters)))
-      .subscribe((response) => {
-        this.updateItems(response.data);
-        this.updatePagination(response.total);
-        this.updateIsLoading(false);
-      });
-  }
+  private readonly loadItemsEffect$ = this.effect((origin$: Observable<void>) =>
+    origin$.pipe(
+      switchMap(() => {
+        const state = this.get();
+
+        return this.searchAssetReports(state.formState.value).pipe(
+          tapResponse(
+            (response) => this.onLoadItemsSuccess(response),
+            (error: HttpErrorResponse) => this.onLoadItemsError(error)
+          )
+        );
+      })
+    )
+  );
 
   private searchAssetReports(filters: AssetReportFormFilters): Observable<any> {
-    return this.componentStore
-      .select((state) => ({
-        currentPage: state.currentPage,
-        perPage: state.perPage,
-        orderBy: state.orderBy,
-        desc: state.desc
-      }))
-      .pipe(
-        map((state) => {
-          const queryParams = new AssetReportPaginationRequest({
-            page: state.currentPage,
-            perPage: state.perPage,
-            orderBy: state.orderBy,
-            desc: state.desc,
-            siteId: filters.siteId || undefined,
-            serviceLevelNames: unbox(filters.serviceLevelNames),
-            assetTypes: unbox(filters.assetTypes),
-            jobStages: unbox(filters.jobStages),
-            errorTypes: unbox(filters.errorTypes)
-          });
+    return this.select((state) => ({
+      page: state.page,
+      perPage: state.perPage,
+      orderBy: state.orderBy,
+      desc: state.desc
+    })).pipe(
+      map((state) => {
+        const queryParams = new AssetReportPaginationRequest({
+          page: state.page,
+          perPage: state.perPage,
+          orderBy: state.orderBy,
+          desc: state.desc,
+          siteId: filters.siteId || undefined,
+          serviceLevelNames: unbox(filters.serviceLevelNames),
+          assetTypes: unbox(filters.assetTypes),
+          jobStages: unbox(filters.jobStages),
+          errorTypes: unbox(filters.errorTypes)
+        });
 
-          return this.notifyService.searchAssetReports(queryParams);
-        }),
-        exhaustMap((obs) => obs)
-      );
+        return this.notifyService.searchAssetReports(queryParams);
+      }),
+      exhaustMap((obs) => obs)
+    );
   }
 
-  private loadItems(): void {
-    this.loadAssetReports();
+  public loadItems(): void {
+    this.setIsLoading(true);
+    this.loadItemsEffect$();
   }
 
   private updateItems(items: AssetReportItem[]): void {
-    this.componentStore.patchState({ items });
+    this.patchState({ items });
   }
 
   private updatePagination(totalItems: number): void {
-    this.componentStore.patchState((state) => {
+    this.patchState((state) => {
       const totalPages = Math.ceil(totalItems / state.perPage);
       return { totalItems, totalPages };
     });
   }
 
   private updateIsLoading(value: boolean): void {
-    this.componentStore.patchState({ isLoading: value });
+    this.patchState({ isLoading: value });
+  }
+
+  private onLoadItemsSuccess(response: any): void {
+    this.patchState({
+      items: response.items,
+      totalPages: Math.ceil(response.totalItems / this.get().perPage),
+      totalItems: response.totalItems,
+      isLoading: false
+    });
+  }
+
+  private onLoadItemsError(error: HttpErrorResponse): void {
+    this.setIsLoading(false);
+    this.notificationService.error(this.translateService.instant('ACCOUNT.REPORTS.ASSET.NOTIFICATIONS.TEXT_ERROR'));
   }
 
   private toggleDisablingForm(value: boolean): void {
-    this.componentStore.updater((state) => ({
+    this.updater((state) => ({
       ...state,
       formState: value ? disable(state.formState) : enable(state.formState)
     }))();
   }
 
   private updateFormState(action: Actions<any>): void {
-    this.componentStore.updater((state) => ({
+    this.updater((state) => ({
       ...state,
       formState: formGroupReducer(state.formState, action)
     }))();
+  }
+
+  public refreshData(): void {
+    this.patchState({
+      page: 1,
+      isLoading: true,
+      items: []
+    });
+    this.loadItems();
   }
 }

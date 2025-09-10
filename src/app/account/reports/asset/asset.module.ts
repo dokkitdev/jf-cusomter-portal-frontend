@@ -18,6 +18,7 @@ import { CustomMultiselectModule } from '@shared/custom-multiselect';
 import { TableContainerModule } from '@shared/table-container';
 import { HeaderSortModule } from '@shared/header-sort';
 import { PaginationElementsModule } from '@shared/pagination-elements';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NotifyService } from '@shared/notify';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { NotifyService } from '@shared/notify';
     TableContainerModule,
     HeaderSortModule,
     PaginationElementsModule,
+    NgxPaginationModule,
     LetDirective,
     PushPipe,
     NotificationModule,

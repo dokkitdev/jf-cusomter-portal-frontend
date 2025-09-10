@@ -208,6 +208,8 @@ export class NotifyService {
       errorTypes: params.errorTypes
     });
 
+    console.log('order_by', params.orderBy);
+
     return this.apiService
       .get<
         PaginationResponse<AssetReportItem>

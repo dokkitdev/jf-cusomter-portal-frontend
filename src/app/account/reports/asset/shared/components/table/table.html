@@ -6,7 +6,7 @@
       <div class="table-row">
         <div class="table-cell">
           <header-sort
-            [orderBy]="'site_id'"
+            [orderBy]="sortField.SITE_ID"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SITE_ID' | translate }}
@@ -14,7 +14,7 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'uprn'"
+            [orderBy]="sortField.UPRN"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_UPRN' | translate }}
@@ -22,7 +22,7 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'asset_id'"
+            [orderBy]="sortField.ASSET_ID"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_ID' | translate }}
@@ -30,7 +30,7 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'asset_type'"
+            [orderBy]="sortField.ASSET_TYPE"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ASSET_TYPE' | translate }}
@@ -38,25 +38,31 @@
         </div>
         <div class="table-cell">
           <header-sort
-            [orderBy]="'service_level_name'"
+            [orderBy]="sortField.SERVICE_LEVEL_NAME"
             [parameters]="parameters$ | async"
             (sortChanged)="onSortChanged($event)">
             {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_SERVICE_LEVEL' | translate }}
           </header-sort>
         </div>
         <div class="table-cell">
-          <header-sort
-            [orderBy]="'error'"
-            [parameters]="parameters$ | async"
-            (sortChanged)="onSortChanged($event)">
-            {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ERROR' | translate }}
-          </header-sort>
+          {{ 'ACCOUNT.REPORTS.ASSET.TABLE_HEADER_ERROR' | translate }}
         </div>
       </div>
     </div>
     <div class="table-content">
       <div
-        *ngFor="let item of items$ | async; trackBy: trackByAssetId"
+        *ngFor="
+          let item of items$
+            | async
+            | paginate
+              : {
+                  id: paginationID$ | async,
+                  itemsPerPage: perPage$ | async,
+                  currentPage: currentPage$ | async,
+                  totalItems: totalItems$ | async
+                };
+          trackBy: trackByAssetId
+        "
         class="table-content-row">
         <div class="table-row">
           <div class="table-cell">{{ item.siteId }}</div>
@@ -75,7 +81,7 @@
   *ngIf="(hasPagination$ | async) && !(isLoading$ | async)"
   class="pagination-container">
   <pagination-elements
-    [paginationID]="paginationID$ | async"
+    [paginationId]="paginationID$ | async"
     [itemsPerPage]="perPage$ | async"
     [currentPage]="currentPage$ | async"
     [totalItems]="totalItems$ | async"
