@@ -13,7 +13,7 @@ import {
   AssetReportItem,
   AssetReportResponse,
   AssetReportFilters,
-  AssetReportQueryParams
+  AssetReportPaginationRequest
 } from './models';
 import { NotifyParsingLogsSortField, NotifySystemLogsSortField } from './type';
 import { PaginationRequest, PaginationResponse } from '@shared/pagination';
@@ -186,12 +186,6 @@ export class NotifyService {
       .pipe(map((response) => response.body as Blob));
   }
 
-  public getAssetReportValidation(): Observable<AssetReportResponse> {
-    return this.apiService
-      .get<AssetReportResponse>(`${this.baseEndpoint}/asset-reports/validation`)
-      .pipe(map((response) => plainToClass(AssetReportResponse, response)));
-  }
-
   public getAssetReportFilters(): Observable<AssetReportFilters> {
     return this.apiService.get<AssetReportFilters>(`${this.baseEndpoint}/asset-reports/validation/search-filters`).pipe(
       map((response) => {
@@ -201,11 +195,30 @@ export class NotifyService {
     );
   }
 
-  public searchAssetReports(params: AssetReportQueryParams): Observable<AssetReportResponse> {
-    const queryParams = omitBy(instanceToPlain(params), isUndefined);
+  public searchAssetReports(params: AssetReportPaginationRequest): Observable<PaginationResponse<AssetReportItem>> {
+    const request = new AssetReportPaginationRequest({
+      page: params.page,
+      perPage: params.perPage,
+      orderBy: params.orderBy,
+      desc: params.desc,
+      siteId: params.siteId,
+      serviceLevelNames: params.serviceLevelNames,
+      assetTypes: params.assetTypes,
+      jobStages: params.jobStages,
+      errorTypes: params.errorTypes
+    });
+
     return this.apiService
-      .get<AssetReportResponse>(`${this.baseEndpoint}/csv-reports/asset`, queryParams)
-      .pipe(map((response) => plainToClass(AssetReportResponse, response)));
+      .get<
+        PaginationResponse<AssetReportItem>
+      >(`${this.baseEndpoint}/asset-reports/validation`, omitBy(instanceToPlain<AssetReportPaginationRequest>(request), isUndefined))
+      .pipe(
+        map((response) =>
+          plainToClassFromExist(new PaginationResponse<AssetReportItem>(AssetReportItem), response, {
+            groups: [ClassGroup.MAIN]
+          })
+        )
+      );
   }
 
   public generateAssetReport(): Observable<void> {

@@ -10,7 +10,7 @@ import { exhaustMap, filter, Observable, tap, withLatestFrom, map, startWith } f
 import { unbox } from 'ngrx-forms';
 import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
-import { AssetReportItem, AssetReportQueryParams, AssetReportFilters } from '@shared/notify';
+import { AssetReportItem, AssetReportPaginationRequest, AssetReportFilters } from '@shared/notify';
 import { tapResponse } from '@ngrx/operators';
 import { plainToClass } from 'class-transformer';
 import { CustomSelectOption } from '@shared/custom-select/models/select-option';
@@ -253,9 +253,9 @@ export class AccountReportsAssetPageFacade {
     this.componentStore
       .select((state) => state.filters)
       .pipe(exhaustMap((filters) => this.searchAssetReports(filters)))
-      .subscribe((data) => {
-        this.updateItems(data.data);
-        this.updatePagination(data.total);
+      .subscribe((response) => {
+        this.updateItems(response.data);
+        this.updatePagination(response.total);
         this.updateIsLoading(false);
       });
   }
@@ -270,7 +270,7 @@ export class AccountReportsAssetPageFacade {
       }))
       .pipe(
         map((state) => {
-          const queryParams = new AssetReportQueryParams({
+          const queryParams = new AssetReportPaginationRequest({
             page: state.currentPage,
             perPage: state.perPage,
             orderBy: state.orderBy,

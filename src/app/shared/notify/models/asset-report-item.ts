@@ -1,36 +1,36 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 
 export class AssetReportItem {
   @Expose()
   public id: number;
 
-  @Expose()
+  @Expose({ name: 'site_id' })
   public siteId: number;
 
-  @Expose()
+  @Expose({ name: 'asset_id' })
   public assetId: number;
 
   @Expose()
   public uprn: string;
 
-  @Expose()
+  @Expose({ name: 'asset_type' })
   public assetType: string;
 
-  @Expose()
+  @Expose({ name: 'service_level_name' })
   public serviceLevelName: string | null;
 
-  @Expose()
+  @Expose({ name: 'job_stage' })
   public jobStage: string | null;
 
-  @Expose()
+  @Expose({ name: 'error_type' })
   public errorType: string;
 
-  @Expose()
+  @Expose({ name: 'error_text' })
   public errorText: string;
 
-  @Expose()
+  @Expose({ name: 'created_at' })
   public createdAt: string;
 
-  @Expose()
+  @Expose({ name: 'updated_at' })
   public updatedAt: string;
 }

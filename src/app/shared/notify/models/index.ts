@@ -8,4 +8,4 @@ export * from './zero-report-request';
 export * from './asset-report-item';
 export * from './asset-report-response';
 export * from './asset-report-filters';
-export * from './asset-report-query-params';
+export * from './asset-report-pagination-request';
