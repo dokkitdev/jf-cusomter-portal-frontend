@@ -1,12 +1,12 @@
-import { createFormGroupState, FormGroupState } from 'ngrx-forms';
+import { createFormGroupState, FormGroupState, box } from 'ngrx-forms';
 import { AssetReportFormFilters } from '../../asset.state';
 
 export const createAssetFormState = (): FormGroupState<AssetReportFormFilters> => {
   return createFormGroupState<AssetReportFormFilters>('assetForm', {
     siteId: null,
-    serviceLevelNames: [],
-    assetTypes: [],
-    errorTypes: [],
-    jobStages: []
+    serviceLevelNames: box([]),
+    assetTypes: box([]),
+    errorTypes: box([]),
+    jobStages: box([])
   });
 };

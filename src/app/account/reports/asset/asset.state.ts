@@ -1,12 +1,12 @@
-import { FormGroupState } from 'ngrx-forms';
+import { FormGroupState, Boxed, box } from 'ngrx-forms';
 import { AssetReportItem } from '@shared/notify';
 
 export interface AssetReportFormFilters {
   siteId: number | null;
-  serviceLevelNames: string[];
-  assetTypes: string[];
-  errorTypes: string[];
-  jobStages: string[];
+  serviceLevelNames: Boxed<string[]>;
+  assetTypes: Boxed<string[]>;
+  errorTypes: Boxed<string[]>;
+  jobStages: Boxed<string[]>;
 }
 
 export interface AccountReportsAssetPageState {
@@ -40,10 +40,10 @@ export class AccountReportsAssetPageState {
   public desc: boolean = false;
   public filters: AssetReportFormFilters = {
     siteId: null,
-    serviceLevelNames: [],
-    assetTypes: [],
-    errorTypes: [],
-    jobStages: []
+    serviceLevelNames: box([]),
+    assetTypes: box([]),
+    errorTypes: box([]),
+    jobStages: box([])
   };
   public formState: FormGroupState<AssetReportFormFilters> = null as any;
   public availableFilters: {

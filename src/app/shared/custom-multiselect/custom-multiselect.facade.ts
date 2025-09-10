@@ -52,7 +52,12 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
   }
 
   public getIsSelected$(id: T): Observable<boolean> {
-    return this.controlState$.pipe(map((controlState) => unbox(controlState.value).includes(id)));
+    return this.controlState$.pipe(
+      map((controlState) => {
+        const value = unbox(controlState.value);
+        return Array.isArray(value) ? value.includes(id) : false;
+      })
+    );
   }
 
   private updateControlState(controlState: FormControlState<Boxed<Array<T>>>): void {
@@ -75,7 +80,8 @@ export class CustomMultiselectFacade<T extends FormControlValueTypes> {
         concatLatestFrom(() => this.controlState$),
         tap(([optionValue, controlState]) => {
           const value = unbox(controlState.value);
-          const options = xor(value, [optionValue]);
+          const currentValue = Array.isArray(value) ? value : [];
+          const options = xor(currentValue, [optionValue]);
 
           this.controlStateActionTriggered.next(new SetValueAction(controlState.id, box(options)));
         })

@@ -6,7 +6,8 @@ import { NotificationService } from '@shared/notification';
 import { NotifyService } from '@shared/notify';
 import { AppState } from '@shared/store';
 import { Actions, disable, enable, formGroupReducer, FormGroupState } from 'ngrx-forms';
-import { exhaustMap, filter, Observable, tap, withLatestFrom, map } from 'rxjs';
+import { exhaustMap, filter, Observable, tap, withLatestFrom, map, startWith } from 'rxjs';
+import { unbox } from 'ngrx-forms';
 import { AccountReportsAssetPageState, AssetReportFormFilters } from './asset.state';
 import { createAssetFormState } from './shared/forms/asset-form';
 import { AssetReportItem, AssetReportQueryParams, AssetReportFilters } from '@shared/notify';
@@ -66,6 +67,7 @@ export class AccountReportsAssetPageFacade {
 
   public get siteOptions$(): Observable<CustomSelectOption<number>[]> {
     return this.availableFilters$.pipe(
+      startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.siteIds || !Array.isArray(filters.siteIds)) {
           return [];
@@ -77,6 +79,7 @@ export class AccountReportsAssetPageFacade {
 
   public get serviceLevelOptions$(): Observable<CustomSelectOption<string>[]> {
     return this.availableFilters$.pipe(
+      startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.serviceLevelNames || !Array.isArray(filters.serviceLevelNames)) {
           return [];
@@ -88,6 +91,7 @@ export class AccountReportsAssetPageFacade {
 
   public get assetTypeOptions$(): Observable<CustomSelectOption<string>[]> {
     return this.availableFilters$.pipe(
+      startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.assetTypes || !Array.isArray(filters.assetTypes)) {
           return [];
@@ -99,6 +103,7 @@ export class AccountReportsAssetPageFacade {
 
   public get errorTypeOptions$(): Observable<CustomSelectOption<string>[]> {
     return this.availableFilters$.pipe(
+      startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.errorTypes || !Array.isArray(filters.errorTypes)) {
           return [];
@@ -110,6 +115,7 @@ export class AccountReportsAssetPageFacade {
 
   public get jobStageOptions$(): Observable<CustomSelectOption<string>[]> {
     return this.availableFilters$.pipe(
+      startWith({ siteIds: [], serviceLevelNames: [], assetTypes: [], errorTypes: [], jobStages: [] }),
       map((filters) => {
         if (!filters?.jobStages || !Array.isArray(filters.jobStages)) {
           return [];
@@ -270,10 +276,10 @@ export class AccountReportsAssetPageFacade {
             orderBy: state.orderBy,
             desc: state.desc,
             siteId: filters.siteId || undefined,
-            serviceLevelNames: filters.serviceLevelNames,
-            assetTypes: filters.assetTypes,
-            jobStages: filters.jobStages,
-            errorTypes: filters.errorTypes
+            serviceLevelNames: unbox(filters.serviceLevelNames),
+            assetTypes: unbox(filters.assetTypes),
+            jobStages: unbox(filters.jobStages),
+            errorTypes: unbox(filters.errorTypes)
           });
 
           return this.notifyService.searchAssetReports(queryParams);
